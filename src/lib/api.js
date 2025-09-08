@@ -1,6 +1,6 @@
 export async function getProducts() {
   // Por padrão, o Strapi roda localmente nesta porta
-  const STRAPI_URL = 'http://localhost:1337/api/produtos'; 
+  const API_URL = 'http://devsite.tecassistiva.com.br/painel/wp-json/wc/v3/products';
 
   try {
     const res = await fetch(STRAPI_URL);
