@@ -1,30 +1,44 @@
+/**
+ * Busca todos os produtos da API do Strapi.
+ * @returns {Promise<Array>} Uma promessa que resolve para um array de produtos.
+ */
 export async function getProducts() {
-  // **IMPORTANTE:** Substitua pela URL da sua API Strapi.
-  // O parâmetro `?populate=*` é usado para incluir todas as relações, como imagens.
-  const STRAPI_URL = 'http://URL_DO_SEU_STRAPI/api/products?populate=*';
-
-  // Opção para guardar a URL em uma variável de ambiente (mais seguro)
-  // const STRAPI_URL = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/products?populate=*`;
-
-  if (!STRAPI_URL.startsWith('http')) {
-    console.error("ERRO: A URL do Strapi não foi definida. Verifique o arquivo /src/lib/api.js");
-    return [];
-  }
+  const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
+  // CORREÇÃO: Alterado de 'products' para 'produtos'
+  const endpoint = `${STRAPI_URL}/api/produtos?populate=*`;
 
   try {
-    const res = await fetch(STRAPI_URL);
-    // Se a requisição falhar, lança um erro
-    if (!res.ok) {
-      throw new Error(`Falha na requisição: ${res.status} ${res.statusText}`);
-    }
+    const res = await fetch(endpoint);
+    if (!res.ok) throw new Error(`Erro na requisição: ${res.status} ${res.statusText}`);
     const data = await res.json();
-    
-    // A resposta do Strapi aninha os dados em um objeto 'data'
-    // Se não houver dados, retorna um array vazio
     return data.data || [];
   } catch (error) {
-    console.error("ERRO ao buscar produtos do Strapi:", error);
-    // Em caso de erro, retorna um array vazio para não quebrar a página
+    console.error("ERRO ao buscar a lista de produtos do Strapi:", error);
     return [];
+  }
+}
+
+/**
+ * Busca um único produto pelo seu slug.
+ * @param {string} slug O slug do produto a ser buscado.
+ * @returns {Promise<Object|null>} Uma promessa que resolve para o objeto do produto ou nulo se não for encontrado.
+ */
+export async function getProductBySlug(slug) {
+  const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
+  // CORREÇÃO: Alterado de 'products' para 'produtos'
+  const endpoint = `${STRAPI_URL}/api/produtos?filters[slug][$eq]=${slug}&populate=*`;
+
+  try {
+    const res = await fetch(endpoint);
+    if (!res.ok) throw new Error(`Erro na requisição do produto: ${res.status} ${res.statusText}`);
+    const data = await res.json();
+    if (data.data && data.data.length > 0) {
+      return data.data[0];
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error(`ERRO ao buscar o produto com slug "${slug}":`, error);
+    return null;
   }
 }
