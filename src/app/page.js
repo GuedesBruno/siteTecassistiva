@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 export default async function Home() {
   const products = await getProducts();
+  const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
 
   return (
     <div className="bg-gray-50">
@@ -18,20 +19,21 @@ export default async function Home() {
         {products && products.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {products.map((product) => {
-              // Acessando os atributos do produto do Strapi
-              const { name, slug, short_description, images } = product.attributes;
-              // Pegando a URL da primeira imagem
-              const imageUrl = images?.data?.[0]?.attributes?.url;
-              // Criando a URL completa da imagem, caso ela seja relativa
-              const fullImageUrl = imageUrl ? `http://URL_DO_SEU_STRAPI${imageUrl}` : null;
+              // ATUALIZADO: Usando os novos nomes dos campos do Strapi
+              const { nome, slug, descricao_curta, imagem_principal } = product.attributes;
               
+              // ATUALIZADO: Acessando a URL da imagem de um campo de mídia único
+              const imageUrl = imagem_principal?.data?.attributes?.url;
+              const fullImageUrl = imageUrl ? `${STRAPI_URL}${imageUrl}` : null;
+              const imageAlt = imagem_principal?.data?.attributes?.alternativeText || `Imagem de ${nome}`;
+
               return (
                 <Link href={`/produtos/${slug}`} key={product.id} className="group bg-white border rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
                   
                   {fullImageUrl ? (
                      <Image
                        src={fullImageUrl}
-                       alt={images.data[0].attributes.alternativeText || `Imagem de ${name}`}
+                       alt={imageAlt}
                        width={400}
                        height={300}
                        className="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-105"
@@ -43,12 +45,11 @@ export default async function Home() {
                   )}
                   
                   <div className="p-6">
-                    <h2 className="text-xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors">{name}</h2>
-                    {short_description && (
-                      <div
-                        className="text-gray-600 mt-2 text-sm"
-                        dangerouslySetInnerHTML={{ __html: short_description }}
-                      />
+                    <h2 className="text-xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors">{nome}</h2>
+                    {descricao_curta && (
+                      <div className="text-gray-600 mt-2 text-sm">
+                        {descricao_curta}
+                      </div>
                     )}
                   </div>
                 
@@ -61,7 +62,6 @@ export default async function Home() {
             Nenhum produto encontrado. Verifique a conexão com a API do Strapi ou se há produtos cadastrados.
           </p>
         )}
-
       </div>
     </div>
   );

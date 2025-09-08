@@ -2,17 +2,25 @@ import { getProductBySlug } from '@/lib/api';
 import Image from 'next/image';
 import Link from 'next/link';
 
+// ATUALIZADO: para usar os novos nomes de campo
 export async function generateMetadata({ params }) {
   const product = await getProductBySlug(params.slug);
-  if (!product) return { title: 'Produto não Encontrado | Tecassistiva' };
+  
+  if (!product) {
+    return { title: 'Produto não Encontrado | Tecassistiva' };
+  }
+
+  const { nome, descricao_curta } = product.attributes;
+
   return {
-    title: `${product.attributes.name} | Tecassistiva`,
-    description: product.attributes.short_description || `Detalhes sobre o produto ${product.attributes.name}`,
+    title: `${nome} | Tecassistiva`,
+    description: descricao_curta || `Detalhes sobre o produto ${nome}`,
   };
 }
 
 export default async function ProductPage({ params }) {
   const product = await getProductBySlug(params.slug);
+  const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
 
   if (!product) {
     return (
@@ -28,12 +36,13 @@ export default async function ProductPage({ params }) {
     );
   }
 
-  const { name, description, images } = product.attributes;
-  const imageUrl = images?.data?.[0]?.attributes?.url;
-  // Usando a variável de ambiente para a URL da imagem
-  const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
+  // ATUALIZADO: Usando os novos nomes dos campos do Strapi
+  const { nome, descricao_longa, imagem_principal, galeria_de_imagens } = product.attributes;
+  
+  // ATUALIZADO: Lógica para a imagem principal
+  const imageUrl = imagem_principal?.data?.attributes?.url;
   const fullImageUrl = imageUrl ? `${STRAPI_URL}${imageUrl}` : null;
-  const imageAlt = images?.data?.[0]?.attributes?.alternativeText || `Imagem ilustrativa de ${name}`;
+  const imageAlt = imagem_principal?.data?.attributes?.alternativeText || `Imagem ilustrativa de ${nome}`;
 
   return (
     <div className="bg-white">
@@ -56,17 +65,30 @@ export default async function ProductPage({ params }) {
                 <p className="text-gray-400">Sem imagem disponível</p>
               </div>
             )}
+            {/* Opcional: Renderizar a galeria de imagens */}
+            {galeria_de_imagens?.data && (
+              <div className="mt-4 grid grid-cols-4 gap-4">
+                {galeria_de_imagens.data.map((img) => (
+                  <div key={img.id} className="aspect-square relative w-full rounded-lg overflow-hidden">
+                    <Image src={`${STRAPI_URL}${img.attributes.url}`} alt={img.attributes.alternativeText || ''} fill className="object-cover" />
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
+          
           <div>
-            <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">{name}</h1>
-            {description ? (
+            <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">{nome}</h1>
+            
+            {descricao_longa ? (
               <div
                 className="prose prose-lg max-w-none text-gray-700"
-                dangerouslySetInnerHTML={{ __html: description }}
+                dangerouslySetInnerHTML={{ __html: descricao_longa }}
               />
             ) : (
               <p className="text-gray-600">Nenhuma descrição detalhada disponível.</p>
             )}
+
             <div className="mt-8">
               <Link href="/" className="text-blue-600 hover:text-blue-800 font-semibold transition-colors duration-300">
                 &larr; Voltar para todos os produtos
