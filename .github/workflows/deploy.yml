@@ -22,8 +22,12 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+    # ATUALIZADO: Adicionamos o bloco 'env' para passar os secrets para o build
     - name: Build Next.js project
       run: npm run build
+      env:
+        NEXT_PUBLIC_STRAPI_URL: ${{ secrets.NEXT_PUBLIC_STRAPI_URL }}
+        STRAPI_API_TOKEN: ${{ secrets.STRAPI_API_TOKEN }}
 
     - name: FTP Deploy Locaweb
       uses: locaweb/ftp-deploy@1.0.0
