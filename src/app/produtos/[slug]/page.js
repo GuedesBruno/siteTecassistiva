@@ -53,16 +53,26 @@ export default async function ProductPage({ params }) {
     );
   }
 
-  // Lógica para ler os dados no formato "plano" da sua API
   const { nome, descricao_longa, imagem_principal, galeria_de_imagens } = product;
   
   const imageUrl = imagem_principal?.url;
   const fullImageUrl = imageUrl ? `${STRAPI_URL}${imageUrl}` : null;
   const imageAlt = imagem_principal?.alternativeText || `Imagem ilustrativa de ${nome}`;
 
+  // Simula as abas do layout
+  const tabs = ["Visão Geral", "Fotos", "Vídeos", "Características Funcionais", "Características Técnicas", "Downloads"];
+
   return (
     <div className="bg-white">
-      <div className="container mx-auto px-6 py-16">
+      <div className="container mx-auto px-6 py-12">
+        {/* Breadcrumbs - Navegação */}
+        <div className="text-sm text-gray-500 mb-8">
+          <Link href="/" className="hover:underline">Página Inicial</Link>
+          <span className="mx-2">&gt;</span>
+          <Link href="/produtos" className="hover:underline">Produtos</Link>
+          {/* Adicionar categorias aqui no futuro, se necessário */}
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
           
           {/* Coluna da Imagem e Galeria */}
@@ -86,7 +96,7 @@ export default async function ProductPage({ params }) {
             {galeria_de_imagens && galeria_de_imagens.length > 0 && (
               <div className="mt-4 grid grid-cols-4 gap-4">
                 {galeria_de_imagens.map((img) => (
-                  <div key={img.id} className="aspect-square relative w-full rounded-lg overflow-hidden border">
+                  <div key={img.id} className="aspect-square relative w-full rounded-lg overflow-hidden border hover:opacity-80 transition-opacity">
                     <Image src={`${STRAPI_URL}${img.url}`} alt={img.alternativeText || ''} fill className="object-cover" />
                   </div>
                 ))}
@@ -96,23 +106,34 @@ export default async function ProductPage({ params }) {
           
           {/* Coluna do Conteúdo */}
           <div>
-            <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">{nome}</h1>
-            
+            <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">{nome}</h1>
             {descricao_longa && (
-              // Ajuste para renderizar o Rich Text do Strapi
               <div className="prose prose-lg max-w-none text-gray-700">
                 {descricao_longa.map((block, index) => (
                   <p key={index}>{block.children.map(child => child.text).join('')}</p>
                 ))}
               </div>
             )}
-
-            <div className="mt-8">
-              <Link href="/" className="text-blue-600 hover:text-blue-800 font-semibold transition-colors duration-300">
-                &larr; Voltar para todos os produtos
-              </Link>
-            </div>
           </div>
+        </div>
+
+        {/* Seção de Abas */}
+        <div className="mt-16 border-t pt-8">
+            <div className="border-b border-gray-200">
+                <nav className="-mb-px flex space-x-8" aria-label="Tabs">
+                    {tabs.map((tab) => (
+                        <a key={tab} href="#" className="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">
+                            {tab}
+                        </a>
+                    ))}
+                </nav>
+            </div>
+            <div className="py-8">
+                <h3 className="text-2xl font-bold mb-4">Visão Geral</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  Aqui entrará o conteúdo detalhado da visão geral do produto.
+                </p>
+            </div>
         </div>
       </div>
     </div>

@@ -1,17 +1,16 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  // O 'content' diz ao Tailwind para escanear todos esses arquivos em busca de classes.
   content: [
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
-      // Aqui podemos adicionar cores, fontes e outras customizações no futuro.
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      // Adicionando a paleta de cores personalizada da Tecassistiva
+      colors: {
+        'tec-blue': '#003366', // Um azul marinho profundo para o header
+        'tec-blue-light': '#007bff', // Um azul mais vibrante para botões e links
+        'tec-navy': '#001F3F', // Um azul ainda mais escuro para títulos de cards
       },
     },
   },
