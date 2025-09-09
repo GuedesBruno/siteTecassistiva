@@ -10,9 +10,10 @@ const Icon = ({ path }) => (
 
 export default function Header() {
   return (
+    // A classe 'bg-tec-blue' agora aplicará a nova cor #002554
     <header className="bg-tec-blue text-white shadow-lg sticky top-0 z-50">
       {/* Barra Superior - Acessibilidade e Busca */}
-      <div className="bg-tec-navy/50">
+      <div className="bg-black/20"> {/* Usando preto com transparência para um tom mais escuro que a base */}
           <div className="container mx-auto px-6 py-1 flex justify-end items-center space-x-6 text-sm">
               <Link href="#" className="hover:underline">Opções de Acessibilidade</Link>
               <Link href="#" className="flex items-center hover:underline">
@@ -28,10 +29,10 @@ export default function Header() {
           {/* Logo */}
           <Link href="/">
             <Image 
-              src="/logo-tecassistiva.svg" 
+              src="/logo-tecassistiva.svg" // Verifique se o nome/extensão está correto
               alt="Tecassistiva Logo"
-              width={220} // Largura que a logo vai ocupar na tela
-              height={55}  // Altura que a logo vai ocupar na tela
+              width={220}
+              height={55}
               priority
             />
           </Link>

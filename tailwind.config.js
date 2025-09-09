@@ -6,11 +6,12 @@ module.exports = {
   ],
   theme: {
     extend: {
-      // Adicionando a paleta de cores personalizada da Tecassistiva
+      // ATUALIZADO: Paleta de cores ajustada
       colors: {
-        'tec-blue': '#003366', // Um azul marinho profundo para o header
-        'tec-blue-light': '#007bff', // Um azul mais vibrante para botões e links
-        'tec-navy': '#001F3F', // Um azul ainda mais escuro para títulos de cards
+        'tec-blue': '#002554',        // Nova cor principal do Header
+        'tec-blue-light': '#007bff',  // Azul vibrante para botões e links
+        'tec-navy': '#001F3F',       // Azul ainda mais escuro para a barra superior
+        'tec-footer': '#003366',     // A cor antiga do Header, agora para o Footer
       },
     },
   },

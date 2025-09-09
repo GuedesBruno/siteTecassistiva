@@ -1,5 +1,5 @@
 import { getFeaturedProducts, getBanners } from '@/lib/api'; 
-import BannerSlider from '@/components/BannerSlider'; // Importamos o novo componente
+import BannerSlider from '@/components/BannerSlider';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -34,7 +34,7 @@ function ProductCard({ product }) {
 
 export default async function Home() {
   const featuredProducts = await getFeaturedProducts();
-  const banners = await getBanners(); // Buscamos os dados dos banners
+  const banners = await getBanners();
 
   return (
     <>

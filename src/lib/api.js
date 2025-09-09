@@ -59,13 +59,14 @@ export async function getCategoryBySlug(slug) {
   return categoryData && categoryData.length > 0 ? categoryData[0] : null;
 }
 
-// --- NOVA FUNÇÃO PARA OS BANNERS ---
+// --- FUNÇÃO CORRIGIDA PARA OS BANNERS ---
 
 /**
- * Busca todos os banners da Home, ordenados pelo campo 'ordem'.
+ * Busca todos os banners da Home, ordenados e com a imagem populada.
  */
 export async function getBanners() {
-  // O endpoint deve corresponder ao API ID (Plural) que o Strapi criou.
-  const json = await fetchAPI('/api/banner-sites?sort=ordem:asc&populate=*');
+  // ATUALIZADO: O populate agora usa o nome de campo correto 'imagem'.
+  const endpoint = '/api/banner-sites?sort=ordem:asc&populate=imagem';
+  const json = await fetchAPI(endpoint);
   return Array.isArray(json) ? json : json.data || [];
 }

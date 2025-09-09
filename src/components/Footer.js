@@ -1,17 +1,18 @@
 import Link from 'next/link';
-import Image from 'next/image'; // Para a logo no rodapé
+import Image from 'next/image';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   return (
-    <footer className="bg-gray-800 text-white pt-16 pb-8">
+    // ATUALIZADO: Trocamos 'bg-gray-800' por 'bg-tec-footer'
+    <footer className="bg-tec-footer text-white pt-16 pb-8">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           
           {/* Coluna 1: Sobre e Contato */}
           <div className="md:col-span-2">
             <Image 
-              src="/logo-tecassistiva.png" // Use uma versão da logo para fundos escuros, se tiver
+              src="/logo-tecassistiva-branca.svg" // Verifique se o nome/extensão está correto
               alt="Tecassistiva Logo"
               width={180}
               height={45}
