@@ -1,107 +1,91 @@
-import { getProducts, getProductBySlug } from '@/lib/api';
+import { getFeaturedProducts } from '@/lib/api'; // Mudamos para buscar apenas os destaques
 import Image from 'next/image';
 import Link from 'next/link';
 
-// ADICIONADO: Esta função gera a lista de todos os slugs para as páginas estáticas
-export async function generateStaticParams() {
-  const products = await getProducts();
-
-  // Retorna um array no formato esperado pelo Next.js: [{ slug: 'produto-1' }, { slug: 'produto-2' }]
-  return products.map((product) => ({
-    slug: product.attributes.slug,
-  }));
-}
-
-// ATUALIZADO: para usar os novos nomes de campo
-export async function generateMetadata({ params }) {
-  const product = await getProductBySlug(params.slug);
-  
-  if (!product) {
-    return { title: 'Produto não Encontrado | Tecassistiva' };
-  }
-
-  const { nome, descricao_curta } = product.attributes;
-
-  return {
-    title: `${nome} | Tecassistiva`,
-    description: descricao_curta || `Detalhes sobre o produto ${nome}`,
-  };
-}
-
-export default async function ProductPage({ params }) {
-  const product = await getProductBySlug(params.slug);
+// Componente para o Card de Produto, para organizar o código
+function ProductCard({ product }) {
   const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
+  
+  const { nome, slug, descricao_curta, imagem_principal } = product;
 
-  if (!product) {
-    return (
-      <div className="bg-gray-50 flex-grow">
-        <div className="container mx-auto text-center px-4 py-20">
-          <h1 className="text-4xl font-bold text-gray-800">Produto não encontrado</h1>
-          <p className="mt-4 text-lg text-gray-600">O produto que você está procurando não existe ou foi removido.</p>
-          <Link href="/" className="mt-8 inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300">
-            Voltar para a página inicial
+  const imageUrl = imagem_principal?.url;
+  const fullImageUrl = imageUrl ? `${STRAPI_URL}${imageUrl}` : null;
+  const imageAlt = imagem_principal?.alternativeText || `Imagem de ${nome}`;
+
+  if (!slug) return null;
+
+  return (
+    <div className="flex flex-col rounded-lg shadow-lg overflow-hidden">
+      <div className="bg-blue-900 p-4 text-white text-center">
+        <h3 className="text-xl font-bold">{nome}</h3>
+      </div>
+      <div className="flex-shrink-0">
+        <div className="relative h-56 w-full">
+          {fullImageUrl ? (
+            <Image
+              src={fullImageUrl}
+              alt={imageAlt}
+              fill
+              className="object-cover"
+            />
+          ) : (
+            <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+              <p className="text-gray-400">Sem imagem</p>
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="flex flex-1 flex-col justify-between bg-white p-6">
+        <div className="flex-1">
+          <p className="text-sm text-gray-600">{descricao_curta}</p>
+        </div>
+        <div className="mt-6">
+          <Link href={`/produtos/${slug}`} className="text-blue-600 hover:text-blue-800 font-semibold">
+            Ver detalhes &rarr;
           </Link>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+}
 
-  const { nome, descricao_longa, imagem_principal, galeria_de_imagens } = product.attributes;
-  
-  const imageUrl = imagem_principal?.data?.attributes?.url;
-  const fullImageUrl = imageUrl ? `${STRAPI_URL}${imageUrl}` : null;
-  const imageAlt = imagem_principal?.data?.attributes?.alternativeText || `Imagem ilustrativa de ${nome}`;
+
+export default async function Home() {
+  const featuredProducts = await getFeaturedProducts();
 
   return (
-    <div className="bg-white">
-      <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
-          <div className="w-full">
-            {fullImageUrl ? (
-              <div className="aspect-square relative w-full rounded-lg shadow-lg overflow-hidden">
-                <Image
-                  src={fullImageUrl}
-                  alt={imageAlt}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  priority
-                />
-              </div>
-            ) : (
-              <div className="aspect-square w-full bg-gray-200 flex items-center justify-center rounded-lg">
-                <p className="text-gray-400">Sem imagem disponível</p>
-              </div>
-            )}
-            {galeria_de_imagens?.data && (
-              <div className="mt-4 grid grid-cols-4 gap-4">
-                {galeria_de_imagens.data.map((img) => (
-                  <div key={img.id} className="aspect-square relative w-full rounded-lg overflow-hidden">
-                    <Image src={`${STRAPI_URL}${img.attributes.url}`} alt={img.attributes.alternativeText || ''} fill className="object-cover" />
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-          
-          <div>
-            <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">{nome}</h1>
-            
-            {descricao_longa ? (
-              <div
-                className="prose prose-lg max-w-none text-gray-700"
-                dangerouslySetInnerHTML={{ __html: descricao_longa }}
-              />
-            ) : (
-              <p className="text-gray-600">Nenhuma descrição detalhada disponível.</p>
-            )}
+    // Seção de Destaques da Página Inicial
+    <div className="bg-gray-100 py-12">
+      <div className="container mx-auto px-4">
+        {/* Título da seção, conforme o PDF */}
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Nossos Produtos</h2>
+          <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-600">
+            Veja abaixo nossos destaques, a TECA possui mais de 50 produtos, as melhores tecnologias da acessibilidade hoje no mercado nacional e internacional!
+          </p>
+        </div>
 
-            <div className="mt-8">
-              <Link href="/" className="text-blue-600 hover:text-blue-800 font-semibold transition-colors duration-300">
-                &larr; Voltar para todos os produtos
-              </Link>
-            </div>
+        {/* Grid de Produtos em Destaque */}
+        {featuredProducts && featuredProducts.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {featuredProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
           </div>
+        ) : (
+          <p className="text-center text-gray-500">
+            Nenhum produto em destaque encontrado.
+          </p>
+        )}
+
+        {/* Botão para ver todos os produtos */}
+        <div className="text-center mt-12">
+          <Link 
+            href="/produtos" // Futura página com todos os produtos
+            className="inline-block bg-blue-600 text-white px-8 py-3 rounded-md font-semibold hover:bg-blue-700 transition-transform transform hover:scale-105"
+          >
+            Todos nossos produtos aqui
+          </Link>
         </div>
       </div>
     </div>

@@ -4,6 +4,9 @@ const nextConfig = {
   output: 'export',
 
   images: {
+    // ADICIONADO: Esta linha desativa a otimização de imagens do Next.js
+    unoptimized: true,
+
     remotePatterns: [
       // Manter a configuração local para desenvolvimento
       {
