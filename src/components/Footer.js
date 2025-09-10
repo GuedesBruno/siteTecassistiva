@@ -12,7 +12,7 @@ export default function Footer() {
           {/* Coluna 1: Sobre e Contato */}
           <div className="md:col-span-2">
             <Image 
-              src="/logo-tecassistiva-branca.svg" // Verifique se o nome/extensão está correto
+              src="/logo-tecassistiva.svg" // Verifique se o nome/extensão está correto
               alt="Tecassistiva Logo"
               width={180}
               height={45}
