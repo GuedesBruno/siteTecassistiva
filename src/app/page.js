@@ -42,15 +42,19 @@ export default async function Home() {
       <BannerSlider banners={banners} />
 
       {/* Seção 2: Sobre a Tecassistiva */}
-      <section className="bg-white py-20">
+      <section className="bg-tec-blue-light py-20">
         <div className="container mx-auto px-6 text-center max-w-4xl">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">Tecassistiva</h2>
-          <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-            A Tecassistiva foi fundada em 2007...
+          <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4">Tecassistiva</h2>
+          <p className="text-lg text-white mb-8 leading-relaxed">
+            A Tecassistiva foi fundada em 2007, visando atender a grande demanda reprimida de produtos e serviços de qualidade
+com preços competitivos, que impediam há muitos anos que as pessoas com deficiência no Brasil, tivessem
+acesso ao grande desenvolvimento tecnológico que vinha acontecendo em outros países.
+O desenvolvimento de projetos inovadores para pessoas com deficiência, com sustentabilidade, tem sido o principal
+objetivo da Tecassistiva.
           </p>
-          <Link href="#" className="text-tec-blue-light hover:underline font-semibold text-lg">
-            Conheça a nossa história
-          </Link>
+        
+        <a class="bg-white hover:bg-gray-400 py-3 px-6 text-lg transition-colors" href="http://localhost:3000/tecassistiva">Connheça a Tecassistiva</a>
+        
         </div>
       </section>
 

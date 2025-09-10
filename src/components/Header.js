@@ -31,8 +31,8 @@ export default function Header() {
             <Image 
               src="/logo-tecassistiva.svg" // Verifique se o nome/extensão está correto
               alt="Tecassistiva Logo"
-              width={220}
-              height={55}
+              width={150}
+              height={30}
               priority
             />
           </Link>
