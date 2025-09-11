@@ -1,72 +1,85 @@
-// --- FUNÇÃO HELPER DE FETCH ---
+import qs from 'qs';
 
-async function fetchAPI(endpoint) {
-  const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
-  const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN;
+const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
+const STRAPI_API_TOKEN = process.env.STRAPI_API_TOKEN;
 
-  if (!STRAPI_URL || !STRAPI_TOKEN) {
-    console.error("ERRO GRAVE: Variáveis de ambiente do Strapi não estão definidas.");
-    return { error: 'Variáveis de ambiente não configuradas', data: null };
-  }
+async function fetchAPI(endpoint, options = {}) {
+  const url = new URL(endpoint, STRAPI_URL);
+  
+  // Mescla as opções padrão com as opções fornecidas pelo utilizador
+  const mergedOptions = {
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...(STRAPI_API_TOKEN && { Authorization: `Bearer ${STRAPI_API_TOKEN}` }),
+    },
+    // ==================================================================
+    // AQUI ESTÁ A CORREÇÃO CRÍTICA: Desativa o cache de dados
+    // ==================================================================
+    cache: 'no-store',
+  };
 
   try {
-    const res = await fetch(`${STRAPI_URL}${endpoint}`, {
-      headers: { 'Authorization': `Bearer ${STRAPI_TOKEN}` },
-      cache: 'no-cache'
-    });
-
-    if (!res.ok) {
-      const errorBody = await res.text();
-      console.error('Resposta da API não foi OK! Status:', res.status, 'Endpoint:', endpoint);
-      console.error('Corpo do Erro:', errorBody);
-      throw new Error(`Erro na requisição: ${res.status} ${res.statusText}`);
+    const response = await fetch(url.href, mergedOptions);
+    if (!response.ok) {
+      console.error(`ERRO HTTP: ${response.status} para ${url.href}`);
+      const errorBody = await response.text();
+      console.error("Corpo do erro:", errorBody);
+      return null;
     }
-    
-    return await res.json();
-
+    const data = await response.json();
+    return data.data;
   } catch (error) {
-    console.error(`ERRO FINAL ao fazer fetch na API para o endpoint "${endpoint}":`, error.message);
-    return { error: error.message, data: null };
+    console.error(`ERRO FINAL ao fazer fetch para "${endpoint}":`, error);
+    return null;
   }
 }
 
-// --- FUNÇÕES DE PRODUTOS E CATEGORIAS ---
+// Usando populate=* para buscar todas as relações de primeiro nível, incluindo imagens.
+const populateAll = qs.stringify({ populate: '*' });
 
 export async function getProducts() {
-  const json = await fetchAPI('/api/produtos?populate=*');
-  return Array.isArray(json) ? json : json.data || [];
-}
-
-export async function getProductBySlug(slug) {
-  const json = await fetchAPI(`/api/produtos?filters[slug][$eq]=${slug}&populate=*`);
-  const productData = Array.isArray(json) ? json : json.data;
-  return productData && productData.length > 0 ? productData[0] : null;
+  return fetchAPI(`/api/produtos?${populateAll}`);
 }
 
 export async function getFeaturedProducts() {
-  const json = await fetchAPI('/api/produtos?filters[destaque][$eq]=true&populate=*');
-  return Array.isArray(json) ? json : json.data || [];
+  const query = qs.stringify({
+    filters: { destaque: { $eq: true } },
+    populate: '*',
+  });
+  return fetchAPI(`/api/produtos?${query}`);
+}
+
+export async function getProductBySlug(slug) {
+  const query = qs.stringify({
+    filters: { slug: { $eq: slug } },
+    populate: '*',
+  });
+  const products = await fetchAPI(`/api/produtos?${query}`);
+  return products && products.length > 0 ? products[0] : null;
 }
 
 export async function getAllCategories() {
-  const json = await fetchAPI('/api/categorias');
-  return Array.isArray(json) ? json : json.data || [];
+  return fetchAPI(`/api/categorias?${populateAll}`);
 }
 
 export async function getCategoryBySlug(slug) {
-  const json = await fetchAPI(`/api/categorias?filters[slug][$eq]=${slug}&populate[produtos][populate][0]=imagem_principal`);
-  const categoryData = Array.isArray(json) ? json : json.data;
-  return categoryData && categoryData.length > 0 ? categoryData[0] : null;
+  const query = qs.stringify({
+    filters: { slug: { $eq: slug } },
+    populate: {
+        produtos: {
+            populate: ['imagem_principal'],
+        },
+    },
+  });
+  const categories = await fetchAPI(`/api/categorias?${query}`);
+  return categories && categories.length > 0 ? categories[0] : null;
 }
 
-// --- FUNÇÃO CORRIGIDA PARA OS BANNERS ---
-
-/**
- * Busca todos os banners da Home, ordenados e com a imagem populada.
- */
 export async function getBanners() {
-  // ATUALIZADO: O populate agora usa o nome de campo correto 'imagem'.
-  const endpoint = '/api/banner-sites?sort=ordem:asc&populate=imagem';
-  const json = await fetchAPI(endpoint);
-  return Array.isArray(json) ? json : json.data || [];
+  const query = qs.stringify({
+    sort: 'ordem:asc',
+    populate: '*',
+  });
+  return fetchAPI(`/api/banner-sites?${query}`);
 }

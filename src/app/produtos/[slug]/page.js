@@ -2,42 +2,32 @@ import { getProducts, getProductBySlug } from '@/lib/api';
 import Image from 'next/image';
 import Link from 'next/link';
 
-// ESSENCIAL: Esta função gera a lista de todos os slugs para as páginas estáticas
 export async function generateStaticParams() {
   const products = await getProducts();
-  
-  // Se não houver produtos ou slugs, retorna um array vazio para não quebrar o build
   if (!products || products.length === 0) {
     return [];
   }
-
   return products
-    .filter(product => product.slug) // Garante que apenas produtos com slug sejam processados
+    .filter(product => product.slug)
     .map((product) => ({
       slug: product.slug,
     }));
 }
 
-// Gera o título e a descrição da página dinamicamente
 export async function generateMetadata({ params }) {
   const product = await getProductBySlug(params.slug);
-  
   if (!product) {
     return { title: 'Produto não Encontrado | Tecassistiva' };
   }
-
   const { nome, descricao_curta } = product;
-
   return {
     title: `${nome} | Tecassistiva`,
     description: descricao_curta || `Detalhes sobre o produto ${nome}`,
   };
 }
 
-// Componente da página
 export default async function ProductPage({ params }) {
   const product = await getProductBySlug(params.slug);
-  const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
 
   if (!product) {
     return (
@@ -55,27 +45,21 @@ export default async function ProductPage({ params }) {
 
   const { nome, descricao_longa, imagem_principal, galeria_de_imagens } = product;
   
-  const imageUrl = imagem_principal?.url;
-  const fullImageUrl = imageUrl ? `${STRAPI_URL}${imageUrl}` : null;
+  // CORREÇÃO: Usar a URL diretamente da imagem principal.
+  const fullImageUrl = imagem_principal?.url;
   const imageAlt = imagem_principal?.alternativeText || `Imagem ilustrativa de ${nome}`;
 
-  // Simula as abas do layout
   const tabs = ["Visão Geral", "Fotos", "Vídeos", "Características Funcionais", "Características Técnicas", "Downloads"];
 
   return (
     <div className="bg-white">
       <div className="container mx-auto px-6 py-12">
-        {/* Breadcrumbs - Navegação */}
         <div className="text-sm text-gray-500 mb-8">
           <Link href="/" className="hover:underline">Página Inicial</Link>
           <span className="mx-2">&gt;</span>
           <Link href="/produtos" className="hover:underline">Produtos</Link>
-          {/* Adicionar categorias aqui no futuro, se necessário */}
         </div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
-          
-          {/* Coluna da Imagem e Galeria */}
           <div className="w-full">
             {fullImageUrl ? (
               <div className="aspect-square relative w-full rounded-lg shadow-lg overflow-hidden border">
@@ -93,18 +77,23 @@ export default async function ProductPage({ params }) {
                 <p className="text-gray-400">Sem imagem disponível</p>
               </div>
             )}
+            
             {galeria_de_imagens && galeria_de_imagens.length > 0 && (
               <div className="mt-4 grid grid-cols-4 gap-4">
                 {galeria_de_imagens.map((img) => (
                   <div key={img.id} className="aspect-square relative w-full rounded-lg overflow-hidden border hover:opacity-80 transition-opacity">
-                    <Image src={`${STRAPI_URL}${img.url}`} alt={img.alternativeText || ''} fill className="object-cover" />
+                    <Image 
+                      // CORREÇÃO: Usar a URL diretamente da galeria.
+                      src={img.url} 
+                      alt={img.alternativeText || ''} 
+                      fill 
+                      className="object-cover" 
+                    />
                   </div>
                 ))}
               </div>
             )}
           </div>
-          
-          {/* Coluna do Conteúdo */}
           <div>
             <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">{nome}</h1>
             {descricao_longa && (
@@ -116,8 +105,6 @@ export default async function ProductPage({ params }) {
             )}
           </div>
         </div>
-
-        {/* Seção de Abas */}
         <div className="mt-16 border-t pt-8">
             <div className="border-b border-gray-200">
                 <nav className="-mb-px flex space-x-8" aria-label="Tabs">

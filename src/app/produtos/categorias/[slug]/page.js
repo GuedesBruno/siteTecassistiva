@@ -2,7 +2,6 @@ import { getAllCategories, getCategoryBySlug } from '@/lib/api';
 import Image from 'next/image';
 import Link from 'next/link';
 
-// Gera a lista de todas as categorias para o Next.js criar as páginas estáticas
 export async function generateStaticParams() {
   const categories = await getAllCategories();
   if (!categories || categories.length === 0) return [];
@@ -11,20 +10,23 @@ export async function generateStaticParams() {
   }));
 }
 
-// Componente do Card de Produto para a página de categoria
 function CategoryProductCard({ product }) {
-  const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
   const { nome, slug, descricao_curta, imagem_principal } = product;
 
-  const imageUrl = imagem_principal?.url;
-  const fullImageUrl = imageUrl ? `${STRAPI_URL}${imageUrl}` : null;
+  // CORREÇÃO: Usar a URL diretamente, pois ela já vem completa do Strapi.
+  const fullImageUrl = imagem_principal?.url;
   const imageAlt = imagem_principal?.alternativeText || `Imagem de ${nome}`;
 
   return (
     <div className="bg-white p-4 rounded-lg shadow-md border flex flex-col">
       <div className="relative h-48 w-full mb-4">
         {fullImageUrl ? (
-          <Image src={fullImageUrl} alt={imageAlt} fill className="object-contain rounded-md" />
+          <Image 
+            src={fullImageUrl} 
+            alt={imageAlt} 
+            fill 
+            className="object-contain rounded-md" 
+          />
         ) : <div className="w-full h-full bg-gray-200 rounded-md" />}
       </div>
       <h3 className="text-xl font-bold text-gray-800">{nome}</h3>
@@ -36,7 +38,6 @@ function CategoryProductCard({ product }) {
   );
 }
 
-// Componente Principal da Página da Categoria
 export default async function CategoryPage({ params }) {
   const category = await getCategoryBySlug(params.slug);
   const allCategories = await getAllCategories();
@@ -45,20 +46,18 @@ export default async function CategoryPage({ params }) {
     return <p>Categoria não encontrada.</p>;
   }
 
+  // A API agora popula os produtos diretamente dentro da categoria
   const products = category.produtos || [];
 
   return (
     <div className="bg-gray-50">
       <div className="container mx-auto px-6 py-12">
-        {/* Breadcrumbs */}
         <div className="text-sm text-gray-500 mb-6">
           <Link href="/" className="hover:underline">Página Inicial</Link>
           <span className="mx-2">&gt;</span>
           <span className="font-semibold text-gray-700">{category.nome}</span>
         </div>
-
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Coluna 1: Barra Lateral de Categorias */}
           <aside className="lg:col-span-1">
             <div className="bg-white p-6 rounded-lg shadow-md border">
               <h2 className="text-xl font-bold mb-4">Categorias</h2>
@@ -67,6 +66,7 @@ export default async function CategoryPage({ params }) {
                   <li key={cat.id} className="mb-2">
                     <Link 
                       href={`/produtos/categorias/${cat.slug}`} 
+                      scroll={false}
                       className={`block p-2 rounded-md transition-colors ${params.slug === cat.slug ? 'bg-blue-100 text-blue-700 font-bold' : 'hover:bg-gray-100'}`}
                     >
                       {cat.nome}
@@ -76,8 +76,6 @@ export default async function CategoryPage({ params }) {
               </ul>
             </div>
           </aside>
-
-          {/* Coluna 2: Lista de Produtos */}
           <main className="lg:col-span-3">
             <h1 className="text-4xl font-extrabold text-gray-900 mb-8">{category.nome}</h1>
             {products.length > 0 ? (

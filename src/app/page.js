@@ -1,64 +1,32 @@
 import { getFeaturedProducts, getBanners } from '@/lib/api'; 
 import BannerSlider from '@/components/BannerSlider';
-import Image from 'next/image';
+import FeaturedProductsSlider from '@/components/FeaturedProductsSlider'; // Importando o novo carrossel
 import Link from 'next/link';
 
-function ProductCard({ product }) {
-  const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
-  const { nome, slug, descricao_curta, imagem_principal } = product;
-  const imageUrl = imagem_principal?.url;
-  const fullImageUrl = imageUrl ? `${STRAPI_URL}${imageUrl}` : null;
-  const imageAlt = imagem_principal?.alternativeText || `Imagem de ${nome}`;
-
-  if (!slug) return null;
-
-  return (
-    <div className="bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-xl transition-shadow flex flex-col text-center">
-      <div className="bg-tec-navy p-4 text-white rounded-t-lg">
-        <h3 className="text-xl font-bold">{nome}</h3>
-      </div>
-      <div className="p-5 flex-grow flex flex-col items-center">
-        <div className="relative h-48 w-full mb-4">
-          {fullImageUrl && (
-            <Image src={fullImageUrl} alt={imageAlt} fill className="object-contain" />
-          )}
-        </div>
-        <p className="text-gray-600 text-sm flex-grow mb-4">{descricao_curta}</p>
-        <Link href={`/produtos/${slug}`} className="text-tec-blue-light hover:underline mt-auto self-center font-semibold">
-          Saiba mais...
-        </Link>
-      </div>
-    </div>
-  );
-}
+// ATENÇÃO: A função ProductCard foi removida daqui e movida para seu próprio arquivo.
 
 export default async function Home() {
   const featuredProducts = await getFeaturedProducts();
   const banners = await getBanners();
-
+  
   return (
     <>
-      {/* Seção 1: Componente BannerSlider */}
       <BannerSlider banners={banners} />
-
-      {/* Seção 2: Sobre a Tecassistiva */}
       <section className="bg-tec-blue-light py-20">
         <div className="container mx-auto px-6 text-center max-w-4xl">
           <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4">Tecassistiva</h2>
           <p className="text-lg text-white mb-8 leading-relaxed">
             A Tecassistiva foi fundada em 2007, visando atender a grande demanda reprimida de produtos e serviços de qualidade
-com preços competitivos, que impediam há muitos anos que as pessoas com deficiência no Brasil, tivessem
-acesso ao grande desenvolvimento tecnológico que vinha acontecendo em outros países.
-O desenvolvimento de projetos inovadores para pessoas com deficiência, com sustentabilidade, tem sido o principal
-objetivo da Tecassistiva.
+            com preços competitivos, que impediam há muitos anos que as pessoas com deficiência no Brasil, tivessem
+            acesso ao grande desenvolvimento tecnológico que vinha acontecendo em outros países.
           </p>
-        
-        <a class="bg-white hover:bg-gray-400 py-3 px-6 text-lg transition-colors" href="http://localhost:3000/tecassistiva">Connheça a Tecassistiva</a>
-        
+          <Link href="/tecassistiva" className="bg-white hover:bg-gray-400 py-3 px-6 text-lg transition-colors">
+            Conheça a Tecassistiva
+          </Link>
         </div>
       </section>
 
-      {/* Seção 3: Nossos Produtos em Destaque */}
+      {/* SEÇÃO DE PRODUTOS ATUALIZADA */}
       <section className="bg-gray-50 py-20">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
@@ -68,15 +36,10 @@ objetivo da Tecassistiva.
               no mercado nacional e internacional!
             </p>
           </div>
-          {featuredProducts && featuredProducts.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {featuredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          ) : (
-            <p className="text-center text-gray-500">Nenhum produto em destaque encontrado.</p>
-          )}
+          
+          {/* O grid foi substituído pelo novo componente de carrossel */}
+          <FeaturedProductsSlider products={featuredProducts} />
+
           <div className="text-center mt-12">
             <Link href="/produtos" className="inline-block bg-tec-blue-light text-white px-8 py-3 font-semibold hover:bg-blue-800 text-lg">
               Todos nossos produtos aqui
@@ -84,8 +47,6 @@ objetivo da Tecassistiva.
           </div>
         </div>
       </section>
-      
-      {/* O restante das seções (Vídeos, Fornecedores, etc.) continua aqui... */}
     </>
   );
 }

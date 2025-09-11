@@ -54,10 +54,10 @@ export default function Footer() {
         <div className="border-t border-gray-700 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-500 text-sm">&copy; {currentYear} Tecassistiva. Todos os direitos reservados.</p>
           <div className="flex space-x-4 mt-4 md:mt-0">
-            {/* Placeholders para redes sociais */}
-            <Link href="#" className="text-gray-400 hover:text-white">Facebook</Link>
-            <Link href="#" className="text-gray-400 hover:text-white">Instagram</Link>
-            <Link href="#" className="text-gray-400 hover:text-white">Youtube</Link>
+            {/* AQUI ESTÁ A ALTERAÇÃO */}
+            <Link href="#" className="text-gray-400 hover:text-white" aria-label="Siga-nos no Facebook">Facebook</Link>
+            <Link href="#" className="text-gray-400 hover:text-white" aria-label="Siga-nos no Instagram">Instagram</Link>
+            <Link href="#" className="text-gray-400 hover:text-white" aria-label="Acesse nosso canal no Youtube">Youtube</Link>
           </div>
         </div>
       </div>
