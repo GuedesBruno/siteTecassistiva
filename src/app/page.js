@@ -38,7 +38,7 @@ export default async function Home() {
 
   return (
     <>
-      {/* Seção 1: ATUALIZADO para usar o componente BannerSlider */}
+      {/* Seção 1: Componente BannerSlider */}
       <BannerSlider banners={banners} />
 
       {/* Seção 2: Sobre a Tecassistiva */}
@@ -64,7 +64,8 @@ objetivo da Tecassistiva.
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">Nossos Produtos</h2>
             <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-600">
-              Veja abaixo nossos destaques...
+              Veja abaixo nossos destaques, a TECA possui mais de 50 produtos, as melhores tecnologias da acessibilidade hoje
+              no mercado nacional e internacional!
             </p>
           </div>
           {featuredProducts && featuredProducts.length > 0 ? (
@@ -77,7 +78,7 @@ objetivo da Tecassistiva.
             <p className="text-center text-gray-500">Nenhum produto em destaque encontrado.</p>
           )}
           <div className="text-center mt-12">
-            <Link href="/produtos" className="inline-block bg-tec-blue-light text-white px-8 py-3 rounded-md font-semibold hover:bg-blue-800 text-lg">
+            <Link href="/produtos" className="inline-block bg-tec-blue-light text-white px-8 py-3 font-semibold hover:bg-blue-800 text-lg">
               Todos nossos produtos aqui
             </Link>
           </div>
