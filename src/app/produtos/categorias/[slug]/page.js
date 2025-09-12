@@ -1,63 +1,40 @@
+import { Suspense } from 'react';
 import { getAllCategories, getCategoryBySlug } from '@/lib/api';
-import Link from 'next/link';
-import ProductListClient from '@/components/ProductListClient'; // Componente de cliente para a lógica de filtragem
+import CategoryClientView from '@/components/CategoryClientView'; // O nosso novo componente de cliente
 
-// ADICIONADO: Informa ao Next.js quais páginas de categoria devem ser geradas
-// Isto resolve o erro "missing generateStaticParams()"
+// Essencial para o build estático, informa ao Next.js quais páginas criar
 export async function generateStaticParams() {
     const categories = await getAllCategories();
     if (!categories) return [];
-    return categories.map((category) => ({
+    // Garante que apenas categorias com slug sejam processadas
+    return categories.filter(cat => cat.slug).map((category) => ({
         slug: category.slug,
     }));
 }
 
-// Componente do Menu Lateral (Sidebar)
-// É um Componente de Servidor, o que o torna rápido
-async function CategorySidebar({ currentCategorySlug }) {
-    const allCategories = await getAllCategories();
+// Esqueleto de carregamento que será mostrado enquanto o componente de cliente renderiza
+function LoadingSkeleton() {
     return (
-        <aside className="lg:col-span-1">
-            <div className="bg-white p-6 rounded-lg shadow-md border">
-                <h2 className="text-xl font-bold mb-4">Categorias</h2>
-                <ul>
-                    {(allCategories || []).map((cat) => (
-                        <li key={cat.id} className="mb-2">
-                            <Link 
-                                href={`/produtos/categorias/${cat.slug}`} 
-                                scroll={false}
-                                className={`block p-2 rounded-md font-bold transition-colors ${currentCategorySlug === cat.slug ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100'}`}
-                            >
-                                {cat.nome}
-                            </Link>
-                            {cat.subcategorias && cat.subcategorias.length > 0 && (
-                                <ul className="ml-4 mt-1 border-l pl-4">
-                                    {cat.subcategorias.map((subCat) => (
-                                        <li key={subCat.id}>
-                                            <Link 
-                                                href={`/produtos/categorias/${cat.slug}?sub=${subCat.slug}`}
-                                                scroll={false}
-                                                className="block p-1 text-sm rounded-md transition-colors hover:bg-gray-100"
-                                            >
-                                                {subCat.nome}
-                                            </Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                            )}
-                        </li>
-                    ))}
-                </ul>
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <div className="lg:col-span-1 h-96 bg-gray-200 rounded-lg animate-pulse"></div>
+            <div className="lg:col-span-3">
+                <div className="h-10 bg-gray-200 rounded w-1/2 mb-8 animate-pulse"></div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="h-80 bg-gray-200 rounded-lg animate-pulse"></div>
+                    <div className="h-80 bg-gray-200 rounded-lg animate-pulse"></div>
+                </div>
             </div>
-        </aside>
+        </div>
     );
 }
 
-// Componente Principal da Página (Componente de Servidor)
-// Ele NÃO usa mais o searchParams aqui, resolvendo o erro de build
+// --- Componente Principal da Página (Componente de Servidor) ---
 export default async function CategoryPage({ params }) {
-    // Busca todos os dados necessários uma única vez no servidor
-    const category = await getCategoryBySlug(params.slug);
+    // Busca todos os dados necessários de uma só vez no servidor
+    const [category, allCategories] = await Promise.all([
+        getCategoryBySlug(params.slug),
+        getAllCategories()
+    ]);
 
     if (!category) {
         return <p className="text-center py-20">Categoria não encontrada.</p>;
@@ -66,25 +43,14 @@ export default async function CategoryPage({ params }) {
     return (
         <div className="bg-gray-50">
             <div className="container mx-auto px-6 md:px-12 py-12">
-                <div className="text-sm text-gray-500 mb-6">
-                    <Link href="/" className="hover:underline">Página Inicial</Link>
-                    <span className="mx-2">&gt;</span>
-                    <Link href="/produtos" className="hover:underline">Produtos</Link>
-                    <span className="mx-2">&gt;</span>
-                    {/* O breadcrumb será atualizado pelo componente de cliente */}
-                    <span className="font-semibold text-gray-700">{category.nome}</span>
-                </div>
-                <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-                    <CategorySidebar 
-                        currentCategorySlug={params.slug} 
+                {/* Suspense é a chave para o deploy funcionar */}
+                <Suspense fallback={<LoadingSkeleton />}>
+                    <CategoryClientView 
+                        category={category}
+                        allCategories={allCategories}
+                        currentCategorySlug={params.slug}
                     />
-                    <main className="lg:col-span-3">
-                        {/* Passamos todos os dados para o componente de cliente */}
-                        <ProductListClient 
-                            category={category}
-                        />
-                    </main>
-                </div>
+                </Suspense>
             </div>
         </div>
     );
