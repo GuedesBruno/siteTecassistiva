@@ -1,13 +1,19 @@
-'use client'; 
-
-import { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
-import Link from 'next/link';
-import ProductCard from '@/components/ProductCard'; // Usando o componente partilhado
 import { getAllCategories, getCategoryBySlug } from '@/lib/api';
+import Link from 'next/link';
+import ProductListClient from '@/components/ProductListClient';
 
-// --- Componente do Menu Lateral ---
-function CategorySidebar({ allCategories, currentCategorySlug, currentSubCategorySlug }) {
+// ADICIONADO: Informa ao Next.js quais páginas de categoria devem ser geradas
+export async function generateStaticParams() {
+    const categories = await getAllCategories();
+    if (!categories) return [];
+    return categories.map((category) => ({
+        slug: category.slug,
+    }));
+}
+
+// Componente do Menu Lateral (Sidebar)
+async function CategorySidebar({ currentCategorySlug, currentSubCategorySlug }) {
+    const allCategories = await getAllCategories();
     return (
         <aside className="lg:col-span-1">
             <div className="bg-white p-6 rounded-lg shadow-md border">
@@ -45,50 +51,13 @@ function CategorySidebar({ allCategories, currentCategorySlug, currentSubCategor
     );
 }
 
-// --- Componente Principal da Página ---
-export default function CategoryPage({ params }) {
-    const [category, setCategory] = useState(null);
-    const [allCategories, setAllCategories] = useState([]);
-    const [filteredProducts, setFilteredProducts] = useState([]);
-    const [pageTitle, setPageTitle] = useState('');
-    const [isLoading, setIsLoading] = useState(true);
-
-    const searchParams = useSearchParams();
-    const subCategorySlug = searchParams.get('sub');
-
-    useEffect(() => {
-        async function fetchData() {
-            setIsLoading(true);
-            const [catData, allCatsData] = await Promise.all([
-                getCategoryBySlug(params.slug),
-                getAllCategories()
-            ]);
-            
-            setCategory(catData);
-            setAllCategories(allCatsData || []);
-            
-            if (catData) {
-                if (subCategorySlug) {
-                    const activeSub = catData.subcategorias?.find(s => s.slug === subCategorySlug);
-                    setFilteredProducts(activeSub?.produtos || []);
-                    setPageTitle(activeSub?.nome || catData.nome);
-                } else {
-                    const allProducts = catData.subcategorias?.flatMap(s => s.produtos || []) || [];
-                    setFilteredProducts(allProducts);
-                    setPageTitle(catData.nome);
-                }
-            }
-            setIsLoading(false);
-        }
-        fetchData();
-    }, [params.slug, subCategorySlug]);
-
-    if (isLoading) {
-        return <div className="text-center py-20">Carregando...</div>;
-    }
+// Componente Principal da Página (Componente de Servidor)
+export default async function CategoryPage({ params, searchParams }) {
+    const category = await getCategoryBySlug(params.slug);
+    const subCategorySlug = searchParams.sub;
 
     if (!category) {
-        return <div className="text-center py-20">Categoria não encontrada.</div>;
+        return <p className="text-center py-20">Categoria não encontrada.</p>;
     }
 
     return (
@@ -102,33 +71,20 @@ export default function CategoryPage({ params }) {
                     {subCategorySlug ? (
                          <>
                             <Link href={`/produtos/categorias/${params.slug}`} className="hover:underline">{category.nome}</Link>
-                            <span className="mx-2">&gt;</span>
-                            <span className="font-semibold text-gray-700">{pageTitle}</span>
                          </>
                     ) : (
-                        <span className="font-semibold text-gray-700">{pageTitle}</span>
+                        <span className="font-semibold text-gray-700">{category.nome}</span>
                     )}
                 </div>
-
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
                     <CategorySidebar 
-                        allCategories={allCategories} 
                         currentCategorySlug={params.slug} 
                         currentSubCategorySlug={subCategorySlug} 
                     />
-                    
                     <main className="lg:col-span-3">
-                        <h1 className="text-4xl font-extrabold text-gray-900 mb-8">{pageTitle}</h1>
-                        {filteredProducts.length > 0 ? (
-                            // Grelha ajustada para ser responsiva
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-1">
-                                {filteredProducts.map((product) => (
-                                    <ProductCard key={product.id} product={product} />
-                                ))}
-                            </div>
-                        ) : (
-                            <p className="text-gray-600">Nenhum produto encontrado para esta seleção.</p>
-                        )}
+                        <ProductListClient 
+                            category={category}
+                        />
                     </main>
                 </div>
             </div>

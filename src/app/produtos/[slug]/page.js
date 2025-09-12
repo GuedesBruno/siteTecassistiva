@@ -2,28 +2,13 @@ import { getProducts, getProductBySlug } from '@/lib/api';
 import Image from 'next/image';
 import Link from 'next/link';
 
+// ADICIONADO: Informa ao Next.js quais páginas de produto devem ser geradas
 export async function generateStaticParams() {
-  const products = await getProducts();
-  if (!products || products.length === 0) {
-    return [];
-  }
-  return products
-    .filter(product => product.slug)
-    .map((product) => ({
-      slug: product.slug,
+    const products = await getProducts();
+    if (!products) return [];
+    return products.map((product) => ({
+        slug: product.slug,
     }));
-}
-
-export async function generateMetadata({ params }) {
-  const product = await getProductBySlug(params.slug);
-  if (!product) {
-    return { title: 'Produto não Encontrado | Tecassistiva' };
-  }
-  const { nome, descricao_curta } = product;
-  return {
-    title: `${nome} | Tecassistiva`,
-    description: descricao_curta || `Detalhes sobre o produto ${nome}`,
-  };
 }
 
 export default async function ProductPage({ params }) {
@@ -45,7 +30,6 @@ export default async function ProductPage({ params }) {
 
   const { nome, descricao_longa, imagem_principal, galeria_de_imagens } = product;
   
-  // CORREÇÃO: Usar a URL diretamente da imagem principal.
   const fullImageUrl = imagem_principal?.url;
   const imageAlt = imagem_principal?.alternativeText || `Imagem ilustrativa de ${nome}`;
 
@@ -83,7 +67,6 @@ export default async function ProductPage({ params }) {
                 {galeria_de_imagens.map((img) => (
                   <div key={img.id} className="aspect-square relative w-full rounded-lg overflow-hidden border hover:opacity-80 transition-opacity">
                     <Image 
-                      // CORREÇÃO: Usar a URL diretamente da galeria.
                       src={img.url} 
                       alt={img.alternativeText || ''} 
                       fill 
