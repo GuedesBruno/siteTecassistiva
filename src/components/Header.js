@@ -3,8 +3,8 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { getAllCategories } from '@/lib/api';
 
-// Componente para um ícone simples
 const Icon = ({ path }) => (
   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
     <path fillRule="evenodd" d={path} clipRule="evenodd" />
@@ -14,6 +14,18 @@ const Icon = ({ path }) => (
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isProdutosMenuOpen, setIsProdutosMenuOpen] = useState(false);
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    async function fetchCategories() {
+      const fetchedCategories = await getAllCategories();
+      if (fetchedCategories) {
+        setCategories(fetchedCategories);
+      }
+    }
+    fetchCategories();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -70,7 +82,38 @@ export default function Header() {
               {/* Navegação Desktop */}
               <nav className="hidden md:flex items-center space-x-8 text-lg">
                 <Link href="/tecassistiva" className="font-semibold hover:text-gray-300 transition-colors">A Tecassistiva</Link>
-                <Link href="/" className="font-semibold hover:text-gray-300 transition-colors">Produtos</Link>
+                
+                {/* === INÍCIO DA CORREÇÃO DO MENU PRODUTOS === */}
+                <div 
+                  className="relative"
+                  onMouseEnter={() => setIsProdutosMenuOpen(true)}
+                  onMouseLeave={() => setIsProdutosMenuOpen(false)}
+                >
+                  {/* Container invisível para preencher o "limbo" */}
+                  <div className="absolute -inset-x-2 -top-2 h-8" />
+
+                  <Link href="/produtos" className="font-semibold hover:text-gray-300 transition-colors flex items-center">
+                    Produtos
+                    <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                  </Link>
+                  
+                  {isProdutosMenuOpen && categories.length > 0 && (
+                    // Removido o mt-2 para eliminar o espaço
+                    <div className="absolute left-0 w-56 bg-white rounded-md shadow-lg py-2">
+                      {categories.map((category) => (
+                        <Link 
+                          key={category.id} 
+                          href={`/produtos/categorias/${category.slug}`}
+                          className="block px-4 py-2 text-tec-blue hover:bg-gray-100"
+                        >
+                          {category.nome}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                {/* === FIM DA CORREÇÃO DO MENU PRODUTOS === */}
+
                 <Link href="#" className="font-semibold hover:text-gray-300 transition-colors">Atas Abertas</Link>
                 <Link href="#" className="font-semibold hover:text-gray-300 transition-colors">Suporte</Link>
                 <Link href="#" className="font-semibold hover:text-gray-300 transition-colors">Contato</Link>
@@ -78,13 +121,13 @@ export default function Header() {
 
               {/* Botão do Menu Mobile */}
               <div className="md:hidden">
-                <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-white focus:outline-none z-50 relative">
-                  {isMenuOpen ? (
-                     <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                  ) : (
-                     <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-                  )}
-                </button>
+                  <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-white focus:outline-none z-50 relative">
+                      {isMenuOpen ? (
+                          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                      ) : (
+                          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                      )}
+                  </button>
               </div>
             </div>
           </div>
@@ -95,7 +138,7 @@ export default function Header() {
       <div className={`fixed inset-0 bg-tec-blue z-40 transform transition-transform duration-300 ease-in-out md:hidden ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         <nav className="flex flex-col items-center justify-center h-full space-y-8 text-2xl text-white">
           <Link href="/tecassistiva" onClick={() => setIsMenuOpen(false)} className="font-semibold hover:text-gray-300">A Tecassistiva</Link>
-          <Link href="/" onClick={() => setIsMenuOpen(false)} className="font-semibold hover:text-gray-300">Produtos</Link>
+          <Link href="/produtos" onClick={() => setIsMenuOpen(false)} className="font-semibold hover:text-gray-300">Produtos</Link>
           <Link href="#" onClick={() => setIsMenuOpen(false)} className="font-semibold hover:text-gray-300">Atas Abertas</Link>
           <Link href="#" onClick={() => setIsMenuOpen(false)} className="font-semibold hover:text-gray-300">Suporte</Link>
           <Link href="#" onClick={() => setIsMenuOpen(false)} className="font-semibold hover:text-gray-300">Contato</Link>

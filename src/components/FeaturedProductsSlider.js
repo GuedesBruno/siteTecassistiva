@@ -15,7 +15,7 @@ export default function FeaturedProductsSlider({ products }) {
   }
 
   return (
-    <div className="relative px-12"> {/* Espaço para as setas de navegação */}
+    <div className="relative px-24"> {/* Espaço para as setas de navegação */}
       <Swiper
         modules={[Navigation, Pagination]}
         spaceBetween={30} // Espaço entre os slides
@@ -25,15 +25,15 @@ export default function FeaturedProductsSlider({ products }) {
         breakpoints={{
           // a partir de 640px
           640: {
-            slidesPerView: 1,
+            slidesPerView: 2,
           },
           // a partir de 768px
           768: {
-            slidesPerView: 2,
+            slidesPerView: 3,
           },
           // a partir de 1024px
           1024: {
-            slidesPerView: 3,
+            slidesPerView: 4,
           },
         }}
         className="!pb-12" // Adiciona padding inferior para a paginação não sobrepor o conteúdo
