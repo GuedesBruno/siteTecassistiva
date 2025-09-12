@@ -1,13 +1,21 @@
-'use client'; // <-- TRANSFORMA EM COMPONENTE DE CLIENTE
-
-import { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
 import { getAllCategories, getCategoryBySlug } from '@/lib/api';
 import Link from 'next/link';
-import ProductCard from '@/components/ProductCard';
+import ProductListClient from '@/components/ProductListClient'; // Componente de cliente para a lógica de filtragem
 
-// --- Componente do Menu Lateral ---
-function CategorySidebar({ allCategories, currentCategorySlug, currentSubCategorySlug }) {
+// ADICIONADO: Informa ao Next.js quais páginas de categoria devem ser geradas
+// Isto resolve o erro "missing generateStaticParams()"
+export async function generateStaticParams() {
+    const categories = await getAllCategories();
+    if (!categories) return [];
+    return categories.map((category) => ({
+        slug: category.slug,
+    }));
+}
+
+// Componente do Menu Lateral (Sidebar)
+// É um Componente de Servidor, o que o torna rápido
+async function CategorySidebar({ currentCategorySlug }) {
+    const allCategories = await getAllCategories();
     return (
         <aside className="lg:col-span-1">
             <div className="bg-white p-6 rounded-lg shadow-md border">
@@ -18,7 +26,7 @@ function CategorySidebar({ allCategories, currentCategorySlug, currentSubCategor
                             <Link 
                                 href={`/produtos/categorias/${cat.slug}`} 
                                 scroll={false}
-                                className={`block p-2 rounded-md font-bold transition-colors ${currentCategorySlug === cat.slug && !currentSubCategorySlug ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100'}`}
+                                className={`block p-2 rounded-md font-bold transition-colors ${currentCategorySlug === cat.slug ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100'}`}
                             >
                                 {cat.nome}
                             </Link>
@@ -29,7 +37,7 @@ function CategorySidebar({ allCategories, currentCategorySlug, currentSubCategor
                                             <Link 
                                                 href={`/produtos/categorias/${cat.slug}?sub=${subCat.slug}`}
                                                 scroll={false}
-                                                className={`block p-1 text-sm rounded-md transition-colors ${currentSubCategorySlug === subCat.slug ? 'bg-gray-200 font-semibold' : 'hover:bg-gray-100'}`}
+                                                className="block p-1 text-sm rounded-md transition-colors hover:bg-gray-100"
                                             >
                                                 {subCat.nome}
                                             </Link>
@@ -45,52 +53,14 @@ function CategorySidebar({ allCategories, currentCategorySlug, currentSubCategor
     );
 }
 
-// --- Componente Principal da Página ---
-export default function CategoryPage({ params }) {
-    const [category, setCategory] = useState(null);
-    const [allCategories, setAllCategories] = useState([]);
-    const [filteredProducts, setFilteredProducts] = useState([]);
-    const [pageTitle, setPageTitle] = useState('');
-    const [isLoading, setIsLoading] = useState(true);
-
-    const searchParams = useSearchParams();
-    const subCategorySlug = searchParams.get('sub');
-
-    useEffect(() => {
-        async function fetchData() {
-            setIsLoading(true);
-            // Busca todos os dados necessários de uma só vez
-            const [catData, allCatsData] = await Promise.all([
-                getCategoryBySlug(params.slug),
-                getAllCategories()
-            ]);
-            
-            setCategory(catData);
-            setAllCategories(allCatsData || []);
-            
-            // Lógica de filtragem
-            if (catData) {
-                if (subCategorySlug) {
-                    const activeSub = catData.subcategorias?.find(s => s.slug === subCategorySlug);
-                    setFilteredProducts(activeSub?.produtos || []);
-                    setPageTitle(activeSub?.nome || catData.nome);
-                } else {
-                    const allProducts = catData.subcategorias?.flatMap(s => s.produtos || []) || [];
-                    setFilteredProducts(allProducts);
-                    setPageTitle(catData.nome);
-                }
-            }
-            setIsLoading(false);
-        }
-        fetchData();
-    }, [params.slug, subCategorySlug]); // Executa sempre que o slug principal ou da subcategoria muda
-
-    if (isLoading) {
-        return <div className="text-center py-20">Carregando...</div>;
-    }
+// Componente Principal da Página (Componente de Servidor)
+// Ele NÃO usa mais o searchParams aqui, resolvendo o erro de build
+export default async function CategoryPage({ params }) {
+    // Busca todos os dados necessários uma única vez no servidor
+    const category = await getCategoryBySlug(params.slug);
 
     if (!category) {
-        return <div className="text-center py-20">Categoria não encontrada.</div>;
+        return <p className="text-center py-20">Categoria não encontrada.</p>;
     }
 
     return (
@@ -101,34 +71,18 @@ export default function CategoryPage({ params }) {
                     <span className="mx-2">&gt;</span>
                     <Link href="/produtos" className="hover:underline">Produtos</Link>
                     <span className="mx-2">&gt;</span>
-                    {subCategorySlug ? (
-                         <>
-                            <Link href={`/produtos/categorias/${params.slug}`} className="hover:underline">{category.nome}</Link>
-                            <span className="mx-2">&gt;</span>
-                            <span className="font-semibold text-gray-700">{pageTitle}</span>
-                         </>
-                    ) : (
-                        <span className="font-semibold text-gray-700">{pageTitle}</span>
-                    )}
+                    {/* O breadcrumb será atualizado pelo componente de cliente */}
+                    <span className="font-semibold text-gray-700">{category.nome}</span>
                 </div>
-
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
                     <CategorySidebar 
-                        allCategories={allCategories} 
                         currentCategorySlug={params.slug} 
-                        currentSubCategorySlug={subCategorySlug} 
                     />
                     <main className="lg:col-span-3">
-                        <h1 className="text-4xl font-extrabold text-gray-900 mb-8">{pageTitle}</h1>
-                        {filteredProducts.length > 0 ? (
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                {filteredProducts.map((product) => (
-                                    <ProductCard key={product.id} product={product} />
-                                ))}
-                            </div>
-                        ) : (
-                            <p className="text-gray-600">Nenhum produto encontrado para esta seleção.</p>
-                        )}
+                        {/* Passamos todos os dados para o componente de cliente */}
+                        <ProductListClient 
+                            category={category}
+                        />
                     </main>
                 </div>
             </div>
