@@ -1,17 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // AQUI ESTÁ A CORREÇÃO:
+  // Esta linha instrui o Next.js a gerar um site estático na pasta "out"
+  output: 'export',
+
   reactStrictMode: true,
   images: {
-    unoptimized: true, // Vamos manter desativado por enquanto para simplificar
+    unoptimized: true, 
     remotePatterns: [
       {
         protocol: 'https',
-        // ESTA É A LINHA CRÍTICA CORRIGIDA:
         hostname: 'light-dog-088c5ec318.strapiapp.com',
         port: '',
         pathname: '/uploads/**',
       },
-      // Manter o localhost para testes futuros
       {
         protocol: 'http',
         hostname: 'localhost',
