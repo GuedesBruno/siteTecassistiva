@@ -6,16 +6,12 @@ const STRAPI_API_TOKEN = process.env.STRAPI_API_TOKEN;
 async function fetchAPI(endpoint, options = {}) {
   const url = new URL(endpoint, STRAPI_URL);
   
-  // Mescla as opções padrão com as opções fornecidas pelo utilizador
   const mergedOptions = {
     ...options,
     headers: {
       'Content-Type': 'application/json',
       ...(STRAPI_API_TOKEN && { Authorization: `Bearer ${STRAPI_API_TOKEN}` }),
     },
-    // ==================================================================
-    // AQUI ESTÁ A CORREÇÃO CRÍTICA: Desativa o cache de dados
-    // ==================================================================
     cache: 'no-store',
   };
 
@@ -35,7 +31,6 @@ async function fetchAPI(endpoint, options = {}) {
   }
 }
 
-// Usando populate=* para buscar todas as relações de primeiro nível, incluindo imagens.
 const populateAll = qs.stringify({ populate: '*' });
 
 export async function getProducts() {
@@ -60,15 +55,22 @@ export async function getProductBySlug(slug) {
 }
 
 export async function getAllCategories() {
-  return fetchAPI(`/api/categorias?${populateAll}`);
+  const query = qs.stringify({
+    populate: ['subcategorias'],
+  });
+  return fetchAPI(`/api/categorias?${query}`);
 }
 
 export async function getCategoryBySlug(slug) {
   const query = qs.stringify({
     filters: { slug: { $eq: slug } },
     populate: {
-        produtos: {
-            populate: ['imagem_principal'],
+        subcategorias: {
+            populate: {
+                produtos: {
+                    populate: ['imagem_principal'],
+                },
+            },
         },
     },
   });

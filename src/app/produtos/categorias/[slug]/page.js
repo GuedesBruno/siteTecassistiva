@@ -1,95 +1,103 @@
 import { getAllCategories, getCategoryBySlug } from '@/lib/api';
-import Image from 'next/image';
 import Link from 'next/link';
+import ProductListClient from '@/components/ProductListClient';
 
-export async function generateStaticParams() {
-  const categories = await getAllCategories();
-  if (!categories || categories.length === 0) return [];
-  return categories.map((category) => ({
-    slug: category.slug,
-  }));
-}
-
-function CategoryProductCard({ product }) {
-  const { nome, slug, descricao_curta, imagem_principal } = product;
-
-  // CORREÇÃO: Usar a URL diretamente, pois ela já vem completa do Strapi.
-  const fullImageUrl = imagem_principal?.url;
-  const imageAlt = imagem_principal?.alternativeText || `Imagem de ${nome}`;
-
-  return (
-    <div className="bg-white p-4 rounded-lg shadow-md border flex flex-col">
-      <div className="relative h-48 w-full mb-4">
-        {fullImageUrl ? (
-          <Image 
-            src={fullImageUrl} 
-            alt={imageAlt} 
-            fill 
-            className="object-contain rounded-md" 
-          />
-        ) : <div className="w-full h-full bg-gray-200 rounded-md" />}
-      </div>
-      <h3 className="text-xl font-bold text-gray-800">{nome}</h3>
-      <p className="text-gray-600 text-sm mt-2 flex-grow">{descricao_curta}</p>
-      <Link href={`/produtos/${slug}`} className="text-blue-600 hover:underline mt-4 font-semibold self-start">
-        Ver detalhes &rarr;
-      </Link>
-    </div>
-  );
-}
-
-export default async function CategoryPage({ params }) {
-  const category = await getCategoryBySlug(params.slug);
-  const allCategories = await getAllCategories();
-
-  if (!category) {
-    return <p>Categoria não encontrada.</p>;
-  }
-
-  // A API agora popula os produtos diretamente dentro da categoria
-  const products = category.produtos || [];
-
-  return (
-    <div className="bg-gray-50">
-      <div className="container mx-auto px-6 py-12">
-        <div className="text-sm text-gray-500 mb-6">
-          <Link href="/" className="hover:underline">Página Inicial</Link>
-          <span className="mx-2">&gt;</span>
-          <span className="font-semibold text-gray-700">{category.nome}</span>
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          <aside className="lg:col-span-1">
+function CategorySidebar({ allCategories, currentCategorySlug, currentSubCategorySlug }) {
+    // ... (este componente não precisa de alterações)
+    return (
+        <aside className="lg:col-span-1">
             <div className="bg-white p-6 rounded-lg shadow-md border">
-              <h2 className="text-xl font-bold mb-4">Categorias</h2>
-              <ul>
-                {allCategories.map((cat) => (
-                  <li key={cat.id} className="mb-2">
-                    <Link 
-                      href={`/produtos/categorias/${cat.slug}`} 
-                      scroll={false}
-                      className={`block p-2 rounded-md transition-colors ${params.slug === cat.slug ? 'bg-blue-100 text-blue-700 font-bold' : 'hover:bg-gray-100'}`}
-                    >
-                      {cat.nome}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+                <h2 className="text-xl font-bold mb-4">Categorias</h2>
+                <ul>
+                    {(allCategories || []).map((cat) => (
+                        <li key={cat.id} className="mb-2">
+                            <Link 
+                                href={`/produtos/categorias/${cat.slug}`} 
+                                scroll={false}
+                                className={`block p-2 rounded-md font-bold transition-colors ${currentCategorySlug === cat.slug && !currentSubCategorySlug ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100'}`}
+                            >
+                                {cat.nome}
+                            </Link>
+                            {cat.subcategorias && cat.subcategorias.length > 0 && (
+                                <ul className="ml-4 mt-1 border-l pl-4">
+                                    {cat.subcategorias.map((subCat) => (
+                                        <li key={subCat.id}>
+                                            <Link 
+                                                href={`/produtos/categorias/${cat.slug}?sub=${subCat.slug}`}
+                                                scroll={false}
+                                                className={`block p-1 text-sm rounded-md transition-colors ${currentSubCategorySlug === subCat.slug ? 'bg-gray-200 font-semibold' : 'hover:bg-gray-100'}`}
+                                            >
+                                                {subCat.nome}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </li>
+                    ))}
+                </ul>
             </div>
-          </aside>
-          <main className="lg:col-span-3">
-            <h1 className="text-4xl font-extrabold text-gray-900 mb-8">{category.nome}</h1>
-            {products.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {products.map((product) => (
-                  <CategoryProductCard key={product.id} product={product} />
-                ))}
-              </div>
-            ) : (
-              <p className="text-gray-600">Nenhum produto encontrado nesta categoria.</p>
-            )}
-          </main>
+        </aside>
+    );
+}
+
+export default async function CategoryPage({ params, searchParams }) {
+    const [category, allCategories] = await Promise.all([
+        getCategoryBySlug(params.slug),
+        getAllCategories()
+    ]);
+    
+    const subCategorySlug = searchParams.sub;
+
+    // ==================================================================
+    // PASSO DE DIAGNÓSTICO: VAMOS IMPRIMIR OS DADOS NO TERMINAL
+    // ==================================================================
+    console.log("DADOS DA CATEGORIA RECEBIDOS NO SERVIDOR:");
+    console.log(JSON.stringify(category, null, 2));
+    // ==================================================================
+
+    if (!category) {
+        return <p className="text-center py-20">Categoria não encontrada.</p>;
+    }
+
+    const getBreadcrumbTitle = () => {
+        if (!subCategorySlug) return category.nome;
+        const sub = category.subcategorias?.find(s => s.slug === subCategorySlug);
+        return sub ? sub.nome : category.nome;
+    };
+
+    return (
+        <div className="bg-gray-50">
+            <div className="container mx-auto px-6 md:px-12 py-12">
+                <div className="text-sm text-gray-500 mb-6">
+                    <Link href="/" className="hover:underline">Página Inicial</Link>
+                    <span className="mx-2">&gt;</span>
+                    <Link href="/produtos" className="hover:underline">Produtos</Link>
+                    <span className="mx-2">&gt;</span>
+                    {subCategorySlug ? (
+                         <>
+                            <Link href={`/produtos/categorias/${params.slug}`} className="hover:underline">{category.nome}</Link>
+                            <span className="mx-2">&gt;</span>
+                            <span className="font-semibold text-gray-700">{getBreadcrumbTitle()}</span>
+                         </>
+                    ) : (
+                        <span className="font-semibold text-gray-700">{category.nome}</span>
+                    )}
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                    <CategorySidebar 
+                        allCategories={allCategories}
+                        currentCategorySlug={params.slug} 
+                        currentSubCategorySlug={subCategorySlug} 
+                    />
+                    <main className="lg:col-span-3">
+                        <ProductListClient 
+                            category={category}
+                        />
+                    </main>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 }

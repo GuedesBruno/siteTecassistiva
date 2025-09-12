@@ -83,36 +83,37 @@ export default function Header() {
               <nav className="hidden md:flex items-center space-x-8 text-lg">
                 <Link href="/tecassistiva" className="font-semibold hover:text-gray-300 transition-colors">A Tecassistiva</Link>
                 
-                {/* === INÍCIO DA CORREÇÃO DO MENU PRODUTOS === */}
                 <div 
                   className="relative"
                   onMouseEnter={() => setIsProdutosMenuOpen(true)}
                   onMouseLeave={() => setIsProdutosMenuOpen(false)}
                 >
-                  {/* Container invisível para preencher o "limbo" */}
-                  <div className="absolute -inset-x-2 -top-2 h-8" />
-
-                  <Link href="/produtos" className="font-semibold hover:text-gray-300 transition-colors flex items-center">
+                  <Link href="/produtos" className="font-semibold hover:text-gray-300 transition-colors flex items-center py-4">
                     Produtos
                     <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                   </Link>
                   
-                  {isProdutosMenuOpen && categories.length > 0 && (
-                    // Removido o mt-2 para eliminar o espaço
-                    <div className="absolute left-0 w-56 bg-white rounded-md shadow-lg py-2">
-                      {categories.map((category) => (
-                        <Link 
-                          key={category.id} 
-                          href={`/produtos/categorias/${category.slug}`}
-                          className="block px-4 py-2 text-tec-blue hover:bg-gray-100"
-                        >
-                          {category.nome}
-                        </Link>
-                      ))}
+                  {isProdutosMenuOpen && (
+                    <div className="absolute left-1/2 top-full -translate-x-1/2 pt-2">
+                      <div className="w-56 bg-white rounded-md shadow-lg py-2">
+                        {categories.length > 0 ? (
+                          categories.map((category) => (
+                            <Link
+                              key={category.id}
+                              href={`/produtos/categorias/${category.slug}`}
+                              className="block px-4 py-2 text-tec-blue hover:bg-gray-100"
+                              onClick={() => setIsProdutosMenuOpen(false)}
+                            >
+                              {category.nome}
+                            </Link>
+                          ))
+                        ) : (
+                          <div className="px-4 py-2 text-gray-500 text-sm">Carregando...</div>
+                        )}
+                      </div>
                     </div>
                   )}
                 </div>
-                {/* === FIM DA CORREÇÃO DO MENU PRODUTOS === */}
 
                 <Link href="#" className="font-semibold hover:text-gray-300 transition-colors">Atas Abertas</Link>
                 <Link href="#" className="font-semibold hover:text-gray-300 transition-colors">Suporte</Link>
