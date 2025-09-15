@@ -5,9 +5,14 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import ProductCard from '@/components/ProductCard';
 
-// --- Componente do Menu Lateral (sem alterações) ---
+// --- Componente do Menu Lateral ---
 function CategorySidebar({ allCategories, currentCategorySlug, currentSubCategorySlug }) {
-    // Extrai os atributos de cada categoria para a renderização
+    // AQUI ESTÁ A CORREÇÃO PRINCIPAL:
+    // Garante que allCategories é um array antes de tentar usar .map()
+    if (!Array.isArray(allCategories)) {
+        return null; // Não renderiza nada se não houver categorias
+    }
+
     const categoriesToRender = allCategories.map(cat => cat.attributes);
 
     return (
@@ -15,32 +20,37 @@ function CategorySidebar({ allCategories, currentCategorySlug, currentSubCategor
             <div className="bg-white p-6 rounded-lg shadow-md border">
                 <h2 className="text-xl font-bold mb-4">Categorias</h2>
                 <ul>
-                    {categoriesToRender.map((cat, index) => (
-                        <li key={allCategories[index].id} className="mb-2">
-                            <Link 
-                                href={`/produtos/categorias/${cat.slug}`} 
-                                scroll={false}
-                                className={`block p-2 rounded-md font-bold transition-colors ${currentCategorySlug === cat.slug && !currentSubCategorySlug ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100'}`}
-                            >
-                                {cat.nome}
-                            </Link>
-                            {cat.subcategorias?.data && cat.subcategorias.data.length > 0 && (
-                                <ul className="ml-4 mt-1 border-l pl-4">
-                                    {cat.subcategorias.data.map((subCat) => (
-                                        <li key={subCat.id}>
-                                            <Link 
-                                                href={`/produtos/categorias/${cat.slug}?sub=${subCat.attributes.slug}`}
-                                                scroll={false}
-                                                className={`block p-1 text-sm rounded-md transition-colors ${currentSubCategorySlug === subCat.attributes.slug ? 'bg-gray-200 font-semibold' : 'hover:bg-gray-100'}`}
-                                            >
-                                                {subCat.attributes.nome}
-                                            </Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                            )}
-                        </li>
-                    ))}
+                    {categoriesToRender.map((cat, index) => {
+                        // Verificação de segurança adicional para cada item
+                        if (!cat) return null;
+
+                        return (
+                            <li key={allCategories[index].id} className="mb-2">
+                                <Link 
+                                    href={`/produtos/categorias/${cat.slug}`} 
+                                    scroll={false}
+                                    className={`block p-2 rounded-md font-bold transition-colors ${currentCategorySlug === cat.slug && !currentSubCategorySlug ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100'}`}
+                                >
+                                    {cat.nome}
+                                </Link>
+                                {cat.subcategorias?.data && cat.subcategorias.data.length > 0 && (
+                                    <ul className="ml-4 mt-1 border-l pl-4">
+                                        {cat.subcategorias.data.map((subCat) => (
+                                            <li key={subCat.id}>
+                                                <Link 
+                                                    href={`/produtos/categorias/${cat.slug}?sub=${subCat.attributes.slug}`}
+                                                    scroll={false}
+                                                    className={`block p-1 text-sm rounded-md transition-colors ${currentSubCategorySlug === subCat.attributes.slug ? 'bg-gray-200 font-semibold' : 'hover:bg-gray-100'}`}
+                                                >
+                                                    {subCat.attributes.nome}
+                                                </Link>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </li>
+                        );
+                    })}
                 </ul>
             </div>
         </aside>
@@ -52,10 +62,9 @@ function CategorySidebar({ allCategories, currentCategorySlug, currentSubCategor
 export default function CategoryClientView({ category, allCategories, currentCategorySlug }) {
     const searchParams = useSearchParams();
     const subCategorySlug = searchParams.get('sub');
-
-    // A lógica foi atualizada para navegar pela estrutura da API do Strapi
+    
     const { productsToShow, title, breadcrumb } = useMemo(() => {
-        if (!category) {
+        if (!category?.attributes) { // Verificação de segurança para a categoria principal
             return { productsToShow: [], title: 'Carregando...', breadcrumb: null };
         }
         
