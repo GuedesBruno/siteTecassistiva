@@ -1,7 +1,8 @@
+import { Suspense } from 'react';
 import { getAllCategories, getCategoryBySlug } from '@/lib/api';
 import CategoryClientView from '@/components/CategoryClientView';
 
-// Gera todos os slugs de categoria no momento do build
+// (Esta função continua igual e está correta)
 export async function generateStaticParams() {
     const categories = await getAllCategories();
     if (!Array.isArray(categories)) return [];
@@ -11,7 +12,7 @@ export async function generateStaticParams() {
     }));
 }
 
-// Gera o título e descrição da página no servidor
+// (Esta função continua igual e está correta)
 export async function generateMetadata({ params }) {
   const category = await getCategoryBySlug(params.slug);
   if (!category) {
@@ -24,8 +25,8 @@ export async function generateMetadata({ params }) {
 }
 
 // O COMPONENTE PRINCIPAL (Componente de Servidor)
-// ATUALIZAÇÃO: Agora ele recebe 'searchParams' e os passa para o cliente
-export default async function CategoryPage({ params, searchParams }) {
+export default async function CategoryPage({ params }) {
+    // Busca todos os dados necessários no servidor
     const [category, allCategories] = await Promise.all([
         getCategoryBySlug(params.slug),
         getAllCategories()
@@ -35,19 +36,19 @@ export default async function CategoryPage({ params, searchParams }) {
         return <p className="text-center py-20">Categoria não encontrada.</p>;
     }
 
-    // Extrai o slug da subcategoria dos parâmetros de busca do servidor
-    const subCategorySlug = searchParams.sub || null;
-
     return (
         <div className="bg-gray-50">
             <div className="container mx-auto px-6 md:px-12 py-12">
-                <CategoryClientView 
-                    category={category} 
-                    allCategories={allCategories}
-                    currentCategorySlug={params.slug}
-                    // Passa o slug da subcategoria como uma prop simples
-                    subCategorySlug={subCategorySlug} 
-                />
+                {/* AQUI ESTÁ A MUDANÇA CRÍTICA */}
+                {/* O Suspense permite que o CategoryClientView use hooks de cliente (useSearchParams) */}
+                {/* sem quebrar o build estático. */}
+                <Suspense fallback={<p>Carregando produtos...</p>}>
+                    <CategoryClientView 
+                        category={category} 
+                        allCategories={allCategories}
+                        currentCategorySlug={params.slug}
+                    />
+                </Suspense>
             </div>
         </div>
     );
