@@ -1,8 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // AQUI ESTÁ A CORREÇÃO:
-  // Esta linha instrui o Next.js a gerar um site estático na pasta "out"
   output: 'export',
+
+  // AQUI ESTÁ A CORREÇÃO:
+  // Esta linha força o Next.js a criar uma pasta para cada rota
+  // (ex: /tecassistiva/index.html), o que é mais compatível com servidores Apache.
+  trailingSlash: true,
 
   reactStrictMode: true,
   images: {
