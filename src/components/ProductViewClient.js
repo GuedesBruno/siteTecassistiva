@@ -4,14 +4,17 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-// Componente para renderizar conteúdo Rich Text do Strapi
+// Componente para renderizar conteúdo Rich Text com segurança
 function RichTextRenderer({ content }) {
-    if (!content) return <p className="text-gray-500">Nenhuma informação disponível.</p>;
+    // VERIFICAÇÃO ADICIONADA: Só renderiza se o conteúdo for uma lista (array)
+    if (!Array.isArray(content) || content.length === 0) {
+        return <p className="text-gray-500">Nenhuma informação disponível.</p>;
+    }
     return (
         <div className="prose prose-lg max-w-none text-gray-700">
             {content.map((block, index) => {
                 const text = block.children.map(child => child.text).join('');
-                if (!text) return null;
+                if (!text) return null; // Ignora parágrafos vazios
                 return <p key={index}>{text}</p>;
             })}
         </div>
@@ -83,6 +86,7 @@ export default function ProductViewClient({ product }) {
                     <div className="border-b border-gray-200">
                         <nav className="-mb-px flex space-x-8 overflow-x-auto" aria-label="Tabs">
                             {tabs.map((tab) => (
+                                // A aba só é renderizada se o conteúdo existir
                                 (tab.content && (!Array.isArray(tab.content) || tab.content.length > 0)) && (
                                     <button
                                         key={tab.id}
@@ -103,7 +107,8 @@ export default function ProductViewClient({ product }) {
                         {activeTab === 'visao-geral' && <RichTextRenderer content={visao_geral} />}
                         {activeTab === 'fotos' && (
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                {galeria_de_imagens?.map((img) => (
+                                {/* VERIFICAÇÃO ADICIONADA: Garante que a galeria é uma lista */}
+                                {Array.isArray(galeria_de_imagens) && galeria_de_imagens.map((img) => (
                                     <div key={img.id} className="aspect-square relative rounded-lg overflow-hidden border">
                                         <Image src={img.url} alt={img.alternativeText || ''} fill className="object-cover" />
                                     </div>
@@ -115,7 +120,8 @@ export default function ProductViewClient({ product }) {
                         {activeTab === 'caracteristicas-tecnicas' && <RichTextRenderer content={caracteristicas_tecnicas} />}
                         {activeTab === 'downloads' && (
                             <ul className="space-y-2">
-                                {Documentos?.map((doc) => (
+                                {/* VERIFICAÇÃO ADICIONADA: Garante que os documentos são uma lista */}
+                                {Array.isArray(Documentos) && Documentos.map((doc) => (
                                     <li key={doc.id}>
                                         <a href={doc.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                                             {doc.name}
