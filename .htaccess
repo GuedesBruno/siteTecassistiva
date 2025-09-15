@@ -1,9 +1,17 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
-  RewriteRule ^index\.html$ - [L]
+
+  # Regra 1: Redireciona para o ficheiro index.html dentro de uma pasta correspondente
+  # Isto irá fazer com que um URL como /produtos/ seja servido por /produtos/index.html
   RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{REQUEST_FILENAME} !-l
-  RewriteRule . /index.html [L]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^(.*)$ $1/index.html [L]
+
+  # Regra 2: Se o URL não tiver uma barra no final e corresponder a uma pasta,
+  # redireciona para adicionar a barra (bom para SEO e consistência)
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_URI} !(.*)/$
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^(.*)$ $1/ [L,R=301]
 </IfModule>
