@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 // Componente para renderizar conteúdo Rich Text com segurança
 function RichTextRenderer({ content }) {
-    // VERIFICAÇÃO ADICIONADA: Só renderiza se o conteúdo for uma lista (array)
+    // VERIFICAÇÃO ADICIONADA: Só renderiza se o conteúdo for uma lista (array) válida
     if (!Array.isArray(content) || content.length === 0) {
         return <p className="text-gray-500">Nenhuma informação disponível.</p>;
     }
@@ -59,6 +59,15 @@ export default function ProductViewClient({ product }) {
         { id: 'downloads', label: 'Downloads', content: Documentos },
     ];
 
+    // Define a primeira aba com conteúdo como ativa por padrão
+    useEffect(() => {
+        const firstAvailableTab = tabs.find(tab => tab.content && (!Array.isArray(tab.content) || tab.content.length > 0));
+        if (firstAvailableTab) {
+            setActiveTab(firstAvailableTab.id);
+        }
+    }, [product]);
+
+
     return (
         <div className="bg-white">
             <div className="container mx-auto px-6 py-12">
@@ -86,7 +95,6 @@ export default function ProductViewClient({ product }) {
                     <div className="border-b border-gray-200">
                         <nav className="-mb-px flex space-x-8 overflow-x-auto" aria-label="Tabs">
                             {tabs.map((tab) => (
-                                // A aba só é renderizada se o conteúdo existir
                                 (tab.content && (!Array.isArray(tab.content) || tab.content.length > 0)) && (
                                     <button
                                         key={tab.id}
@@ -103,11 +111,10 @@ export default function ProductViewClient({ product }) {
                             ))}
                         </nav>
                     </div>
-                    <div className="py-8">
+                    <div className="py-8 min-h-[10rem]">
                         {activeTab === 'visao-geral' && <RichTextRenderer content={visao_geral} />}
                         {activeTab === 'fotos' && (
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                {/* VERIFICAÇÃO ADICIONADA: Garante que a galeria é uma lista */}
                                 {Array.isArray(galeria_de_imagens) && galeria_de_imagens.map((img) => (
                                     <div key={img.id} className="aspect-square relative rounded-lg overflow-hidden border">
                                         <Image src={img.url} alt={img.alternativeText || ''} fill className="object-cover" />
@@ -120,7 +127,6 @@ export default function ProductViewClient({ product }) {
                         {activeTab === 'caracteristicas-tecnicas' && <RichTextRenderer content={caracteristicas_tecnicas} />}
                         {activeTab === 'downloads' && (
                             <ul className="space-y-2">
-                                {/* VERIFICAÇÃO ADICIONADA: Garante que os documentos são uma lista */}
                                 {Array.isArray(Documentos) && Documentos.map((doc) => (
                                     <li key={doc.id}>
                                         <a href={doc.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">

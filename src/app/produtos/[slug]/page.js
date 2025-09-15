@@ -5,7 +5,7 @@ import ProductViewClient from '@/components/ProductViewClient';
 export async function generateStaticParams() {
     const products = await getProducts();
     // VERIFICAÇÃO ADICIONADA: Ignora produtos que não tenham um slug definido
-    if (!products) return [];
+    if (!Array.isArray(products)) return [];
     return products
         .filter(product => product && product.slug) 
         .map((product) => ({
