@@ -35,4 +35,4 @@ jobs:
           user: ${{ secrets.USER }}
           password: ${{ secrets.PASS }}
           localDir: out
-          remoteDir: /
+          remoteDir: /public_html/novositeteca
