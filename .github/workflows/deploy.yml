@@ -1,38 +1,38 @@
 name: Deploy to FTP
+
 on:
   push:
     branches:
       - main
+
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '20'
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '18'
 
-      - name: Install dependencies
-        run: npm install
+    - name: Install dependencies
+      run: npm install
 
-      - name: Build project
-        run: npm run build
-        env:
-          NEXT_PUBLIC_STRAPI_URL: ${{ secrets.NEXT_PUBLIC_STRAPI_URL }}
-          STRAPI_API_TOKEN: ${{ secrets.STRAPI_API_TOKEN }}
-      
-      # PASSO ADICIONADO AQUI: Copia o .htaccess para a pasta de saída
-      - name: Copy .htaccess to out directory
-        run: cp .htaccess out/.htaccess
+    - name: Build project
+      run: npm run build
+      env:
+        # Garante que a URL pública da API seja usada durante o build
+        NEXT_PUBLIC_STRAPI_API_URL: ${{ secrets.NEXT_PUBLIC_STRAPI_API_URL }}
 
-      - name: FTP Deploy
-        uses: locaweb/ftp-deploy@1.0.0
-        with:
-          host: ${{ secrets.HOST }}
-          user: ${{ secrets.USER }}
-          password: ${{ secrets.PASS }}
-          localDir: out
-          remoteDir: /public_html/novositeteca
+    - name: Deploy to FTP
+      uses: SamKirkland/FTP-Deploy-Action@4.1.0
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: ./out/
+        # DIRETÓRIO DE DESTINO ATUALIZADO NO SERVIDOR
+        server-dir: /public_html/novositeteca/
