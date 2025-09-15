@@ -1,11 +1,11 @@
 'use client';
 
 import { useMemo } from 'react';
-import { useSearchParams } from 'next/navigation';
+// REMOVIDO: import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import ProductCard from '@/components/ProductCard';
 
-// --- Componente do Menu Lateral ---
+// --- Componente do Menu Lateral (sem alterações) ---
 function CategorySidebar({ allCategories, currentCategorySlug, currentSubCategorySlug }) {
     return (
         <aside className="lg:col-span-1">
@@ -45,11 +45,12 @@ function CategorySidebar({ allCategories, currentCategorySlug, currentSubCategor
 }
 
 // --- Componente que Renderiza a Vista Completa no Cliente ---
-export default function CategoryClientView({ category, allCategories, currentCategorySlug }) {
-    const searchParams = useSearchParams();
-    const subCategorySlug = searchParams.get('sub');
+// ATUALIZAÇÃO: Recebe 'subCategorySlug' diretamente via props
+export default function CategoryClientView({ category, allCategories, currentCategorySlug, subCategorySlug }) {
+    // REMOVIDO: const searchParams = useSearchParams();
+    // REMOVIDO: const subCategorySlug = searchParams.get('sub');
 
-    // Filtra os produtos com base na subcategoria selecionada na URL
+    // O useMemo continua a funcionar da mesma forma, mas agora com a prop
     const { productsToShow, title, breadcrumb } = useMemo(() => {
         if (!category) {
             return { productsToShow: [], title: 'Carregando...', breadcrumb: null };

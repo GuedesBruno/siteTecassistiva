@@ -1,10 +1,9 @@
 import { getAllCategories, getCategoryBySlug } from '@/lib/api';
 import CategoryClientView from '@/components/CategoryClientView';
 
-// 1. A FUNÇÃO EM FALTA: Gera todos os slugs de categoria no momento do build
+// Gera todos os slugs de categoria no momento do build
 export async function generateStaticParams() {
     const categories = await getAllCategories();
-    // Garante que temos um array antes de mapear
     if (!Array.isArray(categories)) return [];
     
     return categories.map((category) => ({
@@ -12,7 +11,7 @@ export async function generateStaticParams() {
     }));
 }
 
-// 2. (Opcional, mas recomendado para SEO) Gera o título e descrição da página no servidor
+// Gera o título e descrição da página no servidor
 export async function generateMetadata({ params }) {
   const category = await getCategoryBySlug(params.slug);
   if (!category) {
@@ -24,26 +23,30 @@ export async function generateMetadata({ params }) {
   };
 }
 
-// 3. O COMPONENTE PRINCIPAL (agora um Componente de Servidor)
-// Ele busca os dados no servidor e passa para o componente de cliente que você já tem.
-export default async function CategoryPage({ params }) {
+// O COMPONENTE PRINCIPAL (Componente de Servidor)
+// ATUALIZAÇÃO: Agora ele recebe 'searchParams' e os passa para o cliente
+export default async function CategoryPage({ params, searchParams }) {
     const [category, allCategories] = await Promise.all([
         getCategoryBySlug(params.slug),
-        getAllCategories() // Também buscamos todas as categorias para o menu lateral
+        getAllCategories()
     ]);
 
     if (!category) {
         return <p className="text-center py-20">Categoria não encontrada.</p>;
     }
 
+    // Extrai o slug da subcategoria dos parâmetros de busca do servidor
+    const subCategorySlug = searchParams.sub || null;
+
     return (
         <div className="bg-gray-50">
             <div className="container mx-auto px-6 md:px-12 py-12">
-                {/* O seu componente de cliente agora recebe os dados via props */}
                 <CategoryClientView 
                     category={category} 
                     allCategories={allCategories}
                     currentCategorySlug={params.slug}
+                    // Passa o slug da subcategoria como uma prop simples
+                    subCategorySlug={subCategorySlug} 
                 />
             </div>
         </div>
