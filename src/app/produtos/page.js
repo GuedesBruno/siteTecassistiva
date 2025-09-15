@@ -1,27 +1,35 @@
-import { Suspense } from 'react';
-import { getAllCategoriesWithProducts } from '@/lib/api';
-import CategoryClientView from '@/components/CategoryClientView';
+// sitetecassistiva/src/app/produtos/page.js
 
-// Este é o novo "cérebro" da sua página de produtos.
-// Ele busca todos os dados necessários no servidor.
-export default async function ProdutosPage() {
-    const allCategories = await getAllCategoriesWithProducts();
+import CategoryProductList from "@/components/CategoryProductList";
+import { fetchAPI } from "@/lib/api";
 
-    return (
-        <div className="bg-gray-50">
-            <div className="container mx-auto px-6 md:px-12 py-12">
-                {/* Usamos o Suspense para permitir que o CategoryClientView 
-                  use hooks de cliente (como useSearchParams para filtrar) 
-                  sem quebrar o build estático.
-                */}
-                <Suspense fallback={<p>Carregando...</p>}>
-                    <CategoryClientView 
-                        allCategories={allCategories}
-                        // Não passamos 'category' ou 'currentCategorySlug'
-                        // para que o componente saiba que está na visão geral.
-                    />
-                </Suspense>
-            </div>
-        </div>
-    );
+async function getAllCategoriesWithProducts() {
+  try {
+    const categories = await fetchAPI("/categorias", {
+      populate: {
+        subcategorias: {
+          populate: {
+            produtos: {
+              populate: "imagem_principal",
+            },
+          },
+        },
+      },
+    });
+    return categories;
+  } catch (error) {
+    console.error("Failed to fetch all categories:", error);
+    return []; // Retorna array vazio em caso de erro
+  }
+}
+
+export default async function ProductsPage() {
+  const categories = await getAllCategoriesWithProducts();
+
+  return (
+    <div>
+      <h1 className="text-3xl font-bold text-center my-8">Nossos Produtos</h1>
+      <CategoryProductList categories={categories} />
+    </div>
+  );
 }

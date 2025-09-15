@@ -11,14 +11,12 @@ async function getCategoryBySlug(slug) {
         subcategorias: {
           populate: {
             produtos: {
-              populate: "imagem_principal" // Popula a imagem principal dos produtos
+              populate: "imagem_principal"
             }
           }
         }
       }
     });
-
-    // A API retorna um array, pegamos o primeiro elemento
     return categories && categories.length > 0 ? categories[0] : null;
   } catch (error) {
     console.error(`Error fetching category ${slug}:`, error);
@@ -37,9 +35,13 @@ export default async function CategoryPage({ params }) {
   return <CategoryClientView category={category} />;
 }
 
-// Opcional: Gerar rotas estáticas para melhor performance
+// **CORREÇÃO AQUI**
 export async function generateStaticParams() {
     const categories = await fetchAPI("/categorias");
+    // Se a API falhar, categories será null. Retornamos um array vazio.
+    if (!Array.isArray(categories)) {
+        return [];
+    }
     return categories.map((category) => ({
         slug: category.attributes.slug,
     }));
