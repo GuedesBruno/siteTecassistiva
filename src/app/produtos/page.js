@@ -1,12 +1,15 @@
 import { getProducts } from '@/lib/api';
 import Link from 'next/link';
-import ProductCard from '@/components/ProductCard'; // Importando o componente reutilizável
+import ProductCard from '@/components/ProductCard';
 
-// O componente ProductCard local foi removido daqui
-
-// Componente da página de todos os produtos
 export default async function TodosProdutosPage() {
   const allProducts = await getProducts();
+
+  // ADICIONADO: Filtro de segurança para garantir que a API retornou dados válidos.
+  // Isto impede o erro de build se a API retornar 'null' ou um item malformado.
+  const validProducts = Array.isArray(allProducts) 
+    ? allProducts.filter(p => p && p.attributes) 
+    : [];
 
   return (
     <div className="bg-gray-50">
@@ -25,9 +28,9 @@ export default async function TodosProdutosPage() {
             </p>
         </div>
 
-        {allProducts && allProducts.length > 0 ? (
+        {validProducts.length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8">
-            {allProducts.map((product) => (
+            {validProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>

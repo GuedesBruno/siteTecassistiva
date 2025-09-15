@@ -4,9 +4,12 @@ import FeaturedProductsSlider from '@/components/FeaturedProductsSlider';
 import Link from 'next/link';
 
 export default async function Home() {
+  // As chamadas à API continuam iguais
   const featuredProducts = await getFeaturedProducts();
   const banners = await getBanners();
   
+  // ADICIONADO: Passamos os dados para os componentes, que já foram corrigidos
+  // para lidar com a estrutura 'attributes' e com arrays vazios.
   return (
     <>
       <BannerSlider banners={banners} />
@@ -24,7 +27,6 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* SEÇÃO DE PRODUTOS ATUALIZADA */}
       <section className="bg-gray-50 py-20">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
@@ -35,7 +37,6 @@ export default async function Home() {
             </p>
           </div>
           
-          {/* O grid foi substituído pelo novo componente de carrossel */}
           <FeaturedProductsSlider products={featuredProducts} />
 
           <div className="text-center mt-12">
