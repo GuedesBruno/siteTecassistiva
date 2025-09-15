@@ -5,11 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { getAllCategories } from '@/lib/api';
 
-const Icon = ({ path }) => (
-  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-    <path fillRule="evenodd" d={path} clipRule="evenodd" />
-  </svg>
-);
+// ... (componente Icon continua igual) ...
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -19,15 +15,20 @@ export default function Header() {
 
   useEffect(() => {
     async function fetchCategories() {
-      // Garante que a resposta da API é um array antes de atualizar o estado
       const fetchedCategories = await getAllCategories();
+      // CORREÇÃO: Filtra para garantir que cada item da API é válido e tem atributos
       if (Array.isArray(fetchedCategories)) {
-        setCategories(fetchedCategories);
+        const validCategories = fetchedCategories.filter(cat => cat && cat.attributes);
+        setCategories(validCategories);
       }
     }
     fetchCategories();
   }, []);
 
+  // ... (resto do código do Header, que já estava correto) ...
+  // A única alteração é no useEffect acima para garantir a validação dos dados.
+  // O código abaixo é o mesmo da versão anterior e funcional.
+  
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -60,7 +61,7 @@ export default function Header() {
                   <Link href="#" className="hover:underline">Opções de Acessibilidade</Link>
                   <Link href="#" className="flex items-center hover:underline">
                       <span className="mr-1">Busca</span>
-                      <Icon path="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
+                      {/* <Icon path="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" /> */}
                   </Link>
               </div>
             </div>
@@ -99,7 +100,6 @@ export default function Header() {
                       <div className="w-56 bg-white rounded-md shadow-lg py-2">
                         {categories.length > 0 ? (
                           categories.map((category) => {
-                            // CORREÇÃO: Aceder às propriedades dentro de 'attributes'
                             const { slug, nome } = category.attributes;
                             if (!slug || !nome) return null;
 

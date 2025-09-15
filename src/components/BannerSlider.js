@@ -10,7 +10,10 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 export default function BannerSlider({ banners }) {
-  const validBanners = banners?.filter(b => b.attributes) || [];
+  // CORREÇÃO: Garante que 'banners' é um array e filtra itens inválidos
+  const validBanners = Array.isArray(banners) 
+    ? banners.filter(b => b && b.attributes) 
+    : [];
 
   if (validBanners.length === 0) {
     return (
