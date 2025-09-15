@@ -3,6 +3,20 @@
 import { fetchAPI } from "@/lib/api";
 import CategoryClientView from "@/components/CategoryClientView";
 
+// Adicionando exports para forçar o comportamento estático
+export const dynamic = 'error';
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+    const categories = await fetchAPI("/categorias");
+    if (!Array.isArray(categories)) {
+        return [];
+    }
+    return categories.map((category) => ({
+        slug: category.attributes.slug,
+    }));
+}
+
 async function getCategoryBySlug(slug) {
   try {
     const categories = await fetchAPI("/categorias", {
@@ -33,16 +47,4 @@ export default async function CategoryPage({ params }) {
   }
 
   return <CategoryClientView category={category} />;
-}
-
-// **CORREÇÃO AQUI**
-export async function generateStaticParams() {
-    const categories = await fetchAPI("/categorias");
-    // Se a API falhar, categories será null. Retornamos um array vazio.
-    if (!Array.isArray(categories)) {
-        return [];
-    }
-    return categories.map((category) => ({
-        slug: category.attributes.slug,
-    }));
 }
