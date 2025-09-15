@@ -1,12 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react'; // CORREÇÃO: useEffect foi adicionado aqui
 import Image from 'next/image';
 import Link from 'next/link';
 
 // Componente para renderizar conteúdo Rich Text com segurança
 function RichTextRenderer({ content }) {
-    // VERIFICAÇÃO ADICIONADA: Só renderiza se o conteúdo for uma lista (array) válida
     if (!Array.isArray(content) || content.length === 0) {
         return <p className="text-gray-500">Nenhuma informação disponível.</p>;
     }
@@ -14,7 +13,7 @@ function RichTextRenderer({ content }) {
         <div className="prose prose-lg max-w-none text-gray-700">
             {content.map((block, index) => {
                 const text = block.children.map(child => child.text).join('');
-                if (!text) return null; // Ignora parágrafos vazios
+                if (!text) return null;
                 return <p key={index}>{text}</p>;
             })}
         </div>
@@ -34,7 +33,7 @@ function VideoEmbed({ videoContent }) {
 
 // --- Componente que Renderiza a Vista Completa no Cliente ---
 export default function ProductViewClient({ product }) {
-    const [activeTab, setActiveTab] = useState('visao-geral');
+    const [activeTab, setActiveTab] = useState('');
     
     const { 
         nome, 
@@ -65,8 +64,7 @@ export default function ProductViewClient({ product }) {
         if (firstAvailableTab) {
             setActiveTab(firstAvailableTab.id);
         }
-    }, [product]);
-
+    }, [product]); // A dependência [product] garante que isto é executado quando o produto carrega
 
     return (
         <div className="bg-white">
