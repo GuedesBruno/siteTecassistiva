@@ -45,32 +45,32 @@ function CategorySidebar({ allCategories, currentCategorySlug, currentSubCategor
 }
 
 // --- Componente que Renderiza a Vista Completa no Cliente ---
-export default function CategoryClientView({ initialCategory, allCategories, currentCategorySlug }) {
+export default function CategoryClientView({ category, allCategories, currentCategorySlug }) {
     const searchParams = useSearchParams();
     const subCategorySlug = searchParams.get('sub');
 
     // Filtra os produtos com base na subcategoria selecionada na URL
     const { productsToShow, title, breadcrumb } = useMemo(() => {
-        if (!initialCategory) {
+        if (!category) {
             return { productsToShow: [], title: 'Carregando...', breadcrumb: null };
         }
 
         if (subCategorySlug) {
-            const activeSub = initialCategory.subcategorias?.find(s => s.slug === subCategorySlug);
+            const activeSub = category.subcategorias?.find(s => s.slug === subCategorySlug);
             return {
                 productsToShow: activeSub?.produtos || [],
-                title: activeSub?.nome || initialCategory.nome,
+                title: activeSub?.nome || category.nome,
                 breadcrumb: activeSub?.nome || null
             };
         } else {
-            const allProducts = initialCategory.subcategorias?.flatMap(s => s.produtos || []) || [];
+            const allProducts = category.subcategorias?.flatMap(s => s.produtos || []) || [];
             return {
                 productsToShow: allProducts,
-                title: initialCategory.nome,
+                title: category.nome,
                 breadcrumb: null
             };
         }
-    }, [initialCategory, subCategorySlug]);
+    }, [category, subCategorySlug]);
 
     return (
         <>
@@ -81,12 +81,12 @@ export default function CategoryClientView({ initialCategory, allCategories, cur
                 <span className="mx-2">&gt;</span>
                 {breadcrumb ? (
                     <>
-                        <Link href={`/produtos/categorias/${currentCategorySlug}`} className="hover:underline">{initialCategory.nome}</Link>
+                        <Link href={`/produtos/categorias/${currentCategorySlug}`} className="hover:underline">{category.nome}</Link>
                         <span className="mx-2">&gt;</span>
                         <span className="font-semibold text-gray-700">{breadcrumb}</span>
                     </>
                 ) : (
-                    <span className="font-semibold text-gray-700">{initialCategory.nome}</span>
+                    <span className="font-semibold text-gray-700">{category.nome}</span>
                 )}
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
