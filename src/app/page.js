@@ -1,9 +1,7 @@
 import { getFeaturedProducts, getBanners } from '@/lib/api'; 
 import BannerSlider from '@/components/BannerSlider';
-import FeaturedProductsSlider from '@/components/FeaturedProductsSlider'; // Importando o novo carrossel
+import FeaturedProductsSlider from '@/components/FeaturedProductsSlider';
 import Link from 'next/link';
-
-// ATENÇÃO: A função ProductCard foi removida daqui e movida para seu próprio arquivo.
 
 export default async function Home() {
   const featuredProducts = await getFeaturedProducts();
