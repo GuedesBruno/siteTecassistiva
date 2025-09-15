@@ -1,19 +1,22 @@
 'use client';
 
 import { useMemo } from 'react';
-import { useSearchParams } from 'next/navigation'; // Importar novamente
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import ProductCard from '@/components/ProductCard';
 
 // --- Componente do Menu Lateral (sem alterações) ---
 function CategorySidebar({ allCategories, currentCategorySlug, currentSubCategorySlug }) {
+    // Extrai os atributos de cada categoria para a renderização
+    const categoriesToRender = allCategories.map(cat => cat.attributes);
+
     return (
         <aside className="lg:col-span-1">
             <div className="bg-white p-6 rounded-lg shadow-md border">
                 <h2 className="text-xl font-bold mb-4">Categorias</h2>
                 <ul>
-                    {(allCategories || []).map((cat) => (
-                        <li key={cat.id} className="mb-2">
+                    {categoriesToRender.map((cat, index) => (
+                        <li key={allCategories[index].id} className="mb-2">
                             <Link 
                                 href={`/produtos/categorias/${cat.slug}`} 
                                 scroll={false}
@@ -21,16 +24,16 @@ function CategorySidebar({ allCategories, currentCategorySlug, currentSubCategor
                             >
                                 {cat.nome}
                             </Link>
-                            {cat.subcategorias && cat.subcategorias.length > 0 && (
+                            {cat.subcategorias?.data && cat.subcategorias.data.length > 0 && (
                                 <ul className="ml-4 mt-1 border-l pl-4">
-                                    {cat.subcategorias.map((subCat) => (
+                                    {cat.subcategorias.data.map((subCat) => (
                                         <li key={subCat.id}>
                                             <Link 
-                                                href={`/produtos/categorias/${cat.slug}?sub=${subCat.slug}`}
+                                                href={`/produtos/categorias/${cat.slug}?sub=${subCat.attributes.slug}`}
                                                 scroll={false}
-                                                className={`block p-1 text-sm rounded-md transition-colors ${currentSubCategorySlug === subCat.slug ? 'bg-gray-200 font-semibold' : 'hover:bg-gray-100'}`}
+                                                className={`block p-1 text-sm rounded-md transition-colors ${currentSubCategorySlug === subCat.attributes.slug ? 'bg-gray-200 font-semibold' : 'hover:bg-gray-100'}`}
                                             >
-                                                {subCat.nome}
+                                                {subCat.attributes.nome}
                                             </Link>
                                         </li>
                                     ))}
@@ -44,33 +47,39 @@ function CategorySidebar({ allCategories, currentCategorySlug, currentSubCategor
     );
 }
 
+
 // --- Componente que Renderiza a Vista Completa no Cliente ---
 export default function CategoryClientView({ category, allCategories, currentCategorySlug }) {
-    // A lógica para ler o URL volta para este componente de cliente
     const searchParams = useSearchParams();
     const subCategorySlug = searchParams.get('sub');
 
+    // A lógica foi atualizada para navegar pela estrutura da API do Strapi
     const { productsToShow, title, breadcrumb } = useMemo(() => {
         if (!category) {
             return { productsToShow: [], title: 'Carregando...', breadcrumb: null };
         }
+        
+        const categoryAttrs = category.attributes;
+        const subcategories = categoryAttrs.subcategorias?.data || [];
 
         if (subCategorySlug) {
-            const activeSub = category.subcategorias?.find(s => s.slug === subCategorySlug);
+            const activeSub = subcategories.find(s => s.attributes.slug === subCategorySlug);
             return {
-                productsToShow: activeSub?.produtos || [],
-                title: activeSub?.nome || category.nome,
-                breadcrumb: activeSub?.nome || null
+                productsToShow: activeSub?.attributes?.produtos?.data || [],
+                title: activeSub?.attributes?.nome || categoryAttrs.nome,
+                breadcrumb: activeSub?.attributes?.nome || null
             };
         } else {
-            const allProducts = category.subcategorias?.flatMap(s => s.produtos || []) || [];
+            const allProducts = subcategories.flatMap(s => s.attributes.produtos?.data || []);
             return {
                 productsToShow: allProducts,
-                title: category.nome,
+                title: categoryAttrs.nome,
                 breadcrumb: null
             };
         }
     }, [category, subCategorySlug]);
+
+    const categoryName = category?.attributes?.nome;
 
     return (
         <>
@@ -81,12 +90,12 @@ export default function CategoryClientView({ category, allCategories, currentCat
                 <span className="mx-2">&gt;</span>
                 {breadcrumb ? (
                     <>
-                        <Link href={`/produtos/categorias/${currentCategorySlug}`} className="hover:underline">{category.nome}</Link>
+                        <Link href={`/produtos/categorias/${currentCategorySlug}`} className="hover:underline">{categoryName}</Link>
                         <span className="mx-2">&gt;</span>
                         <span className="font-semibold text-gray-700">{breadcrumb}</span>
                     </>
                 ) : (
-                    <span className="font-semibold text-gray-700">{category.nome}</span>
+                    <span className="font-semibold text-gray-700">{categoryName}</span>
                 )}
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
