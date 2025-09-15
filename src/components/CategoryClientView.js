@@ -5,42 +5,49 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import ProductCard from '@/components/ProductCard';
 
-// --- Componente do Menu Lateral ---
+// --- Componente do Menu Lateral (Sidebar) ---
 function CategorySidebar({ allCategories, currentCategorySlug, currentSubCategorySlug }) {
+    // 1. Verificação de segurança principal: Garante que 'allCategories' é um array antes de continuar.
     if (!Array.isArray(allCategories)) {
-        return null;
+        return null; // Não renderiza nada se não houver categorias, impedindo o erro.
     }
-    const categoriesToRender = allCategories.map(cat => cat.attributes);
 
     return (
         <aside className="lg:col-span-1">
             <div className="bg-white p-6 rounded-lg shadow-md border">
                 <h2 className="text-xl font-bold mb-4">Categorias</h2>
                 <ul>
-                    {categoriesToRender.map((cat, index) => {
-                        if (!cat) return null;
+                    {allCategories.map((cat) => {
+                        // 2. Verificação de segurança secundária: Garante que cada item 'cat' e seus 'attributes' existem.
+                        if (!cat || !cat.attributes) return null;
+                        const catAttrs = cat.attributes;
+
                         return (
-                            <li key={allCategories[index].id} className="mb-2">
+                            <li key={cat.id} className="mb-2">
                                 <Link 
-                                    href={`/produtos/categorias/${cat.slug}`} 
+                                    href={`/produtos/categorias/${catAttrs.slug}`} 
                                     scroll={false}
-                                    className={`block p-2 rounded-md font-bold transition-colors ${currentCategorySlug === cat.slug && !currentSubCategorySlug ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100'}`}
+                                    className={`block p-2 rounded-md font-bold transition-colors ${currentCategorySlug === catAttrs.slug && !currentSubCategorySlug ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100'}`}
                                 >
-                                    {cat.nome}
+                                    {catAttrs.nome}
                                 </Link>
-                                {cat.subcategorias?.data && cat.subcategorias.data.length > 0 && (
+                                {catAttrs.subcategorias?.data && catAttrs.subcategorias.data.length > 0 && (
                                     <ul className="ml-4 mt-1 border-l pl-4">
-                                        {cat.subcategorias.data.map((subCat) => (
-                                            <li key={subCat.id}>
-                                                <Link 
-                                                    href={`/produtos/categorias/${cat.slug}?sub=${subCat.attributes.slug}`}
-                                                    scroll={false}
-                                                    className={`block p-1 text-sm rounded-md transition-colors ${currentSubCategorySlug === subCat.attributes.slug ? 'bg-gray-200 font-semibold' : 'hover:bg-gray-100'}`}
-                                                >
-                                                    {subCat.attributes.nome}
-                                                </Link>
-                                            </li>
-                                        ))}
+                                        {catAttrs.subcategorias.data.map((subCat) => {
+                                            if (!subCat || !subCat.attributes) return null;
+                                            const subCatAttrs = subCat.attributes;
+                                            return (
+                                                <li key={subCat.id}>
+                                                    <Link 
+                                                        href={`/produtos/categorias/${catAttrs.slug}?sub=${subCatAttrs.slug}`}
+                                                        scroll={false}
+                                                        className={`block p-1 text-sm rounded-md transition-colors ${currentSubCategorySlug === subCatAttrs.slug ? 'bg-gray-200 font-semibold' : 'hover:bg-gray-100'}`}
+                                                    >
+                                                        {subCatAttrs.nome}
+                                                    </Link>
+                                                </li>
+                                            );
+                                        })}
                                     </ul>
                                 )}
                             </li>
@@ -53,7 +60,7 @@ function CategorySidebar({ allCategories, currentCategorySlug, currentSubCategor
 }
 
 
-// --- Componente que Renderiza a Vista Completa no Cliente ---
+// --- Componente Principal ---
 export default function CategoryClientView({ category, allCategories, currentCategorySlug }) {
     const searchParams = useSearchParams();
     const subCategorySlug = searchParams.get('sub');
@@ -63,17 +70,18 @@ export default function CategoryClientView({ category, allCategories, currentCat
         if (category?.attributes) {
             const categoryAttrs = category.attributes;
             const subcategories = categoryAttrs.subcategorias?.data || [];
+            const safeSubcategories = subcategories.filter(s => s && s.attributes);
 
             if (subCategorySlug) {
-                const activeSub = subcategories.find(s => s.attributes.slug === subCategorySlug);
+                const activeSub = safeSubcategories.find(s => s.attributes.slug === subCategorySlug);
                 return {
-                    productsToShow: activeSub?.attributes?.produtos?.data || [],
+                    productsToShow: activeSub?.attributes?.produtos?.data?.filter(p => p && p.attributes) || [],
                     title: activeSub?.attributes?.nome || categoryAttrs.nome,
                     breadcrumb: activeSub?.attributes?.nome || null,
                     categoryName: categoryAttrs.nome,
                 };
             } else {
-                const allProducts = subcategories.flatMap(s => s.attributes.produtos?.data || []);
+                const allProducts = safeSubcategories.flatMap(s => s.attributes.produtos?.data?.filter(p => p && p.attributes) || []);
                 return {
                     productsToShow: allProducts,
                     title: categoryAttrs.nome,
@@ -86,7 +94,7 @@ export default function CategoryClientView({ category, allCategories, currentCat
         // Lógica para quando estamos em /produtos (visão geral)
         if (Array.isArray(allCategories)) {
              const allProductsFromAllCategories = allCategories.flatMap(cat => 
-                cat.attributes.subcategorias?.data?.flatMap(sub => sub.attributes.produtos?.data || []) || []
+                cat?.attributes?.subcategorias?.data?.flatMap(sub => sub?.attributes?.produtos?.data?.filter(p => p && p.attributes) || []) || []
             );
             return {
                 productsToShow: allProductsFromAllCategories,
@@ -96,7 +104,7 @@ export default function CategoryClientView({ category, allCategories, currentCat
             };
         }
 
-        // Estado de fallback/carregamento
+        // Estado de fallback
         return { productsToShow: [], title: 'Carregando...', breadcrumb: null, categoryName: '' };
     }, [category, allCategories, subCategorySlug]);
 
@@ -107,7 +115,6 @@ export default function CategoryClientView({ category, allCategories, currentCat
                 <Link href="/" className="hover:underline">Página Inicial</Link>
                 <span className="mx-2">&gt;</span>
                 <Link href="/produtos" className="hover:underline">Produtos</Link>
-                {/* O breadcrumb só aparece se estivermos numa categoria específica */}
                 {category && (
                     <>
                         <span className="mx-2">&gt;</span>
