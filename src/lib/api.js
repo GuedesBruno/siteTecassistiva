@@ -1,76 +1,9 @@
-import qs from 'qs';
+// src/lib/api.js
 
-const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
-const STRAPI_API_TOKEN = process.env.STRAPI_API_TOKEN;
+// ... (funções existentes) ...
 
-async function fetchAPI(endpoint, options = {}) {
-  const url = new URL(endpoint, STRAPI_URL);
-  
-  const mergedOptions = {
-    ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      ...(STRAPI_API_TOKEN && { Authorization: `Bearer ${STRAPI_API_TOKEN}` }),
-    },
-    // ==================================================================
-    // CORREÇÃO CRÍTICA:
-    // Esta opção diz ao Next.js para fazer cache dos dados, mas para 
-    // os revalidar a cada 10 segundos.
-    // ==================================================================
-    next: {
-      revalidate: 10,
-    }
-  };
-
-  try {
-    const response = await fetch(url.href, mergedOptions);
-    if (!response.ok) {
-      console.error(`ERRO HTTP: ${response.status} para ${url.href}`);
-      const errorBody = await response.text();
-      console.error("Corpo do erro:", errorBody);
-      return null;
-    }
-    const data = await response.json();
-    return data.data;
-  } catch (error) {
-    console.error(`ERRO FINAL ao fazer fetch para "${endpoint}":`, error);
-    return null;
-  }
-}
-
-const populateAll = qs.stringify({ populate: '*' });
-
-export async function getProducts() {
-  return fetchAPI(`/api/produtos?${populateAll}`);
-}
-
-export async function getFeaturedProducts() {
+export async function getAllCategoriesWithProducts() {
   const query = qs.stringify({
-    filters: { destaque: { $eq: true } },
-    populate: '*',
-  });
-  return fetchAPI(`/api/produtos?${query}`);
-}
-
-export async function getProductBySlug(slug) {
-  const query = qs.stringify({
-    filters: { slug: { $eq: slug } },
-    populate: '*',
-  });
-  const products = await fetchAPI(`/api/produtos?${query}`);
-  return products && products.length > 0 ? products[0] : null;
-}
-
-export async function getAllCategories() {
-  const query = qs.stringify({
-    populate: ['subcategorias'],
-  });
-  return fetchAPI(`/api/categorias?${query}`);
-}
-
-export async function getCategoryBySlug(slug) {
-  const query = qs.stringify({
-    filters: { slug: { $eq: slug } },
     populate: {
         subcategorias: {
             populate: {
@@ -81,14 +14,5 @@ export async function getCategoryBySlug(slug) {
         },
     },
   });
-  const categories = await fetchAPI(`/api/categorias?${query}`);
-  return categories && categories.length > 0 ? categories[0] : null;
-}
-
-export async function getBanners() {
-  const query = qs.stringify({
-    sort: 'ordem:asc',
-    populate: '*',
-  });
-  return fetchAPI(`/api/banner-sites?${query}`);
+  return fetchAPI(`/api/categorias?${query}`);
 }

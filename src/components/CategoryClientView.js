@@ -7,12 +7,9 @@ import ProductCard from '@/components/ProductCard';
 
 // --- Componente do Menu Lateral ---
 function CategorySidebar({ allCategories, currentCategorySlug, currentSubCategorySlug }) {
-    // AQUI ESTÁ A CORREÇÃO PRINCIPAL:
-    // Garante que allCategories é um array antes de tentar usar .map()
     if (!Array.isArray(allCategories)) {
-        return null; // Não renderiza nada se não houver categorias
+        return null;
     }
-
     const categoriesToRender = allCategories.map(cat => cat.attributes);
 
     return (
@@ -21,9 +18,7 @@ function CategorySidebar({ allCategories, currentCategorySlug, currentSubCategor
                 <h2 className="text-xl font-bold mb-4">Categorias</h2>
                 <ul>
                     {categoriesToRender.map((cat, index) => {
-                        // Verificação de segurança adicional para cada item
                         if (!cat) return null;
-
                         return (
                             <li key={allCategories[index].id} className="mb-2">
                                 <Link 
@@ -63,32 +58,48 @@ export default function CategoryClientView({ category, allCategories, currentCat
     const searchParams = useSearchParams();
     const subCategorySlug = searchParams.get('sub');
     
-    const { productsToShow, title, breadcrumb } = useMemo(() => {
-        if (!category?.attributes) { // Verificação de segurança para a categoria principal
-            return { productsToShow: [], title: 'Carregando...', breadcrumb: null };
-        }
-        
-        const categoryAttrs = category.attributes;
-        const subcategories = categoryAttrs.subcategorias?.data || [];
+    const { productsToShow, title, breadcrumb, categoryName } = useMemo(() => {
+        // Lógica para quando estamos a ver UMA categoria específica
+        if (category?.attributes) {
+            const categoryAttrs = category.attributes;
+            const subcategories = categoryAttrs.subcategorias?.data || [];
 
-        if (subCategorySlug) {
-            const activeSub = subcategories.find(s => s.attributes.slug === subCategorySlug);
+            if (subCategorySlug) {
+                const activeSub = subcategories.find(s => s.attributes.slug === subCategorySlug);
+                return {
+                    productsToShow: activeSub?.attributes?.produtos?.data || [],
+                    title: activeSub?.attributes?.nome || categoryAttrs.nome,
+                    breadcrumb: activeSub?.attributes?.nome || null,
+                    categoryName: categoryAttrs.nome,
+                };
+            } else {
+                const allProducts = subcategories.flatMap(s => s.attributes.produtos?.data || []);
+                return {
+                    productsToShow: allProducts,
+                    title: categoryAttrs.nome,
+                    breadcrumb: null,
+                    categoryName: categoryAttrs.nome,
+                };
+            }
+        }
+
+        // Lógica para quando estamos em /produtos (visão geral)
+        if (Array.isArray(allCategories)) {
+             const allProductsFromAllCategories = allCategories.flatMap(cat => 
+                cat.attributes.subcategorias?.data?.flatMap(sub => sub.attributes.produtos?.data || []) || []
+            );
             return {
-                productsToShow: activeSub?.attributes?.produtos?.data || [],
-                title: activeSub?.attributes?.nome || categoryAttrs.nome,
-                breadcrumb: activeSub?.attributes?.nome || null
-            };
-        } else {
-            const allProducts = subcategories.flatMap(s => s.attributes.produtos?.data || []);
-            return {
-                productsToShow: allProducts,
-                title: categoryAttrs.nome,
-                breadcrumb: null
+                productsToShow: allProductsFromAllCategories,
+                title: 'Todos os Produtos',
+                breadcrumb: null,
+                categoryName: 'Todos os Produtos'
             };
         }
-    }, [category, subCategorySlug]);
 
-    const categoryName = category?.attributes?.nome;
+        // Estado de fallback/carregamento
+        return { productsToShow: [], title: 'Carregando...', breadcrumb: null, categoryName: '' };
+    }, [category, allCategories, subCategorySlug]);
+
 
     return (
         <>
@@ -96,15 +107,20 @@ export default function CategoryClientView({ category, allCategories, currentCat
                 <Link href="/" className="hover:underline">Página Inicial</Link>
                 <span className="mx-2">&gt;</span>
                 <Link href="/produtos" className="hover:underline">Produtos</Link>
-                <span className="mx-2">&gt;</span>
-                {breadcrumb ? (
+                {/* O breadcrumb só aparece se estivermos numa categoria específica */}
+                {category && (
                     <>
-                        <Link href={`/produtos/categorias/${currentCategorySlug}`} className="hover:underline">{categoryName}</Link>
                         <span className="mx-2">&gt;</span>
-                        <span className="font-semibold text-gray-700">{breadcrumb}</span>
+                        {breadcrumb ? (
+                            <>
+                                <Link href={`/produtos/categorias/${currentCategorySlug}`} className="hover:underline">{categoryName}</Link>
+                                <span className="mx-2">&gt;</span>
+                                <span className="font-semibold text-gray-700">{breadcrumb}</span>
+                            </>
+                        ) : (
+                            <span className="font-semibold text-gray-700">{categoryName}</span>
+                        )}
                     </>
-                ) : (
-                    <span className="font-semibold text-gray-700">{categoryName}</span>
                 )}
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">

@@ -19,8 +19,9 @@ export default function Header() {
 
   useEffect(() => {
     async function fetchCategories() {
+      // Garante que a resposta da API é um array antes de atualizar o estado
       const fetchedCategories = await getAllCategories();
-      if (fetchedCategories) {
+      if (Array.isArray(fetchedCategories)) {
         setCategories(fetchedCategories);
       }
     }
@@ -97,16 +98,22 @@ export default function Header() {
                     <div className="absolute left-1/2 top-full -translate-x-1/2 pt-2">
                       <div className="w-56 bg-white rounded-md shadow-lg py-2">
                         {categories.length > 0 ? (
-                          categories.map((category) => (
-                            <Link
-                              key={category.id}
-                              href={`/produtos/categorias/${category.slug}`}
-                              className="block px-4 py-2 text-tec-blue hover:bg-gray-100"
-                              onClick={() => setIsProdutosMenuOpen(false)}
-                            >
-                              {category.nome}
-                            </Link>
-                          ))
+                          categories.map((category) => {
+                            // CORREÇÃO: Aceder às propriedades dentro de 'attributes'
+                            const { slug, nome } = category.attributes;
+                            if (!slug || !nome) return null;
+
+                            return (
+                              <Link
+                                key={category.id}
+                                href={`/produtos/categorias/${slug}`}
+                                className="block px-4 py-2 text-tec-blue hover:bg-gray-100"
+                                onClick={() => setIsProdutosMenuOpen(false)}
+                              >
+                                {nome}
+                              </Link>
+                            )
+                          })
                         ) : (
                           <div className="px-4 py-2 text-gray-500 text-sm">Carregando...</div>
                         )}
