@@ -2,16 +2,14 @@
   RewriteEngine On
   RewriteBase /
 
-  # Regra 1: Redireciona para o ficheiro index.html dentro de uma pasta correspondente
-  # Isto irá fazer com que um URL como /produtos/ seja servido por /produtos/index.html
+  # Esta regra impede que os passos seguintes se apliquem a ficheiros ou pastas que já existem
   RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} -d
-  RewriteRule ^(.*)$ $1/index.html [L]
+  RewriteCond %{REQUEST_FILENAME} !-d
 
-  # Regra 2: Se o URL não tiver uma barra no final e corresponder a uma pasta,
-  # redireciona para adicionar a barra (bom para SEO e consistência)
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_URI} !(.*)/$
-  RewriteCond %{REQUEST_FILENAME} -d
-  RewriteRule ^(.*)$ $1/ [L,R=301]
+  # Esta é a regra principal:
+  # Procura se existe uma pasta com o nome do URL solicitado.
+  # Se existir, serve silenciosamente o ficheiro index.html que está dentro dela.
+  # Ex: /tecassistiva -> /tecassistiva/index.html
+  RewriteCond %{REQUEST_URI}/index.html -f
+  RewriteRule (.*) $1/index.html [L]
 </IfModule>
