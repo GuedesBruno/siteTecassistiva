@@ -1,83 +1,60 @@
-'use client'; 
+// sitetecassistiva/src/components/BannerSlider.js
 
+"use client";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-import Image from 'next/image';
-import Link from 'next/link';
-
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { getStrapiURL } from '@/lib/api';
+import Image from 'next/image';
 
 export default function BannerSlider({ banners }) {
-  // CORREÇÃO: Garante que 'banners' é um array e filtra itens inválidos
-  const validBanners = Array.isArray(banners) 
-    ? banners.filter(b => b && b.attributes) 
-    : [];
 
-  if (validBanners.length === 0) {
-    return (
-      <div className="h-[70vh] bg-gray-200 flex items-center justify-center">
-        <p>Nenhum banner para exibir.</p>
-      </div>
-    );
+  // Validação para garantir que banners é um array e não está vazio
+  if (!Array.isArray(banners) || banners.length === 0) {
+    return <div>Não há banners para exibir.</div>;
   }
 
   return (
-    <section className="h-[80vh] max-h-[700px] w-full bg-gray-100">
+    <div className="relative w-full h-96">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
-        spaceBetween={0}
+        spaceBetween={50}
         slidesPerView={1}
         navigation
         pagination={{ clickable: true }}
+        autoplay={{ delay: 5000, disableOnInteraction: false }}
         loop={true}
-        autoplay={{
-          delay: 5000,
-          disableOnInteraction: false,
-        }}
-        className="w-full h-full"
       >
-        {validBanners.map((banner, index) => {
-          const bannerAttrs = banner.attributes;
-          const fullImageUrl = bannerAttrs.imagem?.data?.attributes?.url;
-          const imageAlt = bannerAttrs.imagem?.data?.attributes?.alternativeText || bannerAttrs.titulo;
-          const isReversed = index % 2 !== 0;
+        {banners.map((banner) => {
+          // Acesso correto aos atributos na v4
+          const { titulo, descricao, imagem } = banner.attributes;
+          
+          // Verificação da existência da imagem e de seus dados
+          const imageUrl = imagem?.data?.attributes?.url 
+            ? getStrapiURL(imagem.data.attributes.url)
+            : '/placeholder.jpg'; // Imagem padrão caso não exista
 
           return (
             <SwiperSlide key={banner.id}>
-              <div className={`w-full h-full flex flex-col ${isReversed ? 'lg:flex-row-reverse' : 'lg:flex-row'}`}>
-                <div className="w-full lg:w-1/3 h-1/2 lg:h-full bg-grey-450 text-tec-blue flex items-center justify-center p-8 lg:p-12 order-2 lg:order-1">
-                  <div className="max-w-md text-center lg:text-left">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-4">{bannerAttrs.titulo}</h1>
-                    <p className="text-lg md:text-xl mb-6">{bannerAttrs.subtitulo}</p>
-                    {bannerAttrs.link_do_botao && bannerAttrs.texto_do_botao && (
-                        <Link href={bannerAttrs.link_do_botao} className="bg-tec-blue-light hover:bg-tec-blue text-white font-bold py-3 px-6 rounded-lg text-lg transition-colors">
-                            {bannerAttrs.texto_do_botao}
-                        </Link>
-                    )}
-                  </div>
-                </div>
-                <div className="w-full lg:w-2/3 h-1/2 lg:h-full relative order-1 lg:order-2">
-                  {fullImageUrl ? (
-                    <Image
-                      src={fullImageUrl}
-                      alt={imageAlt}
-                      fill
-                      className="object-cover"
-                      priority={index === 0}
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-gray-400 flex items-center justify-center">
-                      <p className="text-white">Imagem não disponível</p>
-                    </div>
-                  )}
+              <div className="w-full h-96 relative">
+                <Image
+                  src={imageUrl}
+                  alt={titulo || 'Banner Image'}
+                  layout="fill"
+                  objectFit="cover"
+                  priority={true} // Prioriza o carregamento da primeira imagem
+                />
+                <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center text-white p-4">
+                  <h2 className="text-4xl font-bold mb-2">{titulo}</h2>
+                  <p className="text-lg">{descricao}</p>
                 </div>
               </div>
             </SwiperSlide>
           );
         })}
       </Swiper>
-    </section>
+    </div>
   );
 }

@@ -1,109 +1,58 @@
-import qs from 'qs';
+// sitetecassistiva/src/lib/api.js
 
-const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'https://light-dog-088c5ec318.strapiapp.com';
-const STRAPI_API_TOKEN = process.env.STRAPI_API_TOKEN;
+import qs from "qs";
 
-async function fetchAPI(endpoint, options = {}) {
-  // Construção da URL garantindo que não haja barras duplas
-  const url = `${STRAPI_URL.replace(/\/$/, '')}/${endpoint.replace(/^\//, '')}`;
-  
+export const API_URL = process.env.NEXT_PUBLIC_STRAPI_API_URL || "http://127.0.0.1:1337";
+export const NEXT_URL = process.env.NEXT_PUBLIC_FRONTEND_URL || "http://localhost:3000";
+
+/**
+ * Get full Strapi URL from path
+ * @param {string} path Path of the URL
+ * @returns {string} Full Strapi URL
+ */
+export function getStrapiURL(path = "") {
+  return `${API_URL}${path}`;
+}
+
+/**
+ * Helper to make GET requests to Strapi API endpoints
+ * @param {string} path Path of the API route
+ * @param {object} urlParamsObject URL params object, will be stringified
+ * @param {object} options Options passed to fetch
+ * @returns {Promise} Resolved promise with JSON data
+ */
+export async function fetchAPI(path, urlParamsObject = {}, options = {}) {
+  // Merge default and user options
   const mergedOptions = {
-    ...options,
     headers: {
-      'Content-Type': 'application/json',
-      ...(STRAPI_API_TOKEN && { Authorization: `Bearer ${STRAPI_API_TOKEN}` }),
+      "Content-Type": "application/json",
     },
-    next: {
-      revalidate: 10, // Revalida o cache a cada 10 segundos
-    }
+    ...options,
   };
 
+  // Build request URL
+  const queryString = qs.stringify(urlParamsObject);
+  const requestUrl = `${getStrapiURL(`/api${path}${queryString ? `?${queryString}` : ""}`)}`;
+
+  console.log("Fetching from URL:", requestUrl); // Log para depuração
+
+  // Trigger API call
   try {
-    const response = await fetch(url, mergedOptions);
+    const response = await fetch(requestUrl, mergedOptions);
+
+    // Handle response
     if (!response.ok) {
-      console.error(`ERRO HTTP: ${response.status} para ${url}`);
-      const errorBody = await response.text();
-      console.error("Corpo do erro:", errorBody);
-      return null;
+      console.error(`Error fetching ${requestUrl}: ${response.status} ${response.statusText}`);
+      const errorData = await response.json();
+      console.error('Error details:', errorData);
+      throw new Error(`An error occurred please try again. Details: ${JSON.stringify(errorData)}`);
     }
     const data = await response.json();
-    return data.data; // Retorna apenas o campo 'data' da resposta do Strapi
+    // A API do Strapi v4 aninha os dados em uma propriedade 'data'
+    return data.data; 
   } catch (error) {
-    console.error(`ERRO FINAL ao fazer fetch para "${endpoint}":`, error);
-    return null;
+    console.error(`Failed to fetch API: ${error.message}`);
+    // Retornar null ou um array vazio em caso de erro pode ser mais seguro para os componentes
+    return null; 
   }
-}
-
-// ==================================================================
-// AQUI ESTÃO TODAS AS FUNÇÕES RESTAURADAS E EXPORTADAS CORRETAMENTE
-// ==================================================================
-
-export async function getProducts() {
-  const query = qs.stringify({ populate: '*' });
-  return fetchAPI(`/api/produtos?${query}`);
-}
-
-export async function getFeaturedProducts() {
-  const query = qs.stringify({
-    filters: { destaque: { $eq: true } },
-    populate: '*',
-  });
-  return fetchAPI(`/api/produtos?${query}`);
-}
-
-export async function getProductBySlug(slug) {
-  const query = qs.stringify({
-    filters: { slug: { $eq: slug } },
-    populate: '*',
-  });
-  const products = await fetchAPI(`/api/produtos?${query}`);
-  return products && products.length > 0 ? products[0] : null;
-}
-
-export async function getAllCategories() {
-  const query = qs.stringify({
-    populate: ['subcategorias'],
-  });
-  return fetchAPI(`/api/categorias?${query}`);
-}
-
-export async function getCategoryBySlug(slug) {
-  const query = qs.stringify({
-    filters: { slug: { $eq: slug } },
-    populate: {
-        subcategorias: {
-            populate: {
-                produtos: {
-                    populate: ['imagem_principal'],
-                },
-            },
-        },
-    },
-  });
-  const categories = await fetchAPI(`/api/categorias?${query}`);
-  return categories && categories.length > 0 ? categories[0] : null;
-}
-
-export async function getBanners() {
-  const query = qs.stringify({
-    sort: 'ordem:asc',
-    populate: '*',
-  });
-  return fetchAPI(`/api/banner-sites?${query}`);
-}
-
-// A nova função que adicionámos, também exportada
-export async function getAllCategoriesWithProducts() {
-  const query = qs.stringify({
-    populate: {
-        subcategorias: {
-            populate: {
-                produtos: {
-                    populate: ['imagem_principal'],
-                },
-            },
-        },
-    },
-  });
-  return fetchAPI(`/api/categorias?${query}`);
 }

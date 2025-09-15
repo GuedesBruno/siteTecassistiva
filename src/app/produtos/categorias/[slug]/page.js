@@ -1,55 +1,46 @@
-import { Suspense } from 'react';
-import { getAllCategories, getCategoryBySlug } from '@/lib/api';
-import CategoryClientView from '@/components/CategoryClientView';
+// sitetecassistiva/src/app/produtos/categorias/[slug]/page.js
 
-// (Esta função continua igual e está correta)
-export async function generateStaticParams() {
-    const categories = await getAllCategories();
-    if (!Array.isArray(categories)) return [];
-    
-    return categories.map((category) => ({
-        slug: category.slug,
-    }));
-}
+import { fetchAPI } from "@/lib/api";
+import CategoryClientView from "@/components/CategoryClientView";
 
-// (Esta função continua igual e está correta)
-export async function generateMetadata({ params }) {
-  const category = await getCategoryBySlug(params.slug);
-  if (!category) {
-    return { title: 'Categoria não Encontrada | Tecassistiva' };
+async function getCategoryBySlug(slug) {
+  try {
+    const categories = await fetchAPI("/categorias", {
+      filters: { slug: { $eq: slug } },
+      populate: {
+        subcategorias: {
+          populate: {
+            produtos: {
+              populate: "imagem_principal" // Popula a imagem principal dos produtos
+            }
+          }
+        }
+      }
+    });
+
+    // A API retorna um array, pegamos o primeiro elemento
+    return categories && categories.length > 0 ? categories[0] : null;
+  } catch (error) {
+    console.error(`Error fetching category ${slug}:`, error);
+    return null;
   }
-  return {
-    title: `${category.nome} | Tecassistiva`,
-    description: `Produtos da categoria ${category.nome} na Tecassistiva.`,
-  };
 }
 
-// O COMPONENTE PRINCIPAL (Componente de Servidor)
 export default async function CategoryPage({ params }) {
-    // Busca todos os dados necessários no servidor
-    const [category, allCategories] = await Promise.all([
-        getCategoryBySlug(params.slug),
-        getAllCategories()
-    ]);
+  const { slug } = params;
+  const category = await getCategoryBySlug(slug);
 
-    if (!category) {
-        return <p className="text-center py-20">Categoria não encontrada.</p>;
-    }
+  if (!category) {
+    return <div>Categoria não encontrada.</div>;
+  }
 
-    return (
-        <div className="bg-gray-50">
-            <div className="container mx-auto px-6 md:px-12 py-12">
-                {/* AQUI ESTÁ A MUDANÇA CRÍTICA */}
-                {/* O Suspense permite que o CategoryClientView use hooks de cliente (useSearchParams) */}
-                {/* sem quebrar o build estático. */}
-                <Suspense fallback={<p>Carregando produtos...</p>}>
-                    <CategoryClientView 
-                        category={category} 
-                        allCategories={allCategories}
-                        currentCategorySlug={params.slug}
-                    />
-                </Suspense>
-            </div>
-        </div>
-    );
+  return <CategoryClientView category={category} />;
+}
+
+// Opcional: Gerar rotas estáticas para melhor performance
+export async function generateStaticParams() {
+    const categories = await fetchAPI("/categorias");
+    return categories.map((category) => ({
+        slug: category.attributes.slug,
+    }));
 }

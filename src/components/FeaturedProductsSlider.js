@@ -1,39 +1,35 @@
-'use client'; 
+// sitetecassistiva/src/components/FeaturedProductsSlider.js
 
+"use client";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
-import ProductCard from './ProductCard';
-
 import 'swiper/css';
 import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import { Navigation } from 'swiper/modules';
+import ProductCard from './ProductCard';
 
 export default function FeaturedProductsSlider({ products }) {
-  // Filtra para garantir que apenas produtos com 'attributes' sejam processados
-  const validProducts = products?.filter(p => p.attributes) || [];
-
-  if (validProducts.length === 0) {
-    return <p className="text-center text-gray-500">Nenhum produto em destaque encontrado.</p>;
+  if (!Array.isArray(products) || products.length === 0) {
+    return <p>Nenhum produto em destaque no momento.</p>;
   }
-
   return (
-    <div className="relative px-24">
+    <div className="py-8">
+      <h2 className="text-2xl font-bold text-center mb-6">Produtos em Destaque</h2>
       <Swiper
-        modules={[Navigation, Pagination]}
+        modules={[Navigation]}
         spaceBetween={30}
+        slidesPerView={4}
         navigation
-        pagination={{ clickable: true }}
         breakpoints={{
-          640: { slidesPerView: 2 },
-          768: { slidesPerView: 3 },
-          1024: { slidesPerView: 4 },
+          320: { slidesPerView: 1, spaceBetween: 10 },
+          640: { slidesPerView: 2, spaceBetween: 20 },
+          768: { slidesPerView: 3, spaceBetween: 30 },
+          1024: { slidesPerView: 4, spaceBetween: 30 },
         }}
-        className="!pb-12"
       >
-        {validProducts.map((product) => (
-          <SwiperSlide key={product.id} className="h-auto">
+        {products.map((product) => (
+          <SwiperSlide key={product.id}>
             <ProductCard product={product} />
-          </SwiperSlide> 
+          </SwiperSlide>
         ))}
       </Swiper>
     </div>

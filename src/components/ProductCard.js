@@ -1,42 +1,31 @@
-import Image from 'next/image';
+// sitetecassistiva/src/components/ProductCard.js
+
 import Link from 'next/link';
+import Image from 'next/image';
+import { getStrapiURL } from '@/lib/api';
 
 export default function ProductCard({ product }) {
-  // Extrai os atributos do produto do objeto 'attributes'
-  const { nome, slug, descricao_curta, imagem_principal } = product.attributes;
-  
-  // Navega pela estrutura 'data' para obter a URL da imagem
-  const fullImageUrl = imagem_principal?.data?.attributes?.url; 
-  const imageAlt = imagem_principal?.data?.attributes?.alternativeText || `Imagem de ${nome}`;
+  // Acesso correto aos atributos do produto
+  const { nome, slug, preco, imagem_principal } = product.attributes;
 
-  // Se não houver slug, não renderiza o card (boa prática)
-  if (!slug) return null;
+  const imageUrl = imagem_principal?.data?.attributes?.url
+    ? getStrapiURL(imagem_principal.data.attributes.url)
+    : '/placeholder.jpg'; // Imagem de fallback
 
   return (
-    <div className="bg-white border border-gray-200 shadow-md hover:shadow-xl transition-shadow flex flex-col text-center h-full">
-      <div className="bg-tec-navy p-4 text-white">
-        <h3 className="text-xl font-bold truncate">{nome}</h3>
+    <Link href={`/produtos/${slug}`} className="block border rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
+      <div className="relative w-full h-64">
+        <Image
+          src={imageUrl}
+          alt={nome || 'Imagem do Produto'}
+          layout="fill"
+          objectFit="cover"
+        />
       </div>
-      <div className="p-5 flex-grow flex flex-col items-center">
-        <div className="relative h-48 w-full mb-4">
-          {fullImageUrl ? ( // A verificação agora é feita com a variável correta
-            <Image 
-              src={fullImageUrl} 
-              alt={imageAlt} 
-              fill 
-              className="object-contain" 
-            />
-          ) : (
-            <div className="w-full h-full bg-gray-200 rounded-lg flex items-center justify-center">
-                <span className="text-gray-500 text-sm">Imagem indisponível</span>
-            </div>
-          )}
-        </div>
-        <p className="text-gray-600 text-sm flex-grow mb-4">{descricao_curta}</p>
-        <Link href={`/produtos/${slug}`} className="text-tec-blue-light hover:underline mt-auto self-center font-semibold">
-          Saiba mais...
-        </Link>
+      <div className="p-4">
+        <h3 className="text-lg font-semibold truncate">{nome}</h3>
+        <p className="text-gray-700 mt-2">R$ {preco ? preco.toFixed(2) : '0.00'}</p>
       </div>
-    </div>
+    </Link>
   );
 }
