@@ -12,8 +12,14 @@ async function fetchAPI(endpoint, options = {}) {
       'Content-Type': 'application/json',
       ...(STRAPI_API_TOKEN && { Authorization: `Bearer ${STRAPI_API_TOKEN}` }),
     },
-    // A LINHA "cache: 'no-store'" FOI REMOVIDA DAQUI
-    // O Next.js agora usará o cache padrão, o que é necessário para o build estático.
+    // ==================================================================
+    // CORREÇÃO CRÍTICA:
+    // Esta opção diz ao Next.js para fazer cache dos dados, mas para 
+    // os revalidar a cada 10 segundos.
+    // ==================================================================
+    next: {
+      revalidate: 10,
+    }
   };
 
   try {
