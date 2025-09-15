@@ -25,14 +25,14 @@ jobs:
       run: npm run build
       env:
         # Garante que a URL pública da API seja usada durante o build
-        NEXT_PUBLIC_STRAPI_API_URL: ${{ secrets.NEXT_PUBLIC_STRAPI_API_URL }}
+        NEXT_PUBLIC_STRAPI_API_URL: ${{ secrets.NEXT_PUBLIC_STRAPI_URL }}
 
     - name: Deploy to FTP
       uses: SamKirkland/FTP-Deploy-Action@4.1.0
       with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
+        server: ${{ secrets.HOST }}
+        username: ${{ secrets.USER }}
+        password: ${{ secrets.PASS }}
         local-dir: ./out/
         # DIRETÓRIO DE DESTINO ATUALIZADO NO SERVIDOR
         server-dir: /public_html/novositeteca/
