@@ -5,9 +5,10 @@ import Image from 'next/image';
 import { getStrapiURL } from '@/lib/api';
 
 export default function ProductCard({ product }) {
-  // Acesso correto aos atributos do produto
+  // Acesso correto aos atributos do produto na v4
   const { nome, slug, preco, imagem_principal } = product.attributes;
 
+  // Acesso correto à URL da imagem na v4
   const imageUrl = imagem_principal?.data?.attributes?.url
     ? getStrapiURL(imagem_principal.data.attributes.url)
     : '/placeholder.jpg'; // Imagem de fallback

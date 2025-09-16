@@ -40,3 +40,13 @@ export default async function Home() {
     </main>
   );
 }
+
+async function getBanners() {
+  try {
+    // CORREÇÃO: Adicionado o parâmetro populate para a imagem
+    return await fetchAPI("/banner-sites", { populate: "imagem" });
+  } catch (error) {
+    console.error("Failed to fetch banners:", error);
+    return []; // Retorna array vazio em caso de erro
+  }
+}

@@ -1,58 +1,57 @@
-// sitetecassistiva/src/lib/api.js
-
 import qs from "qs";
 
-export const API_URL = process.env.NEXT_PUBLIC_STRAPI_API_URL || "http://127.0.0.1:1337";
-export const NEXT_URL = process.env.NEXT_PUBLIC_FRONTEND_URL || "http://localhost:3000";
-
 /**
- * Get full Strapi URL from path
- * @param {string} path Path of the URL
- * @returns {string} Full Strapi URL
+ * Obtém a URL completa para a API Strapi.
+ * @param {string} path - O caminho para o recurso da API (ex: "/posts").
+ * @returns {string} A URL completa.
  */
 export function getStrapiURL(path = "") {
-  return `${API_URL}${path}`;
+  return `${
+    process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337"
+  }${path}`;
 }
 
 /**
- * Helper to make GET requests to Strapi API endpoints
- * @param {string} path Path of the API route
- * @param {object} urlParamsObject URL params object, will be stringified
- * @param {object} options Options passed to fetch
- * @returns {Promise} Resolved promise with JSON data
+ * Função helper para fazer chamadas de API para o Strapi.
+ * @param {string} path - O caminho do endpoint da API.
+ * @param {object} urlParamsObject - Objeto com os parâmetros de URL (filtros, populate, etc.).
+ * @param {object} options - Opções adicionais para a função fetch.
+ * @returns {Promise<any>} Os dados retornados pela API.
  */
 export async function fetchAPI(path, urlParamsObject = {}, options = {}) {
-  // Merge default and user options
+  // Mescla as opções padrão com as opções fornecidas pelo usuário
   const mergedOptions = {
     headers: {
       "Content-Type": "application/json",
+      // Adiciona o token de autorização da API
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`,
     },
     ...options,
   };
 
-  // Build request URL
+  // Constrói a URL da requisição com os parâmetros
   const queryString = qs.stringify(urlParamsObject);
-  const requestUrl = `${getStrapiURL(`/api${path}${queryString ? `?${queryString}` : ""}`)}`;
+  const requestUrl = `${getStrapiURL(
+    `/api${path}${queryString ? `?${queryString}` : ""}`
+  )}`;
 
   console.log("Fetching from URL:", requestUrl); // Log para depuração
 
-  // Trigger API call
   try {
     const response = await fetch(requestUrl, mergedOptions);
 
-    // Handle response
     if (!response.ok) {
-      console.error(`Error fetching ${requestUrl}: ${response.status} ${response.statusText}`);
-      const errorData = await response.json();
-      console.error('Error details:', errorData);
-      throw new Error(`An error occurred please try again. Details: ${JSON.stringify(errorData)}`);
+      console.error("Erro na resposta da API:", response.status, response.statusText);
+      // Lança um erro para que possa ser tratado no local da chamada
+      throw new Error(`Erro ao buscar dados da API: ${response.statusText}`);
     }
+
     const data = await response.json();
     // A API do Strapi v4 aninha os dados em uma propriedade 'data'
-    return data.data; 
+    return data.data;
   } catch (error) {
-    console.error(`Failed to fetch API: ${error.message}`);
-    // Retornar null ou um array vazio em caso de erro pode ser mais seguro para os componentes
-    return null; 
+    console.error("Falha na chamada da API:", error);
+    // Retorna null ou um objeto de erro para tratamento no frontend
+    return null;
   }
 }
