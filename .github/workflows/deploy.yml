@@ -34,9 +34,11 @@ jobs:
       - name: Instalar dependências
         run: npm ci
 
-      # 4. Executa o build (gerando a pasta 'out')
+      # 4. Executa o build, informando o endereço da API
       - name: Build do projeto
         run: npm run build
+        env:
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_STRAPI_URL }} # Adicionado para o build funcionar
 
       # 5. Envia os arquivos da pasta 'out' para o FTP
       - name: FTP Deploy Locaweb
@@ -45,5 +47,5 @@ jobs:
           host: ${{ secrets.HOST }}
           user: ${{ secrets.USER }}
           password: ${{ secrets.PASS }}
-          localDir: "out"
-          remoteDir: "/public_html/novositeteca/" # Pasta de destino no servidor
+          localDir: "out" # Está correto, pois 'output: export' no next.config.mjs gera a pasta 'out'
+          remoteDir: "/public_html/novositeteca/"
