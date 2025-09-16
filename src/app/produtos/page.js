@@ -1,44 +1,38 @@
-import { getAllCategories } from '@/lib/api';
-import ProductCard from '@/components/ProductCard';
-import Link from 'next/link';
+// sitetecassistiva/src/components/Header.js
 
-export default async function ProductsPage() {
+import Link from 'next/link';
+import { getAllCategories } from "@/lib/api";
+import Image from 'next/image';
+
+export default async function Header() {
   const categories = await getAllCategories();
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-center my-8">Nossos Produtos</h1>
-
-      {categories && categories.length > 0 ? (
-        <div className="space-y-12">
-          {categories.map((category) => {
-            const { nome, slug, subcategorias } = category.attributes;
-            const subcategoriesData = subcategorias?.data || [];
-            const allProducts = subcategoriesData.flatMap(sub => sub.attributes.produtos?.data || []);
-
-            return (
-              <div key={category.id}>
-                <h2 className="text-2xl font-bold mb-4">
-                  <Link href={`/produtos/categorias/${slug}`} className="hover:underline">
-                    {nome}
-                  </Link>
-                </h2>
-                {allProducts.length > 0 ? (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    {allProducts.map((product) => (
-                      <ProductCard key={product.id} product={product} />
-                    ))}
-                  </div>
-                ) : (
-                  <p>Nenhum produto nesta categoria.</p>
-                )}
-              </div>
-            );
-          })}
+    <header className="bg-white shadow-md">
+      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+        <div className="flex-shrink-0">
+          <Link href="/">
+              <Image src="/logo-tecassistiva.svg" alt="Tecassistiva Logo" width={150} height={50} />
+          </Link>
         </div>
-      ) : (
-        <p className="text-center text-gray-500">Nenhuma categoria de produto encontrada.</p>
-      )}
-    </div>
+        <nav className="hidden md:flex items-center space-x-6">
+          <Link href="/" className="text-gray-600 hover:text-blue-500 transition">Início</Link>
+          <div className="relative group">
+            <button className="text-gray-600 hover:text-blue-500 transition">
+              Produtos
+            </button>
+            <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 invisible group-hover:visible">
+              {Array.isArray(categories) && categories.map(category => (
+                <Link key={category.id} href={`/produtos/categorias/${category.attributes.slug}`} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    {category.attributes.nome}
+                </Link>
+              ))}
+            </div>
+          </div>
+          <Link href="/tecassistiva" className="text-gray-600 hover:text-blue-500 transition">O que é Tecassistiva?</Link>
+        </nav>
+        {/* Você pode adicionar um botão de menu para mobile aqui */}
+      </div>
+    </header>
   );
 }
