@@ -1,13 +1,14 @@
-import { getAllCategories, getCategoryBySlug } from '@/lib/api';
-import CategoryClientView from '@/components/CategoryClientView';
+import { getProductBySlug, getProducts } from '@/lib/api';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export async function generateStaticParams() {
-  const categories = await getAllCategories();
-  if (!categories || categories.length === 0) return [];
-  return categories
-    .filter(category => category.attributes && category.attributes.slug)
-    .map((category) => ({
-      slug: category.attributes.slug,
+  const products = await getProducts();
+  if (!products || products.length === 0) return [];
+  return products
+    .filter(product => product.attributes && product.attributes.slug)
+    .map((product) => ({
+      slug: product.attributes.slug,
     }));
 }
 
