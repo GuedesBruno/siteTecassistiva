@@ -26,11 +26,28 @@ jobs:
       - name: Instalar dependências
         run: npm ci
 
-      # 4. Executa o build (agora sem depender de API externa)
+      # 4. Executa o build
       - name: Build do projeto Next.js
         run: npm run build
 
-      # 5. Deploy para o FTP
+      # 5. PASSO DE DEBUG: Mostra a estrutura de pastas após o build
+      - name: Verificar estrutura de arquivos gerados
+        run: |
+          echo "Listando o conteúdo da pasta raiz:"
+          ls -la
+          echo "------------------------------------"
+          echo "Verificando se a pasta 'out' existe:"
+          if [ -d "out" ]; then
+            echo "✅ A pasta 'out' foi encontrada!"
+            echo "Conteúdo da pasta 'out':"
+            ls -la out
+          else
+            echo "❌ ERRO: A pasta 'out' NÃO foi encontrada."
+            echo "Verifique o log do 'Build do projeto Next.js' acima para encontrar o erro."
+            exit 1
+          fi
+
+      # 6. Deploy para o FTP
       - name: FTP Deploy
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
