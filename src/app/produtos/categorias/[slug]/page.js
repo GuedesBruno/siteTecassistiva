@@ -3,26 +3,21 @@ import CategoryClientView from '@/components/CategoryClientView';
 
 // GERA OS PARÂMETROS ESTÁTICOS (SLUGS) PARA CADA PÁGINA DE CATEGORIA
 export async function generateStaticParams() {
-  try {
-    const categories = await fetchAPI("/categorias", { fields: ['slug'] });
+  console.log("A tentar gerar parâmetros estáticos para categorias...");
+  const categories = await fetchAPI("/categorias", { fields: ['slug'] });
 
-    // CORREÇÃO APLICADA AQUI
-    // 1. Verifica se a resposta da API é válida e não está vazia.
-    // 2. Acessa o slug através de 'item.attributes.slug'.
-    if (!categories || categories.length === 0) {
-      return [];
-    }
-
-    return categories
-      .filter(item => item && item.attributes && item.attributes.slug) // Garante que o item e seus atributos existam
-      .map((item) => ({
-        slug: item.attributes.slug,
-      }));
-
-  } catch (error) {
-    console.error("Falha ao gerar slugs de categoria:", error);
-    return []; // Retorna um array vazio em caso de erro para não quebrar o build
+  // CORREÇÃO: Adicionada uma verificação explícita para falhar o build com uma mensagem clara
+  if (!categories || categories.length === 0) {
+    throw new Error("A API não retornou categorias para gerar as páginas. Verifique se as categorias existem e estão publicadas no Strapi.");
   }
+
+  console.log(`Encontradas ${categories.length} categorias para gerar as páginas.`);
+
+  return categories
+    .filter(item => item && item.attributes && item.attributes.slug)
+    .map((item) => ({
+      slug: item.attributes.slug,
+    }));
 }
 
 // BUSCA OS DADOS ESPECÍFICOS DE UMA CATEGORIA
@@ -43,14 +38,12 @@ async function getCategoryData(slug) {
       }
     });
 
-    // Retorna o primeiro item do array ou null se não encontrar
     return categories && categories.length > 0 ? categories[0] : null;
   } catch (error) {
     console.error(`Erro ao buscar dados da categoria ${slug}:`, error);
     return null;
   }
 }
-
 
 // O COMPONENTE DA PÁGINA
 export default async function CategoryPage({ params }) {
