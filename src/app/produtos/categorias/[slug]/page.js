@@ -1,10 +1,19 @@
-// Arquivo: src/app/produtos/categorias/[slug]/page.js
+import { getAllCategories, getCategoryBySlug } from "@/lib/api";
 import CategoryClientView from "@/components/CategoryClientView";
-import { staticCategories } from "@/lib/static-data";
 
-export default function CategoriaSlugPage({ params }) {
-  // Encontra a categoria pelo slug ou pega a primeira como fallback
-  const category = staticCategories.find(c => c.attributes.Slug === params.slug) || staticCategories[0];
+// Esta função busca todos os slugs de categoria no momento do build
+export async function generateStaticParams() {
+  const categories = await getAllCategories();
+  if (!categories) return [];
+  return categories.map((category) => ({
+    slug: category.attributes.slug,
+  }));
+}
+
+// Sua página continua aqui...
+export default async function CategoriaPage({ params }) {
+  const { slug } = params;
+  const category = await getCategoryBySlug(slug);
 
   if (!category) {
     return <div>Categoria não encontrada.</div>;
