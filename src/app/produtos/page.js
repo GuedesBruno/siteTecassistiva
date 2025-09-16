@@ -1,26 +1,15 @@
-// sitetecassistiva/src/app/produtos/page.js
+import { getProducts, getProductBySlug } from '@/lib/api';
+import Image from 'next/image';
+import Link from 'next/link';
 
-import CategoryProductList from "@/components/CategoryProductList";
-import { fetchAPI } from "@/lib/api";
-
-async function getAllCategoriesWithProducts() {
-  try {
-    const categories = await fetchAPI("/categorias", {
-      populate: {
-        subcategorias: {
-          populate: {
-            produtos: {
-              populate: "imagem_principal",
-            },
-          },
-        },
-      },
-    });
-    return categories;
-  } catch (error) {
-    console.error("Failed to fetch all categories:", error);
-    return []; // Retorna array vazio em caso de erro
-  }
+export async function generateStaticParams() {
+  const products = await getProducts();
+  if (!products || products.length === 0) return [];
+  return products
+    .filter(product => product.attributes && product.attributes.slug) 
+    .map((product) => ({
+      slug: product.attributes.slug,
+    }));
 }
 
 export default async function ProductsPage() {

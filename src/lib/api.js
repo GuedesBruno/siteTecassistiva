@@ -1,37 +1,40 @@
-// --- FUNÇÃO HELPER DE FETCH ---
+// Função centralizada para fazer chamadas à API do Strapi
 async function fetchAPI(endpoint) {
+  // As variáveis de ambiente são lidas aqui
   const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
   const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN;
 
+  // Verificação crucial que acusa o erro no build do GitHub Actions
   if (!STRAPI_URL || !STRAPI_TOKEN) {
-    console.error("ERRO GRAVE: Variáveis de ambiente do Strapi não estão definidas.");
-    return { data: null, error: 'Variáveis de ambiente não configuradas' };
+    console.error("ERRO GRAVE: As variáveis de ambiente NEXT_PUBLIC_STRAPI_URL e STRAPI_API_TOKEN devem estar definidas.");
+    return { data: null }; // Retorna um objeto padrão para evitar que a aplicação quebre
   }
 
   try {
     const res = await fetch(`${STRAPI_URL}${endpoint}`, {
       headers: { 'Authorization': `Bearer ${STRAPI_TOKEN}` },
-      // O cache do Next.js 14+ é muito agressivo, 'no-store' garante dados frescos.
-      cache: 'no-store' 
+      cache: 'no-store' // Garante que os dados sejam sempre os mais recentes
     });
 
     if (!res.ok) {
-      const errorBody = await res.text();
-      console.error('Resposta da API não foi OK! Status:', res.status, 'Endpoint:', endpoint);
-      console.error('Corpo do Erro:', errorBody);
-      return { data: null, error: `Erro na requisição: ${res.status}` };
+      console.error(`Erro na requisição para ${endpoint}: ${res.status} ${res.statusText}`);
+      return { data: null };
     }
     
-    // Retorna sempre o JSON completo
     return await res.json(); 
 
   } catch (error) {
-    console.error(`ERRO FINAL ao fazer fetch na API para o endpoint "${endpoint}":`, error.message);
-    return { data: null, error: error.message };
+    console.error(`ERRO ao fazer fetch no endpoint "${endpoint}":`, error.message);
+    return { data: null };
   }
 }
 
-// --- FUNÇÕES EXPORTADAS ---
+// --- Funções Exportadas ---
+
+// Retorna a URL base do Strapi para ser usada em componentes de cliente
+export function getStrapiURL() {
+    return process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
+}
 
 // Busca todos os produtos
 export async function getProducts() {
@@ -41,7 +44,7 @@ export async function getProducts() {
 
 // Busca um produto pelo slug
 export async function getProductBySlug(slug) {
-  const response = await fetchAPI(`/api/produtos?filters[slug][$eq]=${slug}&populate=*`);
+  const response = await fetchAPI(`/api/produtos?filters[slug][$eq]=${slug}&populate=deep`);
   return response.data && response.data.length > 0 ? response.data[0] : null;
 }
 
@@ -53,7 +56,7 @@ export async function getFeaturedProducts() {
 
 // Busca todas as categorias
 export async function getAllCategories() {
-  const response = await fetchAPI('/api/categorias');
+  const response = await fetchAPI('/api/categorias?populate=deep');
   return response.data || [];
 }
 
@@ -65,7 +68,6 @@ export async function getCategoryBySlug(slug) {
 
 // Busca todos os banners do site
 export async function getBanners() {
-  // CORRIGIDO: A query de populate foi ajustada para o formato correto.
-  const response = await fetchAPI('/api/banner-sites?sort=ordem:asc&populate[imagem]=*');
+  const response = await fetchAPI('/api/banner-sites?sort=ordem:asc&populate=imagem');
   return response.data || [];
 }

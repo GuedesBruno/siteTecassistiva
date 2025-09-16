@@ -1,56 +1,55 @@
-import { fetchAPI } from '@/lib/api';
+import { getFeaturedProducts, getBanners } from '@/lib/api'; 
 import BannerSlider from '@/components/BannerSlider';
-import FeaturedProductsSlider from '@/components/FeaturedProductsSlider';
-
-async function getBanners() {
-  try {
-    const banners = await fetchAPI("/banner-sites", { populate: "imagem" });
-    return banners || [];
-  } catch (error) {
-    console.error("Erro ao buscar banners:", error);
-    return [];
-  }
-}
-
-async function getFeaturedProducts() {
-  try {
-    // CORREÇÃO: O filtro foi alterado de 'em_destaque' para 'destaque'
-    const products = await fetchAPI("/produtos", {
-      filters: { destaque: true },
-      populate: {
-        imagem_principal: true,
-        categoria: true
-      },
-    });
-    return products || [];
-  } catch (error) {
-    console.error("Erro ao buscar produtos em destaque:", error);
-    return [];
-  }
-}
+import ProductCard from '@/components/ProductCard'; // Assumindo que o ProductCard foi movido para os componentes
+import Link from 'next/link';
 
 export default async function Home() {
-  const banners = await getBanners();
   const featuredProducts = await getFeaturedProducts();
+  const banners = await getBanners();
 
   return (
-    <main className="flex flex-col items-center justify-between">
-      <div className="w-full">
-        {banners.length > 0 ? (
-          <BannerSlider banners={banners} />
-        ) : (
-          <p className="text-center py-10">Não foi possível carregar os banners.</p>
-        )}
-      </div>
+    <>
+      <BannerSlider banners={banners} />
 
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h2 className="text-3xl font-bold text-center mb-8">Produtos em Destaque</h2>
-        {featuredProducts.length > 0 ? (
-          <FeaturedProductsSlider products={featuredProducts} />
-        ) : (
-          <p className="text-center">Não há produtos em destaque no momento.</p>
-        )}
-      </div>
-    </main>
+      <section className="bg-white py-20">
+        <div className="container mx-auto px-6 text-center max-w-4xl">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">Tecassistiva</h2>
+          <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+            A Tecassistiva foi fundada em 2007...
+          </p>
+          <Link href="/tecassistiva" className="text-tec-blue-light hover:underline font-semibold text-lg">
+            Conheça a nossa história
+          </Link>
+        </div>
+      </section>
+
+      <section className="bg-gray-50 py-20">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">Nossos Produtos</h2>
+            <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-600">
+              Veja abaixo nossos destaques...
+            </p>
+          </div>
+          {featuredProducts && featuredProducts.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {featuredProducts.map((product) => (
+                // CORREÇÃO: Acedemos a product.attributes
+                <ProductCard key={product.id} product={product.attributes} />
+              ))}
+            </div>
+          ) : (
+            <p className="text-center text-gray-500">Nenhum produto em destaque encontrado.</p>
+          )}
+          <div className="text-center mt-12">
+            <Link href="/produtos" className="inline-block bg-tec-blue-light text-white px-8 py-3 rounded-md font-semibold hover:bg-blue-800 text-lg">
+              Todos nossos produtos aqui
+            </Link>
+          </div>
+        </div>
+      </section>
+      
+      {/* Restante das seções... */}
+    </>
   );
 }

@@ -1,56 +1,69 @@
-'use client';
+'use client'; 
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import Image from 'next/image';
+import Link from 'next/link';
+import { getStrapiURL } from '@/lib/api'; // Importa a função para a URL
+
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import Image from 'next/image';
-import { getStrapiURL } from '@/lib/api';
 
 export default function BannerSlider({ banners }) {
-  if (!banners || banners.length === 0) {
-    return null;
+  const STRAPI_URL = getStrapiURL();
+
+  if (!Array.isArray(banners) || banners.length === 0) {
+    return null; 
   }
 
   return (
-    <div className="w-full">
+    <section className="h-[70vh] bg-gray-200">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         spaceBetween={0}
         slidesPerView={1}
         navigation
         pagination={{ clickable: true }}
-        autoplay={{ delay: 5000, disableOnInteraction: false }}
         loop={true}
+        autoplay={{ delay: 5000, disableOnInteraction: false }}
+        className="w-full h-full"
       >
-        {banners.map((banner) => {
-          const { titulo, subtitulo, imagem, texto_do_botao, link_do_botao } = banner.attributes;
-          const imageUrl = getStrapiURL(imagem?.data?.attributes?.url);
+        {banners.map((banner, index) => {
+          // CORREÇÃO: Acedemos a banner.attributes
+          const { titulo, subtitulo, texto_do_botao, link_do_botao, imagem } = banner.attributes;
+          
+          const imageUrl = imagem?.data?.attributes?.url;
+          const imageAlt = imagem?.data?.attributes?.alternativeText || titulo;
+          const fullImageUrl = imageUrl ? `${STRAPI_URL}${imageUrl}` : null;
+
+          const isReversed = index % 2 !== 0;
 
           return (
             <SwiperSlide key={banner.id}>
-              <div className="relative w-full h-[60vh] max-h-[500px]">
-                {imageUrl && (
-                  <Image
-                    src={imageUrl}
-                    alt={titulo || 'Banner Image'}
-                    layout="fill"
-                    objectFit="cover"
-                    priority={true}
-                  />
-                )}
-                <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center text-white p-4">
-                  <h2 className="text-4xl md:text-5xl font-bold mb-4">{titulo}</h2>
-                  {/* CORREÇÃO: O campo 'descricao' foi alterado para 'subtitulo' */}
-                  <p className="text-lg md:text-xl max-w-2xl mb-6">{subtitulo}</p>
-                  {texto_do_botao && link_do_botao && (
-                    <a
-                      href={link_do_botao}
-                      className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors"
-                    >
+              <div className={`w-full h-full flex flex-col lg:flex-row ${isReversed ? 'lg:flex-row-reverse' : ''}`}>
+                <div className="w-full lg:w-1/3 bg-tec-blue text-white flex items-center justify-center p-8 lg:p-12">
+                  <div className="max-w-md text-center lg:text-left">
+                    <h1 className="text-4xl md:text-5xl font-extrapold mb-4">{titulo}</h1>
+                    <p className="text-lg md:text-xl mb-6">{subtitulo}</p>
+                    <Link href={link_do_botao || '#'} className="bg-tec-blue-light hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg text-lg transition-colors">
                       {texto_do_botao}
-                    </a>
+                    </Link>
+                  </div>
+                </div>
+                <div className="w-full lg:w-2/3 h-64 lg:h-full relative">
+                  {fullImageUrl ? (
+                    <Image
+                      src={fullImageUrl}
+                      alt={imageAlt}
+                      fill
+                      className="object-cover"
+                      priority={index === 0}
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gray-400 flex items-center justify-center">
+                      <p className="text-white">Imagem não disponível</p>
+                    </div>
                   )}
                 </div>
               </div>
@@ -58,6 +71,6 @@ export default function BannerSlider({ banners }) {
           );
         })}
       </Swiper>
-    </div>
+    </section>
   );
 }
