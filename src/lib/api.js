@@ -66,7 +66,7 @@ export async function getCategoryBySlug(slug) {
   return response.data && response.data.length > 0 ? response.data[0] : null;
 }
 
-// Busca todos os banners do site
+// Busca todos os banners do site para o hero content
 export async function getBanners() {
   const response = await fetchAPI('/api/banner-sites?sort=ordem:asc&populate=imagem');
   return response.data || [];
