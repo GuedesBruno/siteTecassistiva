@@ -7,23 +7,21 @@ export function getStrapiURL(path = "") {
 }
 
 export async function fetchAPI(path, urlParamsObject = {}, options = {}) {
-  // --- INÍCIO DA MODIFICAÇÃO PARA TESTE ---
-  // A linha 'Authorization' foi comentada para forçar o acesso público.
+  // A linha 'Authorization' foi descomentada para reativar a autenticação
   const mergedOptions = {
     headers: {
       "Content-Type": "application/json",
-      // Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`,
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`,
     },
     ...options,
   };
-  // --- FIM DA MODIFICAÇÃO PARA TESTE ---
 
   const queryString = qs.stringify(urlParamsObject);
   const requestUrl = `${getStrapiURL(
     `/api${path}${queryString ? `?${queryString}` : ""}`
   )}`;
 
-  console.log("Fetching from URL (public access test):", requestUrl);
+  console.log("Fetching from URL:", requestUrl);
 
   try {
     const response = await fetch(requestUrl, mergedOptions);
