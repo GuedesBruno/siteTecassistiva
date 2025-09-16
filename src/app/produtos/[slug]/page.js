@@ -1,69 +1,63 @@
-// sitetecassistiva/src/app/produtos/[slug]/page.js
+import { fetchAPI } from '@/lib/api';
+import ProductViewClient from '@/components/ProductViewClient';
 
-import { fetchAPI, getStrapiURL } from "@/lib/api";
-import Image from 'next/image';
-
-// Adicionando exports para forçar o comportamento estático
-export const dynamic = 'error'; // Lança um erro se uma rota dinâmica não gerada for acessada
-export const dynamicParams = false; // Bloqueia rotas que não foram geradas por generateStaticParams
-
-// Gera as rotas estáticas no momento do build
+// GERA OS PARÂMETROS ESTÁTICOS (SLUGS) PARA CADA PÁGINA DE PRODUTO
 export async function generateStaticParams() {
-    const products = await fetchAPI("/produtos");
-    if (!Array.isArray(products)) {
-        return [];
+  try {
+    const products = await fetchAPI("/produtos", { fields: ['slug'] });
+    
+    // CORREÇÃO APLICADA AQUI
+    // 1. Verifica se a resposta da API é válida.
+    // 2. Acessa o slug através de 'product.attributes.slug'.
+    if (!products || products.length === 0) {
+      return [];
     }
-    return products.map((product) => ({
+
+    return products
+      .filter(product => product && product.attributes && product.attributes.slug)
+      .map((product) => ({
         slug: product.attributes.slug,
-    }));
+      }));
+
+  } catch (error) {
+    console.error("Falha ao gerar slugs de produto:", error);
+    return []; // Retorna um array vazio para não quebrar o build
+  }
 }
 
-async function getProductBySlug(slug) {
+// BUSCA OS DADOS ESPECÍFICOS DE UM PRODUTO
+async function getProductData(slug) {
   try {
     const products = await fetchAPI("/produtos", {
       filters: { slug: { $eq: slug } },
-      populate: "deep",
+      populate: {
+        imagem_principal: true,
+        galeria: true,
+        categoria: true,
+        subcategoria: true,
+      },
     });
+    
     return products && products.length > 0 ? products[0] : null;
   } catch (error) {
-    console.error(`Error fetching product ${slug}:`, error);
+    console.error(`Erro ao buscar dados do produto ${slug}:`, error);
     return null;
   }
 }
 
+// O COMPONENTE DA PÁGINA
 export default async function ProductPage({ params }) {
   const { slug } = params;
-  const product = await getProductBySlug(slug);
+  const product = await getProductData(slug);
 
   if (!product) {
-    return <div className="text-center py-10">Produto não encontrado.</div>;
+    return (
+      <div className="container mx-auto text-center py-10">
+        <h1 className="text-3xl font-bold">Produto não encontrado</h1>
+        <p>O produto que você está procurando não existe ou foi movido.</p>
+      </div>
+    );
   }
 
-  const { nome, descricao, preco, imagem_principal } = product.attributes;
-  const imageUrl = imagem_principal?.data?.attributes?.url
-    ? getStrapiURL(imagem_principal.data.attributes.url)
-    : '/placeholder.jpg';
-
-  return (
-    <div className="container mx-auto px-4 py-12">
-      <div className="grid md:grid-cols-2 gap-10 items-start">
-        <div className="relative w-full h-96">
-          <Image
-            src={imageUrl}
-            alt={nome || 'Imagem do Produto'}
-            layout="fill"
-            objectFit="contain"
-            className="rounded-lg"
-          />
-        </div>
-        <div>
-          <h1 className="text-4xl font-extrabold mb-4">{nome}</h1>
-          <p className="text-2xl text-blue-600 font-semibold mb-6">R$ {preco ? preco.toFixed(2) : 'Preço a consultar'}</p>
-          <div className="prose lg:prose-xl max-w-none">
-            <p>{descricao}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  return <ProductViewClient product={product} />;
 }
