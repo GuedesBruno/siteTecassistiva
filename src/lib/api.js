@@ -7,31 +7,23 @@ export function getStrapiURL(path = "") {
 }
 
 export async function fetchAPI(path, urlParamsObject = {}, options = {}) {
-  const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
-
-  // --- INÍCIO DA ADIÇÃO PARA DEBUG ---
-  // Este log nos mostrará no build do GitHub se o token está sendo carregado.
-  if (token) {
-    console.log(`API Token encontrado. Final do token: ...${token.slice(-4)}`);
-  } else {
-    console.log("AVISO: NEXT_PUBLIC_STRAPI_API_TOKEN não foi encontrado!");
-  }
-  // --- FIM DA ADIÇÃO PARA DEBUG ---
-
+  // --- INÍCIO DA MODIFICAÇÃO PARA TESTE ---
+  // A linha 'Authorization' foi comentada para forçar o acesso público.
   const mergedOptions = {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      // Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`,
     },
     ...options,
   };
+  // --- FIM DA MODIFICAÇÃO PARA TESTE ---
 
   const queryString = qs.stringify(urlParamsObject);
   const requestUrl = `${getStrapiURL(
     `/api${path}${queryString ? `?${queryString}` : ""}`
   )}`;
 
-  console.log("Fetching from URL:", requestUrl);
+  console.log("Fetching from URL (public access test):", requestUrl);
 
   try {
     const response = await fetch(requestUrl, mergedOptions);
