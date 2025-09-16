@@ -1,40 +1,17 @@
-name: Deploy to GitHub Pages
-
-on:
-  push:
-    branches:
-      - main # Garanta que esta é a sua branch de deploy
-
-permissions:
-  contents: write   # 🔑 necessário para permitir o push na gh-pages
-
+name: Deploy via ftp
+on: push
 jobs:
-  build:
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+    - uses: actions/checkout@v2
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18' # Use a versão do Node.js do seu projeto
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build project
-        env:
-          NEXT_PUBLIC_STRAPI_URL: ${{ secrets.NEXT_PUBLIC_STRAPI_URL }}
-          NEXT_PUBLIC_STRAPI_API_TOKEN: ${{ secrets.STRAPI_API_TOKEN }}
-        run: npm run build
-
-      - name: FTP Deploy Locaweb
-        uses: locaweb/ftp-deploy@1.0.0
-        with:
-            host: ${{ secrets.HOST }} 
-            user: ${{ secrets.USER }}
-            password: ${{ secrets.PASS }}
-            localDir: ./ # Envia todo o conteúdo da pasta do projeto
-            remoteDir: /public_html/novositeteca
+    - name: FTP Deploy Locaweb
+      uses: locaweb/ftp-deploy@1.0.0
+      with:
+        host: ${{ secrets.HOST }} 
+        user: ${{ secrets.USER }}
+        password: ${{ secrets.PASS }}
+        localDir: ./ # Envia todo o conteúdo da pasta do projeto
+        remoteDir: /public_html/novositeteca
