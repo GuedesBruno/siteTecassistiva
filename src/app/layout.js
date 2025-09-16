@@ -1,6 +1,6 @@
 import './globals.css'
-import Header from '@/components/Header'; // Importa o Header
-import Footer from '@/components/Footer'; // Importa o Footer
+import Header from '@/components/Header'; // Importa Header
+import Footer from '@/components/Footer'; // Importa Footer
 
 export const metadata = {
   title: 'Tecassistiva',
