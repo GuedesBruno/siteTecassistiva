@@ -2,7 +2,7 @@
 export async function fetchAPI(endpoint) {
   // As variáveis de ambiente são lidas aqui
   const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
-  const STRAPI_TOKEN = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
+  const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN;
 
   // Verificação crucial que acusa o erro no build do GitHub Actions
   if (!STRAPI_URL || !STRAPI_TOKEN) {
