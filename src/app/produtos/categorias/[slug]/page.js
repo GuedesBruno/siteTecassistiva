@@ -1,51 +1,38 @@
-import { getAllCategories, getCategoryBySlug } from '@/lib/api';
-import Image from 'next/image';
-import Link from 'next/link';
-import CategoryClientView from '@/components/CategoryClientView'; // Usaremos um componente de cliente
+import { fetchAPI } from "@/lib/api";
+import CategoryClientView from "@/components/CategoryClientView";
 
-// Gera a lista de todas as categorias para o Next.js criar as páginas estáticas
+// Esta função busca todos os slugs de categoria no momento do build
 export async function generateStaticParams() {
-  const categories = await getAllCategories();
-  if (!categories || categories.length === 0) return [];
-  
-  // CORREÇÃO: Acedemos a 'category.attributes.slug'
-  return categories
-    .filter(category => category.attributes && category.attributes.slug)
-    .map((category) => ({
-      slug: category.attributes.slug,
-    }));
-}
+  try {
+    const categories = await fetchAPI("/categorias", { populate: "*" });
 
-export async function generateMetadata({ params }) {
-    const categoryData = await getCategoryBySlug(params.slug);
-    const category = categoryData?.attributes;
-
-    if (!category) {
-        return { title: 'Categoria não encontrada' };
+    if (categories && categories.data) {
+      return categories.data.map((category) => ({
+        slug: category.attributes.slug,
+      }));
     }
-    return { title: `${category.nome} | Tecassistiva` };
+    return [];
+  } catch (error) {
+    console.error("Failed to generate static params for categories:", error);
+    return [];
+  }
 }
 
-// Componente do Servidor que busca os dados
-export default async function CategoryPage({ params }) {
-  const categoryData = await getCategoryBySlug(params.slug);
-  const allCategories = await getAllCategories();
+// Sua página continua aqui...
+export default async function CategoriaPage({ params }) {
+  const { slug } = params;
 
-  if (!categoryData) {
-    return (
-        <div className="container mx-auto px-6 py-12">
-            <p>Categoria não encontrada.</p>
-        </div>
-    );
+  // Lógica para buscar os dados da categoria específica
+  const categories = await fetchAPI("/categorias", {
+    filters: { slug: { $eq: slug } },
+    populate: "deep",
+  });
+
+  if (!categories || !categories.data || categories.data.length === 0) {
+    return <div>Categoria não encontrada.</div>;
   }
 
-  // Passa os dados para um componente de cliente para renderização
-  return (
-    <CategoryClientView 
-        category={categoryData.attributes}
-        allCategories={allCategories}
-        initialProducts={categoryData.attributes.produtos.data}
-        params={params}
-    />
-  )
+  const category = categories.data[0];
+
+  return <CategoryClientView category={category} />;
 }

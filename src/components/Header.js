@@ -1,7 +1,7 @@
 // sitetecassistiva/src/components/Header.js
 
 import Link from 'next/link';
-import { fetchAPI } from '@/lib/api';
+import { fetchApi } from "@/lib/api";
 import Image from 'next/image';
 
 async function getCategories() {
