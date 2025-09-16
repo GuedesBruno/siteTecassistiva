@@ -5,9 +5,11 @@ import CategoryClientView from "@/components/CategoryClientView";
 export async function generateStaticParams() {
   const categories = await getAllCategories();
   if (!categories) return [];
-  return categories.map((category) => ({
-    slug: category.attributes.slug,
-  }));
+  return categories
+    .filter(category => category && category.attributes && category.attributes.slug)
+    .map((category) => ({
+      slug: category.attributes.slug,
+    }));
 }
 
 // Sua página continua aqui...
