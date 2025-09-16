@@ -1,142 +1,76 @@
 'use client';
 
-import { useState, useEffect } from 'react'; // CORREÇÃO: useEffect foi adicionado aqui
+import { useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
+import { getStrapiURL } from '@/lib/api';
 
-// Componente para renderizar conteúdo Rich Text com segurança
-function RichTextRenderer({ content }) {
-    if (!Array.isArray(content) || content.length === 0) {
-        return <p className="text-gray-500">Nenhuma informação disponível.</p>;
-    }
-    return (
-        <div className="prose prose-lg max-w-none text-gray-700">
-            {content.map((block, index) => {
-                const text = block.children.map(child => child.text).join('');
-                if (!text) return null;
-                return <p key={index}>{text}</p>;
-            })}
-        </div>
-    );
-}
-
-// Componente para renderizar vídeos embedados
-function VideoEmbed({ videoContent }) {
-    if (!videoContent) return <p className="text-gray-500">Nenhum vídeo disponível.</p>;
-    return (
-        <div 
-            className="prose prose-lg max-w-none"
-            dangerouslySetInnerHTML={{ __html: videoContent.replace(/\n/g, '<br />') }}
-        />
-    );
-}
-
-// --- Componente que Renderiza a Vista Completa no Cliente ---
 export default function ProductViewClient({ product }) {
-    const [activeTab, setActiveTab] = useState('');
-    
-    const { 
-        nome, 
-        imagem_principal, 
-        galeria_de_imagens,
-        visao_geral,
-        videos,
-        caracteristicas_funcionais,
-        caracteristicas_tecnicas,
-        Documentos
-    } = product;
-    
-    const fullImageUrl = imagem_principal?.url;
-    const imageAlt = imagem_principal?.alternativeText || `Imagem ilustrativa de ${nome}`;
+  // CORREÇÃO: 'preco' foi removido da desestruturação
+  const {
+    nome,
+    descricao_longa,
+    imagem_principal,
+    galeria_de_imagens,
+  } = product.attributes;
 
-    const tabs = [
-        { id: 'visao-geral', label: 'Visão Geral', content: visao_geral },
-        { id: 'fotos', label: 'Fotos', content: galeria_de_imagens },
-        { id: 'videos', label: 'Vídeos', content: videos },
-        { id: 'caracteristicas-funcionais', label: 'Características Funcionais', content: caracteristicas_funcionais },
-        { id: 'caracteristicas-tecnicas', label: 'Características Técnicas', content: caracteristicas_tecnicas },
-        { id: 'downloads', label: 'Downloads', content: Documentos },
-    ];
+  const mainImageUrl = getStrapiURL(imagem_principal.data.attributes.url);
 
-    // Define a primeira aba com conteúdo como ativa por padrão
-    useEffect(() => {
-        const firstAvailableTab = tabs.find(tab => tab.content && (!Array.isArray(tab.content) || tab.content.length > 0));
-        if (firstAvailableTab) {
-            setActiveTab(firstAvailableTab.id);
-        }
-    }, [product]); // A dependência [product] garante que isto é executado quando o produto carrega
+  // Prepara a lista de imagens para a galeria, incluindo a imagem principal
+  const galleryImages = [
+    mainImageUrl,
+    ...(galeria_de_imagens.data?.map(img => getStrapiURL(img.attributes.url)) || [])
+  ];
 
-    return (
-        <div className="bg-white">
-            <div className="container mx-auto px-6 py-12">
-                <div className="text-sm text-gray-500 mb-8">
-                    <Link href="/" className="hover:underline">Página Inicial</Link>
-                    <span className="mx-2">&gt;</span>
-                    <Link href="/produtos" className="hover:underline">Produtos</Link>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
-                    <div className="w-full">
-                        {fullImageUrl ? (
-                            <div className="aspect-square relative w-full rounded-lg shadow-lg overflow-hidden border">
-                                <Image src={fullImageUrl} alt={imageAlt} fill className="object-contain" priority />
-                            </div>
-                        ) : (
-                            <div className="aspect-square w-full bg-gray-200 rounded-lg" />
-                        )}
-                    </div>
-                    <div>
-                        <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">{nome}</h1>
-                    </div>
-                </div>
+  const [selectedImage, setSelectedImage] = useState(mainImageUrl);
 
-                <div className="mt-16 border-t pt-8">
-                    <div className="border-b border-gray-200">
-                        <nav className="-mb-px flex space-x-8 overflow-x-auto" aria-label="Tabs">
-                            {tabs.map((tab) => (
-                                (tab.content && (!Array.isArray(tab.content) || tab.content.length > 0)) && (
-                                    <button
-                                        key={tab.id}
-                                        onClick={() => setActiveTab(tab.id)}
-                                        className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
-                                            activeTab === tab.id
-                                            ? 'border-blue-500 text-blue-600'
-                                            : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                                        }`}
-                                    >
-                                        {tab.label}
-                                    </button>
-                                )
-                            ))}
-                        </nav>
-                    </div>
-                    <div className="py-8 min-h-[10rem]">
-                        {activeTab === 'visao-geral' && <RichTextRenderer content={visao_geral} />}
-                        {activeTab === 'fotos' && (
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                {Array.isArray(galeria_de_imagens) && galeria_de_imagens.map((img) => (
-                                    <div key={img.id} className="aspect-square relative rounded-lg overflow-hidden border">
-                                        <Image src={img.url} alt={img.alternativeText || ''} fill className="object-cover" />
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-                        {activeTab === 'videos' && <VideoEmbed videoContent={videos} />}
-                        {activeTab === 'caracteristicas-funcionais' && <RichTextRenderer content={caracteristicas_funcionais} />}
-                        {activeTab === 'caracteristicas-tecnicas' && <RichTextRenderer content={caracteristicas_tecnicas} />}
-                        {activeTab === 'downloads' && (
-                            <ul className="space-y-2">
-                                {Array.isArray(Documentos) && Documentos.map((doc) => (
-                                    <li key={doc.id}>
-                                        <a href={doc.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                                            {doc.name}
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
-                    </div>
-                </div>
-            </div>
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        {/* Coluna da Galeria de Imagens */}
+        <div>
+          <div className="relative w-full h-96 border rounded-lg overflow-hidden mb-4">
+            <Image
+              src={selectedImage}
+              alt={nome || 'Imagem do produto'}
+              layout="fill"
+              objectFit="cover"
+            />
+          </div>
+          <div className="flex space-x-2">
+            {galleryImages.map((image, index) => (
+              <div
+                key={index}
+                className={`relative w-20 h-20 border rounded-md overflow-hidden cursor-pointer ${selectedImage === image ? 'border-blue-500 border-2' : ''}`}
+                onClick={() => setSelectedImage(image)}
+              >
+                <Image
+                  src={image}
+                  alt={`Thumbnail ${index + 1}`}
+                  layout="fill"
+                  objectFit="cover"
+                />
+              </div>
+            ))}
+          </div>
         </div>
-    );
+
+        {/* Coluna de Informações do Produto */}
+        <div className="space-y-4">
+          <h1 className="text-3xl font-bold">{nome}</h1>
+          
+          {/* CORREÇÃO: Seção de preço removida */}
+
+          <div>
+            <h2 className="text-xl font-semibold mb-2">Descrição</h2>
+            {/* Usando dangerouslySetInnerHTML para renderizar o HTML do Rich Text */}
+            <div 
+              className="prose max-w-none"
+              dangerouslySetInnerHTML={{ __html: descricao_longa }} 
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
