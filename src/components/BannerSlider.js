@@ -14,7 +14,14 @@ export default function BannerSlider({ banners }) {
   const STRAPI_URL = getStrapiURL();
 
   if (!Array.isArray(banners) || banners.length === 0) {
-    return null; 
+    return (
+      <section className="h-[70vh] bg-gray-200 flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-gray-700">Nenhum banner para exibir.</h2>
+          <p className="text-gray-500">Não há banners disponíveis no momento.</p>
+        </div>
+      </section>
+    );
   }
 
   return (

@@ -1,23 +1,11 @@
 // sitetecassistiva/src/components/Header.js
 
 import Link from 'next/link';
-import { fetchAPI } from "@/lib/api";
+import { getAllCategories } from "@/lib/api";
 import Image from 'next/image';
 
-async function getCategories() {
-  try {
-    const categories = await fetchAPI("/categorias", {
-      populate: "deep", // Popula subcategorias e outros campos relacionados
-    });
-    return categories;
-  } catch (error) {
-    console.error("Failed to fetch categories:", error);
-    return []; // Retorna um array vazio em caso de erro
-  }
-}
-
 export default async function Header() {
-  const categories = await getCategories();
+  const categories = await getAllCategories();
 
   return (
     <header className="bg-white shadow-md">

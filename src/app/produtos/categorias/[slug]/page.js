@@ -1,13 +1,13 @@
-import { fetchAPI } from "@/lib/api";
+import { getAllCategories, getCategoryBySlug } from "@/lib/api";
 import CategoryClientView from "@/components/CategoryClientView";
 
 // Esta função busca todos os slugs de categoria no momento do build
 export async function generateStaticParams() {
   try {
-    const categories = await fetchAPI("/categorias", { populate: "*" });
+    const categories = await getAllCategories();
 
-    if (categories && categories.data) {
-      return categories.data.map((category) => ({
+    if (categories) {
+      return categories.map((category) => ({
         slug: category.attributes.slug,
       }));
     }
@@ -23,16 +23,11 @@ export default async function CategoriaPage({ params }) {
   const { slug } = params;
 
   // Lógica para buscar os dados da categoria específica
-  const categories = await fetchAPI("/categorias", {
-    filters: { slug: { $eq: slug } },
-    populate: "deep",
-  });
+  const category = await getCategoryBySlug(slug);
 
-  if (!categories || !categories.data || categories.data.length === 0) {
+  if (!category) {
     return <div>Categoria não encontrada.</div>;
   }
-
-  const category = categories.data[0];
 
   return <CategoryClientView category={category} />;
 }
