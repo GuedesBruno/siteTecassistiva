@@ -24,7 +24,7 @@ export async function fetchAPI(path, urlParamsObject = {}, options = {}) {
     headers: {
       "Content-Type": "application/json",
       // Adiciona o token de autorização da API
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`,
+      Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
     },
     ...options,
   };
