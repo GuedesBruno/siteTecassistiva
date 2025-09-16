@@ -1,70 +1,51 @@
-import { fetchAPI } from '@/lib/api';
-import CategoryClientView from '@/components/CategoryClientView';
+import { getAllCategories, getCategoryBySlug } from '@/lib/api';
+import Image from 'next/image';
+import Link from 'next/link';
+import CategoryClientView from '@/components/CategoryClientView'; // Usaremos um componente de cliente
 
-// GERA OS PARÂMETROS ESTÁTICOS (SLUGS) PARA CADA PÁGINA DE CATEGORIA
+// Gera a lista de todas as categorias para o Next.js criar as páginas estáticas
 export async function generateStaticParams() {
-  console.log("A tentar gerar parâmetros estáticos para categorias...");
-  const categories = await fetchAPI("/categorias", { fields: ['slug'] });
-
-  // --- INÍCIO DO DIAGNÓSTICO ---
-  // Vamos imprimir a resposta completa para ver o que a API está a devolver.
-  console.log("Resposta da API para /categorias:", JSON.stringify(categories, null, 2));
-  // --- FIM DO DIAGNÓSTICO ---
-
-  if (!categories || categories.length === 0) {
-    // Mantemos o erro explícito para o caso de a resposta ser realmente vazia.
-    throw new Error("A API não retornou categorias para gerar as páginas. Verifique se as categorias existem e estão publicadas no Strapi.");
-  }
-
-  console.log(`Encontradas ${categories.length} categorias para gerar as páginas.`);
-
+  const categories = await getAllCategories();
+  if (!categories || categories.length === 0) return [];
+  
+  // CORREÇÃO: Acedemos a 'category.attributes.slug'
   return categories
-    .filter(item => item && item.attributes && item.attributes.slug)
-    .map((item) => ({
-      slug: item.attributes.slug,
+    .filter(category => category.attributes && category.attributes.slug)
+    .map((category) => ({
+      slug: category.attributes.slug,
     }));
 }
 
-// O resto do ficheiro permanece igual...
+export async function generateMetadata({ params }) {
+    const categoryData = await getCategoryBySlug(params.slug);
+    const category = categoryData?.attributes;
 
-// BUSCA OS DADOS ESPECÍFICOS DE UMA CATEGORIA
-async function getCategoryData(slug) {
-  try {
-    const categories = await fetchAPI("/categorias", {
-      filters: { slug: { $eq: slug } },
-      populate: {
-        subcategorias: {
-          populate: {
-            produtos: {
-              populate: {
-                imagem_principal: true,
-              }
-            }
-          }
-        }
-      }
-    });
-
-    return categories && categories.length > 0 ? categories[0] : null;
-  } catch (error) {
-    console.error(`Erro ao buscar dados da categoria ${slug}:`, error);
-    return null;
-  }
+    if (!category) {
+        return { title: 'Categoria não encontrada' };
+    }
+    return { title: `${category.nome} | Tecassistiva` };
 }
 
-// O COMPONENTE DA PÁGINA
+// Componente do Servidor que busca os dados
 export default async function CategoryPage({ params }) {
-  const { slug } = params;
-  const category = await getCategoryData(slug);
+  const categoryData = await getCategoryBySlug(params.slug);
+  const allCategories = await getAllCategories();
 
-  if (!category) {
+  if (!categoryData) {
     return (
-      <div className="container mx-auto text-center py-10">
-        <h1 className="text-3xl font-bold">Categoria não encontrada</h1>
-        <p>A categoria que você está procurando não existe ou foi movida.</p>
-      </div>
+        <div className="container mx-auto px-6 py-12">
+            <p>Categoria não encontrada.</p>
+        </div>
     );
   }
 
-  return <CategoryClientView category={category} />;
+  // Passa os dados para um componente de cliente para renderização
+  return (
+    <CategoryClientView 
+        category={categoryData.attributes}
+        allCategories={allCategories}
+        initialProducts={categoryData.attributes.produtos.data}
+        params={params}
+    />
+  )
 }
