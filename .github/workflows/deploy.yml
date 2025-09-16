@@ -36,4 +36,5 @@ jobs:
             host: ${{ secrets.HOST }} 
             user: ${{ secrets.USER }}
             password: ${{ secrets.PASS }}
-            localDir: /public_html/novositeteca
+            localDir: ./ # Envia todo o conteúdo da pasta do projeto
+            remoteDir: /public_html/novositeteca
