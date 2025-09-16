@@ -6,8 +6,13 @@ export async function generateStaticParams() {
   console.log("A tentar gerar parâmetros estáticos para categorias...");
   const categories = await fetchAPI("/categorias", { fields: ['slug'] });
 
-  // CORREÇÃO: Adicionada uma verificação explícita para falhar o build com uma mensagem clara
+  // --- INÍCIO DO DIAGNÓSTICO ---
+  // Vamos imprimir a resposta completa para ver o que a API está a devolver.
+  console.log("Resposta da API para /categorias:", JSON.stringify(categories, null, 2));
+  // --- FIM DO DIAGNÓSTICO ---
+
   if (!categories || categories.length === 0) {
+    // Mantemos o erro explícito para o caso de a resposta ser realmente vazia.
     throw new Error("A API não retornou categorias para gerar as páginas. Verifique se as categorias existem e estão publicadas no Strapi.");
   }
 
@@ -19,6 +24,8 @@ export async function generateStaticParams() {
       slug: item.attributes.slug,
     }));
 }
+
+// O resto do ficheiro permanece igual...
 
 // BUSCA OS DADOS ESPECÍFICOS DE UMA CATEGORIA
 async function getCategoryData(slug) {
