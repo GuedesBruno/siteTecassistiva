@@ -2,22 +2,19 @@ import { fetchAPI } from '@/lib/api';
 import BannerSlider from '@/components/BannerSlider';
 import FeaturedProductsSlider from '@/components/FeaturedProductsSlider';
 
-// Função para buscar os banners
 async function getBanners() {
   try {
-    // Adiciona o parâmetro 'populate' para carregar a relação 'imagem'
     const banners = await fetchAPI("/banner-sites", { populate: "imagem" });
-    return banners || []; // Garante que sempre retorne um array
+    return banners || [];
   } catch (error) {
     console.error("Erro ao buscar banners:", error);
-    return []; // Retorna um array vazio em caso de falha
+    return [];
   }
 }
 
-// Função para buscar produtos em destaque
 async function getFeaturedProducts() {
   try {
-    // Popula a imagem principal e a categoria dos produtos em destaque
+    // CORREÇÃO: O filtro foi alterado de 'em_destaque' para 'destaque'
     const products = await fetchAPI("/produtos", {
       filters: { destaque: true },
       populate: {
@@ -25,10 +22,10 @@ async function getFeaturedProducts() {
         categoria: true
       },
     });
-    return products || []; // Garante que sempre retorne um array
+    return products || [];
   } catch (error) {
     console.error("Erro ao buscar produtos em destaque:", error);
-    return []; // Retorna um array vazio em caso de falha
+    return [];
   }
 }
 
@@ -38,7 +35,6 @@ export default async function Home() {
 
   return (
     <main className="flex flex-col items-center justify-between">
-      {/* Seção de Banners */}
       <div className="w-full">
         {banners.length > 0 ? (
           <BannerSlider banners={banners} />
@@ -47,7 +43,6 @@ export default async function Home() {
         )}
       </div>
 
-      {/* Seção de Produtos em Destaque */}
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <h2 className="text-3xl font-bold text-center mb-8">Produtos em Destaque</h2>
         {featuredProducts.length > 0 ? (
