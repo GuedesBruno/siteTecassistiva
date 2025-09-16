@@ -5,6 +5,9 @@ on:
     branches:
       - main # Garanta que esta é a sua branch de deploy
 
+permissions:
+  contents: write   # 🔑 necessário para permitir o push na gh-pages
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,19 +26,12 @@ jobs:
 
       - name: Build project
         env:
-          # Esta linha está correta, pois o nome do secret bate com o da variável
           NEXT_PUBLIC_STRAPI_URL: ${{ secrets.NEXT_PUBLIC_STRAPI_URL }}
-          
-          # CORREÇÃO APLICADA AQUI:
-          # A variável de ambiente (à esquerda) é o que o código Next.js espera.
-          # O secret (à direita) é o nome que você criou no GitHub.
           NEXT_PUBLIC_STRAPI_API_TOKEN: ${{ secrets.STRAPI_API_TOKEN }}
         run: npm run build
 
-      # Suas etapas de deploy (para Vercel, Netlify, etc.) continuam aqui
-      # Exemplo para GitHub Pages:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
+          publish_dir: ./out  # 🚨 garanta que a pasta existe após o build
