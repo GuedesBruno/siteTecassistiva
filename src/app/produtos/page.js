@@ -12,8 +12,9 @@ export default async function ProductsPage() {
       {categories && categories.length > 0 ? (
         <div className="space-y-12">
           {categories.map((category) => {
-            const { nome, slug, produtos } = category.attributes;
-            const productsData = produtos?.data || [];
+            const { nome, slug, subcategorias } = category.attributes;
+            const subcategoriesData = subcategorias?.data || [];
+            const allProducts = subcategoriesData.flatMap(sub => sub.attributes.produtos?.data || []);
 
             return (
               <div key={category.id}>
@@ -22,9 +23,9 @@ export default async function ProductsPage() {
                     {nome}
                   </Link>
                 </h2>
-                {productsData.length > 0 ? (
+                {allProducts.length > 0 ? (
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    {productsData.map((product) => (
+                    {allProducts.map((product) => (
                       <ProductCard key={product.id} product={product} />
                     ))}
                   </div>
