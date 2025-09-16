@@ -56,7 +56,7 @@ export async function getFeaturedProducts() {
 
 // Busca todas as categorias
 export async function getAllCategories() {
-  const response = await fetchAPI('/api/categorias?populate=deep');
+  const response = await fetchAPI('/api/categorias?populate[subcategorias][populate][produtos][populate]=imagem_principal');
   return response.data || [];
 }
 
