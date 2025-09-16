@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
 
   // AQUI ESTÁ A CORREÇÃO CRÍTICA PARA O ERRO 404/403:
   // Esta linha força o Next.js a criar uma pasta para cada rota

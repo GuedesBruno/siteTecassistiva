@@ -1,5 +1,5 @@
 // Função centralizada para fazer chamadas à API do Strapi
-async function fetchAPI(endpoint) {
+export async function fetchAPI(endpoint) {
   // As variáveis de ambiente são lidas aqui
   const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
   const STRAPI_TOKEN = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
