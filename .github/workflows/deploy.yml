@@ -24,7 +24,7 @@ jobs:
       - name: Build project for static export
         env:
           NEXT_PUBLIC_STRAPI_URL: ${{ secrets.NEXT_PUBLIC_STRAPI_URL }}
-          NEXT_PUBLIC_STRAPI_API_TOKEN: ${{ secrets.STRAPI_API_TOKEN }}
+          STRAPI_API_TOKEN: ${{ secrets.STRAPI_API_TOKEN }}
         run: npm run build # This will create the 'out' directory due to the next.config.js setting
 
       - name: FTP Deploy to Locaweb
