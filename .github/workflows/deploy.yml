@@ -34,4 +34,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out  # 🚨 garanta que a pasta existe após o build
+          publish_dir: /public_html/novositeteca

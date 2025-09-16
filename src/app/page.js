@@ -1,6 +1,6 @@
 import { getFeaturedProducts, getBanners } from '@/lib/api'; 
 import BannerSlider from '@/components/BannerSlider';
-import ProductCard from '@/components/ProductCard'; // Assumindo que o ProductCard foi movido para os componentes
+import ProductCard from '@/components/ProductCard';
 import Link from 'next/link';
 
 export default async function Home() {

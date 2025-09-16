@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getStrapiURL } from '@/lib/api'; // Importa a função para a URL
+import { getStrapiURL } from '@/lib/api';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
