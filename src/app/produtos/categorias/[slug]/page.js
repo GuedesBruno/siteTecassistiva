@@ -1,25 +1,19 @@
-import { getAllCategories, getCategoryBySlug } from "@/lib/api";
-import CategoryClientView from "@/components/CategoryClientView";
+import ProductListClient from "@/components/ProductListClient";
+import { getAllProducts, getAllCategories } from "@/lib/api";
 
-// Esta função busca todos os slugs de categoria no momento do build
-export async function generateStaticParams() {
-  const categories = await getAllCategories();
-  if (!categories) return [];
-  return categories
-    .filter(category => category && category.attributes && category.attributes.slug)
-    .map((category) => ({
-      slug: category.attributes.slug,
-    }));
-}
+export default async function ProdutosPage() {
+  const [productsData, categoriesData] = await Promise.all([
+    getAllProducts(),
+    getAllCategories(),
+  ]);
 
-// Sua página continua aqui...
-export default async function CategoriaPage({ params }) {
-  const { slug } = params;
-  const category = await getCategoryBySlug(slug);
-
-  if (!category) {
-    return <div>Categoria não encontrada.</div>;
-  }
-
-  return <CategoryClientView category={category} />;
+  return (
+    <div>
+      <h1 className="text-4xl font-bold text-center my-10">Nossos Produtos</h1>
+      <ProductListClient
+        products={productsData?.data || []}
+        categories={categoriesData?.data || []}
+      />
+    </div>
+  );
 }
