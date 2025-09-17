@@ -37,14 +37,20 @@ jobs:
             npx next export || true
           fi
 
-      - name: FTP Deploy Locaweb
-        uses: locaweb/ftp-deploy@1.0.0
-        with:
-          host: ${{ secrets.HOST }}
-          user: ${{ secrets.USER }}
-          password: ${{ secrets.PASS }}
-          localDir: out
+      - name: Deploy via FTP using lftp (upload contents of out/)
+        shell: bash
+        env:
+          FTP_HOST: ${{ secrets.HOST }}
+          FTP_USER: ${{ secrets.USER }}
+          FTP_PASS: ${{ secrets.PASS }}
+          REMOTE_DIR: /public_html/novositeteca/
           remoteDir: /public_html/novositeteca/
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y lftp
+          echo "Starting lftp deploy to $FTP_HOST -> $REMOTE_DIR (uploading contents of out/)"
+          cd out
+          lftp -u "$FTP_USER","$FTP_PASS" "$FTP_HOST" -e "mirror -R --only-newer --no-perms --parallel=5 --exclude-glob logs* --exclude-glob access_log* --exclude-glob error_log* . \"$REMOTE_DIR\"; bye"
 
       - name: Done
         run: echo "Deploy finished"

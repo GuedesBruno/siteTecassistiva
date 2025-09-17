@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { getStrapiURL } from '@/lib/api';
+import { getStrapiMediaUrl } from '@/lib/api';
 
 export default function ProductViewClient({ product }) {
   // CORREÇÃO: 'preco' foi removido da desestruturação
@@ -13,14 +13,16 @@ export default function ProductViewClient({ product }) {
     galeria_de_imagens,
   } = product.attributes;
   // Defensive image access: verify existence before reading nested attributes
-  const mainImageUrl = (imagem_principal && imagem_principal.data && imagem_principal.data.attributes && imagem_principal.data.attributes.url)
-    ? getStrapiURL(imagem_principal.data.attributes.url)
-    : null;
+  const mainImagePath = imagem_principal?.data?.attributes?.url || imagem_principal?.url || null;
+  const mainImageUrl = mainImagePath ? getStrapiMediaUrl(mainImagePath) : null;
 
   // Prepara a lista de imagens para a galeria, incluindo a imagem principal quando existir
   const galleryImages = [
     ...(mainImageUrl ? [mainImageUrl] : []),
-    ...(Array.isArray(galeria_de_imagens?.data) ? galeria_de_imagens.data.map(img => (img?.attributes?.url ? getStrapiURL(img.attributes.url) : null)).filter(Boolean) : []),
+    ...(Array.isArray(galeria_de_imagens?.data) ? galeria_de_imagens.data.map(img => {
+      const path = img?.attributes?.url || img?.url || null;
+      return path ? getStrapiMediaUrl(path) : null;
+    }).filter(Boolean) : []),
   ];
 
   const [selectedImage, setSelectedImage] = useState(mainImageUrl || galleryImages[0] || null);

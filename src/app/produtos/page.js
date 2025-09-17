@@ -4,7 +4,7 @@ import { getFeaturedProducts, getAllCategories } from "@/lib/api";
 
 export default async function ProdutosPage() {
     // ✅ CORRIGIDO: Chama a função correta
-  const [productsData, categoriesData] = await Promise.all([
+  const [products, categories] = await Promise.all([
     getFeaturedProducts(),
     getAllCategories(),
   ]);
@@ -13,8 +13,8 @@ export default async function ProdutosPage() {
     <div>
       <h1 className="text-4xl font-bold text-center my-10">Nossos Produtos</h1>
       <ProductListClient
-        products={productsData?.data || []}
-        categories={categoriesData?.data || []}
+        products={products || []}
+        categories={categories || []}
       />
     </div>
   );

@@ -49,7 +49,21 @@ export async function fetchAPI(endpoint, options = {}) {
 
 // Retorna a URL base do Strapi para ser usada em componentes de cliente
 export function getStrapiURL() {
-    return process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
+  // Normaliza a URL base removendo barras finais e '/api' caso presente
+  let base = (process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337').replace(/\/+$/g, '');
+  if (base.endsWith('/api')) base = base.replace(/\/api$/, '');
+  return base;
+}
+
+// Gera a URL completa para um caminho de mídia retornado pelo Strapi
+export function getStrapiMediaUrl(path) {
+  if (!path) return null;
+  // Se já for uma URL absoluta, retorna tal qual
+  if (/^https?:\/\//i.test(path) || /^\/\//.test(path)) return path;
+  const base = getStrapiURL();
+  // garante que exista uma barra entre base e path
+  if (path.startsWith('/')) return `${base}${path}`;
+  return `${base}/${path}`;
 }
 
 // Busca todos os produtos (apenas slugs para generateStaticParams)
@@ -72,34 +86,120 @@ export async function getProductBySlug(slug) {
 
 // Busca produtos em destaque
 export async function getFeaturedProducts() {
-  // Busca mínima para destaques (evita populates arriscados)
-  const response = await fetchAPI('/api/produtos?filters[destaque][$eq]=true&fields[0]=nome&fields[1]=slug');
+  // Busca produtos em destaque incluindo imagem principal
+  const response = await fetchAPI('/api/produtos?filters[destaque][$eq]=true&fields[0]=nome&fields[1]=slug&populate=imagem_principal');
   return normalizeDataArray(response);
 }
 
 // Busca todas as categorias com seus produtos e imagens
 export async function getAllCategories() {
-  // Busca leve: apenas campos necessários para o menu (nome e slug)
-  const response = await fetchAPI('/api/categorias?fields[0]=nome&fields[1]=slug');
+  // Busca categorias com subcategorias para montar o menu
+  const response = await fetchAPI('/api/categorias?fields[0]=nome&fields[1]=slug&populate=subcategorias');
   return normalizeDataArray(response);
 }
 
 // Busca uma categoria pelo slug com os seus produtos
 export async function getCategoryBySlug(slug) {
-  // Busca conservadora por categoria (sem populates complexos)
-  const response = await fetchAPI(`/api/categorias?filters[slug][$eq]=${slug}`);
+  // Busca conservadora por categoria (retorna no formato { data: [...] } para compatibilidade)
+  // Popula produtos diretos e produtos dentro das subcategorias para renderização
+  // Tenta popular produtos diretos e produtos dentro das subcategorias usando a forma bracketed do Strapi
+  try {
+    const populateQuery = `populate[produtos]=*&populate[subcategorias][populate]=produtos`;
+    const response = await fetchAPI(`/api/categorias?filters[slug][$eq]=${slug}&${populateQuery}`);
   const data = response.data || [];
-  if (data.length === 0) return null;
-  const item = data[0];
-  if (item.attributes) return item;
-  const { id, ...rest } = item;
-  return { id, attributes: rest };
+  if (data.length === 0) return { data: [] };
+
+  // Normaliza cada item para garantir { id, attributes }
+  const normalized = data.map((item) => {
+    if (item.attributes) return item;
+    const { id, ...rest } = item;
+    return { id, attributes: rest };
+  });
+
+  return { data: normalized };
+  } catch (err) {
+    // Se a requisição com populate falhar (ex: ValidationError do Strapi), fazemos fallback sem populate
+    console.warn('getCategoryBySlug: populate request failed, falling back to no-populate:', err.message);
+    try {
+      const response = await fetchAPI(`/api/categorias?filters[slug][$eq]=${slug}`);
+      const data = response.data || [];
+      if (data.length === 0) return { data: [] };
+      const normalized = data.map((item) => {
+        if (item.attributes) return item;
+        const { id, ...rest } = item;
+        return { id, attributes: rest };
+      });
+
+      // If the category doesn't include products from the CMS, try fetching products by category slug
+      const categoryItem = normalized[0];
+      const hasProducts = !!(categoryItem.attributes && (categoryItem.attributes.produtos || (categoryItem.attributes.subcategorias && categoryItem.attributes.subcategorias.length)));
+      if (!hasProducts) {
+        try {
+          const products = await getProductsByCategorySlug(slug);
+          // attach products to attributes for backward compatibility
+          categoryItem.attributes = categoryItem.attributes || {};
+          categoryItem.attributes.produtos = products;
+        } catch (pErr) {
+          // ignore product fetch errors, keep category as-is
+          console.warn('Failed to fetch products for category:', pErr.message);
+        }
+      }
+
+      return { data: normalized };
+    } catch (err2) {
+      console.error('getCategoryBySlug fallback failed:', err2.message);
+      return { data: [] };
+    }
+  }
+}
+
+// Busca produtos pela slug da categoria via endpoint de produtos (filtrando pela relação)
+export async function getProductsByCategorySlug(slug) {
+  try {
+    // Primeiro buscamos a categoria com suas subcategorias
+    const catResp = await fetchAPI(`/api/categorias?filters[slug][$eq]=${slug}&populate=subcategorias`);
+    const catData = catResp.data || [];
+    if (catData.length === 0) return [];
+
+    const subcats = (catData[0].subcategorias && (catData[0].subcategorias.data || catData[0].subcategorias)) || [];
+    const subSlugs = subcats.map(s => s.attributes?.slug || s.slug).filter(Boolean);
+    const subIds = subcats.map(s => s.id).filter(Boolean);
+
+    // Tenta filtrar por slug das subcategorias
+    if (subSlugs.length > 0) {
+      try {
+        const q = `/api/produtos?filters[subcategorias][slug][$in]=${subSlugs.join(',')}&populate=imagem_principal`;
+        const resp = await fetchAPI(q);
+        return normalizeDataArray(resp);
+      } catch (err) {
+        // continua para tentar por id
+        console.warn('filter by subcategory slug failed:', err.message);
+      }
+    }
+
+    // Tenta filtrar por id das subcategorias
+    if (subIds.length > 0) {
+      try {
+        const q = `/api/produtos?filters[subcategorias][id][$in]=${subIds.join(',')}&populate=imagem_principal`;
+        const resp = await fetchAPI(q);
+        return normalizeDataArray(resp);
+      } catch (err) {
+        console.warn('filter by subcategory id failed:', err.message);
+      }
+    }
+
+    // Se nada funcionou, retorna vazio
+    return [];
+  } catch (err) {
+    console.warn('getProductsByCategorySlug failed:', err.message);
+    return [];
+  }
 }
 
 // Busca todos os banners do site
 export async function getBanners() {
   const response = await fetchAPI('/api/banner-sites?sort=ordem:asc&populate=imagem');
-  return response.data || [];
+  return normalizeDataArray(response);
 }
 
 // Normaliza respostas do Strapi: se os itens já vierem com `attributes`, deixa como está.

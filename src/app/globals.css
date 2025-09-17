@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Force no rounded corners site-wide as requested */
+.rounded, .rounded-sm, .rounded-md, .rounded-lg, .rounded-xl, .rounded-2xl, .rounded-full {
+	border-radius: 0 !important;
+}
+
+/* Also ensure any elements using tailwind's ring/outline shadows don't appear rounded */
+* { border-radius: inherit; }
