@@ -42,7 +42,7 @@ export function getStrapiURL() {
 }
 
 // Busca todos os produtos (apenas slugs para generateStaticParams)
-export async function getProducts() {
+export async function getAllProducts() {
   const response = await fetchAPI('/api/produtos?fields[0]=slug');
   return response.data || [];
 }
