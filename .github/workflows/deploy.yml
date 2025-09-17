@@ -1,37 +1,54 @@
-name: Deploy via FTP para Locaweb
+name: Build and Deploy (Static Export to Locaweb)
 
 on:
   push:
-    branches: ['main']
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
-  deploy:
-    name: Build e Deploy
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout do código
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Configurar o Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: 'npm'
+          node-version: '18'
 
-      - name: Instalar dependências
+      - name: Install dependencies
         run: npm ci
 
-      - name: Build do projeto Next.js
-        run: npm run build
+      - name: Build (Next static export)
         env:
-          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          NEXT_PUBLIC_STRAPI_URL: ${{ secrets.NEXT_PUBLIC_STRAPI_URL }}
+          STRAPI_API_TOKEN: ${{ secrets.STRAPI_API_TOKEN }}
+        run: npm run build
 
-      - name: FTP Deploy
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-        with:
-          server: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
-          password: ${{ secrets.PASS }}
-          local-dir: ./out/
-          server-dir: /public_html/novositeteca/
+      - name: Ensure out exists (export if needed)
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -d out ]; then
+            echo "out/ exists"
+          else
+            echo "Running next export to generate out/ (if required)"
+            npx next export || true
+          fi
+
+      - name: Deploy via FTP using lftp
+        shell: bash
+        env:
+          FTP_HOST: ${{ secrets.HOST }}
+          FTP_USER: ${{ secrets.USER }}
+          FTP_PASS: ${{ secrets.PASS }}
+          remoteDir: /public_html/novositeteca/
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y lftp
+          echo "Starting lftp deploy to $FTP_HOST -> $REMOTE_DIR"
+          lftp -u "$FTP_USER","$FTP_PASS" "$FTP_HOST" -e "mirror -R --delete --verbose out \"$REMOTE_DIR\"; bye"
+
+      - name: Done
+        run: echo "Deploy finished"

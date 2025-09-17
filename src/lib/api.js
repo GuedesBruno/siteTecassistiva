@@ -1,5 +1,5 @@
 // Função centralizada para fazer chamadas à API do Strapi
-export async function fetchAPI(endpoint) {
+export async function fetchAPI(endpoint, options = {}) {
   // As variáveis de ambiente são lidas aqui
   const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
   const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN;
@@ -12,10 +12,21 @@ export async function fetchAPI(endpoint) {
   }
 
   try {
-    const res = await fetch(`${STRAPI_URL}${endpoint}`, {
+    // Normaliza a URL base removendo barras finais
+    // Se a URL terminar com '/api', removemos essa parte para evitar chamadas como '/api/api/...'
+    let base = STRAPI_URL.replace(/\/+$/g, '');
+    if (base.endsWith('/api')) {
+      base = base.replace(/\/api$/,'');
+    }
+    const path = endpoint.replace(/^\/+/, '');
+    const url = `${base}/${path}`;
+
+    const fetchOptions = {
       headers: { 'Authorization': `Bearer ${STRAPI_TOKEN}` },
-      cache: 'no-store'
-    });
+      ...options,
+    };
+
+    const res = await fetch(url, fetchOptions);
 
     if (!res.ok) {
       console.error(`Erro na requisição para ${endpoint}: ${res.status} ${res.statusText}`);
@@ -44,38 +55,64 @@ export function getStrapiURL() {
 // Busca todos os produtos (apenas slugs para generateStaticParams)
 export async function getAllProducts() {
   const response = await fetchAPI('/api/produtos?fields[0]=slug');
-  return response.data || [];
+  return normalizeDataArray(response);
 }
 
 // Busca um produto pelo slug com todos os dados necessários
 export async function getProductBySlug(slug) {
-  const populateQuery = 'populate[imagem_principal]=*&populate[galeria_de_imagens]=*&populate[categorias][populate][subcategorias]=*';
-  const response = await fetchAPI(`/api/produtos?filters[slug][$eq]=${slug}&${populateQuery}`);
-  return response.data && response.data.length > 0 ? response.data[0] : null;
+  // Busca conservadora: sem populates para evitar ValidationError em Strapi remoto
+  const response = await fetchAPI(`/api/produtos?filters[slug][$eq]=${slug}`);
+  const data = response.data || [];
+  if (data.length === 0) return null;
+  const item = data[0];
+  if (item.attributes) return item;
+  const { id, ...rest } = item;
+  return { id, attributes: rest };
 }
 
 // Busca produtos em destaque
 export async function getFeaturedProducts() {
-  const response = await fetchAPI('/api/produtos?filters[destaque][$eq]=true&populate=imagem_principal');
-  return response.data || [];
+  // Busca mínima para destaques (evita populates arriscados)
+  const response = await fetchAPI('/api/produtos?filters[destaque][$eq]=true&fields[0]=nome&fields[1]=slug');
+  return normalizeDataArray(response);
 }
 
 // Busca todas as categorias com seus produtos e imagens
 export async function getAllCategories() {
-  const populateQuery = 'populate[subcategorias][populate][produtos][populate]=imagem_principal';
-  const response = await fetchAPI(`/api/categorias?${populateQuery}`);
-  return response.data || [];
+  // Busca leve: apenas campos necessários para o menu (nome e slug)
+  const response = await fetchAPI('/api/categorias?fields[0]=nome&fields[1]=slug');
+  return normalizeDataArray(response);
 }
 
 // Busca uma categoria pelo slug com os seus produtos
 export async function getCategoryBySlug(slug) {
-  const populateQuery = 'populate[subcategorias][populate][produtos][populate]=imagem_principal';
-  const response = await fetchAPI(`/api/categorias?filters[slug][$eq]=${slug}&${populateQuery}`);
-  return response.data && response.data.length > 0 ? response.data[0] : null;
+  // Busca conservadora por categoria (sem populates complexos)
+  const response = await fetchAPI(`/api/categorias?filters[slug][$eq]=${slug}`);
+  const data = response.data || [];
+  if (data.length === 0) return null;
+  const item = data[0];
+  if (item.attributes) return item;
+  const { id, ...rest } = item;
+  return { id, attributes: rest };
 }
 
 // Busca todos os banners do site
 export async function getBanners() {
   const response = await fetchAPI('/api/banner-sites?sort=ordem:asc&populate=imagem');
   return response.data || [];
+}
+
+// Normaliza respostas do Strapi: se os itens já vierem com `attributes`, deixa como está.
+// Se os itens vierem 'flat' (campos no root), converte para o formato { id, attributes: { ...fields } }
+function normalizeDataArray(response) {
+  if (!response) return [];
+  const data = response.data || [];
+  // se items já têm attributes, retorna como está
+  if (data.length > 0 && data[0].attributes) return data;
+
+  // converte cada item plano para o formato esperado pelo app
+  return data.map((item) => {
+    const { id, ...rest } = item;
+    return { id, attributes: rest };
+  });
 }

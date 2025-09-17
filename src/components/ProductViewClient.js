@@ -12,16 +12,18 @@ export default function ProductViewClient({ product }) {
     imagem_principal,
     galeria_de_imagens,
   } = product.attributes;
+  // Defensive image access: verify existence before reading nested attributes
+  const mainImageUrl = (imagem_principal && imagem_principal.data && imagem_principal.data.attributes && imagem_principal.data.attributes.url)
+    ? getStrapiURL(imagem_principal.data.attributes.url)
+    : null;
 
-  const mainImageUrl = getStrapiURL(imagem_principal.data.attributes.url);
-
-  // Prepara a lista de imagens para a galeria, incluindo a imagem principal
+  // Prepara a lista de imagens para a galeria, incluindo a imagem principal quando existir
   const galleryImages = [
-    mainImageUrl,
-    ...(galeria_de_imagens.data?.map(img => getStrapiURL(img.attributes.url)) || [])
+    ...(mainImageUrl ? [mainImageUrl] : []),
+    ...(Array.isArray(galeria_de_imagens?.data) ? galeria_de_imagens.data.map(img => (img?.attributes?.url ? getStrapiURL(img.attributes.url) : null)).filter(Boolean) : []),
   ];
 
-  const [selectedImage, setSelectedImage] = useState(mainImageUrl);
+  const [selectedImage, setSelectedImage] = useState(mainImageUrl || galleryImages[0] || null);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -30,12 +32,16 @@ export default function ProductViewClient({ product }) {
         {/* Coluna da Galeria de Imagens */}
         <div>
           <div className="relative w-full h-96 border rounded-lg overflow-hidden mb-4">
-            <Image
-              src={selectedImage}
-              alt={nome || 'Imagem do produto'}
-              layout="fill"
-              objectFit="cover"
-            />
+            {selectedImage ? (
+              <Image
+                src={selectedImage}
+                alt={nome || 'Imagem do produto'}
+                layout="fill"
+                objectFit="cover"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-gray-100">Sem imagem</div>
+            )}
           </div>
           <div className="flex space-x-2">
             {galleryImages.map((image, index) => (
