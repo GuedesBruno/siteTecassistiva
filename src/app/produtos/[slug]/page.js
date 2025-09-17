@@ -1,11 +1,11 @@
-import { getAllProducts, getProductBySlug } from "@/lib/api";
+// ✅ CORRIGIDO: Importa as funções que realmente existem no seu api.js
+import { getFeaturedProducts, getProductBySlug } from "@/lib/api";
 import ProductViewClient from "@/components/ProductViewClient";
 
-// ✅ CORRIGIDO: Busca todos os slugs de produtos da API para gerar as páginas
+// ✅ CORRIGIDO: Usa getFeaturedProducts para buscar os slugs
 export async function generateStaticParams() {
-  const products = await getAllProducts();
+  const products = await getFeaturedProducts(); // Usando a função correta
 
-  // Se a API não retornar produtos, retorna um array vazio para não quebrar o build
   if (!products || !products.data) {
     return [];
   }
@@ -15,7 +15,6 @@ export async function generateStaticParams() {
   }));
 }
 
-// A página busca os dados do produto específico pelo slug
 export default async function ProdutoSlugPage({ params }) {
   const productData = await getProductBySlug(params.slug);
 
@@ -23,6 +22,5 @@ export default async function ProdutoSlugPage({ params }) {
     return <div>Produto não encontrado.</div>;
   }
 
-  // O componente recebe os dados do produto encontrado
   return <ProductViewClient product={productData.data[0]} />;
 }

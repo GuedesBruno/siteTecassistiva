@@ -1,9 +1,11 @@
 import ProductListClient from "@/components/ProductListClient";
-import { getAllProducts, getAllCategories } from "@/lib/api";
+// ✅ CORRIGIDO: Importa getFeaturedProducts no lugar de getAllProducts
+import { getFeaturedProducts, getAllCategories } from "@/lib/api";
 
 export default async function ProdutosPage() {
+    // ✅ CORRIGIDO: Chama a função correta
   const [productsData, categoriesData] = await Promise.all([
-    getAllProducts(),
+    getFeaturedProducts(),
     getAllCategories(),
   ]);
 
