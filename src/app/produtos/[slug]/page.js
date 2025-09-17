@@ -37,7 +37,7 @@ export async function generateStaticParams() {
       console.warn('generateStaticParams: getBanners failed:', e.message);
     }
 
-    // Also add safe variants: slug without hyphens (some links use condensed forms)
+    // Adiciona variações dos slugs (sem hífens, com underscores)
     const final = new Set(slugs);
     for (const s of Array.from(slugs)) {
       const condensed = s.replace(/-/g, '');
