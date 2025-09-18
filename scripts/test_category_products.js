@@ -6,6 +6,7 @@ function parseEnv(file) {
   const lines = content.split(/\r?\n/);
   const env = {};
   for (const l of lines) {
+    if (l.trim().length === 0) continue;
     const m = l.match(/^\s*([A-Za-z0-9_]+)\s*=\s*(.*)\s*$/);
     if (m) {
       let val = m[2];
@@ -43,9 +44,11 @@ function parseEnv(file) {
     'subcategorias][populate][produtos][populate]=imagem_principal'
   ];
 
+  
   let foundSubs = [];
   for (const v of populateVariants) {
     const q = `${base}/api/categorias?filters[slug][$eq]=${encodeURIComponent(categorySlug)}&populate[${v}]`;
+    
     console.log('\nTrying populate variant:', v);
     console.log(q);
     try {
@@ -73,7 +76,7 @@ function parseEnv(file) {
 
   if (foundSubs.length === 0) {
     console.log('\nNo subcategories found with populate variants. Trying /api/subcategorias?filters[categoria][slug][$eq]=...');
-    const qsub = `${base}/api/subcategorias?filters[categoria][slug][$eq]=${encodeURIComponent(categorySlug)}&populate=*`;
+    const qsub = `${base}/api/subcategorias?filters[categoria][slug][$eq]=${encodeURIComponent(categorySlug)}&populate[categoria]=*`;
     console.log(qsub);
     try {
       const r = await fetch(qsub, { headers: { Authorization: `Bearer ${token}` } });
@@ -96,7 +99,8 @@ function parseEnv(file) {
   const subIds = foundSubs.map(s => s.id).filter(Boolean);
 
   if (subSlugs.length > 0) {
-    const q1 = `${base}/api/produtos?filters[subcategorias][slug][$in]=${encodeURIComponent(subSlugs.join(','))}&populate=imagem_principal`;
+    const q1 = `${base}/api/produtos?filters[subcategoria][slug][$in]=${encodeURIComponent(subSlugs.join(','))}&populate=imagem_principal`;
+
     console.log('\nTrying filter by subcategory slugs:');
     console.log(q1);
     try {
@@ -108,7 +112,8 @@ function parseEnv(file) {
   }
 
   if (subIds.length > 0) {
-    const q2 = `${base}/api/produtos?filters[subcategorias][id][$in]=${encodeURIComponent(subIds.join(','))}&populate=imagem_principal`;
+    const q2 = `${base}/api/produtos?filters[subcategoria][id][$in]=${encodeURIComponent(subIds.join(','))}&populate=imagem_principal`;
+
     console.log('\nTrying filter by subcategory ids:');
     console.log(q2);
     try {

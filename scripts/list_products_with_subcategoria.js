@@ -6,6 +6,7 @@ function parseEnv(file) {
   const lines = content.split(/\r?\n/);
   const env = {};
   for (const l of lines) {
+    if (l.trim().length === 0) continue;
     const m = l.match(/^\s*([A-Za-z0-9_]+)\s*=\s*(.*)\s*$/);
     if (m) {
       let val = m[2];

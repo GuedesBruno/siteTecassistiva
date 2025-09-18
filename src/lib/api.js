@@ -72,6 +72,20 @@ export async function getAllProducts() {
   return normalizeDataArray(response);
 }
 
+// Busca todos os produtos com dados para exibição
+export async function getAllProductsForDisplay() {
+  try {
+    // Popula os campos necessários para os cards de produto
+    const populate = 'populate[0]=imagem_principal&populate[1]=subcategoria';
+    // Usa pagination[limit]=-1 para buscar todos os registros
+    const productsData = await fetchAPI(`/api/produtos?${populate}&pagination[limit]=1000`);
+    return normalizeDataArray(productsData);
+  } catch (error) {
+    console.error(`Falha ao buscar todos os produtos:`, error);
+    return [];
+  }
+}
+
 // Busca um produto pelo slug com todos os dados necessários
 export async function getProductBySlug(slug) {
   // Busca conservadora: sem populates para evitar ValidationError em Strapi remoto
@@ -100,103 +114,41 @@ export async function getAllCategories() {
 
 // Busca uma categoria pelo slug com os seus produtos
 export async function getCategoryBySlug(slug) {
-  // Busca segura por categoria sem usar populates agressivos (o Strapi remoto rejeita alguns populates)
+  // Busca conservadora por categoria (retorna no formato { data: [...] } para compatibilidade)
+  // Popula produtos diretos e produtos dentro das subcategorias para renderização
+  // Tenta popular produtos diretos e produtos dentro das subcategorias usando a forma bracketed do Strapi
   try {
-    const response = await fetchAPI(`/api/categorias?filters[slug][$eq]=${encodeURIComponent(slug)}`);
-    const data = response.data || [];
-    if (data.length === 0) return { data: [] };
+    const populateQuery = `populate[produtos][populate]=*&populate[subcategorias][populate][produtos][populate]=*`;
+    const response = await fetchAPI(`/api/categorias?filters[slug][$eq]=${slug}&${populateQuery}`);
+  const data = response.data || [];
+  if (data.length === 0) return { data: [] };
 
-    const normalized = data.map((item) => {
-      if (item.attributes) return item;
-      const { id, ...rest } = item;
-      return { id, attributes: rest };
-    });
+  // Normaliza cada item para garantir { id, attributes }
+  const normalized = data.map((item) => {
+    if (item.attributes) return item;
+    const { id, ...rest } = item;
+    return { id, attributes: rest };
+  });
 
-    // If the category doesn't include products, try fetching products by subcategories
-    const categoryItem = normalized[0];
-    const attrs = categoryItem.attributes || {};
-    const hasDirectProducts = !!(attrs.produtos && (attrs.produtos.data || attrs.produtos).length);
-    const hasProductsInSubs = !!(attrs.subcategorias && ((attrs.subcategorias.data && attrs.subcategorias.data.some(s => (s.attributes && (s.attributes.produtos || s.attributes.produtos?.data?.length)) ) ) || false));
-
-    if (!hasDirectProducts && !hasProductsInSubs) {
-      try {
-        const products = await getProductsByCategorySlug(slug);
-        categoryItem.attributes = categoryItem.attributes || {};
-        categoryItem.attributes.produtos = products;
-      } catch (pErr) {
-        console.warn('getCategoryBySlug: failed to fetch products by subcategories:', pErr.message);
-      }
-    }
-
-    return { data: normalized };
+  return { data: normalized };
   } catch (err) {
-    console.error('getCategoryBySlug failed:', err.message);
-    return { data: [] };
-  }
-}
-
-// Busca produtos pela slug da categoria via endpoint de produtos (filtrando pela relação)
-export async function getProductsByCategorySlug(slug) {
-  try {
-    // Primeiro buscamos subcategorias via o endpoint dedicado para obter slugs/ids
-    const subResp = await fetchAPI(`/api/subcategorias?filters[categoria][slug][$eq]=${encodeURIComponent(slug)}&populate=*`);
-    const subs = subResp.data || [];
-    if (subs.length === 0) return [];
-
-    // Os itens podem vir planos (campos no root) ou com attributes — cobrimos ambos
-    const subSlugs = subs.map(s => s.attributes?.slug || s.slug).filter(Boolean);
-    const subIds = subs.map(s => s.id).filter(Boolean);
-
-    // Primeiro tente filtrar pelos slugs usando o nome do campo de relação observado ('subcategoria' singular)
-    if (subSlugs.length > 0) {
-      try {
-        const q = `/api/produtos?filters[subcategoria][slug][$in]=${encodeURIComponent(subSlugs.join(','))}&populate=imagem_principal`;
-        const resp = await fetchAPI(q);
-        return normalizeDataArray(resp);
-      } catch (err) {
-        console.warn('filter by subcategoria slug failed:', err.message);
-      }
-    }
-
-    // Em último caso tente filtrar por id usando o mesmo campo de relação
-    if (subIds.length > 0) {
-      try {
-        const q = `/api/produtos?filters[subcategoria][id][$in]=${encodeURIComponent(subIds.join(','))}&populate=imagem_principal`;
-        const resp = await fetchAPI(q);
-        return normalizeDataArray(resp);
-      } catch (err) {
-        console.warn('filter by subcategoria id failed:', err.message);
-      }
-    }
-
-    // If remote filtering failed (ValidationError), fallback to fetching all products and filtering locally
+    // Se a requisição com populate falhar (ex: ValidationError do Strapi), fazemos fallback sem populate
+    console.warn('getCategoryBySlug: populate request failed, falling back to no-populate:', err.message);
     try {
-      const allResp = await fetchAPI('/api/produtos?pagination[limit]=1000&populate=subcategoria,imagem_principal');
-      const all = (allResp.data || []).map(item => {
+      const response = await fetchAPI(`/api/categorias?filters[slug][$eq]=${slug}`);
+      const data = response.data || [];
+      if (data.length === 0) return { data: [] };
+      const normalized = data.map((item) => {
         if (item.attributes) return item;
         const { id, ...rest } = item;
         return { id, attributes: rest };
       });
 
-      // Filter locally by comparing subcategoria slug or id
-      const filtered = all.filter(prod => {
-        const prodAttrs = prod.attributes || prod;
-        const sc = prodAttrs.subcategoria || prod.subcategoria;
-        const prodSlug = sc?.slug || sc?.attributes?.slug || null;
-        const prodId = sc?.id || null;
-        if (prodSlug && subSlugs.includes(prodSlug)) return true;
-        if (prodId && subIds.includes(prodId)) return true;
-        return false;
-      });
-
-      return filtered;
-    } catch (e) {
-      console.warn('local filter fallback failed:', e.message);
-      return [];
+      return { data: normalized };
+    } catch (err2) {
+      console.error('getCategoryBySlug fallback failed:', err2.message);
+      return { data: [] };
     }
-  } catch (err) {
-    console.warn('getProductsByCategorySlug failed:', err.message);
-    return [];
   }
 }
 
@@ -208,7 +160,7 @@ export async function getBanners() {
 
 // Normaliza respostas do Strapi: se os itens já vierem com `attributes`, deixa como está.
 // Se os itens vierem 'flat' (campos no root), converte para o formato { id, attributes: { ...fields } }
-function normalizeDataArray(response) {
+export function normalizeDataArray(response) {
   if (!response) return [];
   const data = response.data || [];
   // se items já têm attributes, retorna como está

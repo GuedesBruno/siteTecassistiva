@@ -12,16 +12,16 @@ export default async function Header() {
       <div className="container mx-auto px-4 py-4 flex items-center justify-between overflow-visible" style={{ minHeight: 80 }}>
         <div className="flex items-center gap-6">
           <Link href="/" className="flex items-center">
-            <Image src="/logo-tecassistiva.svg" alt="Tecassistiva" width={140} height={48} className="w-36 h-auto" />
+            <Image src="/logo-tecassistiva.svg" alt="Tecassistiva" width={140} height={48} className="w-36 h-auto"  style={{ height: 'auto' }}/>
           </Link>
         </div>
 
         <nav className="hidden lg:flex items-center space-x-8">
           <Link href="/tecassistiva" className="text-white hover:text-tec-blue-light transition font-semibold">A Tecassistiva</Link>
           <div className="relative group">
-            <button className="text-white hover:text-tec-blue-light transition font-semibold" aria-haspopup="true" aria-expanded="false">
+            <Link href="/produtos/categorias" className="text-white hover:text-tec-blue-light transition font-semibold">
               Produtos
-            </button>
+            </Link>
             <div className="absolute left-1/2 transform -translate-x-1/2 top-full mt-0 w-72 bg-white shadow-lg hidden group-hover:block z-[120] border">
               <div className="py-2">
                 {Array.isArray(categories) && categories.map(category => {
