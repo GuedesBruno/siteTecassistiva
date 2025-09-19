@@ -1,0 +1,338 @@
+{
+  "products": [
+    {
+      "id": 22,
+      "documentId": "dq004fumg25ta4nnrc4uk1of",
+      "nome": "Ruby 10",
+      "slug": "ruby-10",
+      "descricao_curta": "Lupa Eletrônica com Voz",
+      "imagem_principal": {
+        "id": 25,
+        "documentId": "mpzkfc1pu3jdgdewecu16mei",
+        "name": "ruby10.jpg",
+        "alternativeText": null,
+        "caption": null,
+        "width": 800,
+        "height": 800,
+        "formats": {
+          "small": {
+            "ext": ".jpg",
+            "url": "https://light-dog-088c5ec318.media.strapiapp.com/small_ruby10_837233f286.jpg",
+            "hash": "small_ruby10_837233f286",
+            "mime": "image/jpeg",
+            "name": "small_ruby10.jpg",
+            "path": null,
+            "size": 35.39,
+            "width": 500,
+            "height": 500,
+            "sizeInBytes": 35391
+          },
+          "medium": {
+            "ext": ".jpg",
+            "url": "https://light-dog-088c5ec318.media.strapiapp.com/medium_ruby10_837233f286.jpg",
+            "hash": "medium_ruby10_837233f286",
+            "mime": "image/jpeg",
+            "name": "medium_ruby10.jpg",
+            "path": null,
+            "size": 60.66,
+            "width": 750,
+            "height": 750,
+            "sizeInBytes": 60661
+          },
+          "thumbnail": {
+            "ext": ".jpg",
+            "url": "https://light-dog-088c5ec318.media.strapiapp.com/thumbnail_ruby10_837233f286.jpg",
+            "hash": "thumbnail_ruby10_837233f286",
+            "mime": "image/jpeg",
+            "name": "thumbnail_ruby10.jpg",
+            "path": null,
+            "size": 6.28,
+            "width": 156,
+            "height": 156,
+            "sizeInBytes": 6276
+          }
+        },
+        "hash": "ruby10_837233f286",
+        "ext": ".jpg",
+        "mime": "image/jpeg",
+        "size": 65.94,
+        "url": "https://light-dog-088c5ec318.media.strapiapp.com/ruby10_837233f286.jpg",
+        "previewUrl": null,
+        "provider": "strapi-provider-upload-strapi-cloud",
+        "provider_metadata": null,
+        "createdAt": "2025-09-11T20:20:44.725Z",
+        "updatedAt": "2025-09-11T20:20:44.725Z",
+        "publishedAt": "2025-09-11T20:20:44.726Z"
+      },
+      "subcategoria": {
+        "id": 9,
+        "documentId": "awz4rxljdn2633ex5im45y65",
+        "nome": "Lupa Eletrônica",
+        "slug": "lupa-eletronica",
+        "createdAt": "2025-09-12T17:36:08.480Z",
+        "updatedAt": "2025-09-12T17:50:35.612Z",
+        "publishedAt": "2025-09-12T17:50:35.679Z"
+      }
+    },
+    {
+      "id": 24,
+      "documentId": "m7tffhlktdylu17o83tt9543",
+      "nome": "Brinca Braille",
+      "slug": "brinca-braille",
+      "descricao_curta": "Alfabetizador Braille",
+      "imagem_principal": {
+        "id": 20,
+        "documentId": "gr44m6hpv4lf2msh273wlw16",
+        "name": "BANNER-brinca-braille_Prancheta-1.jpg",
+        "alternativeText": null,
+        "caption": null,
+        "width": 5692,
+        "height": 2772,
+        "formats": {
+          "large": {
+            "ext": ".jpg",
+            "url": "https://light-dog-088c5ec318.media.strapiapp.com/large_BANNER_brinca_braille_Prancheta_1_91761c4beb.jpg",
+            "hash": "large_BANNER_brinca_braille_Prancheta_1_91761c4beb",
+            "mime": "image/jpeg",
+            "name": "large_BANNER-brinca-braille_Prancheta-1.jpg",
+            "path": null,
+            "size": 55.74,
+            "width": 1000,
+            "height": 487,
+            "sizeInBytes": 55744
+          },
+          "small": {
+            "ext": ".jpg",
+            "url": "https://light-dog-088c5ec318.media.strapiapp.com/small_BANNER_brinca_braille_Prancheta_1_91761c4beb.jpg",
+            "hash": "small_BANNER_brinca_braille_Prancheta_1_91761c4beb",
+            "mime": "image/jpeg",
+            "name": "small_BANNER-brinca-braille_Prancheta-1.jpg",
+            "path": null,
+            "size": 19.8,
+            "width": 500,
+            "height": 243,
+            "sizeInBytes": 19796
+          },
+          "medium": {
+            "ext": ".jpg",
+            "url": "https://light-dog-088c5ec318.media.strapiapp.com/medium_BANNER_brinca_braille_Prancheta_1_91761c4beb.jpg",
+            "hash": "medium_BANNER_brinca_braille_Prancheta_1_91761c4beb",
+            "mime": "image/jpeg",
+            "name": "medium_BANNER-brinca-braille_Prancheta-1.jpg",
+            "path": null,
+            "size": 36.48,
+            "width": 750,
+            "height": 365,
+            "sizeInBytes": 36475
+          },
+          "thumbnail": {
+            "ext": ".jpg",
+            "url": "https://light-dog-088c5ec318.media.strapiapp.com/thumbnail_BANNER_brinca_braille_Prancheta_1_91761c4beb.jpg",
+            "hash": "thumbnail_BANNER_brinca_braille_Prancheta_1_91761c4beb",
+            "mime": "image/jpeg",
+            "name": "thumbnail_BANNER-brinca-braille_Prancheta-1.jpg",
+            "path": null,
+            "size": 6.76,
+            "width": 245,
+            "height": 119,
+            "sizeInBytes": 6762
+          }
+        },
+        "hash": "BANNER_brinca_braille_Prancheta_1_91761c4beb",
+        "ext": ".jpg",
+        "mime": "image/jpeg",
+        "size": 799.39,
+        "url": "https://light-dog-088c5ec318.media.strapiapp.com/BANNER_brinca_braille_Prancheta_1_91761c4beb.jpg",
+        "previewUrl": null,
+        "provider": "strapi-provider-upload-strapi-cloud",
+        "provider_metadata": null,
+        "createdAt": "2025-09-11T18:21:59.656Z",
+        "updatedAt": "2025-09-11T18:21:59.656Z",
+        "publishedAt": "2025-09-11T18:21:59.657Z"
+      },
+      "subcategoria": {
+        "id": 16,
+        "documentId": "qjrjjdqoleszzfpot8du7jko",
+        "nome": "Alfabetizador Braille",
+        "slug": "alfabetizador-braille",
+        "createdAt": "2025-09-17T18:39:57.867Z",
+        "updatedAt": "2025-09-17T18:39:57.867Z",
+        "publishedAt": "2025-09-17T18:39:57.938Z"
+      }
+    },
+    {
+      "id": 11,
+      "documentId": "ums1m6cavhh92564um5j6p8u",
+      "nome": "Multiplano",
+      "slug": "multiplano",
+      "descricao_curta": "Multiplano",
+      "imagem_principal": {
+        "id": 1,
+        "documentId": "ldpvssjlqc0h4ixp10egdqxz",
+        "name": "multiplano_braille_embalagem.jpg",
+        "alternativeText": null,
+        "caption": null,
+        "width": 703,
+        "height": 664,
+        "formats": {
+          "small": {
+            "ext": ".jpg",
+            "url": "https://light-dog-088c5ec318.media.strapiapp.com/small_multiplano_braille_embalagem_6b4a8c0d9d.jpg",
+            "hash": "small_multiplano_braille_embalagem_6b4a8c0d9d",
+            "mime": "image/jpeg",
+            "name": "small_multiplano_braille_embalagem.jpg",
+            "path": null,
+            "size": 41.46,
+            "width": 500,
+            "height": 472,
+            "sizeInBytes": 41457
+          },
+          "thumbnail": {
+            "ext": ".jpg",
+            "url": "https://light-dog-088c5ec318.media.strapiapp.com/thumbnail_multiplano_braille_embalagem_6b4a8c0d9d.jpg",
+            "hash": "thumbnail_multiplano_braille_embalagem_6b4a8c0d9d",
+            "mime": "image/jpeg",
+            "name": "thumbnail_multiplano_braille_embalagem.jpg",
+            "path": null,
+            "size": 6.84,
+            "width": 165,
+            "height": 156,
+            "sizeInBytes": 6842
+          }
+        },
+        "hash": "multiplano_braille_embalagem_6b4a8c0d9d",
+        "ext": ".jpg",
+        "mime": "image/jpeg",
+        "size": 70.38,
+        "url": "https://light-dog-088c5ec318.media.strapiapp.com/multiplano_braille_embalagem_6b4a8c0d9d.jpg",
+        "previewUrl": null,
+        "provider": "strapi-provider-upload-strapi-cloud",
+        "provider_metadata": null,
+        "createdAt": "2025-09-08T20:33:43.784Z",
+        "updatedAt": "2025-09-08T20:33:43.784Z",
+        "publishedAt": "2025-09-08T20:33:43.784Z"
+      },
+      "subcategoria": {
+        "id": 11,
+        "documentId": "j3uxphmu6flt41vgaigyhnmf",
+        "nome": "Matemática Concreta",
+        "slug": "matematica-concreta",
+        "createdAt": "2025-09-12T19:11:56.569Z",
+        "updatedAt": "2025-09-12T19:11:56.569Z",
+        "publishedAt": "2025-09-12T19:11:56.666Z"
+      }
+    },
+    {
+      "id": 16,
+      "documentId": "vh4heic8tll1a7smn2nk50qn",
+      "nome": "Focus 40 Blue",
+      "slug": "focus-40-blue",
+      "descricao_curta": "Linha Braille de 40 Células",
+      "imagem_principal": {
+        "id": 12,
+        "documentId": "ns4vwk0zdurzukyutdko7fr8",
+        "name": "Focus_40_Blue_5th_Gen_-_finger_on_raised_cell_480x480.jpg",
+        "alternativeText": null,
+        "caption": null,
+        "width": 480,
+        "height": 480,
+        "formats": {
+          "thumbnail": {
+            "ext": ".jpg",
+            "url": "https://light-dog-088c5ec318.media.strapiapp.com/thumbnail_Focus_40_Blue_5th_Gen_finger_on_raised_cell_480x480_79a2cca8ce.jpg",
+            "hash": "thumbnail_Focus_40_Blue_5th_Gen_finger_on_raised_cell_480x480_79a2cca8ce",
+            "mime": "image/jpeg",
+            "name": "thumbnail_Focus_40_Blue_5th_Gen_-_finger_on_raised_cell_480x480.jpg",
+            "path": null,
+            "size": 4.36,
+            "width": 156,
+            "height": 156,
+            "sizeInBytes": 4357
+          }
+        },
+        "hash": "Focus_40_Blue_5th_Gen_finger_on_raised_cell_480x480_79a2cca8ce",
+        "ext": ".jpg",
+        "mime": "image/jpeg",
+        "size": 20.07,
+        "url": "https://light-dog-088c5ec318.media.strapiapp.com/Focus_40_Blue_5th_Gen_finger_on_raised_cell_480x480_79a2cca8ce.jpg",
+        "previewUrl": null,
+        "provider": "strapi-provider-upload-strapi-cloud",
+        "provider_metadata": null,
+        "createdAt": "2025-09-11T18:18:40.649Z",
+        "updatedAt": "2025-09-11T18:18:40.649Z",
+        "publishedAt": "2025-09-11T18:18:40.650Z"
+      },
+      "subcategoria": {
+        "id": 8,
+        "documentId": "ppnimvhme4ho9nc825ij8dqu",
+        "nome": "Linha Braille",
+        "slug": "linha-braille",
+        "createdAt": "2025-09-12T17:35:55.770Z",
+        "updatedAt": "2025-09-12T17:50:27.504Z",
+        "publishedAt": "2025-09-12T17:50:27.570Z"
+      }
+    },
+    {
+      "id": 15,
+      "documentId": "viw9989g96c2kb97775p3gds",
+      "nome": "Everest DV5",
+      "slug": "everest-dv-5",
+      "descricao_curta": "Impressora Braille de Folha Solta",
+      "imagem_principal": {
+        "id": 7,
+        "documentId": "hp8ca7o29srlabo0g7nhvdgu",
+        "name": "fotos-impressora-index-everest.jpg",
+        "alternativeText": null,
+        "caption": null,
+        "width": 600,
+        "height": 600,
+        "formats": {
+          "small": {
+            "ext": ".jpg",
+            "url": "https://light-dog-088c5ec318.media.strapiapp.com/small_fotos_impressora_index_everest_853e47a3b1.jpg",
+            "hash": "small_fotos_impressora_index_everest_853e47a3b1",
+            "mime": "image/jpeg",
+            "name": "small_fotos-impressora-index-everest.jpg",
+            "path": null,
+            "size": 18.74,
+            "width": 500,
+            "height": 500,
+            "sizeInBytes": 18740
+          },
+          "thumbnail": {
+            "ext": ".jpg",
+            "url": "https://light-dog-088c5ec318.media.strapiapp.com/thumbnail_fotos_impressora_index_everest_853e47a3b1.jpg",
+            "hash": "thumbnail_fotos_impressora_index_everest_853e47a3b1",
+            "mime": "image/jpeg",
+            "name": "thumbnail_fotos-impressora-index-everest.jpg",
+            "path": null,
+            "size": 3.33,
+            "width": 156,
+            "height": 156,
+            "sizeInBytes": 3332
+          }
+        },
+        "hash": "fotos_impressora_index_everest_853e47a3b1",
+        "ext": ".jpg",
+        "mime": "image/jpeg",
+        "size": 24.23,
+        "url": "https://light-dog-088c5ec318.media.strapiapp.com/fotos_impressora_index_everest_853e47a3b1.jpg",
+        "previewUrl": null,
+        "provider": "strapi-provider-upload-strapi-cloud",
+        "provider_metadata": null,
+        "createdAt": "2025-09-11T18:15:06.251Z",
+        "updatedAt": "2025-09-11T18:15:06.251Z",
+        "publishedAt": "2025-09-11T18:15:06.252Z"
+      },
+      "subcategoria": {
+        "id": 7,
+        "documentId": "nw3467zhn7ad3qk1oiuz1bfc",
+        "nome": "Impressora Braille",
+        "slug": "impressora-braille",
+        "createdAt": "2025-09-12T17:35:42.946Z",
+        "updatedAt": "2025-09-12T17:50:20.342Z",
+        "publishedAt": "2025-09-12T17:50:20.480Z"
+      }
+    }
+  ]
+}

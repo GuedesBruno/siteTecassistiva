@@ -11,7 +11,7 @@ export default async function Home() {
   ]);
 
   return (
-    <main>
+    <div>
       <BannerSlider banners={banners || []} />
       {/* Informational block matching the attached screenshot */}
       <section className="bg-[#007bff] text-white py-12">
@@ -30,6 +30,6 @@ export default async function Home() {
         </div>
       </section>
       <FeaturedProductsSlider products={featuredProducts || []} />
-    </main>
+    </div>
   );
 }

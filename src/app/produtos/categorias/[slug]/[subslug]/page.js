@@ -61,10 +61,10 @@ export default async function SubcategoryPage({ params }) {
             {/* Passa o slug da categoria principal para o menu */}
             <CategoryMenu categories={allCategories} activeCategorySlug={slug} activeSubcategorySlug={subslug} />
         </aside>
-        <main className="w-full md:w-3/4 lg:w-4/5 px-4 md:px-8 lg:px-16">
+        <div className="w-full md:w-3/4 lg:w-4/5 px-4 md:px-8 lg:px-16">
             {/* O ProductDisplay agora recebe o nome da subcategoria e seus produtos */}
             <ProductDisplay categoryName={subcategoryName} products={productsForSubcategory} />
-        </main>
+        </div>
     </div>
   );
 }

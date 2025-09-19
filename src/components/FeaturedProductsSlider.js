@@ -13,7 +13,11 @@ export default function FeaturedProductsSlider({ products }) {
   }
   return (
     <div className="py-8 px-8 md:px-16 lg:px-32 relative">
-      <h2 className="text-2xl font-bold text-center mb-6">Produtos em Destaque</h2>
+      <h2 className="text-2xl font-bold text-center mb-6">Nossos Produtos</h2>
+      <p className="text-center mb-6">
+        Veja abaixo nossos destaques, a TECA possui mais de 50 produtos, as melhores tecnologias para acessibilidade 
+        no mercado nacional e internacional!
+      </p>
       <Swiper
         modules={[Navigation, Autoplay]} // Adiciona Autoplay
         spaceBetween={30}

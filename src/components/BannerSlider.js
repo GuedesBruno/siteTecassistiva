@@ -54,7 +54,7 @@ export default function BannerSlider({ banners }) {
                   <div className="max-w-lg lg:max-w-xs text-center lg:text-left">
                     <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-4 text-[#002554]">{titulo}</h1>
                     <p className="text-lg md:text-xl mb-6 text-[#002554]">{subtitulo}</p>
-                    <Link href={link_do_botao || '#'} className="inline-block bg-[#ff8c00] hover:bg-[#ff7a00] text-white font-semibold py-3 px-6 text-lg transition-colors">
+                    <Link href={link_do_botao || '#'} className="inline-block bg-[#002554] hover:bg-[#003377] text-white font-bold py-3 px-6 rounded-lg shadow-md transition-colors duration-300">
                       {texto_do_botao}
                     </Link>
                   </div>

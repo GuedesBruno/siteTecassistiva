@@ -1,64 +1,55 @@
-// ✅ CORRIGIDO: Importa as funções que realmente existem no seu api.js
-import { getAllProducts, getProductBySlug, getBanners } from "@/lib/api";
-import ProductViewClient from "@/components/ProductViewClient";
+import { getAllProducts, getProductBySlug } from '@/lib/api';
+import ProductViewClient from '@/components/ProductViewClient';
+import { notFound } from 'next/navigation';
 
-// ✅ CORRIGIDO: Usa getFeaturedProducts para buscar os slugs
+// Generate static paths for all products
 export async function generateStaticParams() {
   try {
-    const products = await getAllProducts();
-
-    if (!products || products.length === 0) return [];
-
-    const slugs = new Set(products.map(p => (p.attributes?.slug || p.slug)).filter(Boolean));
-
-    // Também varremos banners (ou outros conteúdos) que podem ter links para produtos
-    try {
-      const banners = await getBanners();
-      if (Array.isArray(banners)) {
-        banners.forEach(b => {
-          const link = (b.attributes && b.attributes.link_do_botao) || b.link_do_botao;
-          if (link && typeof link === 'string') {
-            try {
-              const u = new URL(link, 'http://example');
-              // procura padrões /produtos/<slug>
-              const m = u.pathname.match(/\/produtos\/(.+?)\/?$/);
-              if (m && m[1]) {
-                slugs.add(decodeURIComponent(m[1]));
-              }
-            } catch (e) {
-              // se a URL for um slug relativo sem host
-              const rel = link.replace(/^https?:\/\//, '').split('/').pop();
-              if (rel) slugs.add(rel);
-            }
-          }
-        });
-      }
-    } catch (e) {
-      console.warn('generateStaticParams: getBanners failed:', e.message);
-    }
-
-    // Adiciona variações dos slugs (sem hífens, com underscores)
-    const final = new Set(slugs);
-    for (const s of Array.from(slugs)) {
-      const condensed = s.replace(/-/g, '');
-      if (condensed && condensed !== s) final.add(condensed);
-      const underscored = s.replace(/-/g, '_');
-      if (underscored && underscored !== s) final.add(underscored);
-    }
-
-    return Array.from(final).map(s => ({ slug: s }));
-  } catch (err) {
-    console.error('generateStaticParams (produtos) failed:', err.message);
+    const products = await getAllProducts(); // This gets only slugs
+    return products
+      .map((product) => ({
+        // Acessa o slug de forma segura, esteja ele aninhado ou não.
+        slug: product.attributes?.slug || product.slug,
+      }))
+      .filter((p) => p.slug); // Garante que apenas slugs válidos sejam retornados.
+  } catch (error) {
+    console.error("Failed to generate static params for products:", error);
     return [];
   }
 }
 
-export default async function ProdutoSlugPage({ params }) {
-  const product = await getProductBySlug(params.slug);
+// ajuda a construir o breadcrumb com base na categoria e subcategoria do produto
+function buildBreadcrumbs(product) {
+    const attrs = product.attributes || product;
+    const { categoria, subcategoria } = attrs;
+    
+    const crumbs = [
+        { name: 'Página Inicial', path: '/' },
+        { name: 'Produtos', path: '/produtos/categorias' }
+    ];
+
+    if (categoria?.data) {
+        const catAttrs = categoria.data.attributes;
+        crumbs.push({ name: catAttrs.nome, path: `/produtos/categorias/${catAttrs.slug}` });
+    }
+
+    if (subcategoria?.data && categoria?.data) {
+        const subAttrs = subcategoria.data.attributes;
+        crumbs.push({ name: subAttrs.nome, path: `/produtos/categorias/${categoria.data.attributes.slug}/${subAttrs.slug}` });
+    }
+
+    return crumbs;
+}
+
+export default async function ProductPage({ params }) {
+  const { slug } = params;
+  const product = await getProductBySlug(slug);
 
   if (!product) {
-    return <div>Produto não encontrado.</div>;
+    notFound();
   }
 
-  return <ProductViewClient product={product} />;
+  const breadcrumbs = buildBreadcrumbs(product);
+
+  return <ProductViewClient product={product} breadcrumbs={breadcrumbs} />;
 }

@@ -23,9 +23,9 @@ export default async function AllProductsPage() {
                 {/* Renderiza o menu sem nenhuma categoria ativa */}
                 <CategoryMenu categories={allCategories} />
             </aside>
-            <main className="w-full md:w-3/4 lg:w-4/5 px-4 md:px-8 lg:px-16">
+            <div className="w-full md:w-3/4 lg:w-4/5 px-4 md:px-8 lg:px-16">
                 <ProductDisplay categoryName={pageTitle} products={allProducts} />
-            </main>
+            </div>
         </div>
     );
 }
