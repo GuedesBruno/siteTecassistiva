@@ -35,8 +35,8 @@ export default function Header({ categories = [] }) {
             <Image
               src={isScrolled ? "/icon-tecassistiva.svg" : "/logo-tecassistiva.svg"}
               alt="Tecassistiva"
-              width={isScrolled ? 40 : 140}
-              height={isScrolled ? 40 : 48}
+              width={isScrolled ? 140 : 140}
+              height={isScrolled ? 40 : 40}
               className="transition-all duration-300 ease-in-out h-auto"
             />
           </Link>
