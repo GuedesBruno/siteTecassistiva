@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { getStrapiMediaUrl } from '@/lib/api';
+import VideoModal from './VideoModal.js';
+import { renderRichText } from '@/lib/utils';
 
 /**
  * Renders an interactive tab section for product details.
@@ -11,10 +13,11 @@ import { getStrapiMediaUrl } from '@/lib/api';
  */
 export default function ProductTabs({ product }) {
   const [activeTab, setActiveTab] = useState('visaoGeral');
+  const [selectedVideo, setSelectedVideo] = useState(null);
   const attrs = product.attributes || product;
 
   const {
-    descricao_longa,
+    visao_geral,
     galeria_de_imagens,
     videos,
     caracteristicas_funcionais,
@@ -23,7 +26,18 @@ export default function ProductTabs({ product }) {
     imagem_principal,
   } = attrs;
 
-  // Lógica corrigida para lidar com dados de mídia planos ou aninhados
+  // Parseia as URLs de vídeo do Vimeo para extrair os IDs e hashes
+  const videoIds = videos
+    ? videos.split(',').map(url => {
+        try {
+          const u = new URL(url.trim());
+          // Retorna o caminho, ex: "1027687024/1a5058b7f8"
+          return u.pathname.substring(1);
+        } catch {
+          return null;
+        }
+      }).filter(Boolean)
+    : [];
   const getImgAttrs = (img) => img.attributes || img;
   const galleryImages = [
     ...(imagem_principal ? [imagem_principal] : []),
@@ -31,31 +45,6 @@ export default function ProductTabs({ product }) {
   ].filter(Boolean);
 
   const downloadFiles = documentos ? (Array.isArray(documentos) ? documentos : [documentos]) : [];
-
-  // Helper para converter o rich text do Strapi em uma string HTML
-  const renderRichText = (richTextData) => {
-    if (!richTextData) return '';
-    if (typeof richTextData === 'string') return richTextData;
-    if (!Array.isArray(richTextData)) return '';
-    return richTextData.map((block) => {
-      if (block.type === 'paragraph' && Array.isArray(block.children)) {
-        const content = block.children.map((child) => {
-          if (child.type !== 'text') return '';
-          let text = child.text || '';
-          if (child.bold) text = `<strong>${text}</strong>`;
-          if (child.italic) text = `<em>${text}</em>`;
-          return text;
-        }).join('');
-        return `<p>${content}</p>`;
-      }
-      if (block.type === 'list' && Array.isArray(block.children)) {
-        const listTag = block.format === 'ordered' ? 'ol' : 'ul';
-        const items = block.children.map((item) => `<li>${item.children.map((child) => child.text || '').join('')}</li>`).join('');
-        return `<${listTag}>${items}</${listTag}>`;
-      }
-      return '';
-    }).join('');
-  };
 
   const TabButton = ({ id, label, disabled = false }) => (
     <button
@@ -74,7 +63,7 @@ export default function ProductTabs({ product }) {
   const renderContent = () => {
     switch (activeTab) {
       case 'visaoGeral':
-        return <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: renderRichText(descricao_longa) || 'Nenhuma visão geral disponível.' }} />;
+        return <div className="prose max-w-none whitespace-pre-line" dangerouslySetInnerHTML={{ __html: visao_geral || 'Nenhuma visão geral disponível.' }} />;
       case 'fotos':
         return (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -95,7 +84,28 @@ export default function ProductTabs({ product }) {
           </div>
         );
       case 'videos':
-        return <p>Nenhum vídeo disponível no momento.</p>;
+        return (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {videoIds.map((vimeoId) => (
+              <button 
+                key={vimeoId}
+                onClick={() => setSelectedVideo(vimeoId)}
+                className="relative aspect-video bg-black rounded-lg overflow-hidden group cursor-pointer"
+              >
+                <img 
+                  src={`https://vumbnail.com/${vimeoId}_large.jpg`} 
+                  alt={`Thumbnail do vídeo ${vimeoId}`}
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center transition-opacity group-hover:bg-opacity-50">
+                  <svg className="w-16 h-16 text-white opacity-80 group-hover:opacity-100 transition-opacity" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+                  </svg>
+                </div>
+              </button>
+            ))}
+          </div>
+        );
       case 'caracteristicasFuncionais':
         return <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: renderRichText(caracteristicas_funcionais) || 'Nenhuma característica funcional disponível.' }} />;
       case 'caracteristicasTecnicas':
@@ -130,9 +140,9 @@ export default function ProductTabs({ product }) {
     <div className="w-full">
       <div className="border-b border-gray-200">
         <nav className="-mb-px flex space-x-2 md:space-x-4 overflow-x-auto" aria-label="Tabs">
-          <TabButton id="visaoGeral" label="Visão Geral" disabled={!descricao_longa} />
+          <TabButton id="visaoGeral" label="Visão Geral" disabled={!visao_geral} />
           <TabButton id="fotos" label="Fotos" disabled={galleryImages.length === 0} />
-          <TabButton id="videos" label="Vídeos" disabled={!videos || videos.length === 0} />
+          <TabButton id="videos" label="Vídeos" disabled={videoIds.length === 0} />
           <TabButton id="caracteristicasFuncionais" label="Características Funcionais" disabled={!caracteristicas_funcionais} />
           <TabButton id="caracteristicasTecnicas" label="Características Técnicas" disabled={!caracteristicas_tecnicas} />
           <TabButton id="downloads" label="Downloads" disabled={downloadFiles.length === 0} />
@@ -141,6 +151,9 @@ export default function ProductTabs({ product }) {
       <div className="py-8">
         {renderContent()}
       </div>
+      {selectedVideo && (
+        <VideoModal vimeoId={selectedVideo} onClose={() => setSelectedVideo(null)} />
+      )}
     </div>
   );
 }

@@ -1,10 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getStrapiMediaUrl } from '@/lib/api';
 import ProductTabs from './ProductTabs';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import { renderRichText } from '@/lib/utils';
 
 /**
  * Renderiza a visualização detalhada de um produto, incluindo galeria de imagens,
@@ -14,19 +19,17 @@ import ProductTabs from './ProductTabs';
  * @param {Array<object>} [props.breadcrumbs] - Array de links de breadcrumb.
  */
 export default function ProductViewClient({ product, breadcrumbs = [] }) {
-  const attrs = product.attributes || product;
-  const { nome, descricao_curta, imagem_principal, galeria_de_imagens } = attrs;
+  const navigationPrevRef = useRef(null);
+  const navigationNextRef = useRef(null);
 
-  // Lógica CORRIGIDA para lidar com a estrutura de dados da API
+  const attrs = product.attributes || product;
+  const { nome, descricao_longa, imagem_principal, galeria_de_imagens } = attrs;
+
+  // Lógica para combinar imagem principal e galeria para o carrossel
   const allImages = [
     ...(imagem_principal ? [imagem_principal] : []),
     ...(Array.isArray(galeria_de_imagens) ? galeria_de_imagens : []),
   ].filter(Boolean);
-
-  const [selectedImage, setSelectedImage] = useState(allImages[0] || null);
-
-  // Função para acessar atributos de forma segura
-  const getImgAttrs = (img) => img.attributes || img;
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -43,47 +46,59 @@ export default function ProductViewClient({ product, breadcrumbs = [] }) {
         <span className="font-semibold text-gray-700">{nome}</span>
       </nav>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-        <div>
-          <div className="relative w-full aspect-square bg-gray-100 rounded-lg overflow-hidden border">
-            {selectedImage ? (
-              <Image
-                src={getStrapiMediaUrl(getImgAttrs(selectedImage).url)}
-                alt={getImgAttrs(selectedImage).alternativeText || nome}
-                fill
-                className="object-contain"
-                priority
-              />
-            ) : (
-              <div className="flex items-center justify-center h-full text-gray-500">Sem imagem</div>
-            )}
-          </div>
-          <div className="flex space-x-3 mt-4">
-            {allImages.map((img) => {
-              const imgAttrs = getImgAttrs(img);
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 mb-12">
+        <div className="relative lg:col-span-2">
+          <Swiper
+            modules={[Navigation]}
+            navigation={{
+              prevEl: navigationPrevRef.current,
+              nextEl: navigationNextRef.current,
+            }}
+            onBeforeInit={(swiper) => {
+              swiper.params.navigation.prevEl = navigationPrevRef.current;
+              swiper.params.navigation.nextEl = navigationNextRef.current;
+            }}
+            loop={true}
+            className="w-full aspect-square rounded-lg border bg-gray-100"
+          >
+            {allImages.length > 0 ? allImages.map((img) => {
+              const imgAttrs = img.attributes || img;
               return (
-                <button
-                  key={img.id}
-                  onClick={() => setSelectedImage(img)}
-                  className={`w-20 h-20 relative rounded-md overflow-hidden border-2 transition-all ${
-                    selectedImage?.id === img.id ? 'border-tec-blue' : 'border-transparent'
-                  }`}
-                >
+                <SwiperSlide key={img.id}>
                   <Image
                     src={getStrapiMediaUrl(imgAttrs.url)}
-                    alt={`Thumbnail de ${nome}`}
+                    alt={imgAttrs.alternativeText || nome}
                     fill
-                    className="object-cover"
+                    className="object-contain"
+                    priority={img.id === imagem_principal?.id}
                   />
-                </button>
+                </SwiperSlide>
               );
-            })}
-          </div>
+            }) : (
+              <SwiperSlide>
+                <div className="flex items-center justify-center h-full text-gray-500">Sem imagem</div>
+              </SwiperSlide>
+            )}
+          </Swiper>
+          {allImages.length > 1 && (
+            <>
+              <button ref={navigationPrevRef} className="absolute top-1/2 left-2 -translate-y-1/2 z-10 p-2 bg-black/30 rounded-full text-white hover:bg-black/50 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+              </button>
+              <button ref={navigationNextRef} className="absolute top-1/2 right-2 -translate-y-1/2 z-10 p-2 bg-black/30 rounded-full text-white hover:bg-black/50 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+              </button>
+            </>
+          )}
         </div>
 
-        <div className="flex flex-col justify-center">
+        <div className="lg:col-span-3 flex flex-col">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">{nome}</h1>
-          <p className="text-lg text-gray-600 leading-relaxed">{descricao_curta}</p>
+          <div 
+            className="prose max-w-none text-lg text-gray-600 leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: renderRichText(descricao_longa) }}
+          >
+          </div>
         </div>
       </div>
 
