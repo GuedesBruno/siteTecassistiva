@@ -75,7 +75,7 @@
       }
     },
     {
-      "id": 24,
+      "id": 29,
       "documentId": "m7tffhlktdylu17o83tt9543",
       "nome": "Brinca Braille",
       "slug": "brinca-braille",
@@ -147,7 +147,7 @@
         "provider": "strapi-provider-upload-strapi-cloud",
         "provider_metadata": null,
         "createdAt": "2025-09-11T18:21:59.656Z",
-        "updatedAt": "2025-09-11T18:21:59.656Z",
+        "updatedAt": "2025-09-19T15:24:27.358Z",
         "publishedAt": "2025-09-11T18:21:59.657Z"
       },
       "subcategoria": {
@@ -273,7 +273,7 @@
       }
     },
     {
-      "id": 15,
+      "id": 27,
       "documentId": "viw9989g96c2kb97775p3gds",
       "nome": "Everest DV5",
       "slug": "everest-dv-5",

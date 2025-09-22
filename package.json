@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@strapi/blocks-react-renderer": "^1.0.2",
+    "husky": "^9.1.7",
     "next": "14.2.32",
     "qs": "^6.14.0",
     "react": "^18",

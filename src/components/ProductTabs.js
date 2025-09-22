@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { getStrapiMediaUrl } from '@/lib/api';
 import VideoModal from './VideoModal.js';
-import { renderRichText } from '@/lib/utils';
+import RichTextRenderer from './RichTextRenderer';
 
 /**
  * Renders an interactive tab section for product details.
@@ -63,7 +63,7 @@ export default function ProductTabs({ product }) {
   const renderContent = () => {
     switch (activeTab) {
       case 'visaoGeral':
-        return <div className="prose max-w-none whitespace-pre-line" dangerouslySetInnerHTML={{ __html: visao_geral || 'Nenhuma visão geral disponível.' }} />;
+        return <div className="prose max-w-none"><RichTextRenderer content={visao_geral || 'Nenhuma visão geral disponível.'} /></div>;
       case 'fotos':
         return (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -107,9 +107,9 @@ export default function ProductTabs({ product }) {
           </div>
         );
       case 'caracteristicasFuncionais':
-        return <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: renderRichText(caracteristicas_funcionais) || 'Nenhuma característica funcional disponível.' }} />;
+        return <div className="prose max-w-none"><RichTextRenderer content={caracteristicas_funcionais || 'Nenhuma característica funcional disponível.'} /></div>;
       case 'caracteristicasTecnicas':
-        return <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: renderRichText(caracteristicas_tecnicas) || 'Nenhuma característica técnica disponível.' }} />;
+        return <div className="prose max-w-none"><RichTextRenderer content={caracteristicas_tecnicas || 'Nenhuma característica técnica disponível.'} /></div>;
       case 'downloads':
         return (
           <div>

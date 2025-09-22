@@ -9,7 +9,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { renderRichText } from '@/lib/utils';
+import RichTextRenderer from './RichTextRenderer';
+
 
 /**
  * Renderiza a visualização detalhada de um produto, incluindo galeria de imagens,
@@ -94,10 +95,9 @@ export default function ProductViewClient({ product, breadcrumbs = [] }) {
 
         <div className="lg:col-span-3 flex flex-col">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">{nome}</h1>
-          <div 
-            className="prose max-w-none text-lg text-gray-600 leading-relaxed"
-            dangerouslySetInnerHTML={{ __html: renderRichText(descricao_longa) }}
-          >
+          <div className="prose max-w-none text-lg text-gray-600 leading-relaxed">
+            {/* Renderiza o conteúdo rich text de forma segura com o componente RichTextRenderer */}
+            {descricao_longa && <RichTextRenderer content={descricao_longa} />}
           </div>
         </div>
       </div>
