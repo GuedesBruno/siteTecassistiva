@@ -1,13 +1,25 @@
 import BannerSlider from "@/components/BannerSlider";
 import FeaturedProductsSlider from "@/components/FeaturedProductsSlider";
-import { getBanners, getFeaturedProducts } from "@/lib/api";
+import VideoSection from "@/components/VideoSection";
+import ManufacturersSlider from "@/components/ManufacturersSlider";
+import TestimonialSection from "@/components/TestimonialSection";
+import { 
+  getBanners, 
+  getFeaturedProducts,
+  getManufacturers,
+  getFeaturedTestimonial,
+  getHomeVideos
+} from "@/lib/api";
 import Link from 'next/link';
 
 export default async function Home() {
   // Busca os dados da API em paralelo para otimizar o tempo de build
-  const [banners, featuredProducts] = await Promise.all([
+  const [banners, featuredProducts, manufacturers, featuredTestimonial, homeVideos] = await Promise.all([
     getBanners(),
     getFeaturedProducts(),
+    getManufacturers(),
+    getFeaturedTestimonial(),
+    getHomeVideos(),
   ]);
 
   return (
@@ -30,6 +42,11 @@ export default async function Home() {
         </div>
       </section>
       <FeaturedProductsSlider products={featuredProducts || []} />
+
+      {/* Novas seções adicionadas */}
+      <VideoSection videos={homeVideos || []} />
+      <ManufacturersSlider fabricantes={manufacturers || []} />
+      <TestimonialSection depoimento={featuredTestimonial} />
     </div>
   );
 }

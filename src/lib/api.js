@@ -184,6 +184,28 @@ async function getBanners() {
   return normalizeDataArray(response);
 }
 
+// Busca todos os fabricantes (fornecedores)
+async function getManufacturers() {
+  const response = await fetchAPI('/api/fabricantes?populate=logo&pagination[limit]=100&sort=ordem:asc');
+  return normalizeDataArray(response);
+}
+
+// Busca os vídeos para a seção da home page
+async function getHomeVideos() {
+  // O endpoint deve corresponder exatamente ao "API ID (Plural)" definido no Strapi.
+  const response = await fetchAPI('/api/video-homes?populate=thumbnail&sort=ordem:asc');
+  return normalizeDataArray(response);
+}
+
+// Busca o depoimento em destaque para a home
+async function getFeaturedTestimonial() {
+  // Busca o depoimento marcado como destaque, limitando a 1 resultado.
+  const response = await fetchAPI('/api/depoimentos?filters[destaque_home][$eq]=true&pagination[limit]=1');
+  const data = normalizeDataArray(response);
+  // Retorna o primeiro objeto do array, ou null se não houver depoimentos.
+  return data.length > 0 ? data[0] : null;
+}
+
 // Normaliza respostas do Strapi: se os itens já vierem com `attributes`, deixa como está.
 // Se os itens vierem 'flat' (campos no root), converte para o formato { id, attributes: { ...fields } }
 function normalizeDataArray(response) {
@@ -205,5 +227,8 @@ module.exports = {
   getAllCategories,
   getCategoryBySlug,
   getBanners,
+  getManufacturers,
+  getHomeVideos,
+  getFeaturedTestimonial,
   normalizeDataArray,
 };
