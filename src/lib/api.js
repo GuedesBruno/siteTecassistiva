@@ -186,7 +186,7 @@ async function getBanners() {
 
 // Busca todos os fabricantes (fornecedores)
 async function getManufacturers() {
-  const response = await fetchAPI('/api/fabricante?populate=logo&pagination[limit]=100&sort=ordem:asc');
+  const response = await fetchAPI('/api/fabricantes?populate=logo&pagination[limit]=100&sort=ordem:asc');
   return normalizeDataArray(response);
 }
 
@@ -194,15 +194,15 @@ async function getManufacturers() {
 async function getHomeVideos() {
   // Usando a sintaxe de array para 'fields' conforme a documentação do Strapi,
   // que é a forma mais correta e robusta.
-  // O endpoint para "Video Home" é 'video-home'.
-  const endpoint = '/api/video-home?fields[0]=titulo&fields[1]=link&populate=thumbnail&sort=ordem:asc';
+  // O endpoint para "Video Home" é 'video-homes' (plural).
+  const endpoint = '/api/video-homes?fields[0]=titulo&fields[1]=link&populate=thumbnail&sort=ordem:asc';
   const response = await fetchAPI(endpoint);
   return normalizeDataArray(response);
 }
 
 // Busca todos os depoimentos
 async function getAllTestimonials() {
-  const response = await fetchAPI('/api/depoimento?sort=createdAt:asc');
+  const response = await fetchAPI('/api/depoimentos?sort=createdAt:asc');
   return normalizeDataArray(response);
 }
 
