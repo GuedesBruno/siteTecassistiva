@@ -93,7 +93,7 @@ async function getProductBySlug(slug) {
   const populateFields = [
     'imagem_principal',
     'galeria_de_imagens',
-    'categorias', // Alterado para 'categorias' para refletir a relação muitos-para-muitos
+    'categoria', // O nome do campo da relação no Strapi.
     'subcategoria',
     'documentos' // O campo 'documentos' é uma relação (mídia/upload), então deve ser populado.
   ];
@@ -186,7 +186,7 @@ async function getBanners() {
 
 // Busca todos os fabricantes (fornecedores)
 async function getManufacturers() {
-  const response = await fetchAPI('/api/fabricantes?populate=logo&pagination[limit]=100&sort=ordem:asc');
+  const response = await fetchAPI('/api/fabricante?populate=logo&pagination[limit]=100&sort=ordem:asc');
   return normalizeDataArray(response);
 }
 
@@ -194,15 +194,15 @@ async function getManufacturers() {
 async function getHomeVideos() {
   // Usando a sintaxe de array para 'fields' conforme a documentação do Strapi,
   // que é a forma mais correta e robusta.
-  // O endpoint foi corrigido para 'home-videos' e o campo de URL para 'link'.
-  const endpoint = '/api/video-homes?fields[0]=titulo&fields[1]=link&populate=thumbnail&sort=ordem:asc';
+  // O endpoint para "Video Home" é 'video-home'.
+  const endpoint = '/api/video-home?fields[0]=titulo&fields[1]=link&populate=thumbnail&sort=ordem:asc';
   const response = await fetchAPI(endpoint);
   return normalizeDataArray(response);
 }
 
 // Busca todos os depoimentos
 async function getAllTestimonials() {
-  const response = await fetchAPI('/api/depoimentos?sort=createdAt:asc');
+  const response = await fetchAPI('/api/depoimento?sort=createdAt:asc');
   return normalizeDataArray(response);
 }
 
