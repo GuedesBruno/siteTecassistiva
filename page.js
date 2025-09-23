@@ -1,89 +1,73 @@
-import Image from 'next/image';
-import { getProductBySlug, getAllProducts, getStrapiMediaUrl } from '@/lib/api';
-import RichTextRenderer from '@/components/RichTextRenderer';
-import { notFound } from 'next/navigation';
+import { getAllCategories, fetchAPI, normalizeDataArray } from '@/lib/api';
+import CategoryMenu from '@/components/CategoryMenu';
+import ProductDisplay from '@/components/ProductDisplay';
 
-// Opcional: Gera as páginas de produto estaticamente no momento do build para melhor performance
 export async function generateStaticParams() {
-  try {
-    const products = await getAllProducts(); // Busca todos os produtos
-    // Retorna um array de slugs para o Next.js saber quais páginas gerar
-    return products.map((product) => ({
-      slug: product.attributes.slug,
-    }));
-  } catch (error) {
-    console.error("Falha ao gerar parâmetros estáticos para produtos:", error);
-    return [];
-  }
+    try {
+        const categories = await getAllCategories();
+        if (!categories || categories.length === 0) return [];
+
+        const params = categories.flatMap((category) => {
+            const categorySlug = category.attributes?.slug || category.slug;
+            const subcategories = category.attributes?.subcategorias?.data || [];
+
+            if (!categorySlug || subcategories.length === 0) {
+                return [];
+            }
+
+            return subcategories.map((subcategory) => {
+                const subcategorySlug = subcategory.attributes?.slug || subcategory.slug;
+                if (!subcategorySlug) return null;
+                return {
+                    slug: categorySlug,
+                    subslug: subcategorySlug,
+                };
+            }).filter(Boolean);
+        });
+
+        return params;
+    } catch (err) {
+        console.error("generateStaticParams (subcategorias) failed:", err.message);
+        return [];
+    }
 }
 
-export default async function ProductPage({ params }) {
-  const { slug } = params;
-  const productData = await getProductBySlug(slug);
+async function getProductsForSubCategory(subslug) {
+    try {
+        const fields = 'fields[0]=nome&fields[1]=slug&fields[2]=descricao_curta';
+        const populate = 'populate[0]=imagem_principal';
+        const filters = `filters[subcategoria][slug][$eq]=${subslug}`;
+        
+        const productsData = await fetchAPI(`/api/produtos?${fields}&${populate}&${filters}&pagination[limit]=1000`);
+        return normalizeDataArray(productsData);
+    } catch (error) {
+        console.error(`Falha ao buscar produtos para a subcategoria ${subslug}:`, error);
+        return [];
+    }
+}
 
-  // Se o produto não for encontrado, exibe a página 404
-  if (!productData) {
-    notFound();
-  }
+export default async function SubCategoriaSlugPage({ params }) {
+    const { slug, subslug } = params;
 
-  const {
-    nome,
-    descricao_curta,
-    descricao_longa,
-    imagem_principal,
-  } = productData.attributes;
+    const [allCategories, productsForSubCategory] = await Promise.all([
+        getAllCategories(),
+        getProductsForSubCategory(subslug),
+    ]);
 
-  const mainImageUrl = getStrapiMediaUrl(imagem_principal?.data?.attributes?.url);
+    const currentCategory = allCategories.find(c => (c.attributes?.slug || c.slug) === slug);
+    const currentSubCategory = currentCategory?.attributes?.subcategorias?.data?.find(
+        sc => (sc.attributes?.slug || sc.slug) === subslug
+    );
+    const subCategoryName = currentSubCategory?.attributes?.nome || 'Produtos';
 
-  return (
-    <div className="bg-white">
-      <div className="container mx-auto px-4 md:px-12 lg:px-24 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-          {/* Coluna da Imagem */}
-          <div className="relative w-full aspect-square rounded-lg overflow-hidden shadow-lg">
-            {mainImageUrl ? (
-              <Image
-                src={mainImageUrl}
-                alt={`Imagem do produto ${nome}`}
-                fill
-                className="object-contain"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              />
-            ) : (
-              <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                <p className="text-gray-500">Imagem indisponível</p>
-              </div>
-            )}
-          </div>
-
-          {/* Coluna de Informações */}
-          <div className="flex flex-col justify-center">
-            <h1 className="text-3xl md:text-4xl font-bold text-tec-blue mb-4">{nome}</h1>
-            {descricao_curta && (
-              <p className="text-lg text-gray-600 mb-6">{descricao_curta}</p>
-            )}
-            <a 
-              href="/contato" 
-              className="bg-tec-blue hover:bg-tec-blue-dark text-white font-bold py-3 px-8 rounded-lg shadow-md transition-colors duration-300 self-start"
-            >
-              Solicitar Orçamento
-            </a>
-          </div>
-        </div>
-
-        {/* Seção de Descrição Longa com RichTextRenderer */}
-        {descricao_longa && (
-          <div className="mt-16">
-            <h2 className="text-2xl font-bold text-tec-blue mb-4 border-b-2 border-gray-200 pb-2">
-              Descrição Detalhada
-            </h2>
-            <div className="mt-4">
-              {/* Aqui utilizamos o componente! */}
-              <RichTextRenderer content={descricao_longa} />
+    return (
+        <div className="container mx-auto flex flex-col md:flex-row gap-8 py-8 px-4">
+            <aside className="w-full md:w-1/4 lg:w-1/5">
+                <CategoryMenu categories={allCategories} activeCategorySlug={slug} activeSubCategorySlug={subslug} />
+            </aside>
+            <div className="w-full md:w-3/4 lg:w-4/5 px-4 md:px-8 lg:px-16">
+                <ProductDisplay categoryName={subCategoryName} products={productsForSubCategory} />
             </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
+        </div>
+    );
 }
