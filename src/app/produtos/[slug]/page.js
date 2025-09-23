@@ -21,21 +21,24 @@ export async function generateStaticParams() {
 // ajuda a construir o breadcrumb com base na categoria e subcategoria do produto
 function buildBreadcrumbs(product) {
     const attrs = product.attributes || product;
-    const { categoria, subcategoria } = attrs;
+    // Se um produto pode ter várias categorias, pegamos a primeira como principal para o breadcrumb.
+    const { categorias, subcategoria } = attrs;
+    const primaryCategory = categorias?.data?.[0];
     
     const crumbs = [
         { name: 'Página Inicial', path: '/' },
         { name: 'Produtos', path: '/produtos/categorias' }
     ];
 
-    if (categoria?.data) {
-        const catAttrs = categoria.data.attributes;
+    if (primaryCategory) {
+        const catAttrs = primaryCategory.attributes;
         crumbs.push({ name: catAttrs.nome, path: `/produtos/categorias/${catAttrs.slug}` });
     }
 
-    if (subcategoria?.data && categoria?.data) {
+    if (subcategoria?.data && primaryCategory) {
         const subAttrs = subcategoria.data.attributes;
-        crumbs.push({ name: subAttrs.nome, path: `/produtos/categorias/${categoria.data.attributes.slug}/${subAttrs.slug}` });
+        const catAttrs = primaryCategory.attributes;
+        crumbs.push({ name: subAttrs.nome, path: `/produtos/categorias/${catAttrs.slug}/${subAttrs.slug}` });
     }
 
     return crumbs;

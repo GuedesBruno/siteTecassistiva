@@ -49,9 +49,9 @@ export default function BannerSlider({ banners }) {
           return (
             <SwiperSlide key={banner.id}>
               <div className={`w-full h-full flex flex-col lg:flex-row ${isReversed ? 'lg:flex-row-reverse' : ''}`}>
-                {/* Left text panel 1/3 on large screens */}
-                <div className="w-full lg:w-1/3 bg-gray-100 flex items-center p-6 md:p-12">
-                  <div className="max-w-lg lg:max-w-xs text-center lg:text-left">
+                {/* Painel de texto (40% em telas grandes) */}
+                <div className="w-full lg:w-2/5 bg-gray-100 flex items-center justify-center p-6 md:p-12">
+                  <div className="max-w-md text-center lg:text-left">
                     <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-4 text-[#002554]">{titulo}</h1>
                     <p className="text-lg md:text-xl mb-6 text-[#002554]">{subtitulo}</p>
                     <Link href={link_do_botao || '#'} className="inline-block bg-[#002554] hover:bg-[#003377] text-white font-bold py-3 px-6 rounded-lg shadow-md transition-colors duration-300">
@@ -60,8 +60,8 @@ export default function BannerSlider({ banners }) {
                   </div>
                 </div>
 
-                {/* Right image panel (2/3) */}
-                <div className="w-full lg:w-2/3 h-64 lg:h-full relative">
+                {/* Painel de imagem (60% em telas grandes) */}
+                <div className="w-full lg:w-3/5 h-64 lg:h-full relative">
                   {fullImageUrl ? (
                     <>
                       <Image

@@ -3,13 +3,13 @@
 import { useEffect } from 'react';
 
 /**
- * A modal component to display a Vimeo video player.
+ * A modal component to display a Vimeo or YouTube video player.
  *
  * @param {object} props
- * @param {string | null} props.vimeoId - The ID and optional hash of the Vimeo video (e.g., "1027687024/1a5058b7f8").
+ * @param {object | null} props.videoInfo - The video info object { type: 'vimeo'|'youtube', id: '...' }.
  * @param {() => void} props.onClose - Function to call to close the modal.
  */
-export default function VideoModal({ vimeoId, onClose }) {
+export default function VideoModal({ videoInfo, onClose }) {
   // Lida com a tecla "Esc" para fechar o modal
   useEffect(() => {
     const handleEsc = (event) => {
@@ -24,10 +24,19 @@ export default function VideoModal({ vimeoId, onClose }) {
     };
   }, [onClose]);
 
-  if (!vimeoId) return null;
+  if (!videoInfo) return null;
 
-  const [id, hash] = vimeoId.split('/');
-  const videoSrc = `https://player.vimeo.com/video/${id}?autoplay=1${hash ? `&h=${hash}` : ''}`;
+  let videoSrc = '';
+  let videoTitle = '';
+
+  if (videoInfo.type === 'vimeo') {
+    const [id, hash] = videoInfo.id.split('/');
+    videoSrc = `https://player.vimeo.com/video/${id}?autoplay=1${hash ? `&h=${hash}` : ''}`;
+    videoTitle = `Player de vídeo do Vimeo para o ID ${videoInfo.id}`;
+  } else if (videoInfo.type === 'youtube') {
+    videoSrc = `https://www.youtube.com/embed/${videoInfo.id}?autoplay=1`;
+    videoTitle = `Player de vídeo do YouTube para o ID ${videoInfo.id}`;
+  }
 
   return (
     <div
@@ -52,7 +61,7 @@ export default function VideoModal({ vimeoId, onClose }) {
             frameBorder="0"
             allow="autoplay; fullscreen; picture-in-picture"
             allowFullScreen
-            title={`Player de vídeo do Vimeo para o ID ${vimeoId}`}
+            title={videoTitle}
           ></iframe>
         </div>
       </div>

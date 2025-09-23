@@ -76,7 +76,7 @@ async function getAllProducts() {
 async function getAllProductsForDisplay() {
   try {
     // Busca todos os produtos com os campos necessários para os cards
-    const fieldsQuery = 'fields[0]=nome&fields[1]=slug';
+    const fieldsQuery = 'fields[0]=nome&fields[1]=slug&fields[2]=descricao_curta';
     const populateQuery = 'populate[0]=imagem_principal&populate[1]=subcategoria';
 
     const productsData = await fetchAPI(`/api/produtos?${fieldsQuery}&${populateQuery}&pagination[limit]=1000`);
@@ -93,7 +93,7 @@ async function getProductBySlug(slug) {
   const populateFields = [
     'imagem_principal',
     'galeria_de_imagens',
-    'categoria',
+    'categorias', // Alterado para 'categorias' para refletir a relação muitos-para-muitos
     'subcategoria',
     'documentos' // O campo 'documentos' é uma relação (mídia/upload), então deve ser populado.
   ];
@@ -126,8 +126,8 @@ async function getProductBySlug(slug) {
 
 // Busca produtos em destaque
 async function getFeaturedProducts() {
-  // Busca produtos em destaque incluindo imagem principal
-  const response = await fetchAPI('/api/produtos?filters[destaque][$eq]=true&fields[0]=nome&fields[1]=slug&populate=imagem_principal');
+  // Busca produtos em destaque incluindo imagem principal e descrição curta
+  const response = await fetchAPI('/api/produtos?filters[destaque][$eq]=true&fields[0]=nome&fields[1]=slug&fields[2]=descricao_curta&populate=imagem_principal');
   return normalizeDataArray(response);
 }
 
@@ -192,8 +192,17 @@ async function getManufacturers() {
 
 // Busca os vídeos para a seção da home page
 async function getHomeVideos() {
-  // O endpoint deve corresponder exatamente ao "API ID (Plural)" definido no Strapi.
-  const response = await fetchAPI('/api/video-homes?populate=thumbnail&sort=ordem:asc');
+  // Usando a sintaxe de array para 'fields' conforme a documentação do Strapi,
+  // que é a forma mais correta e robusta.
+  // O endpoint foi corrigido para 'home-videos' e o campo de URL para 'link'.
+  const endpoint = '/api/video-homes?fields[0]=titulo&fields[1]=link&populate=thumbnail&sort=ordem:asc';
+  const response = await fetchAPI(endpoint);
+  return normalizeDataArray(response);
+}
+
+// Busca todos os depoimentos
+async function getAllTestimonials() {
+  const response = await fetchAPI('/api/depoimentos?sort=createdAt:asc');
   return normalizeDataArray(response);
 }
 
@@ -229,6 +238,7 @@ module.exports = {
   getBanners,
   getManufacturers,
   getHomeVideos,
+  getAllTestimonials,
   getFeaturedTestimonial,
   normalizeDataArray,
 };

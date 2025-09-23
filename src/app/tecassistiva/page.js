@@ -12,8 +12,8 @@ const InfoCard = ({ title, children }) => (
 export default function TecassistivaPage() {
   return (
     <div className="bg-white">
-      {/* ATUALIZAÇÃO: Aumentamos o padding horizontal aqui */}
-      <div className="container mx-auto px-36 py-12"> 
+      {/* O padding foi ajustado para ser responsivo */}
+      <div className="container mx-auto px-4 md:px-12 lg:px-24 py-12">
         {/* Breadcrumbs */}
         <div className="text-sm text-gray-500 mb-8">
           <Link href="/" className="hover:underline">Página Inicial</Link>
@@ -78,9 +78,9 @@ export default function TecassistivaPage() {
         </section>
 
         {/* Seção de Depoimentos com o novo depoimento */}
-        <section className="bg-white py-10">
-            <div className="container mx-auto max-w-4xl">
-                <div className="text-center mb-12">
+        <section className="bg-white py-8">
+            <div className="mx-auto">
+                <div className="text-center mb-8">
                     <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">Depoimentos</h2>
                 </div>
                 <div className="bg-gray-100 p-8 rounded-lg shadow-md">

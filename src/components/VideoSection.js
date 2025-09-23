@@ -1,111 +1,113 @@
 'use client';
 
-import { useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
+import React, { useState, useEffect } from 'react';
 import { getStrapiMediaUrl } from '@/lib/api';
+import VideoModal from './VideoModal.js';
 
-function getEmbedUrl(url) {
-  if (!url) return '';
+// Função para extrair o ID do vídeo do YouTube ou Vimeo
+const getVideoId = (url) => {
+  if (!url) return null;
+  // Regex atualizado para Vimeo para capturar ID e hash
+  let match = /vimeo\.com\/([\d\/a-zA-Z]+)/i.exec(url);
+  if (match && match[1]) return { type: 'vimeo', id: match[1] };
+  
+  match = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i.exec(url);
+  if (match && match[1]) return { type: 'youtube', id: match[1] };
+  
+  return null;
+};
 
-  try {
-    if (url.includes('vimeo.com')) {
-      const match = url.match(/vimeo\.com\/(\d+)(?:\/(\w+))?/);
-      if (match && match[1]) {
-        const videoId = match[1];
-        const hash = match[2];
-        const params = new URLSearchParams({ autoplay: '1' });
-        if (hash) {
-          params.set('h', hash);
+const VideoCard = ({ video, onVideoClick }) => {
+  const [thumbnailUrl, setThumbnailUrl] = useState('');
+  const attrs = video.attributes || video;
+  const videoInfo = getVideoId(attrs.link);
+
+  useEffect(() => {
+    if (!videoInfo) return;
+
+    let isMounted = true;
+
+    const determineThumbnailUrl = async () => {
+      // Prioridade 1: Usar a thumbnail do Strapi se existir
+      const strapiThumbnail = attrs.thumbnail;
+      const thumbnailUrlPath = strapiThumbnail?.data?.attributes?.url || strapiThumbnail?.url;
+      const strapiUrl = getStrapiMediaUrl(thumbnailUrlPath);
+      if (strapiUrl) {
+        if (isMounted) setThumbnailUrl(strapiUrl);
+        return;
+      }
+
+      // Prioridade 2: Fallback para o provedor de vídeo
+      if (videoInfo.type === 'youtube') {
+        if (isMounted) setThumbnailUrl(`https://i.ytimg.com/vi/${videoInfo.id}/hqdefault.jpg`);
+      } else if (videoInfo.type === 'vimeo') {
+        try {
+          const response = await fetch(`https://vimeo.com/api/oembed.json?url=${attrs.link}`);
+          if (response.ok) {
+            const data = await response.json();
+            if (isMounted) setThumbnailUrl(data.thumbnail_url);
+          }
+        } catch (error) {
+          console.error("Erro ao buscar thumbnail do Vimeo:", error);
+          // Opcional: definir uma imagem de placeholder em caso de falha
         }
-        return `https://player.vimeo.com/video/${videoId}?${params.toString()}`;
       }
-    }
+    };
 
-    if (url.includes('youtube.com/watch')) {
-      const videoUrl = new URL(url);
-      const videoId = videoUrl.searchParams.get('v');
-      if (videoId) {
-        return `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-      }
-    }
-  } catch (error) {
-    console.error("Error parsing video URL:", error);
-    return ''; // Return empty string on error to avoid broken iframe
-  }
+    determineThumbnailUrl();
 
-  return url; // Fallback for other video types or direct links
-}
+    return () => { isMounted = false; };
+  }, [attrs.link, attrs.thumbnail, videoInfo]);
+
+  if (!videoInfo) return null;
+
+  const handleClick = () => {
+    onVideoClick(videoInfo);
+  };
+
+  return (
+    <button onClick={handleClick} className="group block rounded-lg shadow-md overflow-hidden transform hover:-translate-y-1 transition-all duration-300 text-left w-full">
+      <div className="relative">
+        {thumbnailUrl ? (
+          <img src={thumbnailUrl} alt={attrs.titulo} className="w-full h-48 object-cover" />
+        ) : (
+          <div className="w-full h-48 bg-gray-200 animate-pulse" />
+        )}
+        <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+          <svg className="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+          </svg>
+        </div>
+        {/* Overlay com gradiente e título */}
+        <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent">
+          <h3 className="text-white font-bold text-lg truncate">{attrs.titulo}</h3>
+        </div>
+      </div>
+    </button>
+  );
+};
 
 export default function VideoSection({ videos }) {
   const [selectedVideo, setSelectedVideo] = useState(null);
-
-  if (!videos || videos.length === 0) {
-    return null;
-  }
+  if (!videos || videos.length === 0) return null;
 
   return (
     <section className="bg-tec-blue py-16">
-      <div className="container mx-auto px-6 text-center">
-        <h2 className="text-4xl font-extrabold text-white mb-4">Vídeos</h2>
-        <p className="max-w-2xl mx-auto text-gray-200 mb-12">
-          Assista aos nossos vídeos para conhecer melhor os produtos e aprender a utilizá-los.
-        </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          {videos.map((video) => {
-            const { titulo, link, thumbnail } = video;
-            const thumbnailUrl = getStrapiMediaUrl(thumbnail?.url);
-
-            return (
-              <button
-                key={video.id}
-                onClick={() => setSelectedVideo(link)}
-                className="group relative bg-black rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-1 transition-transform duration-300 w-full"
-              >
-                <div className="relative w-full aspect-video">
-                  {thumbnailUrl ? (
-                    <Image src={thumbnailUrl} alt={titulo} fill className="object-cover group-hover:scale-105 transition-transform duration-300" />
-                  ) : (
-                    <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                      <span className="text-gray-500">Sem imagem</span>
-                    </div>
-                  )}
-                  {/* Overlay com ícone de Play */}
-                  <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <svg className="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd"></path></svg>
-                  </div>
-                  {/* Overlay com o título */}
-                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
-                    <h3 className="font-semibold text-white text-lg drop-shadow-md">{titulo}</h3>
-                  </div>
-                </div>
-              </button>
-            )
-          })}
+      {/* AQUI ESTÁ A MUDANÇA: Ajuste do padding horizontal (px) */}
+      <div className="container mx-auto px-4 md:px-12 lg:px-24">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-white">Vídeos em Destaque</h2>
+          <p className="text-lg text-gray-200 mt-2">Veja nossos produtos em ação.</p>
         </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {videos.map((video) => (
+            <VideoCard key={video.id} video={video} onVideoClick={setSelectedVideo} />
+          ))}
+        </div>
+        {selectedVideo && (
+          <VideoModal videoInfo={selectedVideo} onClose={() => setSelectedVideo(null)} />
+        )}
       </div>
-
-      {selectedVideo && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[100]" onClick={() => setSelectedVideo(null)}>
-          <div className="relative w-full max-w-4xl aspect-video bg-black" onClick={(e) => e.stopPropagation()}>
-            <button
-              onClick={() => setSelectedVideo(null)}
-              className="absolute -top-10 right-0 text-white text-3xl font-bold"
-              aria-label="Fechar modal"
-            >
-              &times;
-            </button>
-            <iframe
-              className="w-full h-full"
-              src={getEmbedUrl(selectedVideo)}
-              title="Video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-          </div>
-        </div>
-      )}
     </section>
   );
 }

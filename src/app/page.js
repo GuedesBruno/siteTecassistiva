@@ -7,18 +7,18 @@ import {
   getBanners, 
   getFeaturedProducts,
   getManufacturers,
-  getFeaturedTestimonial,
+  getAllTestimonials,
   getHomeVideos
 } from "@/lib/api";
 import Link from 'next/link';
 
 export default async function Home() {
   // Busca os dados da API em paralelo para otimizar o tempo de build
-  const [banners, featuredProducts, manufacturers, featuredTestimonial, homeVideos] = await Promise.all([
+  const [banners, featuredProducts, manufacturers, testimonials, homeVideos] = await Promise.all([
     getBanners(),
     getFeaturedProducts(),
     getManufacturers(),
-    getFeaturedTestimonial(),
+    getAllTestimonials(),
     getHomeVideos(),
   ]);
 
@@ -26,10 +26,10 @@ export default async function Home() {
     <div>
       <BannerSlider banners={banners || []} />
       {/* Informational block matching the attached screenshot */}
-      <section className="bg-[#007bff] text-white py-12">
-        <div className="container mx-auto px-6 text-center">
+      <section className="bg-tec-blue-light text-white py-12">
+        <div className="container mx-auto px-4 md:px-12 lg:px-24 text-center">
           <h2 className="text-4xl font-extrabold mb-4">Tecassistiva</h2>
-          <p className="max-w-3xl mx-auto leading-relaxed">
+          <p className="mx-auto leading-relaxed text-xl">
             A Tecassistiva foi fundada em 2007, visando atender a grande demanda reprimida de produtos e serviços de qualidade
             com preços competitivos, que impediam há muitos anos que as pessoas com deficiência no Brasil, tivessem
             acesso ao grande desenvolvimento tecnológico que vinha acontecendo em outros países.
@@ -37,7 +37,7 @@ export default async function Home() {
             objetivo da Tecassistiva.
           </p>
           <div className="mt-8">
-            <Link href="/tecassistiva" className="bg-white text-[#007bff] font-semibold py-3 px-6 rounded-md">Conheça a nossa história</Link>
+            <Link href="/tecassistiva" className="bg-white text-tec-blue font-bold py-3 px-8 rounded-md hover:bg-gray-100 transition-colors shadow-md">Conheça a nossa história</Link>
           </div>
         </div>
       </section>
@@ -46,7 +46,7 @@ export default async function Home() {
       {/* Novas seções adicionadas */}
       <VideoSection videos={homeVideos || []} />
       <ManufacturersSlider fabricantes={manufacturers || []} />
-      <TestimonialSection depoimento={featuredTestimonial} />
+      <TestimonialSection depoimentos={testimonials || []} />
     </div>
   );
 }

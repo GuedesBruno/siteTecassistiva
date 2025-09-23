@@ -22,11 +22,14 @@ export const generateStaticParams = generateStaticParamsImpl;
 // Função para buscar todos os produtos de uma categoria (incluindo subcategorias)
 async function getProductsForCategory(slug) {
     try {
+        // Adicionado campos 'nome', 'slug', 'descricao_curta' para o card
+        const fields = 'fields[0]=nome&fields[1]=slug&fields[2]=descricao_curta';
         const populate = 'populate[0]=imagem_principal&populate[1]=subcategoria';
-        // Filtro OR para buscar produtos que pertencem diretamente à categoria OU a uma de suas subcategorias
-        const filters = `filters[$or][0][categoria][slug][$eq]=${slug}&filters[$or][1][subcategoria][categoria][slug][$eq]=${slug}`;
+        // Alterado o filtro para buscar em uma relação de 'muitos para muitos'.
+        // Se um produto pode ter várias categorias, o nome do campo da relação no Strapi é provavelmente 'categorias' (plural).
+        const filters = `filters[categorias][slug][$eq]=${slug}`;
         
-        const productsData = await fetchAPI(`/api/produtos?${populate}&${filters}`);
+        const productsData = await fetchAPI(`/api/produtos?${fields}&${populate}&${filters}&pagination[limit]=1000`);
         return normalizeDataArray(productsData);
     } catch (error) {
         console.error(`Falha ao buscar produtos para a categoria ${slug}:`, error);

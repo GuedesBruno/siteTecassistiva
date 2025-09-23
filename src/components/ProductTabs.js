@@ -89,7 +89,7 @@ export default function ProductTabs({ product }) {
             {videoIds.map((vimeoId) => (
               <button 
                 key={vimeoId}
-                onClick={() => setSelectedVideo(vimeoId)}
+                onClick={() => setSelectedVideo({ type: 'vimeo', id: vimeoId })}
                 className="relative aspect-video bg-black rounded-lg overflow-hidden group cursor-pointer"
               >
                 <img 
@@ -152,7 +152,7 @@ export default function ProductTabs({ product }) {
         {renderContent()}
       </div>
       {selectedVideo && (
-        <VideoModal vimeoId={selectedVideo} onClose={() => setSelectedVideo(null)} />
+        <VideoModal videoInfo={selectedVideo} onClose={() => setSelectedVideo(null)} />
       )}
     </div>
   );

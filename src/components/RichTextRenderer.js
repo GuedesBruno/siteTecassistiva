@@ -1,84 +1,35 @@
-import React from 'react';
+// src/components/RichTextRenderer.js
+import { BlocksRenderer } from '@strapi/blocks-react-renderer';
 
-/**
- * Renderiza o conteúdo Rich Text do Strapi de forma segura,
- * convertendo o JSON em componentes React.
- * @param {object} props
- * @param {Array|string} props.content - O array de blocos do campo Rich Text ou uma string.
- */
-const RichTextRenderer = ({ content }) => {
+export default function RichTextRenderer({ content }) {
+  // Se não houver conteúdo, não renderiza nada
   if (!content) {
     return null;
   }
 
-  // Lida com strings simples, preservando quebras de linha.
-  if (typeof content === 'string') {
-    return <div className="whitespace-pre-line">{content}</div>;
-  }
-
-  if (!Array.isArray(content)) {
-    console.warn('RichTextRenderer: O conteúdo fornecido não é um array válido.');
-    return null;
-  }
-
-  const renderTextNode = (node, index) => {
-    let children = node.text;
-
-    if (node.bold) {
-      children = <strong key={`${index}-bold`}>{children}</strong>;
-    }
-    if (node.italic) {
-      children = <em key={`${index}-italic`}>{children}</em>;
-    }
-    if (node.underline) {
-      children = <u key={`${index}-underline`}>{children}</u>;
-    }
-    if (node.strikethrough) {
-      children = <s key={`${index}-strikethrough`}>{children}</s>;
-    }
-
-    return <React.Fragment key={index}>{children}</React.Fragment>;
-  };
-
-  const renderElement = (element, index) => {
-    const key = `${element.type}-${index}`;
-    switch (element.type) {
-      case 'paragraph':
-        return (
-          <p key={key}>
-            {element.children.map((child, i) => renderTextNode(child, `${key}-${i}`))}
-          </p>
-        );
-      case 'heading':
-        const Tag = `h${element.level}`;
-        return (
-          <Tag key={key}>
-            {element.children.map((child, i) => renderTextNode(child, `${key}-${i}`))}
-          </Tag>
-        );
-      case 'list':
-        const ListTag = element.format === 'ordered' ? 'ol' : 'ul';
-        const style = element.indentLevel ? { paddingLeft: `${element.indentLevel * 1.5}rem` } : {};
-        return (
-          <ListTag key={key} style={style}>
-            {element.children.map((listItem, i) => {
-              if (listItem.type === 'list') {
-                return renderElement(listItem, `${key}-nested-${i}`);
-              }
-              return (
-                <li key={`${key}-li-${i}`}>
-                  {listItem.children.map((child, j) => renderTextNode(child, `${key}-li-${i}-${j}`))}
-                </li>
-              );
-            })}
-          </ListTag>
-        );
-      default:
-        return null;
-    }
-  };
-
-  return <>{content.map((element, index) => renderElement(element, index))}</>;
-};
-
-export default RichTextRenderer;
+  return (
+    <div className="prose lg:prose-xl max-w-none">
+      <BlocksRenderer
+        content={content}
+        blocks={{
+          // Você pode customizar cada tipo de bloco aqui
+          heading: ({ children, level }) => {
+            switch (level) {
+              case 1:
+                return <h1 className="text-4xl font-bold my-4">{children}</h1>;
+              case 2:
+                return <h2 className="text-3xl font-bold my-3">{children}</h2>;
+              case 3:
+                return <h3 className="text-2xl font-bold my-2">{children}</h3>;
+              default:
+                return <h4 className="text-xl font-bold my-1">{children}</h4>;
+            }
+          },
+          paragraph: ({ children }) => <p className="mb-4 text-gray-700">{children}</p>,
+          link: ({ children, url }) => <a href={url} className="text-blue-600 hover:underline">{children}</a>,
+          // Adicione customizações para listas, imagens, etc.
+        }}
+      />
+    </div>
+  );
+}

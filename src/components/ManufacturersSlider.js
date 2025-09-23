@@ -1,47 +1,59 @@
 'use client';
-
+import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
+import { Autoplay, Navigation } from 'swiper/modules';
 import 'swiper/css';
-import Image from 'next/image';
-import Link from 'next/link';
+import 'swiper/css/navigation';
 import { getStrapiMediaUrl } from '@/lib/api';
 
 export default function ManufacturersSlider({ fabricantes }) {
-  if (!fabricantes || fabricantes.length === 0) return null;
+  if (!fabricantes || fabricantes.length === 0) {
+    return null;
+  }
 
   return (
-    <section className="py-16 bg-white">
-      <div className="container mx-auto px-6">
+    <section className="bg-white py-16">
+      {/* AQUI ESTÁ A MUDANÇA: Ajuste do padding horizontal (px) */}
+      <div className="container mx-auto px-4 md:px-12 lg:px-24">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-extrabold text-gray-900 mb-4">Fornecedores</h2>
-          <p className="max-w-2xl mx-auto text-gray-600">
-            Trabalhamos com os principais desenvolvedores e fabricantes de tecnologia assistiva do mundo.
-          </p>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">Nossos Fornecedores</h2>
+          <p className="text-lg text-gray-600 mt-2">Trabalhamos com as melhores marcas do mercado.</p>
         </div>
         <Swiper
-          modules={[Autoplay]}
+          modules={[Autoplay, Navigation]}
           spaceBetween={50}
           slidesPerView={2}
           loop={true}
           autoplay={{
-            delay: 2000,
+            delay: 3000,
             disableOnInteraction: false,
           }}
+          navigation
           breakpoints={{
-            640: { slidesPerView: 3, spaceBetween: 40 },
-            768: { slidesPerView: 5, spaceBetween: 50 },
-            1024: { slidesPerView: 6, spaceBetween: 60 },
-            1280: { slidesPerView: 8, spaceBetween: 70 },
+            640: { slidesPerView: 3 },
+            768: { slidesPerView: 4 },
+            1024: { slidesPerView: 5 },
           }}
           className="w-full"
         >
           {fabricantes.map((fabricante) => {
-            // Adaptado para a estrutura de dados "flat" (plana) que a API está retornando.
-            const logoUrl = getStrapiMediaUrl(fabricante.logo?.url);
+            const attrs = fabricante.attributes || fabricante;
+            const logo = attrs.logo;
+            const logoUrlPath = logo?.data?.attributes?.url || logo?.url;
+            const logoUrl = getStrapiMediaUrl(logoUrlPath);
             return (
-              <SwiperSlide key={fabricante.id} className="flex items-center justify-center h-24">
-                {logoUrl && <Link href={fabricante.url || '#'} target="_blank" rel="noopener noreferrer"><Image src={logoUrl} alt={fabricante.nome || 'Logo do fabricante'} width={120} height={60} className="object-contain max-h-16 w-auto grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300" /></Link>}
+              <SwiperSlide key={fabricante.id} className="flex items-center justify-center">
+                {logoUrl ? (
+                  <a href={attrs.site} target="_blank" rel="noopener noreferrer" className="cursor-pointer">
+                    <img
+                      src={logoUrl}
+                      alt={attrs.nome}
+                      className="max-h-16 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                    />
+                  </a>
+                ) : (
+                  <span className="text-gray-500">{attrs.nome}</span>
+                )}
               </SwiperSlide>
             );
           })}
