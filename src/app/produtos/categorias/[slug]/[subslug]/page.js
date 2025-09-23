@@ -3,36 +3,42 @@ import CategoryMenu from '@/components/CategoryMenu';
 import ProductDisplay from '@/components/ProductDisplay';
 
 export async function generateStaticParams() {
-  try {
-    const categories = await getAllCategories();
-    if (!categories || categories.length === 0) return [];
+    try {
+        const categories = await getAllCategories();
+        if (!categories || categories.length === 0) return [];
 
-    const params = [];
-    categories.forEach((cat) => {
-      const c = cat.attributes || cat;
-      const slug = c.slug;
-      const subcats = c.subcategorias?.data || c.subcategorias || [];
-      if (Array.isArray(subcats) && subcats.length > 0) {
-        subcats.forEach((sub) => {
-          const s = sub.attributes || sub;
-          if (slug && s.slug) params.push({ slug, subslug: s.slug });
+        const params = categories.flatMap((category) => {
+            const categorySlug = category.attributes?.slug || category.slug;
+            const subcategories = category.attributes?.subcategorias?.data || [];
+
+            if (!categorySlug || subcategories.length === 0) {
+                return [];
+            }
+
+            return subcategories.map((subcategory) => {
+                const subcategorySlug = subcategory.attributes?.slug || subcategory.slug;
+                if (!subcategorySlug) return null;
+                return {
+                    slug: categorySlug,
+                    subslug: subcategorySlug,
+                };
+            }).filter(Boolean);
         });
-      }
-    });
 
-    return params;
-  } catch (err) {
-    console.error('generateStaticParams (subcategoria) failed:', err.message);
-    return [];
-  }
+        return params;
+    } catch (err) {
+        console.error("generateStaticParams (subcategorias) failed:", err.message);
+        return [];
+    }
 }
 
-async function getProductsForSubcategory(subslug) {
+async function getProductsForSubCategory(subslug) {
     try {
+        const fields = 'fields[0]=nome&fields[1]=slug&fields[2]=descricao_curta';
         const populate = 'populate[0]=imagem_principal';
         const filters = `filters[subcategoria][slug][$eq]=${subslug}`;
         
-        const productsData = await fetchAPI(`/api/produtos?${populate}&${filters}`);
+        const productsData = await fetchAPI(`/api/produtos?${fields}&${populate}&${filters}&pagination[limit]=1000`);
         return normalizeDataArray(productsData);
     } catch (error) {
         console.error(`Falha ao buscar produtos para a subcategoria ${subslug}:`, error);
@@ -40,31 +46,28 @@ async function getProductsForSubcategory(subslug) {
     }
 }
 
-export default async function SubcategoryPage({ params }) {
-  const { slug, subslug } = params;
+export default async function SubCategoriaSlugPage({ params }) {
+    const { slug, subslug } = params;
 
-  // Busca todos os dados necessários em paralelo
-  const [allCategories, productsForSubcategory] = await Promise.all([
-    getAllCategories(),
-    getProductsForSubcategory(subslug),
-  ]);
+    const [allCategories, productsForSubCategory] = await Promise.all([
+        getAllCategories(),
+        getProductsForSubCategory(subslug),
+    ]);
 
-  // Encontra o nome da subcategoria para usar como título
-  const currentCategory = allCategories.find(c => (c.attributes?.slug || c.slug) === slug);
-  const subcategories = currentCategory?.attributes?.subcategorias || [];
-  const currentSubcategory = subcategories.find(s => (s.attributes?.slug || s.slug) === subslug);
-  const subcategoryName = currentSubcategory?.nome || 'Produtos';
+    const currentCategory = allCategories.find(c => (c.attributes?.slug || c.slug) === slug);
+    const currentSubCategory = currentCategory?.attributes?.subcategorias?.data?.find(
+        sc => (sc.attributes?.slug || sc.slug) === subslug
+    );
+    const subCategoryName = currentSubCategory?.attributes?.nome || 'Produtos';
 
-  return (
-    <div className="container mx-auto flex flex-col md:flex-row gap-8 py-8 px-4">
-        <aside className="w-full md:w-1/4 lg:w-1/5">
-            {/* Passa o slug da categoria principal para o menu */}
-            <CategoryMenu categories={allCategories} activeCategorySlug={slug} activeSubcategorySlug={subslug} />
-        </aside>
-        <div className="w-full md:w-3/4 lg:w-4/5 px-4 md:px-8 lg:px-16">
-            {/* O ProductDisplay agora recebe o nome da subcategoria e seus produtos */}
-            <ProductDisplay categoryName={subcategoryName} products={productsForSubcategory} />
+    return (
+        <div className="container mx-auto flex flex-col md:flex-row gap-8 py-8 px-4">
+            <aside className="w-full md:w-1/4 lg:w-1/5">
+                <CategoryMenu categories={allCategories} activeCategorySlug={slug} activeSubCategorySlug={subslug} />
+            </aside>
+            <div className="w-full md:w-3/4 lg:w-4/5 px-4 md:px-8 lg:px-16">
+                <ProductDisplay categoryName={subCategoryName} products={productsForSubCategory} />
+            </div>
         </div>
-    </div>
-  );
+    );
 }
