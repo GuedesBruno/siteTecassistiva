@@ -2,7 +2,7 @@ import { getAllCategories, fetchAPI, normalizeDataArray } from '@/lib/api';
 import CategoryMenu from '@/components/CategoryMenu';
 import ProductDisplay from '@/components/ProductDisplay';
 
-export async function generateStaticParams() {
+async function generateStaticParamsImpl() {
     try {
         const categories = await getAllCategories();
         if (!categories || categories.length === 0) return [];
@@ -31,6 +31,8 @@ export async function generateStaticParams() {
         return [];
     }
 }
+
+export const generateStaticParams = generateStaticParamsImpl;
 
 async function getProductsForSubCategory(subslug) {
     try {
