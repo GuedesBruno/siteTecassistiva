@@ -9,7 +9,7 @@ module.exports = {
       // ATUALIZADO: Paleta de cores ajustada
       colors: {
         'tec-blue': '#002554',        // Nova cor principal do Header
-        'tec-blue-light': '#007bff',  // Azul vibrante para botões e links
+        'tec-blue-light': '#0056b3',  // Azul vibrante para botões e links
         'tec-navy': '#001F3F',       // Azul ainda mais escuro para a barra superior
         'tec-footer': '#003366',     // A cor antiga do Header, agora para o Footer
       },

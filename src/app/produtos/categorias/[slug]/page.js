@@ -26,8 +26,8 @@ async function getProductsForCategory(slug) {
         const fields = 'fields[0]=nome&fields[1]=slug&fields[2]=descricao_curta';
         const populate = 'populate[0]=imagem_principal&populate[1]=subcategoria';
         // Alterado o filtro para buscar em uma relação de 'muitos para muitos'.
-        // Se um produto pode ter várias categorias, o nome do campo da relação no Strapi é provavelmente 'categorias' (plural).
-        const filters = `filters[categorias][slug][$eq]=${slug}`;
+        // O nome do campo da relação no Strapi é 'categoria'.
+        const filters = `filters[categoria][slug][$eq]=${slug}`;
         
         const productsData = await fetchAPI(`/api/produtos?${fields}&${populate}&${filters}&pagination[limit]=1000`);
         return normalizeDataArray(productsData);

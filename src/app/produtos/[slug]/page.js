@@ -22,8 +22,8 @@ export async function generateStaticParams() {
 function buildBreadcrumbs(product) {
     const attrs = product.attributes || product;
     // Se um produto pode ter várias categorias, pegamos a primeira como principal para o breadcrumb.
-    const { categorias, subcategoria } = attrs;
-    const primaryCategory = categorias?.data?.[0];
+    const { categoria, subcategoria } = attrs;
+    const primaryCategory = categoria?.data?.[0];
     
     const crumbs = [
         { name: 'Página Inicial', path: '/' },
