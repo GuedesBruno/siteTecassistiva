@@ -202,7 +202,8 @@ async function getHomeVideos() {
 
 // Busca todos os depoimentos
 async function getAllTestimonials() {
-  const response = await fetchAPI('/api/depoimentos?sort=createdAt:asc');
+  // Removendo o sort para isolar a causa do erro 404.
+  const response = await fetchAPI('/api/depoimentos');
   return normalizeDataArray(response);
 }
 
