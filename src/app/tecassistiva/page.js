@@ -1,13 +1,5 @@
 import Link from 'next/link';
 
-// Componente para os cards de Missão, Visão e Valores
-const InfoCard = ({ title, children }) => (
-  <div className="bg-gray-50 p-6 rounded-lg shadow-sm border">
-    <h3 className="text-2xl font-bold text-tec-blue mb-4">{title}</h3>
-    <p className="text-gray-700 leading-relaxed">{children}</p>
-  </div>
-);
-
 // Componente da Página
 export default function TecassistivaPage() {
   return (
@@ -63,6 +55,7 @@ export default function TecassistivaPage() {
                       Ser a empresa de referência em Tecnologia Assistiva, reconhecida pela comunidade, colaboradores, fornecedores e investidores, pela qualidade de seus produtos, serviços e apoio institucional.
                     </p>
                 </div>
+
                 <div>
                     <h2 className="text-4xl font-extrabold mb-4">Valores</h2>
                     <ul className="space-y-2 leading-relaxed">
