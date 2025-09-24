@@ -19,13 +19,18 @@ export async function generateStaticParams() {
   try {
     const categories = await getAllCategories();
 
-    const paths =
-      categories.flatMap((category) =>
-        category.attributes.subcategorias?.data.map((subcategory) => ({
-          slug: category.attributes.slug,
-          subslug: subcategory.attributes.slug,
-        }))
-      ) ?? [];
+    const paths = categories.flatMap((category) => {
+        // FIX: Adiciona verificação para proteger contra dados malformados da API
+        if (!category || !category.attributes) {
+          return []; // Ignora a categoria se não tiver atributos
+        }
+        return (
+          category.attributes.subcategorias?.data.map((subcategory) => ({
+            slug: category.attributes.slug,
+            subslug: subcategory.attributes.slug,
+          })) ?? []
+        );
+      });
 
     // Filtra caminhos undefined ou nulos que podem surgir se a subcategoria não tiver slug
     return paths.filter(p => p && p.slug && p.subslug);
