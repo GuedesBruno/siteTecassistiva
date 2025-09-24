@@ -2,7 +2,7 @@ import { getProductBySlug, getAllProductSlugs } from '@/lib/api';
 import ProductViewClient from '@/components/ProductViewClient';
 import { notFound } from 'next/navigation';
 
-// ✅ ADICIONE ESTA FUNÇÃO
+// ✅ PASSO FINAL: Informa ao Next.js quais páginas de produto construir
 export async function generateStaticParams() {
   const products = await getAllProductSlugs();
   return products.map((product) => ({

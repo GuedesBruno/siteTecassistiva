@@ -2,7 +2,7 @@ import { getSubcategoryBySlug, getProductsBySubcategorySlug, getAllCategoryPaths
 import CategoryProductList from '@/components/CategoryProductList';
 import { notFound } from 'next/navigation';
 
-// ✅ ADICIONE ESTA FUNÇÃO
+// ✅ PASSO FINAL: Informa ao Next.js quais páginas de subcategoria construir
 export async function generateStaticParams() {
   const categories = await getAllCategoryPaths();
 
