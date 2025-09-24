@@ -1,5 +1,3 @@
-// Função centralizada para fazer chamadas à API do Strapi
-// Não exportada, pois é usada apenas internamente
 async function fetchAPI(endpoint, options = {}) {
   const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
   const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN;
@@ -39,8 +37,6 @@ async function fetchAPI(endpoint, options = {}) {
   }
 }
 
-// --- Funções Exportadas ---
-
 export function getStrapiURL() {
   let base = (process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337').replace(/\/+$/g, '');
   if (base.endsWith('/api')) base = base.replace(/\/api$/, '');
@@ -55,18 +51,13 @@ export function getStrapiMediaUrl(path) {
   return `${base}/${path}`;
 }
 
-export async function getHomeVideos() {
-  const endpoint = '/api/video-homes?fields[0]=titulo&fields[1]=link&populate=thumbnail&sort=ordem:asc';
-  const response = await fetchAPI(endpoint);
-  return normalizeDataArray(response);
+export function normalizeDataArray(response) {
+  if (!response) return [];
+  const data = response.data || [];
+  return data;
 }
 
-export async function getAllTestimonials() {
-  const response = await fetchAPI('/api/depoimentos');
-  return normalizeDataArray(response);
-}
-
-export async function getFeaturedTestimonial() {
+export async function getAllProducts() {
   const response = await fetchAPI('/api/produtos?fields[0]=slug&pagination[limit]=1000');
   return normalizeDataArray(response);
 }
@@ -115,11 +106,6 @@ export async function getProductBySlug(slug) {
 
   const { id, ...rest } = item;
   return { id, attributes: rest };
-}
-
-export async function getManufacturers() {
-  const response = await fetchAPI('/api/fabricantes?populate=logo&pagination[limit]=100&sort=ordem:asc');
-  return normalizeDataArray(response);
 }
 
 export async function getFeaturedProducts() {
@@ -171,11 +157,32 @@ export async function getBanners() {
   return normalizeDataArray(response);
 }
 
-export function normalizeDataArray(response) {
-  if (!response) return [];
-  const data = response.data || [];
-  return data;
+// Funções que eu adicionei e que podem ser necessárias
+export async function getManufacturers() {
+  const response = await fetchAPI('/api/fabricantes?populate=logo&pagination[limit]=100&sort=ordem:asc');
+  return normalizeDataArray(response);
 }
 
-// Adicionando a exportação explícita para fetchAPI, caso seja necessária em outro lugar
+export async function getHomeVideos() {
+  const endpoint = '/api/video-homes?fields[0]=titulo&fields[1]=link&populate=thumbnail&sort=ordem:asc';
+  const response = await fetchAPI(endpoint);
+  return normalizeDataArray(response);
+}
+
+export async function getAllTestimonials() {
+  const response = await fetchAPI('/api/depoimentos');
+  return normalizeDataArray(response);
+}
+
+// Adicionando funções que podem estar faltando para o build
+export async function getAllCategoryPaths() {
+    const response = await fetchAPI('/api/categorias?fields[0]=slug&populate[subcategorias][fields][0]=slug&pagination[limit]=200');
+    return normalizeDataArray(response);
+}
+
+export async function getProductsByCategorySlug(slug) {
+    const response = await fetchAPI(`/api/produtos?filters[categorias][slug][$eq]=${slug}&populate=*`);
+    return normalizeDataArray(response);
+}
+
 export { fetchAPI };
