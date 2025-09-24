@@ -1,38 +1,32 @@
-import { getAllCategories, fetchAPI, normalizeDataArray } from '@/lib/api';
+import { getAllCategories, getAllSubcategoriesWithCategory, fetchAPI, normalizeDataArray } from '@/lib/api';
 import CategoryMenu from '@/components/CategoryMenu';
 import ProductDisplay from '@/components/ProductDisplay';
 
-async function generateStaticParamsImpl() {
-    try {
-        const categories = await getAllCategories();
-        if (!categories || categories.length === 0) return [];
+export async function generateStaticParams() {
+    // A lógica foi invertida para lidar com a relação muitos-para-muitos
+    // partindo das subcategorias, que é mais garantido.
+    const subcategorias = await getAllSubcategoriesWithCategory();
+    if (!subcategorias || subcategorias.length === 0) return [];
 
-        const params = categories.flatMap((category) => {
-            const categorySlug = category.attributes?.slug || category.slug;
-            const subcategories = category.attributes?.subcategorias?.data || [];
+    const params = subcategorias.flatMap((subcategoria) => {
+        const subcategoriaSlug = subcategoria.attributes?.slug || subcategoria.slug;
+        const categorias = subcategoria.attributes?.categorias?.data || [];
 
-            if (!categorySlug || subcategories.length === 0) {
-                return [];
-            }
+        if (!subcategoriaSlug || categorias.length === 0) {
+            return [];
+        }
 
-            return subcategories.map((subcategory) => {
-                const subcategorySlug = subcategory.attributes?.slug || subcategory.slug;
-                if (!subcategorySlug) return null;
-                return {
-                    slug: categorySlug,
-                    subslug: subcategorySlug,
-                };
-            }).filter(Boolean);
-        });
-
-        return params;
-    } catch (err) {
-        console.error("generateStaticParams (subcategorias) failed:", err.message);
-        return [];
-    }
+        return categorias.map((categoria) => {
+            const categoriaSlug = categoria.attributes?.slug || categoria.slug;
+            if (!categoriaSlug) return null;
+            return {
+                slug: categoriaSlug,
+                subslug: subcategoriaSlug,
+            };
+        }).filter(Boolean);
+    });
+    return params;
 }
-
-export const generateStaticParams = generateStaticParamsImpl;
 
 async function getProductsForSubCategory(subslug) {
     try {
@@ -51,24 +45,24 @@ async function getProductsForSubCategory(subslug) {
 export default async function SubCategoriaSlugPage({ params }) {
     const { slug, subslug } = params;
 
-    const [allCategories, productsForSubCategory] = await Promise.all([
+    const [todasAsCategorias, produtosDaSubcategoria] = await Promise.all([
         getAllCategories(),
         getProductsForSubCategory(subslug),
     ]);
 
-    const currentCategory = allCategories.find(c => (c.attributes?.slug || c.slug) === slug);
-    const currentSubCategory = currentCategory?.attributes?.subcategorias?.data?.find(
+    const categoriaAtual = todasAsCategorias.find(c => (c.attributes?.slug || c.slug) === slug);
+    const subcategoriaAtual = categoriaAtual?.attributes?.subcategorias?.data?.find(
         sc => (sc.attributes?.slug || sc.slug) === subslug
     );
-    const subCategoryName = currentSubCategory?.attributes?.nome || 'Produtos';
+    const nomeSubcategoria = subcategoriaAtual?.attributes?.nome || 'Produtos';
 
     return (
         <div className="container mx-auto flex flex-col md:flex-row gap-8 py-8 px-4">
             <aside className="w-full md:w-1/4 lg:w-1/5">
-                <CategoryMenu categories={allCategories} activeCategorySlug={slug} activeSubCategorySlug={subslug} />
+                <CategoryMenu categories={todasAsCategorias} activeCategorySlug={slug} activeSubCategorySlug={subslug} />
             </aside>
             <div className="w-full md:w-3/4 lg:w-4/5 px-4 md:px-8 lg:px-16">
-                <ProductDisplay categoryName={subCategoryName} products={productsForSubCategory} />
+                <ProductDisplay categoryName={nomeSubcategoria} products={produtosDaSubcategoria} />
             </div>
         </div>
     );

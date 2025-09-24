@@ -26,7 +26,7 @@ export default async function Home() {
     <div>
       <BannerSlider banners={banners || []} />
       {/* Informational block matching the attached screenshot */}
-      <section className="bg-tec-blue-light text-white py-12">
+      <section className="bg-tec-blue-light text-white py-16">
         <div className="container mx-auto px-4 md:px-12 lg:px-24 text-center">
           <h2 className="text-4xl font-extrabold mb-4">Tecassistiva</h2>
           <p className="mx-auto leading-relaxed text-xl">

@@ -79,11 +79,11 @@ export default function TecassistivaPage() {
 
         {/* Seção de Depoimentos com o novo depoimento */}
         <section className="bg-white py-8">
-            <div className="mx-auto">
+            <div>
                 <div className="text-center mb-8">
                     <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">Depoimentos</h2>
                 </div>
-                <div className="bg-gray-100 p-8 rounded-lg shadow-md">
+                <div className="bg-gray-100 p-8 rounded-lg shadow-md mx-auto">
                     <blockquote className="text-center text-gray-700 text-xl italic leading-loose">
                         <p>"E, na frente dos olhos incrédulos de Bianca, a linha braille transformou o texto de tinta para braille. “Peguei o livro que tinha acabado de comprar e coloquei sobre o Sara PC. Em segundos, a linha braille transformava letras em bolinhas! Eu comecei a viver de novo depois de comprar a linha braille", declara ela com alegria.” Agora, Bianca pede os livros didáticos da filha em formato PDF para as editoras e assim, Nicole lê-os na linha braille. Bianca calcula que, com a linha braille, ela economize por volta de 80% do tempo que dedicava à transcrição dos livros inteiros para filha".</p>
                     </blockquote>

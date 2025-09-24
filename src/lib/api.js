@@ -93,7 +93,7 @@ async function getProductBySlug(slug) {
   const populateFields = [
     'imagem_principal',
     'galeria_de_imagens',
-    'categoria', // O nome do campo da relação no Strapi.
+    'categorias',
     'subcategoria',
     'documentos' // O campo 'documentos' é uma relação (mídia/upload), então deve ser populado.
   ];
@@ -133,8 +133,17 @@ async function getFeaturedProducts() {
 
 // Busca todas as categorias com seus produtos e imagens
 async function getAllCategories() {
-  // Busca categorias com subcategorias para montar o menu
-  const response = await fetchAPI('/api/categorias?fields[0]=nome&fields[1]=slug&populate=subcategorias&pagination[limit]=100');
+  // Busca categorias e popula a relação com subcategorias para montar o menu.
+  const populateQuery = 'populate=subcategorias';
+  const response = await fetchAPI(`/api/categorias?fields[0]=nome&fields[1]=slug&${populateQuery}&pagination[limit]=100`);
+  return normalizeDataArray(response);
+}
+
+// Busca todas as subcategorias e popula as categorias a que pertencem (para generateStaticParams)
+async function getAllSubcategoriesWithCategory() {
+  // Assumindo que a relação é definida no content-type 'subcategoria' com o campo 'categorias'
+  const populateQuery = 'populate[categorias][fields][0]=slug';
+  const response = await fetchAPI(`/api/subcategorias?fields[0]=slug&${populateQuery}&pagination[limit]=1000`);
   return normalizeDataArray(response);
 }
 
@@ -235,6 +244,7 @@ module.exports = {
   getProductBySlug,
   getFeaturedProducts,
   getAllCategories,
+  getAllSubcategoriesWithCategory,
   getCategoryBySlug,
   getBanners,
   getManufacturers,
