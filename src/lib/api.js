@@ -37,7 +37,7 @@ async function fetchAPI(endpoint, options = {}) {
   }
 }
 
-// --- Funções Exportadas ---
+// --- Funções Auxiliares Exportadas ---
 
 export function getStrapiURL() {
   let base = (process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337').replace(/\/+$/g, '');
@@ -57,7 +57,7 @@ export function normalizeDataArray(response) {
   return response.data || [];
 }
 
-// FUNÇÕES PARA PÁGINAS E COMPONENTES
+// --- Funções de Busca de Dados ---
 
 export async function getBanners() {
   const response = await fetchAPI('/api/banner-sites?sort=ordem:asc&populate=imagem');
@@ -86,6 +86,12 @@ export async function getFeaturedTestimonial() {
   return data.length > 0 ? data[0] : null;
 }
 
+// ✅ FUNÇÃO QUE ESTAVA FALTANDO, AGORA ADICIONADA
+export async function getAllTestimonials() {
+  const response = await fetchAPI('/api/depoimentos');
+  return normalizeDataArray(response);
+}
+
 export async function getAllProductsForDisplay() {
   const query = '/api/produtos?fields[0]=nome&fields[1]=slug&fields[2]=descricao_curta&populate[0]=imagem_principal&populate[1]=subcategoria&pagination[limit]=1000';
   const productsData = await fetchAPI(query);
@@ -100,25 +106,13 @@ export async function getProductBySlug(slug) {
 }
 
 export async function getCategoryBySlug(slug) {
-    const response = await fetchAPI(`/api/categorias?filters[slug][$eq]=${slug}`);
+    const response = await fetchAPI(`/api/categorias?filters[slug][$eq]=${slug}&populate=subcategorias`);
     const data = normalizeDataArray(response);
     return data.length > 0 ? data[0] : null;
 }
 
 export async function getProductsByCategorySlug(slug) {
     const response = await fetchAPI(`/api/produtos?filters[categorias][slug][$eq]=${slug}&populate=*`);
-    return normalizeDataArray(response);
-}
-
-// ✅ FUNÇÕES ADICIONADAS PARA O BUILD ESTÁTICO
-
-export async function getAllProductSlugs() {
-    const response = await fetchAPI('/api/produtos?fields[0]=slug&pagination[limit]=1000');
-    return normalizeDataArray(response);
-}
-
-export async function getAllCategoryPaths() {
-    const response = await fetchAPI('/api/categorias?fields[0]=slug&populate[subcategorias][fields][0]=slug&pagination[limit]=200');
     return normalizeDataArray(response);
 }
 
@@ -137,4 +131,16 @@ export async function getAllCategories() {
   const populateQuery = 'populate=subcategorias';
   const response = await fetchAPI(`/api/categorias?fields[0]=nome&fields[1]=slug&${populateQuery}&pagination[limit]=100`);
   return normalizeDataArray(response);
+}
+
+// --- Funções para `generateStaticParams` (Build Estático) ---
+
+export async function getAllProductSlugs() {
+    const response = await fetchAPI('/api/produtos?fields[0]=slug&pagination[limit]=1000');
+    return normalizeDataArray(response);
+}
+
+export async function getAllCategoryPaths() {
+    const response = await fetchAPI('/api/categorias?fields[0]=slug&populate[subcategorias][fields][0]=slug&pagination[limit]=200');
+    return normalizeDataArray(response);
 }
