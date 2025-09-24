@@ -99,7 +99,7 @@ export async function getAllProductsForDisplay() {
 }
 
 export async function getProductBySlug(slug) {
-  const query = `/api/produtos?filters[slug][$eq]=${slug}&populate[imagem_principal]=*&populate[galeria_de_imagens]=*&populate[categorias]=*&populate[subcategoria]=*&populate[documentos]=*`;
+  const query = `/api/produtos?filters[slug][$eq]=${slug}&populate=*`;
   const response = await fetchAPI(query);
   const data = normalizeDataArray(response);
   return data.length > 0 ? data[0] : null;

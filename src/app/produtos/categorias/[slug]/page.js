@@ -1,6 +1,7 @@
 import { getCategoryBySlug, getProductsByCategorySlug, getAllCategoryPaths } from '@/lib/api';
 import CategoryProductList from '@/components/CategoryProductList';
 import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
 
 // ✅ PASSO FINAL: Informa ao Next.js quais páginas de categoria construir
 export async function generateStaticParams() {
@@ -34,9 +35,11 @@ export default async function CategoryPage({ params }) {
   const products = await getProductsByCategorySlug(slug);
   
   return (
-    <CategoryProductList
-      title={categoryData.nome}
-      products={products}
-    />
+    <Suspense fallback={<div>Carregando...</div>}>
+      <CategoryProductList
+        title={categoryData.nome}
+        products={products}
+      />
+    </Suspense>
   );
 }
