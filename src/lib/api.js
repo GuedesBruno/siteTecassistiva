@@ -181,7 +181,8 @@ export async function getAllCategoryPaths() {
 }
 
 export async function getProductsByCategorySlug(slug) {
-    const response = await fetchAPI(`/api/produtos?filters[categorias][slug][$eq]=${slug}&populate=*`);
+    const filters = `filters[$or][0][categorias][slug][$eq]=${slug}&filters[$or][1][subcategoria][categorias][slug][$eq]=${slug}`;
+    const response = await fetchAPI(`/api/produtos?${filters}&populate=*`);
     return normalizeDataArray(response);
 }
 
