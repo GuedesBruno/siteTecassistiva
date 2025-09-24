@@ -4,13 +4,7 @@ import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 
 // ✅ PASSO FINAL: Informa ao Next.js quais páginas de categoria construir
-export async function generateStaticParams() {
-  const categories = await getAllCategoryPaths();
-  // FIX: Aplicando a lógica defensiva
-  return categories.map(c => ({
-    slug: c.attributes?.slug || c.slug,
-  })).filter(c => c.slug);
-}
+
 
 export async function generateMetadata({ params }) {
   const category = await getCategoryBySlug(params.slug);
