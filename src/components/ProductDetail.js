@@ -32,7 +32,7 @@ function RichTextRenderer({ content }) {
   });
 }
 
-export default function ProductDetail({ product, breadcrumbs }) {
+export default function ProductDetail({ product, breadcrumbs = [] }) {
   const [activeTab, setActiveTab] = useState('Visão Geral');
   const { attributes: p } = product;
   const images = [p.imagem_principal, ...(p.galeria_de_imagens || [])].filter(Boolean);
