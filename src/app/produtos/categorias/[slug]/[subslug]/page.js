@@ -1,96 +1,78 @@
-import { getAllCategories, fetchAPI, normalizeDataArray } from '@/lib/api';
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import ProductCard from '@/components/ProductCard';
+// /app/produtos/categorias/[slug]/[subslug]/page.js
+import { getCategoryBySlug, getAllCategories, getProductsBySubcategorySlug, getAllCategoryPaths } from "@/lib/api";
+import CategoryMenu from "@/components/CategoryMenu";
+import ProductDisplay from "@/components/ProductDisplay";
+import { notFound } from "next/navigation";
+import { Suspense } from "react";
 
 export async function generateStaticParams() {
-  try {
-    const categories = await getAllCategories();
-    if (!categories || categories.length === 0) return [];
-
-    const params = [];
-    categories.forEach((cat) => {
-      const c = cat.attributes || cat;
-      const slug = c.slug;
-      const subcats = c.subcategorias?.data || c.subcategorias || [];
-      if (Array.isArray(subcats) && subcats.length > 0) {
-        subcats.forEach((sub) => {
-          const s = sub.attributes || sub;
-          if (slug && s.slug) params.push({ slug, subslug: s.slug });
-        });
-      }
-    });
-
-    return params;
-  } catch (err) {
-    console.error('generateStaticParams (subcategoria) failed:', err.message);
-    return [];
-  }
-}
-
-async function getProductsForSubcategory(subslug) {
-    try {
-        const populate = 'populate[0]=imagem_principal';
-        const filters = `filters[subcategoria][slug][$eq]=${subslug}`;
-        
-        const productsData = await fetchAPI(`/api/produtos?${populate}&${filters}`);
-        return normalizeDataArray(productsData);
-    } catch (error) {
-        console.error(`Falha ao buscar produtos para a subcategoria ${subslug}:`, error);
+  const categories = await getAllCategoryPaths();
+  const params = categories
+    .filter(Boolean)
+    .flatMap((category) => {
+      // No "attributes" nesting, based on user's JSON response
+      if (!category || !category.slug || !category.subcategorias) {
         return [];
-    }
+      }
+      return category.subcategorias
+        .filter(Boolean)
+        .map((subcategory) => {
+          if (!subcategory || !subcategory.slug) {
+            return null;
+          }
+          return {
+            slug: category.slug,
+            subslug: subcategory.slug,
+          };
+        })
+        .filter(Boolean);
+    });
+  return params;
 }
 
-export default async function SubcategoryPage({ params }) {
+export async function generateMetadata({ params }) {
+  // TODO: Fetch specific subcategory name for a more descriptive title
+  return {
+    title: `Produtos | Tecassistiva`,
+  };
+}
+
+export default async function SubCategoryPage({ params }) {
   const { slug, subslug } = params;
 
-  const [allCategories, products] = await Promise.all([
-    getAllCategories(),
-    getProductsForSubcategory(subslug),
+  const [categoryData, products, allCategories] = await Promise.all([
+    getCategoryBySlug(slug),
+    getProductsBySubcategorySlug(subslug),
+    getAllCategories()
   ]);
 
-  if (!products) {
+  if (!categoryData || !categoryData.data || categoryData.data.length === 0) {
     notFound();
   }
 
-  const currentCategory = allCategories.find(c => (c.attributes?.slug || c.slug) === slug);
-  const subcategories = currentCategory?.attributes?.subcategorias?.data || currentCategory?.subcategorias || [];
-  const currentSubcategory = subcategories.find(s => (s.attributes?.slug || s.slug) === subslug);
-  
-  const subcategoryName = currentSubcategory?.attributes?.nome || currentSubcategory?.nome || 'Produtos';
-  const categoryName = currentCategory?.attributes?.nome || currentCategory?.nome || 'Categorias';
-  const categorySlug = currentCategory?.attributes?.slug || currentCategory?.slug;
+  const category = categoryData.data[0].attributes;
+  const subcategory = category.subcategorias?.data?.find(s => (s.attributes || s).slug === subslug);
+  const subcategoryName = subcategory ? (subcategory.attributes || subcategory).nome : '';
+
+  const pageTitle = subcategoryName ? `${category.nome} - ${subcategoryName}` : category.nome;
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <nav className="text-sm text-gray-500 mb-8">
-        <Link href="/" className="hover:underline">
-          Página Inicial
-        </Link>
-        <span className="mx-2">&gt;</span>
-        <Link href="/produtos/categorias" className="hover:underline">
-          Produtos
-        </Link>
-        <span className="mx-2">&gt;</span>
-        <Link
-          href={`/produtos/categorias/${categorySlug}`}
-          className="hover:underline"
-        >
-          {categoryName}
-        </Link>
-        <span className="mx-2">&gt;</span>
-        <span className="font-semibold text-gray-700">
-          {subcategoryName}
-        </span>
-      </nav>
-      <h1 className="text-4xl font-bold text-gray-900 mb-8">
-        {subcategoryName}
-      </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
+    <div className="container mx-auto flex flex-col md:flex-row gap-8 py-8 px-4">
+      <aside className="w-full md:w-1/4 lg:w-1/5">
+        <CategoryMenu
+          categories={allCategories}
+          activeCategorySlug={slug}
+          activeSubcategorySlug={subslug}
+        />
+      </aside>
+      <main className="w-full md:w-3/4 lg:w-4/5 px-4 md:px-8 lg:px-16">
+        <Suspense fallback={<div>Carregando...</div>}>
+          <ProductDisplay
+            categoryName={pageTitle}
+            products={products}
+          />
+        </Suspense>
+      </main>
     </div>
   );
 }

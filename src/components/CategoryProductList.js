@@ -23,8 +23,15 @@ export default function ProductListClient({ category }) {
       };
     } 
     
-    // Se não, junta os produtos de todas as subcategorias da categoria principal
-    const allProducts = category.subcategorias?.flatMap(sub => sub.produtos || []) || [];
+    // Junta produtos diretos da categoria e produtos das subcategorias
+    const directProducts = category.produtos || [];
+    const productsFromSubcategories = category.subcategorias?.flatMap(sub => sub.produtos || []) || [];
+    
+    // Evita duplicatas caso um produto esteja em ambos os lugares
+    const allProductsMap = new Map();
+    [...directProducts, ...productsFromSubcategories].forEach(p => allProductsMap.set(p.id, p));
+    const allProducts = Array.from(allProductsMap.values());
+
     return {
       productsToShow: allProducts,
       title: category.nome
@@ -36,7 +43,7 @@ export default function ProductListClient({ category }) {
     <>
       <h1 className="text-4xl font-extrabold text-gray-900 mb-8">{title}</h1>
       {productsToShow.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {productsToShow.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

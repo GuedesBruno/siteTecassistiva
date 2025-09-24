@@ -9,7 +9,7 @@ export default function ProductListClient({ category, subCategorySlug, products 
   // Caso contrário, caímos na lógica anterior que usa `category` + `subCategorySlug`.
   const { productsToShow, title } = useMemo(() => {
     if (Array.isArray(products) && products.length > 0) {
-      return { productsToShow: products, title: 'Produtos em destaque' };
+      return { productsToShow: products, title: 'Nossos Produtos' };
     }
 
     if (!category) {

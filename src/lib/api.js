@@ -79,7 +79,7 @@ export async function getProductBySlug(slug) {
     'imagem_principal',
     'galeria_de_imagens',
     'categorias',
-    'subcategoria',
+    'subcategorias',
     'documentos'
   ];
   const fieldsToFetch = [
@@ -114,7 +114,7 @@ export async function getFeaturedProducts() {
 }
 
 export async function getAllCategories() {
-  const response = await fetchAPI('/api/categorias?fields[0]=nome&fields[1]=slug&populate=subcategorias&pagination[limit]=100');
+  const response = await fetchAPI('/api/categorias?fields[0]=nome&fields[1]=slug&populate[subcategorias][fields][0]=nome&populate[subcategorias][fields][1]=slug&pagination[limit]=100');
   return normalizeDataArray(response);
 }
 
@@ -176,13 +176,21 @@ export async function getAllTestimonials() {
 
 // Adicionando funções que podem estar faltando para o build
 export async function getAllCategoryPaths() {
-    const response = await fetchAPI('/api/categorias?fields[0]=slug&populate[subcategorias][fields][0]=slug&pagination[limit]=200');
+    const response = await fetchAPI(
+        '/api/categorias?fields[0]=slug&populate[subcategorias][fields][0]=slug&pagination[limit]=200',
+        { cache: 'no-store' } // Força a busca de dados novos, evitando cache
+    );
     return normalizeDataArray(response);
 }
 
 export async function getProductsByCategorySlug(slug) {
     const filters = `filters[$or][0][categorias][slug][$eq]=${slug}&filters[$or][1][subcategoria][categorias][slug][$eq]=${slug}`;
     const response = await fetchAPI(`/api/produtos?${filters}&populate=*`);
+    return normalizeDataArray(response);
+}
+
+export async function getProductsBySubcategorySlug(subslug) {
+    const response = await fetchAPI(`/api/produtos?filters[subcategoria][slug][$eq]=${subslug}&populate=*`);
     return normalizeDataArray(response);
 }
 

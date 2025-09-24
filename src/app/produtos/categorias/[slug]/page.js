@@ -1,5 +1,6 @@
-import { getCategoryBySlug, getProductsByCategorySlug, getAllCategoryPaths } from '@/lib/api';
+import { getCategoryBySlug, getAllCategories, getAllCategoryPaths } from '@/lib/api';
 import CategoryProductList from '@/components/CategoryProductList';
+import CategoryMenu from '@/components/CategoryMenu';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 
@@ -31,23 +32,34 @@ export async function generateMetadata({ params }) {
 
 export default async function CategoryPage({ params }) {
   const { slug } = params;
-  const categoryData = await getCategoryBySlug(slug);
+  
+  // Fetch data in parallel
+  const [categoryData, allCategories] = await Promise.all([
+    getCategoryBySlug(slug),
+    getAllCategories()
+  ]);
 
-  if (!categoryData) {
+  if (!categoryData || !categoryData.data || categoryData.data.length === 0) {
     notFound();
   }
   
-  const products = await getProductsByCategorySlug(slug);
-  
-  // FIX: Aplicando a lógica defensiva
-  const categoryName = categoryData?.attributes?.nome || categoryData?.nome || 'Produtos';
+  const category = categoryData.data[0].attributes;
 
   return (
-    <Suspense fallback={<div>Carregando...</div>}>
-      <CategoryProductList
-        title={categoryName}
-        products={products}
-      />
-    </Suspense>
+    <div className="container mx-auto flex flex-col md:flex-row gap-8 py-8 px-4">
+      <aside className="w-full md:w-1/4 lg:w-1/5">
+        <CategoryMenu
+          categories={allCategories}
+          activeCategorySlug={slug}
+        />
+      </aside>
+      <main className="w-full md:w-3/4 lg:w-4/5 px-4 md:px-8 lg:px-16">
+        <Suspense fallback={<div>Carregando...</div>}>
+          <CategoryProductList
+            category={category}
+          />
+        </Suspense>
+      </main>
+    </div>
   );
 }
