@@ -1,51 +1,65 @@
-import {
-  getProductsBySubcategorySlug,
-  getSubcategoryBySlug,
-  getSubcategoriesForCategory,
-} from "@/lib/api";
-import { notFound } from "next/navigation";
-import Link from "next/link";
-import ProductCard from "@/components/ProductCard";
+import { getAllCategories, fetchAPI, normalizeDataArray } from '@/lib/api';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import ProductCard from '@/components/ProductCard';
 
-// Abordagem "Top-Down" para gerar os parâmetros estáticos
-export async function generateStaticParams({ params }) {
+export async function generateStaticParams() {
   try {
-    const { slug } = params;
-    const subcategories = await getSubcategoriesForCategory(slug);
+    const categories = await getAllCategories();
+    if (!categories || categories.length === 0) return [];
 
-    // CORREÇÃO FINAL: Acessando o .slug diretamente, conforme a estrutura da sua API
-    return subcategories.map((subcategory) => ({
-      subslug: subcategory.slug,
-    }));
+    const params = [];
+    categories.forEach((cat) => {
+      const c = cat.attributes || cat;
+      const slug = c.slug;
+      const subcats = c.subcategorias?.data || c.subcategorias || [];
+      if (Array.isArray(subcats) && subcats.length > 0) {
+        subcats.forEach((sub) => {
+          const s = sub.attributes || sub;
+          if (slug && s.slug) params.push({ slug, subslug: s.slug });
+        });
+      }
+    });
 
-  } catch (error) {
-    console.error(
-      `Falha ao gerar parâmetros para a categoria ${params.slug}:`,
-      error
-    );
+    return params;
+  } catch (err) {
+    console.error('generateStaticParams (subcategoria) failed:', err.message);
     return [];
   }
 }
 
-export default async function SubcategoryPage({ params }) {
-  const { subslug } = params;
+async function getProductsForSubcategory(subslug) {
+    try {
+        const populate = 'populate[0]=imagem_principal';
+        const filters = `filters[subcategoria][slug][$eq]=${subslug}`;
+        
+        const productsData = await fetchAPI(`/api/produtos?${populate}&${filters}`);
+        return normalizeDataArray(productsData);
+    } catch (error) {
+        console.error(`Falha ao buscar produtos para a subcategoria ${subslug}:`, error);
+        return [];
+    }
+}
 
-  const [products, subcategoryData] = await Promise.all([
-    getProductsBySubcategorySlug(subslug),
-    getSubcategoryBySlug(subslug),
+export default async function SubcategoryPage({ params }) {
+  const { slug, subslug } = params;
+
+  const [allCategories, products] = await Promise.all([
+    getAllCategories(),
+    getProductsForSubcategory(subslug),
   ]);
 
-  if (!products || products.length === 0 || !subcategoryData) {
+  if (!products) {
     notFound();
   }
 
-  // CORREÇÃO: Acessar os dados da categoria e subcategoria sem .attributes
-  const categoryData = subcategoryData.categoria?.data;
-
-  if (!categoryData) {
-    console.error(`Categoria pai não encontrada para a subcategoria: ${subslug}`);
-    notFound();
-  }
+  const currentCategory = allCategories.find(c => (c.attributes?.slug || c.slug) === slug);
+  const subcategories = currentCategory?.attributes?.subcategorias?.data || currentCategory?.subcategorias || [];
+  const currentSubcategory = subcategories.find(s => (s.attributes?.slug || s.slug) === subslug);
+  
+  const subcategoryName = currentSubcategory?.attributes?.nome || currentSubcategory?.nome || 'Produtos';
+  const categoryName = currentCategory?.attributes?.nome || currentCategory?.nome || 'Categorias';
+  const categorySlug = currentCategory?.attributes?.slug || currentCategory?.slug;
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -58,20 +72,19 @@ export default async function SubcategoryPage({ params }) {
           Produtos
         </Link>
         <span className="mx-2">&gt;</span>
-        {/* CORREÇÃO: Acessar .slug e .nome diretamente */}
         <Link
-          href={`/produtos/categorias/${categoryData.slug}`}
+          href={`/produtos/categorias/${categorySlug}`}
           className="hover:underline"
         >
-          {categoryData.nome}
+          {categoryName}
         </Link>
         <span className="mx-2">&gt;</span>
         <span className="font-semibold text-gray-700">
-          {subcategoryData.nome}
+          {subcategoryName}
         </span>
       </nav>
       <h1 className="text-4xl font-bold text-gray-900 mb-8">
-        {subcategoryData.nome}
+        {subcategoryName}
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map((product) => (

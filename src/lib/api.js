@@ -1,4 +1,5 @@
 // Função centralizada para fazer chamadas à API do Strapi
+// Não exportada, pois é usada apenas internamente
 async function fetchAPI(endpoint, options = {}) {
   const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
   const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN;
@@ -24,8 +25,9 @@ async function fetchAPI(endpoint, options = {}) {
     const res = await fetch(url, fetchOptions);
 
     if (!res.ok) {
+      console.error(`Erro na requisição para ${endpoint}: ${res.status} ${res.statusText}`);
       const errorText = await res.text();
-      console.error(`Erro na requisição para ${url}: ${res.status} ${res.statusText}`, errorText);
+      console.error("Detalhes do erro:", errorText);
       throw new Error(`Falha na requisição da API para ${endpoint}: ${res.status}`);
     }
     
@@ -37,7 +39,7 @@ async function fetchAPI(endpoint, options = {}) {
   }
 }
 
-// --- Funções Auxiliares Exportadas ---
+// --- Funções Exportadas ---
 
 export function getStrapiURL() {
   let base = (process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337').replace(/\/+$/g, '');
@@ -49,29 +51,8 @@ export function getStrapiMediaUrl(path) {
   if (!path) return null;
   if (/^https?:\/\//i.test(path) || /^\/\//.test(path)) return path;
   const base = getStrapiURL();
-  return path.startsWith('/') ? `${base}${path}` : `${base}/${path}`;
-}
-
-export function normalizeDataArray(response) {
-  if (!response) return [];
-  return response.data || [];
-}
-
-// --- Funções de Busca de Dados ---
-
-export async function getBanners() {
-  const response = await fetchAPI('/api/banner-sites?sort=ordem:asc&populate=imagem');
-  return normalizeDataArray(response);
-}
-
-export async function getFeaturedProducts() {
-  const response = await fetchAPI('/api/produtos?filters[destaque][$eq]=true&fields[0]=nome&fields[1]=slug&fields[2]=descricao_curta&populate=imagem_principal');
-  return normalizeDataArray(response);
-}
-
-export async function getManufacturers() {
-  const response = await fetchAPI('/api/fabricantes?populate=logo&pagination[limit]=100&sort=ordem:asc');
-  return normalizeDataArray(response);
+  if (path.startsWith('/')) return `${base}${path}`;
+  return `${base}/${path}`;
 }
 
 export async function getHomeVideos() {
@@ -80,75 +61,121 @@ export async function getHomeVideos() {
   return normalizeDataArray(response);
 }
 
-export async function getFeaturedTestimonial() {
-  const response = await fetchAPI('/api/depoimentos?filters[destaque_home][$eq]=true&pagination[limit]=1');
-  const data = normalizeDataArray(response);
-  return data.length > 0 ? data[0] : null;
-}
-
-// ✅ FUNÇÃO QUE ESTAVA FALTANDO, AGORA ADICIONADA
 export async function getAllTestimonials() {
   const response = await fetchAPI('/api/depoimentos');
   return normalizeDataArray(response);
 }
 
-export async function getAllProductsForDisplay() {
-  const query = '/api/produtos?fields[0]=nome&fields[1]=slug&fields[2]=descricao_curta&populate[0]=imagem_principal&populate[1]=subcategoria&pagination[limit]=1000';
-  const productsData = await fetchAPI(query);
-  return normalizeDataArray(productsData);
-}
-
-export async function getProductBySlug(slug) {
-  const query = `/api/produtos?filters[slug][$eq]=${slug}&populate=*`;
-  const response = await fetchAPI(query);
-  const data = normalizeDataArray(response);
-  return data.length > 0 ? data[0] : null;
-}
-
-export async function getCategoryBySlug(slug) {
-    const response = await fetchAPI(`/api/categorias?filters[slug][$eq]=${slug}&populate=subcategorias`);
-    const data = normalizeDataArray(response);
-    return data.length > 0 ? data[0] : null;
-}
-
-export async function getProductsByCategorySlug(slug) {
-    const response = await fetchAPI(`/api/produtos?filters[categorias][slug][$eq]=${slug}&populate=*`);
-    return normalizeDataArray(response);
-}
-
-export async function getSubcategoryBySlug(subslug) {
-    const response = await fetchAPI(`/api/subcategorias?filters[slug][$eq]=${subslug}&populate=categoria`);
-    const data = normalizeDataArray(response);
-    return data.length > 0 ? data[0] : null;
-}
-
-export async function getProductsBySubcategorySlug(subslug) {
-    const response = await fetchAPI(`/api/produtos?filters[subcategoria][slug][$eq]=${subslug}&populate=*`);
-    return normalizeDataArray(response);
-}
-
-export async function getSubcategoriesForCategory(categorySlug) {
-  const category = await getCategoryBySlug(categorySlug);
-  if (!category || !category.attributes.subcategorias) {
-    return [];
-  }
-  return category.attributes.subcategorias.data || [];
-}
-
-export async function getAllCategories() {
-  const populateQuery = 'populate=subcategorias';
-  const response = await fetchAPI(`/api/categorias?fields[0]=nome&fields[1]=slug&${populateQuery}&pagination[limit]=100`);
+export async function getFeaturedTestimonial() {
+  const response = await fetchAPI('/api/produtos?fields[0]=slug&pagination[limit]=1000');
   return normalizeDataArray(response);
 }
 
-// --- Funções para `generateStaticParams` (Build Estático) ---
-
-export async function getAllProductSlugs() {
-    const response = await fetchAPI('/api/produtos?fields[0]=slug&pagination[limit]=1000');
-    return normalizeDataArray(response);
+export async function getAllProductsForDisplay() {
+  try {
+    const fieldsQuery = 'fields[0]=nome&fields[1]=slug';
+    const populateQuery = 'populate[0]=imagem_principal&populate[1]=subcategoria';
+    const productsData = await fetchAPI(`/api/produtos?${fieldsQuery}&${populateQuery}&pagination[limit]=1000`);
+    return normalizeDataArray(productsData);
+  } catch (error) {
+    console.error(`Falha ao buscar todos os produtos:`, error);
+    return [];
+  }
 }
 
-export async function getAllCategoryPaths() {
-    const response = await fetchAPI('/api/categorias?fields[0]=slug&populate[subcategorias][fields][0]=slug&pagination[limit]=200');
-    return normalizeDataArray(response);
+export async function getProductBySlug(slug) {
+  const populateFields = [
+    'imagem_principal',
+    'galeria_de_imagens',
+    'categoria',
+    'subcategoria',
+    'documentos'
+  ];
+  const fieldsToFetch = [
+    'nome',
+    'slug',
+    'descricao_curta',
+    'descricao_longa',
+    'videos',
+    'caracteristicas_funcionais',
+    'caracteristicas_tecnicas',
+    'acessorios',
+    'visao_geral'
+  ];
+
+  const fieldsQuery = fieldsToFetch.map((field, i) => `fields[${i}]=${field}`).join('&');
+  const populateQuery = populateFields.map((field, i) => `populate[${i}]=${field}`).join('&');
+
+  const response = await fetchAPI(`/api/produtos?filters[slug][$eq]=${slug}&${fieldsQuery}&${populateQuery}`);
+  const data = response.data || [];
+  if (data.length === 0) return null;
+
+  const item = data[0];
+  if (item.attributes) return item;
+
+  const { id, ...rest } = item;
+  return { id, attributes: rest };
 }
+
+export async function getManufacturers() {
+  const response = await fetchAPI('/api/fabricantes?populate=logo&pagination[limit]=100&sort=ordem:asc');
+  return normalizeDataArray(response);
+}
+
+export async function getFeaturedProducts() {
+  const response = await fetchAPI('/api/produtos?filters[destaque][$eq]=true&fields[0]=nome&fields[1]=slug&populate=imagem_principal');
+  return normalizeDataArray(response);
+}
+
+export async function getAllCategories() {
+  const response = await fetchAPI('/api/categorias?fields[0]=nome&fields[1]=slug&populate=subcategorias&pagination[limit]=100');
+  return normalizeDataArray(response);
+}
+
+export async function getCategoryBySlug(slug) {
+  try {
+    const populateQuery = `populate[produtos][populate]=*&populate[subcategorias][populate][produtos][populate]=*`;
+    const response = await fetchAPI(`/api/categorias?filters[slug][$eq]=${slug}&${populateQuery}`);
+    const data = response.data || [];
+    if (data.length === 0) return { data: [] };
+
+    const normalized = data.map((item) => {
+      if (item.attributes) return item;
+      const { id, ...rest } = item;
+      return { id, attributes: rest };
+    });
+
+    return { data: normalized };
+  } catch (err) {
+    console.warn('getCategoryBySlug: populate request failed, falling back to no-populate:', err.message);
+    try {
+      const response = await fetchAPI(`/api/categorias?filters[slug][$eq]=${slug}`);
+      const data = response.data || [];
+      if (data.length === 0) return { data: [] };
+      const normalized = data.map((item) => {
+        if (item.attributes) return item;
+        const { id, ...rest } = item;
+        return { id, attributes: rest };
+      });
+
+      return { data: normalized };
+    } catch (err2) {
+      console.error('getCategoryBySlug fallback failed:', err2.message);
+      return { data: [] };
+    }
+  }
+}
+
+export async function getBanners() {
+  const response = await fetchAPI('/api/banner-sites?sort=ordem:asc&populate=imagem');
+  return normalizeDataArray(response);
+}
+
+export function normalizeDataArray(response) {
+  if (!response) return [];
+  const data = response.data || [];
+  return data;
+}
+
+// Adicionando a exportação explícita para fetchAPI, caso seja necessária em outro lugar
+export { fetchAPI };

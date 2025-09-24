@@ -1,35 +1,43 @@
-import { getProductBySlug, getAllProductSlugs } from '@/lib/api';
-import ProductViewClient from '@/components/ProductViewClient';
+import { getProductBySlug, getAllProducts } from '@/lib/api';
+import ProductDetail from '@/components/ProductDetail';
 import { notFound } from 'next/navigation';
 
-// ✅ PASSO FINAL: Informa ao Next.js quais páginas de produto construir
+// Gera os caminhos estáticos para todos os produtos
 export async function generateStaticParams() {
-  const products = await getAllProductSlugs();
+  const products = await getAllProducts();
+  if (!products) return [];
+
   return products.map((product) => ({
-    slug: product.slug,
-  }));
+    slug: product.attributes?.slug || product.slug,
+  })).filter(p => p.slug);
 }
 
+// Gera os metadados para a página (título, descrição)
 export async function generateMetadata({ params }) {
     const product = await getProductBySlug(params.slug);
-    if (!product) {
-      return {
-        title: 'Produto não encontrado'
-      }
+    const productAttributes = product?.attributes || product;
+
+    if (!productAttributes) {
+        return {
+            title: 'Produto não encontrado'
+        };
     }
+
     return {
-      title: `${product.nome} | Tecassistiva`,
-      description: product.descricao_curta || `Detalhes sobre o produto ${product.nome}`,
-    }
+        title: `${productAttributes.nome} | Tecassistiva`,
+        description: productAttributes.descricao_curta,
+    };
 }
 
+// A página que renderiza um único produto
 export default async function ProductPage({ params }) {
-    const { slug } = params;
-    const productData = await getProductBySlug(slug);
+  const { slug } = params;
+  const product = await getProductBySlug(slug);
 
-    if (!productData) {
-        notFound();
-    }
+  if (!product) {
+    notFound();
+  }
 
-    return <ProductViewClient product={productData} />;
+  // O componente ProductDetail recebe os dados do produto para renderizar
+  return <ProductDetail product={product} />;
 }
