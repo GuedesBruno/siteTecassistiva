@@ -78,7 +78,7 @@ export async function getProductBySlug(slug) {
   const populateFields = [
     'imagem_principal',
     'galeria_de_imagens',
-    'categoria',
+    'categorias',
     'subcategoria',
     'documentos'
   ];
