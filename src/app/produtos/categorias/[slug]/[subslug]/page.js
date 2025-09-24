@@ -1,4 +1,4 @@
-import { getSubcategoryBySlug, getProductsBySubcategorySlug, getAllCategoryPaths } from '@/lib/api'; // Atualize a importação
+import { getSubcategoryBySlug, getProductsBySubcategorySlug, getAllCategoryPaths } from '@/lib/api';
 import CategoryProductList from '@/components/CategoryProductList';
 import { notFound } from 'next/navigation';
 
@@ -6,7 +6,6 @@ import { notFound } from 'next/navigation';
 export async function generateStaticParams() {
   const categories = await getAllCategoryPaths();
 
-  // Usamos flatMap para achatar o array de arrays que o map geraria
   const paths = categories.flatMap(category => 
     (category.subcategorias || []).map(sub => ({
       slug: category.slug,

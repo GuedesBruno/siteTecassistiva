@@ -1,4 +1,4 @@
-import { getProductBySlug, getAllProductSlugs } from '@/lib/api'; // Atualize a importação
+import { getProductBySlug, getAllProductSlugs } from '@/lib/api';
 import ProductViewClient from '@/components/ProductViewClient';
 import { notFound } from 'next/navigation';
 

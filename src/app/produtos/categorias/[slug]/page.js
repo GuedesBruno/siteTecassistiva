@@ -1,4 +1,4 @@
-import { getCategoryBySlug, getProductsByCategorySlug, getAllCategoryPaths } from '@/lib/api'; // Atualize a importação
+import { getCategoryBySlug, getProductsByCategorySlug, getAllCategoryPaths } from '@/lib/api';
 import CategoryProductList from '@/components/CategoryProductList';
 import { notFound } from 'next/navigation';
 
