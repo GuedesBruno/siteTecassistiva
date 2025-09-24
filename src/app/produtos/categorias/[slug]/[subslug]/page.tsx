@@ -1,10 +1,19 @@
 import {
   getProductsBySubcategorySlug,
   getSubcategoryBySlug,
-  getSubcategoriesForCategory, // Importa a nova função
+  getSubcategoriesForCategory,
 } from "@/lib/api";
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import ProductCard from "@/components/ProductCard";
 
-// ... (o resto do arquivo permanece o mesmo)
+// Definição do tipo para os parâmetros da página, que foi removida acidentalmente
+type Params = {
+  params: {
+    slug: string;
+    subslug: string;
+  };
+};
 
 // Abordagem "Top-Down" para gerar os parâmetros estáticos
 export async function generateStaticParams({ params }: { params: { slug: string } }) {
