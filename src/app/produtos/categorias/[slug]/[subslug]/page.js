@@ -9,21 +9,9 @@ import ProductCard from "@/components/ProductCard";
 
 // Abordagem "Top-Down" para gerar os parâmetros estáticos
 export async function generateStaticParams({ params }) {
-  try {
-    const { slug } = params;
-    const subcategories = await getSubcategoriesForCategory(slug);
-
-    return subcategories.map((subcategory) => ({
-      subslug: subcategory.attributes.slug,
-    }));
-
-  } catch (error) {
-    console.error(
-      `Falha ao gerar parâmetros para a categoria ${params.slug}:`,
-      error
-    );
-    return [];
-  }
+  // ÚLTIMO TESTE: Retornando um array vazio para ver se o build passa.
+  // Se isso funcionar, o problema está nos dados retornados pela API.
+  return [];
 }
 
 export default async function SubcategoryPage({ params }) {
