@@ -18,28 +18,34 @@ type Params = {
 export async function generateStaticParams() {
   try {
     const categories = await getAllCategories();
+    if (!categories) return [];
 
     const paths = categories.flatMap((category) => {
-        // FIX: Adiciona verificação para proteger contra dados malformados da API
-        if (!category || !category.attributes) {
-          return []; // Ignora a categoria se não tiver atributos
-        }
-        return (
-          category.attributes.subcategorias?.data.map((subcategory) => ({
+      if (!category?.attributes?.slug || !category.attributes.subcategorias?.data) {
+        return [];
+      }
+
+      return category.attributes.subcategorias.data
+        .map((subcategory) => {
+          if (!subcategory?.attributes?.slug) {
+            return null;
+          }
+          return {
             slug: category.attributes.slug,
             subslug: subcategory.attributes.slug,
-          })) ?? []
-        );
-      });
+          };
+        })
+        .filter(Boolean); // Remove quaisquer nulos
+    });
 
-    // Filtra caminhos undefined ou nulos que podem surgir se a subcategoria não tiver slug
-    return paths.filter(p => p && p.slug && p.subslug);
+    return paths;
 
   } catch (error) {
     console.error(
-      "Falha ao gerar parâmetros estáticos para subcategorias:",
+      "Falha grave ao gerar parâmetros estáticos para subcategorias:",
       error
     );
+    // Retorna um array vazio em caso de erro para não quebrar o build
     return [];
   }
 }
