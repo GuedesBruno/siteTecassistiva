@@ -1,51 +1,26 @@
 import {
-  getAllCategories,
   getProductsBySubcategorySlug,
   getSubcategoryBySlug,
+  getSubcategoriesForCategory, // Importa a nova função
 } from "@/lib/api";
-import { notFound } from "next/navigation";
-import Link from "next/link";
-import ProductCard from "@/components/ProductCard";
 
-type Params = {
-  params: {
-    slug: string;
-    subslug: string;
-  };
-};
+// ... (o resto do arquivo permanece o mesmo)
 
-// Restaura a função original para gerar os caminhos estáticos
-export async function generateStaticParams() {
+// Abordagem "Top-Down" para gerar os parâmetros estáticos
+export async function generateStaticParams({ params }: { params: { slug: string } }) {
   try {
-    const categories = await getAllCategories();
-    if (!categories) return [];
+    const { slug } = params;
+    const subcategories = await getSubcategoriesForCategory(slug);
 
-    const paths = categories.flatMap((category) => {
-      if (!category?.attributes?.slug || !category.attributes.subcategorias?.data) {
-        return [];
-      }
-
-      return category.attributes.subcategorias.data
-        .map((subcategory) => {
-          if (!subcategory?.attributes?.slug) {
-            return null;
-          }
-          return {
-            slug: category.attributes.slug,
-            subslug: subcategory.attributes.slug,
-          };
-        })
-        .filter(Boolean); // Remove quaisquer nulos
-    });
-
-    return paths;
+    return subcategories.map((subcategory) => ({
+      subslug: subcategory.attributes.slug,
+    }));
 
   } catch (error) {
     console.error(
-      "Falha grave ao gerar parâmetros estáticos para subcategorias:",
+      `Falha ao gerar parâmetros para a categoria ${params.slug}:`,
       error
     );
-    // Retorna um array vazio em caso de erro para não quebrar o build
     return [];
   }
 }

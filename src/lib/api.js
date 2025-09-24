@@ -127,10 +127,12 @@ export async function getProductsBySubcategorySlug(subslug) {
     return normalizeDataArray(response);
 }
 
-export async function getAllCategories() {
-  const populateQuery = 'populate=subcategorias';
-  const response = await fetchAPI(`/api/categorias?fields[0]=nome&fields[1]=slug&${populateQuery}&pagination[limit]=100`);
-  return normalizeDataArray(response);
+export async function getSubcategoriesForCategory(categorySlug) {
+  const category = await getCategoryBySlug(categorySlug);
+  if (!category || !category.attributes.subcategorias) {
+    return [];
+  }
+  return category.attributes.subcategorias.data || [];
 }
 
 // --- Funções para `generateStaticParams` (Build Estático) ---
