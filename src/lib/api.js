@@ -24,9 +24,8 @@ async function fetchAPI(endpoint, options = {}) {
     const res = await fetch(url, fetchOptions);
 
     if (!res.ok) {
-      console.error(`Erro na requisição para ${endpoint}: ${res.status} ${res.statusText}`);
       const errorText = await res.text();
-      console.error("Detalhes do erro:", errorText);
+      console.error(`Erro na requisição para ${url}: ${res.status} ${res.statusText}`, errorText);
       throw new Error(`Falha na requisição da API para ${endpoint}: ${res.status}`);
     }
     
@@ -40,136 +39,102 @@ async function fetchAPI(endpoint, options = {}) {
 
 // --- Funções Exportadas ---
 
-// ✅ CORREÇÃO: Usando 'export'
 export function getStrapiURL() {
   let base = (process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337').replace(/\/+$/g, '');
   if (base.endsWith('/api')) base = base.replace(/\/api$/, '');
   return base;
 }
 
-// ✅ CORREÇÃO: Usando 'export'
 export function getStrapiMediaUrl(path) {
   if (!path) return null;
   if (/^https?:\/\//i.test(path) || /^\/\//.test(path)) return path;
   const base = getStrapiURL();
-  if (path.startsWith('/')) return `${base}${path}`;
-  return `${base}/${path}`;
+  return path.startsWith('/') ? `${base}${path}` : `${base}/${path}`;
 }
 
-// ✅ CORREÇÃO: Usando 'export'
-export async function getAllProducts() {
-  const response = await fetchAPI('/api/produtos?fields[0]=slug&pagination[limit]=1000');
-  return normalizeDataArray(response);
+export function normalizeDataArray(response) {
+  if (!response) return [];
+  return response.data || [];
 }
 
-// ✅ CORREÇÃO: Usando 'export'
-export async function getAllProductsForDisplay() {
-  try {
-    const fieldsQuery = 'fields[0]=nome&fields[1]=slug&fields[2]=descricao_curta';
-    const populateQuery = 'populate[0]=imagem_principal&populate[1]=subcategoria';
-    const productsData = await fetchAPI(`/api/produtos?${fieldsQuery}&${populateQuery}&pagination[limit]=1000`);
-    return normalizeDataArray(productsData);
-  } catch (error) {
-    console.error(`Falha ao buscar todos os produtos:`, error);
-    return [];
-  }
-}
+// FUNÇÕES PARA PÁGINAS E COMPONENTES
 
-// ✅ CORREÇÃO: Usando 'export'
-export async function getProductBySlug(slug) {
-  const populateFields = [
-    'imagem_principal', 'galeria_de_imagens', 'categorias',
-    'subcategoria', 'documentos'
-  ];
-  const fieldsToFetch = [
-    'nome', 'slug', 'descricao_curta', 'descricao_longa', 'videos',
-    'caracteristicas_funcionais', 'caracteristicas_tecnicas',
-    'acessorios', 'visao_geral'
-  ];
-
-  const fieldsQuery = fieldsToFetch.map((field, i) => `fields[${i}]=${field}`).join('&');
-  const populateQuery = populateFields.map((field, i) => `populate[${i}]=${field}`).join('&');
-
-  const response = await fetchAPI(`/api/produtos?filters[slug][$eq]=${slug}&${fieldsQuery}&${populateQuery}`);
-  const data = response.data || [];
-  if (data.length === 0) return null;
-
-  const item = data[0];
-  return item.attributes ? item : { id: item.id, attributes: { ...item } };
-}
-
-// ✅ CORREÇÃO: Usando 'export'
-export async function getFeaturedProducts() {
-  const response = await fetchAPI('/api/produtos?filters[destaque][$eq]=true&fields[0]=nome&fields[1]=slug&fields[2]=descricao_curta&populate=imagem_principal');
-  return normalizeDataArray(response);
-}
-
-// ✅ CORREÇÃO: Usando 'export'
-export async function getAllCategories() {
-  const populateQuery = 'populate=subcategorias';
-  const response = await fetchAPI(`/api/categorias?fields[0]=nome&fields[1]=slug&${populateQuery}&pagination[limit]=100`);
-  return normalizeDataArray(response);
-}
-
-// ✅ CORREÇÃO: Usando 'export'
-export async function getAllSubcategoriesWithCategory() {
-  const populateQuery = 'populate=categorias';
-  const response = await fetchAPI(`/api/subcategorias?fields[0]=slug&${populateQuery}&pagination[limit]=1000`);
-  return normalizeDataArray(response);
-}
-
-// ✅ CORREÇÃO: Usando 'export'
-export async function getCategoryBySlug(slug) {
-  try {
-    const populateQuery = `populate[produtos][populate]=*&populate[subcategorias][populate][produtos][populate]=*`;
-    const response = await fetchAPI(`/api/categorias?filters[slug][$eq]=${slug}&${populateQuery}`);
-    return { data: normalizeDataArray(response) };
-  } catch (err) {
-    console.warn('getCategoryBySlug: populate request failed, falling back:', err.message);
-    try {
-      const response = await fetchAPI(`/api/categorias?filters[slug][$eq]=${slug}`);
-      return { data: normalizeDataArray(response) };
-    } catch (err2) {
-      console.error('getCategoryBySlug fallback failed:', err2.message);
-      return { data: [] };
-    }
-  }
-}
-
-// ✅ CORREÇÃO: Usando 'export'
 export async function getBanners() {
   const response = await fetchAPI('/api/banner-sites?sort=ordem:asc&populate=imagem');
   return normalizeDataArray(response);
 }
 
-// ✅ CORREÇÃO: Usando 'export'
+export async function getFeaturedProducts() {
+  const response = await fetchAPI('/api/produtos?filters[destaque][$eq]=true&fields[0]=nome&fields[1]=slug&fields[2]=descricao_curta&populate=imagem_principal');
+  return normalizeDataArray(response);
+}
+
 export async function getManufacturers() {
   const response = await fetchAPI('/api/fabricantes?populate=logo&pagination[limit]=100&sort=ordem:asc');
   return normalizeDataArray(response);
 }
 
-// ✅ CORREÇÃO: Usando 'export'
 export async function getHomeVideos() {
   const endpoint = '/api/video-homes?fields[0]=titulo&fields[1]=link&populate=thumbnail&sort=ordem:asc';
   const response = await fetchAPI(endpoint);
   return normalizeDataArray(response);
 }
 
-// ✅ CORREÇÃO: Usando 'export'
-export async function getAllTestimonials() {
-  const response = await fetchAPI('/api/depoimentos');
-  return normalizeDataArray(response);
-}
-
-// ✅ CORREÇÃO: Usando 'export'
 export async function getFeaturedTestimonial() {
   const response = await fetchAPI('/api/depoimentos?filters[destaque_home][$eq]=true&pagination[limit]=1');
   const data = normalizeDataArray(response);
   return data.length > 0 ? data[0] : null;
 }
 
-// ✅ CORREÇÃO: Usando 'export'
-export function normalizeDataArray(response) {
-  if (!response) return [];
-  return response.data || [];
+export async function getAllProductsForDisplay() {
+  const query = '/api/produtos?fields[0]=nome&fields[1]=slug&fields[2]=descricao_curta&populate[0]=imagem_principal&populate[1]=subcategoria&pagination[limit]=1000';
+  const productsData = await fetchAPI(query);
+  return normalizeDataArray(productsData);
+}
+
+export async function getProductBySlug(slug) {
+  const query = `/api/produtos?filters[slug][$eq]=${slug}&populate[imagem_principal]=*&populate[galeria_de_imagens]=*&populate[categorias]=*&populate[subcategoria]=*&populate[documentos]=*`;
+  const response = await fetchAPI(query);
+  const data = normalizeDataArray(response);
+  return data.length > 0 ? data[0] : null;
+}
+
+export async function getCategoryBySlug(slug) {
+    const response = await fetchAPI(`/api/categorias?filters[slug][$eq]=${slug}`);
+    const data = normalizeDataArray(response);
+    return data.length > 0 ? data[0] : null;
+}
+
+export async function getProductsByCategorySlug(slug) {
+    const response = await fetchAPI(`/api/produtos?filters[categorias][slug][$eq]=${slug}&populate=*`);
+    return normalizeDataArray(response);
+}
+
+// ✅ FUNÇÕES ADICIONADAS PARA O BUILD ESTÁTICO
+
+export async function getAllProductSlugs() {
+    const response = await fetchAPI('/api/produtos?fields[0]=slug&pagination[limit]=1000');
+    return normalizeDataArray(response);
+}
+
+export async function getAllCategoryPaths() {
+    const response = await fetchAPI('/api/categorias?fields[0]=slug&populate[subcategorias][fields][0]=slug&pagination[limit]=200');
+    return normalizeDataArray(response);
+}
+
+export async function getSubcategoryBySlug(subslug) {
+    const response = await fetchAPI(`/api/subcategorias?filters[slug][$eq]=${subslug}&populate=categoria`);
+    const data = normalizeDataArray(response);
+    return data.length > 0 ? data[0] : null;
+}
+
+export async function getProductsBySubcategorySlug(subslug) {
+    const response = await fetchAPI(`/api/produtos?filters[subcategoria][slug][$eq]=${subslug}&populate=*`);
+    return normalizeDataArray(response);
+}
+
+export async function getAllCategories() {
+  const populateQuery = 'populate=subcategorias';
+  const response = await fetchAPI(`/api/categorias?fields[0]=nome&fields[1]=slug&${populateQuery}&pagination[limit]=100`);
+  return normalizeDataArray(response);
 }
