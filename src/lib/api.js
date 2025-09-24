@@ -142,7 +142,7 @@ async function getAllCategories() {
 // Busca todas as subcategorias e popula as categorias a que pertencem (para generateStaticParams)
 async function getAllSubcategoriesWithCategory() {
   // Assumindo que a relação é definida no content-type 'subcategoria' com o campo 'categorias'
-  const populateQuery = 'populate[categorias][fields][0]=slug';
+  const populateQuery = 'populate=categorias';
   const response = await fetchAPI(`/api/subcategorias?fields[0]=slug&${populateQuery}&pagination[limit]=1000`);
   return normalizeDataArray(response);
 }
