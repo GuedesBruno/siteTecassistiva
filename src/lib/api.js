@@ -79,7 +79,7 @@ export async function getProductBySlug(slug) {
     'imagem_principal',
     'galeria_de_imagens',
     'categorias',
-    'subcategorias',
+    'subcategoria', // Corrigido de 'subcategorias' para 'subcategoria'
     'documentos'
   ];
   const fieldsToFetch = [
