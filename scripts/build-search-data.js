@@ -1,45 +1,58 @@
-const fs = require('fs').promises;
-const path = require('path');
-const dotenv = require('dotenv');
+import fs from 'fs';
+import path from 'path';
+import 'dotenv/config'; // Para carregar as variáveis de ambiente
 
-// Carrega as variáveis de ambiente do arquivo .env.local
-dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
+// ✅ CORREÇÃO: Usando import moderno para o módulo da API
+import { getAllProductsForDisplay } from '../src/lib/api.js';
 
-// Importa as funções da API usando caminho relativo
-const { fetchAPI, normalizeDataArray } = require('../src/lib/api.js');
-
-async function buildSearchData() {
-  console.log('Building search data index...');
+async function generateSearchData() {
+  console.log('Iniciando a geração de dados de busca...');
+  
   try {
-    // Busca todos os produtos com os campos necessários para a busca e para os cards de resultado
-    const fieldsToSearch = [
-      'nome',
-      'slug',
-      'descricao_curta'
-    ];
-    const relationsToPopulate = ['imagem_principal', 'subcategoria'];
+    const products = await getAllProductsForDisplay();
+    
+    if (!products || products.length === 0) {
+      console.warn('Nenhum produto encontrado. O arquivo search-data.json não será gerado.');
+      // Cria um arquivo vazio para não quebrar a aplicação de busca no frontend
+      const publicDir = path.join(process.cwd(), 'public');
+      const outputPath = path.join(publicDir, 'search-data.json');
+      if (!fs.existsSync(publicDir)) {
+        fs.mkdirSync(publicDir);
+      }
+      fs.writeFileSync(outputPath, JSON.stringify([], null, 2));
+      console.log('Arquivo search-data.json vazio foi gerado.');
+      return;
+    }
 
-    const fieldsQuery = fieldsToSearch.map((field, i) => `fields[${i}]=${field}`).join('&');
-    const populateQuery = relationsToPopulate.map((relation, i) => `populate[${i}]=${relation}`).join('&');
+    const searchData = products.map(product => {
+      // Normaliza o acesso aos atributos, quer o produto já venha normalizado ou não
+      const attrs = product.attributes || product;
+      return {
+        id: product.id,
+        nome: attrs.nome,
+        slug: attrs.slug,
+        descricao_curta: attrs.descricao_curta || '',
+      };
+    });
 
-    // Constrói a query completa, pedindo tanto os campos de texto quanto as relações
-    const productsData = await fetchAPI(`/api/produtos?${fieldsQuery}&${populateQuery}&pagination[limit]=1000`);
-    const normalizedProducts = normalizeDataArray(productsData);
+    const publicDir = path.join(process.cwd(), 'public');
+    const outputPath = path.join(publicDir, 'search-data.json');
 
-    const searchData = {
-      products: normalizedProducts,
-      // No futuro, podemos adicionar outras fontes de conteúdo (páginas, posts) aqui
-    };
+    // Garante que o diretório 'public' existe
+    if (!fs.existsSync(publicDir)) {
+      fs.mkdirSync(publicDir);
+    }
 
-    const dataPath = path.join(process.cwd(), 'public', 'search-data.json');
-    await fs.writeFile(dataPath, JSON.stringify(searchData, null, 2));
+    fs.writeFileSync(outputPath, JSON.stringify(searchData, null, 2));
+    
+    console.log(`Dados de busca gerados com sucesso em: ${outputPath}`);
+    console.log(`${searchData.length} produtos foram indexados.`);
 
-    console.log(`✅ Successfully built search data at ${dataPath}`);
   } catch (error) {
-    console.error('❌ Failed to build search data:', error);
-    // Falha o processo de build se o script não conseguir gerar os dados
+    console.error('ERRO FATAL ao gerar os dados de busca:', error);
+    // Lança o erro para que o processo de build pare
     process.exit(1);
   }
 }
 
-buildSearchData();
+generateSearchData();
