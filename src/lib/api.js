@@ -1,19 +1,14 @@
 // Função centralizada para fazer chamadas à API do Strapi
 async function fetchAPI(endpoint, options = {}) {
-  // As variáveis de ambiente são lidas aqui
   const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
   const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN;
 
-  // Verificação crucial
   if (!STRAPI_URL || !STRAPI_TOKEN) {
     console.error("ERRO GRAVE: As variáveis de ambiente NEXT_PUBLIC_STRAPI_URL e STRAPI_API_TOKEN devem estar definidas.");
-    // Em um cenário de build estático, é melhor lançar um erro para parar o build.
     throw new Error("Variáveis de ambiente da API do Strapi não definidas.");
   }
 
   try {
-    // Normaliza a URL base removendo barras finais
-    // Se a URL terminar com '/api', removemos essa parte para evitar chamadas como '/api/api/...'
     let base = STRAPI_URL.replace(/\/+$/g, '');
     if (base.endsWith('/api')) {
       base = base.replace(/\/api$/,'');
@@ -32,7 +27,6 @@ async function fetchAPI(endpoint, options = {}) {
       console.error(`Erro na requisição para ${endpoint}: ${res.status} ${res.statusText}`);
       const errorText = await res.text();
       console.error("Detalhes do erro:", errorText);
-      // Lançar um erro para falhar o build em caso de erro na API
       throw new Error(`Falha na requisição da API para ${endpoint}: ${res.status}`);
     }
     
@@ -40,45 +34,39 @@ async function fetchAPI(endpoint, options = {}) {
 
   } catch (error) {
     console.error(`ERRO ao fazer fetch no endpoint "${endpoint}":`, error.message);
-    // Propagar o erro para que o processo de build falhe
     throw error;
   }
 }
 
 // --- Funções Exportadas ---
 
-// Retorna a URL base do Strapi para ser usada em componentes de cliente
-function getStrapiURL() {
-  // Normaliza a URL base removendo barras finais e '/api' caso presente
+// ✅ CORREÇÃO: Usando 'export'
+export function getStrapiURL() {
   let base = (process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337').replace(/\/+$/g, '');
   if (base.endsWith('/api')) base = base.replace(/\/api$/, '');
   return base;
 }
 
-// Gera a URL completa para um caminho de mídia retornado pelo Strapi
-function getStrapiMediaUrl(path) {
+// ✅ CORREÇÃO: Usando 'export'
+export function getStrapiMediaUrl(path) {
   if (!path) return null;
-  // Se já for uma URL absoluta, retorna tal qual
   if (/^https?:\/\//i.test(path) || /^\/\//.test(path)) return path;
   const base = getStrapiURL();
-  // garante que exista uma barra entre base e path
   if (path.startsWith('/')) return `${base}${path}`;
   return `${base}/${path}`;
 }
 
-// Busca todos os produtos (apenas slugs para generateStaticParams)
-async function getAllProducts() {
+// ✅ CORREÇÃO: Usando 'export'
+export async function getAllProducts() {
   const response = await fetchAPI('/api/produtos?fields[0]=slug&pagination[limit]=1000');
   return normalizeDataArray(response);
 }
 
-// Busca todos os produtos com dados para exibição
-async function getAllProductsForDisplay() {
+// ✅ CORREÇÃO: Usando 'export'
+export async function getAllProductsForDisplay() {
   try {
-    // Busca todos os produtos com os campos necessários para os cards
     const fieldsQuery = 'fields[0]=nome&fields[1]=slug&fields[2]=descricao_curta';
     const populateQuery = 'populate[0]=imagem_principal&populate[1]=subcategoria';
-
     const productsData = await fetchAPI(`/api/produtos?${fieldsQuery}&${populateQuery}&pagination[limit]=1000`);
     return normalizeDataArray(productsData);
   } catch (error) {
@@ -87,29 +75,18 @@ async function getAllProductsForDisplay() {
   }
 }
 
-// Busca um produto pelo slug com todos os dados necessários
-async function getProductBySlug(slug) {
-  // Popula todas as relações e mídias necessárias para a página de detalhes.
+// ✅ CORREÇÃO: Usando 'export'
+export async function getProductBySlug(slug) {
   const populateFields = [
-    'imagem_principal',
-    'galeria_de_imagens',
-    'categorias',
-    'subcategoria',
-    'documentos' // O campo 'documentos' é uma relação (mídia/upload), então deve ser populado.
+    'imagem_principal', 'galeria_de_imagens', 'categorias',
+    'subcategoria', 'documentos'
   ];
   const fieldsToFetch = [
-    'nome',
-    'slug',
-    'descricao_curta',
-    'descricao_longa',
-    'videos',
-    'caracteristicas_funcionais',
-    'caracteristicas_tecnicas',
-    'acessorios',
-    'visao_geral'
+    'nome', 'slug', 'descricao_curta', 'descricao_longa', 'videos',
+    'caracteristicas_funcionais', 'caracteristicas_tecnicas',
+    'acessorios', 'visao_geral'
   ];
 
-  // Constrói a query para ser mais explícita, pedindo tanto os campos de texto quanto as relações.
   const fieldsQuery = fieldsToFetch.map((field, i) => `fields[${i}]=${field}`).join('&');
   const populateQuery = populateFields.map((field, i) => `populate[${i}]=${field}`).join('&');
 
@@ -118,68 +95,40 @@ async function getProductBySlug(slug) {
   if (data.length === 0) return null;
 
   const item = data[0];
-  if (item.attributes) return item;
-
-  const { id, ...rest } = item;
-  return { id, attributes: rest };
+  return item.attributes ? item : { id: item.id, attributes: { ...item } };
 }
 
-// Busca produtos em destaque
-async function getFeaturedProducts() {
-  // Busca produtos em destaque incluindo imagem principal e descrição curta
+// ✅ CORREÇÃO: Usando 'export'
+export async function getFeaturedProducts() {
   const response = await fetchAPI('/api/produtos?filters[destaque][$eq]=true&fields[0]=nome&fields[1]=slug&fields[2]=descricao_curta&populate=imagem_principal');
   return normalizeDataArray(response);
 }
 
-// Busca todas as categorias com seus produtos e imagens
-async function getAllCategories() {
-  // Busca categorias e popula a relação com subcategorias para montar o menu.
+// ✅ CORREÇÃO: Usando 'export'
+export async function getAllCategories() {
   const populateQuery = 'populate=subcategorias';
   const response = await fetchAPI(`/api/categorias?fields[0]=nome&fields[1]=slug&${populateQuery}&pagination[limit]=100`);
   return normalizeDataArray(response);
 }
 
-// Busca todas as subcategorias e popula as categorias a que pertencem (para generateStaticParams)
-async function getAllSubcategoriesWithCategory() {
-  // Assumindo que a relação é definida no content-type 'subcategoria' com o campo 'categorias'
+// ✅ CORREÇÃO: Usando 'export'
+export async function getAllSubcategoriesWithCategory() {
   const populateQuery = 'populate=categorias';
   const response = await fetchAPI(`/api/subcategorias?fields[0]=slug&${populateQuery}&pagination[limit]=1000`);
   return normalizeDataArray(response);
 }
 
-// Busca uma categoria pelo slug com os seus produtos
-async function getCategoryBySlug(slug) {
-  // Busca conservadora por categoria (retorna no formato { data: [...] } para compatibilidade)
-  // Popula produtos diretos e produtos dentro das subcategorias para renderização
-  // Tenta popular produtos diretos e produtos dentro das subcategorias usando a forma bracketed do Strapi
+// ✅ CORREÇÃO: Usando 'export'
+export async function getCategoryBySlug(slug) {
   try {
     const populateQuery = `populate[produtos][populate]=*&populate[subcategorias][populate][produtos][populate]=*`;
     const response = await fetchAPI(`/api/categorias?filters[slug][$eq]=${slug}&${populateQuery}`);
-  const data = response.data || [];
-  if (data.length === 0) return { data: [] };
-
-  // Normaliza cada item para garantir { id, attributes }
-  const normalized = data.map((item) => {
-    if (item.attributes) return item;
-    const { id, ...rest } = item;
-    return { id, attributes: rest };
-  });
-
-  return { data: normalized };
+    return { data: normalizeDataArray(response) };
   } catch (err) {
-    // Se a requisição com populate falhar (ex: ValidationError do Strapi), fazemos fallback sem populate
-    console.warn('getCategoryBySlug: populate request failed, falling back to no-populate:', err.message);
+    console.warn('getCategoryBySlug: populate request failed, falling back:', err.message);
     try {
       const response = await fetchAPI(`/api/categorias?filters[slug][$eq]=${slug}`);
-      const data = response.data || [];
-      if (data.length === 0) return { data: [] };
-      const normalized = data.map((item) => {
-        if (item.attributes) return item;
-        const { id, ...rest } = item;
-        return { id, attributes: rest };
-      });
-
-      return { data: normalized };
+      return { data: normalizeDataArray(response) };
     } catch (err2) {
       console.error('getCategoryBySlug fallback failed:', err2.message);
       return { data: [] };
@@ -187,69 +136,40 @@ async function getCategoryBySlug(slug) {
   }
 }
 
-// Busca todos os banners do site
-async function getBanners() {
+// ✅ CORREÇÃO: Usando 'export'
+export async function getBanners() {
   const response = await fetchAPI('/api/banner-sites?sort=ordem:asc&populate=imagem');
   return normalizeDataArray(response);
 }
 
-// Busca todos os fabricantes (fornecedores)
-async function getManufacturers() {
+// ✅ CORREÇÃO: Usando 'export'
+export async function getManufacturers() {
   const response = await fetchAPI('/api/fabricantes?populate=logo&pagination[limit]=100&sort=ordem:asc');
   return normalizeDataArray(response);
 }
 
-// Busca os vídeos para a seção da home page
-async function getHomeVideos() {
-  // Usando a sintaxe de array para 'fields' conforme a documentação do Strapi,
-  // que é a forma mais correta e robusta.
-  // O endpoint para "Video Home" é 'video-homes' (plural).
+// ✅ CORREÇÃO: Usando 'export'
+export async function getHomeVideos() {
   const endpoint = '/api/video-homes?fields[0]=titulo&fields[1]=link&populate=thumbnail&sort=ordem:asc';
   const response = await fetchAPI(endpoint);
   return normalizeDataArray(response);
 }
 
-// Busca todos os depoimentos
-async function getAllTestimonials() {
-  // Removendo o sort para isolar a causa do erro 404.
+// ✅ CORREÇÃO: Usando 'export'
+export async function getAllTestimonials() {
   const response = await fetchAPI('/api/depoimentos');
   return normalizeDataArray(response);
 }
 
-// Busca o depoimento em destaque para a home
-async function getFeaturedTestimonial() {
-  // Busca o depoimento marcado como destaque, limitando a 1 resultado.
+// ✅ CORREÇÃO: Usando 'export'
+export async function getFeaturedTestimonial() {
   const response = await fetchAPI('/api/depoimentos?filters[destaque_home][$eq]=true&pagination[limit]=1');
   const data = normalizeDataArray(response);
-  // Retorna o primeiro objeto do array, ou null se não houver depoimentos.
   return data.length > 0 ? data[0] : null;
 }
 
-// Normaliza respostas do Strapi: se os itens já vierem com `attributes`, deixa como está.
-// Se os itens vierem 'flat' (campos no root), converte para o formato { id, attributes: { ...fields } }
-function normalizeDataArray(response) {
+// ✅ CORREÇÃO: Usando 'export'
+export function normalizeDataArray(response) {
   if (!response) return [];
-  const data = response.data || [];
-  // Retorna os dados diretamente, pois os componentes já esperam
-  // a estrutura { id, attributes: {...} } do Strapi.
-  return data;
+  return response.data || [];
 }
-
-module.exports = {
-  fetchAPI,
-  getStrapiURL,
-  getStrapiMediaUrl,
-  getAllProducts,
-  getAllProductsForDisplay,
-  getProductBySlug,
-  getFeaturedProducts,
-  getAllCategories,
-  getAllSubcategoriesWithCategory,
-  getCategoryBySlug,
-  getBanners,
-  getManufacturers,
-  getHomeVideos,
-  getAllTestimonials,
-  getFeaturedTestimonial,
-  normalizeDataArray,
-};

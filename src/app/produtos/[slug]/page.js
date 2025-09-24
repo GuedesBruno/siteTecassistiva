@@ -1,34 +1,35 @@
-import ProductDetail from '@/components/ProductDetail';
-import { buildBreadcrumbs } from '@/lib/utils.js';
-import { getAllProducts, getProductBySlug } from '@/lib/api';
+import { getProductBySlug, getAllProductSlugs } from '@/lib/api'; // Atualize a importação
+import ProductViewClient from '@/components/ProductViewClient';
+import { notFound } from 'next/navigation';
 
-// Generate static paths for all products
+// ✅ ADICIONE ESTA FUNÇÃO
 export async function generateStaticParams() {
-  const products = await getAllProducts(); // This gets only slugs
-  return products
-    .map((product) => ({
-      // Acessa o slug de forma segura, esteja ele aninhado ou não.
-      slug: product.attributes?.slug || product.slug,
-    }))
-    .filter((p) => p.slug); // Garante que apenas slugs válidos sejam retornados.
+  const products = await getAllProductSlugs();
+  return products.map((product) => ({
+    slug: product.slug,
+  }));
 }
 
-// ajuda a construir o breadcrumb com base na categoria e subcategoria do produto
+export async function generateMetadata({ params }) {
+    const product = await getProductBySlug(params.slug);
+    if (!product) {
+      return {
+        title: 'Produto não encontrado'
+      }
+    }
+    return {
+      title: `${product.nome} | Tecassistiva`,
+      description: product.descricao_curta || `Detalhes sobre o produto ${product.nome}`,
+    }
+}
 
-export default async function ProdutoPage({ params }) {
-  const { slug } = params;
-  const product = await getProductBySlug(slug);
+export default async function ProductPage({ params }) {
+    const { slug } = params;
+    const productData = await getProductBySlug(slug);
 
-  if (!product) {
-    // Em um app real, usaríamos notFound() do Next.js
-    return <div>Produto não encontrado</div>;
-  }
+    if (!productData) {
+        notFound();
+    }
 
-  const breadcrumbs = buildBreadcrumbs(product);
-
-  return (
-    <div className="container mx-auto px-4 py-8">
-      <ProductDetail product={product} breadcrumbs={breadcrumbs} />
-    </div>
-  );
+    return <ProductViewClient product={productData} />;
 }
