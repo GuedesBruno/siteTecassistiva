@@ -7,16 +7,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
 
-// Definição do tipo para os parâmetros da página, que foi removida acidentalmente
-type Params = {
-  params: {
-    slug: string;
-    subslug: string;
-  };
-};
-
 // Abordagem "Top-Down" para gerar os parâmetros estáticos
-export async function generateStaticParams({ params }: { params: { slug: string } }) {
+export async function generateStaticParams({ params }) {
   try {
     const { slug } = params;
     const subcategories = await getSubcategoriesForCategory(slug);
@@ -34,7 +26,7 @@ export async function generateStaticParams({ params }: { params: { slug: string 
   }
 }
 
-export default async function SubcategoryPage({ params }: Params) {
+export default async function SubcategoryPage({ params }) {
   const { subslug } = params;
 
   // Busca os produtos e os dados da subcategoria em paralelo
