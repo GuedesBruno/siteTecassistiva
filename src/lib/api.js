@@ -64,7 +64,7 @@ export async function getAllProducts() {
 
 export async function getAllProductsForDisplay() {
   try {
-    const fieldsQuery = 'fields[0]=nome&fields[1]=slug';
+    const fieldsQuery = 'fields[0]=nome&fields[1]=slug&fields[2]=descricao_curta';
     const populateQuery = 'populate[0]=imagem_principal&populate[1]=subcategoria';
     const productsData = await fetchAPI(`/api/produtos?${fieldsQuery}&${populateQuery}&pagination[limit]=1000`);
     return normalizeDataArray(productsData);
@@ -109,7 +109,7 @@ export async function getProductBySlug(slug) {
 }
 
 export async function getFeaturedProducts() {
-  const response = await fetchAPI('/api/produtos?filters[destaque][$eq]=true&fields[0]=nome&fields[1]=slug&populate=imagem_principal');
+  const response = await fetchAPI('/api/produtos?filters[destaque][$eq]=true&fields[0]=nome&fields[1]=slug&fields[2]=descricao_curta&populate=imagem_principal');
   return normalizeDataArray(response);
 }
 
@@ -192,6 +192,19 @@ export async function getProductsByCategorySlug(slug) {
 export async function getProductsBySubcategorySlug(subslug) {
     const response = await fetchAPI(`/api/produtos?filters[subcategoria][slug][$eq]=${subslug}&populate=*`);
     return normalizeDataArray(response);
+}
+
+export async function getOpenAtas() {
+  const response = await fetchAPI('/api/atas?populate=documentos');
+  const data = normalizeDataArray(response);
+  // Manually normalize if attributes is missing
+  return data.map(item => {
+    if (item.attributes) {
+      return item;
+    }
+    const { id, ...attributes } = item;
+    return { id, attributes };
+  });
 }
 
 export { fetchAPI };

@@ -2,7 +2,7 @@
 "use client";
 
 import Link from 'next/link';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react'; // Import useRef
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
@@ -10,29 +10,30 @@ export default function Header({ categories = [] }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const router = useRouter();
-  const headerRef = useRef(null);
+  const headerRef = useRef(null); // Create a ref for the header
 
-  // Função para medir a altura do header e definir uma variável CSS
-  const updateHeaderHeight = () => {
-    if (headerRef.current) {
-      document.documentElement.style.setProperty(
-        '--header-height',
-        `${headerRef.current.offsetHeight}px`
-      );
-    }
-  };
-
-  // Efeito para detectar o scroll da página e atualizar a altura
+  // Efeito para detectar o scroll da página
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
-      updateHeaderHeight(); // Atualiza a altura do header em cada scroll
+      setIsScrolled(window.scrollY > 0); // Ativa o estado 'rolado' imediatamente
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll); // Limpeza do evento
+  }, []);
+
+  // Efeito para medir a altura do header e definir uma variável CSS
+  useEffect(() => {
+    const updateHeaderHeight = () => {
+      if (headerRef.current) {
+        document.documentElement.style.setProperty(
+          '--header-height',
+          `${headerRef.current.offsetHeight}px`
+        );
+      }
     };
 
-    // Atualiza a altura inicialmente
+    // Atualiza a altura inicialmente e em cada scroll
     updateHeaderHeight();
-
-    window.addEventListener('scroll', handleScroll);
 
     // Observa mudanças no tamanho do header (ex: devido a transições ou conteúdo responsivo)
     const resizeObserver = new ResizeObserver(() => {
@@ -43,14 +44,13 @@ export default function Header({ categories = [] }) {
       resizeObserver.observe(headerRef.current);
     }
 
-    // Limpeza dos eventos e observer
+    // Limpeza do observer
     return () => {
-      window.removeEventListener('scroll', handleScroll);
       if (headerRef.current) {
         resizeObserver.unobserve(headerRef.current);
       }
     };
-  }, []); // Array de dependências vazio para rodar apenas uma vez na montagem
+  }, [isScrolled]); // Depende de isScrolled para re-medir quando o header encolhe/expande
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();

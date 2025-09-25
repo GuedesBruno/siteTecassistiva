@@ -22,8 +22,8 @@ export default async function RootLayout({ children }) {
     <html lang="pt-BR" className={`${montserrat.variable} font-sans`}>
       <body className="flex flex-col min-h-screen bg-gray-50 text-gray-800">
         <Header categories={allCategories} />
-        {/* Adiciona um padding-top (pt-24) para compensar a altura do header fixo */}
-        <main className="flex-grow z-0 pt-24">
+        {/* Adiciona um padding-top dinâmico para compensar a altura do header fixo */}
+        <main className="flex-grow z-0" style={{ paddingTop: 'var(--header-height, 6rem)' }}>
           {children}
         </main>
         <Footer />
