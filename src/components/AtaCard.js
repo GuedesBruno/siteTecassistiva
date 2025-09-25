@@ -1,3 +1,6 @@
+'use client';
+
+import { useState, useRef } from 'react';
 import Accordion from './Accordion';
 import { getStrapiMediaUrl } from '@/lib/api';
 import RichTextRenderer from './RichTextRenderer';
@@ -9,29 +12,103 @@ function formatDate(dateString) {
 }
 
 export default function AtaCard({ ata }) {
-  const { titulo, validade, descricao_adesao, lista_de_itens, documentos } = ata.attributes;
+  const attributes = ata.attributes || ata;
+  const { titulo, validade, descricao_adesao, item_ata, documentos } = attributes;
 
+  const [isAccordionOpen, setIsAccordionOpen] = useState(false);
+  const [highlightedItemId, setHighlightedItemId] = useState(null);
+  const itemRefs = useRef({});
+
+  const itens = item_ata || [];
   const docs = documentos?.data;
+
+  const handleButtonClick = (itemId) => {
+    if (!isAccordionOpen) {
+        setIsAccordionOpen(true);
+    }
+    
+    setHighlightedItemId(itemId);
+
+    setTimeout(() => {
+      const element = itemRefs.current[itemId];
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 300); // Delay to allow accordion to open
+
+    setTimeout(() => {
+      setHighlightedItemId(null);
+    }, 2500); // Highlight duration
+  };
+
+  const ItensContent = () => (
+    <div className="space-y-4">
+      {itens.map((item) => {
+        const isHighlighted = item.id === highlightedItemId;
+        return (
+          <div 
+            key={item.id} 
+            ref={(el) => (itemRefs.current[item.id] = el)}
+            className={`p-4 border border-gray-200 rounded-md bg-gray-50 transition-all duration-500 ${isHighlighted ? 'ring-2 ring-tec-blue' : ''}`}>
+            <p className="font-bold text-tec-blue">
+              Item {item.numero_item}: {item.produto}
+            </p>
+            {item.categoria && <p className="text-sm text-gray-600 mt-2"><strong>Categoria:</strong> {item.categoria}</p>}
+            {item.quantidade_carona && <p className="text-sm text-gray-600"><strong>Quantidade para "Carona":</strong> {item.quantidade_carona}</p>}
+          </div>
+        );
+      })}
+    </div>
+  );
 
   return (
     <div className="bg-white border border-gray-200 rounded-lg shadow-md mb-6 overflow-hidden">
       <div className="p-6">
-        <h3 className="text-2xl font-bold text-tec-blue mb-2">{titulo}</h3>
-        <p className="text-sm text-gray-600 font-semibold mb-4">Válido até {formatDate(validade)}</p>
-        
-        <div className="prose prose-sm max-w-none text-gray-700 mb-4">
-          <RichTextRenderer content={descricao_adesao} />
+        <div className="flex flex-col md:flex-row gap-6 md:gap-8 md:items-start">
+          {/* Left Column */}
+          <div className="w-full md:w-2/3">
+            <h3 className="text-2xl font-bold text-tec-blue mb-2">{titulo}</h3>
+            <p className="text-sm text-gray-600 font-semibold mb-4">Válido até {formatDate(validade)}</p>
+            <div className="prose prose-sm max-w-none text-gray-700 [&>*:first-child]:mt-0">
+              <RichTextRenderer content={descricao_adesao} />
+            </div>
+          </div>
+
+          {/* Right Column */}
+          {itens && itens.length > 0 && (
+            <div className="w-full md:w-1/3">
+              <h4 className="font-semibold text-gray-700 mb-2 text-sm">Itens da Ata</h4>
+              <div className="max-h-48 overflow-y-auto pr-2">
+                <div className="grid grid-cols-4 gap-1">
+                  {itens.map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => handleButtonClick(item.id)}
+                      title={item.produto}
+                      className="text-center p-1 rounded bg-gray-100 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200 text-[10px] leading-tight"
+                    >
+                      {item.descricao}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
-        
-        {lista_de_itens && (
-          <Accordion 
-            title="Ver Itens" 
-            content={<RichTextRenderer content={lista_de_itens} />} 
-          />
+
+        {itens && itens.length > 0 && (
+            <div className="mt-4">
+                <Accordion 
+                    title="Ver Itens" 
+                    content={<ItensContent />} 
+                    isOpen={isAccordionOpen}
+                    onToggle={() => setIsAccordionOpen(!isAccordionOpen)}
+                />
+            </div>
         )}
 
         {docs && docs.length > 0 && (
-          <div className="pt-4">
+          <div className="pt-4 mt-4 border-t border-gray-200">
             <h4 className="text-lg font-semibold text-gray-800 mb-2">Documentos para Download:</h4>
             <ul className="space-y-2">
               {docs.map((doc) => {
@@ -45,8 +122,8 @@ export default function AtaCard({ ata }) {
                       rel="noopener noreferrer"
                       className="text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200 flex items-center"
                     >
-                      <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                      {docAttributes.name}
+                      <svg className="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                      <span>{docAttributes.name}</span>
                     </a>
                   </li>
                 );

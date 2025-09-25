@@ -195,7 +195,7 @@ export async function getProductsBySubcategorySlug(subslug) {
 }
 
 export async function getOpenAtas() {
-  const response = await fetchAPI('/api/atas?populate=documentos');
+  const response = await fetchAPI('/api/atas?populate[0]=item_ata&populate[1]=documentos');
   const data = normalizeDataArray(response);
   // Manually normalize if attributes is missing
   return data.map(item => {

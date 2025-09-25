@@ -1,9 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-
-export default function Accordion({ title, content }) {
-  const [isOpen, setIsOpen] = useState(false);
+// No longer uses its own state
+export default function Accordion({ title, content, isOpen, onToggle }) {
 
   let renderedContent;
   if (typeof content === 'string') {
@@ -21,7 +19,7 @@ export default function Accordion({ title, content }) {
   return (
     <div className="border-t border-gray-200 py-4">
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={onToggle} // Use the passed-in toggle handler
         className="flex justify-between items-center w-full text-lg font-semibold text-left text-gray-800 hover:text-blue-600 focus:outline-none"
       >
         <span>{title}</span>
