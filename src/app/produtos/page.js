@@ -15,7 +15,7 @@ export default async function ProdutosPage() {
   ];
 
   return (
-    <div className="container mx-auto flex flex-col md:flex-row gap-4 py-8 px-4">
+    <div className="container mx-auto flex flex-col md:flex-row gap-4 py-8 px-8">
       <aside className="w-full md:w-1/4 lg:w-1/5">
         <CategoryMenu categories={categories} />
       </aside>

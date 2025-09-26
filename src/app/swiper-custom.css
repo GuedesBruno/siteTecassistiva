@@ -1,0 +1,29 @@
+/* src/app/swiper-custom.css */
+
+.swiper-button-next, .swiper-button-prev {
+    color: #fff !important; /* Cor dos ícones */
+    background-color: rgba(0, 37, 84, 0.5); /* Fundo semi-transparente */
+    border-radius: 50%; /* Formato circular */
+    width: 44px !important; /* Largura */
+    height: 44px !important; /* Altura */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.swiper-button-next:hover, .swiper-button-prev:hover {
+    background-color: rgba(0, 37, 84, 0.8); /* Fundo mais opaco no hover */
+}
+
+.swiper-button-next::after, .swiper-button-prev::after {
+    font-size: 20px !important; /* Tamanho dos ícones de seta */
+    font-weight: 900;
+}
+
+/* Esconde as setas em telas menores para não sobrecarregar a interface */
+@media (max-width: 768px) {
+    .swiper-button-next, .swiper-button-prev {
+        display: none !important;
+    }
+}

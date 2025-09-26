@@ -1,4 +1,5 @@
-import './globals.css'
+import './globals.css';
+import './swiper-custom.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Montserrat } from 'next/font/google';

@@ -38,7 +38,7 @@ export default function TestimonialSection({ depoimentos }) {
             return (
               <SwiperSlide key={depoimento.id}>
                 <div className="mx-auto text-center pb-12">
-                  <blockquote className="text-2xl italic leading-relaxed mb-8 text-gray-700">
+                  <blockquote className="text-lg md:text-2xl italic leading-relaxed mb-8 text-gray-700">
                     <span className="text-4xl leading-none font-serif">&ldquo;</span>
                     {texto}
                     <span className="text-4xl leading-none font-serif">&rdquo;</span>
