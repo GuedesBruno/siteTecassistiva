@@ -58,8 +58,8 @@ export function normalizeDataArray(response) {
 }
 
 export async function getAllProducts() {
-  const response = await fetchAPI('/api/produtos?fields[0]=slug&pagination[limit]=1000');
-  return normalizeDataArray(response);
+  // Usando a mesma lógica de getAllProductsForDisplay para garantir consistência
+  return getAllProductsForDisplay();
 }
 
 export async function getAllProductsForDisplay() {

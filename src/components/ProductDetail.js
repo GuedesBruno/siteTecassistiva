@@ -125,7 +125,20 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
           <div className="prose max-w-none">
             {tabs.map((tab) => (
               <div key={tab.name} className={activeTab === tab.name ? 'block' : 'hidden'}>
-                {tab.name === 'Fotos' && <p>Galeria de fotos aqui.</p>}
+                                {tab.name === 'Fotos' && (
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    {(p.galeria_de_imagens || []).map((img) => (
+                      <div key={img.id} className="relative aspect-square border rounded-lg overflow-hidden">
+                        <Image
+                          src={getStrapiMediaUrl(img.url)}
+                          alt={img.alternativeText || p.nome}
+                          fill
+                          className="object-cover hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
                 {tab.name === 'Downloads' && p.documentos?.map(doc => (
                   <a key={doc.id} href={getStrapiMediaUrl(doc.url)} target="_blank" rel="noopener noreferrer" className="block text-tec-blue hover:underline">{doc.name}</a>
                 ))}

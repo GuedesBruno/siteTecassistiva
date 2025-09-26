@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import 'dotenv/config'; // Para carregar as variáveis de ambiente
+import dotenv from 'dotenv';
+dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
 // ✅ CORREÇÃO: Usando import moderno para o módulo da API
 import { getAllProductsForDisplay } from '../src/lib/api.js';
@@ -32,6 +33,7 @@ async function generateSearchData() {
         nome: attrs.nome,
         slug: attrs.slug,
         descricao_curta: attrs.descricao_curta || '',
+        imagem_principal: attrs.imagem_principal, // Adiciona a imagem principal
       };
     });
 

@@ -18,12 +18,12 @@ function SearchResults() {
       setError(null);
       try {
         // Carrega o índice de busca local gerado no build.
-        const response = await fetch('/search-data.json');
+        const response = await fetch(`/search-data.json?v=${new Date().getTime()}`);
         if (!response.ok) {
           throw new Error('Não foi possível carregar o índice de busca.');
         }
         const data = await response.json();
-        const allProducts = data.products || [];
+        const allProducts = data || [];
 
         if (!query) {
           setResults({ products: [] });
