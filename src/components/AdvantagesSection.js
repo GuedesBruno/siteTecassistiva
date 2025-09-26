@@ -24,7 +24,6 @@ const advantages = [
         title: "Flexibilidade",
         description: "Diga adeus à necessidade de grandes estoques. A Ata de Registro de Preços não obriga a aquisição do quantitativo total registrado. Sua instituição ganha a liberdade de comprar apenas o que precisa, quando precisa, durante toda a vigência do contrato. Isso permite um melhor planejamento orçamentário, evita o desperdício de recursos."
     }
-
 ];
 
 export default function AdvantagesSection() {
