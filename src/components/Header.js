@@ -57,7 +57,9 @@ export default function Header({ categories = [] }) {
     e.preventDefault();
     if (searchTerm.trim()) {
       setIsMenuOpen(false); // Fecha o menu mobile
-      router.push(`/busca?q=${encodeURIComponent(searchTerm.trim())}`);
+      setTimeout(() => {
+        router.push(`/busca?q=${encodeURIComponent(searchTerm.trim())}`);
+      }, 300); // Delay to allow menu to close
     }
   };
 

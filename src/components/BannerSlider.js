@@ -11,7 +11,6 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 export default function BannerSlider({ banners }) {
-
   if (!Array.isArray(banners) || banners.length === 0) {
     return (
       <section className="h-[70vh] bg-gray-200 flex items-center justify-center">
@@ -24,19 +23,18 @@ export default function BannerSlider({ banners }) {
   }
 
   return (
-    <section className="h-[70vh] sm:h-[60vh] md:h-[72vh] bg-gray-200">
+    <section className="relative h-[70vh] sm:h-[60vh] md:h-[72vh] bg-gray-200">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         spaceBetween={0}
         slidesPerView={1}
-        navigation
+        navigation={true}
         pagination={{ clickable: true }}
         loop={true}
         autoplay={{ delay: 5000, disableOnInteraction: false }}
         className="w-full h-full"
       >
         {banners.map((banner, index) => {
-          // Banner pode vir no formato { id, attributes: {...} } ou plano { id, titulo, ... }
           const attrs = banner.attributes || banner;
           const { titulo, subtitulo, texto_do_botao, link_do_botao, imagem } = attrs;
 
@@ -49,7 +47,6 @@ export default function BannerSlider({ banners }) {
           return (
             <SwiperSlide key={banner.id}>
               <div className={`w-full h-full flex flex-col lg:flex-row ${isReversed ? 'lg:flex-row-reverse' : ''}`}>
-                {/* Painel de texto (40% em telas grandes) */}
                 <div className="w-full lg:w-2/5 bg-gray-100 flex items-center justify-center p-6 md:p-12">
                   <div className="max-w-md text-center lg:text-left">
                     <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-4 text-[#002554]">{titulo}</h1>
@@ -60,7 +57,6 @@ export default function BannerSlider({ banners }) {
                   </div>
                 </div>
 
-                {/* Painel de imagem (60% em telas grandes) */}
                 <div className="w-full lg:w-3/5 h-64 lg:h-full relative">
                   {fullImageUrl ? (
                     <>
@@ -71,7 +67,6 @@ export default function BannerSlider({ banners }) {
                         className="object-cover"
                         priority={index === 0}
                       />
-                      {/* subtle dark gradient overlay for readability */}
                       <div className="absolute inset-0 bg-gradient-to-l from-black/30 to-transparent pointer-events-none" />
                     </>
                   ) : (
