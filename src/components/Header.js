@@ -56,6 +56,7 @@ export default function Header({ categories = [] }) {
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (searchTerm.trim()) {
+      setIsMenuOpen(false); // Fecha o menu mobile
       router.push(`/busca?q=${encodeURIComponent(searchTerm.trim())}`);
     }
   };

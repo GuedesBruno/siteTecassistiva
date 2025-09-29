@@ -17,6 +17,11 @@ export default function CategoryMenu({ categories = [], activeCategorySlug, acti
   // já que os dados podem ou não estar aninhados em 'attributes'.
   const getAttrs = (item) => item.attributes || item;
 
+  // Ordena as categorias em ordem alfabética
+  const sortedCategories = [...categories].sort((a, b) =>
+    getAttrs(a).nome.localeCompare(getAttrs(b).nome)
+  );
+
   return (
     <div className="w-full bg-white p-4 rounded-lg shadow-md border border-gray-200 md:p-0 md:bg-transparent md:shadow-none md:border-none">
       {/* Botão para expandir/recolher em telas pequenas */}
@@ -41,10 +46,15 @@ export default function CategoryMenu({ categories = [], activeCategorySlug, acti
           <h3 className="font-bold text-lg mb-4 text-gray-800 border-b pb-2 hidden md:block">Categorias</h3>
           <nav>
             <ul className="space-y-1">
-              {categories.map((category) => {
+              {sortedCategories.map((category) => {
                 const catAttrs = getAttrs(category);
                 const isActive = catAttrs.slug === activeCategorySlug;
                 const subcategories = catAttrs.subcategorias?.data || catAttrs.subcategorias || [];
+                
+                // Ordena as subcategorias em ordem alfabética
+                const sortedSubcategories = [...subcategories].sort((a, b) =>
+                  getAttrs(a).nome.localeCompare(getAttrs(b).nome)
+                );
 
                 return (
                   <li key={catAttrs.slug}>
@@ -58,9 +68,9 @@ export default function CategoryMenu({ categories = [], activeCategorySlug, acti
                     >
                       {catAttrs.nome}
                     </Link>
-                    {isActive && subcategories.length > 0 && (
+                    {sortedSubcategories.length > 0 && (
                       <ul className="mt-2 pl-4 border-l-2 border-tec-blue-light space-y-1">
-                        {subcategories.map((subcategory) => {
+                        {sortedSubcategories.map((subcategory) => {
                           const subAttrs = getAttrs(subcategory);
                           const isSubActive = subAttrs.slug === activeSubcategorySlug;
                           return (
