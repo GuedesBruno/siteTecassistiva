@@ -13,12 +13,24 @@
 /* Custom styles for Featured Products Slider navigation */
 .featured-products-prev, 
 .featured-products-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
     color: #002554 !important; /* Cor dos ícones */
     background-color: rgba(255, 255, 255, 0.7); /* Fundo branco semi-transparente */
     border-radius: 50%;
     width: 40px !important;
     height: 40px !important;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.featured-products-prev {
+    left: 2rem;
+}
+
+.featured-products-next {
+    right: 2rem;
 }
 
 .featured-products-prev:hover, 

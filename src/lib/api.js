@@ -207,4 +207,46 @@ export async function getOpenAtas() {
   });
 }
 
+
+export async function getProductsWithDocuments() {
+  try {
+    const query = new URLSearchParams({
+      'filters[documentos][$notNull]': true,
+      'filters[documentos][$ne]': '[]',
+      'fields[0]': 'nome',
+      'fields[1]': 'slug',
+      'populate[categorias][fields][0]': 'nome',
+      'populate[categorias][fields][1]': 'slug',
+      'populate[subcategoria][fields][0]': 'nome',
+      'populate[subcategoria][fields][1]': 'slug',
+      'populate[documentos][fields][0]': 'name',
+      'populate[documentos][fields][1]': 'url',
+      'pagination[limit]': 1000,
+    }).toString();
+
+    const productsData = await fetchAPI(`/api/produtos?${query}`);
+    return normalizeDataArray(productsData);
+  } catch (error) {
+    console.error(`Falha ao buscar produtos com documentos:`, error);
+    return [];
+  }
+}
+
+export async function getSoftwareAndDrivers() {
+  try {
+    const query = new URLSearchParams({
+      'populate[logo]': '*',
+      'populate[produto_relacionado]': '*',
+      'populate[instaladores]': '*',
+      'pagination[limit]': 1000,
+    }).toString();
+    
+    const softwareData = await fetchAPI(`/api/softwares?${query}`);
+    return normalizeDataArray(softwareData);
+  } catch (error) {
+    console.error(`Falha ao buscar softwares e drivers:`, error);
+    return [];
+  }
+}
+
 export { fetchAPI };

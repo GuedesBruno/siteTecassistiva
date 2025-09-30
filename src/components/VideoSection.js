@@ -66,24 +66,25 @@ const VideoCard = ({ video, onVideoClick }) => {
   };
 
   return (
-    <button onClick={handleClick} className="group block rounded-lg shadow-md overflow-hidden transform hover:-translate-y-1 transition-all duration-300 text-left w-full">
-      <div className="relative">
-        {thumbnailUrl ? (
-          <img src={thumbnailUrl} alt={attrs.titulo} className="w-full h-48 object-cover" />
-        ) : (
-          <div className="w-full h-48 bg-gray-200 animate-pulse" />
-        )}
+    <div className="group block rounded-lg shadow-md overflow-hidden transform hover:-translate-y-1 transition-all duration-300 text-left w-full bg-white">
+      <button onClick={handleClick} className="relative block w-full">
+        <div className="aspect-video">
+          {thumbnailUrl ? (
+            <img src={thumbnailUrl} alt={attrs.titulo} className="w-full h-full object-cover" />
+          ) : (
+            <div className="w-full h-full bg-gray-200 animate-pulse" />
+          )}
+        </div>
         <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
           <svg className="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
           </svg>
         </div>
-        {/* Overlay com gradiente e título */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent">
-          <h3 className="text-white font-bold text-lg truncate">{attrs.titulo}</h3>
-        </div>
+      </button>
+      <div className="p-4">
+        <h3 className="text-gray-800 font-bold text-lg truncate">{attrs.titulo}</h3>
       </div>
-    </button>
+    </div>
   );
 };
 

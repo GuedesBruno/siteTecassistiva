@@ -85,7 +85,7 @@ export default function AtaCard({ ata }) {
                       key={item.id}
                       onClick={() => handleButtonClick(item.id)}
                       title={item.produto}
-                      className="text-center p-1 rounded bg-gray-100 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200 text-[10px] leading-tight"
+                      className="text-center p-1 rounded bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200 text-[10px] leading-tight"
                     >
                       {item.descricao}
                     </button>
