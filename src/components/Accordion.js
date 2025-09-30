@@ -1,6 +1,6 @@
 'use client';
 
-// No longer uses its own state
+// Não usar useState aqui, o estado será gerenciado no componente pai
 export default function Accordion({ title, content, isOpen, onToggle }) {
 
   let renderedContent;
