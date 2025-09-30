@@ -1,5 +1,6 @@
-'use client'; 
+'use client';
 
+import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import Image from 'next/image';
@@ -11,6 +12,12 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 export default function BannerSlider({ banners }) {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   if (!Array.isArray(banners) || banners.length === 0) {
     return (
       <section className="h-[70vh] bg-gray-200 flex items-center justify-center">
@@ -28,7 +35,7 @@ export default function BannerSlider({ banners }) {
         modules={[Navigation, Pagination, Autoplay]}
         spaceBetween={0}
         slidesPerView={1}
-        navigation={true}
+        navigation={isMounted}
         pagination={{ clickable: true }}
         loop={true}
         autoplay={{ delay: 5000, disableOnInteraction: false }}

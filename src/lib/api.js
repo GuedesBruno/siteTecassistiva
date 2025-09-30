@@ -114,7 +114,7 @@ export async function getFeaturedProducts() {
 }
 
 export async function getAllCategories() {
-  const response = await fetchAPI('/api/categorias?fields[0]=nome&fields[1]=slug&populate[subcategorias][fields][0]=nome&populate[subcategorias][fields][1]=slug&pagination[limit]=100');
+  const response = await fetchAPI('/api/categorias?sort=nome:asc&fields[0]=nome&fields[1]=slug&populate[subcategorias][fields][0]=nome&populate[subcategorias][fields][1]=slug&pagination[limit]=100');
   return normalizeDataArray(response);
 }
 

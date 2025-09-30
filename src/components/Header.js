@@ -57,9 +57,7 @@ export default function Header({ categories = [] }) {
     e.preventDefault();
     if (searchTerm.trim()) {
       setIsMenuOpen(false); // Fecha o menu mobile
-      setTimeout(() => {
-        router.push(`/busca?q=${encodeURIComponent(searchTerm.trim())}`);
-      }, 300); // Delay to allow menu to close
+      router.push(`/busca?q=${encodeURIComponent(searchTerm.trim())}`);
     }
   };
 
