@@ -22,31 +22,38 @@ export default function FeaturedProductsSlider({ products }) {
             no mercado nacional e internacional!
           </p>
         </div>
-        <Swiper
-          modules={[Navigation, Autoplay]} // Adiciona Autoplay
-          spaceBetween={30}
-          slidesPerView={4} // Define 4 colunas como padrão para telas grandes
-          navigation
-          className="!static" // Força o contêiner do Swiper a não ser um contexto de posicionamento
-          loop={true} // Habilita o loop infinito
-          autoplay={{
-            delay: 2500, // Rola a cada 2.5 segundos
-            disableOnInteraction: false, // Não para o autoplay ao interagir
-          }}
-          breakpoints={{
-            // Configurações responsivas
-            320: { slidesPerView: 1, spaceBetween: 10 },
-            640: { slidesPerView: 2, spaceBetween: 20 },
-            768: { slidesPerView: 3, spaceBetween: 30 },
-            1024: { slidesPerView: 4, spaceBetween: 30 },
-          }}
-        >
-          {products.map((product) => (
-            <SwiperSlide key={product.id}>
-              <ProductCard product={product} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        <div className="relative">
+          <Swiper
+            modules={[Navigation, Autoplay]} // Adiciona Autoplay
+            spaceBetween={30}
+            slidesPerView={4} // Define 4 colunas como padrão para telas grandes
+            navigation={{
+              prevEl: '.featured-products-prev',
+              nextEl: '.featured-products-next',
+            }}
+            loop={true} // Habilita o loop infinito
+            autoplay={{
+              delay: 2500, // Rola a cada 2.5 segundos
+              disableOnInteraction: false, // Não para o autoplay ao interagir
+            }}
+            breakpoints={{
+              // Configurações responsivas
+              320: { slidesPerView: 1, spaceBetween: 10 },
+              640: { slidesPerView: 2, spaceBetween: 20 },
+              768: { slidesPerView: 3, spaceBetween: 30 },
+              1024: { slidesPerView: 4, spaceBetween: 30 },
+            }}
+          >
+            {products.map((product) => (
+              <SwiperSlide key={product.id}>
+                <ProductCard product={product} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          {/* Botões de navegação personalizados */}
+          <div className="swiper-button-prev featured-products-prev"></div>
+          <div className="swiper-button-next featured-products-next"></div>
+        </div>
         <div className="text-center mt-12">
           <Link href="/produtos" className="bg-tec-blue-light text-white font-bold py-3 px-8 rounded-md hover:bg-tec-blue transition-colors shadow-md">
             Todos nossos produtos aqui

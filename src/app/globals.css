@@ -9,3 +9,25 @@
 
 /* Also ensure any elements using tailwind's ring/outline shadows don't appear rounded */
 * { border-radius: inherit; }
+
+/* Custom styles for Featured Products Slider navigation */
+.featured-products-prev, 
+.featured-products-next {
+    color: #002554 !important; /* Cor dos ícones */
+    background-color: rgba(255, 255, 255, 0.7); /* Fundo branco semi-transparente */
+    border-radius: 50%;
+    width: 40px !important;
+    height: 40px !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.featured-products-prev:hover, 
+.featured-products-next:hover {
+    background-color: rgba(255, 255, 255, 1); /* Fundo branco opaco no hover */
+}
+
+.featured-products-prev::after, 
+.featured-products-next::after {
+    font-size: 18px !important; /* Tamanho dos ícones de seta */
+    font-weight: 900;
+}
