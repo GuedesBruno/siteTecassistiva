@@ -75,13 +75,6 @@ export async function getAllProductsForDisplay() {
 }
 
 export async function getProductBySlug(slug) {
-  const populateFields = [
-    'imagem_principal',
-    'galeria_de_imagens',
-    'categorias',
-    'subcategoria', // Corrigido de 'subcategorias' para 'subcategoria'
-    'documentos'
-  ];
   const fieldsToFetch = [
     'nome',
     'slug',
@@ -95,13 +88,14 @@ export async function getProductBySlug(slug) {
   ];
 
   const fieldsQuery = fieldsToFetch.map((field, i) => `fields[${i}]=${field}`).join('&');
-  const populateQuery = populateFields.map((field, i) => `populate[${i}]=${field}`).join('&');
+  const populateQuery = 'populate=*';
 
   const response = await fetchAPI(`/api/produtos?filters[slug][$eq]=${slug}&${fieldsQuery}&${populateQuery}`);
   const data = response.data || [];
   if (data.length === 0) return null;
 
   const item = data[0];
+  // The API response might already be normalized, but this ensures it is.
   if (item.attributes) return item;
 
   const { id, ...rest } = item;
@@ -210,19 +204,10 @@ export async function getOpenAtas() {
 
 export async function getProductsWithDocuments() {
   try {
-    const query = new URLSearchParams({
-      'filters[documentos][$notNull]': true,
-      'filters[documentos][$ne]': '[]',
-      'fields[0]': 'nome',
-      'fields[1]': 'slug',
-      'populate[categorias][fields][0]': 'nome',
-      'populate[categorias][fields][1]': 'slug',
-      'populate[subcategoria][fields][0]': 'nome',
-      'populate[subcategoria][fields][1]': 'slug',
-      'populate[documentos][fields][0]': 'name',
-      'populate[documentos][fields][1]': 'url',
-      'pagination[limit]': 1000,
-    }).toString();
+    // To ensure all fields are returned, especially 'documentos',
+    // removing the 'fields' parameter which can conflict with 'populate=*'.
+    const query = 'populate=*' +
+      '&pagination[limit]=1000';
 
     const productsData = await fetchAPI(`/api/produtos?${query}`);
     return normalizeDataArray(productsData);
@@ -234,15 +219,29 @@ export async function getProductsWithDocuments() {
 
 export async function getSoftwareAndDrivers() {
   try {
-    const query = new URLSearchParams({
-      'populate[logo]': '*',
-      'populate[produto_relacionado]': '*',
+    const params = new URLSearchParams({
+      'fields[0]': 'nome',
+      'fields[1]': 'tipo',
       'populate[instaladores]': '*',
       'pagination[limit]': 1000,
     }).toString();
-    
+
+    // Adiciona a população do produto separadamente para maior robustez
+    const query = `${params}&populate=produto`;
+
     const softwareData = await fetchAPI(`/api/softwares?${query}`);
-    return normalizeDataArray(softwareData);
+    
+    const rawData = softwareData.data || [];
+    const normalizedData = rawData.map(item => {
+        if (item.attributes) {
+            return item;
+        }
+        const { id, ...attributes } = item;
+        return { id, attributes };
+    });
+
+    return normalizedData;
+
   } catch (error) {
     console.error(`Falha ao buscar softwares e drivers:`, error);
     return [];

@@ -1,28 +1,63 @@
-
 import React from 'react';
 
-// Este é um renderizador de texto rico muito básico.
-// O campo de texto rico do Strapi retorna um JSON estruturado (blocks).
-// Uma implementação completa usaria uma biblioteca como 'react-markdown' ou 
-// mapearia recursivamente os blocos para componentes React.
-// Por enquanto, isso apenas renderizará o texto simples para evitar erros.
+// Função recursiva para renderizar nós de texto (folhas da árvore)
+const renderTextNode = (node, index) => {
+  let textElement = <React.Fragment key={index}>{node.text}</React.Fragment>;
+  if (node.bold) {
+    textElement = <strong key={index}>{textElement}</strong>;
+  }
+  if (node.italic) {
+    textElement = <em key={index}>{textElement}</em>;
+  }
+  // Adicione outros estilos de texto aqui se necessário (underline, strikethrough)
+  return textElement;
+};
 
+// Função recursiva para renderizar elementos aninhados (como links)
+const renderElementNode = (node, index) => {
+  switch (node.type) {
+    case 'link':
+      return (
+        <a 
+          href={node.url}
+          key={index} 
+          className="text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200"
+          target="_blank" 
+          rel="noopener noreferrer"
+        >
+          {node.children.map(renderTextNode)}
+        </a>
+      );
+    default:
+      return renderTextNode(node, index);
+  }
+};
+
+// Função principal que mapeia os blocos de nível superior do Strapi
 export default function RichTextRenderer({ content }) {
-  if (!content) {
+  if (!content || !Array.isArray(content)) {
     return null;
   }
 
-  // Se o conteúdo for uma string simples
-  if (typeof content === 'string') {
-    return <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: content.replace(/\n/g, '<br />') }} />;
-  }
-
-  // Placeholder para uma estrutura de blocos mais complexa (não implementado)
-  // console.log("RichText content structure:", content);
-
   return (
-    <div className="prose max-w-none prose-sm text-gray-600">
-        <p>O conteúdo formatado aparecerá aqui.</p>
+    <div className="prose prose-sm max-w-none text-gray-700">
+      {content.map((block, index) => {
+        switch (block.type) {
+          case 'paragraph':
+            return (
+              <p key={index} className="mb-2 last:mb-0">
+                {block.children.map(renderElementNode)}
+              </p>
+            );
+          // Adicione outros tipos de bloco aqui (heading, list, etc.) se precisar
+          default:
+            return (
+              <p key={index} className="mb-2 last:mb-0">
+                {block.children.map(renderElementNode)}
+              </p>
+            );
+        }
+      })}
     </div>
   );
 }

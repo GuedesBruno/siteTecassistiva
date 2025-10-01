@@ -1,7 +1,5 @@
-
 import React from 'react';
 import { getStrapiMediaUrl } from '@/lib/api';
-import Link from 'next/link';
 
 // Ícone de exemplo para download
 const DownloadIcon = () => (
@@ -11,26 +9,28 @@ const DownloadIcon = () => (
 );
 
 export default function DocumentCard({ product }) {
-  if (!product?.attributes?.documentos?.data?.length) {
+  // Updated logic to match the working implementation in ProductDetail.js
+  const { nome, documentos } = product;
+
+  // If there are no documents, don't render the card.
+  if (!documentos || documentos.length === 0) {
     return null;
   }
-
-  const { nome, documentos } = product.attributes;
 
   return (
     <div className="border rounded-lg p-6 bg-white shadow-md hover:shadow-lg transition-shadow duration-300">
       <h3 className="text-xl font-bold text-gray-800 mb-4">{nome}</h3>
       <ul className="space-y-3">
-        {documentos.data.map((doc) => (
+        {documentos.map((doc) => (
           <li key={doc.id}>
             <a
-              href={getStrapiMediaUrl(doc.attributes.url)}
+              href={getStrapiMediaUrl(doc.url)}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200"
             >
               <DownloadIcon />
-              <span>{doc.attributes.name}</span>
+              <span>{doc.name}</span>
             </a>
           </li>
         ))}

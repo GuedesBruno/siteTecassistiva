@@ -5,26 +5,82 @@ import { useState } from 'react';
 
 /**
  * Renderiza um menu de navegação lateral para categorias e subcategorias.
- * Destaca a categoria ativa e exibe suas subcategorias.
- * @param {object} props - As propriedades do componente.
- * @param {Array<object>} props.categories - A lista de categorias para exibir.
- * @param {string} props.activeCategorySlug - O slug da categoria atualmente ativa.
- * @param {string} [props.activeSubcategorySlug] - O slug da subcategoria atualmente ativa (opcional).
+ * Suporta dois modos de operação:
+ * 1. Modo Callback (com `onCategorySelect`): Renderiza botões para manipulação de estado no cliente.
+ * 2. Modo Link (sem `onCategorySelect`): Renderiza links de navegação padrão do Next.js.
  */
-export default function CategoryMenu({ categories = [], activeCategorySlug, activeSubcategorySlug }) {
+export default function CategoryMenu({
+  categories = [],
+  // Props para o modo Callback
+  onCategorySelect,
+  onSubcategorySelect,
+  selectedCategory,
+  selectedSubcategory,
+  // Props para o modo Link
+  activeCategorySlug,
+  activeSubcategorySlug,
+  basePath = '/produtos/categorias', // Default path for links
+}) {
   const [isOpen, setIsOpen] = useState(false);
-  // Função auxiliar para acessar os atributos de forma segura,
-  // já que os dados podem ou não estar aninhados em 'attributes'.
+  const isCallbackMode = typeof onCategorySelect === 'function';
+
   const getAttrs = (item) => item.attributes || item;
 
-  // Ordena as categorias em ordem alfabética
   const sortedCategories = [...categories].sort((a, b) =>
     getAttrs(a).nome.localeCompare(getAttrs(b).nome)
   );
 
+  const handleCategoryClick = (category) => {
+    if (isCallbackMode) {
+      onCategorySelect(getAttrs(category));
+    }
+  };
+
+  const handleSubcategoryClick = (subcategory) => {
+    if (isCallbackMode && onSubcategorySelect) {
+      onSubcategorySelect(getAttrs(subcategory));
+    }
+  };
+
+  const renderItem = (item, isSub = false) => {
+    const attrs = getAttrs(item);
+    const slug = attrs.slug;
+    const parentSlug = isSub ? activeCategorySlug || selectedCategory?.slug : undefined;
+
+    const isActive = isSub
+      ? (isCallbackMode ? selectedSubcategory?.slug === slug : activeSubcategorySlug === slug)
+      : (isCallbackMode ? selectedCategory?.slug === slug : activeCategorySlug === slug);
+
+    const commonClasses = `block w-full text-left px-4 transition-colors duration-200 rounded-md ${isSub ? 'py-1.5 text-sm' : 'py-2'}`;
+    
+    const activeClasses = isSub 
+      ? 'font-bold text-tec-blue bg-gray-100' 
+      : 'bg-tec-blue text-white font-semibold shadow-sm';
+      
+    const inactiveClasses = isSub 
+      ? 'text-gray-700 hover:text-tec-blue hover:bg-gray-100' 
+      : 'text-gray-800 hover:bg-gray-100 hover:text-tec-blue';
+
+    const className = `${commonClasses} ${isActive ? activeClasses : inactiveClasses}`;
+
+    if (isCallbackMode) {
+      return (
+        <button onClick={() => isSub ? handleSubcategoryClick(item) : handleCategoryClick(item)} className={className}>
+          {attrs.nome}
+        </button>
+      );
+    }
+
+    const href = isSub ? `${basePath}/${parentSlug}/${slug}` : `${basePath}/${slug}`;
+    return (
+      <Link href={href} className={className}>
+        {attrs.nome}
+      </Link>
+    );
+  };
+
   return (
     <div className="w-full bg-white p-4 rounded-lg shadow-md border border-gray-200 md:p-0 md:bg-transparent md:shadow-none md:border-none">
-      {/* Botão para expandir/recolher em telas pequenas */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex justify-between items-center p-4 border border-gray-200 rounded-lg md:hidden"
@@ -40,54 +96,32 @@ export default function CategoryMenu({ categories = [], activeCategorySlug, acti
         </svg>
       </button>
 
-      {/* Conteúdo do menu (condicionalmente visível em telas pequenas) */}
       <div className={`${isOpen ? 'block' : 'hidden'} mt-4 md:block`}>
         <div className="w-full bg-white p-4 rounded-lg shadow-md border border-gray-200">
-          <h3 className="font-bold text-lg mb-4 text-gray-800 border-b pb-2 hidden md:block">Categorias</h3>
+          
           <nav>
             <ul className="space-y-1">
               {sortedCategories.map((category) => {
                 const catAttrs = getAttrs(category);
-                const isActive = catAttrs.slug === activeCategorySlug;
-                const subcategories = catAttrs.subcategorias?.data || catAttrs.subcategorias || [];
+                const isActive = isCallbackMode
+                  ? selectedCategory?.slug === catAttrs.slug
+                  : activeCategorySlug === catAttrs.slug;
                 
-                // Ordena as subcategorias em ordem alfabética
+                const subcategories = catAttrs.subcategorias?.data || catAttrs.subcategorias || [];
                 const sortedSubcategories = [...subcategories].sort((a, b) =>
                   getAttrs(a).nome.localeCompare(getAttrs(b).nome)
                 );
 
                 return (
                   <li key={catAttrs.slug}>
-                    <Link
-                      href={`/produtos/categorias/${catAttrs.slug}`}
-                      className={`block w-full text-left px-4 py-2 rounded-md transition-colors duration-200 ${
-                        isActive
-                          ? 'bg-tec-blue text-white font-semibold shadow-sm'
-                          : 'text-gray-800 hover:bg-gray-100 hover:text-tec-blue'
-                      }`}
-                    >
-                      {catAttrs.nome}
-                    </Link>
+                    {renderItem(category, false)}
                     {sortedSubcategories.length > 0 && (
                       <ul className="mt-2 pl-4 border-l-2 border-tec-blue-light space-y-1">
-                        {sortedSubcategories.map((subcategory) => {
-                          const subAttrs = getAttrs(subcategory);
-                          const isSubActive = subAttrs.slug === activeSubcategorySlug;
-                          return (
-                            <li key={subAttrs.slug}>
-                              <Link
-                                href={`/produtos/categorias/${catAttrs.slug}/${subAttrs.slug}`}
-                                className={`block px-4 py-1.5 text-sm rounded-md transition-colors duration-200 ${
-                                  isSubActive
-                                    ? 'font-bold text-tec-blue bg-gray-100' // Estilo para subcategoria ativa
-                                    : 'text-gray-700 hover:text-tec-blue hover:bg-gray-100'
-                                }`}
-                              >
-                                {subAttrs.nome}
-                              </Link>
-                            </li>
-                          );
-                        })}
+                        {sortedSubcategories.map((subcategory) => (
+                          <li key={getAttrs(subcategory).slug}>
+                            {renderItem(subcategory, true)}
+                          </li>
+                        ))}
                       </ul>
                     )}
                   </li>
