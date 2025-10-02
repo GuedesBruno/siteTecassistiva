@@ -29,7 +29,7 @@ function RichTextRenderer({ content }) {
         text = <s key={index}>{text}</s>;
       }
       if (node.code) {
-        return <div key={index} className="whitespace-pre-wrap bg-gray-100 p-2 rounded font-mono text-sm" dangerouslySetInnerHTML={{ __html: node.text }} />;
+        return <code key={index} className="block whitespace-pre-wrap bg-gray-100 p-2 rounded font-mono text-sm" dangerouslySetInnerHTML={{ __html: node.text }} />;
       }
       return text;
     }
@@ -103,10 +103,7 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
         <div className="relative lg:col-span-2">
           <Swiper
             modules={[Navigation]}
-            navigation={{
-              nextEl: '.swiper-button-next',
-              prevEl: '.swiper-button-prev',
-            }}
+            navigation={true}
             className="w-full aspect-square rounded-lg border bg-gray-100"
           >
             {images.map((img) => (
@@ -121,12 +118,6 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
               </SwiperSlide>
             ))}
           </Swiper>
-          <button className="swiper-button-prev absolute top-1/2 left-2 -translate-y-1/2 z-10 p-2 bg-black/30 rounded-full text-white hover:bg-black/50 transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
-          </button>
-          <button className="swiper-button-next absolute top-1/2 right-2 -translate-y-1/2 z-10 p-2 bg-black/30 rounded-full text-white hover:bg-black/50 transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-          </button>
         </div>
 
         <div className="lg:col-span-3 flex flex-col">
