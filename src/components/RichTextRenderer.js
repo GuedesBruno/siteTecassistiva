@@ -1,63 +1,61 @@
+import Image from 'next/image';
 import React from 'react';
 
-// Função recursiva para renderizar nós de texto (folhas da árvore)
-const renderTextNode = (node, index) => {
-  let textElement = <React.Fragment key={index}>{node.text}</React.Fragment>;
-  if (node.bold) {
-    textElement = <strong key={index}>{textElement}</strong>;
-  }
-  if (node.italic) {
-    textElement = <em key={index}>{textElement}</em>;
-  }
-  // Adicione outros estilos de texto aqui se necessário (underline, strikethrough)
-  return textElement;
-};
-
-// Função recursiva para renderizar elementos aninhados (como links)
-const renderElementNode = (node, index) => {
-  switch (node.type) {
-    case 'link':
-      return (
-        <a 
-          href={node.url}
-          key={index} 
-          className="text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200"
-          target="_blank" 
-          rel="noopener noreferrer"
-        >
-          {node.children.map(renderTextNode)}
-        </a>
-      );
-    default:
-      return renderTextNode(node, index);
-  }
-};
-
-// Função principal que mapeia os blocos de nível superior do Strapi
+// Comprehensive RichTextRenderer to handle various formats from Strapi
 export default function RichTextRenderer({ content }) {
-  if (!content || !Array.isArray(content)) {
-    return null;
-  }
+  if (!content) return null;
 
-  return (
-    <div className="prose prose-sm max-w-none text-gray-700">
-      {content.map((block, index) => {
-        switch (block.type) {
-          case 'paragraph':
-            return (
-              <p key={index} className="mb-2 last:mb-0">
-                {block.children.map(renderElementNode)}
-              </p>
-            );
-          // Adicione outros tipos de bloco aqui (heading, list, etc.) se precisar
-          default:
-            return (
-              <p key={index} className="mb-2 last:mb-0">
-                {block.children.map(renderElementNode)}
-              </p>
-            );
+  const renderNode = (node, index) => {
+    if (node.type === 'text') {
+      let text = <span key={index}>{node.text}</span>;
+      if (node.bold) {
+        text = <strong key={index}>{text}</strong>;
+      }
+      if (node.italic) {
+        text = <em key={index}>{text}</em>;
+      }
+      if (node.underline) {
+        text = <u key={index}>{text}</u>;
+      }
+      if (node.strikethrough) {
+        text = <s key={index}>{text}</s>;
+      }
+      if (node.code) {
+        return <code key={index} className="block whitespace-pre-wrap bg-gray-100 p-2 rounded font-mono text-sm" dangerouslySetInnerHTML={{ __html: node.text }} />;
+      }
+      return text;
+    }
+
+    const children = node.children?.map((child, childIndex) => renderNode(child, `${index}-${childIndex}`));
+
+    switch (node.type) {
+      case 'heading':
+        switch (node.level) {
+          case 1: return <h1 key={index} className="text-4xl font-bold my-4">{children}</h1>;
+          case 2: return <h2 key={index} className="text-3xl font-bold my-4">{children}</h2>;
+          case 3: return <h3 key={index} className="text-2xl font-bold my-3">{children}</h3>;
+          case 4: return <h4 key={index} className="text-xl font-bold my-3">{children}</h4>;
+          case 5: return <h5 key={index} className="text-lg font-bold my-2">{children}</h5>;
+          case 6: return <h6 key={index} className="font-bold my-2">{children}</h6>;
+          default: return <h2 key={index} className="text-3xl font-bold my-4">{children}</h2>;
         }
-      })}
-    </div>
-  );
+      case 'paragraph':
+        return <div key={index} className="mb-4">{children}</div>;
+      case 'list':
+        if (node.format === 'ordered') {
+          return <ol key={index} className="list-decimal list-inside mb-4 pl-4">{children}</ol>;
+        }
+        return <ul key={index} className="list-disc list-inside mb-4 pl-4">{children}</ul>;
+      case 'list-item':
+        return <li key={index}>{children}</li>;
+      case 'link':
+        return <a key={index} href={node.url} className="text-blue-600 hover:underline">{children}</a>;
+      case 'image':
+        return <Image key={index} src={node.image.url} alt={node.image.alternativeText || ''} width={node.image.width} height={node.image.height} className="my-4 rounded" />;
+      default:
+        return <div key={index}>{children}</div>;
+    }
+  };
+
+  return <>{content.map((node, index) => renderNode(node, index))}</>;
 }

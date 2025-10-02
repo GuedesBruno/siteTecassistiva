@@ -77,7 +77,7 @@ export default function VideoModal({ videoInfo, onClose }) {
       onClick={onClose} // Fecha ao clicar no overlay
     >
       <div
-        className="bg-black w-full h-full md:w-auto md:h-auto md:max-w-4xl md:p-2 md:rounded-lg shadow-xl relative"
+        className="bg-black w-full h-full md:w-full md:h-auto md:max-w-3xl md:p-2 md:rounded-lg shadow-xl relative"
         onClick={(e) => e.stopPropagation()} // Impede o fechamento ao clicar no conteúdo do modal
       >
         <button

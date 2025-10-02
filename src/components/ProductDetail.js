@@ -1,63 +1,16 @@
+"use client";
+import { useState, useEffect } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import { getStrapiMediaUrl } from '@/lib/api';
 import VideoModal from './VideoModal'; // Importa o Modal
+import RichTextRenderer from './RichTextRenderer';
 
-// Comprehensive RichTextRenderer to handle various formats from Strapi
-function RichTextRenderer({ content }) {
-  if (!content) return null;
 
-  const renderNode = (node, index) => {
-    if (node.type === 'text') {
-      let text = <span key={index}>{node.text}</span>;
-      if (node.bold) {
-        text = <strong key={index}>{text}</strong>;
-      }
-      if (node.italic) {
-        text = <em key={index}>{text}</em>;
-      }
-      if (node.underline) {
-        text = <u key={index}>{text}</u>;
-      }
-      if (node.strikethrough) {
-        text = <s key={index}>{text}</s>;
-      }
-      if (node.code) {
-        return <code key={index} className="block whitespace-pre-wrap bg-gray-100 p-2 rounded font-mono text-sm" dangerouslySetInnerHTML={{ __html: node.text }} />;
-      }
-      return text;
-    }
-
-    const children = node.children?.map(renderNode);
-
-    switch (node.type) {
-      case 'heading':
-        switch (node.level) {
-          case 1: return <h1 key={index} className="text-4xl font-bold my-4">{children}</h1>;
-          case 2: return <h2 key={index} className="text-3xl font-bold my-4">{children}</h2>;
-          case 3: return <h3 key={index} className="text-2xl font-bold my-3">{children}</h3>;
-          case 4: return <h4 key={index} className="text-xl font-bold my-3">{children}</h4>;
-          case 5: return <h5 key={index} className="text-lg font-bold my-2">{children}</h5>;
-          case 6: return <h6 key={index} className="font-bold my-2">{children}</h6>;
-          default: return <h2 key={index} className="text-3xl font-bold my-4">{children}</h2>;
-        }
-      case 'paragraph':
-        return <p key={index} className="mb-4">{children}</p>;
-      case 'list':
-        if (node.format === 'ordered') {
-          return <ol key={index} className="list-decimal list-inside mb-4 pl-4">{children}</ol>;
-        }
-        return <ul key={index} className="list-disc list-inside mb-4 pl-4">{children}</ul>;
-      case 'list-item':
-        return <li key={index}>{children}</li>;
-      case 'link':
-        return <a key={index} href={node.url} className="text-blue-600 hover:underline">{children}</a>;
-      case 'image':
-        return <Image key={index} src={node.image.url} alt={node.image.alternativeText || ''} width={node.image.width} height={node.image.height} className="my-4 rounded" />;
-      default:
-        return <p key={index}>{children}</p>;
-    }
-  };
-
-  return content.map(renderNode);
-}
 
 // --- Lógica de Vídeo adaptada para este componente ---
 const getVideoId = (url) => {
@@ -103,7 +56,7 @@ const VideoCard = ({ video, onVideoClick }) => {
   if (!videoInfo) return null;
 
   return (
-    <div className="group block rounded-lg shadow-md overflow-hidden transform hover:-translate-y-1 transition-all duration-300 text-left w-full max-w-sm bg-white">
+    <div className="group block rounded-lg shadow-md overflow-hidden transform hover:-translate-y-1 transition-all duration-300">
       <button onClick={() => onVideoClick(videoInfo)} className="relative block w-full">
         <div className="aspect-video">
           {thumbnailUrl ? (
@@ -116,9 +69,6 @@ const VideoCard = ({ video, onVideoClick }) => {
           <svg className="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" /></svg>
         </div>
       </button>
-      <div className="p-4">
-        <h3 className="text-gray-800 font-bold text-lg truncate">{attrs.titulo}</h3>
-      </div>
     </div>
   );
 };
@@ -139,14 +89,15 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
     { name: 'Downloads', content: p.documentos },
   ];
 
-  // Transforma o link de vídeo (string) em um formato que o VideoCard entende
-  const videoData = p.videos ? [{
-    id: 'video-produto',
+  // Parse video URLs from the 'videos' text field (one URL per line)
+  const videoLinks = p.videos ? p.videos.split('\n').filter(link => link.trim() !== '') : [];
+  const videoData = videoLinks.map((link, index) => ({
+    id: `video-${index}`,
     attributes: {
-      titulo: `Vídeo sobre ${p.nome}`,
-      link: p.videos
+      link: link,
+      titulo: `Vídeo ${index + 1}` // Generic title, as it's not available in the text field
     }
-  }] : [];
+  }));
 
   return (
     <>
