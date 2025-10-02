@@ -54,10 +54,12 @@ export default function Footer() {
         <div className="border-t border-gray-700 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-500 text-sm">&copy; {currentYear} Tecassistiva. Todos os direitos reservados.</p>
           <div className="flex space-x-4 mt-4 md:mt-0">
-            {/* AQUI ESTÁ A ALTERAÇÃO */}
-            <Link href="#" className="text-gray-400 hover:text-white" aria-label="Siga-nos no Facebook">Facebook</Link>
-            <Link href="#" className="text-gray-400 hover:text-white" aria-label="Siga-nos no Instagram">Instagram</Link>
-            <Link href="#" className="text-gray-400 hover:text-white" aria-label="Acesse nosso canal no Youtube">Youtube</Link>
+            <Link href="https://www.instagram.com/tecassistiva/" className="text-gray-400 hover:opacity-75 transition-opacity" aria-label="Siga-nos no Instagram" target="_blank" rel="noopener noreferrer">
+              <Image src="/logo_instagram.svg" alt="Instagram" width={24} height={24} />
+            </Link>
+            <Link href="https://www.youtube.com/@Tecassistiva" className="text-gray-400 hover:opacity-75 transition-opacity" aria-label="Acesse nosso canal no Youtube" target="_blank" rel="noopener noreferrer">
+              <Image src="/logo_youtube.svg" alt="Youtube" width={24} height={24} />
+            </Link>
           </div>
         </div>
       </div>

@@ -28,8 +28,12 @@ export default function ContatoPage() {
         <div className="bg-white p-6 rounded-lg border h-fit">
           <h2 className="text-2xl font-semibold mb-4">Informações</h2>
           <p className="text-gray-700"><strong>Telefone:</strong> +55 (11) 3266-4311</p>
-          <p className="text-gray-700 mt-2"><strong>Endereço:</strong> R. das Camélias, 37 - Mirandópolis, São Paulo - SP</p>
-          <p className="text-gray-700 mt-4"><strong>Horário de Atendimento:</strong> Seg-Sex 9h-18h</p>
+          <p className="text-gray-700 mt-4
+          "><strong>WhatsApp:</strong> +55 (11) 9 9597-8139</p>
+          <p className="text-gray-700 mt-4"><strong>Email:</strong> teca@tecassistiva.com.br</p>
+          <p className="text-gray-700 mt-4"><strong>Endereço:</strong> R. das Camélias, 37 - Mirandópolis, São Paulo - SP</p>
+          <p className="text-gray-700 mt-4"><strong>Horário de Atendimento:</strong></p>
+          <p className="text-gray-700">Seg-Qui 8h-18h e Sexta 8h-17h</p>
         </div>
       </section>
     </div>
