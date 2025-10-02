@@ -68,19 +68,9 @@ export default function SupportPageClient({ products, software, categories }) {
 
   const filteredProducts = productsWithDocs.filter(product => {
     if (!selectedCategory) return true;
-
-    console.log(`[Filter] Product: "${product.nome}"`);
-    
     const inCategory = product.categorias?.some(cat => cat.slug === selectedCategory.slug);
-    console.log(`  - Is in category "${selectedCategory.nome}"? ${inCategory}`);
-
-    if (!selectedSubcategory) {
-      return inCategory;
-    }
-
+    if (!selectedSubcategory) return inCategory;
     const inSubcategory = product.subcategoria?.slug === selectedSubcategory.slug;
-    console.log(`  - Is in subcategory "${selectedSubcategory.nome}"? ${inSubcategory}`);
-    
     return inCategory && inSubcategory;
   });
 
@@ -96,13 +86,16 @@ export default function SupportPageClient({ products, software, categories }) {
     switch (activeTab) {
       case 'documentos':
         return (
-          <CategoryMenu 
-            categories={filteredCategoriesForMenu}
-            onCategorySelect={handleCategorySelect}
-            onSubcategorySelect={handleSubcategorySelect}
-            selectedCategory={selectedCategory}
-            selectedSubcategory={selectedSubcategory}
-          />
+          <>
+            <h2 className="text-2xl font-bold mb-4">Categorias</h2>
+            <CategoryMenu 
+              categories={filteredCategoriesForMenu}
+              onCategorySelect={handleCategorySelect}
+              onSubcategorySelect={handleSubcategorySelect}
+              selectedCategory={selectedCategory}
+              selectedSubcategory={selectedSubcategory}
+            />
+          </>
         );
 
       case 'softwares':

@@ -1,4 +1,3 @@
-
 import { getOpenAtas } from '@/lib/api';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import AtaCard from '@/components/AtaCard';
@@ -31,7 +30,7 @@ export default async function AtasAbertasPage() {
             <h2 className="text-2xl font-bold text-center mt-8">O que é uma Ata de Registro de Preços – ARP?</h2>
             <p className="text-justify">Placeholder: A Ata de Registro de Preços (ARP) é o documento que formaliza o resultado do SRP. Nela, são registrados os preços, os fornecedores, os produtos e as condições de fornecimento. Essa ata funciona como um "cardápio" de produtos e serviços que os órgãos públicos podem adquirir de forma ágil e sem a necessidade de um novo processo licitatório completo, bastando apenas emitir uma ordem de compra.</p>
             <div className="text-center mt-8">
-                                <a href="#contact-form" className="bg-blue-600 text-white font-bold py-3 px-4 sm:px-6 rounded-lg hover:bg-blue-700 transition-colors duration-300 text-[11px] sm:text-sm md:text-base whitespace-nowrap">Queremos te contar mais, clique aqui.</a>
+                    <a href="#contact-form" className="bg-blue-600 text-white font-bold py-3 px-4 sm:px-6 rounded-lg hover:bg-blue-700 transition-colors duration-300 text-[11px] sm:text-sm md:text-base whitespace-nowrap">Queremos te contar mais, clique aqui.</a>
             </div>
         </div>
       </section>
@@ -55,7 +54,10 @@ export default async function AtasAbertasPage() {
 
       {/* 3. Seção do Formulário de Contato */}
       <section id="contact-form" className="my-16 scroll-mt-20">
-        <ContactForm />
+        <ContactForm 
+          title="Queremos diminuir o seu trabalho"
+          subtitle="Preencha o formulário abaixo com o seu contato:"
+        />
       </section>
 
       {/* 4. Seção de Vantagens */}
