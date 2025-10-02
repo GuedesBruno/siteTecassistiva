@@ -42,10 +42,10 @@ export default function CategoryMenu({
     }
   };
 
-  const renderItem = (item, isSub = false) => {
+  const renderItem = (item, isSub = false, parentCategorySlug = null) => {
     const attrs = getAttrs(item);
     const slug = attrs.slug;
-    const parentSlug = isSub ? activeCategorySlug || selectedCategory?.slug : undefined;
+    const parentSlug = parentCategorySlug || (isSub ? activeCategorySlug || selectedCategory?.slug : undefined);
 
     const isActive = isSub
       ? (isCallbackMode ? selectedSubcategory?.slug === slug : activeSubcategorySlug === slug)
@@ -119,7 +119,7 @@ export default function CategoryMenu({
                       <ul className="mt-2 pl-4 border-l-2 border-tec-blue-light space-y-1">
                         {sortedSubcategories.map((subcategory) => (
                           <li key={getAttrs(subcategory).slug}>
-                            {renderItem(subcategory, true)}
+                            {renderItem(subcategory, true, catAttrs.slug)}
                           </li>
                         ))}
                       </ul>
