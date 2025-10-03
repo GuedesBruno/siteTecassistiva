@@ -3,6 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import { getStrapiMediaUrl } from '@/lib/api';
 import VideoModal from './VideoModal.js';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 // Função para extrair o ID do vídeo do YouTube ou Vimeo
 const getVideoId = (url) => {
@@ -81,7 +85,7 @@ const VideoCard = ({ video, onVideoClick }) => {
           </svg>
         </div>
       </button>
-      <div className="p-4">
+      <div className="p-4 bg-gray-100">
         <h3 className="text-gray-800 font-bold text-lg truncate">{attrs.titulo}</h3>
       </div>
     </div>
@@ -93,22 +97,44 @@ export default function VideoSection({ videos }) {
   if (!videos || videos.length === 0) return null;
 
   return (
-    <section className="bg-tec-blue py-16">
-      {/* AQUI ESTÁ A MUDANÇA: Ajuste do padding horizontal (px) */}
+    <section className="bg-tec-blue py-16 relative">
       <div className="container mx-auto px-4 md:px-12 lg:px-24">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-extrabold text-white">Vídeos em Destaque</h2>
           <p className="text-lg text-gray-200 mt-2">Veja nossos produtos em ação.</p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <Swiper
+          modules={[Navigation, Autoplay]}
+          spaceBetween={30}
+          navigation={{
+            prevEl: '.video-section-prev',
+            nextEl: '.video-section-next',
+          }}
+          loop={true}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+            reverseDirection: true,
+          }}
+          breakpoints={{
+            320: { slidesPerView: 1, spaceBetween: 10 },
+            768: { slidesPerView: 2, spaceBetween: 20 },
+            1024: { slidesPerView: 3, spaceBetween: 30 },
+          }}
+        >
           {videos.map((video) => (
-            <VideoCard key={video.id} video={video} onVideoClick={setSelectedVideo} />
+            <SwiperSlide key={video.id}>
+              <VideoCard video={video} onVideoClick={setSelectedVideo} />
+            </SwiperSlide>
           ))}
-        </div>
+        </Swiper>
         {selectedVideo && (
           <VideoModal videoInfo={selectedVideo} onClose={() => setSelectedVideo(null)} />
         )}
       </div>
+      {/* Custom navigation buttons */}
+      <div className="swiper-button-prev video-section-prev"></div>
+      <div className="swiper-button-next video-section-next"></div>
     </section>
   );
 }

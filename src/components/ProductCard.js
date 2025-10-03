@@ -9,7 +9,8 @@ export default function ProductCard({ product }) {
 
   // imagem_principal pode vir como { data: { attributes: { url }}} ou plano { url }
   const imagePath = imagem_principal?.data?.attributes?.url || imagem_principal?.url || null;
-  const imageUrl = imagePath ? getStrapiMediaUrl(imagePath) : '/placeholder.jpg';
+  const isPlaceholder = !imagePath;
+  const imageUrl = isPlaceholder ? '/icon-tecassistiva.svg' : getStrapiMediaUrl(imagePath);
 
   const productName = nome || "Produto sem nome";
   const description = descricao_curta || "Descrição não disponível.";
@@ -32,7 +33,7 @@ export default function ProductCard({ product }) {
             src={imageUrl}
             alt={imagem_principal?.data?.attributes?.alternativeText || imagem_principal?.alternativeText || `Imagem de ${productName}`}
             fill
-            className="object-cover"
+            className={isPlaceholder ? "object-contain p-8" : "object-cover"}
           />
         </div>
         {/* Descrição */}

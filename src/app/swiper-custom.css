@@ -27,3 +27,15 @@
         display: none !important;
     }
 }
+
+/* Custom styles for Video Section Carousel */
+.video-section-prev,
+.video-section-next {
+    background-color: #e5e7eb; /* light gray, equivalent to tailwind gray-200 */
+    color: #002554 !important; /* tec-blue, from the rgba value */
+}
+
+.video-section-prev:hover,
+.video-section-next:hover {
+    background-color: #d1d5db; /* gray-300 for hover */
+}
