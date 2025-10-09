@@ -21,7 +21,7 @@
     font-weight: 900;
 }
 
-/* Esconde as setas em telas menores para não sobrecarregar a interface */
+/* Esconde as setas em telas menores*/
 @media (max-width: 768px) {
     .swiper-button-next, .swiper-button-prev {
         display: none !important;
