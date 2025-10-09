@@ -28,7 +28,7 @@
     }
 }
 
-/* Custom styles for Video Section Carousel */
+/* Custom styles for Video Section Carousel  */
 .video-section-prev,
 .video-section-next {
     background-color: #e5e7eb; /* light gray, equivalent to tailwind gray-200 */
