@@ -3,12 +3,14 @@
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState, Suspense } from 'react';
 import ProductCard from '@/components/ProductCard';
+import SearchResultCard from '@/components/SearchResultCard';
+import Link from 'next/link';
 
 function SearchResults() {
   const searchParams = useSearchParams();
   const query = searchParams.get('q');
 
-  const [results, setResults] = useState({ products: [] });
+  const [results, setResults] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -17,29 +19,38 @@ function SearchResults() {
       setIsLoading(true);
       setError(null);
       try {
-        // Carrega o índice de busca local gerado no build.
         const response = await fetch(`/search-data.json?v=${new Date().getTime()}`);
         if (!response.ok) {
           throw new Error('Não foi possível carregar o índice de busca.');
         }
         const data = await response.json();
-        const allProducts = data || [];
-
+        
         if (!query) {
-          setResults({ products: [] });
+          setResults({});
         } else {
-          // Filtra os produtos no lado do cliente
           const lowerCaseQuery = query.toLowerCase();
-          const filteredProducts = allProducts.filter((product) => {
-            const attrs = product.attributes || product; // Lida com dados aninhados ou planos
-            const name = attrs.nome || '';
-            const shortDesc = attrs.descricao_curta || '';
+          const filteredData = data.filter((item) => {
+            const title = item.title || '';
+            const description = item.description || '';
+            const content = item.content || '';
             return (
-              name.toLowerCase().includes(lowerCaseQuery) ||
-              shortDesc.toLowerCase().includes(lowerCaseQuery)
+              title.toLowerCase().includes(lowerCaseQuery) ||
+              description.toLowerCase().includes(lowerCaseQuery) ||
+              content.toLowerCase().includes(lowerCaseQuery)
             );
           });
-          setResults({ products: filteredProducts });
+
+          // Group results by type
+          const groupedResults = filteredData.reduce((acc, item) => {
+            const type = item.type || 'Outros';
+            if (!acc[type]) {
+              acc[type] = [];
+            }
+            acc[type].push(item);
+            return acc;
+          }, {});
+
+          setResults(groupedResults);
         }
       } catch (err) {
         setError('Falha ao carregar os dados de busca. Tente recarregar a página.');
@@ -50,7 +61,7 @@ function SearchResults() {
     };
 
     performSearch();
-  }, [query]); // Roda a busca sempre que o termo na URL mudar.
+  }, [query]);
 
   if (isLoading) {
     return <p className="text-center py-10">Carregando resultados...</p>;
@@ -60,6 +71,8 @@ function SearchResults() {
     return <p className="text-center py-10 text-red-500">{error}</p>;
   }
 
+  const resultKeys = Object.keys(results);
+
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-2">Resultados da Busca</h1>
@@ -67,18 +80,34 @@ function SearchResults() {
         Você buscou por: <span className="font-semibold text-tec-blue">{query}</span>
       </p>
 
-      <section>
-        <h2 className="text-2xl font-bold mb-4 border-b pb-2">Produtos ({results.products.length})</h2>
-        {results.products.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-6">
-            {results.products.map(product => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        ) : (
-          <p>Nenhum produto encontrado para este termo.</p>
-        )}
-      </section>
+      {resultKeys.length > 0 ? (
+        resultKeys.map(type => (
+          <section key={type} className="mb-12">
+            <h2 className="text-2xl font-bold mb-4 border-b pb-2">{type} ({results[type].length})</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-6">
+              {results[type].map(item => {
+                if (type === 'Produto') {
+                  // The ProductCard expects a different data structure
+                  const product = {
+                    id: item.id.replace('product-', ''),
+                    attributes: {
+                      nome: item.title,
+                      slug: item.slug.replace('/produtos/', ''),
+                      descricao_curta: item.description,
+                      // imagem_principal would be missing here, so the card might not show an image.
+                      // This is a limitation of the current search data structure.
+                    }
+                  };
+                  return <ProductCard key={item.id} product={product} />;
+                }
+                return <SearchResultCard key={item.id} result={item} />;
+              })}
+            </div>
+          </section>
+        ))
+      ) : (
+        <p>Nenhum resultado encontrado para este termo.</p>
+      )}
     </div>
   );
 }

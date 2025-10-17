@@ -248,4 +248,24 @@ export async function getSoftwareAndDrivers() {
   }
 }
 
+export async function getAllSimplePages() {
+  try {
+    // Tenta buscar como uma coleção
+    const pagesData = await fetchAPI(`/api/paginas?fields[0]=titulo&fields[1]=slug&pagination[limit]=100`);
+    if (pagesData && pagesData.length > 0) {
+      return normalizeDataArray(pagesData);
+    }
+    // Se falhar ou retornar vazio, tenta como um tipo único (single type)
+    const singlePageData = await fetchAPI(`/api/pagina?fields[0]=titulo&fields[1]=slug`);
+    if (singlePageData && singlePageData.id) {
+      // Encapsula em um array para manter a consistência do tipo de retorno
+      return [singlePageData];
+    }
+    return [];
+  } catch (error) {
+    console.error(`Falha ao buscar páginas simples, tentando como coleção e tipo único:`, error);
+    return [];
+  }
+}
+
 export { fetchAPI };

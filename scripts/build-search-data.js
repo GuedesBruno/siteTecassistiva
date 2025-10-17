@@ -1,58 +1,129 @@
 import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
+import { glob } from 'glob';
+
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
-// ✅ CORREÇÃO: Usando import moderno para o módulo da API
-import { getAllProductsForDisplay } from '../src/lib/api.js';
+// Import API functions
+import {
+  getAllProductsForDisplay,
+  getOpenAtas,
+  getSoftwareAndDrivers,
+} from '../src/lib/api.js';
+
+// Function to strip HTML/JSX tags and extract text
+function stripTags(content) {
+  return content
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
 
 async function generateSearchData() {
-  console.log('Iniciando a geração de dados de busca...');
-  
-  try {
-    const products = await getAllProductsForDisplay();
-    
-    if (!products || products.length === 0) {
-      console.warn('Nenhum produto encontrado. O arquivo search-data.json não será gerado.');
-      // Cria um arquivo vazio para não quebrar a aplicação de busca no frontend
-      const publicDir = path.join(process.cwd(), 'public');
-      const outputPath = path.join(publicDir, 'search-data.json');
-      if (!fs.existsSync(publicDir)) {
-        fs.mkdirSync(publicDir);
-      }
-      fs.writeFileSync(outputPath, JSON.stringify([], null, 2));
-      console.log('Arquivo search-data.json vazio foi gerado.');
-      return;
-    }
+  console.log('Iniciando a geração de dados de busca abrangente...');
 
-    const searchData = products.map(product => {
-      // Normaliza o acesso aos atributos, quer o produto já venha normalizado ou não
-      const attrs = product.attributes || product;
+  try {
+    // Fetch data from APIs
+    const [products, atas, software] = await Promise.all([
+      getAllProductsForDisplay(),
+      getOpenAtas(),
+      getSoftwareAndDrivers(),
+    ]);
+
+    // Process API data
+    const productData = products.map(p => {
+        const attrs = p.attributes || p;
+        return {
+            id: `product-${p.id}`,
+            title: attrs.nome,
+            slug: `/produtos/${attrs.slug}`,
+            description: attrs.descricao_curta || '',
+            type: 'Produto',
+        }
+    });
+
+    const ataData = atas.map(a => {
+        const attrs = a.attributes || a;
+        return {
+            id: `ata-${a.id}`,
+            title: attrs.titulo,
+            slug: '/atas-abertas',
+            description: attrs.descricao || '',
+            type: 'Ata',
+        }
+    });
+
+    const softwareData = software.map(s => {
+        const attrs = s.attributes || s;
+        return {
+            id: `software-${s.id}`,
+            title: attrs.nome,
+            slug: '/suporte',
+            description: `Tipo: ${s.attributes.tipo}`,
+            type: 'Software/Driver',
+        }
+    });
+
+    // Process static pages
+    const pageFiles = await glob('src/app/**/page.js', {
+      ignore: ['src/app/api/**', 'src/app/produtos/**'],
+    });
+
+    const pageData = pageFiles.map(file => {
+      const content = fs.readFileSync(file, 'utf-8');
+      const textContent = stripTags(content);
+      const slug = file
+        .replace('src/app', '')
+        .replace('/page.js', '') || '/';
+
+      const description = textContent.substring(0, 150) + '...';
+      
+      let title = slug.split('/').pop() || 'Página Inicial';
+      title = title.charAt(0).toUpperCase() + title.slice(1).replace(/-/g, ' ');
+
+      const titleMatch = content.match(/<h1[^>]*>([^<]+)<\/h1>/);
+      if (titleMatch && titleMatch[1]) {
+        title = titleMatch[1];
+      }
+
       return {
-        id: product.id,
-        nome: attrs.nome,
-        slug: attrs.slug,
-        descricao_curta: attrs.descricao_curta || '',
-        imagem_principal: attrs.imagem_principal, // Adiciona a imagem principal
+        id: `page-${slug}`,
+        title: title,
+        slug: slug,
+        description: description,
+        content: textContent,
+        type: 'Página',
       };
     });
+
+
+    // Combine all data
+    const searchData = [
+      ...productData,
+      ...ataData,
+      ...softwareData,
+      ...pageData,
+    ];
 
     const publicDir = path.join(process.cwd(), 'public');
     const outputPath = path.join(publicDir, 'search-data.json');
 
-    // Garante que o diretório 'public' existe
     if (!fs.existsSync(publicDir)) {
       fs.mkdirSync(publicDir);
     }
 
     fs.writeFileSync(outputPath, JSON.stringify(searchData, null, 2));
-    
+
     console.log(`Dados de busca gerados com sucesso em: ${outputPath}`);
-    console.log(`${searchData.length} produtos foram indexados.`);
+    console.log(`${searchData.length} itens foram indexados.`);
+    console.log(`- ${productData.length} Produtos`);
+    console.log(`- ${ataData.length} Atas`);
+    console.log(`- ${softwareData.length} Softwares/Drivers`);
+    console.log(`- ${pageData.length} Páginas`);
 
   } catch (error) {
     console.error('ERRO FATAL ao gerar os dados de busca:', error);
-    // Lança o erro para que o processo de build pare
     process.exit(1);
   }
 }

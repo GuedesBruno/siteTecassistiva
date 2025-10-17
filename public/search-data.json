@@ -1,252 +1,218 @@
 [
   {
-    "id": 20,
-    "nome": "Index Everest",
-    "slug": "index-everest",
-    "descricao_curta": "Impressora Braille de Folha Solta",
-    "imagem_principal": {
-      "id": 45,
-      "documentId": "qwg9stcgwtk1bobo1aryqf9j",
-      "name": "everest1.jpg",
-      "alternativeText": null,
-      "caption": null,
-      "width": 500,
-      "height": 500,
-      "formats": {
-        "thumbnail": {
-          "ext": ".jpg",
-          "url": "https://innovative-friendship-159ff40007.media.strapiapp.com/thumbnail_everest1_2eb8f2395a.jpg",
-          "hash": "thumbnail_everest1_2eb8f2395a",
-          "mime": "image/jpeg",
-          "name": "thumbnail_everest1.jpg",
-          "path": null,
-          "size": 3.26,
-          "width": 156,
-          "height": 156,
-          "sizeInBytes": 3263
-        }
-      },
-      "hash": "everest1_2eb8f2395a",
-      "ext": ".jpg",
-      "mime": "image/jpeg",
-      "size": 18.95,
-      "url": "https://innovative-friendship-159ff40007.media.strapiapp.com/everest1_2eb8f2395a.jpg",
-      "previewUrl": null,
-      "provider": "strapi-provider-upload-strapi-cloud",
-      "provider_metadata": null,
-      "createdAt": "2025-09-26T14:29:26.951Z",
-      "updatedAt": "2025-09-26T14:30:27.253Z",
-      "publishedAt": "2025-09-26T14:29:26.952Z"
-    }
+    "id": "product-65",
+    "title": "BrailleBox",
+    "slug": "/produtos/braille-box",
+    "description": "Impressora Braille de Grande Porte",
+    "type": "Produto"
   },
   {
-    "id": 43,
-    "nome": "Traveller HD",
-    "slug": "traveller-hd",
-    "descricao_curta": "Ampliador Eletrônico Portátil",
-    "imagem_principal": null
+    "id": "product-58",
+    "title": "Index Everest",
+    "slug": "/produtos/index-everest",
+    "description": "Impressora Braille de Folha Solta",
+    "type": "Produto"
   },
   {
-    "id": 38,
-    "nome": "ClearView 24″ Full HD",
-    "slug": "clear-view-24-hd",
-    "descricao_curta": "Ampliador Eletrônico de Mesa",
-    "imagem_principal": null
+    "id": "product-67",
+    "title": "Focus 80 Blue",
+    "slug": "/produtos/focus-80-blue",
+    "description": "Linha Braille de 80 Células",
+    "type": "Produto"
   },
   {
-    "id": 23,
-    "nome": "Focus 40 Blue",
-    "slug": "focus-40-blue",
-    "descricao_curta": "Linha Braille de 40 células",
-    "imagem_principal": {
-      "id": 13,
-      "documentId": "g4h7gtxnofr0ul2qkhxvtua0",
-      "name": "Focus_40_principal.jpg",
-      "alternativeText": null,
-      "caption": null,
-      "width": 480,
-      "height": 480,
-      "formats": {
-        "thumbnail": {
-          "ext": ".jpg",
-          "url": "https://innovative-friendship-159ff40007.media.strapiapp.com/thumbnail_Focus_40_principal_af080f049f.jpg",
-          "hash": "thumbnail_Focus_40_principal_af080f049f",
-          "mime": "image/jpeg",
-          "name": "thumbnail_Focus_40_principal.jpg",
-          "path": null,
-          "size": 4.36,
-          "width": 156,
-          "height": 156,
-          "sizeInBytes": 4359
-        }
-      },
-      "hash": "Focus_40_principal_af080f049f",
-      "ext": ".jpg",
-      "mime": "image/jpeg",
-      "size": 19.04,
-      "url": "https://innovative-friendship-159ff40007.media.strapiapp.com/Focus_40_principal_af080f049f.jpg",
-      "previewUrl": null,
-      "provider": "strapi-provider-upload-strapi-cloud",
-      "provider_metadata": null,
-      "createdAt": "2025-09-22T16:57:22.154Z",
-      "updatedAt": "2025-09-22T16:57:22.154Z",
-      "publishedAt": "2025-09-22T16:57:22.155Z"
-    }
+    "id": "product-60",
+    "title": "Traveller HD",
+    "slug": "/produtos/traveller-hd",
+    "description": "Ampliador Eletrônico Portátil",
+    "type": "Produto"
   },
   {
-    "id": 37,
-    "nome": "ClearReader",
-    "slug": "clearreader",
-    "descricao_curta": "Leitor e digitalizador autônomo",
-    "imagem_principal": {
-      "id": 19,
-      "documentId": "vggya5t1xhv3j5z4u5habf8g",
-      "name": "ClearReader_com_tela_de+lado.png",
-      "alternativeText": null,
-      "caption": null,
-      "width": 1080,
-      "height": 1080,
-      "formats": {
-        "large": {
-          "ext": ".png",
-          "url": "https://innovative-friendship-159ff40007.media.strapiapp.com/large_Clear_Reader_com_tela_de_lado_218890231c.png",
-          "hash": "large_Clear_Reader_com_tela_de_lado_218890231c",
-          "mime": "image/png",
-          "name": "large_ClearReader_com_tela_de+lado.png",
-          "path": null,
-          "size": 485.21,
-          "width": 1000,
-          "height": 1000,
-          "sizeInBytes": 485212
-        },
-        "small": {
-          "ext": ".png",
-          "url": "https://innovative-friendship-159ff40007.media.strapiapp.com/small_Clear_Reader_com_tela_de_lado_218890231c.png",
-          "hash": "small_Clear_Reader_com_tela_de_lado_218890231c",
-          "mime": "image/png",
-          "name": "small_ClearReader_com_tela_de+lado.png",
-          "path": null,
-          "size": 143.8,
-          "width": 500,
-          "height": 500,
-          "sizeInBytes": 143800
-        },
-        "medium": {
-          "ext": ".png",
-          "url": "https://innovative-friendship-159ff40007.media.strapiapp.com/medium_Clear_Reader_com_tela_de_lado_218890231c.png",
-          "hash": "medium_Clear_Reader_com_tela_de_lado_218890231c",
-          "mime": "image/png",
-          "name": "medium_ClearReader_com_tela_de+lado.png",
-          "path": null,
-          "size": 297.17,
-          "width": 750,
-          "height": 750,
-          "sizeInBytes": 297167
-        },
-        "thumbnail": {
-          "ext": ".png",
-          "url": "https://innovative-friendship-159ff40007.media.strapiapp.com/thumbnail_Clear_Reader_com_tela_de_lado_218890231c.png",
-          "hash": "thumbnail_Clear_Reader_com_tela_de_lado_218890231c",
-          "mime": "image/png",
-          "name": "thumbnail_ClearReader_com_tela_de+lado.png",
-          "path": null,
-          "size": 18.8,
-          "width": 156,
-          "height": 156,
-          "sizeInBytes": 18803
-        }
-      },
-      "hash": "Clear_Reader_com_tela_de_lado_218890231c",
-      "ext": ".png",
-      "mime": "image/png",
-      "size": 111.45,
-      "url": "https://innovative-friendship-159ff40007.media.strapiapp.com/Clear_Reader_com_tela_de_lado_218890231c.png",
-      "previewUrl": null,
-      "provider": "strapi-provider-upload-strapi-cloud",
-      "provider_metadata": null,
-      "createdAt": "2025-09-22T17:37:15.064Z",
-      "updatedAt": "2025-09-22T17:37:15.064Z",
-      "publishedAt": "2025-09-22T17:37:15.065Z"
-    }
+    "id": "product-81",
+    "title": "ClearView 24″ Full HD",
+    "slug": "/produtos/clearview-24",
+    "description": "Ampliador Eletrônico de Mesa com Voz",
+    "type": "Produto"
   },
   {
-    "id": 40,
-    "nome": "Ruby 7 HD",
-    "slug": "ruby-7-hd",
-    "descricao_curta": "Lupa eletrônica portátil",
-    "imagem_principal": null
+    "id": "product-80",
+    "title": "PUMA 7",
+    "slug": "/produtos/puma-7",
+    "description": "IMPRESSORA BRAILLE DE CHAPA",
+    "type": "Produto"
   },
   {
-    "id": 39,
-    "nome": "Mountbatten Tutor",
-    "slug": "mountbatten-tutor",
-    "descricao_curta": "Máquina de escrever e impressora braille",
-    "imagem_principal": null
+    "id": "product-71",
+    "title": "Ruby 10",
+    "slug": "/produtos/ruby-10",
+    "description": "Lupa Eletrônica com Voz",
+    "type": "Produto"
   },
   {
-    "id": 41,
-    "nome": "Index Basic",
-    "slug": "index-basic",
-    "descricao_curta": "Impressora Braille Folha Solta",
-    "imagem_principal": {
-      "id": 39,
-      "documentId": "x6h8ocqyk84yx799ux7fab65",
-      "name": "foto-basic-angulo-lateral.jpg",
-      "alternativeText": null,
-      "caption": null,
-      "width": 600,
-      "height": 600,
-      "formats": {
-        "small": {
-          "ext": ".jpg",
-          "url": "https://innovative-friendship-159ff40007.media.strapiapp.com/small_foto_basic_angulo_lateral_7e62f45378.jpg",
-          "hash": "small_foto_basic_angulo_lateral_7e62f45378",
-          "mime": "image/jpeg",
-          "name": "small_foto-basic-angulo-lateral.jpg",
-          "path": null,
-          "size": 17.77,
-          "width": 500,
-          "height": 500,
-          "sizeInBytes": 17767
-        },
-        "thumbnail": {
-          "ext": ".jpg",
-          "url": "https://innovative-friendship-159ff40007.media.strapiapp.com/thumbnail_foto_basic_angulo_lateral_7e62f45378.jpg",
-          "hash": "thumbnail_foto_basic_angulo_lateral_7e62f45378",
-          "mime": "image/jpeg",
-          "name": "thumbnail_foto-basic-angulo-lateral.jpg",
-          "path": null,
-          "size": 2.84,
-          "width": 156,
-          "height": 156,
-          "sizeInBytes": 2840
-        }
-      },
-      "hash": "foto_basic_angulo_lateral_7e62f45378",
-      "ext": ".jpg",
-      "mime": "image/jpeg",
-      "size": 23.47,
-      "url": "https://innovative-friendship-159ff40007.media.strapiapp.com/foto_basic_angulo_lateral_7e62f45378.jpg",
-      "previewUrl": null,
-      "provider": "strapi-provider-upload-strapi-cloud",
-      "provider_metadata": null,
-      "createdAt": "2025-09-26T11:36:14.327Z",
-      "updatedAt": "2025-09-26T11:40:52.567Z",
-      "publishedAt": "2025-09-26T11:36:14.328Z"
-    }
+    "id": "product-77",
+    "title": "Liber",
+    "slug": "/produtos/liber",
+    "description": "Computador Braille",
+    "type": "Produto"
   },
   {
-    "id": 25,
-    "nome": "Brinca Braille",
-    "slug": "brinca-braille",
-    "descricao_curta": "Ferramenta interativa para aprendizado do braille",
-    "imagem_principal": null
+    "id": "product-84",
+    "title": "ClearView 24″ Full HD com Voz",
+    "slug": "/produtos/clearview-24-com-voz",
+    "description": "Ampliador de Mesa com Voz",
+    "type": "Produto"
   },
   {
-    "id": 42,
-    "nome": "Teca-Fuser",
-    "slug": "teca-fuser",
-    "descricao_curta": "Impressora Térmica mais rápida e eficiente do mercado",
-    "imagem_principal": null
+    "id": "product-57",
+    "title": "Focus 40 Blue",
+    "slug": "/produtos/focus-40-blue",
+    "description": "Linha Braille de 40 células",
+    "type": "Produto"
+  },
+  {
+    "id": "product-56",
+    "title": "ClearReader",
+    "slug": "/produtos/clearreader",
+    "description": "Leitor e digitalizador autônomo",
+    "type": "Produto"
+  },
+  {
+    "id": "product-89",
+    "title": "NSF Excel",
+    "slug": "/produtos/nsf-excel",
+    "description": "Impressora Rotativa",
+    "type": "Produto"
+  },
+  {
+    "id": "product-61",
+    "title": "Ruby 7 HD",
+    "slug": "/produtos/ruby-7-hd",
+    "description": "Lupa eletrônica portátil",
+    "type": "Produto"
+  },
+  {
+    "id": "product-52",
+    "title": "Mountbatten Tutor",
+    "slug": "/produtos/mountbatten-tutor",
+    "description": "Máquina de escrever e impressora braille",
+    "type": "Produto"
+  },
+  {
+    "id": "product-54",
+    "title": "Index Basic",
+    "slug": "/produtos/index-basic",
+    "description": "Impressora Braille Folha Solta",
+    "type": "Produto"
+  },
+  {
+    "id": "product-68",
+    "title": "Fanfold",
+    "slug": "/produtos/fanfold",
+    "description": "Impressora Braille de Grande Porte",
+    "type": "Produto"
+  },
+  {
+    "id": "product-55",
+    "title": "Brinca Braille",
+    "slug": "/produtos/brinca-braille",
+    "description": "Ferramenta interativa para aprendizado do braille",
+    "type": "Produto"
+  },
+  {
+    "id": "product-88",
+    "title": "Teca-Fuser",
+    "slug": "/produtos/teca-fuser",
+    "description": "Impressora Térmica mais rápida e eficiente do mercado",
+    "type": "Produto"
+  },
+  {
+    "id": "product-90",
+    "title": "Onyx OCR",
+    "slug": "/produtos/onyx-ocr",
+    "description": "Ampliador de Mesa com Voz",
+    "type": "Produto"
+  },
+  {
+    "id": "product-92",
+    "title": "Multiplano",
+    "slug": "/produtos/multiplano",
+    "description": "Matemática Concreta",
+    "type": "Produto"
+  },
+  {
+    "id": "ata-6",
+    "title": "Instituto Federal de Educação de São Paulo",
+    "slug": "/atas-abertas",
+    "description": "",
+    "type": "Ata"
+  },
+  {
+    "id": "software-15",
+    "title": "Focus 40",
+    "slug": "/suporte",
+    "description": "Tipo: Driver",
+    "type": "Software/Driver"
+  },
+  {
+    "id": "software-18",
+    "title": "Leitor de Telas JAWS ",
+    "slug": "/suporte",
+    "description": "Tipo: Software",
+    "type": "Software/Driver"
+  },
+  {
+    "id": "software-19",
+    "title": "ZoomText Ampliador e Leitor",
+    "slug": "/suporte",
+    "description": "Tipo: Software",
+    "type": "Software/Driver"
+  },
+  {
+    "id": "page-src\\app\\page.js",
+    "title": "Src\\app\\page.js",
+    "slug": "src\\app\\page.js",
+    "description": "import BannerSlider from \"@/components/BannerSlider\"; import FeaturedProductsSlider from \"@/components/FeaturedProductsSlider\"; import VideoSection fr...",
+    "content": "import BannerSlider from \"@/components/BannerSlider\"; import FeaturedProductsSlider from \"@/components/FeaturedProductsSlider\"; import VideoSection from \"@/components/VideoSection\"; import ManufacturersSlider from \"@/components/ManufacturersSlider\"; import TestimonialSection from \"@/components/TestimonialSection\"; import { getBanners, getFeaturedProducts, getManufacturers, getAllTestimonials, getHomeVideos } from \"@/lib/api\"; import Link from 'next/link'; export default async function Home() { // Busca os dados da API em paralelo para otimizar o tempo de build const [banners, featuredProducts, manufacturers, testimonials, homeVideos] = await Promise.all([ getBanners(), getFeaturedProducts(), getManufacturers(), getAllTestimonials(), getHomeVideos(), ]); return ( {/* Informational block matching the attached screenshot */} Tecassistiva A Tecassistiva foi fundada em 2007, visando atender a grande demanda reprimida de produtos e serviços de qualidade com preços competitivos, que impediam há muitos anos que as pessoas com deficiência no Brasil, tivessem acesso ao grande desenvolvimento tecnológico que vinha acontecendo em outros países. O desenvolvimento de projetos inovadores para pessoas com deficiência, com sustentabilidade, tem sido o principal objetivo da Tecassistiva. Conheça a nossa história {/* Novas seções adicionadas */} ); }",
+    "type": "Página"
+  },
+  {
+    "id": "page-src\\app\\tecassistiva\\page.js",
+    "title": "Tecassistiva",
+    "slug": "src\\app\\tecassistiva\\page.js",
+    "description": "import Link from 'next/link'; // Componente da Página export default function TecassistivaPage() { return ( {/* O padding foi ajustado para ser respon...",
+    "content": "import Link from 'next/link'; // Componente da Página export default function TecassistivaPage() { return ( {/* O padding foi ajustado para ser responsivo */} {/* Breadcrumbs */} Página Inicial &gt; A Tecassistiva {/* Seção Principal */} Tecassistiva {/* Texto de apresentação em 2 colunas */} A TECA foi fundada em 2007, visando atender a grande demanda reprimida de produtos e serviços de qualidade com preços competitivos, que impediam há muitos anos que as pessoas com deficiência no Brasil, tivessem acesso ao grande desenvolvimento tecnológico que vinha acontecendo em outros países. Atuando como fomentadora e alinhada com os projetos públicos, a TECA se tornou em poucos anos a lider do setor no Brasil e uma das maiores das distribuidoras internacionais de Tecnologia Assistiva. Esse crescimento exigiu o fortalecimento de seus canais de distribuição e de suporte, principalmente para o atendimento de milhares de escolas, bibliotecas, universidades e centros de pesquisa. Na área de desenvolvimento, além de localizar para o português do Brasil diversos programas de computador e equipamentos que distribui, a TECA está fazendo um investimento significativo, em conjunto com órgãos de fomento e parcerias internacionais, para que o Brasil em curto prazo, se torne também um desenvolvedor e produtor de Tecnologia Assistiva. {/* Vídeo Institucional */} Vídeo Apresentação Teca {/* Seção Missão, Visão e Valores com o novo layout */} Missão Desenvolver e disseminar Tecnologia Assistiva no Brasil, por meio da oferta de produtos e serviços de excelência que contribuam para a melhoria da qualidade de vida das pessoas com deficiência e da comunidade em geral. Visão Ser a empresa de referência em Tecnologia Assistiva, reconhecida pela comunidade, colaboradores, fornecedores e investidores, pela qualidade de seus produtos, serviços e apoio institucional. Valores Valorização da Pessoa com Deficiência Ética Inovação Trabalho em equipe Qualidade Sustentabilidade {/* Seção de Depoimentos - PRECISA TROCAR PARA O COMPONENTE NOVO */} Depoimentos \"E, na frente dos olhos incrédulos de Bianca, a linha braille transformou o texto de tinta para braille. “Peguei o livro que tinha acabado de comprar e coloquei sobre o Sara PC. Em segundos, a linha braille transformava letras em bolinhas! Eu comecei a viver de novo depois de comprar a linha braille\", declara ela com alegria.” Agora, Bianca pede os livros didáticos da filha em formato PDF para as editoras e assim, Nicole lê-os na linha braille. Bianca calcula que, com a linha braille, ela economize por volta de 80% do tempo que dedicava à transcrição dos livros inteiros para filha\". Bianca Chaló Carlos Santos, mãe da Nicole Carlos Santos Adquiriu a Linha Braille Focus 40. ); }",
+    "type": "Página"
+  },
+  {
+    "id": "page-src\\app\\suporte\\page.js",
+    "title": "Src\\app\\suporte\\page.js",
+    "slug": "src\\app\\suporte\\page.js",
+    "description": "import { getProductsWithDocuments, getSoftwareAndDrivers, getAllCategories } from '@/lib/api'; import SupportPageClient from '@/components/SupportPage...",
+    "content": "import { getProductsWithDocuments, getSoftwareAndDrivers, getAllCategories } from '@/lib/api'; import SupportPageClient from '@/components/SupportPageClient'; import Breadcrumbs from '@/components/Breadcrumbs'; export const metadata = { title: 'Suporte | Tecassistiva', description: 'Encontre documentos, manuais, softwares, drivers e utilitários para os produtos Tecassistiva.', }; export default async function SuportePage() { // Fetching all data in parallel for efficiency const [products, software, categories] = await Promise.all([ getProductsWithDocuments(), getSoftwareAndDrivers(), getAllCategories(), ]); const breadcrumbs = [ { name: 'Página Inicial', path: '/' }, { name: 'Suporte', path: '/suporte' }, ]; return ( ); }",
+    "type": "Página"
+  },
+  {
+    "id": "page-src\\app\\contato\\page.js",
+    "title": "Contato",
+    "slug": "src\\app\\contato\\page.js",
+    "description": "import Link from 'next/link'; import ContactForm from '@/components/ContactForm'; // Importa o componente reutilizável export default function Contato...",
+    "content": "import Link from 'next/link'; import ContactForm from '@/components/ContactForm'; // Importa o componente reutilizável export default function ContatoPage() { return ( Página Inicial &gt; Contato Contato Fale conosco para dúvidas, orçamentos e suporte. Preencha o formulário ou utilize um de nossos canais de atendimento. {/* Coluna do Formulário - Ocupa 2/3 do espaço em telas grandes */} {/* Coluna de Informações - Ocupa 1/3 do espaço */} Informações Telefone: +55 (11) 3266-4311 WhatsApp: +55 (11) 9 9597-8139 Email: teca@tecassistiva.com.br Endereço: R. das Camélias, 37 - Mirandópolis, São Paulo - SP Horário de Atendimento: Seg-Qui 8h-18h e Sexta 8h-17h ); }",
+    "type": "Página"
+  },
+  {
+    "id": "page-src\\app\\busca\\page.js",
+    "title": "Resultados da Busca",
+    "slug": "src\\app\\busca\\page.js",
+    "description": "\"use client\"; import { useSearchParams } from 'next/navigation'; import { useEffect, useState, Suspense } from 'react'; import ProductCard from '@/com...",
+    "content": "\"use client\"; import { useSearchParams } from 'next/navigation'; import { useEffect, useState, Suspense } from 'react'; import ProductCard from '@/components/ProductCard'; function SearchResults() { const searchParams = useSearchParams(); const query = searchParams.get('q'); const [results, setResults] = useState({ products: [] }); const [isLoading, setIsLoading] = useState(true); const [error, setError] = useState(null); useEffect(() => { const performSearch = async () => { setIsLoading(true); setError(null); try { // Carrega o índice de busca local gerado no build. const response = await fetch(`/search-data.json?v=${new Date().getTime()}`); if (!response.ok) { throw new Error('Não foi possível carregar o índice de busca.'); } const data = await response.json(); const allProducts = data || []; if (!query) { setResults({ products: [] }); } else { // Filtra os produtos no lado do cliente const lowerCaseQuery = query.toLowerCase(); const filteredProducts = allProducts.filter((product) => { const attrs = product.attributes || product; // Lida com dados aninhados ou planos const name = attrs.nome || ''; const shortDesc = attrs.descricao_curta || ''; return ( name.toLowerCase().includes(lowerCaseQuery) || shortDesc.toLowerCase().includes(lowerCaseQuery) ); }); setResults({ products: filteredProducts }); } } catch (err) { setError('Falha ao carregar os dados de busca. Tente recarregar a página.'); console.error(err); } finally { setIsLoading(false); } }; performSearch(); }, [query]); // Roda a busca sempre que o termo na URL mudar. if (isLoading) { return Carregando resultados... ; } if (error) { return {error} ; } return ( Resultados da Busca Você buscou por: {query} Produtos ({results.products.length}) {results.products.length > 0 ? ( {results.products.map(product => ( ))} ) : ( Nenhum produto encontrado para este termo. )} ); } export default function SearchPage() { return ( Carregando busca... }> ); }",
+    "type": "Página"
+  },
+  {
+    "id": "page-src\\app\\atas-abertas\\page.js",
+    "title": "Atas Abertas",
+    "slug": "src\\app\\atas-abertas\\page.js",
+    "description": "import { getOpenAtas } from '@/lib/api'; import Breadcrumbs from '@/components/Breadcrumbs'; import AtaCard from '@/components/AtaCard'; import Contac...",
+    "content": "import { getOpenAtas } from '@/lib/api'; import Breadcrumbs from '@/components/Breadcrumbs'; import AtaCard from '@/components/AtaCard'; import ContactForm from '@/components/ContactForm'; import AdvantagesSection from '@/components/AdvantagesSection'; export const metadata = { title: 'Atas Abertas | Tecassistiva', description: 'Consulte as Atas de Registro de Preços (ARP) disponíveis e saiba como fazer a adesão.', }; export default async function AtasAbertasPage() { const atas = await getOpenAtas(); const breadcrumbs = [ { name: 'Página Inicial', path: '/' }, { name: 'Atas Abertas', path: '/atas-abertas' }, ]; return ( {/* 1. Seção de Título e Introdução */} Atas Abertas O que é o Sistema de Registro de Preços – SRP? Placeholder: O Sistema de Registro de Preços (SRP) é um procedimento especial de licitação que seleciona a proposta mais vantajosa para futuras e eventuais contratações governamentais. Em vez de realizar uma licitação para cada compra, o órgão público registra os preços de produtos e serviços de fornecedores qualificados, que se comprometem a manter a oferta por um período determinado (geralmente 12 meses). O que é uma Ata de Registro de Preços – ARP? Placeholder: A Ata de Registro de Preços (ARP) é o documento que formaliza o resultado do SRP. Nela, são registrados os preços, os fornecedores, os produtos e as condições de fornecimento. Essa ata funciona como um \"cardápio\" de produtos e serviços que os órgãos públicos podem adquirir de forma ágil e sem a necessidade de um novo processo licitatório completo, bastando apenas emitir uma ordem de compra. Queremos te contar mais, clique aqui. {/* 2. Seção da Lista de Atas */} Lista de ATAS disponíveis para você: {atas && atas.length > 0 ? ( atas.map((ata) => ) ) : ( Nenhuma ata aberta encontrada no momento. Por favor, verifique novamente mais tarde ou entre em contato para mais informações. )} {/* 3. Seção do Formulário de Contato */} {/* 4. Seção de Vantagens */} ); }",
+    "type": "Página"
   }
 ]
