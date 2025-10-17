@@ -70,7 +70,7 @@ export default function TecassistivaPage() {
             </div>
         </section>
 
-        {/* Seção de Depoimentos -  PRECISA TROCAR PARA O COMPONENTE */}
+        {/* Seção de Depoimentos -  PRECISA TROCAR PARA O COMPONENTE NOVO */}
         <section className="bg-white py-8">
             <div>
                 <div className="text-center mb-8">
