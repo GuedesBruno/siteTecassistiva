@@ -1,7 +1,7 @@
 import BannerSlider from "@/components/BannerSlider";
 import FeaturedProductsSlider from "@/components/FeaturedProductsSlider";
 import VideoSection from "@/components/VideoSection";
-import ManufacturersSlider from "@/components/ManufacturersSlider";
+import ManufacturersGrid from "@/components/ManufacturersGrid";
 import TestimonialSection from "@/components/TestimonialSection";
 import { 
   getBanners, 
@@ -45,7 +45,7 @@ export default async function Home() {
 
       {/* Novas seções adicionadas */}
       <VideoSection videos={homeVideos || []} />
-      <ManufacturersSlider fabricantes={manufacturers || []} />
+      <ManufacturersGrid fabricantes={manufacturers || []} />
       <TestimonialSection depoimentos={testimonials || []} />
     </div>
   );

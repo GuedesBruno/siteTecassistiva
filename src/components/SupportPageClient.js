@@ -34,6 +34,11 @@ export default function SupportPageClient({ products, software, categories }) {
   const handleSubcategorySelect = (subcategory) => {
     setSelectedItem(null);
     setSelectedSubcategory(subcategory);
+    // Encontra e define a categoria pai para garantir que o filtro funcione
+    const parentCategory = categories.find(cat => 
+      cat.subcategorias?.some(sub => sub.slug === subcategory.slug)
+    );
+    setSelectedCategory(parentCategory || null); // Define como nulo se não encontrar
   };
 
   const handleItemSelect = (item) => {
