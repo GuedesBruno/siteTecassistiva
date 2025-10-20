@@ -2,14 +2,15 @@
 
 import { useState } from 'react';
 
-export default function ContactForm({ title, subtitle }) {
+// Adicionamos a prop 'formName' para que a página possa se identificar
+export default function ContactForm({ title, subtitle, formName }) {
   const [formData, setFormData] = useState({
     instituicao: '',
     nome: '',
     departamento: '',
     celular: '',
     email: '',
-    mensagem: '', // <-- Novo campo adicionado ao estado
+    mensagem: '',
   });
   
   const [status, setStatus] = useState('');
@@ -32,14 +33,13 @@ export default function ContactForm({ title, subtitle }) {
 
       if (response.ok) {
         setStatus('Obrigado pelo seu contato! Em breve retornaremos.');
-        // Limpa o formulário, incluindo o novo campo
         setFormData({
           instituicao: '',
           nome: '',
           departamento: '',
           celular: '',
           email: '',
-          mensagem: '', // <-- Limpa o novo campo
+          mensagem: '',
         });
       } else {
         const data = await response.json();
@@ -57,6 +57,9 @@ export default function ContactForm({ title, subtitle }) {
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-2">{title}</h2>
         <h3 className="text-xl text-center text-gray-600 mb-8">{subtitle}</h3>
         <form onSubmit={handleSubmit} className="space-y-6">
+            {/* ✅ CAMPO OCULTO QUE DEFINE O ASSUNTO DO E-MAIL */}
+            <input type="hidden" name="_subject" value={`Novo Contato via ${formName}`} />
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <input type="text" name="instituicao" value={formData.instituicao} onChange={handleChange} placeholder="Instituição*" required className="p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
                 <input type="text" name="nome" value={formData.nome} onChange={handleChange} placeholder="Nome*" required className="p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
@@ -64,7 +67,6 @@ export default function ContactForm({ title, subtitle }) {
                 <input type="tel" name="celular" value={formData.celular} onChange={handleChange} placeholder="Celular*" required className="p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
                 <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="E-mail*" required className="p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 md:col-span-2" />
                 
-                {/* ✅ NOVO CAMPO DE MENSAGEM ADICIONADO AQUI */}
                 <div className="md:col-span-2">
                     <textarea 
                         name="mensagem" 
