@@ -102,6 +102,11 @@ export async function getProductBySlug(slug) {
   return { id, attributes: rest };
 }
 
+export async function getAllProductSlugs() {
+  const response = await fetchAPI('/api/produtos?fields[0]=slug&pagination[limit]=1000');
+  return normalizeDataArray(response);
+}
+
 export async function getFeaturedProducts() {
   const response = await fetchAPI('/api/produtos?filters[destaque][$eq]=true&fields[0]=nome&fields[1]=slug&fields[2]=descricao_curta&populate=imagem_principal');
   return normalizeDataArray(response);
