@@ -143,6 +143,19 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
             <div className="prose max-w-none text-lg text-gray-600 leading-relaxed">
               <RichTextRenderer content={p.descricao_longa} />
             </div>
+
+            {/* Botão Compre Agora via WhatsApp */}
+            <div className="mt-8">
+              <a
+                href={`https://wa.me/5511995978139?text=${encodeURIComponent(`Olá, tenho interesse em comprar o produto: ${p.nome}`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-semibold rounded-md text-white bg-green-600 hover:bg-green-700 transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              >
+                <svg className="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.06 22L7.32 20.58C8.77 21.39 10.37 21.82 12.04 21.82C17.5 21.82 21.95 17.37 21.95 11.91C21.95 6.45 17.5 2 12.04 2ZM16.57 15.96C16.3 16.23 15.39 16.73 15.03 16.78C14.67 16.83 13.91 16.98 13.3 16.83C12.69 16.68 11.74 16.38 10.62 15.3C9.28 14.04 8.47 12.54 8.32 12.27C8.17 12 7.36 10.91 7.36 10.05C7.36 9.19 7.87 8.71 8.07 8.5C8.27 8.29 8.57 8.24 8.82 8.24C9.07 8.24 9.27 8.24 9.44 8.27C9.61 8.29 9.86 8.84 9.96 9.16C10.06 9.48 10.11 9.88 9.96 10.11C9.81 10.34 9.74 10.44 9.59 10.61C9.44 10.78 9.29 10.96 9.44 11.23C9.59 11.5 10.11 12.22 10.83 12.9C11.71 13.73 12.38 14.03 12.68 14.18C12.98 14.33 13.13 14.28 13.28 14.13C13.43 13.98 13.89 13.4 14.11 13.1C14.33 12.8 14.56 12.75 14.83 12.85C15.11 12.95 16.04 13.45 16.29 13.58C16.54 13.71 16.69 13.78 16.74 13.91C16.79 14.04 16.79 14.44 16.57 14.71L16.57 15.96Z"/></svg>
+                Compre Agora via WhatsApp
+              </a>
+            </div>
           </div>
         </div>
 
