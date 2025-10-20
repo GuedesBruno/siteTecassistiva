@@ -72,11 +72,13 @@ export default function SupportPageClient({ products, software, categories }) {
       }));
 
   const filteredProducts = productsWithDocs.filter(product => {
-    if (!selectedCategory) return true;
-    const inCategory = product.categorias?.some(cat => cat.slug === selectedCategory.slug);
-    if (!selectedSubcategory) return inCategory;
-    const inSubcategory = product.subcategoria?.slug === selectedSubcategory.slug;
-    return inCategory && inSubcategory;
+    if (selectedSubcategory) {
+      return product.subcategoria?.slug === selectedSubcategory.slug;
+    }
+    if (selectedCategory) {
+      return product.categorias?.some(cat => cat.slug === selectedCategory.slug);
+    }
+    return true;
   });
 
   const softwares = software
