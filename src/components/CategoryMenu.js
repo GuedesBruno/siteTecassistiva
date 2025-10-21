@@ -19,7 +19,7 @@ export default function CategoryMenu({
   // Props para o modo Link
   activeCategorySlug,
   activeSubcategorySlug,
-  basePath = '/produtos/categorias', // Default path for links
+  basePath = '/produtos/categorias', // Caminho padrão para os links
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const isCallbackMode = typeof onCategorySelect === 'function';

@@ -1,4 +1,3 @@
-// /app/produtos/categorias/[slug]/[subslug]/page.js
 import { getCategoryBySlug, getAllCategories, getProductsBySubcategorySlug, getAllCategoryPaths } from "@/lib/api";
 import CategoryMenu from "@/components/CategoryMenu";
 import ProductDisplay from "@/components/ProductDisplay";
@@ -11,7 +10,6 @@ export async function generateStaticParams() {
   const params = categories
     .filter(Boolean)
     .flatMap((category) => {
-      // No "attributes" nesting, based on user's JSON response
       if (!category || !category.slug || !category.subcategorias) {
         return [];
       }
@@ -32,7 +30,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  // TODO: Fetch specific subcategory name for a more descriptive title
+  // TODO: Buscar o nome da subcategoria específica para um título mais descritivo.
   return {
     title: `Produtos | Tecassistiva`,
   };

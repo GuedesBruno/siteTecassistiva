@@ -3,11 +3,11 @@
 import { useEffect, useRef } from 'react';
 
 /**
- * A modal component to display a Vimeo or YouTube video player.
+ * Um componente de modal para exibir um player de vídeo do Vimeo ou YouTube.
  *
  * @param {object} props
- * @param {object | null} props.videoInfo - The video info object { type: 'vimeo'|'youtube', id: '...' }.
- * @param {() => void} props.onClose - Function to call to close the modal.
+ * @param {object | null} props.videoInfo - O objeto de informações do vídeo { type: 'vimeo'|'youtube', id: '...' }.
+ * @param {() => void} props.onClose - Função a ser chamada para fechar o modal.
  */
 export default function VideoModal({ videoInfo, onClose }) {
   const wakeLockRef = useRef(null);

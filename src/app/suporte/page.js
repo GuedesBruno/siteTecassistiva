@@ -8,7 +8,7 @@ export const metadata = {
 };
 
 export default async function SuportePage() {
-  // Fetching all data in parallel for efficiency
+  // Buscando todos os dados em paralelo para eficiência
   const [products, software, categories] = await Promise.all([
     getProductsWithDocuments(),
     getSoftwareAndDrivers(),

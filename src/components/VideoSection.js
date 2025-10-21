@@ -132,7 +132,7 @@ export default function VideoSection({ videos }) {
           <VideoModal videoInfo={selectedVideo} onClose={() => setSelectedVideo(null)} />
         )}
       </div>
-      {/* Custom navigation buttons */}
+      {/* Botões de navegação personalizados */}
       <div className="swiper-button-prev video-section-prev"></div>
       <div className="swiper-button-next video-section-next"></div>
     </section>

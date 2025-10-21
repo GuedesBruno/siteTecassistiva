@@ -1,4 +1,4 @@
-// sitetecassistiva/src/components/Header.js
+
 "use client";
 
 import Link from 'next/link';
@@ -62,7 +62,7 @@ export default function Header({ categories = [] }) {
   };
 
   return (
-    <header ref={headerRef} className={`bg-tec-blue shadow-md z-[80] fixed top-0 w-full`}> {/* Attach ref here */}
+    <header ref={headerRef} className={`bg-tec-blue shadow-md z-[80] fixed top-0 w-full`}> {/* Anexa a ref para medir a altura do cabeçalho */}
       <div className={`container mx-auto px-4 flex items-center justify-between transition-all duration-300 ease-in-out ${isScrolled ? 'py-2' : 'py-4'}`}>
         <div className="flex items-center gap-6">
           <Link href="/" className="flex items-center">
@@ -134,7 +134,7 @@ export default function Header({ categories = [] }) {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Menu Mobile */}
       <div
         className={`fixed top-0 left-0 w-full h-full bg-tec-blue z-[100] transform transition-transform duration-300 ease-in-out ${
           isMenuOpen ? 'translate-x-0' : '-translate-x-full'

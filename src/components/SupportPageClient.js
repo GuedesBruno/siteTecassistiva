@@ -52,7 +52,7 @@ export default function SupportPageClient({ products, software, categories }) {
     setSelectedItem(null);
   };
 
-  // Filter categories and subcategories to only show those with products that have documents.
+  // Filtra categorias e subcategorias para mostrar apenas aquelas com produtos que possuem documentos.
   const productsWithDocs = products.filter(p => p.documentos && p.documentos.length > 0);
   const relevantCatSlugs = new Set(productsWithDocs.flatMap(p => p.categorias?.map(c => c.slug) || []));
   const relevantSubcatSlugs = new Set(productsWithDocs.map(p => p.subcategoria?.slug).filter(Boolean));

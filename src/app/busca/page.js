@@ -40,7 +40,7 @@ function SearchResults() {
             );
           });
 
-          // Group results by type
+          // Agrupa os resultados por tipo
           const groupedResults = filteredData.reduce((acc, item) => {
             const type = item.type || 'Outros';
             if (!acc[type]) {
@@ -87,15 +87,15 @@ function SearchResults() {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-6">
               {results[type].map(item => {
                 if (type === 'Produto') {
-                  // The ProductCard expects a different data structure
+                  // O ProductCard espera uma estrutura de dados diferente
                   const product = {
                     id: item.id.replace('product-', ''),
                     attributes: {
                       nome: item.title,
                       slug: item.slug.replace('/produtos/', ''),
                       descricao_curta: item.description,
-                      // imagem_principal would be missing here, so the card might not show an image.
-                      // This is a limitation of the current search data structure.
+                      // a `imagem_principal` estaria faltando aqui, então o card pode não mostrar uma imagem.
+                      // Esta é uma limitação da estrutura de dados de busca atual.
                     }
                   };
                   return <ProductCard key={item.id} product={product} />;

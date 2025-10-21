@@ -1,4 +1,3 @@
-// sitetecassistiva/src/app/produtos/categorias/page.js
 
 import { getAllCategories, getAllProductsForDisplay } from '@/lib/api';
 import CategoryMenu from '@/components/CategoryMenu';

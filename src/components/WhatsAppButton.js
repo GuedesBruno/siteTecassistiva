@@ -1,9 +1,8 @@
-// src/components/WhatsAppButton.js
 'use client';
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { event } from '@/lib/gtag'; // <-- 1. IMPORTE A FUNÇÃO DE EVENTO
+import { event } from '@/lib/gtag';
 
 export default function WhatsAppButton() {
   const phoneNumber = '5511995978139'; 
@@ -20,7 +19,6 @@ export default function WhatsAppButton() {
     return () => clearTimeout(timer);
   }, []);
 
-  // 2. CRIE A FUNÇÃO PARA DISPARAR O EVENTO
   const handleWhatsAppClick = () => {
     event({
       action: 'click_whatsapp',
@@ -34,7 +32,7 @@ export default function WhatsAppButton() {
       href={whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
-      onClick={handleWhatsAppClick} // <-- 3. ADICIONE O EVENTO `onClick`
+      onClick={handleWhatsAppClick}
       className={`group fixed bottom-5 right-8 z-50 flex items-center
         transition-all duration-700 ease-in-out
         focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 

@@ -25,7 +25,7 @@ export default async function Home() {
   return (
     <div>
       <BannerSlider banners={banners || []} />
-      {/* Informational block matching the attached screenshot */}
+      {/* Seção Sobre a Tecassistiva */}
       <section className="bg-tec-blue-light text-white py-16">
         <div className="container mx-auto px-4 md:px-12 lg:px-24 text-center">
           <h2 className="text-4xl font-extrabold mb-4">Tecassistiva</h2>

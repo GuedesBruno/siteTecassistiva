@@ -34,11 +34,11 @@ export default function AtaCard({ ata }) {
       if (element) {
         element.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
-    }, 300); // Delay to allow accordion to open
+    }, 300); // Atraso para permitir que o accordion abra
 
     setTimeout(() => {
       setHighlightedItemId(null);
-    }, 2500); // Highlight duration
+    }, 2500); // Duração do destaque
   };
 
   const ItensContent = () => (
@@ -65,7 +65,7 @@ export default function AtaCard({ ata }) {
     <div className="bg-white border border-gray-200 rounded-lg shadow-md mb-6 overflow-hidden">
       <div className="p-6">
         <div className="flex flex-col md:flex-row gap-6 md:gap-8 md:items-start">
-          {/* Left Column */}
+          {/* Coluna Esquerda */}
           <div className="w-full md:w-2/3">
             <h3 className="text-2xl font-bold text-tec-blue mb-2">{titulo}</h3>
             <p className="text-sm text-gray-600 font-semibold mb-4">Válido até {formatDate(validade)}</p>
@@ -74,7 +74,7 @@ export default function AtaCard({ ata }) {
             </div>
           </div>
 
-          {/* Right Column */}
+          {/* Coluna Direita */}
           {itens && itens.length > 0 && (
             <div className="w-full md:w-1/3">
               <h4 className="font-semibold text-gray-700 mb-2 text-sm">Itens da Ata</h4>

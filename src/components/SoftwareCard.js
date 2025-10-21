@@ -3,7 +3,7 @@ import { getStrapiMediaUrl } from '@/lib/api';
 import Image from 'next/image';
 import RichTextRenderer from './RichTextRenderer';
 
-// Helper to safely extract the first URL from a Strapi Rich Text field
+// Função auxiliar para extrair com segurança a primeira URL de um campo Rich Text do Strapi
 const extractLinkFromRichText = (content) => {
   if (!Array.isArray(content)) return null;
   try {

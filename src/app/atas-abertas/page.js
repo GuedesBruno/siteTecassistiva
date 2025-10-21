@@ -57,6 +57,7 @@ export default async function AtasAbertasPage() {
         <ContactForm 
           title="Queremos diminuir o seu trabalho"
           subtitle="Preencha o formulário abaixo com o seu contato:"
+          formName="Página de Atas Abertas" 
         />
       </section>
 

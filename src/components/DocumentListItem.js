@@ -8,7 +8,7 @@ const DownloadIcon = () => (
 );
 
 export default function DocumentListItem({ product }) {
-  // The product object is flattened, so we access properties directly.
+  // As propriedades do produto são acessadas diretamente no objeto.
   const { nome, documentos } = product;
 
   if (!documentos || documentos.length === 0) {

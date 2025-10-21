@@ -89,13 +89,13 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
     { name: 'Downloads', content: p.documentos },
   ];
 
-  // Parse video URLs from the 'videos' text field (one URL per line)
+  // Analisa as URLs de vídeo do campo de texto 'videos' (uma URL por linha)
   const videoLinks = p.videos ? p.videos.split('\n').filter(link => link.trim() !== '') : [];
   const videoData = videoLinks.map((link, index) => ({
     id: `video-${index}`,
     attributes: {
       link: link,
-      titulo: `Vídeo ${index + 1}` // Generic title, as it's not available in the text field
+      titulo: `Vídeo ${index + 1}` // Título genérico, já que não está disponível no campo de texto
     }
   }));
 
@@ -167,8 +167,7 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
                   <button
                     key={tab.name}
                     onClick={() => setActiveTab(tab.name)}
-                    className={`px-4 py-3 text-sm md:text-base font-semibold transition-colors duration-200 whitespace-nowrap ${
-                      activeTab === tab.name
+                    className={`px-4 py-3 text-sm md:text-base font-semibold transition-colors duration-200 whitespace-nowrap ${activeTab === tab.name
                         ? 'border-b-2 border-tec-blue text-tec-blue'
                         : 'text-gray-500 hover:text-tec-blue'
                     }`}

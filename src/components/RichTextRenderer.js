@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 
-// Comprehensive RichTextRenderer to handle various formats from Strapi
+// Renderizador de Rich Text abrangente para lidar com vários formatos do Strapi
 export default function RichTextRenderer({ content }) {
   if (!content) return null;
 

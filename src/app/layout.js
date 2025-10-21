@@ -4,8 +4,8 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Montserrat } from 'next/font/google';
 import { getAllCategories } from '@/lib/api';
-import WhatsAppButton from '@/components/WhatsAppButton'; // <-- 1. IMPORTE O COMPONENTE
-import Script from 'next/script'; // Import the Script component
+import WhatsAppButton from '@/components/WhatsAppButton';
+import Script from 'next/script'; // Importa o componente Script
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -29,9 +29,9 @@ export default async function RootLayout({ children }) {
           {children}
         </main>
         <Footer />
-        <WhatsAppButton /> {/* <-- 2. ADICIONE O COMPONENTE AQUI */}
+        <WhatsAppButton />
 
-        {/* Google Tag Manager Scripts */}
+        {/* Scripts do Google Tag Manager */}
         <Script async src="https://www.googletagmanager.com/gtag/js?id=G-WH33R519KY" />
         <Script id="google-analytics">
           {`

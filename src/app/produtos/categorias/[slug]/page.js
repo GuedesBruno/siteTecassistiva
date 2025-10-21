@@ -5,12 +5,8 @@ import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import Breadcrumbs from '@/components/Breadcrumbs';
 
-// ✅ PASSO FINAL: Informa ao Next.js quais páginas de categoria construir
-
-
 export async function generateStaticParams() {
   const categories = await getAllCategoryPaths();
-  // FIX: Aplicando a lógica defensiva
   return categories.map(c => ({
     slug: c.attributes?.slug || c.slug,
   })).filter(c => c.slug);
@@ -18,7 +14,6 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }) {
   const category = await getCategoryBySlug(params.slug);
-  // FIX: Aplicando a lógica defensiva
   const categoryAttributes = category?.attributes || category;
   if (!categoryAttributes) {
     return {
@@ -34,7 +29,7 @@ export async function generateMetadata({ params }) {
 export default async function CategoryPage({ params }) {
   const { slug } = params;
   
-  // Fetch data in parallel
+  // Busca os dados em paralelo
   const [categoryData, allCategories] = await Promise.all([
     getCategoryBySlug(slug),
     getAllCategories()

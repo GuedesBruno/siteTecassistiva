@@ -7,9 +7,9 @@ import VideoModal from './VideoModal.js';
 import RichTextRenderer from './RichTextRenderer';
 
 /**
- * Renders an interactive tab section for product details.
+ * Renderiza uma seção de abas interativas para os detalhes do produto.
  * @param {object} props
- * @param {object} props.product - The full product object from Strapi.
+ * @param {object} props.product - O objeto completo do produto vindo do Strapi.
  */
 export default function ProductTabs({ product }) {
   const [activeTab, setActiveTab] = useState('visaoGeral');

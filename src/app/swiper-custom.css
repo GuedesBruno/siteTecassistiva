@@ -1,5 +1,3 @@
-/* src/app/swiper-custom.css */
-
 .swiper-button-next, .swiper-button-prev {
     color: #fff !important; /* Cor dos ícones */
     background-color: rgba(0, 37, 84, 0.5); /* Fundo semi-transparente */
@@ -28,11 +26,11 @@
     }
 }
 
-/* Custom styles for Video Section Carousel  */
+/* Estilos personalizados para o Carrossel da Seção de Vídeos */
 .video-section-prev,
 .video-section-next {
-    background-color: #e5e7eb; /* light gray, equivalent to tailwind gray-200 */
-    color: #002554 !important; /* tec-blue, from the rgba value */
+    background-color: #e5e7eb; /* cinza claro, equivalente ao gray-200 do Tailwind */
+    color: #002554 !important; /* tec-blue, a partir do valor rgba */
 }
 
 .video-section-prev:hover,

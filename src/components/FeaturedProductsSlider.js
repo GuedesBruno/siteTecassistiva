@@ -1,4 +1,3 @@
-// sitetecassistiva/src/components/FeaturedProductsSlider.js
 
 "use client";
 import Link from 'next/link';

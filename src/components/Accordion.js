@@ -12,14 +12,14 @@ export default function Accordion({ title, content, isOpen, onToggle }) {
       </span>
     ));
   } else {
-    // Assume it's a React node or an array of nodes
+    // Assume que o conteúdo é um nó React ou uma lista de nós
     renderedContent = content;
   }
 
   return (
     <div className="border-t border-gray-200 py-4">
       <button
-        onClick={onToggle} // Use the passed-in toggle handler
+        onClick={onToggle} // Usa o manipulador de toggle recebido por props
         className="flex justify-between items-center w-full text-lg font-semibold text-left text-gray-800 hover:text-blue-600 focus:outline-none"
       >
         <span>{title}</span>

@@ -9,10 +9,10 @@ const DownloadIcon = () => (
 );
 
 export default function DocumentCard({ product }) {
-  // Updated logic to match the working implementation in ProductDetail.js
+  // Extrai o nome e os documentos do produto.
   const { nome, documentos } = product;
 
-  // If there are no documents, don't render the card.
+  // Se não houver documentos, não renderiza o card.
   if (!documentos || documentos.length === 0) {
     return null;
   }
