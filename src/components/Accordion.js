@@ -12,7 +12,7 @@ export default function Accordion({ title, content, isOpen, onToggle }) {
       </span>
     ));
   } else {
-    // Assume que o conteúdo é um nó React ou uma lista de nós
+    // Assume que o conteúdo é um nó React ou uma lista de nós.
     renderedContent = content;
   }
 
