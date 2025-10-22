@@ -10,6 +10,7 @@ import {
   getAllProductsForDisplay,
   getOpenAtas,
   getSoftwareAndDrivers,
+  getStrapiMediaUrl,
 } from '../src/lib/api.js';
 
 // Function to strip HTML/JSX tags and extract text
