@@ -11,9 +11,6 @@ body {
 	border-radius: 0 !important;
 }
 
-/* Garante que elementos usando sombras de anel/contorno do Tailwind não pareçam arredondados. */
-* { border-radius: inherit; }
-
 /* Estilos personalizados para a navegação do Carrossel de Produtos em Destaque */
 .featured-products-prev, 
 .featured-products-next {

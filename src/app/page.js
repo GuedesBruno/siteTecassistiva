@@ -27,7 +27,7 @@ export default async function Home() {
       <BannerSlider banners={banners || []} />
       {/* Seção Sobre a Tecassistiva */}
       <section className="bg-tec-blue-light text-white py-16">
-        <div className="container mx-auto px-4 md:px-12 lg:px-24 text-center">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-extrabold mb-4">Tecassistiva</h2>
           <p className="mx-auto leading-relaxed text-xl">
             A Tecassistiva foi fundada em 2007, visando atender a grande demanda reprimida de produtos e serviços de qualidade

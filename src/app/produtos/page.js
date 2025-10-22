@@ -19,7 +19,7 @@ export default async function ProdutosPage() {
       <aside className="w-full md:w-1/4 lg:w-1/5">
         <CategoryMenu categories={categories} />
       </aside>
-      <main className="w-full md:w-3/4 lg:w-4/5 px-2 md:px-4 lg:px-6">
+      <main className="w-full md:w-3/4 lg:w-4/5">
         <Breadcrumbs items={breadcrumbs} />
         <ProductListClient
           products={products || []}
