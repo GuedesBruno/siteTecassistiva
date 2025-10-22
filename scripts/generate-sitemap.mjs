@@ -1,7 +1,10 @@
 // scripts/generate-sitemap.mjs
 import fs from 'fs';
-import 'dotenv/config';
+import path from 'path';
+import dotenv from 'dotenv';
 import { getAllProductSlugs, getAllCategoryPaths } from '../src/lib/api.js';
+
+dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
 const SITE_URL = 'https://www.tecassistiva.com.br'; // Substitua pela URL final do seu site
 

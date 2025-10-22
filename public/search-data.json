@@ -1,16 +1,58 @@
 [
   {
+    "id": "product-115",
+    "title": "Ruby HD",
+    "slug": "/produtos/ruby-hd",
+    "description": "",
+    "imageUrl": null,
+    "type": "Produto"
+  },
+  {
+    "id": "product-103",
+    "title": "Transformer HD com Voz",
+    "slug": "/produtos/transformer-hd-com-voz",
+    "description": "Ampliador Portátil com Voz",
+    "imageUrl": null,
+    "type": "Produto"
+  },
+  {
     "id": "product-65",
     "title": "BrailleBox",
     "slug": "/produtos/braille-box",
     "description": "Impressora Braille de Grande Porte",
+    "imageUrl": null,
     "type": "Produto"
   },
   {
-    "id": "product-97",
+    "id": "product-121",
+    "title": "Papel Encapsulado A3 - 100 Folhas",
+    "slug": "/produtos/papel-encapsulado-a3",
+    "description": "",
+    "imageUrl": null,
+    "type": "Produto"
+  },
+  {
+    "id": "product-128",
+    "title": "Teclado Ampliado",
+    "slug": "/produtos/teclado-ampliado",
+    "description": "",
+    "imageUrl": null,
+    "type": "Produto"
+  },
+  {
+    "id": "product-101",
+    "title": "Onyx Deskset HD 24\"",
+    "slug": "/produtos/onyx-deskset-24",
+    "description": "Lupa Eletrônica de Mesa",
+    "imageUrl": null,
+    "type": "Produto"
+  },
+  {
+    "id": "product-109",
     "title": "Everest DV5",
     "slug": "/produtos/everest",
     "description": "Impressora Braille de Folha Solta",
+    "imageUrl": null,
     "type": "Produto"
   },
   {
@@ -18,6 +60,7 @@
     "title": "Focus 80 Blue",
     "slug": "/produtos/focus-80-blue",
     "description": "Linha Braille de 80 Células",
+    "imageUrl": null,
     "type": "Produto"
   },
   {
@@ -25,6 +68,7 @@
     "title": "Traveller HD",
     "slug": "/produtos/traveller-hd",
     "description": "Ampliador Eletrônico Portátil",
+    "imageUrl": null,
     "type": "Produto"
   },
   {
@@ -32,6 +76,7 @@
     "title": "ClearView 24″ Full HD",
     "slug": "/produtos/clearview-24",
     "description": "Ampliador Eletrônico de Mesa com Voz",
+    "imageUrl": null,
     "type": "Produto"
   },
   {
@@ -39,6 +84,7 @@
     "title": "PUMA 7",
     "slug": "/produtos/puma-7",
     "description": "Impressora Braille de Chapa",
+    "imageUrl": null,
     "type": "Produto"
   },
   {
@@ -46,6 +92,7 @@
     "title": "Ruby 10",
     "slug": "/produtos/ruby-10",
     "description": "Lupa Eletrônica com Voz",
+    "imageUrl": null,
     "type": "Produto"
   },
   {
@@ -53,6 +100,7 @@
     "title": "Liber",
     "slug": "/produtos/liber",
     "description": "Computador Braille",
+    "imageUrl": null,
     "type": "Produto"
   },
   {
@@ -60,13 +108,23 @@
     "title": "ClearView 24″ Full HD com Voz",
     "slug": "/produtos/clearview-24-com-voz",
     "description": "Ampliador de Mesa com Voz",
+    "imageUrl": null,
     "type": "Produto"
   },
   {
-    "id": "product-57",
+    "id": "product-98",
     "title": "Focus 40 Blue",
     "slug": "/produtos/focus-40-blue",
     "description": "Linha Braille de 40 células",
+    "imageUrl": null,
+    "type": "Produto"
+  },
+  {
+    "id": "product-112",
+    "title": "Ruby XL HD",
+    "slug": "/produtos/ruby-xl-hd",
+    "description": "",
+    "imageUrl": null,
     "type": "Produto"
   },
   {
@@ -74,6 +132,15 @@
     "title": "ClearReader",
     "slug": "/produtos/clearreader",
     "description": "Leitor e digitalizador autônomo",
+    "imageUrl": null,
+    "type": "Produto"
+  },
+  {
+    "id": "product-110",
+    "title": "Abafador para Impressora Index Braille",
+    "slug": "/produtos/abafador-index",
+    "description": "Abafador de ruídos para impressora Index Braille Basic e Index Braille Everest.",
+    "imageUrl": null,
     "type": "Produto"
   },
   {
@@ -81,6 +148,7 @@
     "title": "NSF Excel",
     "slug": "/produtos/nsf-excel",
     "description": "Impressora Rotativa",
+    "imageUrl": null,
     "type": "Produto"
   },
   {
@@ -88,6 +156,15 @@
     "title": "Ruby 7 HD",
     "slug": "/produtos/ruby-7-hd",
     "description": "Lupa eletrônica portátil",
+    "imageUrl": null,
+    "type": "Produto"
+  },
+  {
+    "id": "product-105",
+    "title": "Perkins Clássica",
+    "slug": "/produtos/perkins-classica",
+    "description": "",
+    "imageUrl": null,
     "type": "Produto"
   },
   {
@@ -95,13 +172,15 @@
     "title": "Mountbatten Tutor",
     "slug": "/produtos/mountbatten-tutor",
     "description": "Máquina de escrever e impressora braille",
+    "imageUrl": null,
     "type": "Produto"
   },
   {
-    "id": "product-96",
+    "id": "product-108",
     "title": "Basic DV5",
     "slug": "/produtos/basic",
     "description": "Impressora Braille Formulário Contínuo",
+    "imageUrl": null,
     "type": "Produto"
   },
   {
@@ -109,6 +188,7 @@
     "title": "Fanfold",
     "slug": "/produtos/fanfold",
     "description": "Impressora Braille de Grande Porte",
+    "imageUrl": null,
     "type": "Produto"
   },
   {
@@ -116,13 +196,15 @@
     "title": "Brinca Braille",
     "slug": "/produtos/brinca-braille",
     "description": "Ferramenta interativa para aprendizado do braille",
+    "imageUrl": null,
     "type": "Produto"
   },
   {
-    "id": "product-88",
+    "id": "product-122",
     "title": "Teca-Fuser",
     "slug": "/produtos/teca-fuser",
     "description": "Impressora Térmica mais rápida e eficiente do mercado",
+    "imageUrl": null,
     "type": "Produto"
   },
   {
@@ -130,6 +212,7 @@
     "title": "Onyx OCR",
     "slug": "/produtos/onyx-ocr",
     "description": "Ampliador de Mesa com Voz",
+    "imageUrl": null,
     "type": "Produto"
   },
   {
@@ -137,6 +220,31 @@
     "title": "Multiplano",
     "slug": "/produtos/multiplano",
     "description": "Matemática Concreta",
+    "imageUrl": null,
+    "type": "Produto"
+  },
+  {
+    "id": "product-126",
+    "title": "Big Red",
+    "slug": "/produtos/big-red",
+    "description": "",
+    "imageUrl": null,
+    "type": "Produto"
+  },
+  {
+    "id": "product-129",
+    "title": "BigTrack 2",
+    "slug": "/produtos/big-track",
+    "description": "",
+    "imageUrl": null,
+    "type": "Produto"
+  },
+  {
+    "id": "product-120",
+    "title": "Papel Encapsulado A4 - 100 Folhas",
+    "slug": "/produtos/papel-encapsulado-a4",
+    "description": "",
+    "imageUrl": null,
     "type": "Produto"
   },
   {
@@ -172,15 +280,15 @@
     "title": "Src\\app\\page.js",
     "slug": "src\\app\\page.js",
     "description": "import BannerSlider from \"@/components/BannerSlider\"; import FeaturedProductsSlider from \"@/components/FeaturedProductsSlider\"; import VideoSection fr...",
-    "content": "import BannerSlider from \"@/components/BannerSlider\"; import FeaturedProductsSlider from \"@/components/FeaturedProductsSlider\"; import VideoSection from \"@/components/VideoSection\"; import ManufacturersGrid from \"@/components/ManufacturersGrid\"; import TestimonialSection from \"@/components/TestimonialSection\"; import { getBanners, getFeaturedProducts, getManufacturers, getAllTestimonials, getHomeVideos } from \"@/lib/api\"; import Link from 'next/link'; export default async function Home() { // Busca os dados da API em paralelo para otimizar o tempo de build const [banners, featuredProducts, manufacturers, testimonials, homeVideos] = await Promise.all([ getBanners(), getFeaturedProducts(), getManufacturers(), getAllTestimonials(), getHomeVideos(), ]); return ( {/* Informational block matching the attached screenshot */} Tecassistiva A Tecassistiva foi fundada em 2007, visando atender a grande demanda reprimida de produtos e serviços de qualidade com preços competitivos, que impediam há muitos anos que as pessoas com deficiência no Brasil, tivessem acesso ao grande desenvolvimento tecnológico que vinha acontecendo em outros países. O desenvolvimento de projetos inovadores para pessoas com deficiência, com sustentabilidade, tem sido o principal objetivo da Tecassistiva. Conheça a nossa história {/* Novas seções adicionadas */} ); }",
+    "content": "import BannerSlider from \"@/components/BannerSlider\"; import FeaturedProductsSlider from \"@/components/FeaturedProductsSlider\"; import VideoSection from \"@/components/VideoSection\"; import ManufacturersGrid from \"@/components/ManufacturersGrid\"; import TestimonialSection from \"@/components/TestimonialSection\"; import { getBanners, getFeaturedProducts, getManufacturers, getAllTestimonials, getHomeVideos } from \"@/lib/api\"; import Link from 'next/link'; export default async function Home() { // Busca os dados da API em paralelo para otimizar o tempo de build const [banners, featuredProducts, manufacturers, testimonials, homeVideos] = await Promise.all([ getBanners(), getFeaturedProducts(), getManufacturers(), getAllTestimonials(), getHomeVideos(), ]); return ( {/* Seção Sobre a Tecassistiva */} Tecassistiva A Tecassistiva foi fundada em 2007, visando atender a grande demanda reprimida de produtos e serviços de qualidade com preços competitivos, que impediam há muitos anos que as pessoas com deficiência no Brasil, tivessem acesso ao grande desenvolvimento tecnológico que vinha acontecendo em outros países. O desenvolvimento de projetos inovadores para pessoas com deficiência, com sustentabilidade, tem sido o principal objetivo da Tecassistiva. Conheça a nossa história {/* Novas seções adicionadas */} ); }",
     "type": "Página"
   },
   {
     "id": "page-src\\app\\tecassistiva\\page.js",
     "title": "Tecassistiva",
     "slug": "src\\app\\tecassistiva\\page.js",
-    "description": "import Link from 'next/link'; // Componente da Página export default function TecassistivaPage() { return ( {/* O padding foi ajustado para ser respon...",
-    "content": "import Link from 'next/link'; // Componente da Página export default function TecassistivaPage() { return ( {/* O padding foi ajustado para ser responsivo */} {/* Breadcrumbs */} Página Inicial &gt; A Tecassistiva {/* Seção Principal */} Tecassistiva {/* Texto de apresentação em 2 colunas */} A TECA foi fundada em 2007, visando atender a grande demanda reprimida de produtos e serviços de qualidade com preços competitivos, que impediam há muitos anos que as pessoas com deficiência no Brasil, tivessem acesso ao grande desenvolvimento tecnológico que vinha acontecendo em outros países. Atuando como fomentadora e alinhada com os projetos públicos, a TECA se tornou em poucos anos a lider do setor no Brasil e uma das maiores das distribuidoras internacionais de Tecnologia Assistiva. Esse crescimento exigiu o fortalecimento de seus canais de distribuição e de suporte, principalmente para o atendimento de milhares de escolas, bibliotecas, universidades e centros de pesquisa. Na área de desenvolvimento, além de localizar para o português do Brasil diversos programas de computador e equipamentos que distribui, a TECA está fazendo um investimento significativo, em conjunto com órgãos de fomento e parcerias internacionais, para que o Brasil em curto prazo, se torne também um desenvolvedor e produtor de Tecnologia Assistiva. {/* Vídeo Institucional */} Vídeo Apresentação Teca {/* Seção Missão, Visão e Valores com o novo layout */} Missão Desenvolver e disseminar Tecnologia Assistiva no Brasil, por meio da oferta de produtos e serviços de excelência que contribuam para a melhoria da qualidade de vida das pessoas com deficiência e da comunidade em geral. Visão Ser a empresa de referência em Tecnologia Assistiva, reconhecida pela comunidade, colaboradores, fornecedores e investidores, pela qualidade de seus produtos, serviços e apoio institucional. Valores Valorização da Pessoa com Deficiência Ética Inovação Trabalho em equipe Qualidade Sustentabilidade {/* Seção de Depoimentos - PRECISA TROCAR PARA O COMPONENTE NOVO */} Depoimentos \"E, na frente dos olhos incrédulos de Bianca, a linha braille transformou o texto de tinta para braille. “Peguei o livro que tinha acabado de comprar e coloquei sobre o Sara PC. Em segundos, a linha braille transformava letras em bolinhas! Eu comecei a viver de novo depois de comprar a linha braille\", declara ela com alegria.” Agora, Bianca pede os livros didáticos da filha em formato PDF para as editoras e assim, Nicole lê-os na linha braille. Bianca calcula que, com a linha braille, ela economize por volta de 80% do tempo que dedicava à transcrição dos livros inteiros para filha\". Bianca Chaló Carlos Santos, mãe da Nicole Carlos Santos Adquiriu a Linha Braille Focus 40. ); }",
+    "description": "import Link from 'next/link'; import { getAllTestimonials } from '@/lib/api'; import TestimonialSection from '@/components/TestimonialSection'; // Com...",
+    "content": "import Link from 'next/link'; import { getAllTestimonials } from '@/lib/api'; import TestimonialSection from '@/components/TestimonialSection'; // Componente da Página export default async function TecassistivaPage() { const testimonials = await getAllTestimonials(); return ( {/* O padding foi ajustado para ser responsivo */} {/* Breadcrumbs */} Página Inicial &gt; A Tecassistiva {/* Seção Principal */} Tecassistiva {/* Texto de apresentação em 2 colunas */} A TECA foi fundada em 2007, visando atender a grande demanda reprimida de produtos e serviços de qualidade com preços competitivos, que impediam há muitos anos que as pessoas com deficiência no Brasil, tivessem acesso ao grande desenvolvimento tecnológico que vinha acontecendo em outros países. Atuando como fomentadora e alinhada com os projetos públicos, a TECA se tornou em poucos anos a lider do setor no Brasil e uma das maiores das distribuidoras internacionais de Tecnologia Assistiva. Esse crescimento exigiu o fortalecimento de seus canais de distribuição e de suporte, principalmente para o atendimento de milhares de escolas, bibliotecas, universidades e centros de pesquisa. Na área de desenvolvimento, além de localizar para o português do Brasil diversos programas de computador e equipamentos que distribui, a TECA está fazendo um investimento significativo, em conjunto com órgãos de fomento e parcerias internacionais, para que o Brasil em curto prazo, se torne também um desenvolvedor e produtor de Tecnologia Assistiva. {/* Vídeo Institucional */} Vídeo Apresentação Teca {/* Seção Missão, Visão e Valores com o novo layout */} Missão Desenvolver e disseminar Tecnologia Assistiva no Brasil, por meio da oferta de produtos e serviços de excelência que contribuam para a melhoria da qualidade de vida das pessoas com deficiência e da comunidade em geral. Visão Ser a empresa de referência em Tecnologia Assistiva, reconhecida pela comunidade, colaboradores, fornecedores e investidores, pela qualidade de seus produtos, serviços e apoio institucional. Valores Valorização da Pessoa com Deficiência Ética Inovação Trabalho em equipe Qualidade Sustentabilidade ); }",
     "type": "Página"
   },
   {
@@ -188,15 +296,15 @@
     "title": "Src\\app\\suporte\\page.js",
     "slug": "src\\app\\suporte\\page.js",
     "description": "import { getProductsWithDocuments, getSoftwareAndDrivers, getAllCategories } from '@/lib/api'; import SupportPageClient from '@/components/SupportPage...",
-    "content": "import { getProductsWithDocuments, getSoftwareAndDrivers, getAllCategories } from '@/lib/api'; import SupportPageClient from '@/components/SupportPageClient'; import Breadcrumbs from '@/components/Breadcrumbs'; export const metadata = { title: 'Suporte | Tecassistiva', description: 'Encontre documentos, manuais, softwares, drivers e utilitários para os produtos Tecassistiva.', }; export default async function SuportePage() { // Fetching all data in parallel for efficiency const [products, software, categories] = await Promise.all([ getProductsWithDocuments(), getSoftwareAndDrivers(), getAllCategories(), ]); const breadcrumbs = [ { name: 'Página Inicial', path: '/' }, { name: 'Suporte', path: '/suporte' }, ]; return ( ); }",
+    "content": "import { getProductsWithDocuments, getSoftwareAndDrivers, getAllCategories } from '@/lib/api'; import SupportPageClient from '@/components/SupportPageClient'; import Breadcrumbs from '@/components/Breadcrumbs'; export const metadata = { title: 'Suporte | Tecassistiva', description: 'Encontre documentos, manuais, softwares, drivers e utilitários para os produtos Tecassistiva.', }; export default async function SuportePage() { // Buscando todos os dados em paralelo para eficiência const [products, software, categories] = await Promise.all([ getProductsWithDocuments(), getSoftwareAndDrivers(), getAllCategories(), ]); const breadcrumbs = [ { name: 'Página Inicial', path: '/' }, { name: 'Suporte', path: '/suporte' }, ]; return ( ); }",
     "type": "Página"
   },
   {
     "id": "page-src\\app\\contato\\page.js",
     "title": "Contato",
     "slug": "src\\app\\contato\\page.js",
-    "description": "import Link from 'next/link'; import ContactForm from '@/components/ContactForm'; // Importa o componente reutilizável export default function Contato...",
-    "content": "import Link from 'next/link'; import ContactForm from '@/components/ContactForm'; // Importa o componente reutilizável export default function ContatoPage() { return ( Página Inicial &gt; Contato Contato Fale conosco para dúvidas, orçamentos e suporte. Preencha o formulário ou utilize um de nossos canais de atendimento. {/* Coluna do Formulário - Ocupa 2/3 do espaço em telas grandes */} {/* Coluna de Informações - Ocupa 1/3 do espaço */} Informações Telefone: +55 (11) 3266-4311 WhatsApp: +55 (11) 9 9597-8139 Email: teca@tecassistiva.com.br Endereço: R. das Camélias, 37 - Mirandópolis, São Paulo - SP Horário de Atendimento: Seg-Qui 8h-18h e Sexta 8h-17h Nossa Localização ); }",
+    "description": "import Link from 'next/link'; import ContactForm from '@/components/ContactForm'; export default function ContatoPage() { return ( Página Inicial &gt;...",
+    "content": "import Link from 'next/link'; import ContactForm from '@/components/ContactForm'; export default function ContatoPage() { return ( Página Inicial &gt; Contato Contato Fale conosco para dúvidas, orçamentos e suporte. Preencha o formulário ou utilize um de nossos canais de atendimento. {/* Coluna do Formulário */} {/* Coluna de Informações */} Informações Telefone: +55 (11) 3266-4311 WhatsApp: +55 (11) 9 9597-8139 Email: teca@tecassistiva.com.br Endereço: R. das Camélias, 37 - Mirandópolis, São Paulo - SP Horário de Atendimento: Seg-Qui 8h-18h e Sexta 8h-17h Nossa Localização ); }",
     "type": "Página"
   },
   {
@@ -204,7 +312,7 @@
     "title": "Resultados da Busca",
     "slug": "src\\app\\busca\\page.js",
     "description": "\"use client\"; import { useSearchParams } from 'next/navigation'; import { useEffect, useState, Suspense } from 'react'; import ProductCard from '@/com...",
-    "content": "\"use client\"; import { useSearchParams } from 'next/navigation'; import { useEffect, useState, Suspense } from 'react'; import ProductCard from '@/components/ProductCard'; import SearchResultCard from '@/components/SearchResultCard'; import Link from 'next/link'; function SearchResults() { const searchParams = useSearchParams(); const query = searchParams.get('q'); const [results, setResults] = useState({}); const [isLoading, setIsLoading] = useState(true); const [error, setError] = useState(null); useEffect(() => { const performSearch = async () => { setIsLoading(true); setError(null); try { const response = await fetch(`/search-data.json?v=${new Date().getTime()}`); if (!response.ok) { throw new Error('Não foi possível carregar o índice de busca.'); } const data = await response.json(); if (!query) { setResults({}); } else { const lowerCaseQuery = query.toLowerCase(); const filteredData = data.filter((item) => { const title = item.title || ''; const description = item.description || ''; const content = item.content || ''; return ( title.toLowerCase().includes(lowerCaseQuery) || description.toLowerCase().includes(lowerCaseQuery) || content.toLowerCase().includes(lowerCaseQuery) ); }); // Group results by type const groupedResults = filteredData.reduce((acc, item) => { const type = item.type || 'Outros'; if (!acc[type]) { acc[type] = []; } acc[type].push(item); return acc; }, {}); setResults(groupedResults); } } catch (err) { setError('Falha ao carregar os dados de busca. Tente recarregar a página.'); console.error(err); } finally { setIsLoading(false); } }; performSearch(); }, [query]); if (isLoading) { return Carregando resultados... ; } if (error) { return {error} ; } const resultKeys = Object.keys(results); return ( Resultados da Busca Você buscou por: {query} {resultKeys.length > 0 ? ( resultKeys.map(type => ( {type} ({results[type].length}) {results[type].map(item => { if (type === 'Produto') { // The ProductCard expects a different data structure const product = { id: item.id.replace('product-', ''), attributes: { nome: item.title, slug: item.slug.replace('/produtos/', ''), descricao_curta: item.description, // imagem_principal would be missing here, so the card might not show an image. // This is a limitation of the current search data structure. } }; return ; } return ; })} )) ) : ( Nenhum resultado encontrado para este termo. )} ); } export default function SearchPage() { return ( Carregando busca... }> ); }",
+    "content": "\"use client\"; import { useSearchParams } from 'next/navigation'; import { useEffect, useState, Suspense } from 'react'; import ProductCard from '@/components/ProductCard'; import SearchResultCard from '@/components/SearchResultCard'; import Link from 'next/link'; function SearchResults() { const searchParams = useSearchParams(); const query = searchParams.get('q'); const [results, setResults] = useState({}); const [isLoading, setIsLoading] = useState(true); const [error, setError] = useState(null); useEffect(() => { const performSearch = async () => { setIsLoading(true); setError(null); try { const response = await fetch(`/search-data.json?v=${new Date().getTime()}`); if (!response.ok) { throw new Error('Não foi possível carregar o índice de busca.'); } const data = await response.json(); if (!query) { setResults({}); } else { const lowerCaseQuery = query.toLowerCase(); const filteredData = data.filter((item) => { const title = item.title || ''; const description = item.description || ''; const content = item.content || ''; return ( title.toLowerCase().includes(lowerCaseQuery) || description.toLowerCase().includes(lowerCaseQuery) || content.toLowerCase().includes(lowerCaseQuery) ); }); // Agrupa os resultados por tipo const groupedResults = filteredData.reduce((acc, item) => { const type = item.type || 'Outros'; if (!acc[type]) { acc[type] = []; } acc[type].push(item); return acc; }, {}); setResults(groupedResults); } } catch (err) { setError('Falha ao carregar os dados de busca. Tente recarregar a página.'); console.error(err); } finally { setIsLoading(false); } }; performSearch(); }, [query]); if (isLoading) { return Carregando resultados... ; } if (error) { return {error} ; } const resultKeys = Object.keys(results); return ( Resultados da Busca Você buscou por: {query} {resultKeys.length > 0 ? ( resultKeys.map(type => ( {type} ({results[type].length}) {results[type].map(item => { if (type === 'Produto') { // O ProductCard espera uma estrutura de dados específica. // Mapeamos o `imageUrl` do resultado da busca para o formato que o card espera. const product = { id: item.id.replace('product-', ''), attributes: { nome: item.title, slug: item.slug.replace('/produtos/', ''), descricao_curta: item.description, imagem_principal: { url: item.imageUrl }, } }; return ; } return ; })} )) ) : ( Nenhum resultado encontrado para este termo. )} ); } export default function SearchPage() { return ( Carregando busca... }> ); }",
     "type": "Página"
   },
   {
