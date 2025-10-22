@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           
           {/* Coluna 1: Sobre e Contato */}
-          <div className="md:col-span-2">
+          <div className="md:col-span-1">
             <Image 
               src="/logo-tecassistiva.svg" 
               alt="Tecassistiva Logo"
@@ -26,26 +26,36 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Coluna 2: Links de Produtos */}
+          {/* Coluna 2: Links Institucionais */}
           <div>
-            <h3 className="text-lg font-bold mb-4">Produtos</h3>
+            <h3 className="text-lg font-bold mb-4">Institucional</h3>
             <ul className="space-y-2">
-              <li><Link href="#" className="text-gray-400 hover:text-white">Cegueira</Link></li>
-              <li><Link href="#" className="text-gray-400 hover:text-white">Baixa Visão</Link></li>
-              <li><Link href="#" className="text-gray-400 hover:text-white">Deficiência Motora e Cognitiva</Link></li>
-              <li><Link href="#" className="text-gray-400 hover:text-white">Recursos Pedagógicos</Link></li>
-              <li><Link href="#" className="text-gray-400 hover:text-white">Soluções por Ambientes</Link></li>
+              <li><Link href="/tecassistiva" className="text-gray-400 hover:text-white">Quem Somos</Link></li>
+              <li><Link href="/atas-abertas" className="text-gray-400 hover:text-white">Atas Abertas</Link></li>
+              <li><Link href="/contato" className="text-gray-400 hover:text-white">Contato</Link></li>
             </ul>
           </div>
 
-          {/* Coluna 3: Links de Suporte */}
+          {/* Coluna 3: Links de Produtos */}
+          <div>
+            <h3 className="text-lg font-bold mb-4">Produtos</h3>
+            <ul className="space-y-2">
+              <li><Link href="/produtos/categorias/cegueira" className="text-gray-400 hover:text-white">Cegueira</Link></li>
+              <li><Link href="/produtos/categorias/baixa-visao" className="text-gray-400 hover:text-white">Baixa Visão</Link></li>
+              <li><Link href="/produtos/categorias/deficiencia-motora-e-cognitiva" className="text-gray-400 hover:text-white">Deficiência Motora e Cognitiva</Link></li>
+              <li><Link href="/produtos/categorias/recursos-pedagogicos" className="text-gray-400 hover:text-white">Recursos Pedagógicos</Link></li>
+              <li><Link href="/produtos/categorias/solucoes-por-ambientes" className="text-gray-400 hover:text-white">Soluções por Ambientes</Link></li>
+            </ul>
+          </div>
+
+          {/* Coluna 4: Links de Suporte */}
           <div>
             <h3 className="text-lg font-bold mb-4">Suporte</h3>
             <ul className="space-y-2">
-              <li><Link href="#" className="text-gray-400 hover:text-white">Softwares</Link></li>
-              <li><Link href="#" className="text-gray-400 hover:text-white">Sintetizadores de Voz</Link></li>
-              <li><Link href="#" className="text-gray-400 hover:text-white">Manuais</Link></li>
-              <li><Link href="#" className="text-gray-400 hover:text-white">Catálogos</Link></li>
+              <li><Link href="/suporte" className="text-gray-400 hover:text-white">Softwares</Link></li>
+              <li><Link href="/suporte" className="text-gray-400 hover:text-white">Sintetizadores de Voz</Link></li>
+              <li><Link href="/suporte" className="text-gray-400 hover:text-white">Manuais</Link></li>
+              <li><Link href="/suporte" className="text-gray-400 hover:text-white">Catálogos</Link></li>
             </ul>
           </div>
 

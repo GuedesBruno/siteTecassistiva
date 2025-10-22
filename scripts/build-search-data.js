@@ -34,11 +34,13 @@ async function generateSearchData() {
     // Process API data
     const productData = products.map(p => {
         const attrs = p.attributes || p;
+        const imageUrl = getStrapiMediaUrl(attrs.imagem_principal?.data?.attributes?.url);
         return {
             id: `product-${p.id}`,
             title: attrs.nome,
             slug: `/produtos/${attrs.slug}`,
             description: attrs.descricao_curta || '',
+            imageUrl: imageUrl || null,
             type: 'Produto',
         }
     });
