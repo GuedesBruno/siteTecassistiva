@@ -64,9 +64,9 @@ export async function getAllProducts() {
 
 export async function getAllProductsForDisplay() {
   try {
-    const fieldsQuery = 'fields[0]=nome&fields[1]=slug&fields[2]=descricao_curta';
+    // const fieldsQuery = 'fields[0]=nome&fields[1]=slug&fields[2]=descricao_curta';
     const populateQuery = 'populate[0]=imagem_principal&populate[1]=subcategoria';
-    const productsData = await fetchAPI(`/api/produtos?${fieldsQuery}&${populateQuery}&pagination[limit]=1000`);
+    const productsData = await fetchAPI(`/api/produtos?${populateQuery}&pagination[limit]=1000`);
     return normalizeDataArray(productsData);
   } catch (error) {
     console.error(`Falha ao buscar todos os produtos:`, error);

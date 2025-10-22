@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  outline: 1px solid red;
+}
+
 body {
   overflow-x: clip;
 }

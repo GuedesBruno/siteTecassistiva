@@ -1,9 +1,9 @@
 [
   {
-    "id": "product-115",
+    "id": "product-136",
     "title": "Ruby HD",
     "slug": "/produtos/ruby-hd",
-    "description": "",
+    "description": "Lupa Eletrônica de 4.3\" Portátil",
     "imageUrl": null,
     "type": "Produto"
   },
@@ -24,18 +24,18 @@
     "type": "Produto"
   },
   {
-    "id": "product-121",
+    "id": "product-134",
     "title": "Papel Encapsulado A3 - 100 Folhas",
     "slug": "/produtos/papel-encapsulado-a3",
-    "description": "",
+    "description": "Papel A3 para Impressora Térmica de Relevos Teca-Fuser",
     "imageUrl": null,
     "type": "Produto"
   },
   {
-    "id": "product-128",
+    "id": "product-131",
     "title": "Teclado Ampliado",
     "slug": "/produtos/teclado-ampliado",
-    "description": "",
+    "description": "Teclado Ampliado Tecassistiva",
     "imageUrl": null,
     "type": "Produto"
   },
@@ -120,10 +120,10 @@
     "type": "Produto"
   },
   {
-    "id": "product-112",
+    "id": "product-137",
     "title": "Ruby XL HD",
     "slug": "/produtos/ruby-xl-hd",
-    "description": "",
+    "description": "Lupa Eletrônica de 5\" Portátil",
     "imageUrl": null,
     "type": "Produto"
   },
@@ -160,10 +160,10 @@
     "type": "Produto"
   },
   {
-    "id": "product-105",
+    "id": "product-138",
     "title": "Perkins Clássica",
     "slug": "/produtos/perkins-classica",
-    "description": "",
+    "description": "Máquina de Escrever Braille",
     "imageUrl": null,
     "type": "Produto"
   },
@@ -224,26 +224,26 @@
     "type": "Produto"
   },
   {
-    "id": "product-126",
+    "id": "product-132",
     "title": "Big Red",
     "slug": "/produtos/big-red",
-    "description": "",
+    "description": "Acionador de Pressão com Grande Botão",
     "imageUrl": null,
     "type": "Produto"
   },
   {
-    "id": "product-129",
+    "id": "product-133",
     "title": "BigTrack 2",
     "slug": "/produtos/big-track",
-    "description": "",
+    "description": "Mouse Estacionário com Grande Esfera",
     "imageUrl": null,
     "type": "Produto"
   },
   {
-    "id": "product-120",
+    "id": "product-135",
     "title": "Papel Encapsulado A4 - 100 Folhas",
     "slug": "/produtos/papel-encapsulado-a4",
-    "description": "",
+    "description": "Papel A4 para Impressora Térmica de Relevos Teca-Fuser",
     "imageUrl": null,
     "type": "Produto"
   },
