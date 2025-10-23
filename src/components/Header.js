@@ -81,7 +81,7 @@ export default function Header({ categories = [] }) {
           <nav className="flex items-center space-x-8 flex-wrap">
             <Link href="/tecassistiva" className="text-white hover:text-tec-blue-light transition font-semibold">A Tecassistiva</Link>
             <div className="relative group py-4 -my-4">
-              <Link href="/produtos/categorias" className="text-white hover:text-tec-blue-light transition font-semibold">
+              <Link href="/produtos" className="text-white hover:text-tec-blue-light transition font-semibold">
                 Produtos
               </Link>
               <div className="absolute left-1/2 transform -translate-x-1/2 top-full mt-0 w-72 bg-white shadow-lg hidden group-hover:block z-[120] border">
@@ -165,7 +165,7 @@ export default function Header({ categories = [] }) {
           <nav className="flex flex-col space-y-6">
             <Link href="/tecassistiva" onClick={() => setIsMenuOpen(false)} className="text-white text-lg font-semibold">A Tecassistiva</Link>
             <div className="flex flex-col space-y-4">
-              <Link href="/produtos/categorias" onClick={() => setIsMenuOpen(false)} className="text-white text-lg font-semibold">Produtos</Link>
+              <Link href="/produtos" onClick={() => setIsMenuOpen(false)} className="text-white text-lg font-semibold">Produtos</Link>
               <div className="flex flex-col space-y-2 pl-4">
                 {Array.isArray(categories) && categories.map(category => {
                   const cat = category.attributes || category;

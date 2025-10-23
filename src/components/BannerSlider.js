@@ -43,7 +43,7 @@ export default function BannerSlider({ banners }) {
       >
         {banners.map((banner, index) => {
           const attrs = banner.attributes || banner;
-          const { titulo, subtitulo, texto_do_botao, link_do_botao, imagem } = attrs;
+          const { titulo, subtitulo, texto_comercial, texto_do_botao, link_do_botao, imagem } = attrs;
 
           const imageUrl = imagem?.data?.attributes?.url || imagem?.url || null;
           const imageAlt = imagem?.data?.attributes?.alternativeText || imagem?.alternativeText || titulo;
@@ -58,6 +58,9 @@ export default function BannerSlider({ banners }) {
                   <div className="max-w-md text-center lg:text-left">
                     <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-4 text-[#002554]">{titulo}</h1>
                     <p className="text-lg md:text-xl mb-6 text-[#002554]">{subtitulo}</p>
+                    {texto_comercial && (
+                      <p className="text-base mb-6 text-[#002554]">{texto_comercial}</p>
+                    )}
                     <Link href={link_do_botao || '#'} className="inline-block bg-[#002554] hover:bg-[#003377] text-white font-bold py-3 px-6 rounded-lg shadow-md transition-colors duration-300">
                       {texto_do_botao}
                     </Link>

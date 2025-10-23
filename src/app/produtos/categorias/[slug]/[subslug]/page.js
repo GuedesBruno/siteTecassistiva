@@ -58,22 +58,21 @@ export default async function SubCategoryPage({ params }) {
   const breadcrumbs = [
     { name: 'Página Inicial', path: '/' },
     { name: 'Produtos', path: '/produtos' },
-    { name: 'Categorias', path: '/produtos/categorias' },
     { name: category.nome, path: `/produtos/categorias/${category.slug}` },
     { name: subcategoryName, path: `/produtos/categorias/${category.slug}/${subslug}` },
   ];
 
   return (
     <div className="py-8">
-      <div className="container mx-auto flex flex-col md:flex-row gap-4 px-4">
-      <aside className="w-full md:w-1/4 lg:w-1/5">
+    <div className="container mx-auto flex flex-col md:flex-row py-8 px-4">
+      <aside className="w-full md:w-1/4 lg:w-1/5 md:pr-2">
         <CategoryMenu
           categories={allCategories}
           activeCategorySlug={slug}
           activeSubcategorySlug={subslug}
         />
       </aside>
-      <main className="w-full md:w-3/4 lg:w-4/5 px-2 md:px-4 lg:px-6">
+      <main className="w-full md:w-3/4 lg:w-4/5 md:pl-2">
         <Breadcrumbs items={breadcrumbs} />
         <Suspense fallback={<div>Carregando...</div>}>
           <ProductDisplay
