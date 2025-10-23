@@ -17,7 +17,7 @@ export default async function AllProductsPage() {
     ];
 
     return (
-        <div className="container mx-auto flex flex-col md:flex-row py-8 px-4">
+        <div className="flex flex-col md:flex-row py-8 px-4">
             <aside className="w-full md:w-1/4 lg:w-1/5 md:pr-2">
                 <CategoryMenu categories={allCategories} />
             </aside>
