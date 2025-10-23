@@ -42,5 +42,11 @@ body {
 .featured-products-prev::after, 
 .featured-products-next::after {
     font-size: 18px !important; /* Tamanho dos ícones de seta */
-    font-weight: 900;
+} 
+
+/* Safari-specific fix for squashed product cards */
+@supports (-webkit-touch-callout: none) {
+  .product-card-safari-fix {
+    min-width: 230px;
+  }
 }
