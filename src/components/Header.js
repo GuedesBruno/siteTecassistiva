@@ -63,7 +63,7 @@ export default function Header({ categories = [] }) {
 
   return (
     <header ref={headerRef} className={`bg-tec-blue shadow-md z-[80] fixed top-0 left-0 right-0`}> {/* Anexa a ref para medir a altura do cabeçalho */}
-      <div className={`container mx-auto px-4 flex items-center justify-between transition-all duration-300 ease-in-out ${isScrolled ? 'py-2' : 'py-4'} overflow-x-auto`}>
+      <div className={`container mx-auto px-4 flex items-center justify-between transition-all duration-300 ease-in-out ${isScrolled ? 'py-2' : 'py-4'}`}>
         <div className="flex items-center gap-6">
           <Link href="/" className="flex items-center">
                           <Image
@@ -78,7 +78,7 @@ export default function Header({ categories = [] }) {
 
         {/* Container para alinhar Navegação e Busca à direita */}
         <div className="hidden lg:flex items-center">
-          <nav className="flex items-center space-x-8">
+          <nav className="flex items-center space-x-8 flex-wrap">
             <Link href="/tecassistiva" className="text-white hover:text-tec-blue-light transition font-semibold">A Tecassistiva</Link>
             <div className="relative group py-4 -my-4">
               <Link href="/produtos/categorias" className="text-white hover:text-tec-blue-light transition font-semibold">
