@@ -1,5 +1,5 @@
 @tailwind base;
-* { border: 1px solid red; }
+
 @tailwind components;
 @tailwind utilities;
 
