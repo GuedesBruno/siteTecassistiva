@@ -42,11 +42,14 @@ body {
 .featured-products-prev::after, 
 .featured-products-next::after {
     font-size: 18px !important; /* Tamanho dos ícones de seta */
-} 
+    font-weight: 900;
+}
 
-/* Safari-specific fix for squashed product cards */
+/* Safari-specific fix for product grid */
 @supports (-webkit-touch-callout: none) {
-  .product-card-safari-fix {
-    min-width: 230px;
+  @media (min-width: 1024px) {
+    .product-grid-safari-fix {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
   }
 }

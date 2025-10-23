@@ -20,7 +20,7 @@ export default function ProductCard({ product }) {
   }
 
   return (
-    <div className="border border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col h-full bg-white product-card-safari-fix">
+    <div className="border border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col h-full bg-white">
       {/* Cabeçalho Azul */}
       <div className="bg-tec-blue text-white font-bold text-left py-2 px-4">
         <h3 className="text-lg truncate">{productName}</h3>
