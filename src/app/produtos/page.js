@@ -15,7 +15,8 @@ export default async function ProdutosPage() {
   ];
 
   return (
-    <div className="container mx-auto flex flex-col md:flex-row py-8 px-4">
+    <div className="py-8">
+      <div className="container mx-auto flex flex-col md:flex-row gap-4 px-4">
       <aside className="w-full md:w-1/4 lg:w-1/5">
         <CategoryMenu categories={categories} />
       </aside>
@@ -26,6 +27,7 @@ export default async function ProdutosPage() {
           // categories não é mais necessário aqui, pois o CategoryMenu já as recebe
         />
       </main>
+      </div>
     </div>
   );
 }

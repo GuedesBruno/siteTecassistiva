@@ -6,12 +6,7 @@ import { glob } from 'glob';
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
 // Import API functions
-import {
-  getAllProductsForDisplay,
-  getOpenAtas,
-  getSoftwareAndDrivers,
-  getStrapiMediaUrl,
-} from '../src/lib/api.js';
+import * as api from '../src/lib/api.js';
 
 // Function to strip HTML/JSX tags and extract text
 function stripTags(content) {
@@ -27,15 +22,15 @@ async function generateSearchData() {
   try {
     // Fetch data from APIs
     const [products, atas, software] = await Promise.all([
-      getAllProductsForDisplay(),
-      getOpenAtas(),
-      getSoftwareAndDrivers(),
+      api.getAllProductsForDisplay(),
+      api.getOpenAtas(),
+      api.getSoftwareAndDrivers(),
     ]);
 
     // Process API data
     const productData = products.map(p => {
         const attrs = p.attributes || p;
-        const imageUrl = getStrapiMediaUrl(attrs.imagem_principal?.data?.attributes?.url);
+        const imageUrl = api.getStrapiMediaUrl(attrs.imagem_principal?.data?.attributes?.url);
         return {
             id: `product-${p.id}`,
             title: attrs.nome,
