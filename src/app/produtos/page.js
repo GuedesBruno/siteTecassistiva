@@ -17,10 +17,10 @@ export default async function ProdutosPage() {
   return (
     <div className="py-8">
       <div className="container mx-auto flex flex-col md:flex-row gap-4 px-4">
-      <aside className="w-full md:w-1/4 lg:w-1/5">
+      {/* <aside className="w-full md:w-1/4 lg:w-1/5">
         <CategoryMenu categories={categories} />
-      </aside>
-      <main className="w-full md:w-3/4 lg:w-4/5">
+      </aside> */}
+      <main className="w-full">
         <Breadcrumbs items={breadcrumbs} />
         <ProductListClient
           products={products || []}
