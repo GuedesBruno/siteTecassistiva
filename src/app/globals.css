@@ -1,10 +1,8 @@
 @tailwind base;
+* { border: 1px solid red; }
 @tailwind components;
 @tailwind utilities;
 
-body {
-  overflow-x: clip;
-}
 
 /* Força a remoção de cantos arredondados em todo o site, conforme solicitado. */
 .rounded, .rounded-sm, .rounded-md, .rounded-lg, .rounded-xl, .rounded-2xl, .rounded-full {
@@ -43,13 +41,4 @@ body {
 .featured-products-next::after {
     font-size: 18px !important; /* Tamanho dos ícones de seta */
     font-weight: 900;
-}
-
-/* Safari-specific fix for product grid */
-@supports (-webkit-touch-callout: none) {
-  @media (min-width: 1024px) {
-    .product-grid-safari-fix {
-      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    }
-  }
 }

@@ -35,7 +35,7 @@ export default function ProductListClient({ category, subCategorySlug, products 
     <>
       <h1 className="text-4xl font-extrabold text-gray-900 mb-8">{title}</h1>
       {productsToShow.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 product-grid-safari-fix">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {productsToShow.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
