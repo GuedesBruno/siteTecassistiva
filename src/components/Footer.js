@@ -41,7 +41,7 @@ export default function Footer() {
               <li><Link href="/produtos/categorias/baixa-visao" className="text-gray-400 hover:text-white">Baixa Visão</Link></li>
               <li><Link href="/produtos/categorias/deficiencia-motora-e-cognitiva" className="text-gray-400 hover:text-white">Deficiência Motora e Cognitiva</Link></li>
               <li><Link href="/produtos/categorias/recursos-pedagogicos" className="text-gray-400 hover:text-white">Recurso Pedagógico</Link></li>
-              <li><Link href="/produtos/categorias/solucoes-por-ambientes" className="text-gray-400 hover:text-white">Soluções por Ambientes</Link></li>
+              <li><Link href="/ambientes" className="text-gray-400 hover:text-white">Soluções por Ambientes</Link></li>
             </ul>
           </div>
 
