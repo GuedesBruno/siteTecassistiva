@@ -17,10 +17,7 @@ export default function Footer() {
               height={45}
               className="mb-4"
             />
-            <p className="text-gray-400 max-w-md leading-relaxed">
-              Desenvolver e disseminar Tecnologia Assistiva no Brasil, por meio da oferta de produtos e serviços de excelência que contribuam para a melhoria da qualidade de vida das pessoas com deficiência e da comunidade em geral.
-            </p>
-            <div className="mt-6">
+              <div className="mt-6">
               <p className="text-gray-300"><strong>Telefone:</strong> +55 (11) 3266-4311</p>
               <p className="text-gray-300 mt-2"><strong>Endereço:</strong> R. das Camélias, 37 - Mirandópolis, CEP 04048-060 São Paulo - SP - Brazil</p>
             </div>
@@ -43,7 +40,7 @@ export default function Footer() {
               <li><Link href="/produtos/categorias/cegueira" className="text-gray-400 hover:text-white">Cegueira</Link></li>
               <li><Link href="/produtos/categorias/baixa-visao" className="text-gray-400 hover:text-white">Baixa Visão</Link></li>
               <li><Link href="/produtos/categorias/deficiencia-motora-e-cognitiva" className="text-gray-400 hover:text-white">Deficiência Motora e Cognitiva</Link></li>
-              <li><Link href="/produtos/categorias/recursos-pedagogicos" className="text-gray-400 hover:text-white">Recursos Pedagógicos</Link></li>
+              <li><Link href="/produtos/categorias/recursos-pedagogicos" className="text-gray-400 hover:text-white">Recurso Pedagógico</Link></li>
               <li><Link href="/produtos/categorias/solucoes-por-ambientes" className="text-gray-400 hover:text-white">Soluções por Ambientes</Link></li>
             </ul>
           </div>
@@ -53,7 +50,6 @@ export default function Footer() {
             <h3 className="text-lg font-bold mb-4">Suporte</h3>
             <ul className="space-y-2">
               <li><Link href="/suporte" className="text-gray-400 hover:text-white">Softwares</Link></li>
-              <li><Link href="/suporte" className="text-gray-400 hover:text-white">Sintetizadores de Voz</Link></li>
               <li><Link href="/suporte" className="text-gray-400 hover:text-white">Manuais</Link></li>
               <li><Link href="/suporte" className="text-gray-400 hover:text-white">Catálogos</Link></li>
             </ul>
