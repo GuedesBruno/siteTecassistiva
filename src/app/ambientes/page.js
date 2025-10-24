@@ -31,7 +31,7 @@ export default function AmbientesPage() {
           return (
             <div 
               key={ambiente.id} 
-              className={`flex flex-col md:flex-row items-stretch md:h-[480px]`}>
+              className={`flex flex-col md:flex-row items-stretch md:h-[240px]`}>
               
               {/* Coluna da Imagem com Efeito de Zoom */}
               <div className={`w-full md:w-1/2 ${isReversed ? 'md:order-last' : ''} overflow-hidden`}>
