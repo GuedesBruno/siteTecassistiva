@@ -13,21 +13,21 @@ export const ambientesData = [
         id: 101,
         slug: 'sala-de-aula',
         nome: 'Sala de Aula',
-        imagem: '/public/ambientes/Sala-de-Aula.jpg', // Placeholder
+        imagem: '/ambientes/Sala-de-Aula.jpg', // Placeholder
         productSlugs: ['clearreader', 'focus-40-blue', 'brinca-braille', 'ruby-7-hd', 'multiplano']
       },
       {
         id: 102,
         slug: 'sala-de-recurso-multifuncional',
         nome: 'Sala de Recurso Multifuncional',
-        imagem: '/public/ambientes/Sala-de-Recurso.jpg', // Placeholder
+        imagem: '/ambientes/Sala-de-Recurso.jpg', // Placeholder
         productSlugs: ['clearreader', 'focus-40-blue', 'brinca-braille', 'ruby-7-hd', 'traveller-hd', 'clearview-24', 'teca-fuser', 'multiplano', 'everest', 'abafador-index']
       },
       {
         id: 103,
         slug: 'biblioteca-escolar',
         nome: 'Biblioteca',
-        imagem: '/public/ambientes/Biblioteca.jpg', // Placeholder
+        imagem: '/ambientes/Biblioteca.jpg', // Placeholder
         productSlugs: ['clearreader', 'focus-40-blue', 'traveller-hd', 'clearview-24']
       }
     ]
@@ -51,21 +51,21 @@ export const ambientesData = [
         id: 301,
         slug: 'sala-de-aula-if',
         nome: 'Sala de Aula',
-        imagem: '/public/ambientes/Sala-de-Aula.jpg', // Placeholder
+        imagem: '/ambientes/Sala-de-Aula.jpg', // Placeholder
         productSlugs: ['clearreader', 'focus-40-blue', 'brinca-braille', 'ruby-7-hd', 'multiplano', 'everest', 'abafador-index']
       },
       {
         id: 302,
         slug: 'napne-conapne',
         nome: 'Napne + Conapne e afins',
-        imagem: '/public/ambientes/Sala-de-Recurso.jpg', // Placeholder
+        imagem: '/ambientes/Sala-de-Recurso.jpg', // Placeholder
         productSlugs: ['clearreader', 'focus-40-blue', 'brinca-braille', 'ruby-7-hd', 'traveller-hd', 'clearview-24', 'teca-fuser', 'multiplano', 'everest', 'abafador-index']
       },
       {
         id: 303,
         slug: 'biblioteca-if',
         nome: 'Biblioteca',
-        imagem: '/public/ambientes/Biblioteca.jpg', // Placeholder
+        imagem: '/ambientes/Biblioteca.jpg', // Placeholder
         productSlugs: ['clearreader', 'focus-40-blue', 'traveller-hd', 'clearview-24']
       }
     ]
@@ -81,21 +81,21 @@ export const ambientesData = [
         id: 401,
         slug: 'sala-de-aula-uf',
         nome: 'Sala de Aula',
-        imagem: '/public/ambientes/Sala-de-Aula.jpg', // Placeholder
+        imagem: '/ambientes/Sala-de-Aula.jpg', // Placeholder
         productSlugs: ['clearreader', 'focus-40-blue', 'brinca-braille', 'ruby-7-hd', 'multiplano']
       },
       {
         id: 402,
         slug: 'sala-de-recurso-multifuncional-uf',
         nome: 'Sala de Recurso Multifuncional',
-        imagem: '/public/ambientes/Sala-de-Recurso.jpg', // Placeholder
+        imagem: '/ambientes/Sala-de-Recurso.jpg', // Placeholder
         productSlugs: ['clearreader', 'focus-40-blue', 'brinca-braille', 'ruby-7-hd', 'traveller-hd', 'clearview-24', 'teca-fuser', 'multiplano', 'everest', 'abafador-index']
       },
       {
         id: 403,
         slug: 'biblioteca-uf',
         nome: 'Biblioteca',
-        imagem: '/public/ambientes/Biblioteca.jpg', // Placeholder
+        imagem: '/ambientes/Biblioteca.jpg', // Placeholder
         productSlugs: ['clearreader', 'focus-40-blue', 'traveller-hd', 'clearview-24']
       }
     ]

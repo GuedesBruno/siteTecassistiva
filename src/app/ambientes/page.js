@@ -22,7 +22,7 @@ export default function AmbientesPage() {
       </div>
       
       <div className="container mx-auto px-4 pb-16">
-        <div className="space-y-8">
+        <div className="space-y-0">
           {ambientesData.map((ambiente, index) => {
             const isReversed = index % 2 !== 0;
 
@@ -32,7 +32,7 @@ export default function AmbientesPage() {
             return (
               <div 
                 key={ambiente.id} 
-                className={`flex flex-col md:flex-row items-stretch md:h-[240px] rounded-lg overflow-hidden shadow-lg`}>
+                className={`group flex flex-col md:flex-row items-stretch md:h-[240px] rounded-lg overflow-hidden shadow-lg`}>
                 
                 {/* Coluna da Imagem com Efeito de Zoom */}
                 <div className={`w-full md:w-1/2 ${isReversed ? 'md:order-last' : ''} overflow-hidden`}>
@@ -42,7 +42,7 @@ export default function AmbientesPage() {
                       alt={`Ambiente ${ambiente.nome}`}
                       width={800}
                       height={600}
-                      className="w-full h-full object-cover transition-transform duration-300 ease-in-out hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
                     />
                   </Link>
                 </div>
