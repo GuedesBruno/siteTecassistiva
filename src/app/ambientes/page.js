@@ -15,19 +15,19 @@ export default function AmbientesPage() {
   ];
 
   return (
-<div className="w-full px-8">
-      <h1 className="text-3xl font-bold text-center my-8">Soluções por Ambiente</h1>
-      <div className="flex flex-col items-center">
+<div class="w-full px-8">
+      <h1 class="text-3xl font-bold text-center my-8">Soluções por Ambiente</h1>
+      <div class="flex flex-col items-center">
         {ambientesData.map((ambiente) => (
-          <Link key={ambiente.id} href={`/ambientes/${ambiente.slug}`} className="w-full max-w-6xl mx-auto transition-transform duration-300 ease-in-out hover:scale-105">
-            <div className="relative w-full h-[200px] overflow-hidden">
+          <Link key={ambiente.id} href={`/ambientes/${ambiente.slug}`} class="w-full max-w-6xl mx-auto transition-transform duration-300 ease-in-out hover:scale-105">
+            <div class="relative w-full h-[200px] overflow-hidden">
               <img
                 src={ambiente.imagem}
                 alt={ambiente.titulo}
-                className="w-full h-full object-cover"
+                class="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                <h2 className="text-white text-4xl font-bold">{ambiente.titulo}</h2>
+              <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                <h2 class="text-white text-4xl font-bold">{ambiente.titulo}</h2>
               </div>
             </div>
           </Link>
