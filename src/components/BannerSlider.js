@@ -38,7 +38,7 @@ export default function BannerSlider({ banners }) {
         navigation={isMounted}
         pagination={{ clickable: true }}
         loop={true}
-        autoplay={{ delay: 5000, disableOnInteraction: false }}
+        autoplay={{ delay: 10000, disableOnInteraction: false }}
         className="w-full h-full"
       >
         {banners.map((banner, index) => {
