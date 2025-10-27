@@ -15,57 +15,23 @@ export default function AmbientesPage() {
   ];
 
   return (
-    <div className="w-full">
-      <div className="container mx-auto px-4 py-8">
-        <Breadcrumbs items={breadcrumbs} />
-        <h1 className="text-4xl font-extrabold text-gray-900 mb-10 text-center">Soluções por Ambientes</h1>
-      </div>
-      
-      <div className="container mx-auto px-4 pb-16">
-        <div className="space-y-0">
-          {ambientesData.map((ambiente, index) => {
-            const isReversed = index % 2 !== 0;
-
-            const textBgColor = index % 2 === 0 ? 'bg-tec-blue text-white' : 'bg-gray-200 text-gray-800';
-            const buttonColor = index % 2 === 0 ? 'bg-white text-tec-blue hover:bg-gray-100' : 'bg-tec-blue text-white hover:bg-blue-800';
-
-            return (
-              <div 
-                key={ambiente.id} 
-                className={`group flex flex-col md:flex-row items-stretch md:h-[240px] rounded-lg overflow-hidden shadow-lg`}>
-                
-                {/* Coluna da Imagem com Efeito de Zoom */}
-                <div className={`w-full md:w-1/2 ${isReversed ? 'md:order-last' : ''} overflow-hidden`}>
-                  <Link href={`/ambientes/${ambiente.slug}`} className="block h-full">
-                    <Image
-                      src={ambiente.imagem_grid}
-                      alt={`Ambiente ${ambiente.nome}`}
-                      width={800}
-                      height={600}
-                      className="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
-                    />
-                  </Link>
-                </div>
-
-                {/* Coluna do Texto e Botão */}
-                <div className={`w-full md:w-1/2 flex flex-col items-center justify-center p-8 ${textBgColor}`}>
-                  <div className="max-w-md text-center">
-                    <h2 className="text-3xl font-bold mb-4">{ambiente.nome}</h2>
-                    <p className="text-lg mb-6">
-                      Descubra as soluções de tecnologia assistiva ideais para o ambiente de {ambiente.nome.toLowerCase()}.
-                    </p>
-                    <Link 
-                      href={`/ambientes/${ambiente.slug}`} 
-                      className={`inline-block font-bold py-3 px-8 rounded-lg transition-colors duration-300 shadow-md ${buttonColor}`}>
-                      Ver Soluções
-                    </Link>
-                  </div>
-                </div>
-
+<div className="w-full px-8">
+      <h1 className="text-3xl font-bold text-center my-8">Soluções por Ambiente</h1>
+      <div className="flex flex-col items-center">
+        {ambientesData.map((ambiente) => (
+          <Link key={ambiente.id} href={`/ambientes/${ambiente.slug}`} className="w-full max-w-6xl mx-auto transition-transform duration-300 ease-in-out hover:scale-105">
+            <div className="relative w-full h-[200px] overflow-hidden">
+              <img
+                src={ambiente.imagem}
+                alt={ambiente.titulo}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                <h2 className="text-white text-4xl font-bold">{ambiente.titulo}</h2>
               </div>
-            )
-          })}
-        </div>
+            </div>
+          </Link>
+        ))}
       </div>
     </div>
   );

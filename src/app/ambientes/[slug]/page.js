@@ -41,17 +41,6 @@ export default async function AmbienteDetalhePage({ params }) {
   if (ambiente.subAmbientes && ambiente.subAmbientes.length > 0) {
     return (
       <div>
-        <div className="relative h-64 md:h-80 w-full">
-          <Image
-            src={ambiente.imagem_banner}
-            alt={`Banner do ambiente ${ambiente.nome}`}
-            fill
-            style={{ objectFit: 'cover' }}
-            priority
-          />
-          <div className="absolute inset-0 bg-black bg-opacity-30" />
-        </div>
-
         <div className="container mx-auto px-4 py-8">
           <Breadcrumbs items={breadcrumbs} />
           <h1 className="text-4xl font-extrabold text-gray-900 my-6">{`Soluções para ${ambiente.nome}`}</h1>
@@ -94,17 +83,6 @@ export default async function AmbienteDetalhePage({ params }) {
 
   return (
     <div>
-      <div className="relative h-64 md:h-80 w-full">
-        <Image
-          src={ambiente.imagem_banner}
-          alt={`Banner do ambiente ${ambiente.nome}`}
-          fill
-          style={{ objectFit: 'cover' }}
-          priority
-        />
-        <div className="absolute inset-0 bg-black bg-opacity-30" />
-      </div>
-
       <div className="container mx-auto px-4 py-8">
         <Breadcrumbs items={breadcrumbs} />
         <h1 className="text-4xl font-extrabold text-gray-900 my-6">{ambiente.nome}</h1>
