@@ -22,7 +22,7 @@ export default function AmbientesPage() {
       </div>
       
       <div className="container mx-auto px-4 pb-16">
-        <div className="space-y-8">
+        <div className="space-y-0">
           {ambientesData.map((ambiente, index) => {
             const isReversed = index % 2 !== 0;
 
