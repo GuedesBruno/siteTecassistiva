@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import Link from 'next/link';
 import { getStrapiMediaUrl } from '@/lib/api';
 
 export default function ManufacturersGrid({ fabricantes }) {
@@ -22,14 +23,14 @@ export default function ManufacturersGrid({ fabricantes }) {
             const logoUrl = getStrapiMediaUrl(logoUrlPath);
             return (
               <div key={fabricante.id} className="flex items-center justify-center">
-                {logoUrl ? (
-                  <a href={attrs.site} target="_blank" rel="noopener noreferrer" className="cursor-pointer">
+                {logoUrl && attrs.slug ? (
+                  <Link href={`/produtos?fabricante=${attrs.slug}`} className="cursor-pointer">
                     <img
                       src={logoUrl}
                       alt={attrs.nome}
                       className="max-h-16 w-auto object-contain transition-all duration-300"
                     />
-                  </a>
+                  </Link>
                 ) : (
                   <span className="text-gray-500">{attrs.nome}</span>
                 )}

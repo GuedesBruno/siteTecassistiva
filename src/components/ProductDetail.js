@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,8 +9,7 @@ import 'swiper/css/navigation';
 import { getStrapiMediaUrl } from '@/lib/api';
 import VideoModal from './VideoModal'; // Importa o Modal
 import RichTextRenderer from './RichTextRenderer';
-
-
+import ProductCard from './ProductCard'; // Importa o ProductCard
 
 // --- Lógica de Vídeo adaptada para este componente ---
 const getVideoId = (url) => {
@@ -86,6 +85,7 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
     { name: 'Vídeos', content: p.videos },
     { name: 'Características Funcionais', content: p.caracteristicas_funcionais },
     { name: 'Características Técnicas', content: p.caracteristicas_tecnicas },
+    { name: 'Produtos Relacionados', content: p.relacao_acessorios?.data },
     { name: 'Downloads', content: p.documentos },
   ];
 
@@ -212,9 +212,17 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
                     </div>
                   )}
 
+                  {tab.name === 'Produtos Relacionados' && p.relacao_acessorios?.data?.length > 0 && (
+                    <div className="not-prose grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                      {p.relacao_acessorios.data.map((relatedProduct) => (
+                        <ProductCard key={relatedProduct.id} product={relatedProduct} />
+                      ))}
+                    </div>
+                  )}
+
                   {/* Lógica original ajustada para não renderizar a aba de vídeo como texto */}
-                  {tab.name !== 'Vídeos' && typeof tab.content === 'string' && <div className="whitespace-pre-line">{tab.content}</div>}
-                  {tab.name !== 'Vídeos' && Array.isArray(tab.content) && tab.name !== 'Downloads' && <RichTextRenderer content={tab.content} />}
+                  {tab.name !== 'Vídeos' && tab.name !== 'Produtos Relacionados' && typeof tab.content === 'string' && <div className="whitespace-pre-line">{tab.content}</div>}
+                  {tab.name !== 'Vídeos' && tab.name !== 'Produtos Relacionados' && Array.isArray(tab.content) && tab.name !== 'Downloads' && <RichTextRenderer content={tab.content} />}
                 </div>
               ))}
             </div>

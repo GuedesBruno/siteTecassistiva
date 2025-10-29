@@ -83,7 +83,6 @@ export async function getProductBySlug(slug) {
     'videos',
     'caracteristicas_funcionais',
     'caracteristicas_tecnicas',
-    'acessorios',
     'visao_geral'
   ];
 
@@ -158,7 +157,7 @@ export async function getBanners() {
 
 // Funções que eu adicionei e que podem ser necessárias
 export async function getManufacturers() {
-  const response = await fetchAPI('/api/fabricantes?populate=logo&pagination[limit]=100&sort=ordem:asc');
+  const response = await fetchAPI('/api/fabricantes?fields[0]=nome&fields[1]=slug&populate=logo&pagination[limit]=100&sort=ordem:asc');
   return normalizeDataArray(response);
 }
 
@@ -194,7 +193,7 @@ export async function getProductsBySubcategorySlug(subslug) {
 }
 
 export async function getOpenAtas() {
-  const response = await fetchAPI('/api/atas?populate[0]=item_ata&populate[1]=documentos');
+  const response = await fetchAPI('/api/atas?sort=ordem:asc&populate[0]=item_ata&populate[1]=documentos');
   const data = normalizeDataArray(response);
   // Manually normalize if attributes is missing
   return data.map(item => {
@@ -271,6 +270,17 @@ export async function getAllSimplePages() {
     console.error(`Falha ao buscar páginas simples, tentando como coleção e tipo único:`, error);
     return [];
   }
+}
+
+export async function getProductsByManufacturerSlug(slug) {
+    const response = await fetchAPI(`/api/produtos?filters[fabricante][slug][$eq]=${slug}&populate=*`);
+    return normalizeDataArray(response);
+}
+
+export async function getManufacturerBySlug(slug) {
+    const response = await fetchAPI(`/api/fabricantes?filters[slug][$eq]=${slug}`);
+    const data = normalizeDataArray(response);
+    return data.length > 0 ? data[0] : null;
 }
 
 export { fetchAPI };
