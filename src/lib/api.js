@@ -157,7 +157,7 @@ export async function getBanners() {
 
 // Funções que eu adicionei e que podem ser necessárias
 export async function getManufacturers() {
-  const response = await fetchAPI('/api/fabricantes?fields[0]=nome&populate=logo&pagination[limit]=100&sort=ordem:asc');
+  const response = await fetchAPI('/api/fabricantes?fields[0]=nome&fields[1]=slug&populate=logo&pagination[limit]=100&sort=ordem:asc');
   return normalizeDataArray(response);
 }
 
@@ -272,9 +272,15 @@ export async function getAllSimplePages() {
   }
 }
 
-export async function getProductsByManufacturerName(name) {
-    const response = await fetchAPI(`/api/produtos?filters[fabricante][nome][$eq]=${name}&populate=*`);
+export async function getProductsByManufacturerSlug(slug) {
+    const response = await fetchAPI(`/api/produtos?filters[fabricante][slug][$eq]=${slug}&populate=*`);
     return normalizeDataArray(response);
+}
+
+export async function getManufacturerBySlug(slug) {
+    const response = await fetchAPI(`/api/fabricantes?filters[slug][$eq]=${slug}`);
+    const data = normalizeDataArray(response);
+    return data.length > 0 ? data[0] : null;
 }
 
 export { fetchAPI };

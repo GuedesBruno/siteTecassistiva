@@ -1,7 +1,8 @@
 import {
     getAllCategories,
-    getProductsByManufacturerName,
-    getManufacturers
+    getProductsByManufacturerSlug,
+    getManufacturers,
+    getManufacturerBySlug
 } from '@/lib/api';
 import CategoryMenu from '@/components/CategoryMenu';
 import ProductDisplay from '@/components/ProductDisplay';
@@ -10,17 +11,18 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 export async function generateStaticParams() {
     const manufacturers = await getManufacturers();
     return manufacturers.map((manufacturer) => ({
-        fabricante: encodeURIComponent(manufacturer.attributes.nome),
+        slug: manufacturer.attributes.slug,
     }));
 }
 
 export default async function ManufacturerProductsPage({ params }) {
-    const manufacturerName = decodeURIComponent(params.fabricante);
+    const { slug } = params;
     
     const allCategories = await getAllCategories();
-    const products = await getProductsByManufacturerName(manufacturerName);
+    const products = await getProductsByManufacturerSlug(slug);
+    const manufacturer = await getManufacturerBySlug(slug);
     
-    const pageTitle = `Produtos de ${manufacturerName}`;
+    const pageTitle = manufacturer ? `Produtos de ${manufacturer.attributes.nome}` : 'Fabricante não encontrado';
     const breadcrumbs = [
         { name: 'Página Inicial', path: '/' },
         { name: 'Produtos', path: '/produtos' },
