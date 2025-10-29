@@ -45,7 +45,7 @@ async function generateSearchData() {
         const attrs = a.attributes || a;
         return {
             id: `ata-${a.id}`,
-            title: attrs.titulo,
+            title: attrs.orgao,
             slug: '/atas-abertas',
             description: attrs.descricao || '',
             type: 'Ata',
