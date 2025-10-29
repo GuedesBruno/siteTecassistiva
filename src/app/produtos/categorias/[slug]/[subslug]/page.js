@@ -30,7 +30,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  // TODO: Buscar o nome da subcategoria específica para um título mais descritivo.
+  // TODO: Buscar o nome da subcategoria específica para um título mais descritivo
   return {
     title: `Produtos | Tecassistiva`,
   };
