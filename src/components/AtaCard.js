@@ -13,7 +13,7 @@ function formatDate(dateString) {
 
 export default function AtaCard({ ata }) {
   const attributes = ata.attributes || ata;
-  const { titulo, validade, descricao_adesao, item_ata, documentos } = attributes;
+  const { orgao, categoria, validade, descricao_adesao, item_ata, documentos } = attributes;
 
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
   const [highlightedItemId, setHighlightedItemId] = useState(null);
@@ -67,7 +67,8 @@ export default function AtaCard({ ata }) {
         <div className="flex flex-col md:flex-row gap-6 md:gap-8 md:items-start">
           {/* Coluna Esquerda */}
           <div className="w-full md:w-2/3">
-            <h3 className="text-2xl font-bold text-tec-blue mb-2">{titulo}</h3>
+            {categoria && <p className="text-base font-medium text-gray-700 mb-1">{categoria}</p>}
+            <h3 className="text-2xl font-bold text-tec-blue mb-2">{orgao}</h3>
             <p className="text-sm text-gray-600 font-semibold mb-4">Válido até {formatDate(validade)}</p>
             <div className="prose prose-sm max-w-none text-gray-700 [&>*:first-child]:mt-0">
               <RichTextRenderer content={descricao_adesao} />
