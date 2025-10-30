@@ -9,16 +9,13 @@ import ProductDisplay from '@/components/ProductDisplay';
 import Breadcrumbs from '@/components/Breadcrumbs';
 
 export async function generateStaticParams() {
-    console.log('Fetching manufacturers for static params...');
     const manufacturers = await getManufacturers();
-    console.log('Manufacturers received:', manufacturers);
-    const params = manufacturers
+    // Filtra para garantir que o fabricante e seus atributos necessários existam
+    return manufacturers
+        .filter(manufacturer => manufacturer && manufacturer.attributes && manufacturer.attributes.slug)
         .map((manufacturer) => ({
-            slug: manufacturer.attributes?.slug || manufacturer.slug,
-        }))
-        .filter(manufacturer => manufacturer.slug);
-    console.log('Generated params:', params);
-    return params;
+            slug: manufacturer.attributes.slug,
+        }));
 }
 
 export default async function ManufacturerProductsPage({ params }) {
