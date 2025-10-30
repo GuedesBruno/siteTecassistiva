@@ -12,10 +12,10 @@ export async function generateStaticParams() {
     const manufacturers = await getManufacturers();
     // Filtra para garantir que o fabricante e seus atributos necessários existam
     return manufacturers
-        .filter(manufacturer => manufacturer && manufacturer.attributes && manufacturer.attributes.slug)
         .map((manufacturer) => ({
-            slug: manufacturer.attributes.slug,
-        }));
+            slug: manufacturer.attributes?.slug || manufacturer.slug,
+        }))
+        .filter(manufacturer => manufacturer.slug);
 }
 
 export default async function ManufacturerProductsPage({ params }) {
