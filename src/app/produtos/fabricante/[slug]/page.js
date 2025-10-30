@@ -61,7 +61,3 @@ export default async function ManufacturerProductsPage({ params }) {
         </div>
     );
 }
-
-env:
-  NEXT_PUBLIC_STRAPI_URL: ${{ secrets.NEXT_PUBLIC_STRAPI_URL }}
-  STRAPI_API_TOKEN: ${{ secrets.STRAPI_API_TOKEN }}
