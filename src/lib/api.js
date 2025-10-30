@@ -157,8 +157,24 @@ export async function getBanners() {
 
 // Funções que eu adicionei e que podem ser necessárias
 export async function getManufacturers() {
-  const response = await fetchAPI('/api/fabricantes?fields[0]=nome&fields[1]=slug&populate=logo&pagination[limit]=100&sort=ordem:asc');
-  return normalizeDataArray(response);
+  try {
+    console.log('Buscando fabricantes...');
+    const response = await fetchAPI('/api/fabricantes?populate=*&pagination[limit]=100&sort=ordem:asc');
+    const data = normalizeDataArray(response);
+    console.log('Dados dos fabricantes:', data);
+    
+    // Normaliza os dados como fazemos com categorias
+    const normalized = data.map(item => {
+      if (item.attributes) return item;
+      const { id, ...attributes } = item;
+      return { id, attributes };
+    });
+    
+    return normalized;
+  } catch (error) {
+    console.error('Erro ao buscar fabricantes:', error);
+    return [];
+  }
 }
 
 export async function getHomeVideos() {
