@@ -10,9 +10,12 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 
 export async function generateStaticParams() {
     const manufacturers = await getManufacturers();
-    return manufacturers.map((manufacturer) => ({
-        slug: manufacturer.attributes.slug,
-    }));
+    // Filtra para garantir que o fabricante e seus atributos necessários existam
+    return manufacturers
+        .filter(manufacturer => manufacturer && manufacturer.attributes && manufacturer.attributes.slug)
+        .map((manufacturer) => ({
+            slug: manufacturer.attributes.slug,
+        }));
 }
 
 export default async function ManufacturerProductsPage({ params }) {
