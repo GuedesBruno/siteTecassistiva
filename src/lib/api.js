@@ -7,6 +7,12 @@ async function fetchAPI(endpoint, options = {}) {
     throw new Error("Variáveis de ambiente da API do Strapi não definidas.");
   }
 
+  // Validação adicional para evitar placeholders óbvios (ex: 'seu-strapi') ou URLs sem protocolo
+  if (!/^https?:\/\//i.test(STRAPI_URL) || /seu-?strapi|your[_-]?strapi/i.test(STRAPI_URL)) {
+    console.error(`NEXT_PUBLIC_STRAPI_URL inválida detectada: ${STRAPI_URL}`);
+    throw new Error('NEXT_PUBLIC_STRAPI_URL inválida. Defina uma URL válida (ex: https://meu-strapi.exemplo) nas variáveis de ambiente ou secrets do CI.');
+  }
+
   try {
     let base = STRAPI_URL.replace(/\/+$/g, '');
     if (base.endsWith('/api')) {
@@ -157,24 +163,8 @@ export async function getBanners() {
 
 // Funções que eu adicionei e que podem ser necessárias
 export async function getManufacturers() {
-  try {
-    console.log('Buscando fabricantes...');
-    const response = await fetchAPI('/api/fabricantes?populate=*&pagination[limit]=100&sort=ordem:asc');
-    const data = normalizeDataArray(response);
-    console.log('Dados dos fabricantes:', data);
-    
-    // Normaliza os dados como fazemos com categorias
-    const normalized = data.map(item => {
-      if (item.attributes) return item;
-      const { id, ...attributes } = item;
-      return { id, attributes };
-    });
-    
-    return normalized;
-  } catch (error) {
-    console.error('Erro ao buscar fabricantes:', error);
-    return [];
-  }
+  const response = await fetchAPI('/api/fabricantes?fields[0]=nome&fields[1]=slug&populate=logo&pagination[limit]=100&sort=ordem:asc');
+  return normalizeDataArray(response);
 }
 
 export async function getHomeVideos() {
@@ -289,15 +279,14 @@ export async function getAllSimplePages() {
 }
 
 export async function getProductsByManufacturerSlug(slug) {
-    // Usando o campo de relação correto do Strapi
-    const response = await fetchAPI(`/api/produtos?filters[relacao_fabricante][slug][$eq]=${slug}&populate=*`);
-    return normalizeDataArray(response);
+  const response = await fetchAPI(`/api/produtos?filters[fabricante][slug][$eq]=${slug}&populate=*`);
+  return normalizeDataArray(response);
 }
 
 export async function getManufacturerBySlug(slug) {
-    const response = await fetchAPI(`/api/fabricantes?filters[slug][$eq]=${slug}`);
-    const data = normalizeDataArray(response);
-    return data.length > 0 ? data[0] : null;
+  const response = await fetchAPI(`/api/fabricantes?filters[slug][$eq]=${slug}`);
+  const data = normalizeDataArray(response);
+  return data.length > 0 ? data[0] : null;
 }
 
 export { fetchAPI };

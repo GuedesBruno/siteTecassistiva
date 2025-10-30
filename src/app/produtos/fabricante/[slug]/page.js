@@ -13,14 +13,15 @@ export async function generateStaticParams() {
     const manufacturers = await getManufacturers();
     console.log('2. Dados brutos dos fabricantes:', JSON.stringify(manufacturers, null, 2));
     
-    const mappedSlugs = manufacturers.map(m => {
-        const slug = m.attributes?.slug || m.slug;
-        console.log(`3. Processando fabricante:`, {
-            nome: m.attributes?.nome || m.nome,
-            slugEncontrado: slug
+    const mappedSlugs = manufacturers
+        .filter(Boolean)
+        .map(m => {
+            const attrs = m.attributes || m;
+            const slug = attrs?.slug || m.slug || null;
+            const nome = attrs?.nome || m.nome || '';
+            console.log('3. Processando fabricante:', { nome, slugEncontrado: slug });
+            return { slug };
         });
-        return { slug };
-    });
     
     const filteredSlugs = mappedSlugs.filter(m => m.slug);
     console.log('4. Slugs finais:', filteredSlugs);
@@ -33,9 +34,15 @@ export default async function ManufacturerProductsPage({ params }) {
     
     const allCategories = await getAllCategories();
     const products = await getProductsByManufacturerSlug(slug);
-    const manufacturer = await getManufacturerBySlug(slug);
-    
-    const pageTitle = manufacturer ? `Produtos de ${manufacturer.attributes.nome}` : 'Fabricante não encontrado';
+    let manufacturer = await getManufacturerBySlug(slug);
+
+    // Normaliza o formato do objeto do fabricante para sempre ter `.attributes`
+    if (manufacturer && !manufacturer.attributes && manufacturer.nome) {
+        manufacturer = { attributes: manufacturer };
+    }
+
+    const manufacturerName = manufacturer?.attributes?.nome || manufacturer?.nome || null;
+    const pageTitle = manufacturerName ? `Produtos de ${manufacturerName}` : 'Fabricante não encontrado';
     const breadcrumbs = [
         { name: 'Página Inicial', path: '/' },
         { name: 'Produtos', path: '/produtos' },
@@ -54,3 +61,7 @@ export default async function ManufacturerProductsPage({ params }) {
         </div>
     );
 }
+
+env:
+  NEXT_PUBLIC_STRAPI_URL: ${{ secrets.NEXT_PUBLIC_STRAPI_URL }}
+  STRAPI_API_TOKEN: ${{ secrets.STRAPI_API_TOKEN }}
