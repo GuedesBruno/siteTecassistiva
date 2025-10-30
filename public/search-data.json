@@ -104,10 +104,26 @@
     "type": "Produto"
   },
   {
+    "id": "product-147",
+    "title": "ZoomText Ampliador",
+    "slug": "/produtos/zoomtext-ampliador",
+    "description": "Ampliador de Telas",
+    "imageUrl": null,
+    "type": "Produto"
+  },
+  {
     "id": "product-84",
     "title": "ClearView 24″ Full HD com Voz",
     "slug": "/produtos/clearview-24-com-voz",
     "description": "Ampliador de Mesa com Voz",
+    "imageUrl": null,
+    "type": "Produto"
+  },
+  {
+    "id": "product-149",
+    "title": "Fusion",
+    "slug": "/produtos/fusion",
+    "description": "Software Ampliador e Leitor de Telas",
     "imageUrl": null,
     "type": "Produto"
   },
@@ -132,6 +148,14 @@
     "title": "ClearReader",
     "slug": "/produtos/clearreader",
     "description": "Leitor e digitalizador autônomo",
+    "imageUrl": null,
+    "type": "Produto"
+  },
+  {
+    "id": "product-146",
+    "title": "ZoomText Ampliador com Voz",
+    "slug": "/produtos/zoomtext-com-voz",
+    "description": "Ampliador de Telas com Voz",
     "imageUrl": null,
     "type": "Produto"
   },
@@ -232,6 +256,14 @@
     "type": "Produto"
   },
   {
+    "id": "product-142",
+    "title": "Jaws",
+    "slug": "/produtos/jaws",
+    "description": "Software Leitor de Telas",
+    "imageUrl": null,
+    "type": "Produto"
+  },
+  {
     "id": "product-133",
     "title": "BigTrack 2",
     "slug": "/produtos/big-track",
@@ -248,11 +280,25 @@
     "type": "Produto"
   },
   {
-    "id": "ata-6",
+    "id": "ata-15",
     "title": "Instituto Federal de Educação de São Paulo",
     "slug": "/atas-abertas",
     "description": "",
     "type": "Ata"
+  },
+  {
+    "id": "ata-16",
+    "title": "Instituto Federal de Educação de São Paulo",
+    "slug": "/atas-abertas",
+    "description": "",
+    "type": "Ata"
+  },
+  {
+    "id": "software-26",
+    "title": "Index Braille",
+    "slug": "/suporte",
+    "description": "Tipo: Driver",
+    "type": "Software/Driver"
   },
   {
     "id": "software-15",
@@ -271,6 +317,20 @@
   {
     "id": "software-19",
     "title": "ZoomText Ampliador e Leitor",
+    "slug": "/suporte",
+    "description": "Tipo: Software",
+    "type": "Software/Driver"
+  },
+  {
+    "id": "software-21",
+    "title": "Fusion",
+    "slug": "/suporte",
+    "description": "Tipo: Software",
+    "type": "Software/Driver"
+  },
+  {
+    "id": "software-23",
+    "title": "OpenBook",
     "slug": "/suporte",
     "description": "Tipo: Software",
     "type": "Software/Driver"
@@ -321,6 +381,30 @@
     "slug": "src\\app\\atas-abertas\\page.js",
     "description": "import { getOpenAtas } from '@/lib/api'; import Breadcrumbs from '@/components/Breadcrumbs'; import AtaCard from '@/components/AtaCard'; import Contac...",
     "content": "import { getOpenAtas } from '@/lib/api'; import Breadcrumbs from '@/components/Breadcrumbs'; import AtaCard from '@/components/AtaCard'; import ContactForm from '@/components/ContactForm'; import AdvantagesSection from '@/components/AdvantagesSection'; export const metadata = { title: 'Atas Abertas | Tecassistiva', description: 'Consulte as Atas de Registro de Preços (ARP) disponíveis e saiba como fazer a adesão.', }; export default async function AtasAbertasPage() { const atas = await getOpenAtas(); const breadcrumbs = [ { name: 'Página Inicial', path: '/' }, { name: 'Atas Abertas', path: '/atas-abertas' }, ]; return ( {/* 1. Seção de Título e Introdução */} Atas Abertas O que é o Sistema de Registro de Preços – SRP? Placeholder: O Sistema de Registro de Preços (SRP) é um procedimento especial de licitação que seleciona a proposta mais vantajosa para futuras e eventuais contratações governamentais. Em vez de realizar uma licitação para cada compra, o órgão público registra os preços de produtos e serviços de fornecedores qualificados, que se comprometem a manter a oferta por um período determinado (geralmente 12 meses). O que é uma Ata de Registro de Preços – ARP? Placeholder: A Ata de Registro de Preços (ARP) é o documento que formaliza o resultado do SRP. Nela, são registrados os preços, os fornecedores, os produtos e as condições de fornecimento. Essa ata funciona como um \"cardápio\" de produtos e serviços que os órgãos públicos podem adquirir de forma ágil e sem a necessidade de um novo processo licitatório completo, bastando apenas emitir uma ordem de compra. Queremos te contar mais, clique aqui. {/* 2. Seção da Lista de Atas */} Lista de ATAS disponíveis para você: {atas && atas.length > 0 ? ( atas.map((ata) => ) ) : ( Nenhuma ata aberta encontrada no momento. Por favor, verifique novamente mais tarde ou entre em contato para mais informações. )} {/* 3. Seção do Formulário de Contato */} {/* 4. Seção de Vantagens */} ); }",
+    "type": "Página"
+  },
+  {
+    "id": "page-src\\app\\ambientes\\page.js",
+    "title": "Soluções por Ambientes",
+    "slug": "src\\app\\ambientes\\page.js",
+    "description": "import Link from 'next/link'; import Image from 'next/image'; import { ambientesData } from '@/lib/ambientes-data'; // Importa os dados estáticos impo...",
+    "content": "import Link from 'next/link'; import Image from 'next/image'; import { ambientesData } from '@/lib/ambientes-data'; // Importa os dados estáticos import Breadcrumbs from '@/components/Breadcrumbs'; export const metadata = { title: 'Soluções por Ambientes | Tecassistiva', description: 'Descubra soluções de tecnologia assistiva organizadas por ambientes de aplicação.', }; export default function AmbientesPage() { const breadcrumbs = [ { name: 'Página Inicial', path: '/' }, { name: 'Soluções por Ambientes', path: '/ambientes' }, ]; return ( Soluções por Ambientes {ambientesData.map((ambiente, index) => { const isReversed = index % 2 !== 0; const textBgColor = index % 2 === 0 ? 'bg-tec-blue text-white' : 'bg-gray-200 text-gray-800'; const buttonColor = index % 2 === 0 ? 'bg-white text-tec-blue hover:bg-gray-100' : 'bg-tec-blue text-white hover:bg-blue-800'; return ( {/* Coluna da Imagem com Efeito de Zoom */} {/* Coluna do Texto e Botão */} {ambiente.nome} Descubra as soluções de tecnologia assistiva ideais para o ambiente de {ambiente.nome.toLowerCase()}. Ver Soluções ) })} ); }",
+    "type": "Página"
+  },
+  {
+    "id": "page-src\\app\\ambientes\\[slug]\\page.js",
+    "title": "{`Soluções para ${ambiente.nome}`}",
+    "slug": "src\\app\\ambientes\\[slug]\\page.js",
+    "description": "import Image from 'next/image'; import Link from 'next/link'; import { ambientesData } from '@/lib/ambientes-data'; import { getAllProductsForDisplay ...",
+    "content": "import Image from 'next/image'; import Link from 'next/link'; import { ambientesData } from '@/lib/ambientes-data'; import { getAllProductsForDisplay } from '@/lib/api'; // Reutiliza a função que busca todos os produtos import Breadcrumbs from '@/components/Breadcrumbs'; import ProductCard from '@/components/ProductCard'; import { notFound } from 'next/navigation'; // Gera as páginas estáticas no momento do build a partir dos dados estáticos export async function generateStaticParams() { return ambientesData.map((ambiente) => ({ slug: ambiente.slug, })); } export async function generateMetadata({ params }) { const ambiente = ambientesData.find(a => a.slug === params.slug); if (!ambiente) { return { title: 'Ambiente não encontrado' }; } return { title: `${ambiente.nome} | Soluções por Ambientes`, description: `Produtos recomendados para o ambiente: ${ambiente.nome}`, }; } export default async function AmbienteDetalhePage({ params }) { const ambiente = ambientesData.find(a => a.slug === params.slug); if (!ambiente) { notFound(); } const breadcrumbs = [ { name: 'Página Inicial', path: '/' }, { name: 'Soluções por Ambientes', path: '/ambientes' }, { name: ambiente.nome, path: `/ambientes/${ambiente.slug}` }, ]; // Caso 1: O ambiente tem sub-ambientes para exibir como cartões if (ambiente.subAmbientes && ambiente.subAmbientes.length > 0) { return ( {`Soluções para ${ambiente.nome}`} Selecione uma área abaixo para ver os produtos e recursos de tecnologia assistiva recomendados. {ambiente.subAmbientes.map(sub => ( {sub.nome} ))} ← Voltar para Ambientes ); } // Caso 2: O ambiente lista os produtos diretamente (lógica original) const allProducts = await getAllProductsForDisplay(); const produtosRecomendados = allProducts.filter(product => ambiente.productSlugs?.includes(product.slug) ); return ( {ambiente.nome} {produtosRecomendados.map(produto => ( ))} {produtosRecomendados.length === 0 && ( Nenhum produto recomendado para este ambiente no momento. )} ← Voltar para Ambientes ); }",
+    "type": "Página"
+  },
+  {
+    "id": "page-src\\app\\ambientes\\[slug]\\[subslug]\\page.js",
+    "title": "{subAmbiente.nome}",
+    "slug": "src\\app\\ambientes\\[slug]\\[subslug]\\page.js",
+    "description": "import Image from 'next/image'; import Link from 'next/link'; import { ambientesData } from '@/lib/ambientes-data'; import { getAllProductsForDisplay ...",
+    "content": "import Image from 'next/image'; import Link from 'next/link'; import { ambientesData } from '@/lib/ambientes-data'; import { getAllProductsForDisplay } from '@/lib/api'; import Breadcrumbs from '@/components/Breadcrumbs'; import ProductCard from '@/components/ProductCard'; import { notFound } from 'next/navigation'; // Gera as páginas estáticas para todas as sub-categorias no momento do build export async function generateStaticParams() { const paths = []; ambientesData.forEach(ambiente => { if (ambiente.subAmbientes) { ambiente.subAmbientes.forEach(sub => { paths.push({ slug: ambiente.slug, subslug: sub.slug }); }); } }); return paths; } export async function generateMetadata({ params }) { const ambiente = ambientesData.find(a => a.slug === params.slug); const subAmbiente = ambiente?.subAmbientes?.find(s => s.slug === params.subslug); if (!subAmbiente) { return { title: 'Página não encontrada' }; } return { title: `${subAmbiente.nome} | ${ambiente.nome}`, description: `Produtos recomendados para ${subAmbiente.nome} no ambiente ${ambiente.nome}.`, }; } export default async function SubAmbientePage({ params }) { const ambiente = ambientesData.find(a => a.slug === params.slug); const subAmbiente = ambiente?.subAmbientes?.find(s => s.slug === params.subslug); if (!ambiente || !subAmbiente) { notFound(); } const allProducts = await getAllProductsForDisplay(); const produtosRecomendados = allProducts.filter(product => subAmbiente.productSlugs?.includes(product.slug) ); const breadcrumbs = [ { name: 'Página Inicial', path: '/' }, { name: 'Soluções por Ambientes', path: '/ambientes' }, { name: ambiente.nome, path: `/ambientes/${ambiente.slug}` }, { name: subAmbiente.nome, path: `/ambientes/${ambiente.slug}/${subAmbiente.slug}` }, ]; return ( {subAmbiente.nome} {produtosRecomendados.map(produto => ( ))} {produtosRecomendados.length === 0 && ( Nenhum produto recomendado para esta área no momento. )} {`← Voltar para ${ambiente.nome}`} ); }",
     "type": "Página"
   }
 ]
