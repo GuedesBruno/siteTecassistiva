@@ -289,7 +289,8 @@ export async function getAllSimplePages() {
 }
 
 export async function getProductsByManufacturerSlug(slug) {
-    const response = await fetchAPI(`/api/produtos?filters[fabricante][slug][$eq]=${slug}&populate=*`);
+    // Usando o campo de relação correto do Strapi
+    const response = await fetchAPI(`/api/produtos?filters[relacao_fabricante][slug][$eq]=${slug}&populate=*`);
     return normalizeDataArray(response);
 }
 
