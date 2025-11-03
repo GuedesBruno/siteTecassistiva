@@ -292,12 +292,32 @@ export async function getManufacturerBySlug(slug) {
 export async function getImersaoBySlug(slug) {
   const res = await fetchAPI(`/api/imersaos?filters[slug][$eq]=${slug}&populate=deep`);
   const data = normalizeDataArray(res);
-  return data.length > 0 ? data[0] : null;
+  if (data.length === 0) return null;
+
+  const item = data[0];
+  // Normalize if the attributes object is missing
+  if (item.attributes) {
+    return item;
+  }
+  const { id, ...attributes } = item;
+  return { id, attributes };
 }
 
 export async function getAllImersaoSlugs() {
   const res = await fetchAPI('/api/imersaos?fields[0]=slug');
-  return normalizeDataArray(res);
+  const data = normalizeDataArray(res);
+
+  // Normalize each item if the attributes object is missing
+  const normalizedData = data.map(item => {
+    if (!item) return null; // handle null items in array
+    if (item.attributes) {
+      return item;
+    }
+    const { id, ...attributes } = item;
+    return { id, attributes };
+  });
+
+  return normalizedData.filter(Boolean); // remove any null items
 }
 
 export { fetchAPI };
