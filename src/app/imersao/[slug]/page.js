@@ -32,12 +32,25 @@ export default async function ImersaoPage({ params }) {
     const { slug } = params;
     const imersao = await getImersaoBySlug(slug);
 
-    if (!imersao || !imersao.attributes.produto || !imersao.attributes.produto.data) {
+    if (!imersao || !imersao.attributes) {
         notFound();
     }
 
+    const { produto } = imersao.attributes;
+
+    if (!produto || typeof produto.data === 'undefined') {
+        notFound();
+    }
+
+    // Handle single vs. multiple relation: take the first entry if it's an array.
+    const productEntry = Array.isArray(produto.data) ? produto.data[0] : produto.data;
+
+    if (!productEntry || !productEntry.attributes) {
+        notFound();
+    }
+
+    const productData = productEntry.attributes;
     const { curso, guia, manual, botoes_padrao = true, botoes_personalizados } = imersao.attributes;
-    const productData = imersao.attributes.produto.data.attributes;
     const imageUrl = productData.imagem_principal?.data?.attributes?.url;
     const category = productData.categorias?.data[0]?.attributes?.nome || 'produto';
 
