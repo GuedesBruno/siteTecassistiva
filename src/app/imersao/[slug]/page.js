@@ -15,13 +15,23 @@ export async function generateMetadata({ params }) {
     const { slug } = params;
     const imersao = await getImersaoBySlug(slug);
 
-    if (!imersao || !imersao.attributes.produto || !imersao.attributes.produto.data) {
-        return {
-            title: 'Página de Imersão não encontrada',
-        };
+    if (!imersao || !imersao.attributes) {
+        return { title: 'Página de Imersão não encontrada' };
     }
 
-    const productData = imersao.attributes.produto.data.attributes;
+    const { produto } = imersao.attributes;
+
+    if (!produto || typeof produto.data === 'undefined') {
+        return { title: 'Página de Imersão não encontrada' };
+    }
+
+    const productEntry = Array.isArray(produto.data) ? produto.data[0] : produto.data;
+
+    if (!productEntry || !productEntry.attributes) {
+        return { title: 'Página de Imersão não encontrada' };
+    }
+
+    const productData = productEntry.attributes;
     return {
         title: `Imersão: ${productData.nome}`,
     };
