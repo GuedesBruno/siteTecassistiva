@@ -38,7 +38,7 @@ export default async function ImersaoPage({ params }) {
 
     const { curso, guia, manual, botoes_padrao = true, botoes_personalizados } = imersao.attributes;
     const productData = imersao.attributes.produto.data.attributes;
-    const imageUrl = productData.imagem_destacada?.data?.attributes?.url;
+    const imageUrl = productData.imagem_principal?.data?.attributes?.url;
     const category = productData.categorias?.data[0]?.attributes?.nome || 'produto';
 
     const buttonClassName = "bg-[#002554] text-white py-3 px-6 rounded-lg font-bold text-lg hover:bg-blue-900 transition-colors duration-300";
