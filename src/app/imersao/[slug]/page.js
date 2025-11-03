@@ -104,7 +104,7 @@ export default async function ImersaoPage({ params }) {
                     <Link href="https://www.youtube.com/c/tecassistiva" target="_blank" rel="noopener noreferrer" aria-label="Canal no YouTube da Tecassistiva" className="bg-[#002554] rounded-full w-12 h-12 flex items-center justify-center transition-opacity hover:opacity-80">
                         <Image src="/logo_youtube.svg" alt="YouTube" width={32} height={32} />
                     </Link>
-                    <Link href="mailto:contato@tecassistiva.com.br" aria-label="Enviar email para Tecassistiva" className="bg-[#002554] rounded-full w-12 h-12 flex items-center justify-center transition-opacity hover:opacity-80">
+                    <Link href="mailto:teca@tecassistiva.com.br" aria-label="Enviar email para Tecassistiva" className="bg-[#002554] rounded-full w-12 h-12 flex items-center justify-center transition-opacity hover:opacity-80">
                          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                     </Link>
                 </div>
