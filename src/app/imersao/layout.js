@@ -1,6 +1,6 @@
 import '../globals.css';
-import { GoogleAnalytics } from '@next/third-parties/google';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import Script from 'next/script';
 
 export default function ImersaoLayout({ children }) {
   return (
@@ -8,7 +8,18 @@ export default function ImersaoLayout({ children }) {
       <body>
         {children}
         <WhatsAppButton />
-        <GoogleAnalytics gaId="G-1J55L46P18" />
+
+        {/* Scripts do Google Tag Manager */}
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-WH33R519KY" />
+        <Script id="google-analytics">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-WH33R519KY');
+          `}
+        </Script>
       </body>
     </html>
   );
