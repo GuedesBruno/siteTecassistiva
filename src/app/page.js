@@ -13,7 +13,7 @@ import {
 import Link from 'next/link';
 
 export default async function Home() {
-  // Busca os dados da API em paralelo para otimizar o tempo de build.
+  // Busca os dados da API em paralelo para otimizar o tempo de build
   const [banners, featuredProducts, manufacturers, testimonials, homeVideos] = await Promise.all([
     getBanners(),
     getFeaturedProducts(),
