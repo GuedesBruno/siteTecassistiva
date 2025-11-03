@@ -37,25 +37,16 @@ async function testImersaoData() {
     }
     console.log('-> "imersao.attributes" OK');
 
-    const { produto } = imersao.attributes;
-    if (!produto || typeof produto.data === 'undefined') {
-        throw new Error('Teste falhou: "produto" ou "produto.data" não encontrado.');
+    const { produto: productData } = imersao.attributes;
+    if (!productData) {
+        throw new Error('Teste falhou: Objeto "produto" não encontrado nos atributos.');
     }
-    console.log('-> "produto.data" OK');
+    console.log('-> "produto" OK');
 
-    const productEntry = Array.isArray(produto.data) ? produto.data[0] : produto.data;
-    if (!productEntry) {
-        throw new Error('Teste falhou: A relação de produto está vazia (productEntry é nulo ou undefined).');
+    if (!productData.nome) {
+        throw new Error('Teste falhou: "produto.nome" não foi encontrado.');
     }
-    console.log('-> "productEntry" OK');
-
-    if (!productEntry.attributes) {
-        throw new Error('Teste falhou: "productEntry" não tem a propriedade "attributes".');
-    }
-    console.log('-> "productEntry.attributes" OK');
-
-    const productData = productEntry.attributes;
-    console.log('-> "productData" OK');
+    console.log('-> "produto.nome" OK');
 
     console.log('\n--- Simulação concluída com sucesso! ---');
     console.log('A estrutura dos dados parece correta.');

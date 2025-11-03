@@ -19,19 +19,12 @@ export async function generateMetadata({ params }) {
         return { title: 'Página de Imersão não encontrada' };
     }
 
-    const { produto } = imersao.attributes;
+    const { produto: productData } = imersao.attributes;
 
-    if (!produto || typeof produto.data === 'undefined') {
+    if (!productData) {
         return { title: 'Página de Imersão não encontrada' };
     }
 
-    const productEntry = Array.isArray(produto.data) ? produto.data[0] : produto.data;
-
-    if (!productEntry || !productEntry.attributes) {
-        return { title: 'Página de Imersão não encontrada' };
-    }
-
-    const productData = productEntry.attributes;
     return {
         title: `Imersão: ${productData.nome}`,
     };
@@ -46,23 +39,14 @@ export default async function ImersaoPage({ params }) {
         notFound();
     }
 
-    const { produto } = imersao.attributes;
+    const { produto: productData, curso, guia, manual, botoes_padrao = true, botoes_personalizados } = imersao.attributes;
 
-    if (!produto || typeof produto.data === 'undefined') {
+    if (!productData) {
         notFound();
     }
 
-    // Handle single vs. multiple relation: take the first entry if it's an array.
-    const productEntry = Array.isArray(produto.data) ? produto.data[0] : produto.data;
-
-    if (!productEntry || !productEntry.attributes) {
-        notFound();
-    }
-
-    const productData = productEntry.attributes;
-    const { curso, guia, manual, botoes_padrao = true, botoes_personalizados } = imersao.attributes;
-    const imageUrl = productData.imagem_principal?.data?.attributes?.url;
-    const category = productData.categorias?.data[0]?.attributes?.nome || 'produto';
+    const imageUrl = productData.imagem_principal?.url;
+    const category = productData.categorias?.[0]?.nome || 'produto';
 
     const buttonClassName = "bg-[#002554] text-white py-3 px-6 rounded-lg font-bold text-lg hover:bg-blue-900 transition-colors duration-300";
 
