@@ -36,7 +36,7 @@ export default async function ManufacturerProductsPage({ params }) {
     const products = await getProductsByManufacturerSlug(slug);
     let manufacturer = await getManufacturerBySlug(slug);
 
-    // Normaliza o formato do objeto do fabricante para sempre ter `.attributes`.
+    // Normaliza o formato do objeto do fabricante para sempre ter `.attributes`
     if (manufacturer && !manufacturer.attributes && manufacturer.nome) {
         manufacturer = { attributes: manufacturer };
     }
