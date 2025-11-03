@@ -15,9 +15,9 @@ export async function generateMetadata({ params }) {
     const { slug } = params;
     const imersao = await getImersaoBySlug(slug);
 
-    if (!imersao) {
+    if (!imersao || !imersao.attributes.produto || !imersao.attributes.produto.data) {
         return {
-            title: 'Página não encontrada',
+            title: 'Página de Imersão não encontrada',
         };
     }
 
