@@ -46,7 +46,6 @@ export default async function ImersaoPage({ params }) {
     }
 
     const imageUrl = productData.imagem_principal?.url;
-    const category = productData.categorias?.[0]?.nome || 'produto';
 
     const buttonClassName = "bg-[#002554] text-white py-3 px-6 rounded-lg font-bold text-lg hover:bg-blue-900 transition-colors duration-300";
 
@@ -58,13 +57,13 @@ export default async function ImersaoPage({ params }) {
                     <Image
                         src={imageUrl}
                         alt={productData.nome}
-                        width={400}
-                        height={400}
+                        width={200}
+                        height={200}
                         className="mb-6 rounded-lg shadow-lg object-cover"
                     />
                 )}
                 <p className="text-xl md:text-2xl mb-8">
-                    Sua IMERSÃO com o(a) <strong>{category}</strong> começa aqui!
+                    Sua IMERSÃO com o(a) <strong>{productData.descricao_curta}</strong> começa aqui!
                 </p>
 
                 <div className="flex flex-col space-y-4 w-full max-w-sm">
