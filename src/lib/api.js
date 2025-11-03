@@ -290,7 +290,8 @@ export async function getManufacturerBySlug(slug) {
 }
 
 export async function getImersaoBySlug(slug) {
-  const res = await fetchAPI(`/api/imersaos?filters[slug][$eq]=${slug}&populate=deep`);
+  const populateQuery = 'populate[produto][populate]=imagem_destacada,categorias';
+  const res = await fetchAPI(`/api/imersaos?filters[slug][$eq]=${slug}&${populateQuery}`);
   const data = normalizeDataArray(res);
   if (data.length === 0) return null;
 
