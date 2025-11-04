@@ -57,8 +57,8 @@ export default async function ImersaoPage({ params }) {
                     <Image
                         src={imageUrl}
                         alt={productData.nome}
-                        width={200}
-                        height={200}
+                        width={100}
+                        height={100}
                         className="mb-6 rounded-lg shadow-lg object-cover"
                     />
                 )}
@@ -108,10 +108,6 @@ export default async function ImersaoPage({ params }) {
                          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                     </Link>
                 </div>
-
-                <footer className="mt-4">
-                    <p className="text-sm text-gray-600">Tecassistiva – Tecnologia Assistiva</p>
-                </footer>
             </main>
         </div>
     );
