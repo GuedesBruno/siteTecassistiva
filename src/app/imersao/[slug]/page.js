@@ -39,7 +39,7 @@ export default async function ImersaoPage({ params }) {
         notFound();
     }
 
-    const { produto: productData, curso, guia, manual, botoes_padrao = true, botoes_personalizados } = imersao.attributes;
+    const { produto: productData, curso, guia, manual, botoes_padrao = true, personalizado } = imersao.attributes;
 
     if (!productData) {
         notFound();
@@ -57,8 +57,8 @@ export default async function ImersaoPage({ params }) {
                     <Image
                         src={imageUrl}
                         alt={productData.nome}
-                        width={100}
-                        height={100}
+                        width={50}
+                        height={50}
                         className="mb-6 rounded-lg shadow-lg object-cover"
                     />
                 )}
@@ -89,7 +89,7 @@ export default async function ImersaoPage({ params }) {
                             </Link>
                         </>
                     ) : (
-                        botoes_personalizados && botoes_personalizados.map((botao) => (
+                        personalizado && personalizado.map((botao) => (
                             <Link key={botao.id} href={botao.link_do_botao} target="_blank" rel="noopener noreferrer" className={buttonClassName}>
                                 {botao.texto_do_botao}
                             </Link>
