@@ -39,7 +39,7 @@ export default async function ImersaoPage({ params }) {
         notFound();
     }
 
-    const { produto: productData, curso, guia, manual, botoes_padrao = true, botoes } = imersao.attributes;
+    const { produto: productData, curso, guia, manual, botoes_padrao = true, botoes_personalizados } = imersao.attributes;
 
     if (!productData) {
         notFound();
@@ -89,7 +89,7 @@ export default async function ImersaoPage({ params }) {
                             </Link>
                         </>
                     ) : (
-                        botoes && botoes.map((botao) => (
+                        botoes_personalizados && botoes_personalizados.map((botao) => (
                             <Link key={botao.id} href={botao.link_do_botao} target="_blank" rel="noopener noreferrer" className={buttonClassName}>
                                 {botao.texto_do_botao}
                             </Link>
