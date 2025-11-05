@@ -1,5 +1,4 @@
 import WhatsAppButton from '@/components/WhatsAppButton';
-import Script from 'next/script';
 
 export default function ImersaoLayout({ children }) {
   return (

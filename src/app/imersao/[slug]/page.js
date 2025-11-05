@@ -47,26 +47,27 @@ export default async function ImersaoPage({ params }) {
 
     const imageUrl = productData.imagem_principal?.url;
 
-    const buttonClassName = "bg-[#002554] text-white py-3 px-6 rounded-lg font-bold text-lg hover:bg-blue-900 transition-colors duration-300";
+    const buttonClassName = "bg-[#002554] text-white py-3 px-6 font-bold text-lg hover:bg-tec-blue-light transition-colors duration-300";
 
     return (
-        <div className="bg-white text-black min-h-screen flex flex-col items-center justify-center text-center p-4 font-sans">
-            <main className="flex flex-col items-center">
-                <h1 className="text-4xl md:text-5xl font-bold mb-6">{productData.nome}</h1>
+        <div className="bg-gray-50 text-black min-h-screen flex flex-col items-center justify-center p-4 font-sans py-12">
+            <main className="w-full max-w-2xl bg-white p-8 shadow-lg flex flex-col items-center text-center">
+                <h1 className="text-4xl md:text-5xl font-bold mb-8">{productData.nome}</h1>
                 {imageUrl && (
                     <Image
                         src={imageUrl}
                         alt={productData.nome}
                         width={200}
                         height={200}
-                        className="mb-6 rounded-lg shadow-lg object-cover"
+                        className="mb-10 object-cover"
                     />
                 )}
-                <p className="text-xl md:text-2xl mb-8">
-                    Sua IMERSÃO com o(a) <strong>{productData.descricao_curta}</strong> começa aqui!
+                <p className="text-xl md:text-2xl mb-10">
+                    Sua IMERSÃO com {productData.genero_descricao === 'feminino' ? 'a' : 'o'}{' '}
+                    <strong>{productData.descricao_curta}</strong> começa aqui!
                 </p>
 
-                <div className="flex flex-col space-y-4 w-full max-w-sm">
+                <div className="flex flex-col space-y-4 w-full max-w-sm mt-8">
                     {botoes_padrao ? (
                         <>
                             {curso && (
@@ -97,7 +98,7 @@ export default async function ImersaoPage({ params }) {
                     )}
                 </div>
 
-                <div className="flex space-x-6 my-10">
+                <div className="flex space-x-6 mt-10">
                     <Link href="https://www.instagram.com/tecassistiva/" target="_blank" rel="noopener noreferrer" aria-label="Instagram da Tecassistiva" className="bg-[#002554] rounded-full w-12 h-12 flex items-center justify-center transition-opacity hover:opacity-80">
                         <Image src="/logo_instagram.svg" alt="Instagram" width={32} height={32} />
                     </Link>
