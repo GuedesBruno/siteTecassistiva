@@ -57,8 +57,8 @@ export default async function ImersaoPage({ params }) {
                     <Image
                         src={imageUrl}
                         alt={productData.nome}
-                        width={50}
-                        height={50}
+                        width={200}
+                        height={200}
                         className="mb-6 rounded-lg shadow-lg object-cover"
                     />
                 )}
