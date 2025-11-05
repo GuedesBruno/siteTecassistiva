@@ -290,7 +290,7 @@ export async function getManufacturerBySlug(slug) {
 }
 
 export async function getImersaoBySlug(slug) {
-  const populateQuery = 'populate[personalizado]=*&populate[produto][populate]=imagem_principal,categorias,nome,descricao_curta&fields[0]=genero_descricao';
+  const populateQuery = 'populate[personalizado]=*&populate[produto][fields][0]=nome&populate[produto][fields][1]=descricao_curta&populate[produto][populate][imagem_principal]=*&populate[produto][populate][categorias]=*&fields[0]=genero_descricao';
   const res = await fetchAPI(`/api/imersaos?filters[slug][$eq]=${slug}&${populateQuery}`);
   const data = normalizeDataArray(res);
   if (data.length === 0) return null;
