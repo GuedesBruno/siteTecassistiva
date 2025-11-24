@@ -23,16 +23,19 @@ export default async function TecassistivaPage() {
           {/* Texto de apresentação em 2 colunas */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 text-lg text-justify text-gray-700 leading-relaxed">
             <p>
-              A TECA foi fundada em 2007, visando atender a grande demanda reprimida de produtos e serviços de qualidade com preços competitivos, que impediam há muitos anos que as pessoas com deficiência no Brasil, tivessem acesso ao grande desenvolvimento tecnológico que vinha acontecendo em outros países.
+              A Tecassistiva é uma empresa brasileira especializada em soluções de tecnologia assistiva voltadas para a inclusão educacional e social de pessoas com deficiência.
             </p>
             <p>
-              Atuando como fomentadora e alinhada com os projetos públicos, a TECA se tornou em poucos anos a lider do setor no Brasil e uma das maiores das distribuidoras internacionais de Tecnologia Assistiva.
+              Atuamos há mais de duas décadas oferecendo equipamentos, softwares e serviços que ampliam a autonomia, o acesso à informação e as oportunidades de aprendizagem para estudantes, profissionais e instituições em todo o país.
             </p>
             <p>
-              Esse crescimento exigiu o fortalecimento de seus canais de distribuição e de suporte, principalmente para o atendimento de milhares de escolas, bibliotecas, universidades e centros de pesquisa.
+              Nosso compromisso é entregar tecnologia que transforma vidas. Por isso desenvolvemos e representamos soluções de alto desempenho para pessoas com deficiência visual e outras necessidades específicas, atendendo escolas, secretarias de educação, universidades, empresas e órgãos públicos com excelência e responsabilidade.
             </p>
             <p>
-              Na área de desenvolvimento, além de localizar para o português do Brasil diversos programas de computador e equipamentos que distribui, a TECA está fazendo um investimento significativo, em conjunto com órgãos de fomento e parcerias internacionais, para que o Brasil em curto prazo, se torne também um desenvolvedor e produtor de Tecnologia Assistiva.
+              Trabalhamos lado a lado com educadores, gestores e equipes técnicas para garantir diagnósticos precisos, implementações eficientes e suporte contínuo. Mais do que fornecer produtos, construímos projetos completos que fortalecem políticas de inclusão, aprimoram processos e garantem resultados reais na prática.
+            </p>
+            <p>
+              A Tecassistiva acredita que acessibilidade não é apenas um serviço, é um valor, uma causa e um compromisso permanente com um Brasil mais inclusivo, justo e conectado às necessidades de todos.
             </p>
           </div>
         </section>
@@ -48,13 +51,14 @@ export default async function TecassistivaPage() {
         <section className="bg-tec-blue-light text-white p-12">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                 <div>
-                    <h2 className="text-4xl font-extrabold mb-4">Missão</h2>
+                    <h2 className="text-align: justify text-4xl font-extrabold mb-4">Missão</h2>
                     <p className="leading-relaxed">
+                      
                       Desenvolver e disseminar Tecnologia Assistiva no Brasil, por meio da oferta de produtos e serviços de excelência que contribuam para a melhoria da qualidade de vida das pessoas com deficiência e da comunidade em geral.
                     </p>
                 </div>
                 <div>
-                    <h2 className="text-4xl font-extrabold mb-4">Visão</h2>
+                    <h2 className="text-align: justify text-4xl font-extrabold mb-4">Visão</h2>
                     <p className="leading-relaxed">
                       Ser a empresa de referência em Tecnologia Assistiva, reconhecida pela comunidade, colaboradores, fornecedores e investidores, pela qualidade de seus produtos, serviços e apoio institucional.
                     </p>
@@ -63,12 +67,12 @@ export default async function TecassistivaPage() {
                 <div>
                     <h2 className="text-4xl font-extrabold mb-4">Valores</h2>
                     <ul className="space-y-2 leading-relaxed">
-                      <li>Valorização da Pessoa com Deficiência</li>
-                      <li>Ética</li>
-                      <li>Inovação</li>
-                      <li>Trabalho em equipe</li>
-                      <li>Qualidade</li>
-                      <li>Sustentabilidade</li>
+                      <li>•Valorização da Pessoa com Deficiência</li>
+                      <li>•Ética</li>
+                      <li>•Inovação</li>
+                      <li>•Trabalho em equipe</li>
+                      <li>•Qualidade</li>
+                      <li>•Sustentabilidade</li>
                     </ul>
                 </div>
             </div>
