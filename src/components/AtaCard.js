@@ -12,7 +12,6 @@ function formatDate(dateString) {
 }
 
 export default function AtaCard({ ata }) {
-  console.log('Dados da ATA recebidos:', JSON.stringify(ata, null, 2));
   const attributes = ata.attributes || ata;
   const { orgao, categoria, validade, descricao_adesao, item_ata, documentos } = attributes;
 
@@ -31,7 +30,7 @@ export default function AtaCard({ ata }) {
     setHighlightedItemId(itemId);
 
     const item = itens.find(i => i.id === itemId);
-    const produtoData = item?.relacao_produto?.data?.attributes;
+    const produtoData = item?.relacao_produto;
 
     if (produtoData && produtoData.slug) {
         window.open(`/produtos/${produtoData.slug}`, '_blank', 'noopener,noreferrer');
@@ -53,7 +52,7 @@ export default function AtaCard({ ata }) {
     <div className="space-y-4">
       {itens.map((item) => {
         const isHighlighted = item.id === highlightedItemId;
-        const produtoData = item.relacao_produto?.data?.attributes;
+        const produtoData = item.relacao_produto;
         
         return (
           <div 
@@ -104,7 +103,7 @@ export default function AtaCard({ ata }) {
               <div className="max-h-48 overflow-y-auto pr-2">
                 <div className="grid grid-cols-4 gap-1">
                   {itens.map((item) => {
-                    const produtoData = item.relacao_produto?.data?.attributes;
+                    const produtoData = item.relacao_produto;
                     const produtoNome = produtoData?.nome || (typeof item.relacao_produto === 'string' ? item.relacao_produto : item.descricao) || 'Produto';
 
                     return (
