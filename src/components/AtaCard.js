@@ -12,6 +12,7 @@ function formatDate(dateString) {
 }
 
 export default function AtaCard({ ata }) {
+  console.log('Dados da ATA recebidos:', JSON.stringify(ata, null, 2));
   const attributes = ata.attributes || ata;
   const { orgao, categoria, validade, descricao_adesao, item_ata, documentos } = attributes;
 
