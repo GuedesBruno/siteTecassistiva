@@ -52,7 +52,7 @@ export default function AtaCard({ ata }) {
     <div className="space-y-4">
       {itens.map((item) => {
         const isHighlighted = item.id === highlightedItemId;
-        const produtoData = item.produto?.data?.attributes;
+        const produtoData = item.relacao_produto?.data?.attributes;
         
         return (
           <div 
@@ -71,7 +71,7 @@ export default function AtaCard({ ata }) {
                   {produtoData.nome}
                 </a>
               ) : (
-                (typeof item.relacao_produto === 'string' && item.relacao_produto) || item.descricao || 'Produto não especificado'
+                produtoData?.nome || item.descricao || 'Produto não especificado'
               )}
             </p>
             {item.categoria && <p className="text-sm text-gray-600 mt-2"><strong>Categoria:</strong> {item.categoria}</p>}
@@ -104,7 +104,7 @@ export default function AtaCard({ ata }) {
                 <div className="grid grid-cols-4 gap-1">
                   {itens.map((item) => {
                     const produtoData = item.relacao_produto?.data?.attributes;
-                    const produtoNome = produtoData?.nome || (typeof item.produto === 'string' ? item.produto : item.descricao) || 'Produto';
+                    const produtoNome = produtoData?.nome || (typeof item.relacao_produto === 'string' ? item.relacao_produto : item.descricao) || 'Produto';
 
                     return (
                         <button
@@ -113,7 +113,7 @@ export default function AtaCard({ ata }) {
                           title={produtoNome}
                           className="text-center p-1 rounded bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200 text-[10px] leading-tight"
                         >
-                          {item.descricao}
+                          {produtoNome}
                         </button>
                     );
                   })}
