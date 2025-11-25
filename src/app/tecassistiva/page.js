@@ -53,7 +53,6 @@ export default async function TecassistivaPage() {
                 <div>
                     <h2 className="text-align: justify text-4xl font-extrabold mb-4">Missão</h2>
                     <p className="leading-relaxed">
-                      
                       Desenvolver e disseminar Tecnologia Assistiva no Brasil, por meio da oferta de produtos e serviços de excelência que contribuam para a melhoria da qualidade de vida das pessoas com deficiência e da comunidade em geral.
                     </p>
                 </div>

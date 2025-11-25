@@ -29,6 +29,13 @@ export default function AtaCard({ ata }) {
     
     setHighlightedItemId(itemId);
 
+    const item = itens.find(i => i.id === itemId);
+    const produtoData = item?.produto?.data?.attributes;
+
+    if (produtoData && produtoData.slug) {
+        window.open(`/produtos/${produtoData.slug}`, '_blank', 'noopener,noreferrer');
+    }
+
     setTimeout(() => {
       const element = itemRefs.current[itemId];
       if (element) {
@@ -45,13 +52,27 @@ export default function AtaCard({ ata }) {
     <div className="space-y-4">
       {itens.map((item) => {
         const isHighlighted = item.id === highlightedItemId;
+        const produtoData = item.produto?.data?.attributes;
+        
         return (
           <div 
             key={item.id} 
             ref={(el) => (itemRefs.current[item.id] = el)}
             className={`p-4 border border-gray-200 rounded-md bg-gray-50 transition-all duration-500 ${isHighlighted ? 'ring-2 ring-tec-blue' : ''}`}>
             <p className="font-bold text-tec-blue">
-              Item {item.numero_item}: {item.produto}
+              Item {item.numero_item}:{' '}
+              {produtoData && produtoData.slug ? (
+                <a 
+                  href={`/produtos/${produtoData.slug}`} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:underline"
+                >
+                  {produtoData.nome}
+                </a>
+              ) : (
+                (typeof item.produto === 'string' && item.produto) || item.descricao || 'Produto não especificado'
+              )}
             </p>
             {item.categoria && <p className="text-sm text-gray-600 mt-2"><strong>Categoria:</strong> {item.categoria}</p>}
             {item.quantidade_carona && <p className="text-sm text-gray-600"><strong>Quantidade para "Carona":</strong> {item.quantidade_carona}</p>}
@@ -81,16 +102,21 @@ export default function AtaCard({ ata }) {
               <h4 className="font-semibold text-gray-700 mb-2 text-sm">Itens da Ata</h4>
               <div className="max-h-48 overflow-y-auto pr-2">
                 <div className="grid grid-cols-4 gap-1">
-                  {itens.map((item) => (
-                    <button
-                      key={item.id}
-                      onClick={() => handleButtonClick(item.id)}
-                      title={item.produto}
-                      className="text-center p-1 rounded bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200 text-[10px] leading-tight"
-                    >
-                      {item.descricao}
-                    </button>
-                  ))}
+                  {itens.map((item) => {
+                    const produtoData = item.produto?.data?.attributes;
+                    const produtoNome = produtoData?.nome || (typeof item.produto === 'string' ? item.produto : item.descricao) || 'Produto';
+
+                    return (
+                        <button
+                          key={item.id}
+                          onClick={() => handleButtonClick(item.id)}
+                          title={produtoNome}
+                          className="text-center p-1 rounded bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200 text-[10px] leading-tight"
+                        >
+                          {item.descricao}
+                        </button>
+                    );
+                  })}
                 </div>
               </div>
             </div>
