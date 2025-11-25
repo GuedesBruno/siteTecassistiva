@@ -199,7 +199,7 @@ export async function getProductsBySubcategorySlug(subslug) {
 }
 
 export async function getOpenAtas() {
-  const response = await fetchAPI('/api/atas?sort=ordem:asc&populate=item_ata.relacao_produtos,documentos');
+  const response = await fetchAPI('/api/atas?sort=ordem:asc&populate[0]=item_ata.relacao_produto&populate[1]=documentos');
   const data = normalizeDataArray(response);
   // Manually normalize if attributes is missing
   return data.map(item => {
