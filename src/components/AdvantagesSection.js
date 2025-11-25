@@ -50,7 +50,7 @@ export default function AdvantagesSection() {
                 </div>
             </div>
         </div>
-        <p className="text-center text-gray-700 max-w-4xl mx-auto">Entendemos que a aquisição de tecnologia assistiva é um passo fundamental para garantir a inclusão, mas os processos de compra podem ser um desafio. É por isso que o sistema de "carona" em Atas de Registro de Preço se torna um poderoso facilitador. Ele simplifica cada etapa, oferecendo um caminho rápido, seguro e econômico para equipar sua instituição com as melhores soluções do mercado. Nosso compromisso é estar ao seu lado, transformando a burocracia em oportunidade e garantindo que os recursos de acessibilidade cheguem a quem mais precisa, sem demora.</p>
+        <p className="text-justify text-gray-700 max-w-4xl mx-auto">Entendemos que a aquisição de tecnologia assistiva é um passo fundamental para garantir a inclusão, mas os processos de compra podem ser um desafio. É por isso que o sistema de "carona" em Atas de Registro de Preço se torna um poderoso facilitador. Ele simplifica cada etapa, oferecendo um caminho rápido, seguro e econômico para equipar sua instituição com as melhores soluções do mercado. Nosso compromisso é estar ao seu lado, transformando a burocracia em oportunidade e garantindo que os recursos de acessibilidade cheguem a quem mais precisa, sem demora.</p>
     </div>
   );
 }

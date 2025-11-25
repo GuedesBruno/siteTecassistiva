@@ -30,11 +30,8 @@ export default async function Home() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-extrabold mb-4">Tecassistiva</h2>
           <p className="mx-auto leading-relaxed text-xl">
-            A Tecassistiva foi fundada em 2007, visando atender a grande demanda reprimida de produtos e serviços de qualidade
-            com preços competitivos, que impediam há muitos anos que as pessoas com deficiência no Brasil, tivessem
-            acesso ao grande desenvolvimento tecnológico que vinha acontecendo em outros países.
-            O desenvolvimento de projetos inovadores para pessoas com deficiência, com sustentabilidade, tem sido o principal
-            objetivo da Tecassistiva.
+            A Tecassistiva é uma empresa brasileira especializada em soluções de tecnologia assistiva voltadas à inclusão educacional e social de pessoas com deficiência. Atuamos há mais de duas décadas oferecendo equipamentos, softwares e serviços que ampliam a autonomia, o acesso à informação e as oportunidades de aprendizagem para estudantes, profissionais e instituições em todo o país.
+            Nosso compromisso é entregar tecnologia que transforma vidas. Por isso desenvolvemos e representamos soluções de alto desempenho para pessoas com deficiência visual e outras necessidades específicas, atendendo escolas, secretarias de educação, universidades, bibliotecas, empresas e órgãos públicos em geral com excelência e responsabilidade.
           </p>
           <div className="mt-8">
             <Link href="/tecassistiva" className="bg-white text-tec-blue font-bold py-3 px-8 rounded-md hover:bg-gray-100 transition-colors shadow-md">Conheça a nossa história</Link>

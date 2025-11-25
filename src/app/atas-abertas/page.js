@@ -3,6 +3,7 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import AtaCard from '@/components/AtaCard';
 import ContactForm from '@/components/ContactForm';
 import AdvantagesSection from '@/components/AdvantagesSection';
+import SocialMediaSection from '@/components/SocialMediaSection';
 
 export const metadata = {
   title: 'Atas Abertas | Tecassistiva',

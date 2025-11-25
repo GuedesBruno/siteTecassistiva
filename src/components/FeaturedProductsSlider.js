@@ -17,8 +17,7 @@ export default function FeaturedProductsSlider({ products }) {
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">Nossos Produtos</h2>
           <p className="text-lg text-gray-600 mt-2 max-w-4xl mx-auto">
-            Veja abaixo nossos destaques, a TECA possui mais de 50 produtos, as melhores tecnologias para acessibilidade 
-            no mercado nacional e internacional!
+            Confira abaixo nossos principais destaques. A TECA disponibiliza mais de 50 soluções de tecnologia assistiva, reconhecidas pela qualidade, inovação e alinhamento às melhores práticas de acessibilidade no Brasil e no exterior.
           </p>
         </div>
         <Swiper
@@ -50,7 +49,7 @@ export default function FeaturedProductsSlider({ products }) {
         </Swiper>
         <div className="text-center mt-12">
           <Link href="/produtos" className="bg-tec-blue-light text-white font-bold py-3 px-8 rounded-md hover:bg-tec-blue transition-colors shadow-md">
-            Todos nossos produtos aqui
+            Todos os nossos produtos aqui
           </Link>
         </div>
       </div>
