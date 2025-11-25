@@ -36,7 +36,7 @@ export default function AdvantagesSection() {
                     {advantages.slice(0, 3).map((advantage, i) => (
                         <div key={i} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border-l-4 border-tec-blue">
                             <h3 className="font-bold text-xl text-tec-blue mb-3">{advantage.title}</h3>
-                            <p className="text-gray-600">{advantage.description}</p>
+                            <p className="text-gray-600 text-justify">{advantage.description}</p>
                         </div>
                     ))}
                 </div>
@@ -44,7 +44,7 @@ export default function AdvantagesSection() {
                     {advantages.slice(3, 6).map((advantage, i) => (
                         <div key={i} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border-l-4 border-tec-blue">
                             <h3 className="font-bold text-xl text-tec-blue mb-3">{advantage.title}</h3>
-                            <p className="text-gray-600">{advantage.description}</p>
+                            <p className="text-gray-600 text-justify">{advantage.description}</p>
                         </div>
                     ))}
                 </div>

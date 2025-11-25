@@ -1,6 +1,8 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { getAllTestimonials } from '@/lib/api';
 import TestimonialSection from '@/components/TestimonialSection';
+import SocialMediaSection from '@/components/SocialMediaSection';
 
 // Componente da Página
 export default async function TecassistivaPage() {
@@ -76,6 +78,8 @@ export default async function TecassistivaPage() {
                 </div>
             </div>
         </section>
+
+        <SocialMediaSection />
 
         <TestimonialSection depoimentos={testimonials || []} />
 

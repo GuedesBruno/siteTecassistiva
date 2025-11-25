@@ -78,8 +78,12 @@ export default function ContactForm({ title, subtitle, formName }) {
                     />
                 </div>
             </div>
-            <div className="text-center">
+            <div className="text-center flex items-center justify-center space-x-4">
                 <button type="submit" className="bg-tec-blue text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-transform transform hover:scale-105">Enviar Contato</button>
+                <span className="text-gray-600">ou</span>
+                <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" className="bg-green-500 text-white font-bold py-3 px-8 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-transform transform hover:scale-105">
+                    Fale agora
+                </a>
             </div>
             
             {status && <p className="text-center text-sm text-gray-600 mt-4">{status}</p>}
