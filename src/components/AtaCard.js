@@ -30,7 +30,7 @@ export default function AtaCard({ ata }) {
     setHighlightedItemId(itemId);
 
     const item = itens.find(i => i.id === itemId);
-    const produtoData = item?.produto?.data?.attributes;
+    const produtoData = item?.relacao_produto?.data?.attributes;
 
     if (produtoData && produtoData.slug) {
         window.open(`/produtos/${produtoData.slug}`, '_blank', 'noopener,noreferrer');
@@ -71,7 +71,7 @@ export default function AtaCard({ ata }) {
                   {produtoData.nome}
                 </a>
               ) : (
-                (typeof item.produto === 'string' && item.produto) || item.descricao || 'Produto não especificado'
+                (typeof item.relacao_produto === 'string' && item.relacao_produto) || item.descricao || 'Produto não especificado'
               )}
             </p>
             {item.categoria && <p className="text-sm text-gray-600 mt-2"><strong>Categoria:</strong> {item.categoria}</p>}
@@ -103,7 +103,7 @@ export default function AtaCard({ ata }) {
               <div className="max-h-48 overflow-y-auto pr-2">
                 <div className="grid grid-cols-4 gap-1">
                   {itens.map((item) => {
-                    const produtoData = item.produto?.data?.attributes;
+                    const produtoData = item.relacao_produto?.data?.attributes;
                     const produtoNome = produtoData?.nome || (typeof item.produto === 'string' ? item.produto : item.descricao) || 'Produto';
 
                     return (
