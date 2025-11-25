@@ -5,7 +5,7 @@ import Footer from '@/components/Footer';
 import { Montserrat } from 'next/font/google';
 import { getAllCategories } from '@/lib/api';
 import WhatsAppButton from '@/components/WhatsAppButton';
-import Script from 'next/script'; // Importa o componente Script
+import Script from 'next/script';
 
 const montserrat = Montserrat({
   subsets: ['latin'],
