@@ -63,12 +63,15 @@ export default function SupportPageClient({ products, software, categories }) {
     setSelectedItem(item);
   };
 
-  const productsWithDocs = products.filter(p => p.attributes.documentos?.data?.length > 0);
-  const relevantCatSlugs = new Set(productsWithDocs.flatMap(p => p.attributes.categorias?.data?.map(c => c.attributes.slug) || []));
-  const relevantSubcatSlugs = new Set(productsWithDocs.flatMap(p => p.attributes.subcategorias?.data?.map(s => s.attributes.slug)).filter(Boolean));
+  // Função auxiliar para acessar atributos de forma segura
+  const getAttrs = (item) => item.attributes || item;
+
+  const productsWithDocs = products.filter(p => getAttrs(p).documentos?.data?.length > 0);
+  const relevantCatSlugs = new Set(productsWithDocs.flatMap(p => getAttrs(p).categorias?.data?.map(c => getAttrs(c).slug) || []));
+  const relevantSubcatSlugs = new Set(productsWithDocs.flatMap(p => getAttrs(p).subcategorias?.data?.map(s => getAttrs(s).slug)).filter(Boolean));
 
   categories.forEach(cat => {
-      const hasRelevantSubcat = (cat.attributes.subcategorias?.data || []).some(sub => relevantSubcatSlugs.has(sub.attributes.slug));
+      const hasRelevantSubcat = (getAttrs(cat).subcategorias?.data || []).some(sub => relevantSubcatSlugs.has(getAttrs(sub).slug));
       if (hasRelevantSubcat) {
           relevantCatSlugs.add(cat.attributes.slug);
       }
@@ -76,19 +79,19 @@ export default function SupportPageClient({ products, software, categories }) {
 
   const filteredCategoriesForMenu = categories
       .filter(cat => relevantCatSlugs.has(cat.attributes.slug))
-      .map(cat => ({
-          ...cat.attributes,
-          id: cat.id,
-          subcategorias: (cat.attributes.subcategorias?.data || []).filter(sub => relevantSubcatSlugs.has(sub.attributes.slug)).map(s => ({...s.attributes, id: s.id}))
-      }));
+      .map(cat => {
+          const catAttrs = getAttrs(cat);
+          return {
+              ...catAttrs,
+              id: cat.id,
+              subcategorias: (catAttrs.subcategorias?.data || []).filter(sub => relevantSubcatSlugs.has(getAttrs(sub).slug)).map(s => ({...getAttrs(s), id: s.id}))
+          };
+      });
 
   const filteredProducts = productsWithDocs.filter(product => {
-    if (selectedSubcategory) {
-      return product.attributes.subcategorias?.data?.some(s => s.attributes.slug === selectedSubcategory.slug);
-    }
-    if (selectedCategory) {
-      return product.attributes.categorias?.data?.some(cat => cat.attributes.slug === selectedCategory.slug);
-    }
+    const pAttrs = getAttrs(product);
+    if (selectedSubcategory) return pAttrs.subcategorias?.data?.some(s => getAttrs(s).slug === selectedSubcategory.slug);
+    if (selectedCategory) return pAttrs.categorias?.data?.some(cat => getAttrs(cat).slug === selectedCategory.slug);
     return true;
   });
 
@@ -131,7 +134,7 @@ export default function SupportPageClient({ products, software, categories }) {
       case 'documentos':
         return filteredProducts.length > 0 ? (
           <div className="flex flex-col">
-            {filteredProducts.map(product => <DocumentListItem key={product.id} product={product.attributes} />)}
+            {filteredProducts.map(product => <DocumentListItem key={product.id} product={getAttrs(product)} />)}
           </div>
         ) : (
           <p className="text-center text-gray-500 mt-8">Nenhum documento encontrado para a seleção atual.</p>
