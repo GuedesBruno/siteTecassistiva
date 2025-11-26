@@ -68,7 +68,7 @@ export default function SupportPageClient({ products, software, categories }) {
 
   const productsWithDocs = products.filter(p => getAttrs(p).documentos?.data?.length > 0);
   const relevantCatSlugs = new Set(productsWithDocs.flatMap(p => getAttrs(p).categorias?.data?.map(c => getAttrs(c).slug) || []));
-  const relevantSubcatSlugs = new Set(productsWithDocs.flatMap(p => getAttrs(p).subcategoria?.data?.map(s => getAttrs(s).slug)).filter(Boolean));
+  const relevantSubcatSlugs = new Set(productsWithDocs.flatMap(p => getAttrs(p).subcategorias?.data?.map(s => getAttrs(s).slug)).filter(Boolean));
 
   categories.forEach(cat => {
       const hasRelevantSubcat = (getAttrs(cat).subcategorias?.data || []).some(sub => relevantSubcatSlugs.has(getAttrs(sub).slug));
@@ -90,7 +90,7 @@ export default function SupportPageClient({ products, software, categories }) {
 
   const filteredProducts = productsWithDocs.filter(product => {
     const pAttrs = getAttrs(product);
-    if (selectedSubcategory) return pAttrs.subcategoria?.data?.some(s => getAttrs(s).slug === selectedSubcategory.slug);
+    if (selectedSubcategory) return pAttrs.subcategorias?.data?.some(s => getAttrs(s).slug === selectedSubcategory.slug);
     if (selectedCategory) return pAttrs.categorias?.data?.some(cat => getAttrs(cat).slug === selectedCategory.slug);
     return true;
   });
