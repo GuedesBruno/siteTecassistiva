@@ -103,9 +103,9 @@ export default function CategoryMenu({
             <ul className="space-y-1">
               {sortedCategories.map((category) => {
                 const catAttrs = getAttrs(category);
-                const isActive = isCallbackMode
-                  ? selectedCategory?.slug === catAttrs.slug
-                  : activeCategorySlug === catAttrs.slug;
+                const isActive = isCallbackMode ? 
+                  selectedCategory?.slug === catAttrs.slug : 
+                  activeCategorySlug === catAttrs.slug;
                 
                 const subcategories = catAttrs.subcategorias?.data || catAttrs.subcategorias || [];
                 const sortedSubcategories = [...subcategories].sort((a, b) =>
