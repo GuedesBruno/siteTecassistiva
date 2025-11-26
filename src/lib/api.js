@@ -72,7 +72,7 @@ export async function getAllProductsForDisplay() {
   try {
     // Populating 'subcategorias' (plural) as the relation is now many-to-many
     const populateQuery = 'populate[0]=imagem_principal&populate[1]=subcategorias';
-    const productsData = await fetchAPI(`/api/produtos?${populateQuery}&pagination[limit]=1000`);
+    const productsData = await fetchAPI(`/api/produtos?${populateQuery}&pagination[limit]=1000&sort=ordem:asc`);
     return normalizeDataArray(productsData);
   } catch (error) {
     console.error(`Falha ao buscar todos os produtos:`, error);
@@ -189,12 +189,12 @@ export async function getAllCategoryPaths() {
 
 export async function getProductsByCategorySlug(slug) {
     const filters = `filters[$or][0][categorias][slug][$eq]=${slug}&filters[$or][1][subcategorias][categorias][slug][$eq]=${slug}`;
-    const response = await fetchAPI(`/api/produtos?${filters}&populate=*`);
+    const response = await fetchAPI(`/api/produtos?${filters}&populate=*&sort=nome:asc`);
     return normalizeDataArray(response);
 }
 
 export async function getProductsBySubcategorySlug(subslug) {
-    const response = await fetchAPI(`/api/produtos?filters[subcategorias][slug][$eq]=${subslug}&populate=*`);
+    const response = await fetchAPI(`/api/produtos?filters[subcategorias][slug][$eq]=${subslug}&populate=*&sort=nome:asc`);
     return normalizeDataArray(response);
 }
 
@@ -279,7 +279,7 @@ export async function getAllSimplePages() {
 }
 
 export async function getProductsByManufacturerSlug(slug) {
-  const response = await fetchAPI(`/api/produtos?filters[relacao_fabricante][slug][$eq]=${slug}&populate=*`);
+  const response = await fetchAPI(`/api/produtos?filters[relacao_fabricante][slug][$eq]=${slug}&populate=*&sort=nome:asc`);
   return normalizeDataArray(response);
 }
 
