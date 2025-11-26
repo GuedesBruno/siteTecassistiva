@@ -25,10 +25,13 @@ const sortDocuments = (docs) => {
 
 export default function DocumentListItem({ product }) {
   const { nome, documentos } = product;
+  const docsArray = documentos?.data || [];
 
-  if (!documentos || documentos.length === 0) {
+  if (docsArray.length === 0) {
     return null;
   }
+
+  const sortedDocs = sortDocuments(docsArray);
 
   return (
     <div className="border-b border-gray-200 py-4 last:border-b-0 flex items-start">
@@ -37,16 +40,16 @@ export default function DocumentListItem({ product }) {
       </div>
       <div className="w-2/3">
         <ul className="space-y-2">
-          {documentos.map((doc) => (
+          {sortedDocs.map((doc) => (
             <li key={doc.id}>
               <a
-                href={getStrapiMediaUrl(doc.url)}
+                href={getStrapiMediaUrl(doc.attributes.url)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200"
               >
                 <DownloadIcon />
-                <span>{doc.name}</span>
+                <span>{doc.attributes.name}</span>
               </a>
             </li>
           ))}

@@ -222,7 +222,7 @@ export async function getOpenAtas() {
 
 export async function getProductsWithDocuments() {
   try {
-    const query = 'populate[0]=documentos&populate[1]=categorias&populate[2]=subcategorias&pagination[limit]=1000&sort=nome:asc';
+    const query = 'populate[documentos]=*&pagination[limit]=1000&sort=nome:asc';
 
     const productsData = await fetchAPI(`/api/produtos?${query}`);
     return normalizeDataArray(productsData);
