@@ -4,7 +4,11 @@ import { useState } from 'react';
 import { FaWhatsapp, FaPhoneAlt, FaEnvelope, FaCertificate } from 'react-icons/fa';
 
 export default function SupportPageClient({ products, software }) {
-  const [activeTab, setActiveTab] = useState('documentos'); // 'documentos', 'drivers', 'contato'
+  const [activeTab, setActiveTab] = useState('software');
+
+  // Filtra os itens recebidos em 'software' para suas respectivas categorias
+  const softwareItems = software.filter(s => s.attributes?.tipo === 'Software');
+  const driverItems = software.filter(s => s.attributes?.tipo === 'Driver' || s.attributes?.tipo === 'Utilitário');
 
   // Função para ordenar os documentos
   const sortDocuments = (docs) => {
@@ -33,6 +37,9 @@ export default function SupportPageClient({ products, software }) {
 
       <div className="border-b border-gray-200 mb-8">
         <nav className="-mb-px flex space-x-6 justify-center" aria-label="Tabs">
+          <button onClick={() => setActiveTab('software')} className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg ${activeTab === 'software' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}>
+            Softwares
+          </button>
           <button onClick={() => setActiveTab('documentos')} className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg ${activeTab === 'documentos' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}>
             Manuais e Documentos
           </button>
@@ -47,12 +54,7 @@ export default function SupportPageClient({ products, software }) {
 
       {activeTab === 'documentos' && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {products
-            .filter(p => {
-              const attrs = p.attributes || p; // Garante que temos os atributos
-              return attrs.documentos?.data?.length > 0;
-            })
-            .map(product => (
+          {products && products.filter(p => p.attributes?.documentos?.data?.length > 0).map(product => (
             <div key={product.id} className="bg-white p-6 rounded-lg shadow-md border border-gray-100">
               <h3 className="text-xl font-semibold text-gray-800">{product.attributes.nome}</h3>
               <ul className="mt-3 space-y-2">
@@ -70,14 +72,35 @@ export default function SupportPageClient({ products, software }) {
         </div>
       )}
 
-      {activeTab === 'drivers' && (
+      {activeTab === 'software' && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {software.map(sw => (
+          {softwareItems.map(sw => (
             <div key={sw.id} className="bg-white p-6 rounded-lg shadow-md border border-gray-100">
               <h3 className="text-xl font-semibold text-gray-800">{sw.attributes.nome}</h3>
               <p className="text-sm text-gray-500 mb-3">Tipo: {sw.attributes.tipo}</p>
               <ul className="space-y-2">
-                {sw.attributes.instaladores.data.map(installer => (
+                {sw.attributes.instaladores?.data?.map(installer => (
+                  <li key={installer.id}>
+                    <a href={`${process.env.NEXT_PUBLIC_STRAPI_URL}${installer.attributes.url}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline flex items-center">
+                      <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                      <span>{installer.attributes.name}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {activeTab === 'drivers' && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {driverItems.map(sw => (
+            <div key={sw.id} className="bg-white p-6 rounded-lg shadow-md border border-gray-100">
+              <h3 className="text-xl font-semibold text-gray-800">{sw.attributes.nome}</h3>
+              <p className="text-sm text-gray-500 mb-3">Tipo: {sw.attributes.tipo}</p>
+              <ul className="space-y-2">
+                {sw.attributes.instaladores?.data?.map(installer => (
                   <li key={installer.id}>
                     <a href={`${process.env.NEXT_PUBLIC_STRAPI_URL}${installer.attributes.url}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline flex items-center">
                       <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
