@@ -14,7 +14,7 @@ export default function Header({ categories = [] }) {
   const headerRef = useRef(null);
 
   const supportMenuItems = [
-    { name: 'Softwares', slug: '/suporte?tab=software' },
+    { name: 'Softwares', slug: '/suporte?tab=softwares' },
     { name: 'Manuais e Documentos', slug: '/suporte?tab=documentos' },
     { name: 'Drivers e Utilitários', slug: '/suporte?tab=drivers' },
     { name: 'Contato do Suporte', slug: '/suporte?tab=contato' },
