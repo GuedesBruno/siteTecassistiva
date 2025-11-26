@@ -1,176 +1,130 @@
 'use client';
 
 import { useState } from 'react';
-import DocumentListItem from './DocumentListItem';
-import SoftwareListItem from './SoftwareListItem';
-import CategoryMenu from './CategoryMenu';
-import SoftwareListMenu from './SoftwareListMenu'; // Novo menu para softwares
+import { FaWhatsapp, FaPhoneAlt, FaEnvelope, FaCertificate } from 'react-icons/fa';
 
-const TabButton = ({ label, isActive, onClick }) => (
-  <button
-    onClick={onClick}
-    className={`px-4 py-3 font-semibold border-b-4 transition-colors duration-300 ${
-      isActive
-        ? 'border-blue-500 text-blue-600'
-        : 'border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-300'
-    }`}
-  >
-    {label}
-  </button>
-);
+export default function SupportPageClient({ products, software }) {
+  const [activeTab, setActiveTab] = useState('documentos'); // 'documentos', 'drivers', 'contato'
 
-export default function SupportPageClient({ products, software, categories }) {
-  const [activeTab, setActiveTab] = useState('documentos');
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [selectedSubcategory, setSelectedSubcategory] = useState(null);
-  const [selectedItem, setSelectedItem] = useState(null); // Estado para o item selecionado (software ou driver)
+  // Função para ordenar os documentos
+  const sortDocuments = (docs) => {
+    if (!docs || !Array.isArray(docs)) return [];
+    const order = { 'catalogo': 1, 'guia': 2, 'manual': 3 };
+    return [...docs].sort((a, b) => {
+      const nameA = a.attributes.name.toLowerCase();
+      const nameB = b.attributes.name.toLowerCase();
+      
+      const orderA = Object.keys(order).find(key => nameA.includes(key)) ? order[Object.keys(order).find(key => nameA.includes(key))] : 99;
+      const orderB = Object.keys(order).find(key => nameB.includes(key)) ? order[Object.keys(order).find(key => nameB.includes(key))] : 99;
 
-  const handleCategorySelect = (category) => {
-    setSelectedItem(null);
-    setSelectedCategory(category);
-    setSelectedSubcategory(null);
-  };
-
-  const handleSubcategorySelect = (subcategory) => {
-    setSelectedItem(null);
-    setSelectedSubcategory(subcategory);
-    // Encontra e define a categoria pai para garantir que o filtro funcione
-    const parentCategory = categories.find(cat => 
-      cat.subcategorias?.some(sub => sub.slug === subcategory.slug)
-    );
-    setSelectedCategory(parentCategory || null); // Define como nulo se não encontrar
-  };
-
-  const handleItemSelect = (item) => {
-    setSelectedItem(item);
-  };
-
-  const handleTabClick = (tab) => {
-    setActiveTab(tab);
-    setSelectedCategory(null);
-    setSelectedSubcategory(null);
-    setSelectedItem(null);
-  };
-
-  // Filtra categorias e subcategorias para mostrar apenas aquelas com produtos que possuem documentos.
-  const productsWithDocs = products.filter(p => p.documentos && p.documentos.length > 0);
-  const relevantCatSlugs = new Set(productsWithDocs.flatMap(p => p.categorias?.map(c => c.slug) || []));
-  const relevantSubcatSlugs = new Set(productsWithDocs.map(p => p.subcategoria?.slug).filter(Boolean));
-
-  categories.forEach(cat => {
-      const hasRelevantSubcat = (cat.subcategorias || []).some(sub => relevantSubcatSlugs.has(sub.slug));
-      if (hasRelevantSubcat) {
-          relevantCatSlugs.add(cat.slug);
-      }
-  });
-
-  const filteredCategoriesForMenu = categories
-      .filter(cat => relevantCatSlugs.has(cat.slug))
-      .map(cat => ({
-          ...cat,
-          subcategorias: (cat.subcategorias || []).filter(sub => relevantSubcatSlugs.has(sub.slug))
-      }));
-
-  const filteredProducts = productsWithDocs.filter(product => {
-    if (selectedSubcategory) {
-      return product.subcategoria?.slug === selectedSubcategory.slug;
-    }
-    if (selectedCategory) {
-      return product.categorias?.some(cat => cat.slug === selectedCategory.slug);
-    }
-    return true;
-  });
-
-  const softwares = software
-    .filter(s => s && s.attributes && s.attributes.tipo === 'Software')
-    .sort((a, b) => a.attributes.nome.localeCompare(b.attributes.nome));
-
-  const drivers = software
-    .filter(s => s && s.attributes && (s.attributes.tipo === 'Driver' || s.attributes.tipo === 'Utilitario'))
-    .sort((a, b) => a.attributes.nome.localeCompare(b.attributes.nome));
-
-  const renderSidebarContent = () => {
-    switch (activeTab) {
-      case 'documentos':
-        return (
-          <>
-            <h2 className="text-2xl font-bold mb-4">Categorias</h2>
-            <CategoryMenu 
-              categories={filteredCategoriesForMenu}
-              onCategorySelect={handleCategorySelect}
-              onSubcategorySelect={handleSubcategorySelect}
-              selectedCategory={selectedCategory}
-              selectedSubcategory={selectedSubcategory}
-            />
-          </>
-        );
-
-      case 'softwares':
-        return <SoftwareListMenu items={softwares} selectedItem={selectedItem} onItemSelect={handleItemSelect} />;
-      case 'drivers':
-        return <SoftwareListMenu items={drivers} selectedItem={selectedItem} onItemSelect={handleItemSelect} />;
-      default:
-        return null;
-    }
-  };
-
-  const renderMainContent = () => {
-    switch (activeTab) {
-      case 'documentos':
-        return filteredProducts.length > 0 ? (
-          <div className="flex flex-col">
-            {filteredProducts.map(product => <DocumentListItem key={product.id} product={product} />)}
-          </div>
-        ) : (
-          <p className="text-center text-gray-500">Nenhum documento encontrado para a seleção atual.</p>
-        );
-      case 'softwares':
-      case 'drivers':
-        if (selectedItem) {
-          // Se um item for selecionado, exibe apenas seus detalhes.
-          return <SoftwareListItem software={selectedItem} />;
-        }
-        // Se nenhum item for selecionado, exibe a lista completa da aba ativa.
-        const itemsToShow = activeTab === 'softwares' ? softwares : drivers;
-        return (
-          <div className="flex flex-col space-y-4">
-            {itemsToShow.map(item => (
-              <SoftwareListItem key={item.id} software={item} />
-            ))}
-          </div>
-        );
-      default:
-        return null;
-    }
+      if (orderA !== orderB) return orderA - orderB;
+      return nameA.localeCompare(nameB); // Fallback para ordem alfabética
+    });
   };
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <header className="mb-8">
-        <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">Central de Suporte</h1>
-        <p className="mt-3 text-lg text-gray-600">Encontre documentos, softwares e drivers para nossos produtos.</p>
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <header className="text-center mb-12">
+        <h1 className="text-4xl font-extrabold text-gray-900">Suporte Técnico</h1>
+        <p className="mt-3 max-w-2xl mx-auto text-lg text-gray-600">
+          Encontre manuais, drivers e entre em contato com nossa equipe.
+        </p>
       </header>
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-        <aside className="lg:col-span-1">
-          <div className="sticky top-24">
-            {renderSidebarContent()}
-          </div>
-        </aside>
-
-        <main className="lg:col-span-3">
-          <div className="border-b border-gray-200 mb-8">
-            <nav className="-mb-px flex space-x-6" aria-label="Tabs">
-              <TabButton label="Documentos" isActive={activeTab === 'documentos'} onClick={() => handleTabClick('documentos')} />
-              <TabButton label="Softwares" isActive={activeTab === 'softwares'} onClick={() => handleTabClick('softwares')} />
-              <TabButton label="Drivers e Utilitários" isActive={activeTab === 'drivers'} onClick={() => handleTabClick('drivers')} />
-            </nav>
-          </div>
-          <div>
-            {renderMainContent()}
-          </div>
-        </main>
+      <div className="border-b border-gray-200 mb-8">
+        <nav className="-mb-px flex space-x-6 justify-center" aria-label="Tabs">
+          <button onClick={() => setActiveTab('documentos')} className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg ${activeTab === 'documentos' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}>
+            Manuais e Documentos
+          </button>
+          <button onClick={() => setActiveTab('drivers')} className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg ${activeTab === 'drivers' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}>
+            Drivers e Utilitários
+          </button>
+          <button onClick={() => setActiveTab('contato')} className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg ${activeTab === 'contato' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}>
+            Contato do Suporte
+          </button>
+        </nav>
       </div>
+
+      {activeTab === 'documentos' && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {products.filter(p => p.attributes.documentos?.data?.length > 0).map(product => (
+            <div key={product.id} className="bg-white p-6 rounded-lg shadow-md border border-gray-100">
+              <h3 className="text-xl font-semibold text-gray-800">{product.attributes.nome}</h3>
+              <ul className="mt-3 space-y-2">
+                {sortDocuments(product.attributes.documentos.data).map(doc => (
+                  <li key={doc.id}>
+                    <a href={`${process.env.NEXT_PUBLIC_STRAPI_URL}${doc.attributes.url}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline flex items-center">
+                      <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                      <span>{doc.attributes.name}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {activeTab === 'drivers' && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {software.map(sw => (
+            <div key={sw.id} className="bg-white p-6 rounded-lg shadow-md border border-gray-100">
+              <h3 className="text-xl font-semibold text-gray-800">{sw.attributes.nome}</h3>
+              <p className="text-sm text-gray-500 mb-3">Tipo: {sw.attributes.tipo}</p>
+              <ul className="space-y-2">
+                {sw.attributes.instaladores.data.map(installer => (
+                  <li key={installer.id}>
+                    <a href={`${process.env.NEXT_PUBLIC_STRAPI_URL}${installer.attributes.url}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline flex items-center">
+                      <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                      <span>{installer.attributes.name}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {activeTab === 'contato' && (
+        <div className="bg-white p-8 rounded-lg shadow-md border border-gray-200">
+            <h2 className="text-2xl font-bold text-gray-800 mb-6">Fale com nosso Suporte Técnico</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="space-y-6">
+                    <div className="flex items-start">
+                        <FaPhoneAlt className="text-blue-600 mt-1 mr-4 flex-shrink-0" size={20} />
+                        <div>
+                            <h3 className="font-semibold text-lg">Telefone</h3>
+                            <p className="text-gray-600">+55 (11) 3266-4311</p>
+                            <p className="text-sm text-gray-500">Ao ligar, escolha a <span className="font-bold">opção 2</span> para ser direcionado ao Suporte.</p>
+                        </div>
+                    </div>
+                    <div className="flex items-start">
+                        <FaWhatsapp className="text-green-500 mt-1 mr-4 flex-shrink-0" size={22} />
+                        <div>
+                            <h3 className="font-semibold text-lg">WhatsApp</h3>
+                            <p className="text-gray-600">+55 (11) 9 9597-8139</p>
+                            <p className="text-sm text-gray-500">Ao iniciar a conversa, escolha a <span className="font-bold">opção 2</span> no menu para falar com o Suporte.</p>
+                        </div>
+                    </div>
+                    <div className="flex items-start">
+                        <FaEnvelope className="text-red-500 mt-1 mr-4 flex-shrink-0" size={20} />
+                        <div>
+                            <h3 className="font-semibold text-lg">E-mail</h3>
+                            <p className="text-gray-600">suporte@tecassistiva.com.br</p>
+                        </div>
+                    </div>
+                </div>
+                <div className="bg-blue-50 p-6 rounded-lg border border-blue-200 flex items-start">
+                    <FaCertificate className="text-blue-600 mt-1 mr-4 flex-shrink-0" size={24} />
+                    <div>
+                        <h3 className="font-semibold text-lg text-blue-800">Equipe Certificada</h3>
+                        <p className="text-gray-700 mt-2">Nossos técnicos são treinados e certificados diretamente pelas fabricantes dos produtos. Como representantes oficiais da maioria das marcas que trabalhamos, garantimos um suporte especializado e de alta qualidade para você.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+      )}
     </div>
   );
 }
