@@ -73,7 +73,7 @@ export default function SupportPageClient({ products, software, categories }) {
   categories.forEach(cat => {
       const hasRelevantSubcat = (getAttrs(cat).subcategorias?.data || []).some(sub => relevantSubcatSlugs.has(getAttrs(sub).slug));
       if (hasRelevantSubcat) {
-          relevantCatSlugs.add(cat.attributes.slug);
+          relevantCatSlugs.add(getAttrs(cat).slug);
       }
   });
 
