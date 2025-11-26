@@ -78,7 +78,7 @@ export default function SupportPageClient({ products, software, categories }) {
   });
 
   const filteredCategoriesForMenu = categories
-      .filter(cat => relevantCatSlugs.has(cat.attributes.slug))
+      .filter(cat => cat && relevantCatSlugs.has(getAttrs(cat).slug))
       .map(cat => {
           const catAttrs = getAttrs(cat);
           return {
@@ -96,12 +96,11 @@ export default function SupportPageClient({ products, software, categories }) {
   });
 
   const softwares = software
-    .filter(s => s?.attributes?.tipo === 'Software')
-    .sort((a, b) => a.attributes.nome.localeCompare(b.attributes.nome));
+    .sort((a, b) => getAttrs(a).nome.localeCompare(getAttrs(b).nome));
 
   const drivers = software
     .filter(s => s?.attributes && (s.attributes.tipo === 'Driver' || s.attributes.tipo === 'Utilitario'))
-    .sort((a, b) => a.attributes.nome.localeCompare(b.attributes.nome));
+    .sort((a, b) => getAttrs(a).nome.localeCompare(getAttrs(b).nome));
 
   const renderSidebarContent = () => {
     switch (activeTab) {

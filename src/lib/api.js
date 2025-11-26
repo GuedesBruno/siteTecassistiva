@@ -119,7 +119,15 @@ export async function getFeaturedProducts() {
 
 export async function getAllCategories() {
   const response = await fetchAPI('/api/categorias?sort=nome:asc&fields[0]=nome&fields[1]=slug&populate[subcategorias][fields][0]=nome&populate[subcategorias][fields][1]=slug&pagination[limit]=100');
-  return normalizeDataArray(response);
+  const data = normalizeDataArray(response);
+  // Manually normalize if attributes is missing
+  return data.map(item => {
+    if (item.attributes) {
+      return item;
+    }
+    const { id, ...attributes } = item;
+    return { id, attributes };
+  });
 }
 
 export async function getCategoryBySlug(slug) {
