@@ -8,7 +8,7 @@ dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 // Import API functions
 import * as api from '../src/lib/api.js';
 
-// Function to strip HTML/JSX tags and extract text
+// Function to strip HTML/JSX tags and extract text.
 function stripTags(content) {
   return content
     .replace(/<[^>]+>/g, ' ')
