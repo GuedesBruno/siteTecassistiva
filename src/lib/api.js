@@ -225,7 +225,16 @@ export async function getProductsWithDocuments() {
     const query = 'populate[documentos]=*&pagination[limit]=1000&sort=nome:asc';
 
     const productsData = await fetchAPI(`/api/produtos?${query}`);
-    return normalizeDataArray(productsData);
+    const rawData = normalizeDataArray(productsData);
+
+    // Normaliza os dados para garantir a estrutura { id, attributes }
+    return rawData.map(item => {
+      if (item.attributes) {
+        return item;
+      }
+      const { id, ...attributes } = item;
+      return { id, attributes };
+    });
   } catch (error) {
     console.error(`Falha ao buscar produtos com documentos:`, error);
     return [];
