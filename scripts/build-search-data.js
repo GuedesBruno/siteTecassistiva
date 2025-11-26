@@ -22,7 +22,7 @@ async function generateSearchData() {
   try {
     // Fetch data from APIs
     const [products, atas, software] = await Promise.all([
-      api.getAllProductsForDisplay(),
+      api.getAllProductsForDisplay({ populateSubcategories: true }),
       api.getOpenAtas(),
       api.getSoftwareAndDrivers(),
     ]);
