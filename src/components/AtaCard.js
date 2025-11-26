@@ -136,20 +136,21 @@ export default function AtaCard({ ata }) {
 
         {docs && docs.length > 0 && (
           <div className="pt-4 mt-4 border-t border-gray-200">
-            <h4 className="text-lg font-semibold text-gray-800 mb-2">Documentos da Ata:</h4>
+            <h4 className="text-lg font-semibold text-gray-800 mb-3">Documentos da Ata:</h4>
             <ul className="space-y-2">
               {docs.map((doc) => {
                 const docAttributes = doc.attributes;
                 const fileUrl = getStrapiMediaUrl(docAttributes.url);
                 return (
                   <li key={doc.id}>
-                    <a
-                      href={fileUrl}
-                      target="_blank"
+                    <a 
+                      href={fileUrl} 
+                      target="_blank" 
                       rel="noopener noreferrer"
-                      title={`Abrir ${docAttributes.name} em uma nova aba`}
+                      title={`Visualizar ${docAttributes.name} em nova aba`}
                       className="text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200 flex items-center"
                     >
+                      {/* Ícone de "abrir em nova aba" */}
                       <svg className="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                       <span>{docAttributes.name}</span>
                     </a>
