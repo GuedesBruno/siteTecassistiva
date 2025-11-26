@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import ContactForm from '@/components/ContactForm';
-import { FaInstagram, FaYoutube } from 'react-icons/fa6';
+import Image from 'next/image';
 
 
 export default function ContatoPage() {
@@ -41,10 +41,10 @@ export default function ContatoPage() {
             <h3 className="text-xl font-bold mb-4">Nossas Redes</h3>
             <div className="flex items-center space-x-6">
               <a href="https://www.instagram.com/tecassistiva" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
-                <FaInstagram size={32} />
+                <Image src="/logo_instagram.svg" alt="Instagram" width={32} height={32} />
               </a>
               <a href="https://www.youtube.com/@TecaAssistiva" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
-                <FaYoutube size={36} />
+                <Image src="/logo_youtube.svg" alt="Youtube" width={36} height={36} />
               </a>
             </div>
           </div>
