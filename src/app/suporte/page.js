@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { getProductsWithDocuments, getSoftwareAndDrivers, getAllCategories } from '@/lib/api';
 import SupportPageClient from '@/components/SupportPageClient';
 import Breadcrumbs from '@/components/Breadcrumbs';
@@ -25,11 +26,13 @@ export default async function SuportePage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-8">
             <Breadcrumbs path={breadcrumbs} />
         </div>
-        <SupportPageClient 
-            products={products}
-            software={software}
-            categories={categories}
-        />
+        <Suspense fallback={<div className="text-center py-16">Carregando conteúdo do suporte...</div>}>
+            <SupportPageClient 
+                products={products}
+                software={software}
+                categories={categories}
+            />
+        </Suspense>
     </div>
   );
 }
