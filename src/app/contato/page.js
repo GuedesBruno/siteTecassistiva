@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import ContactForm from '@/components/ContactForm';
-import { FaInstagram, FaYoutube } from 'react-icons/fa';
+import { FaInstagram, FaYoutube } from 'react-icons/fa6';
 
 
 export default function ContatoPage() {

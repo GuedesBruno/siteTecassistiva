@@ -25,6 +25,12 @@ export default async function AtasAbertasPage() {
       {/* 1. Seção de Título e Introdução */}
       <section className="my-12">
         <h1 className="text-4xl font-extrabold text-gray-900 mb-6 text-center">Atas Abertas</h1>
+        <div className="prose max-w-4xl mx-auto text-center text-gray-700 mb-10">
+          <p className="text-lg">
+            Você sabe o que é um Sistema de Registro de Preço (SRP)? <br />
+            Se você já conhece, <a href="#lista-atas" className="text-blue-600 hover:underline font-semibold">clique aqui e acesse as ATAS abertas</a>.
+          </p>
+        </div>
         <div className="prose max-w-4xl mx-auto text-gray-700">
             <h2 className="text-2xl font-bold text-center">O que é o Sistema de Registro de Preços – SRP?</h2>
             <p className="text-justify">Placeholder: O Sistema de Registro de Preços (SRP) é um procedimento especial de licitação que seleciona a proposta mais vantajosa para futuras e eventuais contratações governamentais. Em vez de realizar uma licitação para cada compra, o órgão público registra os preços de produtos e serviços de fornecedores qualificados, que se comprometem a manter a oferta por um período determinado (geralmente 12 meses).</p>
@@ -37,7 +43,7 @@ export default async function AtasAbertasPage() {
       </section>
 
       {/* 2. Seção da Lista de Atas */}
-      <section className="my-16">
+      <section id="lista-atas" className="my-16 scroll-mt-20">
         <h2 className="text-3xl font-bold text-gray-800 text-center border-b-2 border-gray-200 pb-4 mb-10">
             Lista de ATAS disponíveis para você:
         </h2>
