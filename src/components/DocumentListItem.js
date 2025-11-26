@@ -7,8 +7,23 @@ const DownloadIcon = () => (
   </svg>
 );
 
+// Função para ordenar os documentos
+const sortDocuments = (docs) => {
+  if (!docs || !Array.isArray(docs)) return [];
+  const order = { 'catalogo': 1, 'guia': 2, 'manual': 3 };
+  return [...docs].sort((a, b) => {
+    const nameA = a.attributes.name.toLowerCase();
+    const nameB = b.attributes.name.toLowerCase();
+    
+    const orderA = Object.keys(order).find(key => nameA.includes(key)) ? order[Object.keys(order).find(key => nameA.includes(key))] : 99;
+    const orderB = Object.keys(order).find(key => nameB.includes(key)) ? order[Object.keys(order).find(key => nameB.includes(key))] : 99;
+
+    if (orderA !== orderB) return orderA - orderB;
+    return nameA.localeCompare(nameB); // Fallback para ordem alfabética
+  });
+};
+
 export default function DocumentListItem({ product }) {
-  // As propriedades do produto são acessadas diretamente no objeto.
   const { nome, documentos } = product;
 
   if (!documentos || documentos.length === 0) {
