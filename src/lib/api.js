@@ -222,9 +222,7 @@ export async function getOpenAtas() {
 
 export async function getProductsWithDocuments() {
   try {
-    // To ensure all fields are returned, especially 'documentos',
-    // removing the 'fields' parameter which can conflict with 'populate=*'.
-    const query = 'populate=*&pagination[limit]=1000&sort=nome:asc';
+    const query = 'populate[documentos]=*&populate[categorias]=*&populate[subcategorias]=*&pagination[limit]=1000&sort=nome:asc';
 
     const productsData = await fetchAPI(`/api/produtos?${query}`);
     return normalizeDataArray(productsData);
