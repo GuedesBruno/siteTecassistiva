@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import ContactForm from '@/components/ContactForm';
+import { FaInstagram, FaYoutube } from 'react-icons/fa';
+
 
 export default function ContatoPage() {
   return (
@@ -26,14 +28,26 @@ export default function ContatoPage() {
         </div>
 
         {/* Coluna de Informações */}
-        <div className="bg-white p-6 rounded-lg border h-fit">
-          <h2 className="text-2xl font-semibold mb-4">Informações</h2>
-          <p className="text-gray-700"><strong>Telefone:</strong> +55 (11) 3266-4311</p>
-          <p className="text-gray-700 mt-4"><strong>WhatsApp:</strong> +55 (11) 9 9597-8139</p>
-          <p className="text-gray-700 mt-4"><strong>Email:</strong> teca@tecassistiva.com.br</p>
-          <p className="text-gray-700 mt-4"><strong>Endereço:</strong> R. das Camélias, 37 - Mirandópolis, São Paulo - SP</p>
-          <p className="text-gray-700 mt-4"><strong>Horário de Atendimento:</strong></p>
-          <p className="text-gray-700">Seg-Qui 8h-18h e Sexta 8h-17h</p>
+        <div className="bg-[#002554] text-white p-8 rounded-lg shadow-lg h-fit">
+          <h2 className="text-2xl font-bold mb-6 border-b border-blue-300 pb-2">Informações</h2>
+          <p className="mt-4"><strong>Telefone:</strong> +55 (11) 3266-4311</p>
+          <p className="mt-4"><strong>WhatsApp:</strong> +55 (11) 9 9597-8139</p>
+          <p className="mt-4"><strong>Email:</strong> teca@tecassistiva.com.br</p>
+          <p className="mt-4"><strong>Endereço:</strong> R. das Camélias, 37 - Mirandópolis, São Paulo - SP</p>
+          <p className="mt-4"><strong>Horário de Atendimento:</strong></p>
+          <p>Seg-Qui 8h-18h e Sexta 8h-17h</p>
+
+          <div className="mt-8 border-t border-blue-300 pt-6">
+            <h3 className="text-xl font-bold mb-4">Nossas Redes</h3>
+            <div className="flex items-center space-x-6">
+              <a href="https://www.instagram.com/tecassistiva" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+                <FaInstagram size={32} />
+              </a>
+              <a href="https://www.youtube.com/@TecaAssistiva" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+                <FaYoutube size={36} />
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
