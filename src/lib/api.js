@@ -222,7 +222,8 @@ export async function getOpenAtas() {
 
 export async function getProductsWithDocuments() {
   try {
-    const query = 'populate[documentos]=*&pagination[limit]=1000&sort=nome:asc';
+    // Corrigido para usar a sintaxe de população de primeiro nível padrão do Strapi.
+    const query = 'populate=documentos&pagination[limit]=1000&sort=nome:asc';
 
     const productsData = await fetchAPI(`/api/produtos?${query}`);
     const rawData = normalizeDataArray(productsData);
