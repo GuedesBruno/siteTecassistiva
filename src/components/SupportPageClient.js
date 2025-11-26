@@ -1,10 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { FaWhatsapp, FaPhoneAlt, FaEnvelope, FaCertificate } from 'react-icons/fa';
 
 export default function SupportPageClient({ products, software }) {
-  const [activeTab, setActiveTab] = useState('software');
+  const searchParams = useSearchParams();
+  const tabFromUrl = searchParams.get('tab');
+  const [activeTab, setActiveTab] = useState(tabFromUrl || 'software');
 
   // Filtra os itens recebidos em 'software' para suas respectivas categorias
   const softwareItems = software.filter(s => s.attributes?.tipo === 'Software');
@@ -25,6 +28,13 @@ export default function SupportPageClient({ products, software }) {
       return nameA.localeCompare(nameB); // Fallback para ordem alfabética
     });
   };
+
+  // Efeito para atualizar a aba ativa se a URL mudar
+  useEffect(() => {
+    if (tabFromUrl && tabFromUrl !== activeTab) {
+      setActiveTab(tabFromUrl);
+    }
+  }, [tabFromUrl, activeTab]);
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">

@@ -13,6 +13,13 @@ export default function Header({ categories = [] }) {
   const router = useRouter();
   const headerRef = useRef(null);
 
+  const supportMenuItems = [
+    { name: 'Softwares', slug: '/suporte?tab=software' },
+    { name: 'Manuais e Documentos', slug: '/suporte?tab=documentos' },
+    { name: 'Drivers e Utilitários', slug: '/suporte?tab=drivers' },
+    { name: 'Contato do Suporte', slug: '/suporte?tab=contato' },
+  ];
+
   // Função para medir a altura do header e definir uma variável CSS
   const updateHeaderHeight = () => {
     if (headerRef.current) {
@@ -100,7 +107,22 @@ export default function Header({ categories = [] }) {
               </div>
             </div>
             <Link href="/atas-abertas" className="text-white hover:text-tec-blue-light transition font-semibold">Atas Abertas</Link>
-            <Link href="/suporte" className="text-white hover:text-tec-blue-light transition font-semibold">Suporte</Link>
+            <div className="relative group py-4 -my-4">
+              <Link href="/suporte" className="text-white hover:text-tec-blue-light transition font-semibold">
+                Suporte
+              </Link>
+              <div className="absolute left-1/2 transform -translate-x-1/2 top-full mt-0 w-72 bg-white shadow-lg hidden group-hover:block z-[120] border">
+                <div className="py-2">
+                  {supportMenuItems.map(item => (
+                    <div key={item.name} className="border-b last:border-b-0">
+                      <Link href={item.slug} className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">
+                        {item.name}
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
             <Link href="/contato" className="text-white hover:text-tec-blue-light transition font-semibold">Contato</Link>
           </nav>
 
@@ -178,7 +200,16 @@ export default function Header({ categories = [] }) {
               </div>
             </div>
             <Link href="/atas-abertas" onClick={() => setIsMenuOpen(false)} className="text-white text-lg font-semibold">Atas Abertas</Link>
-            <Link href="/suporte" onClick={() => setIsMenuOpen(false)} className="text-white text-lg font-semibold">Suporte</Link>
+            <div className="flex flex-col space-y-4">
+              <Link href="/suporte" onClick={() => setIsMenuOpen(false)} className="text-white text-lg font-semibold">Suporte</Link>
+              <div className="flex flex-col space-y-2 pl-4">
+                {supportMenuItems.map(item => (
+                  <Link key={item.name} href={item.slug} onClick={() => setIsMenuOpen(false)} className="text-white text-base">
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
             <Link href="/contato" onClick={() => setIsMenuOpen(false)} className="text-white text-lg font-semibold">Contato</Link>
           </nav>
 
