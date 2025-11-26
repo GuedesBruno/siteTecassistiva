@@ -236,7 +236,7 @@ export async function getSoftwareAndDrivers() {
       'pagination[limit]': 1000,
     }).toString();
 
-    // Adiciona a população do produto separadamente para maior robustez
+    // Adiciona a população do produto separadamente para maior robustez.
     const query = `${params}&populate=produto`;
 
     const softwareData = await fetchAPI(`/api/softwares?${query}`);
