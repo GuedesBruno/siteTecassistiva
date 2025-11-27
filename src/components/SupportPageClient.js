@@ -84,11 +84,17 @@ export default function SupportPageClient({ products, software, categories }) {
     if (!items) return [];
     // Se for um array direto
     if (Array.isArray(items)) {
-      return items.map(item => (item.attributes?.slug || item.slug)).filter(Boolean);
+      return items
+        .filter(item => item) // Filtra itens null/undefined
+        .map(item => (item.attributes?.slug || item.slug))
+        .filter(Boolean);
     }
     // Se for um objeto com .data
     if (items.data && Array.isArray(items.data)) {
-      return items.data.map(item => (item.attributes?.slug || item.slug)).filter(Boolean);
+      return items.data
+        .filter(item => item) // Filtra itens null/undefined
+        .map(item => (item.attributes?.slug || item.slug))
+        .filter(Boolean);
     }
     return [];
   };
@@ -116,10 +122,7 @@ export default function SupportPageClient({ products, software, categories }) {
               ...catAttrs,
               id: cat.id,
               subcategorias: subcategoriesData
-                .filter(sub => {
-                  const subSlug = getAttrs(sub).slug;
-                  return relevantSubcatSlugs.has(subSlug);
-                })
+                .filter(sub => sub && relevantSubcatSlugs.has(getAttrs(sub).slug))
                 .map(s => ({...getAttrs(s), id: s.id}))
           };
       });
@@ -138,11 +141,20 @@ export default function SupportPageClient({ products, software, categories }) {
   });
 
   const softwares = software
-    .sort((a, b) => getAttrs(a).nome.localeCompare(getAttrs(b).nome));
+    .filter(s => s && (s.attributes || s.nome))
+    .sort((a, b) => {
+      const nameA = getAttrs(a).nome || '';
+      const nameB = getAttrs(b).nome || '';
+      return nameA.localeCompare(nameB);
+    });
 
   const drivers = software
-    .filter(s => s?.attributes && (s.attributes.tipo === 'Driver' || s.attributes.tipo === 'Utilitario'))
-    .sort((a, b) => getAttrs(a).nome.localeCompare(getAttrs(b).nome));
+    .filter(s => s && s?.attributes && (s.attributes.tipo === 'Driver' || s.attributes.tipo === 'Utilitario'))
+    .sort((a, b) => {
+      const nameA = getAttrs(a).nome || '';
+      const nameB = getAttrs(b).nome || '';
+      return nameA.localeCompare(nameB);
+    });
 
   const renderSidebarContent = () => {
     switch (activeTab) {

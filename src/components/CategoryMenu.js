@@ -43,8 +43,12 @@ export default function CategoryMenu({
   };
 
   const renderItem = (item, isSub = false, parentCategorySlug = null) => {
+    if (!item) return null;
     const attrs = getAttrs(item);
-    const slug = attrs.slug;
+    const slug = attrs?.slug;
+    
+    if (!slug) return null;
+    
     const parentSlug = parentCategorySlug || (isSub ? activeCategorySlug || selectedCategory?.slug : undefined);
 
     const isActive = isSub
@@ -102,6 +106,7 @@ export default function CategoryMenu({
           <nav>
             <ul className="space-y-1">
               {sortedCategories.map((category) => {
+                if (!category) return null;
                 const catAttrs = getAttrs(category);
                 const isActive = isCallbackMode ? 
                   selectedCategory?.slug === catAttrs.slug : 
@@ -111,9 +116,13 @@ export default function CategoryMenu({
                 const subcategories = Array.isArray(catAttrs.subcategorias) 
                   ? catAttrs.subcategorias 
                   : (catAttrs.subcategorias?.data || []);
-                const sortedSubcategories = [...subcategories].sort((a, b) =>
-                  getAttrs(a).nome.localeCompare(getAttrs(b).nome)
-                );
+                const sortedSubcategories = subcategories
+                  .filter(s => s) // Filtra nulos/undefined
+                  .sort((a, b) => {
+                    const nameA = getAttrs(a).nome || '';
+                    const nameB = getAttrs(b).nome || '';
+                    return nameA.localeCompare(nameB);
+                  });
 
                 return (
                   <li key={catAttrs.slug}>
