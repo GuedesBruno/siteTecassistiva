@@ -68,7 +68,8 @@ export default function SupportPageClient({ products, software, categories }) {
 
   const productsWithDocs = products.filter(p => {
     const attrs = getAttrs(p);
-    return attrs.documentos?.data?.length > 0;
+    const docsArray = Array.isArray(attrs.documentos) ? attrs.documentos : (attrs.documentos?.data || []);
+    return docsArray.length > 0;
   });
 
   // DEBUG: Log para verificar a estrutura dos dados
@@ -81,9 +82,11 @@ export default function SupportPageClient({ products, software, categories }) {
   // Função auxiliar para extrair slugs de relacionamentos (funciona com .data ou diretamente)
   const extractSlugs = (items) => {
     if (!items) return [];
+    // Se for um array direto
     if (Array.isArray(items)) {
       return items.map(item => (item.attributes?.slug || item.slug)).filter(Boolean);
     }
+    // Se for um objeto com .data
     if (items.data && Array.isArray(items.data)) {
       return items.data.map(item => (item.attributes?.slug || item.slug)).filter(Boolean);
     }
@@ -106,11 +109,13 @@ export default function SupportPageClient({ products, software, categories }) {
       .filter(cat => cat && relevantCatSlugs.has(getAttrs(cat).slug))
       .map(cat => {
           const catAttrs = getAttrs(cat);
-          const subcategoriesData = catAttrs.subcategorias?.data || catAttrs.subcategorias || [];
+          const subcategoriesData = Array.isArray(catAttrs.subcategorias) 
+            ? catAttrs.subcategorias 
+            : (catAttrs.subcategorias?.data || []);
           return {
               ...catAttrs,
               id: cat.id,
-              subcategorias: (Array.isArray(subcategoriesData) ? subcategoriesData : [])
+              subcategorias: subcategoriesData
                 .filter(sub => {
                   const subSlug = getAttrs(sub).slug;
                   return relevantSubcatSlugs.has(subSlug);

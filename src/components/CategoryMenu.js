@@ -107,7 +107,10 @@ export default function CategoryMenu({
                   selectedCategory?.slug === catAttrs.slug : 
                   activeCategorySlug === catAttrs.slug;
                 
-                const subcategories = catAttrs.subcategorias?.data || catAttrs.subcategorias || [];
+                // Lidar com ambas estruturas: .data ou array direto
+                const subcategories = Array.isArray(catAttrs.subcategorias) 
+                  ? catAttrs.subcategorias 
+                  : (catAttrs.subcategorias?.data || []);
                 const sortedSubcategories = [...subcategories].sort((a, b) =>
                   getAttrs(a).nome.localeCompare(getAttrs(b).nome)
                 );

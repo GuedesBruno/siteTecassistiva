@@ -25,7 +25,9 @@ const sortDocuments = (docs) => {
 
 export default function DocumentListItem({ product }) {
   const { nome, documentos } = product;
-  const docsArray = documentos?.data || [];
+  
+  // Lidar com ambas estruturas: documentos.data ou documentos direto
+  const docsArray = Array.isArray(documentos) ? documentos : (documentos?.data || []);
 
   if (docsArray.length === 0) {
     return null;
