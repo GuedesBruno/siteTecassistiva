@@ -141,7 +141,7 @@ export default function SupportPageClient({ products, software, categories }) {
   });
 
   const softwares = software
-    .filter(s => s && (s.attributes || s.nome))
+    .filter(s => s && (s?.attributes && s.attributes.tipo !== 'Driver' && s.attributes.tipo !== 'Utilitario' || !s?.attributes?.tipo))
     .sort((a, b) => {
       const nameA = getAttrs(a).nome || '';
       const nameB = getAttrs(b).nome || '';
