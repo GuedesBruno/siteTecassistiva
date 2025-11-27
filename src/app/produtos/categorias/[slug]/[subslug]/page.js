@@ -50,7 +50,13 @@ export default async function SubCategoryPage({ params }) {
   }
 
   const category = categoryData.data[0].attributes;
-  const subcategory = category.subcategorias?.data?.find(s => (s.attributes || s).slug === subslug);
+  
+  // Lidar com ambas estruturas: .data ou array direto
+  const subcategoriesArray = Array.isArray(category.subcategorias) 
+    ? category.subcategorias 
+    : (category.subcategorias?.data || []);
+  
+  const subcategory = subcategoriesArray.find(s => (s.attributes || s).slug === subslug);
   const subcategoryName = subcategory ? (subcategory.attributes || subcategory).nome : '';
 
   const pageTitle = subcategoryName ? `${category.nome} - ${subcategoryName}` : category.nome;
@@ -59,8 +65,12 @@ export default async function SubCategoryPage({ params }) {
     { name: 'Página Inicial', path: '/' },
     { name: 'Produtos', path: '/produtos' },
     { name: category.nome, path: `/produtos/categorias/${category.slug}` },
-    { name: subcategoryName, path: `/produtos/categorias/${category.slug}/${subslug}` },
   ];
+
+  // Adicionar subcategoria ao breadcrumb apenas se houver nome
+  if (subcategoryName) {
+    breadcrumbs.push({ name: subcategoryName, path: `/produtos/categorias/${category.slug}/${subslug}` });
+  }
 
   return (
     <div className="py-8">

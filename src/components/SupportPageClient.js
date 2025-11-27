@@ -215,23 +215,40 @@ export default function SupportPageClient({ products, software, categories }) {
                           <FaPhoneAlt className="text-blue-600 mt-1 mr-4 flex-shrink-0" size={20} />
                           <div>
                               <h3 className="font-semibold text-lg">Telefone</h3>
-                              <p className="text-gray-600">+55 (11) 3266-4311</p>
-                              <p className="text-sm text-gray-500">Ao ligar, escolha a <span className="font-bold">opção 2</span> para ser direcionado ao Suporte.</p>
+                              <a 
+                                href="tel:+5511326643111" 
+                                className="text-blue-600 hover:text-blue-800 hover:underline font-medium"
+                              >
+                                +55 (11) 3266-4311
+                              </a>
+                              <p className="text-sm text-gray-500 mt-1">Ao ligar, escolha a <span className="font-bold">opção 2</span> para ser direcionado ao Suporte.</p>
                           </div>
                       </div>
                       <div className="flex items-start">
                           <FaWhatsapp className="text-green-500 mt-1 mr-4 flex-shrink-0" size={22} />
                           <div>
                               <h3 className="font-semibold text-lg">WhatsApp</h3>
-                              <p className="text-gray-600">+55 (11) 9 9597-8139</p>
-                              <p className="text-sm text-gray-500">Ao iniciar a conversa, escolha a <span className="font-bold">opção 2</span> no menu para falar com o Suporte.</p>
+                              <a 
+                                href="https://wa.me/5511995978139" 
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-green-600 hover:text-green-800 hover:underline font-medium"
+                              >
+                                +55 (11) 99597-8139
+                              </a>
+                              <p className="text-sm text-gray-500 mt-1">Ao iniciar a conversa, escolha a <span className="font-bold">opção 2</span> no menu para falar com o Suporte.</p>
                           </div>
                       </div>
                       <div className="flex items-start">
                           <FaEnvelope className="text-red-500 mt-1 mr-4 flex-shrink-0" size={20} />
                           <div>
                               <h3 className="font-semibold text-lg">E-mail</h3>
-                              <p className="text-gray-600">suporte@tecassistiva.com.br</p>
+                              <a 
+                                href="mailto:suporte@tecassistiva.com.br" 
+                                className="text-red-600 hover:text-red-800 hover:underline font-medium"
+                              >
+                                suporte@tecassistiva.com.br
+                              </a>
                           </div>
                       </div>
                   </div>
