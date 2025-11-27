@@ -16,6 +16,15 @@ export default async function SuportePage() {
     getAllCategories(),
   ]);
 
+  // DEBUG: Log para verificar os dados
+  console.log('=== SUPORTE PAGE DEBUG ===');
+  console.log('Total de produtos com documentos:', products.length);
+  if (products.length > 0) {
+    console.log('Primeiro produto:', JSON.stringify(products[0], null, 2));
+  }
+  console.log('Total de categorias:', categories.length);
+  console.log('=========================');
+
   const breadcrumbs = [
     { name: 'Página Inicial', path: '/' },
     { name: 'Suporte', path: '/suporte' },

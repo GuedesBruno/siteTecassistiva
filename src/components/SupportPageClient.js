@@ -35,7 +35,7 @@ export default function SupportPageClient({ products, software, categories }) {
     if (currentTab && currentTab !== activeTab) {
       setActiveTab(currentTab);
     }
-  }, [searchParams, activeTab]);
+  }, [tabFromUrl]);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -66,14 +66,39 @@ export default function SupportPageClient({ products, software, categories }) {
   // Função auxiliar para acessar atributos de forma segura
   const getAttrs = (item) => item.attributes || item;
 
-  const productsWithDocs = products.filter(p => getAttrs(p).documentos?.data?.length > 0);
-  const relevantCatSlugs = new Set(productsWithDocs.flatMap(p => getAttrs(p).categorias?.data?.map(c => getAttrs(c).slug) || []));
-  const relevantSubcatSlugs = new Set(productsWithDocs.flatMap(p => getAttrs(p).subcategorias?.data?.map(s => getAttrs(s).slug)).filter(Boolean));
+  const productsWithDocs = products.filter(p => {
+    const attrs = getAttrs(p);
+    return attrs.documentos?.data?.length > 0;
+  });
+
+  // DEBUG: Log para verificar a estrutura dos dados
+  if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
+    if (productsWithDocs.length > 0) {
+      console.log('Primeiro produto com docs:', getAttrs(productsWithDocs[0]));
+    }
+  }
+
+  // Função auxiliar para extrair slugs de relacionamentos (funciona com .data ou diretamente)
+  const extractSlugs = (items) => {
+    if (!items) return [];
+    if (Array.isArray(items)) {
+      return items.map(item => (item.attributes?.slug || item.slug)).filter(Boolean);
+    }
+    if (items.data && Array.isArray(items.data)) {
+      return items.data.map(item => (item.attributes?.slug || item.slug)).filter(Boolean);
+    }
+    return [];
+  };
+
+  const relevantCatSlugs = new Set(productsWithDocs.flatMap(p => extractSlugs(getAttrs(p).categorias)));
+  const relevantSubcatSlugs = new Set(productsWithDocs.flatMap(p => extractSlugs(getAttrs(p).subcategorias)));
 
   categories.forEach(cat => {
-      const hasRelevantSubcat = (getAttrs(cat).subcategorias?.data || []).some(sub => relevantSubcatSlugs.has(getAttrs(sub).slug));
+      const catAttrs = getAttrs(cat);
+      const subcatSlugs = extractSlugs(catAttrs.subcategorias);
+      const hasRelevantSubcat = subcatSlugs.some(subslug => relevantSubcatSlugs.has(subslug));
       if (hasRelevantSubcat) {
-          relevantCatSlugs.add(getAttrs(cat).slug);
+          relevantCatSlugs.add(catAttrs.slug);
       }
   });
 
@@ -81,17 +106,29 @@ export default function SupportPageClient({ products, software, categories }) {
       .filter(cat => cat && relevantCatSlugs.has(getAttrs(cat).slug))
       .map(cat => {
           const catAttrs = getAttrs(cat);
+          const subcategoriesData = catAttrs.subcategorias?.data || catAttrs.subcategorias || [];
           return {
               ...catAttrs,
               id: cat.id,
-              subcategorias: (catAttrs.subcategorias?.data || []).filter(sub => relevantSubcatSlugs.has(getAttrs(sub).slug)).map(s => ({...getAttrs(s), id: s.id}))
+              subcategorias: (Array.isArray(subcategoriesData) ? subcategoriesData : [])
+                .filter(sub => {
+                  const subSlug = getAttrs(sub).slug;
+                  return relevantSubcatSlugs.has(subSlug);
+                })
+                .map(s => ({...getAttrs(s), id: s.id}))
           };
       });
 
   const filteredProducts = productsWithDocs.filter(product => {
     const pAttrs = getAttrs(product);
-    if (selectedSubcategory) return pAttrs.subcategorias?.data?.some(s => getAttrs(s).slug === selectedSubcategory.slug);
-    if (selectedCategory) return pAttrs.categorias?.data?.some(cat => getAttrs(cat).slug === selectedCategory.slug);
+    if (selectedSubcategory) {
+      const subcatSlugs = extractSlugs(pAttrs.subcategorias);
+      return subcatSlugs.includes(selectedSubcategory.slug);
+    }
+    if (selectedCategory) {
+      const catSlugs = extractSlugs(pAttrs.categorias);
+      return catSlugs.includes(selectedCategory.slug);
+    }
     return true;
   });
 
