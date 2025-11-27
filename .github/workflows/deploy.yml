@@ -44,8 +44,8 @@ jobs:
           FTP_HOST: ${{ secrets.HOST }}
           FTP_USER: ${{ secrets.USER }}
           FTP_PASS: ${{ secrets.PASS }}
-          REMOTE_DIR: /public_html/novositeteca/
-          remoteDir: /public_html/novositeteca/
+          REMOTE_DIR: /public_html/
+          remoteDir: /public_html/
         run: |
           sudo apt-get update -y
           sudo apt-get install -y lftp
