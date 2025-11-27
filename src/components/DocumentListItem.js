@@ -10,10 +10,17 @@ const DownloadIcon = () => (
 // Função para ordenar os documentos
 const sortDocuments = (docs) => {
   if (!docs || !Array.isArray(docs)) return [];
+  
+  // Filtrar documentos nulos e extrair atributos
+  const validDocs = docs.filter(doc => doc).map(doc => {
+    const attrs = doc.attributes || doc;
+    return { ...attrs, id: doc.id || attrs.id };
+  });
+
   const order = { 'catalogo': 1, 'guia': 2, 'manual': 3 };
-  return [...docs].sort((a, b) => {
-    const nameA = a.attributes.name.toLowerCase();
-    const nameB = b.attributes.name.toLowerCase();
+  return [...validDocs].sort((a, b) => {
+    const nameA = (a.name || '').toLowerCase();
+    const nameB = (b.name || '').toLowerCase();
     
     const orderA = Object.keys(order).find(key => nameA.includes(key)) ? order[Object.keys(order).find(key => nameA.includes(key))] : 99;
     const orderB = Object.keys(order).find(key => nameB.includes(key)) ? order[Object.keys(order).find(key => nameB.includes(key))] : 99;
@@ -42,19 +49,26 @@ export default function DocumentListItem({ product }) {
       </div>
       <div className="w-2/3">
         <ul className="space-y-2">
-          {sortedDocs.map((doc) => (
-            <li key={doc.id}>
-              <a
-                href={getStrapiMediaUrl(doc.attributes.url)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200"
-              >
-                <DownloadIcon />
-                <span>{doc.attributes.name}</span>
-              </a>
-            </li>
-          ))}
+          {sortedDocs.map((doc) => {
+            const docUrl = doc.url || doc.attributes?.url;
+            const docName = doc.name || doc.attributes?.name;
+            
+            if (!docUrl || !docName) return null;
+            
+            return (
+              <li key={doc.id}>
+                <a
+                  href={getStrapiMediaUrl(docUrl)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200"
+                >
+                  <DownloadIcon />
+                  <span>{docName}</span>
+                </a>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>
