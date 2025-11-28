@@ -5,6 +5,7 @@ import { useEffect, useState, Suspense } from 'react';
 import ProductCard from '@/components/ProductCard';
 import SearchResultCard from '@/components/SearchResultCard';
 import Link from 'next/link';
+import { hybridSearch } from '@/lib/fuzzySearch';
 
 function SearchResults() {
   const searchParams = useSearchParams();
@@ -28,20 +29,16 @@ function SearchResults() {
         if (!query) {
           setResults({});
         } else {
-          const lowerCaseQuery = query.toLowerCase();
-          const filteredData = data.filter((item) => {
-            const title = item.title || '';
-            const description = item.description || '';
-            const content = item.content || '';
-            return (
-              title.toLowerCase().includes(lowerCaseQuery) ||
-              description.toLowerCase().includes(lowerCaseQuery) ||
-              content.toLowerCase().includes(lowerCaseQuery)
-            );
+          // Usa busca fuzzy/híbrida para encontrar resultados mesmo com typos
+          const searchResults = hybridSearch(query, data, {
+            keys: ['title', 'description', 'content', 'categories', 'fabricante'],
+            exactThreshold: 0.6,
+            fuzzyThreshold: 0.4,
+            maxResults: 100,
           });
 
           // Agrupa os resultados por tipo
-          const groupedResults = filteredData.reduce((acc, item) => {
+          const groupedResults = searchResults.reduce((acc, item) => {
             const type = item.type || 'Outros';
             if (!acc[type]) {
               acc[type] = [];

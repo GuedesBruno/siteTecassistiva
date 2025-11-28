@@ -30,7 +30,35 @@ async function generateSearchData() {
     // Process API data
     const productData = products.map(p => {
         const attrs = p.attributes || p;
-        const imageUrl = api.getStrapiMediaUrl(attrs.imagem_principal?.data?.attributes?.url);
+        const imageUrl = api.getStrapiMediaUrl(attrs.imagem_principal?.data?.attributes?.url || attrs.imagem_principal?.url);
+        
+        // Extrai categorias e subcategorias
+        const categoriesArray = Array.isArray(attrs.categorias) 
+          ? attrs.categorias 
+          : (attrs.categorias?.data || []);
+        const subcategoriesArray = Array.isArray(attrs.subcategorias) 
+          ? attrs.subcategorias 
+          : (attrs.subcategorias?.data || []);
+        
+        const categories = categoriesArray
+          .map(c => (c.attributes?.nome || c.nome))
+          .filter(Boolean)
+          .join(', ');
+        
+        const subcategories = subcategoriesArray
+          .map(s => (s.attributes?.nome || s.nome))
+          .filter(Boolean)
+          .join(', ');
+        
+        // Combina conteúdo para busca mais completa
+        const content = [
+          attrs.descricao_curta || '',
+          attrs.descricao_longa ? stripTags(JSON.stringify(attrs.descricao_longa)) : '',
+          categories,
+          subcategories,
+          attrs.Fabricante || '',
+        ].filter(Boolean).join(' ');
+        
         return {
             id: `product-${p.id}`,
             title: attrs.nome,
@@ -38,6 +66,9 @@ async function generateSearchData() {
             description: attrs.descricao_curta || '',
             imageUrl: imageUrl || null,
             type: 'Produto',
+            content: content,
+            categories: categories,
+            fabricante: attrs.Fabricante || '',
         }
     });
 
