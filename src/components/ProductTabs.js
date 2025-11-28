@@ -30,9 +30,16 @@ export default function ProductTabs({ product }) {
   const videoIds = videos
     ? videos.split(',').map(url => {
         try {
-          const u = new URL(url.trim());
-          // Retorna o caminho, ex: "1027687024/1a5058b7f8"
-          return u.pathname.substring(1);
+          const trimmed = url.trim();
+          // Extrai o ID do Vimeo (último segmento da URL)
+          const match = trimmed.match(/vimeo\.com\/([0-9]+)/);
+          if (match) return match[1];
+          
+          // Ou tenta extrair o pathname diretamente
+          const pathMatch = trimmed.match(/\/([0-9a-f]+)$/);
+          if (pathMatch) return pathMatch[1];
+          
+          return null;
         } catch {
           return null;
         }

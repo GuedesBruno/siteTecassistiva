@@ -14,7 +14,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata = {
-  metadataBase: new URL('https://www.tecassistiva.com.br'),
+  metadataBase: 'https://www.tecassistiva.com.br',
   title: {
     default: 'Tecassistiva - Tecnologia & Acessibilidade',
     template: '%s | Tecassistiva'
