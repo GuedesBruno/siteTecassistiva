@@ -12,25 +12,6 @@ import {
 } from "@/lib/api";
 import Link from 'next/link';
 
-export const metadata = {
-  title: 'Tecnologia & Acessibilidade',
-  description: 'A Tecassistiva é uma empresa brasileira especializada em soluções de tecnologia assistiva voltadas à inclusão educacional e social de pessoas com deficiência.',
-  openGraph: {
-    title: 'Tecassistiva - Tecnologia & Acessibilidade',
-    description: 'Soluções em tecnologia assistiva para inclusão educacional e social',
-    url: 'https://www.tecassistiva.com.br/',
-    type: 'website',
-    images: [
-      {
-        url: 'https://www.tecassistiva.com.br/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'Tecassistiva'
-      }
-    ]
-  }
-};
-
 export default async function Home() {
   // Busca os dados da API em paralelo para otimizar o tempo de build
   const [banners, featuredProducts, manufacturers, testimonials, homeVideos] = await Promise.all([
