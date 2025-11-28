@@ -5,8 +5,52 @@ import { glob } from 'glob';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
-// Import API functions
-import * as api from '../src/lib/api.js';
+// Função auxiliar para fetch API
+async function fetchAPI(endpoint) {
+  const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
+  const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN;
+
+  if (!STRAPI_URL || !STRAPI_TOKEN) {
+    throw new Error("Variáveis de ambiente não definidas");
+  }
+
+  try {
+    let base = STRAPI_URL.replace(/\/+$/g, '');
+    if (base.endsWith('/api')) {
+      base = base.replace(/\/api$/, '');
+    }
+    const path_ep = endpoint.replace(/^\/+/, '');
+    const url = `${base}/${path_ep}`;
+
+    const res = await fetch(url, {
+      headers: { 'Authorization': `Bearer ${STRAPI_TOKEN}` },
+    });
+
+    if (!res.ok) {
+      throw new Error(`API Error: ${res.status}`);
+    }
+    
+    return await res.json();
+  } catch (error) {
+    console.error(`Erro ao fazer fetch: ${error.message}`);
+    throw error;
+  }
+}
+
+function getStrapiMediaUrl(path) {
+  if (!path) return null;
+  if (/^https?:\/\//i.test(path) || /^\/\//.test(path)) return path;
+  const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
+  const base = STRAPI_URL.replace(/\/+$/g, '').replace(/\/api$/, '');
+  if (path.startsWith('/')) return `${base}${path}`;
+  return `${base}/${path}`;
+}
+
+function normalizeDataArray(response) {
+  if (!response) return [];
+  const data = response.data || [];
+  return data;
+}
 
 // Function to strip HTML/JSX tags and extract text.
 function stripTags(content) {
@@ -22,16 +66,23 @@ async function generateSearchData() {
   try {
     // Fetch data from APIs
     const [products, productsWithDocs, atas, software] = await Promise.all([
-      api.getAllProductsForDisplay(),
-      api.getProductsWithDocuments(),
-      api.getOpenAtas(),
-      api.getSoftwareAndDrivers(),
+      fetchAPI('/api/produtos?populate[0]=imagem_principal&populate[1]=subcategorias&populate[2]=categorias&pagination[limit]=1000&sort=ordem:asc').then(d => normalizeDataArray(d)),
+      fetchAPI('/api/produtos?populate[0]=documentos&populate[1]=categorias&populate[2]=subcategorias&pagination[limit]=1000&sort=nome:asc').then(d => {
+        const rawData = normalizeDataArray(d);
+        return rawData.map(item => {
+          if (item.attributes) return item;
+          const { id, ...attributes } = item;
+          return { id, attributes };
+        });
+      }),
+      fetchAPI('/api/atas?sort=ordem:asc&pagination[limit]=1000').then(d => normalizeDataArray(d)),
+      fetchAPI('/api/softwares?fields[0]=nome&fields[1]=tipo&populate[instaladores]=*&pagination[limit]=1000').then(d => normalizeDataArray(d)),
     ]);
 
     // Process API data - Products
     const productData = products.map(p => {
         const attrs = p.attributes || p;
-        const imageUrl = api.getStrapiMediaUrl(attrs.imagem_principal?.data?.attributes?.url || attrs.imagem_principal?.url);
+        const imageUrl = getStrapiMediaUrl(attrs.imagem_principal?.data?.attributes?.url || attrs.imagem_principal?.url);
         
         // Extrai categorias e subcategorias
         const categoriesArray = Array.isArray(attrs.categorias) 
@@ -108,7 +159,7 @@ async function generateSearchData() {
           productTitle: attrs.nome,
           productSlug: `/produtos/${attrs.slug}`,
           fileName: fileName,
-          fileUrl: api.getStrapiMediaUrl(fileUrl),
+          fileUrl: getStrapiMediaUrl(fileUrl),
           content: `${fileName} ${docType} ${attrs.nome}`,
         });
       });
@@ -127,11 +178,12 @@ async function generateSearchData() {
 
     const softwareData = software.map(s => {
         const attrs = s.attributes || s;
+        const tipo = attrs.tipo || 'Software/Driver';
         return {
             id: `software-${s.id}`,
             title: attrs.nome,
             slug: '/suporte',
-            description: `Tipo: ${s.attributes.tipo}`,
+            description: `Tipo: ${tipo}`,
             type: 'Software/Driver',
         }
     });
