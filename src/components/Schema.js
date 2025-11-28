@@ -1,7 +1,9 @@
 /**
  * Componente para renderizar Schema.org JSON-LD na página
- * Deve ser usado em layouts ou pages específicas
+ * Client-side only para evitar erros durante build
  */
+
+'use client';
 
 export function Schema({ schema }) {
   if (!schema) return null;

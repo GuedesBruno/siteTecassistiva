@@ -1,7 +1,5 @@
 import { getProductBySlug, getAllProducts, getStrapiMediaUrl } from '@/lib/api';
 import ProductDetail from '@/components/ProductDetail';
-import { Schema } from '@/components/Schema';
-import { generateProductSchema, generateBreadcrumbSchema } from '@/lib/schemas';
 import { notFound } from 'next/navigation';
 
 // Gera os caminhos estáticos para todos os produtos
@@ -72,15 +70,8 @@ export default async function ProductPage({ params }) {
     { name: 'Produtos', path: '/produtos/' },
     { name: p.nome, path: null }
   ];
-  
-  const productSchema = generateProductSchema(product);
-  const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
 
   return (
-    <>
-      <Schema schema={productSchema} />
-      <Schema schema={breadcrumbSchema} />
-      <ProductDetail product={product} breadcrumbs={breadcrumbs} />
-    </>
+    <ProductDetail product={product} breadcrumbs={breadcrumbs} />
   );
 }
