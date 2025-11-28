@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { getStrapiMediaUrl } from '@/lib/api';
+import { getStrapiMediaUrl } from '@/lib/media';
 
 export default function ProductCard({ product }) {
   // Acesso seguro aos atributos do produto

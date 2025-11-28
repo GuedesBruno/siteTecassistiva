@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react';
 import Accordion from './Accordion';
-import { getStrapiMediaUrl } from '@/lib/api';
+import { getStrapiMediaUrl } from '@/lib/media';
 import RichTextRenderer from './RichTextRenderer';
 
 function formatDate(dateString) {

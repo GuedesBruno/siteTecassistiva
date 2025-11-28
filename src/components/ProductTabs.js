@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { getStrapiMediaUrl } from '@/lib/api';
+import { getStrapiMediaUrl } from '@/lib/media';
 import VideoModal from './VideoModal.js';
 import RichTextRenderer from './RichTextRenderer';
 

@@ -3,7 +3,7 @@
 import { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getStrapiMediaUrl } from '@/lib/api';
+import { getStrapiMediaUrl } from '@/lib/media';
 import ProductTabs from './ProductTabs';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';

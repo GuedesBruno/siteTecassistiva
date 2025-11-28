@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { getStrapiMediaUrl } from '@/lib/api';
+import { getStrapiMediaUrl } from '@/lib/media';
 import VideoModal from './VideoModal'; // Importa o Modal
 import RichTextRenderer from './RichTextRenderer';
 import ProductCard from './ProductCard'; // Importa o ProductCard

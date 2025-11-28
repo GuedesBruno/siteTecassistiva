@@ -1,4 +1,5 @@
-import { getProductBySlug, getAllProducts, getStrapiMediaUrl } from '@/lib/api';
+import { getProductBySlug, getAllProducts } from '@/lib/api';
+import { getStrapiMediaUrl } from '@/lib/media';
 import ProductDetail from '@/components/ProductDetail';
 import { notFound } from 'next/navigation';
 

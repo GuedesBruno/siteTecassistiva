@@ -1,5 +1,5 @@
 import React from 'react';
-import { getStrapiMediaUrl } from '@/lib/api';
+import { getStrapiMediaUrl } from '@/lib/media';
 import Image from 'next/image';
 import RichTextRenderer from './RichTextRenderer';
 

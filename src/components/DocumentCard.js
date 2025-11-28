@@ -1,5 +1,5 @@
 import React from 'react';
-import { getStrapiMediaUrl } from '@/lib/api';
+import { getStrapiMediaUrl } from '@/lib/media';
 
 // Ícone de exemplo para download
 const DownloadIcon = () => (

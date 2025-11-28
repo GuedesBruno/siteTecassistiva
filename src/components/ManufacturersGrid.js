@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
-import { getStrapiMediaUrl } from '@/lib/api';
+import { getStrapiMediaUrl } from '@/lib/media';
 
 export default function ManufacturersGrid({ fabricantes }) {
   if (!fabricantes || fabricantes.length === 0) {
