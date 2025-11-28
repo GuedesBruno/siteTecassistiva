@@ -2,14 +2,79 @@
   RewriteEngine On
   RewriteBase /
 
-  # Esta regra impede que os passos seguintes se apliquem a ficheiros ou pastas que já existem
+  # ----------------------------------------------------------------------
+  # 1. FORÇAR HTTPS (Segurança)
+  # Garante que todo mundo acesse via cadeado seguro
+  # ----------------------------------------------------------------------
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # ----------------------------------------------------------------------
+  # 2. REDIRECIONAMENTOS 301 (Do site antigo para o novo)
+  # Isso garante que quem clica no Google cai no produto certo
+  # ----------------------------------------------------------------------
+
+  # --- Ampliadores e Lupas Eletrônicas ---
+  Redirect 301 /catalogo/clearview-24-full-hd/ /produtos/clearview-24/
+  Redirect 301 /catalogo/ruby-7-hd/ /produtos/ruby-7-hd/
+  Redirect 301 /catalogo/ruby-xl-hd-2/ /produtos/ruby-xl-hd/
+  Redirect 301 /catalogo/onyx-portatil-hd/ /produtos/onyx-deskset-24/
+  Redirect 301 /catalogo/onyx-ocr/ /produtos/onyx-ocr/
+  Redirect 301 /catalogo/travellerhd.pdf /produtos/traveller-hd/
+  Redirect 301 /catalogo/ruby-10/ /produtos/ruby-10/
+  Redirect 301 /catalogo/clearreader/ /produtos/clearreader/
+
+  # --- Impressoras Braille ---
+  Redirect 301 /catalogo/index-braillebox/ /produtos/braille-box/
+  Redirect 301 /catalogo/index-fanfold/ /produtos/fanfold/
+  Redirect 301 /catalogo/index-basic/ /produtos/basic/
+  Redirect 301 /catalogo/puma-7/ /produtos/puma-7/
+  Redirect 301 /catalogo/index-everest/ /produtos/everest/
+  Redirect 301 /cegueira/impressoras-braille-grande-producao/ /produtos/nsf-excel/
+
+  # --- Linhas Braille e Computadores ---
+  Redirect 301 /catalogo/liber/ /produtos/liber/
+  Redirect 301 /catalogo/focus-40-blue-v5/ /produtos/focus-40-blue/
+  Redirect 301 /catalogo/focus-80-blue/ /produtos/focus-80-blue/
+
+  # --- Máquinas de Escrever e Educacional ---
+  Redirect 301 /catalogo/mountbatten-tutor/ /produtos/tutor/
+  Redirect 301 /catalogo/perkins-classica/ /produtos/perkins-classica/
+  Redirect 301 /catalogo/brincabraille/ /produtos/brinca-braille/
+  Redirect 301 /catalogo/multiplano/ /produtos/multiplano/
+
+  # --- Acessórios e Outros ---
+  Redirect 301 /catalogo/abafador-index/ /produtos/abafador-index/
+  Redirect 301 /catalogo/big-red/ /produtos/big-red/
+  Redirect 301 /cegueira/maquina-fusora/ /produtos/teca-fuser/
+  
+  # --- Papéis e Suprimentos ---
+  Redirect 301 /catalogo/papel-a3-fusora-100-folhas-a3/ /produtos/papel-encapsulado-a3/
+  Redirect 301 /catalogo/papel-a4-fusora-100-folhas-a4/ /produtos/papel-encapsulado-a4/
+
+  # --- Teclados e Mouses ---
+  Redirect 301 /catalogo/teclado-ampliado-tecassistiva/ /produtos/teclado-ampliado/
+  Redirect 301 /catalogo/bigtrack/ /produtos/big-track/
+
+  # --- REGRA GENÉRICA (Tenta salvar outros produtos) ---
+  RedirectMatch 301 ^/catalogo/(.*)$ /produtos/$1/
+
+  # ----------------------------------------------------------------------
+  # 3. LÓGICA DO NEXT.JS (O trecho que você enviou)
+  # Permite URLs limpas com trailingSlash: true
+  # ----------------------------------------------------------------------
+  
+  # Se o arquivo ou pasta solicitada não existe fisicamente...
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-
-  # Esta é a regra principal:
-  # Procura se existe uma pasta com o nome do URL solicitado.
-  # Se existir, serve silenciosamente o ficheiro index.html que está dentro dela.
-  # Ex: /tecassistiva -> /tecassistiva/index.html
+  
+  # ...mas existe uma pasta com index.html correspondente
   RewriteCond %{REQUEST_URI}/index.html -f
+  
+  # ...então sirva esse index.html silenciosamente
   RewriteRule (.*) $1/index.html [L]
+
 </IfModule>
+
+# Define a página de erro 404 personalizada do Next.js
+ErrorDocument 404 /404.html

@@ -16,6 +16,10 @@ const montserrat = Montserrat({
 export const metadata = {
   title: 'Tecassistiva',
   description: 'Tecnologia & Acessibilidade',
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/apple-icon.png',
+  },
 }
 
 export default async function RootLayout({ children }) {
