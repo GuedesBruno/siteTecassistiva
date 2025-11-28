@@ -14,12 +14,65 @@ const montserrat = Montserrat({
 });
 
 export const metadata = {
-  title: 'Tecassistiva',
-  description: 'Tecnologia & Acessibilidade',
+  metadataBase: new URL('https://www.tecassistiva.com.br'),
+  title: {
+    default: 'Tecassistiva - Tecnologia & Acessibilidade',
+    template: '%s | Tecassistiva'
+  },
+  description: 'Soluções em tecnologia assistiva para inclusão educacional e social. Produtos, softwares e serviços para pessoas com deficiência visual e outras necessidades específicas.',
+  keywords: 'tecnologia assistiva, acessibilidade, deficiência visual, braille, leitura de tela, inclusão digital, educação especial',
+  authors: [{ name: 'Tecassistiva' }],
+  creator: 'Tecassistiva',
+  publisher: 'Tecassistiva',
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
+  alternates: {
+    canonical: 'https://www.tecassistiva.com.br'
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'pt_BR',
+    url: 'https://www.tecassistiva.com.br',
+    siteName: 'Tecassistiva',
+    title: 'Tecassistiva - Tecnologia & Acessibilidade',
+    description: 'Soluções em tecnologia assistiva para inclusão educacional e social',
+    images: [
+      {
+        url: 'https://www.tecassistiva.com.br/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Tecassistiva - Tecnologia & Acessibilidade'
+      }
+    ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@tecassistiva',
+    creator: '@tecassistiva',
+    title: 'Tecassistiva - Tecnologia & Acessibilidade',
+    description: 'Soluções em tecnologia assistiva para inclusão educacional e social',
+    images: ['https://www.tecassistiva.com.br/og-image.png']
+  },
   icons: {
     icon: '/favicon.ico',
     apple: '/apple-icon.png',
+    shortcut: '/favicon-16x16.png',
   },
+  manifest: '/manifest.json',
+  verification: {
+    google: 'google-site-verification-code-here',
+    // yandex: 'yandex-verification-code-here',
+  }
 }
 
 export default async function RootLayout({ children }) {

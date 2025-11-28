@@ -21,13 +21,14 @@ async function generateSearchData() {
 
   try {
     // Fetch data from APIs
-    const [products, atas, software] = await Promise.all([
+    const [products, productsWithDocs, atas, software] = await Promise.all([
       api.getAllProductsForDisplay(),
+      api.getProductsWithDocuments(),
       api.getOpenAtas(),
       api.getSoftwareAndDrivers(),
     ]);
 
-    // Process API data
+    // Process API data - Products
     const productData = products.map(p => {
         const attrs = p.attributes || p;
         const imageUrl = api.getStrapiMediaUrl(attrs.imagem_principal?.data?.attributes?.url || attrs.imagem_principal?.url);
@@ -70,6 +71,47 @@ async function generateSearchData() {
             categories: categories,
             fabricante: attrs.Fabricante || '',
         }
+    });
+
+    // Extract documents from products
+    const documentData = [];
+    productsWithDocs.forEach(p => {
+      const attrs = p.attributes || p;
+      const documentosArray = Array.isArray(attrs.documentos) 
+        ? attrs.documentos 
+        : (attrs.documentos?.data || []);
+      
+      documentosArray.forEach(doc => {
+        const docAttrs = doc.attributes || doc;
+        const fileName = docAttrs.name || docAttrs.nome || 'Documento';
+        const fileUrl = docAttrs.url || '';
+        
+        // Extrai extensão do arquivo
+        const extension = fileName.split('.').pop().toLowerCase();
+        const docType = {
+          'pdf': 'PDF',
+          'doc': 'Word',
+          'docx': 'Word',
+          'xls': 'Excel',
+          'xlsx': 'Excel',
+          'txt': 'Texto',
+          'zip': 'Compactado',
+        }[extension] || 'Documento';
+        
+        documentData.push({
+          id: `doc-${p.id}-${doc.id}`,
+          title: `${fileName} - ${attrs.nome}`,
+          slug: `/produtos/${attrs.slug}`,
+          description: `Documento do produto ${attrs.nome}`,
+          type: 'Documento',
+          documentType: docType,
+          productTitle: attrs.nome,
+          productSlug: `/produtos/${attrs.slug}`,
+          fileName: fileName,
+          fileUrl: api.getStrapiMediaUrl(fileUrl),
+          content: `${fileName} ${docType} ${attrs.nome}`,
+        });
+      });
     });
 
     const ataData = atas.map(a => {
@@ -130,6 +172,7 @@ async function generateSearchData() {
     // Combine all data
     const searchData = [
       ...productData,
+      ...documentData,
       ...ataData,
       ...softwareData,
       ...pageData,
@@ -147,6 +190,7 @@ async function generateSearchData() {
     console.log(`Dados de busca gerados com sucesso em: ${outputPath}`);
     console.log(`${searchData.length} itens foram indexados.`);
     console.log(`- ${productData.length} Produtos`);
+    console.log(`- ${documentData.length} Documentos`);
     console.log(`- ${ataData.length} Atas`);
     console.log(`- ${softwareData.length} Softwares/Drivers`);
     console.log(`- ${pageData.length} Páginas`);

@@ -32,9 +32,13 @@ export default function VideoModal({ videoInfo, onClose }) {
       if ('wakeLock' in navigator) {
         try {
           wakeLockRef.current = await navigator.wakeLock.request('screen');
-          console.log('Wake Lock ativado!');
+          if (process.env.NODE_ENV === 'development') {
+            console.log('Wake Lock ativado!');
+          }
         } catch (err) {
-          console.error(`${err.name}, ${err.message}`);
+          if (process.env.NODE_ENV === 'development') {
+            console.error(`${err.name}, ${err.message}`);
+          }
         }
       }
     };
@@ -43,7 +47,9 @@ export default function VideoModal({ videoInfo, onClose }) {
       if (wakeLockRef.current) {
         await wakeLockRef.current.release();
         wakeLockRef.current = null;
-        console.log('Wake Lock liberado.');
+        if (process.env.NODE_ENV === 'development') {
+          console.log('Wake Lock liberado.');
+        }
       }
     };
 

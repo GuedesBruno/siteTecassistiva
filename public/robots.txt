@@ -1,5 +1,32 @@
-# public/robots.txt
+# Robots.txt - https://www.tecassistiva.com.br/robots.txt
+# Política de indexação para mecanismos de busca
+
+# Padrão geral para todos os crawlers
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /.next/
+Disallow: /search?
+Crawl-delay: 1
 
+# Google Bot - configuração específica
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing Bot
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Archive.org
+User-agent: ia_archiver
+Allow: /
+
+# Yandex
+User-agent: Yandex
+Allow: /
+
+# Site maps
 Sitemap: https://www.tecassistiva.com.br/sitemap.xml

@@ -72,10 +72,10 @@ export default function SupportPageClient({ products, software, categories }) {
     return docsArray.length > 0;
   });
 
-  // DEBUG: Log para verificar a estrutura dos dados
+  // DEBUG: Log para verificar a estrutura dos dados (apenas em desenvolvimento)
   if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
     if (productsWithDocs.length > 0) {
-      console.log('Primeiro produto com docs:', getAttrs(productsWithDocs[0]));
+      // console.log('Primeiro produto com docs:', getAttrs(productsWithDocs[0]));
     }
   }
 

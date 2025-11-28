@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
+import DOMPurify from 'isomorphic-dompurify';
 
 // Renderizador de Rich Text abrangente para lidar com vários formatos do Strapi
 export default function RichTextRenderer({ content }) {
@@ -21,7 +22,9 @@ export default function RichTextRenderer({ content }) {
         text = <s key={index}>{text}</s>;
       }
       if (node.code) {
-        return <code key={index} className="block whitespace-pre-wrap bg-gray-100 p-2 rounded font-mono text-sm" dangerouslySetInnerHTML={{ __html: node.text }} />;
+        // Sanitizar HTML antes de renderizar
+        const sanitizedHtml = DOMPurify.sanitize(node.text);
+        return <code key={index} className="block whitespace-pre-wrap bg-gray-100 p-2 rounded font-mono text-sm">{sanitizedHtml}</code>;
       }
       return text;
     }
@@ -49,9 +52,9 @@ export default function RichTextRenderer({ content }) {
       case 'list-item':
         return <li key={index}>{children}</li>;
       case 'link':
-        return <a key={index} href={node.url} className="text-blue-600 hover:underline">{children}</a>;
+        return <a key={index} href={node.url} className="text-blue-600 hover:underline" rel="noopener noreferrer">{children}</a>;
       case 'image':
-        return <Image key={index} src={node.image.url} alt={node.image.alternativeText || ''} width={node.image.width} height={node.image.height} className="my-4 rounded" />;
+        return <Image key={index} src={node.image.url} alt={node.image.alternativeText || 'Imagem do conteúdo'} width={node.image.width || 800} height={node.image.height || 600} className="my-4 rounded" />;
       default:
         return <div key={index}>{children}</div>;
     }

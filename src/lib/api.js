@@ -70,8 +70,8 @@ export async function getAllProducts() {
 
 export async function getAllProductsForDisplay() {
   try {
-    // Populating 'subcategorias' (plural) as the relation is now many-to-many
-    const populateQuery = 'populate[0]=imagem_principal&populate[1]=subcategorias';
+    // Populating subcategorias, categorias e imagem_principal para display completo
+    const populateQuery = 'populate[0]=imagem_principal&populate[1]=subcategorias&populate[2]=categorias';
     const productsData = await fetchAPI(`/api/produtos?${populateQuery}&pagination[limit]=1000&sort=ordem:asc`);
     return normalizeDataArray(productsData);
   } catch (error) {

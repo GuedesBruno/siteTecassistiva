@@ -1,5 +1,7 @@
-import { getProductBySlug, getAllProducts } from '@/lib/api';
+import { getProductBySlug, getAllProducts, getStrapiMediaUrl } from '@/lib/api';
 import ProductDetail from '@/components/ProductDetail';
+import { Schema } from '@/components/Schema';
+import { generateProductSchema, generateBreadcrumbSchema } from '@/lib/schemas';
 import { notFound } from 'next/navigation';
 
 // Gera os caminhos estáticos para todos os produtos
@@ -23,9 +25,35 @@ export async function generateMetadata({ params }) {
         };
     }
 
+    const description = (productAttributes.descricao_curta || '').substring(0, 160);
+    const imageUrl = getStrapiMediaUrl(
+      productAttributes.imagem_principal?.data?.attributes?.url ||
+      productAttributes.imagem_principal?.url
+    );
+
     return {
-        title: `${productAttributes.nome} | Tecassistiva`,
-        description: productAttributes.descricao_curta,
+        title: productAttributes.nome,
+        description: description,
+        keywords: [
+          productAttributes.nome,
+          productAttributes.Fabricante,
+          'tecnologia assistiva',
+          'acessibilidade'
+        ].filter(Boolean).join(', '),
+        canonical: `https://www.tecassistiva.com.br/produtos/${productAttributes.slug}/`,
+        openGraph: {
+          title: productAttributes.nome,
+          description: description,
+          url: `https://www.tecassistiva.com.br/produtos/${productAttributes.slug}/`,
+          type: 'website',
+          images: imageUrl ? [{ url: imageUrl, width: 800, height: 600 }] : [],
+        },
+        twitter: {
+          card: 'summary_large_image',
+          title: productAttributes.nome,
+          description: description,
+          images: imageUrl ? [imageUrl] : [],
+        }
     };
 }
 
@@ -38,6 +66,21 @@ export default async function ProductPage({ params }) {
     notFound();
   }
 
-  // O componente ProductDetail recebe os dados do produto para renderizar
-  return <ProductDetail product={product} />;
+  const p = product.attributes || product;
+  const breadcrumbs = [
+    { name: 'Início', path: '/' },
+    { name: 'Produtos', path: '/produtos/' },
+    { name: p.nome, path: null }
+  ];
+  
+  const productSchema = generateProductSchema(product);
+  const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
+
+  return (
+    <>
+      <Schema schema={productSchema} />
+      <Schema schema={breadcrumbSchema} />
+      <ProductDetail product={product} breadcrumbs={breadcrumbs} />
+    </>
+  );
 }
