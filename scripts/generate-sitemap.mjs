@@ -31,7 +31,7 @@ async function fetchAPI(endpoint) {
     if (!res.ok) {
       throw new Error(`API Error: ${res.status}`);
     }
-    
+
     return await res.json();
   } catch (error) {
     console.error(`Erro ao fazer fetch: ${error.message}`);
@@ -58,10 +58,10 @@ async function getAllCategoryPaths() {
   const categories = normalizeDataArray(data);
   return categories.map(c => {
     const attrs = c.attributes || c;
-    const subcategorias = Array.isArray(attrs.subcategorias) 
-      ? attrs.subcategorias 
+    const subcategorias = Array.isArray(attrs.subcategorias)
+      ? attrs.subcategorias
       : (attrs.subcategorias?.data || []);
-    
+
     return {
       slug: attrs.slug,
       subcategorias: subcategorias.map(s => ({
@@ -71,11 +71,20 @@ async function getAllCategoryPaths() {
   });
 }
 
+async function getAllImersaoSlugs() {
+  const data = await fetchAPI('/api/imersaos?fields[0]=slug&pagination[limit]=1000');
+  const items = normalizeDataArray(data);
+  return items.map(i => ({
+    slug: i.attributes?.slug || i.slug,
+  })).filter(i => i.slug);
+}
+
 async function generateSitemap() {
   console.log('Gerando sitemap...');
 
   const productSlugs = await getAllProductSlugs();
   const categoryPaths = await getAllCategoryPaths();
+  const imersaoSlugs = await getAllImersaoSlugs();
 
   const staticPages = [
     '/',
@@ -113,6 +122,13 @@ async function generateSitemap() {
             <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
           </url>
         `).join('')}
+      `).join('')}
+
+      ${imersaoSlugs.map(i => `
+        <url>
+          <loc>${`${SITE_URL}/imersao/${i.slug}`}</loc>
+          <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+        </url>
       `).join('')}
     </urlset>
   `.trim();
