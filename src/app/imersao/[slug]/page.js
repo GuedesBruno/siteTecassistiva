@@ -47,7 +47,7 @@ function normalizeDataArray(response) {
 }
 
 async function getImersaoBySlugInternal(slug) {
-    const populateQuery = 'populate[personalizado]=*&populate[produto][fields][0]=nome&populate[produto][fields][1]=descricao_curta&populate[produto][populate][0]=imagem_principal&populate[produto][populate][1]=categorias&fields[0]=genero_descricao&fields[1]=curso&fields[2]=guia&fields[3]=manual&fields[4]=botoes_padrao&fields[5]=fabricante';
+    const populateQuery = 'populate[personalizado]=*&populate[produto][fields][0]=nome&populate[produto][fields][1]=descricao_curta&populate[produto][populate][0]=imagem_principal&populate[produto][populate][1]=categorias&populate[produto][populate][2]=relacao_fabricante&fields[0]=genero_descricao&fields[1]=curso&fields[2]=guia&fields[3]=manual&fields[4]=botoes_padrao';
     const res = await internalFetchAPI(`/api/imersaos?filters[slug][$eq]=${slug}&${populateQuery}`);
     const data = normalizeDataArray(res);
     if (data.length === 0) return null;
@@ -119,7 +119,7 @@ export default async function ImersaoPage({ params }) {
         notFound();
     }
 
-    const { produto: productData, curso, guia, manual, botoes_padrao = true, personalizado, genero_descricao, fabricante } = imersao.attributes;
+    const { produto: productData, curso, guia, manual, botoes_padrao = true, personalizado, genero_descricao } = imersao.attributes;
 
     if (!productData) {
         console.error(`❌ ERRO: Imersão "${slug}" não tem produto vinculado`);
@@ -129,6 +129,10 @@ export default async function ImersaoPage({ params }) {
     console.log(`✅ Imersão renderizada com sucesso: ${slug}`);
 
     const imageUrl = productData.imagem_principal?.url;
+
+    // Extract manufacturer name safely
+    const fabricanteData = productData.relacao_fabricante?.data?.attributes || productData.relacao_fabricante?.data;
+    const fabricanteNome = fabricanteData?.nome || '';
 
     const buttonClassName = "bg-[#002554] text-white py-3 px-6 font-bold text-lg hover:bg-tec-blue-light transition-colors duration-300";
 
@@ -147,7 +151,7 @@ export default async function ImersaoPage({ params }) {
                 )}
                 <p className="text-xl md:text-2xl mb-10">
                     Sua IMERSÃO com {genero_descricao === 'feminino' ? 'a' : 'o'}{' '}
-                    <strong>{fabricante} {productData.nome}</strong> começa aqui!
+                    <strong>{fabricanteNome} {productData.nome}</strong> começa aqui!
                 </p>
 
                 <div className="flex flex-col space-y-4 w-full max-w-sm mt-8">

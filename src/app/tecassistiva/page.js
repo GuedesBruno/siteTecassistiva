@@ -38,6 +38,8 @@ export default async function TecassistivaPage() {
                 Por isso desenvolvemos e representamos soluções de alto desempenho para pessoas com deficiência visual e outras necessidades específicas, atendendo Escolas, Secretarias de Educação, Universidades, Empresas e órgãos públicos com excelência e responsabilidade.
                 Trabalhamos lado a lado com educadores, gestores e equipes técnicas para garantir diagnósticos precisos, implementações eficientes e suporte contínuo.
               </p>
+            </div>
+            <div>
               <p>
                 Mais do que fornecer tecnologia, construímos projetos completos que fortalecem políticas de inclusão, aprimoram processos e garantem resultados reais na vida prática das pessoas.
                 A Tecassistiva acredita que acessibilidade não é apenas um serviço, é um valor, uma causa e um compromisso permanente com um Brasil mais inclusivo, justo e conectado às necessidades de Todos.
