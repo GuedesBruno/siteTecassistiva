@@ -1,7 +1,17 @@
-import { getImersaoBySlug, getAllImersaoSlugs } from '@/lib/api';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+
+// Lazy load API functions to avoid compilation during SSG
+async function getImersaoBySlug(slug) {
+  const { getImersaoBySlug: _getImersaoBySlug } = await import('@/lib/api');
+  return _getImersaoBySlug(slug);
+}
+
+async function getAllImersaoSlugs() {
+  const { getAllImersaoSlugs: _getAllImersaoSlugs } = await import('@/lib/api');
+  return _getAllImersaoSlugs();
+}
 
 export async function generateStaticParams() {
     // ⚠️  NOTA: Nenhuma imersão tem produto vinculado no Strapi atualmente

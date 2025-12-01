@@ -1,7 +1,17 @@
-import { getAllCategories, getAllProductsForDisplay } from '@/lib/api';
 import CategoryMenu from '@/components/CategoryMenu';
 import ProductDisplay from '@/components/ProductDisplay';
 import Breadcrumbs from '@/components/Breadcrumbs';
+
+// Lazy load API functions to avoid compilation during SSG
+async function getAllCategories() {
+  const { getAllCategories: _getAllCategories } = await import('@/lib/api');
+  return _getAllCategories();
+}
+
+async function getAllProductsForDisplay() {
+  const { getAllProductsForDisplay: _getAllProductsForDisplay } = await import('@/lib/api');
+  return _getAllProductsForDisplay();
+}
 
 export default async function AllProductsPage() {
     const [allCategories, allProducts] = await Promise.all([

@@ -1,9 +1,29 @@
-import { getCategoryBySlug, getAllCategories, getProductsBySubcategorySlug, getAllCategoryPaths } from "@/lib/api";
 import CategoryMenu from "@/components/CategoryMenu";
 import ProductDisplay from "@/components/ProductDisplay";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import Breadcrumbs from "@/components/Breadcrumbs";
+
+// Lazy load API functions to avoid compilation during SSG
+async function getCategoryBySlug(slug) {
+  const { getCategoryBySlug: _getCategoryBySlug } = await import("@/lib/api");
+  return _getCategoryBySlug(slug);
+}
+
+async function getAllCategories() {
+  const { getAllCategories: _getAllCategories } = await import("@/lib/api");
+  return _getAllCategories();
+}
+
+async function getProductsBySubcategorySlug(categorySlug, subcategorySlug) {
+  const { getProductsBySubcategorySlug: _getProductsBySubcategorySlug } = await import("@/lib/api");
+  return _getProductsBySubcategorySlug(categorySlug, subcategorySlug);
+}
+
+async function getAllCategoryPaths() {
+  const { getAllCategoryPaths: _getAllCategoryPaths } = await import("@/lib/api");
+  return _getAllCategoryPaths();
+}
 
 export async function generateStaticParams() {
   const categories = await getAllCategoryPaths();

@@ -1,7 +1,17 @@
-import { getProductBySlug, getAllProducts } from '@/lib/api';
 import { getStrapiMediaUrl } from '@/lib/media';
 import ProductDetail from '@/components/ProductDetail';
 import { notFound } from 'next/navigation';
+
+// Lazy load API functions to avoid compilation during SSG
+async function getProductBySlug(slug) {
+  const { getProductBySlug: _getProductBySlug } = await import('@/lib/api');
+  return _getProductBySlug(slug);
+}
+
+async function getAllProducts() {
+  const { getAllProducts: _getAllProducts } = await import('@/lib/api');
+  return _getAllProducts();
+}
 
 // Gera os caminhos estáticos para todos os produtos
 export async function generateStaticParams() {

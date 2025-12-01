@@ -1,10 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ambientesData } from '@/lib/ambientes-data';
-import { getAllProductsForDisplay } from '@/lib/api'; // Reutiliza a função que busca todos os produtos
 import Breadcrumbs from '@/components/Breadcrumbs';
 import ProductCard from '@/components/ProductCard';
 import { notFound } from 'next/navigation';
+
+// Lazy load API functions to avoid compilation during SSG
+async function getAllProductsForDisplay() {
+  const { getAllProductsForDisplay: _getAllProductsForDisplay } = await import('@/lib/api');
+  return _getAllProductsForDisplay();
+}
 
 // Gera as páginas estáticas no momento do build a partir dos dados estáticos
 export async function generateStaticParams() {

@@ -1,12 +1,27 @@
-import {
-    getAllCategories,
-    getProductsByManufacturerSlug,
-    getManufacturers,
-    getManufacturerBySlug
-} from '@/lib/api';
 import CategoryMenu from '@/components/CategoryMenu';
 import ProductDisplay from '@/components/ProductDisplay';
 import Breadcrumbs from '@/components/Breadcrumbs';
+
+// Lazy load API functions to avoid compilation during SSG
+async function getAllCategories() {
+  const { getAllCategories: _getAllCategories } = await import('@/lib/api');
+  return _getAllCategories();
+}
+
+async function getProductsByManufacturerSlug(slug) {
+  const { getProductsByManufacturerSlug: _getProductsByManufacturerSlug } = await import('@/lib/api');
+  return _getProductsByManufacturerSlug(slug);
+}
+
+async function getManufacturers() {
+  const { getManufacturers: _getManufacturers } = await import('@/lib/api');
+  return _getManufacturers();
+}
+
+async function getManufacturerBySlug(slug) {
+  const { getManufacturerBySlug: _getManufacturerBySlug } = await import('@/lib/api');
+  return _getManufacturerBySlug(slug);
+}
 
 export async function generateStaticParams() {
     console.log('1. Iniciando generateStaticParams para fabricantes...');

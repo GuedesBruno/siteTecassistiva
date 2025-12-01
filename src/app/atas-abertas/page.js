@@ -1,9 +1,14 @@
-import { getOpenAtas } from '@/lib/api';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import AtaCard from '@/components/AtaCard';
 import ContactForm from '@/components/ContactForm';
 import AdvantagesSection from '@/components/AdvantagesSection';
 import SocialMediaSection from '@/components/SocialMediaSection';
+
+// Lazy load API functions to avoid compilation during SSG
+async function getOpenAtas() {
+  const { getOpenAtas: _getOpenAtas } = await import('@/lib/api');
+  return _getOpenAtas();
+}
 
 export default async function AtasAbertasPage() {
   const atas = await getOpenAtas();

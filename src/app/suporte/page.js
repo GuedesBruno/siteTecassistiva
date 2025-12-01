@@ -1,7 +1,22 @@
 import { Suspense } from 'react';
-import { getProductsWithDocuments, getSoftwareAndDrivers, getAllCategories } from '@/lib/api';
 import SupportPageClient from '@/components/SupportPageClient';
 import Breadcrumbs from '@/components/Breadcrumbs';
+
+// Lazy load API functions to avoid compilation during SSG
+async function getProductsWithDocuments() {
+  const { getProductsWithDocuments: _getProductsWithDocuments } = await import('@/lib/api');
+  return _getProductsWithDocuments();
+}
+
+async function getSoftwareAndDrivers() {
+  const { getSoftwareAndDrivers: _getSoftwareAndDrivers } = await import('@/lib/api');
+  return _getSoftwareAndDrivers();
+}
+
+async function getAllCategories() {
+  const { getAllCategories: _getAllCategories } = await import('@/lib/api');
+  return _getAllCategories();
+}
 
 export default async function SuportePage() {
   // Buscando todos os dados em paralelo para eficiência

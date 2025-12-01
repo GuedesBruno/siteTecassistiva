@@ -1,8 +1,13 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { getAllTestimonials } from '@/lib/api';
 import TestimonialSection from '@/components/TestimonialSection';
 import SocialMediaSection from '@/components/SocialMediaSection';
+
+// Lazy load API functions to avoid compilation during SSG
+async function getAllTestimonials() {
+  const { getAllTestimonials: _getAllTestimonials } = await import('@/lib/api');
+  return _getAllTestimonials();
+}
 
 // Componente da Página
 export default async function TecassistivaPage() {
