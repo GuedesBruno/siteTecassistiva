@@ -1,3 +1,5 @@
+import { sortItemsByOrder } from './utils';
+
 async function fetchAPI(endpoint, options = {}) {
   const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
   const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN;
@@ -16,7 +18,7 @@ async function fetchAPI(endpoint, options = {}) {
   try {
     let base = STRAPI_URL.replace(/\/+$/g, '');
     if (base.endsWith('/api')) {
-      base = base.replace(/\/api$/,'');
+      base = base.replace(/\/api$/, '');
     }
     const path = endpoint.replace(/^\/+/, '');
     const url = `${base}/${path}`;
@@ -34,8 +36,8 @@ async function fetchAPI(endpoint, options = {}) {
       console.error("Detalhes do erro:", errorText);
       throw new Error(`Falha na requisição da API para ${endpoint}: ${res.status}`);
     }
-    
-    return await res.json(); 
+
+    return await res.json();
 
   } catch (error) {
     console.error(`ERRO ao fazer fetch no endpoint "${endpoint}":`, error.message);
@@ -73,7 +75,7 @@ export async function getAllProductsForDisplay() {
     // Populating subcategorias, categorias e imagem_principal para display completo
     const populateQuery = 'populate[0]=imagem_principal&populate[1]=subcategorias&populate[2]=categorias';
     const productsData = await fetchAPI(`/api/produtos?${populateQuery}&pagination[limit]=1000&sort=ordem:asc`);
-    return normalizeDataArray(productsData);
+    return sortItemsByOrder(normalizeDataArray(productsData));
   } catch (error) {
     console.error(`Falha ao buscar todos os produtos:`, error);
     return [];
@@ -118,16 +120,29 @@ export async function getFeaturedProducts() {
 }
 
 export async function getAllCategories() {
-  const response = await fetchAPI('/api/categorias?sort=nome:asc&fields[0]=nome&fields[1]=slug&populate[subcategorias][fields][0]=nome&populate[subcategorias][fields][1]=slug&pagination[limit]=100');
+  const response = await fetchAPI('/api/categorias?sort=nome:asc&fields[0]=nome&fields[1]=slug&fields[2]=ordem&populate[subcategorias][fields][0]=nome&populate[subcategorias][fields][1]=slug&populate[subcategorias][fields][2]=ordem&pagination[limit]=100');
   const data = normalizeDataArray(response);
   // Manually normalize if attributes is missing
-  return data.map(item => {
+  const normalized = data.map(item => {
     if (item.attributes) {
       return item;
     }
     const { id, ...attributes } = item;
     return { id, attributes };
   });
+
+  // Sort categories
+  const sortedCategories = sortItemsByOrder(normalized);
+
+  // Sort subcategories within each category
+  sortedCategories.forEach(cat => {
+    const catAttrs = cat.attributes || cat;
+    if (catAttrs.subcategorias && catAttrs.subcategorias.data) {
+      catAttrs.subcategorias.data = sortItemsByOrder(catAttrs.subcategorias.data);
+    }
+  });
+
+  return sortedCategories;
 }
 
 export async function getCategoryBySlug(slug) {
@@ -188,22 +203,22 @@ export async function getAllTestimonials() {
 
 // Adicionando funções que podem estar faltando para o build
 export async function getAllCategoryPaths() {
-    const response = await fetchAPI(
-        '/api/categorias?fields[0]=slug&populate[subcategorias][fields][0]=slug&pagination[limit]=200',
-        { cache: 'no-store' } // Força a busca de dados novos, evitando cache
-    );
-    return normalizeDataArray(response);
+  const response = await fetchAPI(
+    '/api/categorias?fields[0]=slug&populate[subcategorias][fields][0]=slug&pagination[limit]=200',
+    { cache: 'no-store' } // Força a busca de dados novos, evitando cache
+  );
+  return normalizeDataArray(response);
 }
 
 export async function getProductsByCategorySlug(slug) {
-    const filters = `filters[$or][0][categorias][slug][$eq]=${slug}&filters[$or][1][subcategorias][categorias][slug][$eq]=${slug}`;
-    const response = await fetchAPI(`/api/produtos?${filters}&populate=*&sort=nome:asc`);
-    return normalizeDataArray(response);
+  const filters = `filters[$or][0][categorias][slug][$eq]=${slug}&filters[$or][1][subcategorias][categorias][slug][$eq]=${slug}`;
+  const response = await fetchAPI(`/api/produtos?${filters}&populate=*&sort=ordem:asc`);
+  return sortItemsByOrder(normalizeDataArray(response));
 }
 
 export async function getProductsBySubcategorySlug(subslug) {
-    const response = await fetchAPI(`/api/produtos?filters[subcategorias][slug][$eq]=${subslug}&populate=*&sort=nome:asc`);
-    return normalizeDataArray(response);
+  const response = await fetchAPI(`/api/produtos?filters[subcategorias][slug][$eq]=${subslug}&populate=*&sort=ordem:asc`);
+  return sortItemsByOrder(normalizeDataArray(response));
 }
 
 export async function getOpenAtas() {
@@ -223,19 +238,21 @@ export async function getOpenAtas() {
 export async function getProductsWithDocuments() {
   try {
     // Popula documentos, categorias e subcategorias para filtro no componente
-    const query = 'populate[0]=documentos&populate[1]=categorias&populate[2]=subcategorias&pagination[limit]=1000&sort=nome:asc';
+    const query = 'populate[0]=documentos&populate[1]=categorias&populate[2]=subcategorias&pagination[limit]=1000&sort=ordem:asc';
 
     const productsData = await fetchAPI(`/api/produtos?${query}`);
     const rawData = normalizeDataArray(productsData);
 
     // Normaliza os dados para garantir a estrutura { id, attributes }
-    return rawData.map(item => {
+    const normalized = rawData.map(item => {
       if (item.attributes) {
         return item;
       }
       const { id, ...attributes } = item;
       return { id, attributes };
     });
+
+    return sortItemsByOrder(normalized);
   } catch (error) {
     console.error(`Falha ao buscar produtos com documentos:`, error);
     return [];
@@ -247,6 +264,7 @@ export async function getSoftwareAndDrivers() {
     const params = new URLSearchParams({
       'fields[0]': 'nome',
       'fields[1]': 'tipo',
+      'fields[2]': 'ordem',
       'populate[instaladores]': '*',
       'pagination[limit]': 1000,
     }).toString();
@@ -255,17 +273,17 @@ export async function getSoftwareAndDrivers() {
     const query = `${params}&populate=produto`;
 
     const softwareData = await fetchAPI(`/api/softwares?${query}`);
-    
+
     const rawData = softwareData.data || [];
     const normalizedData = rawData.map(item => {
-        if (item.attributes) {
-            return item;
-        }
-        const { id, ...attributes } = item;
-        return { id, attributes };
+      if (item.attributes) {
+        return item;
+      }
+      const { id, ...attributes } = item;
+      return { id, attributes };
     });
 
-    return normalizedData;
+    return sortItemsByOrder(normalizedData);
 
   } catch (error) {
     console.error(`Falha ao buscar softwares e drivers:`, error);
@@ -294,8 +312,8 @@ export async function getAllSimplePages() {
 }
 
 export async function getProductsByManufacturerSlug(slug) {
-  const response = await fetchAPI(`/api/produtos?filters[relacao_fabricante][slug][$eq]=${slug}&populate=*&sort=nome:asc`);
-  return normalizeDataArray(response);
+  const response = await fetchAPI(`/api/produtos?filters[relacao_fabricante][slug][$eq]=${slug}&populate=*&sort=ordem:asc`);
+  return sortItemsByOrder(normalizeDataArray(response));
 }
 
 export async function getManufacturerBySlug(slug) {
@@ -323,11 +341,11 @@ export async function getAllImersaoSlugs() {
   // ADICIONADO: populate[produto][fields] para verificar se existe relação
   const populateQuery = 'populate[produto][fields][0]=slug&populate[produto][fields][1]=nome&fields[0]=slug';
   console.log(`🔍 Buscando imersões com populate: /api/imersaos?${populateQuery}`);
-  
+
   try {
     const res = await fetchAPI(`/api/imersaos?${populateQuery}`);
     console.log(`✅ Resposta da API:`, JSON.stringify(res, null, 2).substring(0, 500));
-    
+
     const data = normalizeDataArray(res);
     console.log(`📊 Data após normalize:`, data.length, 'itens');
 
@@ -342,12 +360,12 @@ export async function getAllImersaoSlugs() {
       return { id, attributes };
     });
 
-    const filtered = normalizedData.filter(item => 
-      item && 
-      item.attributes?.slug && 
+    const filtered = normalizedData.filter(item =>
+      item &&
+      item.attributes?.slug &&
       item.attributes?.produto?.data
     );
-    
+
     console.log(`✅ Imersões com produto vinculado: ${filtered.length}`);
     return filtered;
   } catch (error) {
