@@ -7,7 +7,11 @@ export default function RichTextRenderer({ content }) {
   if (!content) return null;
 
   const renderNode = (node, index) => {
+    if (!node) return null; // Proteção contra nodes nulos
+    
     if (node.type === 'text') {
+      if (!node.text) return null; // Proteção contra texto vazio/nulo
+      
       let text = <span key={index}>{node.text}</span>;
       if (node.bold) {
         text = <strong key={index}>{text}</strong>;

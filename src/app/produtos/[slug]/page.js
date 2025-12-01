@@ -59,13 +59,18 @@ export async function generateMetadata({ params }) {
 // A página que renderiza um único produto
 export default async function ProductPage({ params }) {
   const { slug } = params;
+  console.log(`📦 Renderizando página de produto: ${slug}`);
+  
   const product = await getProductBySlug(slug);
 
   if (!product) {
+    console.error(`❌ ERRO: Produto não encontrado para slug: ${slug}`);
     notFound();
   }
 
   const p = product.attributes || product;
+  console.log(`✅ Produto renderizado com sucesso: ${slug}`);
+  
   const breadcrumbs = [
     { name: 'Início', path: '/' },
     { name: 'Produtos', path: '/produtos/' },

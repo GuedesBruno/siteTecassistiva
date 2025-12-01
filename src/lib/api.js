@@ -320,20 +320,40 @@ export async function getImersaoBySlug(slug) {
 }
 
 export async function getAllImersaoSlugs() {
-  const res = await fetchAPI('/api/imersaos?fields[0]=slug');
-  const data = normalizeDataArray(res);
+  // ADICIONADO: populate[produto][fields] para verificar se existe relação
+  const populateQuery = 'populate[produto][fields][0]=slug&populate[produto][fields][1]=nome&fields[0]=slug';
+  console.log(`🔍 Buscando imersões com populate: /api/imersaos?${populateQuery}`);
+  
+  try {
+    const res = await fetchAPI(`/api/imersaos?${populateQuery}`);
+    console.log(`✅ Resposta da API:`, JSON.stringify(res, null, 2).substring(0, 500));
+    
+    const data = normalizeDataArray(res);
+    console.log(`📊 Data após normalize:`, data.length, 'itens');
 
-  // Normalize each item if the attributes object is missing
-  const normalizedData = data.map(item => {
-    if (!item) return null; // handle null items in array
-    if (item.attributes) {
-      return item;
-    }
-    const { id, ...attributes } = item;
-    return { id, attributes };
-  });
+    // Normalize each item if the attributes object is missing
+    const normalizedData = data.map(item => {
+      if (!item) return null;
+      if (item.attributes) {
+        console.log(`  - Item com slug: ${item.attributes?.slug}, produto: ${item.attributes?.produto?.data ? 'SIM' : 'NÃO'}`);
+        return item;
+      }
+      const { id, ...attributes } = item;
+      return { id, attributes };
+    });
 
-  return normalizedData.filter(Boolean); // remove any null items
+    const filtered = normalizedData.filter(item => 
+      item && 
+      item.attributes?.slug && 
+      item.attributes?.produto?.data
+    );
+    
+    console.log(`✅ Imersões com produto vinculado: ${filtered.length}`);
+    return filtered;
+  } catch (error) {
+    console.error(`❌ ERRO ao buscar imersões:`, error.message);
+    return [];
+  }
 }
 
 export { fetchAPI };
