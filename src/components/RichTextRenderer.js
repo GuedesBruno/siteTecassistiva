@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import React from 'react';
-import DOMPurify from 'isomorphic-dompurify';
 
 // Renderizador de Rich Text abrangente para lidar com vários formatos do Strapi
 export default function RichTextRenderer({ content }) {
@@ -26,9 +25,9 @@ export default function RichTextRenderer({ content }) {
         text = <s key={index}>{text}</s>;
       }
       if (node.code) {
-        // Sanitizar HTML antes de renderizar
-        const sanitizedHtml = DOMPurify.sanitize(node.text);
-        return <code key={index} className="block whitespace-pre-wrap bg-gray-100 p-2 rounded font-mono text-sm">{sanitizedHtml}</code>;
+        // React already escapes text automatically, preventing XSS
+        // DOMPurify is not needed for text content
+        return <code key={index} className="block whitespace-pre-wrap bg-gray-100 p-2 rounded font-mono text-sm">{node.text}</code>;
       }
       return text;
     }

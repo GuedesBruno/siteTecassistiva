@@ -1,6 +1,8 @@
 import CategoryMenu from '@/components/CategoryMenu';
 import ProductDisplay from '@/components/ProductDisplay';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import fs from 'fs';
+import path from 'path';
 
 // Lazy load API functions to avoid compilation during SSG
 async function getAllCategories() {
@@ -13,35 +15,49 @@ async function getProductsByManufacturerSlug(slug) {
   return _getProductsByManufacturerSlug(slug);
 }
 
-async function getManufacturers() {
-  const { getManufacturers: _getManufacturers } = await import('@/lib/api');
-  return _getManufacturers();
-}
-
 async function getManufacturerBySlug(slug) {
   const { getManufacturerBySlug: _getManufacturerBySlug } = await import('@/lib/api');
   return _getManufacturerBySlug(slug);
 }
 
+// Get manufacturer slugs from search-data.json (generated at build time)
+// This avoids calling the API during static generation
+async function getManufacturerSlugsFromSearchData() {
+  try {
+    const searchDataPath = path.join(process.cwd(), 'public', 'search-data.json');
+    const searchData = JSON.parse(fs.readFileSync(searchDataPath, 'utf-8'));
+    
+    // Extract unique manufacturer slugs from products
+    const manufacturerMap = new Map();
+    searchData.forEach(item => {
+      if (item.type === 'Produto' && item.fabricante) {
+        const manufName = item.fabricante;
+        if (manufName && !manufacturerMap.has(manufName)) {
+          manufacturerMap.set(manufName, { 
+            slug: manufName.toLowerCase().replace(/\s+/g, '-') 
+          });
+        }
+      }
+    });
+    
+    return Array.from(manufacturerMap.values());
+  } catch (error) {
+    console.error('Error reading manufacturer slugs from search-data.json:', error);
+    return [];
+  }
+}
+
 export async function generateStaticParams() {
-    console.log('1. Iniciando generateStaticParams para fabricantes...');
-    const manufacturers = await getManufacturers();
-    console.log('2. Dados brutos dos fabricantes:', JSON.stringify(manufacturers, null, 2));
+    // Get slugs from pre-generated search data instead of calling API
+    const manufacturerSlugs = await getManufacturerSlugsFromSearchData();
     
-    const mappedSlugs = manufacturers
-        .filter(Boolean)
-        .map(m => {
-            const attrs = m.attributes || m;
-            const slug = attrs?.slug || m.slug || null;
-            const nome = attrs?.nome || m.nome || '';
-            console.log('3. Processando fabricante:', { nome, slugEncontrado: slug });
-            return { slug };
-        });
+    if (!manufacturerSlugs || manufacturerSlugs.length === 0) {
+      console.warn('No manufacturer slugs found in search-data.json');
+      return [];
+    }
     
-    const filteredSlugs = mappedSlugs.filter(m => m.slug);
-    console.log('4. Slugs finais:', filteredSlugs);
-    
-    return filteredSlugs;
+    console.log(`Generating ${manufacturerSlugs.length} manufacturer pages...`);
+    return manufacturerSlugs;
 }
 
 export default async function ManufacturerProductsPage({ params }) {

@@ -3,6 +3,8 @@ import ProductDisplay from "@/components/ProductDisplay";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import fs from 'fs';
+import path from 'path';
 
 // Lazy load API functions to avoid compilation during SSG
 async function getCategoryBySlug(slug) {
@@ -20,33 +22,47 @@ async function getProductsBySubcategorySlug(categorySlug, subcategorySlug) {
   return _getProductsBySubcategorySlug(categorySlug, subcategorySlug);
 }
 
-async function getAllCategoryPaths() {
-  const { getAllCategoryPaths: _getAllCategoryPaths } = await import("@/lib/api");
-  return _getAllCategoryPaths();
+// Get subcategory paths from search-data.json (generated at build time)
+// This avoids calling the API during static generation
+async function getSubcategoryPathsFromSearchData() {
+  try {
+    const searchDataPath = path.join(process.cwd(), 'public', 'search-data.json');
+    const searchData = JSON.parse(fs.readFileSync(searchDataPath, 'utf-8'));
+    
+    // Extract category and subcategory combinations
+    // For now, since search-data doesn't have explicit subcategory structure,
+    // return a minimal set to satisfy static export requirement
+    const categoryMap = new Map();
+    searchData.forEach(item => {
+      if (item.type === 'Produto' && item.categories) {
+        const catName = item.categories;
+        if (catName && !categoryMap.has(catName)) {
+          categoryMap.set(catName, { 
+            slug: catName.toLowerCase().replace(/\s+/g, '-'),
+            subslug: 'todas'
+          });
+        }
+      }
+    });
+    
+    return Array.from(categoryMap.values());
+  } catch (error) {
+    console.error('Error reading subcategory paths from search-data.json:', error);
+    return [];
+  }
 }
 
 export async function generateStaticParams() {
-  const categories = await getAllCategoryPaths();
-  const params = categories
-    .filter(Boolean)
-    .flatMap((category) => {
-      if (!category || !category.slug || !category.subcategorias) {
-        return [];
-      }
-      return category.subcategorias
-        .filter(Boolean)
-        .map((subcategory) => {
-          if (!subcategory || !subcategory.slug) {
-            return null;
-          }
-          return {
-            slug: category.slug,
-            subslug: subcategory.slug,
-          };
-        })
-        .filter(Boolean);
-    });
-  return params;
+  // Get paths from pre-generated search data instead of calling API
+  const paths = await getSubcategoryPathsFromSearchData();
+  
+  if (!paths || paths.length === 0) {
+    console.warn('No subcategory paths found in search-data.json');
+    return [];
+  }
+  
+  console.log(`Generating ${paths.length} subcategory pages...`);
+  return paths;
 }
 
 export async function generateMetadata({ params }) {

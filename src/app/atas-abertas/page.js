@@ -4,6 +4,9 @@ import ContactForm from '@/components/ContactForm';
 import AdvantagesSection from '@/components/AdvantagesSection';
 import SocialMediaSection from '@/components/SocialMediaSection';
 
+// Prevent static generation - use on-demand ISR
+export const revalidate = 3600; // Revalidate every hour
+
 // Lazy load API functions to avoid compilation during SSG
 async function getOpenAtas() {
   const { getOpenAtas: _getOpenAtas } = await import('@/lib/api');
@@ -11,7 +14,13 @@ async function getOpenAtas() {
 }
 
 export default async function AtasAbertasPage() {
-  const atas = await getOpenAtas();
+  let atas = [];
+  try {
+    atas = await getOpenAtas();
+  } catch (error) {
+    console.error('Erro ao carregar atas abertas:', error);
+    atas = [];
+  }
 
   const breadcrumbs = [
     { name: 'Página Inicial', path: '/' },

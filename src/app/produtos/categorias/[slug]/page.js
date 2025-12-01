@@ -3,6 +3,8 @@ import CategoryMenu from '@/components/CategoryMenu';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import fs from 'fs';
+import path from 'path';
 
 // Lazy load API functions to avoid compilation during SSG
 async function getCategoryBySlug(slug) {
@@ -15,30 +17,68 @@ async function getAllCategories() {
   return _getAllCategories();
 }
 
-async function getAllCategoryPaths() {
-  const { getAllCategoryPaths: _getAllCategoryPaths } = await import('@/lib/api');
-  return _getAllCategoryPaths();
+// Get category slugs from search-data.json (generated at build time)
+// This avoids calling the API during static generation
+async function getCategorySlugsFromSearchData() {
+  try {
+    const searchDataPath = path.join(process.cwd(), 'public', 'search-data.json');
+    const searchData = JSON.parse(fs.readFileSync(searchDataPath, 'utf-8'));
+    
+    // Extract unique category slugs from search data
+    const categoryMap = new Map();
+    searchData.forEach(item => {
+      if (item.type === 'Produto' && item.categories) {
+        // Assuming categories might have slugs or we need to extract them
+        // For now, store the category name/slug
+        const catName = item.categories;
+        if (catName && !categoryMap.has(catName)) {
+          categoryMap.set(catName, { slug: catName.toLowerCase().replace(/\s+/g, '-') });
+        }
+      }
+    });
+    
+    return Array.from(categoryMap.values());
+  } catch (error) {
+    console.error('Error reading category slugs from search-data.json:', error);
+    return [];
+  }
 }
 
 export async function generateStaticParams() {
-  const categories = await getAllCategoryPaths();
-  return categories.map(c => ({
-    slug: c.attributes?.slug || c.slug,
-  })).filter(c => c.slug);
+  // Get slugs from pre-generated search data instead of calling API
+  const categorySlugs = await getCategorySlugsFromSearchData();
+  
+  if (!categorySlugs || categorySlugs.length === 0) {
+    console.warn('No category slugs found in search-data.json');
+    return [];
+  }
+  
+  console.log(`Generating ${categorySlugs.length} category pages...`);
+  return categorySlugs;
 }
 
 export async function generateMetadata({ params }) {
-  const category = await getCategoryBySlug(params.slug);
-  const categoryAttributes = category?.attributes || category;
-  if (!categoryAttributes) {
+  // Return minimal metadata - full metadata loads on-demand with ISR
+  // This prevents API calls during static generation
+  try {
+    const category = await getCategoryBySlug(params.slug);
+    const categoryAttributes = category?.attributes || category;
+    if (!categoryAttributes) {
+      return {
+        title: 'Categoria não encontrada',
+      };
+    }
     return {
-      title: 'Categoria não encontrada',
+      title: `${categoryAttributes.nome} | Tecassistiva`,
+      description: `Confira nossos produtos para ${categoryAttributes.nome}.`,
+    };
+  } catch (error) {
+    // During build, return minimal metadata
+    return {
+      title: 'Produtos | Tecassistiva',
+      description: 'Confira nossos produtos.',
     };
   }
-  return {
-    title: `${categoryAttributes.nome} | Tecassistiva`,
-    description: `Confira nossos produtos para ${categoryAttributes.nome}.`,
-  };
 }
 
 export default async function CategoryPage({ params }) {

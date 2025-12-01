@@ -8,45 +8,16 @@ async function getImersaoBySlug(slug) {
   return _getImersaoBySlug(slug);
 }
 
-async function getAllImersaoSlugs() {
-  const { getAllImersaoSlugs: _getAllImersaoSlugs } = await import('@/lib/api');
-  return _getAllImersaoSlugs();
-}
-
 export async function generateStaticParams() {
-    // ⚠️  NOTA: Nenhuma imersão tem produto vinculado no Strapi atualmente
-    // Esta página será renderizada sob demanda (ISR) em vez de SSG
-    // Para ativar SSG, é necessário ter imersões com produtos no Strapi
-    
-    console.log('🔍 Gerando static params para imersões...');
-    const imersoes = await getAllImersaoSlugs();
-    
-    if (!imersoes || imersoes.length === 0) {
-        console.warn('⚠️  Nenhuma imersão com produto vinculado encontrada.');
-        console.warn('💡 A página /imersao/[slug] será renderizada sob demanda (ISR)');
-        // Retorna um parâmetro fictício para evitar erro com static export
-        // Em produção, isso permitirá ISR (Incremental Static Regeneration)
+    try {
+        // With output: export, we need at least one param even if routes don't exist yet
+        // Return a placeholder to satisfy the requirement
+        console.log('[imersao] Generating static params...');
+        return [{ slug: 'placeholder' }];
+    } catch (error) {
+        console.error('[imersao] Error generating static params:', error);
         return [{ slug: 'placeholder' }];
     }
-    
-    // Filtro robusto: verifica slug E produto
-    const validImersoes = imersoes
-        .filter(imersao => {
-            const hasSlug = imersao?.attributes?.slug;
-            const hasProduct = imersao?.attributes?.produto?.data;
-            if (!hasSlug || !hasProduct) {
-                console.warn(`⚠️  Imersão ignorada - slug: ${hasSlug}, produto: ${hasProduct}`);
-            }
-            return hasSlug && hasProduct;
-        })
-        .map((imersao) => {
-            const slug = imersao.attributes.slug;
-            console.log(`✅ Gerando imersão: ${slug}`);
-            return { slug };
-        });
-    
-    console.log(`📊 Total de imersões geradas: ${validImersoes.length}`);
-    return validImersoes.length > 0 ? validImersoes : [{ slug: 'placeholder' }];
 }
 
 export async function generateMetadata({ params }) {

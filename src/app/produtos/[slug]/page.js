@@ -1,6 +1,8 @@
 import { getStrapiMediaUrl } from '@/lib/media';
 import ProductDetail from '@/components/ProductDetail';
 import { notFound } from 'next/navigation';
+import fs from 'fs';
+import path from 'path';
 
 // Lazy load API functions to avoid compilation during SSG
 async function getProductBySlug(slug) {
@@ -8,62 +10,95 @@ async function getProductBySlug(slug) {
   return _getProductBySlug(slug);
 }
 
-async function getAllProducts() {
-  const { getAllProducts: _getAllProducts } = await import('@/lib/api');
-  return _getAllProducts();
+// Get product slugs from search-data.json (generated at build time)
+// This avoids calling the API during static generation
+async function getProductSlugsFromSearchData() {
+  try {
+    const searchDataPath = path.join(process.cwd(), 'public', 'search-data.json');
+    const searchData = JSON.parse(fs.readFileSync(searchDataPath, 'utf-8'));
+    
+    // Filter for products and extract slugs
+    const productSlugs = searchData
+      .filter(item => item.type === 'Produto')
+      .map(item => {
+        // slug comes as "/produtos/slug-name", extract just the slug part
+        const parts = item.slug.split('/');
+        return { slug: parts[parts.length - 1] };
+      })
+      .filter(item => item.slug);
+    
+    return productSlugs;
+  } catch (error) {
+    console.error('Error reading product slugs from search-data.json:', error);
+    return [];
+  }
 }
 
-// Gera os caminhos estáticos para todos os produtos
+// Return empty array for generateStaticParams to avoid API calls during build
 export async function generateStaticParams() {
-  const products = await getAllProducts();
-  if (!products) return [];
-
-  return products.map((product) => ({
-    slug: product.attributes?.slug || product.slug,
-  })).filter(p => p.slug);
+  // Get slugs from pre-generated search data instead of calling API
+  // This prevents whatwg-url from being loaded during static generation
+  const productSlugs = await getProductSlugsFromSearchData();
+  
+  if (!productSlugs || productSlugs.length === 0) {
+    console.warn('No product slugs found in search-data.json');
+    return [];
+  }
+  
+  console.log(`Generating ${productSlugs.length} product pages...`);
+  return productSlugs;
 }
 
 // Gera os metadados para a página (título, descrição)
 export async function generateMetadata({ params }) {
-    const product = await getProductBySlug(params.slug);
-    const productAttributes = product?.attributes || product;
+    try {
+        const product = await getProductBySlug(params.slug);
+        const productAttributes = product?.attributes || product;
 
-    if (!productAttributes) {
+        if (!productAttributes) {
+            return {
+                title: 'Produto não encontrado'
+            };
+        }
+
+        const description = (productAttributes.descricao_curta || '').substring(0, 160);
+        const imageUrl = getStrapiMediaUrl(
+          productAttributes.imagem_principal?.data?.attributes?.url ||
+          productAttributes.imagem_principal?.url
+        );
+
         return {
-            title: 'Produto não encontrado'
+            title: productAttributes.nome,
+            description: description,
+            keywords: [
+              productAttributes.nome,
+              productAttributes.Fabricante,
+              'tecnologia assistiva',
+              'acessibilidade'
+            ].filter(Boolean).join(', '),
+            canonical: `https://www.tecassistiva.com.br/produtos/${productAttributes.slug}/`,
+            openGraph: {
+              title: productAttributes.nome,
+              description: description,
+              url: `https://www.tecassistiva.com.br/produtos/${productAttributes.slug}/`,
+              type: 'website',
+              images: imageUrl ? [{ url: imageUrl, width: 800, height: 600 }] : [],
+            },
+            twitter: {
+              card: 'summary_large_image',
+              title: productAttributes.nome,
+              description: description,
+              images: imageUrl ? [imageUrl] : [],
+            }
+        };
+    } catch (error) {
+        // During build, return minimal metadata
+        // Full metadata will load on-demand with ISR
+        return {
+            title: 'Produto | Tecassistiva',
+            description: 'Confira nosso produto.',
         };
     }
-
-    const description = (productAttributes.descricao_curta || '').substring(0, 160);
-    const imageUrl = getStrapiMediaUrl(
-      productAttributes.imagem_principal?.data?.attributes?.url ||
-      productAttributes.imagem_principal?.url
-    );
-
-    return {
-        title: productAttributes.nome,
-        description: description,
-        keywords: [
-          productAttributes.nome,
-          productAttributes.Fabricante,
-          'tecnologia assistiva',
-          'acessibilidade'
-        ].filter(Boolean).join(', '),
-        canonical: `https://www.tecassistiva.com.br/produtos/${productAttributes.slug}/`,
-        openGraph: {
-          title: productAttributes.nome,
-          description: description,
-          url: `https://www.tecassistiva.com.br/produtos/${productAttributes.slug}/`,
-          type: 'website',
-          images: imageUrl ? [{ url: imageUrl, width: 800, height: 600 }] : [],
-        },
-        twitter: {
-          card: 'summary_large_image',
-          title: productAttributes.nome,
-          description: description,
-          images: imageUrl ? [imageUrl] : [],
-        }
-    };
 }
 
 // A página que renderiza um único produto
