@@ -8,15 +8,26 @@ async function getImersaoBySlug(slug) {
     return _getImersaoBySlug(slug);
 }
 
+async function getAllImersaoSlugs() {
+    const { getAllImersaoSlugs: _getAllImersaoSlugs } = await import('@/lib/api');
+    return _getAllImersaoSlugs();
+}
+
 export async function generateStaticParams() {
     try {
-        // With output: export, we need at least one param even if routes don't exist yet
-        // Return a placeholder to satisfy the requirement
-        console.log('[imersao] Generating static params...');
-        return [{ slug: 'placeholder' }];
+        const imersoes = await getAllImersaoSlugs();
+
+        if (!imersoes || imersoes.length === 0) {
+            console.log('[imersao] Nenhuma imersão encontrada para gerar páginas estáticas.');
+            return [];
+        }
+
+        return imersoes.map((imersao) => ({
+            slug: imersao.attributes?.slug || imersao.slug,
+        }));
     } catch (error) {
         console.error('[imersao] Error generating static params:', error);
-        return [{ slug: 'placeholder' }];
+        return [];
     }
 }
 
