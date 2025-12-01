@@ -3,11 +3,6 @@ import Image from 'next/image';
 import { ambientesData } from '@/lib/ambientes-data'; // Importa os dados estáticos
 import Breadcrumbs from '@/components/Breadcrumbs';
 
-export const metadata = {
-  title: 'Soluções por Ambientes | Tecassistiva',
-  description: 'Descubra soluções de tecnologia assistiva organizadas por ambientes de aplicação.',
-};
-
 export default function AmbientesPage() {
   const breadcrumbs = [
     { name: 'Página Inicial', path: '/' },

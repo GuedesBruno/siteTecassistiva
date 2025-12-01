@@ -5,11 +5,6 @@ import ContactForm from '@/components/ContactForm';
 import AdvantagesSection from '@/components/AdvantagesSection';
 import SocialMediaSection from '@/components/SocialMediaSection';
 
-export const metadata = {
-  title: 'Atas Abertas | Tecassistiva',
-  description: 'Consulte as Atas de Registro de Preços (ARP) disponíveis e saiba como fazer a adesão.',
-};
-
 export default async function AtasAbertasPage() {
   const atas = await getOpenAtas();
 

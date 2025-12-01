@@ -3,11 +3,6 @@ import { getProductsWithDocuments, getSoftwareAndDrivers, getAllCategories } fro
 import SupportPageClient from '@/components/SupportPageClient';
 import Breadcrumbs from '@/components/Breadcrumbs';
 
-export const metadata = {
-  title: 'Suporte | Tecassistiva',
-  description: 'Encontre documentos, manuais, softwares, drivers e utilitários para os produtos Tecassistiva.',
-};
-
 export default async function SuportePage() {
   // Buscando todos os dados em paralelo para eficiência
   const [products, software, categories] = await Promise.all([
