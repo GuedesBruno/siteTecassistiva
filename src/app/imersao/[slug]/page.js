@@ -131,71 +131,165 @@ export default async function ImersaoPage({ params }) {
     const imageUrl = productData.imagem_principal?.url;
 
     // Extract manufacturer name safely
-    const fabricanteData = productData.relacao_fabricante?.data?.attributes || productData.relacao_fabricante?.data;
+    const fabricanteData = productData.relacao_fabricante?.data?.attributes ||
+        productData.relacao_fabricante?.data ||
+        productData.relacao_fabricante;
+
     const fabricanteNome = fabricanteData?.nome || '';
 
-    const buttonClassName = "bg-[#002554] text-white py-3 px-6 font-bold text-lg hover:bg-tec-blue-light transition-colors duration-300";
-
     return (
-        <div className="bg-gray-50 text-black min-h-screen flex flex-col items-center justify-center p-4 font-sans py-12">
-            <main className="w-full max-w-2xl bg-white p-8 shadow-lg flex flex-col items-center text-center">
-                <h1 className="text-4xl md:text-5xl font-bold mb-8">{productData.nome}</h1>
-                {imageUrl && (
-                    <Image
-                        src={imageUrl}
-                        alt={productData.nome}
-                        width={200}
-                        height={200}
-                        className="mb-10 object-cover"
-                    />
-                )}
-                <p className="text-xl md:text-2xl mb-10">
-                    Sua IMERSÃO com {genero_descricao === 'feminino' ? 'a' : 'o'}{' '}
-                    <strong>{fabricanteNome} {productData.nome}</strong> começa aqui!
-                </p>
+        <div className="h-screen bg-[#002554] font-sans text-white selection:bg-blue-500 selection:text-white relative overflow-hidden flex flex-col items-center justify-center p-4">
 
-                <div className="flex flex-col space-y-4 w-full max-w-sm mt-8">
-                    {botoes_padrao ? (
-                        <>
-                            {curso && (
-                                <Link href={curso} target="_blank" rel="noopener noreferrer" className={buttonClassName}>
-                                    Curso Completo
-                                </Link>
-                            )}
-                            {guia && (
-                                <Link href={guia} target="_blank" rel="noopener noreferrer" className={buttonClassName}>
-                                    Guia do Usuário
-                                </Link>
-                            )}
-                            {manual && (
-                                <Link href={manual} target="_blank" rel="noopener noreferrer" className={buttonClassName}>
-                                    Manual
-                                </Link>
-                            )}
-                            <Link href="/produtos" className={buttonClassName}>
-                                Catálogo Teca
-                            </Link>
-                        </>
+            {/* Background Logo Watermark */}
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-5 pointer-events-none z-0">
+                <Image
+                    src="/logo-tecassistiva.svg"
+                    alt="Background Logo"
+                    fill
+                    className="object-contain brightness-0 invert"
+                />
+            </div>
+
+            {/* Glassmorphism Card */}
+            <main className="w-full max-w-md bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl shadow-2xl p-6 relative z-10 flex flex-col items-center max-h-[95vh] overflow-hidden">
+
+                {/* Product Image (Rounded) */}
+                <div
+                    className="relative w-36 h-36 mb-6 mt-12 group overflow-hidden border-4 border-white/10 shadow-lg shrink-0"
+                    style={{ borderRadius: '50%' }}
+                >
+                    <div className="absolute inset-0 bg-blue-400 opacity-20 blur-xl group-hover:opacity-30 transition-opacity duration-500"></div>
+                    {imageUrl ? (
+                        <Image
+                            src={imageUrl}
+                            alt={productData.nome}
+                            fill
+                            className="object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
                     ) : (
-                        personalizado && personalizado.map((botao) => (
-                            <Link key={botao.id} href={botao.link_do_botao} target="_blank" rel="noopener noreferrer" className={buttonClassName}>
-                                {botao.texto_do_botao}
-                            </Link>
-                        ))
+                        <div className="w-full h-full flex items-center justify-center bg-white/5">
+                            <span className="text-white/50 text-sm">Sem imagem</span>
+                        </div>
                     )}
                 </div>
 
-                <div className="flex space-x-6 mt-10">
-                    <Link href="https://www.instagram.com/tecassistiva/" target="_blank" rel="noopener noreferrer" aria-label="Instagram da Tecassistiva" className="bg-[#002554] rounded-full w-12 h-12 flex items-center justify-center transition-opacity hover:opacity-80">
-                        <Image src="/logo_instagram.svg" alt="Instagram" width={32} height={32} />
-                    </Link>
-                    <Link href="https://www.youtube.com/c/tecassistiva" target="_blank" rel="noopener noreferrer" aria-label="Canal no YouTube da Tecassistiva" className="bg-[#002554] rounded-full w-12 h-12 flex items-center justify-center transition-opacity hover:opacity-80">
-                        <Image src="/logo_youtube.svg" alt="YouTube" width={32} height={32} />
-                    </Link>
-                    <Link href="mailto:teca@tecassistiva.com.br" aria-label="Enviar email para Tecassistiva" className="bg-[#002554] rounded-full w-12 h-12 flex items-center justify-center transition-opacity hover:opacity-80">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                {/* Welcome Text */}
+                <p className="text-center text-lg mb-6 text-blue-100 leading-relaxed font-light shrink-0">
+                    Sua IMERSÃO com {genero_descricao === 'feminino' ? 'a' : 'o'}{' '}
+                    <strong className="font-bold text-white block text-xl mt-1">
+                        {fabricanteNome} {productData.nome}
+                    </strong>
+                    começa aqui!
+                </p>
+
+                {/* Action Buttons (Linktree Style) */}
+                <div className="w-full space-y-2 mb-4">
+                    {botoes_padrao ? (
+                        <>
+                            {curso && (
+                                <Link
+                                    href={curso}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center p-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl transition-all duration-300 group"
+                                >
+                                    <div className="w-7 h-7 bg-white/20 rounded-full flex items-center justify-center mr-3 group-hover:scale-110 transition-transform">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                                            <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+                                        </svg>
+                                    </div>
+                                    <span className="font-semibold text-white tracking-wide text-xs">Curso Completo</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 text-white/50 ml-auto group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </Link>
+                            )}
+                            {guia && (
+                                <Link
+                                    href={guia}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center p-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl transition-all duration-300 group"
+                                >
+                                    <div className="w-7 h-7 bg-white/20 rounded-full flex items-center justify-center mr-3 group-hover:scale-110 transition-transform">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                        </svg>
+                                    </div>
+                                    <span className="font-semibold text-white tracking-wide text-xs">Guia do Usuário</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 text-white/50 ml-auto group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </Link>
+                            )}
+                            {manual && (
+                                <Link
+                                    href={manual}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center p-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl transition-all duration-300 group"
+                                >
+                                    <div className="w-7 h-7 bg-white/20 rounded-full flex items-center justify-center mr-3 group-hover:scale-110 transition-transform">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                        </svg>
+                                    </div>
+                                    <span className="font-semibold text-white tracking-wide text-xs">Manual</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 text-white/50 ml-auto group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </Link>
+                            )}
+                        </>
+                    ) : (
+                        personalizado && personalizado.map((botao) => (
+                            <Link
+                                key={botao.id}
+                                href={botao.link_do_botao}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center p-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl transition-all duration-300 group"
+                            >
+                                <div className="w-7 h-7 bg-white/20 rounded-full flex items-center justify-center mr-3 group-hover:scale-110 transition-transform">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                                    </svg>
+                                </div>
+                                <span className="font-semibold text-white tracking-wide text-xs">{botao.texto_do_botao}</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 text-white/50 ml-auto group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                </svg>
+                            </Link>
+                        ))
+                    )}
+
+                    {/* Secondary Button */}
+                    <Link
+                        href="/produtos"
+                        className="flex items-center justify-center p-3 mt-2 border border-white/30 rounded-xl text-white/80 hover:bg-white/10 hover:text-white transition-all duration-300 text-sm font-medium tracking-wider uppercase shrink-0"
+                    >
+                        Ver Catálogo Completo
                     </Link>
                 </div>
+
+                {/* Social Media Icons */}
+                <div className="flex space-x-6 mt-auto pt-4 shrink-0">
+                    <Link href="https://www.instagram.com/tecassistiva/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-all transform hover:scale-110 border border-white/10">
+                        <Image src="/logo_instagram.svg" alt="Instagram" width={20} height={20} className="brightness-0 invert" />
+                    </Link>
+                    <Link href="https://www.youtube.com/c/tecassistiva" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-all transform hover:scale-110 border border-white/10">
+                        <Image src="/logo_youtube.svg" alt="YouTube" width={20} height={20} className="brightness-0 invert" />
+                    </Link>
+                    <Link href="mailto:teca@tecassistiva.com.br" aria-label="Email" className="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-all transform hover:scale-110 border border-white/10">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    </Link>
+                </div>
+
+                <footer className="mt-4 text-center text-white/30 text-[10px] shrink-0">
+                    © {new Date().getFullYear()} Tecassistiva
+                </footer>
             </main>
         </div>
     );
