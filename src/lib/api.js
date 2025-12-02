@@ -137,8 +137,12 @@ export async function getAllCategories() {
   // Sort subcategories within each category
   sortedCategories.forEach(cat => {
     const catAttrs = cat.attributes || cat;
-    if (catAttrs.subcategorias && catAttrs.subcategorias.data) {
-      catAttrs.subcategorias.data = sortItemsByOrder(catAttrs.subcategorias.data);
+    if (catAttrs.subcategorias) {
+      if (Array.isArray(catAttrs.subcategorias)) {
+        catAttrs.subcategorias = sortItemsByOrder(catAttrs.subcategorias);
+      } else if (catAttrs.subcategorias.data) {
+        catAttrs.subcategorias.data = sortItemsByOrder(catAttrs.subcategorias.data);
+      }
     }
   });
 
