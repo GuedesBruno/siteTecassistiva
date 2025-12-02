@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import { Montserrat } from 'next/font/google';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import Script from 'next/script';
+import { getAllCategories } from '@/lib/api';
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -75,10 +76,12 @@ export const metadata = {
 }
 
 export default async function RootLayout({ children }) {
+  const categories = await getAllCategories();
+
   return (
     <html lang="pt-BR" className={`${montserrat.variable} font-sans`}>
       <body className="flex flex-col min-h-screen bg-gray-50 text-gray-800">
-        <Header categories={[]} />
+        <Header categories={categories} />
         <main className="flex-grow z-0" style={{ paddingTop: 'var(--header-height, 6rem)' }}>
           {children}
         </main>

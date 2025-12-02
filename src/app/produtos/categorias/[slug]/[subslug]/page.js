@@ -22,46 +22,34 @@ async function getProductsBySubcategorySlug(categorySlug, subcategorySlug) {
   return _getProductsBySubcategorySlug(categorySlug, subcategorySlug);
 }
 
-// Get subcategory paths from search-data.json (generated at build time)
-// This avoids calling the API during static generation
-async function getSubcategoryPathsFromSearchData() {
-  try {
-    const searchDataPath = path.join(process.cwd(), 'public', 'search-data.json');
-    const searchData = JSON.parse(fs.readFileSync(searchDataPath, 'utf-8'));
-    
-    // Extract category and subcategory combinations
-    // For now, since search-data doesn't have explicit subcategory structure,
-    // return a minimal set to satisfy static export requirement
-    const categoryMap = new Map();
-    searchData.forEach(item => {
-      if (item.type === 'Produto' && item.categories) {
-        const catName = item.categories;
-        if (catName && !categoryMap.has(catName)) {
-          categoryMap.set(catName, { 
-            slug: catName.toLowerCase().replace(/\s+/g, '-'),
-            subslug: 'todas'
-          });
-        }
-      }
-    });
-    
-    return Array.from(categoryMap.values());
-  } catch (error) {
-    console.error('Error reading subcategory paths from search-data.json:', error);
-    return [];
-  }
+async function getAllCategoryPaths() {
+  const { getAllCategoryPaths: _getAllCategoryPaths } = await import("@/lib/api");
+  return _getAllCategoryPaths();
 }
 
 export async function generateStaticParams() {
-  // Get paths from pre-generated search data instead of calling API
-  const paths = await getSubcategoryPathsFromSearchData();
-  
-  if (!paths || paths.length === 0) {
-    console.warn('No subcategory paths found in search-data.json');
-    return [];
-  }
-  
-  console.log(`Generating ${paths.length} subcategory pages...`);
+  const categories = await getAllCategoryPaths();
+
+  const paths = [];
+  categories.forEach(category => {
+    const catAttrs = category.attributes || category;
+    const catSlug = catAttrs.slug;
+
+    if (catAttrs.subcategorias && (catAttrs.subcategorias.data || Array.isArray(catAttrs.subcategorias))) {
+      const subs = Array.isArray(catAttrs.subcategorias) ? catAttrs.subcategorias : catAttrs.subcategorias.data;
+
+      subs.forEach(sub => {
+        const subAttrs = sub.attributes || sub;
+        if (subAttrs.slug) {
+          paths.push({
+            slug: catSlug,
+            subslug: subAttrs.slug
+          });
+        }
+      });
+    }
+  });
+
   return paths;
 }
 
@@ -86,12 +74,12 @@ export default async function SubCategoryPage({ params }) {
   }
 
   const category = categoryData.data[0].attributes;
-  
+
   // Lidar com ambas estruturas: .data ou array direto
-  const subcategoriesArray = Array.isArray(category.subcategorias) 
-    ? category.subcategorias 
+  const subcategoriesArray = Array.isArray(category.subcategorias)
+    ? category.subcategorias
     : (category.subcategorias?.data || []);
-  
+
   const subcategory = subcategoriesArray.find(s => (s.attributes || s).slug === subslug);
   const subcategoryName = subcategory ? (subcategory.attributes || subcategory).nome : '';
 
@@ -110,23 +98,23 @@ export default async function SubCategoryPage({ params }) {
 
   return (
     <div className="py-8">
-    <div className="flex flex-col md:flex-row py-8 px-4">
-      <aside className="w-full md:w-1/4 lg:w-1/5 md:pr-2">
-        <CategoryMenu
-          categories={allCategories}
-          activeCategorySlug={slug}
-          activeSubcategorySlug={subslug}
-        />
-      </aside>
-      <main className="w-full md:w-3/4 lg:w-4/5 md:pl-2">
-        <Breadcrumbs items={breadcrumbs} />
-        <Suspense fallback={<div>Carregando...</div>}>
-          <ProductDisplay
-            categoryName={pageTitle}
-            products={products}
+      <div className="flex flex-col md:flex-row py-8 px-4">
+        <aside className="w-full md:w-1/4 lg:w-1/5 md:pr-2">
+          <CategoryMenu
+            categories={allCategories}
+            activeCategorySlug={slug}
+            activeSubcategorySlug={subslug}
           />
-        </Suspense>
-      </main>
+        </aside>
+        <main className="w-full md:w-3/4 lg:w-4/5 md:pl-2">
+          <Breadcrumbs items={breadcrumbs} />
+          <Suspense fallback={<div>Carregando...</div>}>
+            <ProductDisplay
+              categoryName={pageTitle}
+              products={products}
+            />
+          </Suspense>
+        </main>
       </div>
     </div>
   );

@@ -26,9 +26,7 @@ export default function CategoryMenu({
 
   const getAttrs = (item) => item.attributes || item;
 
-  const sortedCategories = [...categories].sort((a, b) =>
-    getAttrs(a).nome.localeCompare(getAttrs(b).nome)
-  );
+  const sortedCategories = categories;
 
   const handleCategoryClick = (category) => {
     if (isCallbackMode) {
@@ -46,9 +44,9 @@ export default function CategoryMenu({
     if (!item) return null;
     const attrs = getAttrs(item);
     const slug = attrs?.slug;
-    
+
     if (!slug) return null;
-    
+
     const parentSlug = parentCategorySlug || (isSub ? activeCategorySlug || selectedCategory?.slug : undefined);
 
     const isActive = isSub
@@ -56,13 +54,13 @@ export default function CategoryMenu({
       : (isCallbackMode ? selectedCategory?.slug === slug : activeCategorySlug === slug);
 
     const commonClasses = `block w-full text-left px-4 transition-colors duration-200 rounded-md ${isSub ? 'py-1.5 text-sm' : 'py-2'}`;
-    
-    const activeClasses = isSub 
-      ? 'font-bold text-tec-blue bg-gray-100' 
+
+    const activeClasses = isSub
+      ? 'font-bold text-tec-blue bg-gray-100'
       : 'bg-tec-blue text-white font-semibold shadow-sm';
-      
-    const inactiveClasses = isSub 
-      ? 'text-gray-700 hover:text-tec-blue hover:bg-gray-100' 
+
+    const inactiveClasses = isSub
+      ? 'text-gray-700 hover:text-tec-blue hover:bg-gray-100'
       : 'text-gray-800 hover:bg-gray-100 hover:text-tec-blue';
 
     const className = `${commonClasses} ${isActive ? activeClasses : inactiveClasses}`;
@@ -102,27 +100,22 @@ export default function CategoryMenu({
 
       <div className={`${isOpen ? 'block' : 'hidden'} mt-4 md:block`}>
         <div className="w-full bg-white p-4 rounded-lg shadow-md border border-gray-200">
-          
+
           <nav>
             <ul className="space-y-1">
               {sortedCategories.map((category) => {
                 if (!category) return null;
                 const catAttrs = getAttrs(category);
-                const isActive = isCallbackMode ? 
-                  selectedCategory?.slug === catAttrs.slug : 
+                const isActive = isCallbackMode ?
+                  selectedCategory?.slug === catAttrs.slug :
                   activeCategorySlug === catAttrs.slug;
-                
+
                 // Lidar com ambas estruturas: .data ou array direto
-                const subcategories = Array.isArray(catAttrs.subcategorias) 
-                  ? catAttrs.subcategorias 
+                const subcategories = Array.isArray(catAttrs.subcategorias)
+                  ? catAttrs.subcategorias
                   : (catAttrs.subcategorias?.data || []);
                 const sortedSubcategories = subcategories
-                  .filter(s => s) // Filtra nulos/undefined
-                  .sort((a, b) => {
-                    const nameA = getAttrs(a).nome || '';
-                    const nameB = getAttrs(b).nome || '';
-                    return nameA.localeCompare(nameB);
-                  });
+                  .filter(s => s); // Filtra nulos/undefined
 
                 return (
                   <li key={catAttrs.slug}>

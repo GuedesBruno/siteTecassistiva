@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from 'next/link';
@@ -73,14 +72,14 @@ export default function Header({ categories = [] }) {
       <div className={`container mx-auto px-4 flex items-center justify-between transition-all duration-300 ease-in-out ${isScrolled ? 'py-2' : 'py-4'}`}>
         <div className="flex items-center gap-6">
           <Link href="/" className="flex items-center">
-                          <Image
-                            src={isScrolled ? "/icon-tecassistiva.svg" : "/logo-tecassistiva.svg"}
-                            alt="Tecassistiva"
-                            width={isScrolled ? 140 : 140}
-                            height={isScrolled ? 40 : 40}
-                            className="transition-all duration-300 ease-in-out h-auto"
-                            priority
-                          />          </Link>
+            <Image
+              src={isScrolled ? "/icon-tecassistiva.svg" : "/logo-tecassistiva.svg"}
+              alt="Tecassistiva"
+              width={isScrolled ? 140 : 140}
+              height={isScrolled ? 40 : 40}
+              className="transition-all duration-300 ease-in-out h-auto"
+              priority
+            />          </Link>
         </div>
 
         {/* Container para alinhar Navegação e Busca à direita */}
@@ -93,6 +92,11 @@ export default function Header({ categories = [] }) {
               </Link>
               <div className="absolute left-1/2 transform -translate-x-1/2 top-full mt-0 w-72 bg-white shadow-lg hidden group-hover:block z-[120] border">
                 <div className="py-2">
+                  <div className="border-b last:border-b-0">
+                    <Link href="/ambientes" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">
+                      Ambientes
+                    </Link>
+                  </div>
                   {Array.isArray(categories) && categories.map(category => {
                     const cat = category.attributes || category;
                     return (
@@ -158,9 +162,8 @@ export default function Header({ categories = [] }) {
 
       {/* Menu Mobile */}
       <div
-        className={`lg:hidden fixed top-0 left-0 w-full h-full bg-tec-blue z-[100] transform transition-transform duration-300 ease-in-out ${
-          isMenuOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
+        className={`lg:hidden fixed top-0 left-0 w-full h-full bg-tec-blue z-[100] transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
       >
         <div className="container mx-auto px-4 py-4 flex flex-col">
           <div className="flex justify-between items-center mb-8">
