@@ -7,10 +7,10 @@ export default function RichTextRenderer({ content }) {
 
   const renderNode = (node, index) => {
     if (!node) return null; // Proteção contra nodes nulos
-    
+
     if (node.type === 'text') {
       if (!node.text) return null; // Proteção contra texto vazio/nulo
-      
+
       let text = <span key={index}>{node.text}</span>;
       if (node.bold) {
         text = <strong key={index}>{text}</strong>;
@@ -25,6 +25,16 @@ export default function RichTextRenderer({ content }) {
         text = <s key={index}>{text}</s>;
       }
       if (node.code) {
+        // Check if the code block contains an iframe
+        if (node.text && node.text.trim().startsWith('<iframe')) {
+          return (
+            <div
+              key={index}
+              className="my-4 aspect-video w-full"
+              dangerouslySetInnerHTML={{ __html: node.text }}
+            />
+          );
+        }
         // React already escapes text automatically, preventing XSS
         // DOMPurify is not needed for text content
         return <code key={index} className="block whitespace-pre-wrap bg-gray-100 p-2 rounded font-mono text-sm">{node.text}</code>;

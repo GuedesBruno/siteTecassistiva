@@ -1,3 +1,4 @@
+import qs from 'qs';
 import { sortItemsByOrder } from './utils';
 
 async function fetchAPI(endpoint, options = {}) {
@@ -22,6 +23,8 @@ async function fetchAPI(endpoint, options = {}) {
     }
     const path = endpoint.replace(/^\/+/, '');
     const url = `${base}/${path}`;
+
+    console.log(`🔌 Fetching API: ${url}`); // Log para debug
 
     const fetchOptions = {
       headers: { 'Authorization': `Bearer ${STRAPI_TOKEN}` },
@@ -65,11 +68,6 @@ export function normalizeDataArray(response) {
   return data;
 }
 
-export async function getAllProducts() {
-  // Usando a mesma lógica de getAllProductsForDisplay para garantir consistência
-  return getAllProductsForDisplay();
-}
-
 export async function getAllProductsForDisplay() {
   try {
     // Populating subcategorias, categorias e imagem_principal para display completo
@@ -82,22 +80,49 @@ export async function getAllProductsForDisplay() {
   }
 }
 
+export async function getAllProducts() {
+  // Usando a mesma lógica de getAllProductsForDisplay para garantir consistência
+  return getAllProductsForDisplay();
+}
+
+export async function getFeaturedProducts() {
+  const response = await fetchAPI('/api/produtos?filters[destaque][$eq]=true&fields[0]=nome&fields[1]=slug&fields[2]=descricao_curta&populate=imagem_principal');
+  return normalizeDataArray(response);
+}
+
 export async function getProductBySlug(slug) {
-  const fieldsToFetch = [
-    'nome',
-    'slug',
-    'descricao_curta',
-    'descricao_longa',
-    'videos',
-    'caracteristicas_funcionais',
-    'caracteristicas_tecnicas',
-    'visao_geral'
-  ];
+  const query = qs.stringify({
+    filters: {
+      slug: {
+        $eq: slug,
+      },
+    },
+    fields: [
+      'nome',
+      'slug',
+      'descricao_curta',
+      'descricao_longa',
+      'caracteristicas_funcionais',
+      'caracteristicas_tecnicas',
+      'visao_geral',
+      'videos',
+    ],
+    populate: {
+      imagem_principal: { fields: ['url', 'alternativeText', 'width', 'height'] },
+      galeria_de_imagens: { fields: ['url', 'alternativeText', 'width', 'height'] },
+      subcategorias: { fields: ['nome', 'slug', 'ordem'] },
+      categorias: { fields: ['nome', 'slug', 'ordem'] },
+      relacao_fabricante: { populate: '*' },
+      documentos: { fields: ['url', 'name', 'ext', 'size'] },
+      especificacoes_por_categoria: {
+        populate: '*',
+      },
+    },
+  }, {
+    encodeValuesOnly: true,
+  });
 
-  const fieldsQuery = fieldsToFetch.map((field, i) => `fields[${i}]=${field}`).join('&');
-  const populateQuery = 'populate=*';
-
-  const response = await fetchAPI(`/api/produtos?filters[slug][$eq]=${slug}&${fieldsQuery}&${populateQuery}`);
+  const response = await fetchAPI(`/api/produtos?${query}`);
   const data = response.data || [];
   if (data.length === 0) return null;
 
@@ -107,16 +132,6 @@ export async function getProductBySlug(slug) {
 
   const { id, ...rest } = item;
   return { id, attributes: rest };
-}
-
-export async function getAllProductSlugs() {
-  const response = await fetchAPI('/api/produtos?fields[0]=slug&pagination[limit]=1000');
-  return normalizeDataArray(response);
-}
-
-export async function getFeaturedProducts() {
-  const response = await fetchAPI('/api/produtos?filters[destaque][$eq]=true&fields[0]=nome&fields[1]=slug&fields[2]=descricao_curta&populate=imagem_principal');
-  return normalizeDataArray(response);
 }
 
 export async function getAllCategories() {
@@ -255,7 +270,6 @@ export async function getProductsWithDocuments() {
       const { id, ...attributes } = item;
       return { id, attributes };
     });
-
     return sortItemsByOrder(normalized);
   } catch (error) {
     console.error(`Falha ao buscar produtos com documentos:`, error);

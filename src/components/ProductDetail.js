@@ -9,17 +9,49 @@ import 'swiper/css/navigation';
 import { getStrapiMediaUrl } from '@/lib/media';
 import VideoModal from './VideoModal'; // Importa o Modal
 import RichTextRenderer from './RichTextRenderer';
-import ProductCard from './ProductCard'; // Importa o ProductCard
+import SpecsTable from './SpecsTable';
+import Breadcrumbs from './Breadcrumbs';
 
-// --- Lógica de Vídeo adaptada para este componente ---
+// Componente ProductCard simples para produtos relacionados
+const ProductCard = ({ product }) => {
+  const { attributes: p } = product;
+  const imageUrl = getStrapiMediaUrl(p.imagem_principal?.data?.attributes?.url);
+
+  return (
+    <Link href={`/produtos/${p.slug}`} className="group block bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden border border-gray-100">
+      <div className="aspect-square relative bg-gray-50">
+        {imageUrl ? (
+          <Image
+            src={imageUrl}
+            alt={p.nome}
+            fill
+            className="object-contain p-4 group-hover:scale-105 transition-transform duration-300"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center text-gray-300">
+            <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+        )}
+      </div>
+      <div className="p-4">
+        <h3 className="text-lg font-semibold text-gray-900 group-hover:text-tec-blue transition-colors mb-1">{p.nome}</h3>
+        {p.descricao_curta && (
+          <p className="text-sm text-gray-500 line-clamp-2">{p.descricao_curta}</p>
+        )}
+      </div>
+    </Link>
+  );
+};
+
+// Função para extrair o ID do vídeo do YouTube ou Vimeo
 const getVideoId = (url) => {
   if (!url) return null;
   let match = /vimeo\.com\/([\d\/a-zA-Z]+)/i.exec(url);
   if (match && match[1]) return { type: 'vimeo', id: match[1] };
-  
   match = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i.exec(url);
   if (match && match[1]) return { type: 'youtube', id: match[1] };
-  
   return null;
 };
 
@@ -31,8 +63,14 @@ const VideoCard = ({ video, onVideoClick }) => {
   useEffect(() => {
     if (!videoInfo) return;
     let isMounted = true;
-
-    const fetchThumbnail = async () => {
+    const determineThumbnailUrl = async () => {
+      const strapiThumbnail = attrs.thumbnail;
+      const thumbnailUrlPath = strapiThumbnail?.data?.attributes?.url || strapiThumbnail?.url;
+      const strapiUrl = getStrapiMediaUrl(thumbnailUrlPath);
+      if (strapiUrl) {
+        if (isMounted) setThumbnailUrl(strapiUrl);
+        return;
+      }
       if (videoInfo.type === 'youtube') {
         if (isMounted) setThumbnailUrl(`https://i.ytimg.com/vi/${videoInfo.id}/hqdefault.jpg`);
       } else if (videoInfo.type === 'vimeo') {
@@ -47,17 +85,16 @@ const VideoCard = ({ video, onVideoClick }) => {
         }
       }
     };
-
-    fetchThumbnail();
+    determineThumbnailUrl();
     return () => { isMounted = false; };
-  }, [attrs.link, videoInfo]);
+  }, [attrs.link, attrs.thumbnail, videoInfo]);
 
   if (!videoInfo) return null;
 
   return (
-    <div className="group block rounded-lg shadow-md overflow-hidden transform hover:-translate-y-1 transition-all duration-300">
+    <div className="group block rounded-lg shadow-md overflow-hidden transform hover:-translate-y-1 transition-all duration-300 text-left w-full bg-white border border-gray-100">
       <button onClick={() => onVideoClick(videoInfo)} className="relative block w-full">
-        <div className="aspect-video">
+        <div className="aspect-square">
           {thumbnailUrl ? (
             <img src={thumbnailUrl} alt={attrs.titulo} className="w-full h-full object-cover" />
           ) : (
@@ -65,97 +102,179 @@ const VideoCard = ({ video, onVideoClick }) => {
           )}
         </div>
         <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-          <svg className="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" /></svg>
+          <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 20 20">
+            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+          </svg>
         </div>
       </button>
+
     </div>
   );
 };
-// --- Fim da lógica de vídeo ---
 
 export default function ProductDetail({ product, breadcrumbs = [] }) {
+  // ... (state and logic remains same)
   const [activeTab, setActiveTab] = useState('Visão Geral');
   const [selectedVideo, setSelectedVideo] = useState(null); // Estado para o modal
+  const [swiper, setSwiper] = useState(null); // Estado para controlar o Swiper
   const { attributes: p } = product;
   const images = [p.imagem_principal, ...(p.galeria_de_imagens || [])].filter(Boolean);
 
+  console.log('Product videos raw:', p.videos);
+  let videoList = [];
+  if (typeof p.videos === 'string') {
+    videoList = p.videos.split('\n').filter(link => link.trim() !== '').map((link, index) => ({
+      id: `vid-${index}`,
+      attributes: {
+        link: link.trim(),
+        titulo: 'Vídeo',
+        thumbnail: null // Thumbnail will be fetched by VideoCard
+      }
+    }));
+  } else if (Array.isArray(p.videos)) {
+    videoList = p.videos;
+  }
+
+  const videoData = videoList.map(video => {
+    const attrs = video.attributes || video;
+    const videoId = getVideoId(attrs.link);
+    return { ...video, videoId };
+  }).filter(v => v.videoId);
+
+  // Determine content for Technical Characteristics tab
+  const hasStructuredSpecs = p.especificacoes_por_categoria && p.especificacoes_por_categoria.length > 0;
+  const technicalSpecsContent = hasStructuredSpecs ? p.especificacoes_por_categoria : p.caracteristicas_tecnicas;
+
   const tabs = [
     { name: 'Visão Geral', content: p.visao_geral },
-    { name: 'Fotos', content: p.galeria_de_imagens },
-    { name: 'Vídeos', content: p.videos },
     { name: 'Características Funcionais', content: p.caracteristicas_funcionais },
-    { name: 'Características Técnicas', content: p.caracteristicas_tecnicas },
+    { name: 'Características Técnicas', content: technicalSpecsContent, isStructured: hasStructuredSpecs },
     { name: 'Produtos Relacionados', content: p.relacao_acessorios?.data },
     { name: 'Downloads', content: p.documentos },
+    { name: 'Fotos', content: p.galeria_de_imagens },
+    { name: 'Vídeos', content: p.videos },
   ];
-
-  // Analisa as URLs de vídeo do campo de texto 'videos' (uma URL por linha)
-  const videoLinks = p.videos ? p.videos.split('\n').filter(link => link.trim() !== '') : [];
-  const videoData = videoLinks.map((link, index) => ({
-    id: `video-${index}`,
-    attributes: {
-      link: link,
-      titulo: `Vídeo ${index + 1}` // Título genérico, já que não está disponível no campo de texto
-    }
-  }));
 
   return (
     <>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <nav className="text-sm text-gray-500 mb-8">
-          {breadcrumbs.map((crumb, index) => (
-            <span key={index}>
-              {index > 0 && <span className="mx-2">&gt;</span>}
-              {crumb.path ? (
-                <Link href={crumb.path} className="hover:underline">
-                  {crumb.name}
-                </Link>
-              ) : (
-                <span className="font-semibold text-gray-700">{crumb.name}</span>
-              )}
-            </span>
-          ))}
-        </nav>
+        {/* Breadcrumbs */}
+        <Breadcrumbs items={breadcrumbs} />
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 mb-12">
-          <div className="relative lg:col-span-2">
-            <Swiper
-              modules={[Navigation]}
-              navigation={true}
-              className="w-full aspect-square rounded-lg border bg-gray-100"
-            >
-              {images.map((img) => (
-                <SwiperSlide key={img.id}>
-                  <Image
-                    src={getStrapiMediaUrl(img.url)}
-                    alt={p.nome}
-                    fill
-                    className="object-contain"
-                    priority={img.id === p.imagem_principal.id}
-                  />
-                </SwiperSlide>
-              ))}
-            </Swiper>
+        {/* Image Gallery and Product Info */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
+          <div className="relative group lg:col-span-5">
+            <div className="aspect-square relative rounded-2xl overflow-hidden bg-white shadow-lg border border-gray-100">
+              {images.length > 0 ? (
+                <Swiper
+                  modules={[Navigation]}
+                  onSwiper={setSwiper}
+                  navigation={{
+                    prevEl: '.swiper-button-prev',
+                    nextEl: '.swiper-button-next',
+                  }}
+                  loop={images.length > 1}
+                  className="h-full w-full"
+                >
+                  {images.map((img, idx) => (
+                    <SwiperSlide key={img.id || idx}>
+                      <div className="relative w-full h-full">
+                        <Image
+                          src={getStrapiMediaUrl(img.url)}
+                          alt={img.alternativeText || p.nome}
+                          fill
+                          className="object-contain p-8"
+                          priority={idx === 0}
+                        />
+                      </div>
+                    </SwiperSlide>
+                  ))}
+                  <div className="swiper-button-prev !text-white after:!text-2xl !w-10 !h-10 !bg-tec-blue/50 !rounded-full !shadow-md hover:!bg-tec-blue transition-all opacity-0 group-hover:opacity-100"></div>
+                  <div className="swiper-button-next !text-white after:!text-2xl !w-10 !h-10 !bg-tec-blue/50 !rounded-full !shadow-md hover:!bg-tec-blue transition-all opacity-0 group-hover:opacity-100"></div>
+                </Swiper>
+              ) : (
+                <div className="w-full h-full flex items-center justify-center bg-gray-50 text-gray-400">
+                  <svg className="w-20 h-20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                </div>
+              )}
+            </div>
+
+            {/* Thumbnails */}
+            {images.length > 1 && (
+              <div className="mt-4 grid grid-cols-5 gap-2">
+                {images.map((img, idx) => (
+                  <div
+                    key={img.id || idx}
+                    className="aspect-square relative rounded-lg overflow-hidden border border-gray-200 cursor-pointer hover:border-tec-blue transition-colors"
+                    onClick={() => swiper?.slideTo(idx)}
+                  >
+                    <Image
+                      src={getStrapiMediaUrl(img.url)}
+                      alt={`Thumbnail ${idx + 1}`}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Video Gallery */}
+            {videoData.length > 0 && (
+              <div className="mt-2">
+                <Swiper
+                  modules={[Navigation]}
+                  spaceBetween={10}
+                  slidesPerView={3.5}
+                  navigation={{
+                    prevEl: '.video-swiper-button-prev',
+                    nextEl: '.video-swiper-button-next',
+                  }}
+                  breakpoints={{
+                    640: { slidesPerView: 4.5 },
+                    1024: { slidesPerView: 5 },
+                  }}
+                  className="w-full relative group/video"
+                >
+                  {videoData.map((video) => (
+                    <SwiperSlide key={video.id}>
+                      <VideoCard video={video} onVideoClick={setSelectedVideo} />
+                    </SwiperSlide>
+                  ))}
+                  <div className="video-swiper-button-prev swiper-button-prev !text-white after:!text-xl !w-8 !h-8 !bg-tec-blue/50 !rounded-full !shadow-md hover:!bg-tec-blue transition-all opacity-0 group-hover/video:opacity-100"></div>
+                  <div className="video-swiper-button-next swiper-button-next !text-white after:!text-xl !w-8 !h-8 !bg-tec-blue/50 !rounded-full !shadow-md hover:!bg-tec-blue transition-all opacity-0 group-hover/video:opacity-100"></div>
+                </Swiper>
+              </div>
+            )}
           </div>
 
-          <div className="lg:col-span-3 flex flex-col">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">{p.nome}</h1>
-            <div className="prose max-w-none text-lg text-gray-600 leading-relaxed">
-              <RichTextRenderer content={p.descricao_longa} />
+          {/* Product Info */}
+          <div className="flex flex-col justify-center lg:col-span-7">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">{p.nome}</h1>
+
+            {/* Descrição Longa (Rich Text) ao lado da imagem */}
+            <div className="prose prose-lg text-gray-600 mb-8 leading-relaxed">
+              {p.descricao_longa ? (
+                <RichTextRenderer content={p.descricao_longa} />
+              ) : (
+                p.descricao_curta && <p>{p.descricao_curta}</p>
+              )}
             </div>
 
-            {/* Botão Compre Agora via WhatsApp */}
-            <div className="mt-8">
-              <a
-                href={`https://wa.me/5511995978139?text=${encodeURIComponent(`Olá, tenho interesse em comprar o produto: ${p.nome}`)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-semibold rounded-md text-white bg-green-600 hover:bg-green-700 transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-              >
-                <svg className="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.06 22L7.32 20.58C8.77 21.39 10.37 21.82 12.04 21.82C17.5 21.82 21.95 17.37 21.95 11.91C21.95 6.45 17.5 2 12.04 2ZM16.57 15.96C16.3 16.23 15.39 16.73 15.03 16.78C14.67 16.83 13.91 16.98 13.3 16.83C12.69 16.68 11.74 16.38 10.62 15.3C9.28 14.04 8.47 12.54 8.32 12.27C8.17 12 7.36 10.91 7.36 10.05C7.36 9.19 7.87 8.71 8.07 8.5C8.27 8.29 8.57 8.24 8.82 8.24C9.07 8.24 9.27 8.24 9.44 8.27C9.61 8.29 9.86 8.84 9.96 9.16C10.06 9.48 10.11 9.88 9.96 10.11C9.81 10.34 9.74 10.44 9.59 10.61C9.44 10.78 9.29 10.96 9.44 11.23C9.59 11.5 10.11 12.22 10.83 12.9C11.71 13.73 12.38 14.03 12.68 14.18C12.98 14.33 13.13 14.28 13.28 14.13C13.43 13.98 13.89 13.4 14.11 13.1C14.33 12.8 14.56 12.75 14.83 12.85C15.11 12.95 16.04 13.45 16.29 13.58C16.54 13.71 16.69 13.78 16.74 13.91C16.79 14.04 16.79 14.44 16.57 14.71L16.57 15.96Z"/></svg>
-                Compre Agora via WhatsApp
-              </a>
-            </div>
+            {/* WhatsApp Button */}
+            <a
+              href={`https://wa.me/5511999999999?text=Olá, gostaria de saber mais sobre o produto ${p.nome}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-8 py-4 bg-green-500 hover:bg-green-600 text-white text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 w-full sm:w-auto"
+            >
+              <svg className="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.015-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
+              </svg>
+              Solicitar Orçamento via WhatsApp
+            </a>
           </div>
         </div>
 
@@ -168,9 +287,9 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
                     key={tab.name}
                     onClick={() => setActiveTab(tab.name)}
                     className={`px-4 py-3 text-sm md:text-base font-semibold transition-colors duration-200 whitespace-nowrap ${activeTab === tab.name
-                        ? 'border-b-2 border-tec-blue text-tec-blue'
-                        : 'text-gray-500 hover:text-tec-blue'
-                    }`}
+                      ? 'border-b-2 border-tec-blue text-tec-blue'
+                      : 'text-gray-500 hover:text-tec-blue'
+                      }`}
                   >
                     {tab.name}
                   </button>
@@ -202,7 +321,7 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
                       <span>{doc.name}</span>
                     </a>
                   ))}
-                  
+
                   {/* NOVA LÓGICA PARA VÍDEOS */}
                   {tab.name === 'Vídeos' && videoData.length > 0 && (
                     <div className="not-prose grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -220,9 +339,16 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
                     </div>
                   )}
 
-                  {/* Lógica original ajustada para não renderizar a aba de vídeo como texto */}
-                  {tab.name !== 'Vídeos' && tab.name !== 'Produtos Relacionados' && typeof tab.content === 'string' && <div className="whitespace-pre-line">{tab.content}</div>}
-                  {tab.name !== 'Vídeos' && tab.name !== 'Produtos Relacionados' && Array.isArray(tab.content) && tab.name !== 'Downloads' && <RichTextRenderer content={tab.content} />}
+                  {/* Lógica para Especificações Técnicas Estruturadas */}
+                  {tab.name === 'Características Técnicas' && tab.isStructured && (
+                    <div className="not-prose">
+                      <SpecsTable specGroups={tab.content} />
+                    </div>
+                  )}
+
+                  {/* Lógica original ajustada para não renderizar a aba de vídeo como texto e nem a tabela estruturada */}
+                  {tab.name !== 'Vídeos' && tab.name !== 'Produtos Relacionados' && !(tab.name === 'Características Técnicas' && tab.isStructured) && typeof tab.content === 'string' && <div className="whitespace-pre-line">{tab.content}</div>}
+                  {tab.name !== 'Vídeos' && tab.name !== 'Produtos Relacionados' && !(tab.name === 'Características Técnicas' && tab.isStructured) && Array.isArray(tab.content) && tab.name !== 'Downloads' && <RichTextRenderer content={tab.content} />}
                 </div>
               ))}
             </div>
