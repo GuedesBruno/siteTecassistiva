@@ -1,10 +1,12 @@
+import React from 'react';
+
 const CheckIcon = () => (
     <svg className="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
     </svg>
 );
 
-const SpecsTable = ({ specGroups }) => {
+const SpecsTable = ({ specGroups, showTitle = true }) => {
     if (!specGroups || specGroups.length === 0) {
         return null;
     }
@@ -14,12 +16,14 @@ const SpecsTable = ({ specGroups }) => {
             {specGroups.map((group, groupIndex) => (
                 <div key={groupIndex} className="space-y-4">
                     {/* Group Title */}
-                    <div className="flex items-center space-x-4 mb-6">
-                        <h3 className="text-2xl font-bold text-gray-800 relative pl-4 border-l-4 border-tec-blue">
-                            {group.titulo}
-                        </h3>
-                        <div className="h-px bg-gray-200 flex-grow"></div>
-                    </div>
+                    {showTitle && (
+                        <div className="flex items-center space-x-4 mb-6">
+                            <h3 className="text-2xl font-bold text-gray-800 relative pl-4 border-l-4 border-tec-blue">
+                                {group.titulo}
+                            </h3>
+                            <div className="h-px bg-gray-200 flex-grow"></div>
+                        </div>
+                    )}
 
                     {/* Items Grid */}
                     <div className="grid grid-cols-1 gap-4 max-w-3xl mx-auto">

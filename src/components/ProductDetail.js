@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -11,6 +11,7 @@ import VideoModal from './VideoModal'; // Importa o Modal
 import RichTextRenderer from './RichTextRenderer';
 import SpecsTable from './SpecsTable';
 import Breadcrumbs from './Breadcrumbs';
+import InfoCard from './InfoCard';
 
 // Componente ProductCard simples para produtos relacionados
 const ProductCard = ({ product }) => {
@@ -112,8 +113,100 @@ const VideoCard = ({ video, onVideoClick }) => {
   );
 };
 
+// Componente reutilizável para listar cards com efeito sticky e foco 3D
+const StickyCardList = ({ items }) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const containerRef = useRef(null);
+  const cardRefs = useRef([]);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const containerTop = container.getBoundingClientRect().top;
+
+      let newActiveIndex = cardRefs.current.length - 1; // Default to last if all are stuck
+
+      for (let i = 0; i < cardRefs.current.length; i++) {
+        const card = cardRefs.current[i];
+        if (!card) continue;
+
+        const cardTop = card.getBoundingClientRect().top - containerTop;
+
+        // Find the first card that is NOT stuck (scrolling up)
+        // The active card is the one immediately BEFORE it (the one currently stuck/visible on top)
+        if (cardTop > 20) {
+          newActiveIndex = i - 1;
+          break;
+        }
+      }
+
+      if (newActiveIndex < 0) newActiveIndex = 0; // Safety for first item
+
+      setActiveIndex(newActiveIndex);
+    };
+
+    container.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initialize
+
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, [items]);
+
+  return (
+    <div
+      ref={containerRef}
+      className="flex flex-col gap-6 overflow-y-auto h-[calc(100vh-var(--header-height)-60px)] scroll-smooth px-1 pb-20 no-scrollbar relative overscroll-contain"
+    >
+      {items.map((item, idx) => (
+        <div key={idx} ref={el => cardRefs.current[idx] = el} className="contents">
+          <InfoCard
+            title={item.title}
+            isActive={idx === activeIndex}
+            isPrev={idx < activeIndex}
+            isNext={idx > activeIndex}
+          >
+            {item.content}
+          </InfoCard>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+// Helper para agrupar conteúdo Rich Text por títulos
+const groupContentByHeading = (content) => {
+  if (!content || !Array.isArray(content)) return [{ title: null, content: <RichTextRenderer content={content} /> }];
+
+  const groups = [];
+  let currentGroup = { title: null, rawContent: [] };
+
+  content.forEach((node) => {
+    if (node.type === 'heading') {
+      if (currentGroup.rawContent.length > 0 || currentGroup.title) {
+        groups.push({
+          title: currentGroup.title,
+          content: <RichTextRenderer content={currentGroup.rawContent} />
+        });
+      }
+      const titleText = node.children?.map(c => c.text).join('') || '';
+      currentGroup = { title: titleText, rawContent: [] };
+    } else {
+      currentGroup.rawContent.push(node);
+    }
+  });
+
+  if (currentGroup.rawContent.length > 0 || currentGroup.title) {
+    groups.push({
+      title: currentGroup.title,
+      content: <RichTextRenderer content={currentGroup.rawContent} />
+    });
+  }
+
+  return groups;
+};
+
 export default function ProductDetail({ product, breadcrumbs = [] }) {
-  // ... (state and logic remains same)
   const [activeTab, setActiveTab] = useState('Visão Geral');
   const [selectedVideo, setSelectedVideo] = useState(null); // Estado para o modal
   const [swiper, setSwiper] = useState(null); // Estado para controlar o Swiper
@@ -279,8 +372,8 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
         </div>
 
         <div className="w-full">
-          <div className="border-b border-gray-200">
-            <nav className="-mb-px flex space-x-2 md:space-x-4 overflow-x-auto" aria-label="Tabs">
+          <div className="border-b border-gray-200 sticky top-[var(--header-height)] z-40 bg-white transition-all duration-300">
+            <nav className="-mb-px flex space-x-2 md:space-x-4 overflow-x-auto no-scrollbar" aria-label="Tabs">
               {tabs.map((tab) => (
                 tab.content && (
                   <button
@@ -301,6 +394,11 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
             <div className="prose max-w-none">
               {tabs.map((tab) => (
                 <div key={tab.name} className={activeTab === tab.name ? 'block' : 'hidden'}>
+                  {/* Lógica para Visão Geral e Características Funcionais (Cards Verticais) */}
+                  {(tab.name === 'Visão Geral' || tab.name === 'Características Funcionais') && (
+                    <StickyCardList items={groupContentByHeading(tab.content)} />
+                  )}
+
                   {tab.name === 'Fotos' && (
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                       {(p.galeria_de_imagens || []).map((img) => (
@@ -339,16 +437,21 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
                     </div>
                   )}
 
-                  {/* Lógica para Especificações Técnicas Estruturadas */}
+                  {/* Lógica para Especificações Técnicas Estruturadas (Cards Verticais) */}
                   {tab.name === 'Características Técnicas' && tab.isStructured && (
-                    <div className="not-prose">
-                      <SpecsTable specGroups={tab.content} />
-                    </div>
+                    <StickyCardList
+                      items={tab.content.map(group => ({
+                        title: group.titulo,
+                        content: <SpecsTable specGroups={[group]} showTitle={false} />
+                      }))}
+                    />
                   )}
 
-                  {/* Lógica original ajustada para não renderizar a aba de vídeo como texto e nem a tabela estruturada */}
-                  {tab.name !== 'Vídeos' && tab.name !== 'Produtos Relacionados' && !(tab.name === 'Características Técnicas' && tab.isStructured) && typeof tab.content === 'string' && <div className="whitespace-pre-line">{tab.content}</div>}
-                  {tab.name !== 'Vídeos' && tab.name !== 'Produtos Relacionados' && !(tab.name === 'Características Técnicas' && tab.isStructured) && Array.isArray(tab.content) && tab.name !== 'Downloads' && <RichTextRenderer content={tab.content} />}
+                  {tab.name === 'Características Técnicas' && !tab.isStructured && (
+                    <InfoCard title="Especificações">
+                      {typeof tab.content === 'string' ? <div className="whitespace-pre-line">{tab.content}</div> : <RichTextRenderer content={tab.content} />}
+                    </InfoCard>
+                  )}
                 </div>
               ))}
             </div>

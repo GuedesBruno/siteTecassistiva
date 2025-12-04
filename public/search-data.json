@@ -11,7 +11,18 @@
     "fabricante": ""
   },
   {
-    "id": "product-223",
+    "id": "product-239",
+    "title": "Liber + 2026.AI",
+    "slug": "/produtos/liber-mais-2026",
+    "description": "Computador Braille",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/LIBER_43b8e6a64a.jpg",
+    "type": "Produto",
+    "content": "Computador Braille [{\"type\":\"heading\",\"level\":4,\"children\":[{\"bold\":true,\"text\":\"Liber + 2026.AI\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Com Patente Brasileira, o Liber + 2026.AI é o mais completo computador acessível para o aluno com deficiência visual integrando teclado ampliado e monitor de 10” com bateria inclusa.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Crie seus arquivos, digitalize textos impressos, compartilhe email, ouça os seus livros preferidos, viaje pela internet, tudo através de um dispositivo com retorno em áudio, braille, vibração e texto ampliado.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"O novo Liber + 2026.AI inova mais uma vez lendo texto manuscrito, descrevendo imagens e criando um diálogo educativo, falando com o Liber ou escrevendo no teclado ampliado do Liber, sobre tudo o que o aluno precisar e saber com recurso a AI de última geração.\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Computador braille acessível Octa core Kryo 585, com 1 TB de disco e 64GB + 8GB de memória interna;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Retorno em áudio e ampliado;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Conexão HDMI para um monitor externo para as pessoas com baixa visão acompanharem o texto ampliado e em alto contraste;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Tela LCD de 4 polegadas para educadores e pais acompanharem a atividade dos alunos; \",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Teclado QWERTY ampliado de alto contraste;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Uma câmera de 16 MP acoplada no braço móvel permitem a digitalização de documentos impressos e com a ajuda do software OCR o Liber lê o texto digitalizado; \",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Gerenciamento de arquivos na memória interna e nas memórias externas (USB e cartão SD);\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Possui calculadora matemática, calculadora científica e calculadora estatística;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Leia livros digitais em formato Daisy, ePub;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Reproduza áudio em MP3, WAV e OGG.\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Grave áudio de aulas ou conversas.\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Acesse aos seus e-mails;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Navegue na internet;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Diferentes formas de personalização do Liber + para diferentes modos de utilização do usuário (iniciante e avançado);\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Gerenciamento de arquivos nas extensões PDF, TXT, BRL, BRF, ZIP, ZBK.\",\"type\":\"text\"}]}]}] Cegueira Computador Braille Tecassistiva",
+    "categories": "Cegueira",
+    "fabricante": "Tecassistiva"
+  },
+  {
+    "id": "product-231",
     "title": "Everest",
     "slug": "/produtos/everest",
     "description": "Impressora Braille de Médio Porte",
@@ -121,15 +132,15 @@
     "fabricante": "Optelec"
   },
   {
-    "id": "product-215",
-    "title": "Abafador para Impressora Index Braille",
-    "slug": "/produtos/abafador-index",
-    "description": "Abafador de ruídos para impressora Index Braille Basic e Index Braille Everest.",
-    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/Abafador_Impressoras_Index_a0f46412b8.png",
+    "id": "product-229",
+    "title": "Basic",
+    "slug": "/produtos/basic",
+    "description": "Impressora Braille de Médio Porte",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/foto_basic_angulo_lateral_7e62f45378.jpg",
     "type": "Produto",
-    "content": "Abafador de ruídos para impressora Index Braille Basic e Index Braille Everest. [{\"type\":\"paragraph\",\"children\":[{\"text\":\"Para fazer um bom ponto Braille você tem que deformar de forma permanente as fibras do papel sem danificar a sua estrutura. O processo mais indicado para fazer é martelando cada ponto braille com sua forma contra o molde. Assim você consegue um ponto firme, robusto e duradouro. Quanto melhor for a qualidade dos materiais envolvidos (como martelo positivo e negativo) mais som é causado pelo impacto do ponto braille.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"O abafador de ruído para impressoras Index Braille oferece ótima solução para abafar o som natural que a impressora Braille Index faz quando está no processo de impressão. Torna a impressora adequada para produção em Braille em um escritório ou em uma sala de aula com o nível de ruído agradável. Diminui cerca de 90% do ruído, além do seu design atrativo.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Nível de ruído somente 60 (dB);\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Suporta as impressoras Index Basic e Index Everest;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Coleta e armazena 100 páginas de formulário contínuo;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Materiais: MDF em branco, vidro temperado e perfis de alumínio.\",\"type\":\"text\"}]}]}] Cegueira Impressoras Braille Formulário Contínuo, Impressoras Braille Folha Solta Tecassistiva",
+    "content": "Impressora Braille de Médio Porte [{\"type\":\"paragraph\",\"children\":[{\"text\":\"Impressora Braille de Papel de Formulário Contínuo mais vendida do mundo e com mais de 6.000 equipamentos instalados pelo Brasil. A Index Basic tem uma história bem sucedida, além de compacta, é fácil de usar. Utiliza papel de formulário contínuo para produzir impressão braille de ambos os lados.\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Velocidade de impressão de 123 caracteres por segundo (CPS), considerando o código braille da grafia da língua portuguesa; \",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Capacidade máxima de impressão de até 140 caracteres por segundo e 400 páginas por hora;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"46 caracteres por linha em formulário contínuo;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Impressão direta de arquivos doc, docx, pdf e txt, sem a necessidade de softwares ou dispositivos externos;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Imprime direto do Pen-drive, sem a necessidade de softwares ou dispositivos externos;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Imprime direto de dispositivos móveis, iOs e Android, sem a necessidade de softwares ou dispositivos externos;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Compatível com o software brasileiro de transcrição braille “Braille Fácil”;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Acompanha software Tactile Graphics para conversão e impressão de imagens e desenhos;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Impressão Braille horizontal e vertical em modo “dobra-Z” para fácil encadernação;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Painel de Controle com Braille, texto, luz LED e retorno por voz sintetizada em português do Brasil;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Conexões nativas para uso autônomo: Wireless, Bluetooth, USB, Rede, WebPrint, Pen-drive;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Tecnologia idB Print para transcrição do texto tinta para o Braille direto pela impressora; \",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Gráficos Táteis de alta resolução – 500 DPI;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Largura do papel: até 12,8 polegadas (325 mm);\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Comprimento do papel: até 17 polegadas (431 mm);\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Compatível com as plataformas Windows, iOS, Android e Linux.\",\"type\":\"text\"}]}]}] Cegueira Impressoras Braille Formulário Contínuo Index Braille",
     "categories": "Cegueira",
-    "fabricante": "Tecassistiva"
+    "fabricante": "Index Braille"
   },
   {
     "id": "product-216",
@@ -154,169 +165,15 @@
     "fabricante": "ZyChen"
   },
   {
-    "id": "product-157",
-    "title": "ClearView 24″ Full HD com Voz",
-    "slug": "/produtos/clearview-24-com-voz",
-    "description": "Ampliador de Mesa com Voz",
-    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/Clear_View_255c3b3291.jpg",
+    "id": "product-228",
+    "title": "Abafador para Impressora Index Braille",
+    "slug": "/produtos/abafador-index",
+    "description": "Abafador de ruídos para impressora Index Braille Basic e Index Braille Everest.",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/Abafador_Impressoras_Index_a0f46412b8.png",
     "type": "Produto",
-    "content": "Ampliador de Mesa com Voz [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O novo ClearView C com Voz é uma lupa eletrônica de mesa única que foi desenvolvida para melhorar a sua experiência de leitura. Selecione a sua voz de leitura preferida e sente-se, relaxe e ouça aos documentos enquanto são lidos em alta voz. A combinação de uma voz clara com ampliação e alto contraste torna a leitura muito mais fácil.\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Ampliação Contínua: 1,5x – 75x (opcional: até 170x);\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Tela panorâmica de 24 polegadas;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Processador de Vídeo de Alta Definição Superior 1080p para imagens ultra-nítidas e vivas;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Mais de 74 vozes de leitura em 36 idiomas;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Visualize e ouça documentos longos com Texto-para-Áudio;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Funcionalidade Aponte & Leia: interface tátil intuitiva, toque na coluna, parágrafo ou palavra na tela para ler instantaneamente;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"16 combinações de cor de alto-contraste para melhorar o contraste para melhor visibilidade, de 1 até 4 combinações de cores pré-definidas selecionáveis;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Leitura assistida com reconhecimento da zona do texto automática;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Permite armazenar documentos e imagens para depois visualizar quando quiser;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Visualização de fotos digitais;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Menu com fonte e ícone grandes.\",\"type\":\"text\"}]}]}] Baixa Visão Ampliadores Eletrônicos de Mesa Optelec",
-    "categories": "Baixa Visão",
-    "fabricante": "Optelec"
-  },
-  {
-    "id": "product-149",
-    "title": "Fusion",
-    "slug": "/produtos/fusion",
-    "description": "Software Ampliador e Leitor de Telas",
-    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/ZT_Fusion_2bb3defec2.jpg",
-    "type": "Produto",
-    "content": "Software Ampliador e Leitor de Telas [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O Fusion é a ferramenta perfeita e única para indivíduos com qualquer nível de deficiência visual. O Fusion oferece o melhor dos dois mundos – ZoomText, com ampliação de tela e otimizações visuais para facilitar a visualização da tela, junto com o poder e velocidade do software leitor de tela mais completo do mercado JAWS.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Ao juntar o ZoomText com o JAWS, o Fusion possui sintetizadores de voz de alta qualidade como Eloquence e Vocalizer Expressive, teclas de acesso poderosas incluindo navegação na web e uma ampla variedade de opções custodiáveis.\",\"type\":\"text\"}]}] Cegueira, Baixa Visão Software Leitor de Telas e Ampliador  Freedom Scientific",
-    "categories": "Cegueira, Baixa Visão",
-    "fabricante": "Freedom Scientific"
-  },
-  {
-    "id": "product-147",
-    "title": "ZoomText Ampliador",
-    "slug": "/produtos/zoomtext-ampliador",
-    "description": "Ampliador de Telas",
-    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/ZT_Ampliador_7ca535d15b.jpg",
-    "type": "Produto",
-    "content": "Ampliador de Telas [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O ZoomText Ampliador é um software de ampliação avançado que aumenta e otimiza todo na tela do computador, facilitando visualmente o uso do computador para pessoas com baixa visão.\",\"type\":\"text\"}]}] Baixa Visão Software Ampliador de Telas Freedom Scientific",
-    "categories": "Baixa Visão",
-    "fabricante": "Freedom Scientific"
-  },
-  {
-    "id": "product-137",
-    "title": "Ruby XL HD",
-    "slug": "/produtos/ruby-xl-hd",
-    "description": "Lupa Eletrônica de 5\" Portátil",
-    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/RUBY_XL_HD_front_flat_lay_FS_Logo_65c82da618.webp",
-    "type": "Produto",
-    "content": "Lupa Eletrônica de 5\" Portátil [{\"type\":\"paragraph\",\"children\":[{\"text\":\"Lupa eletrônica portátil Ruby XL HD com imagens claras de alta definição na palma da sua mão. A tela de 5 polegadas define até os pequenos detalhes.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Tela panorâmica LCD de 5 polegadas;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Zoom contínuo com ampliação de 2x–14x;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Leitura rápida sem perder o foco;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Luz LED embutida;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Design leve e ergonômico;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Braço articulado de 2 posições;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Suporte para leitura vertical;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Botões táteis com cores de alto contraste para fácil orientação;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" 20 Modos de visualização de cor de alto contraste;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Função Congelar Quadro com ampliação ajustável;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Máscaras e linhas de leitura ajustáveis;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Salve até 80 imagens e envie para o computador através da porta USB;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Recurso de modo de apresentação de slides;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Inclui bateria, carregador, pulseira, estojo e cabo USB.\",\"type\":\"text\"}]}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"code\":true,\"text\":\" \",\"type\":\"text\"}]}] Baixa Visão Ampliadores Eletrônicos Portáteis Freedom Scientific",
-    "categories": "Baixa Visão",
-    "fabricante": "Freedom Scientific"
-  },
-  {
-    "id": "product-71",
-    "title": "Ruby 10",
-    "slug": "/produtos/ruby-10",
-    "description": "Lupa Eletrônica com Voz",
-    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/ruby10_3e7c21c2ee.jpg",
-    "type": "Produto",
-    "content": "Lupa Eletrônica com Voz [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O modelo RUBY 10 é uma lupa digital com voz, uma tela tátil de 10 polegadas e três câmeras.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Oferece ampliação de 2x até 24x e recursos como digitalização e leitura de documentos, conexão com monitor externo e modos de visualização exclusivos.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"É leve, fácil de usar e ideal para ampliar textos, revistas, rótulos e fotografias. Com recursos como ColorSight+, GlareGuard™ e EdgeScribe™, proporciona uma experiência visual aprimorada.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"O RUBY 10 é uma solução versátil para ampliação e leitura em qualquer lugar.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Ampliação de 2x até 24x;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Tela tátil de 10 polegadas;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Tela e botões táteis de alto contraste;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Portátil e leve – ideal para levar para qualquer lugar;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Amplie objetos pequenos e letras reduzidas de forma simples;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Visualização de objetos a curtas distâncias;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Possui braço extensível que permite você visualizar qualquer objeto que esteja na sua mão e escrever (no modelo com voz permite ativar a opção OCR);\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Ligação a monitor externo através de Miracast ou USB;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Guarde imagens e documentos digitalizados;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Digitalização e leitura de documentos;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Ligue os fones de ouvido para ouvir documentos com toda a privacidade;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Bolsa de transporte e pano de limpeza de tela incluídos.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]}] Baixa Visão Ampliadores e Leitores Portáteis Freedom Scientific",
-    "categories": "Baixa Visão",
-    "fabricante": "Freedom Scientific"
-  },
-  {
-    "id": "product-146",
-    "title": "ZoomText Ampliador com Voz",
-    "slug": "/produtos/zoomtext-com-voz",
-    "description": "Ampliador de Telas com Voz",
-    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/ZT_Ampliador_Leitor_474fda5299.jpg",
-    "type": "Produto",
-    "content": "Ampliador de Telas com Voz [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O ZoomText Ampliador/Leitor é um software completamente integrado que lê e amplia criado para usuários com baixa visão. O Ampliador e Leitor aumenta e otimiza tudo na tela do seu computador, lê o que você digita e conforme você navega no programa, automaticamente lê documentos, páginas web e email.\",\"type\":\"text\"}]}] Baixa Visão Software Ampliador de Telas Freedom Scientific",
-    "categories": "Baixa Visão",
-    "fabricante": "Freedom Scientific"
-  },
-  {
-    "id": "product-220",
-    "title": "PUMA 7",
-    "slug": "/produtos/puma-7",
-    "description": "Impressora para Produção Braille",
-    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/foto_impressora_grande_producao_puma_7_4de440181b.jpg",
-    "type": "Produto",
-    "content": "Impressora para Produção Braille [{\"type\":\"paragraph\",\"children\":[{\"text\":\"Impressora Braille de produção pesada, com capacidade de imprimir em papeis e diferentes materiais como Zinco, alumínio, plástico, ferro, etiquetas, entre outros.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Tela touch fácil de usar com um gerenciador do menu intuitivo;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Recebimento, armazenamento e impressão de arquivos via USB ou interface serial;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Interponto fácil de ajustar placa após placa – a placa são prendidas somente por dois buracos;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Controle de Impressão de Gráfico e Texto através de vários softwares, assim como: Duxbury, Firebird, BrailleGraf, Monet, TactileView ou RTFC;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Velocidade: Máximo de 15 CPS – Braille de 6 pontos.\",\"type\":\"text\"}]}] Cegueira Impressora Braille Grande Produção BrailleTec",
+    "content": "Abafador de ruídos para impressora Index Braille Basic e Index Braille Everest. [{\"type\":\"paragraph\",\"children\":[{\"text\":\"Para fazer um bom ponto Braille você tem que deformar de forma permanente as fibras do papel sem danificar a sua estrutura. O processo mais indicado para fazer é martelando cada ponto braille com sua forma contra o molde. Assim você consegue um ponto firme, robusto e duradouro. Quanto melhor for a qualidade dos materiais envolvidos (como martelo positivo e negativo) mais som é causado pelo impacto do ponto braille.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"O abafador de ruído para impressoras Index Braille oferece ótima solução para abafar o som natural que a impressora Braille Index faz quando está no processo de impressão. Torna a impressora adequada para produção em Braille em um escritório ou em uma sala de aula com o nível de ruído agradável. Diminui cerca de 90% do ruído, além do seu design atrativo.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Nível de ruído somente 60 (dB);\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Suporta as impressoras Index Basic e Index Everest;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Coleta e armazena 100 páginas de formulário contínuo;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Materiais: MDF em branco, vidro temperado e perfis de alumínio.\",\"type\":\"text\"}]}]}] Cegueira Impressoras Braille Formulário Contínuo, Impressoras Braille Folha Solta Tecassistiva",
     "categories": "Cegueira",
-    "fabricante": "BrailleTec"
-  },
-  {
-    "id": "product-221",
-    "title": "NSF Excel",
-    "slug": "/produtos/nsf-excel",
-    "description": "Impressora para Produção Braille",
-    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/NSF_Excel_a7cabe7bdb.png",
-    "type": "Produto",
-    "content": "Impressora para Produção Braille [{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Tamanho máximo da folha: 47cm x 52cm;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Área de impressão: 30,8cm x 44,8cm;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Velocidade de impressão: Até 5.500 impressões por hora (iph);\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Estampagem a quente;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Relevo seco e estampagem de folha em relevo;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Corte e vinco;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Fusão de folha de alta velocidade;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Até 8 posições de impressão programáveis por folha;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Remoção de resíduos em linha (opcional).\",\"type\":\"text\"}]}]}] Cegueira Impressora Braille Grande Produção binderhaus",
-    "categories": "Cegueira",
-    "fabricante": "binderhaus"
-  },
-  {
-    "id": "product-67",
-    "title": "Focus 80 Blue",
-    "slug": "/produtos/focus-80-blue",
-    "description": "Linha Braille de 80 Células",
-    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/focus_80_blue_pequeno_4c89f13439.jpg",
-    "type": "Produto",
-    "content": "Linha Braille de 80 Células [{\"type\":\"paragraph\",\"children\":[{\"text\":\"A Focus 80 Blue é a linha Braille mais completa do mercado que une 80 células Braille sem qualquer divisão, a um teclado Braille de 8 teclas incrivelmente sensíveis e silenciosas. A linha Braille possui no total 21 teclas adicionais de controle para total interação com o JAWS, incluindo 2 Balanceadores de Navegação.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" 80 células Braille com 80 teclas de posicionamento do cursor;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Teclado Braille de 8 teclas silenciosas e de resposta super eficaz;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" 21 teclas adicionais de controle incluindo teclas de deslocamento, botões de deslocamento, balanceadores, shift, entre outras funções;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Linha Braille sem divisão entre as células (sem cápsulas), para uma leitura mais eficaz e confortável;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Compatível com os computadores Windows OS, Mac OS, dispositivos Apple e Android;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Modo de Aprendizado Braille;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Permite o ajuste da firmeza dos pontos;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Autonomia de 10 horas da bateria de íons lítio, recarregável através do USB;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Inclui ligação Bluetooth 2.0.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"code\":true,\"text\":\" \",\"type\":\"text\"}]}] Cegueira Linhas Braille Freedom Scientific",
-    "categories": "Cegueira",
-    "fabricante": "Freedom Scientific"
-  },
-  {
-    "id": "product-138",
-    "title": "Perkins Clássica",
-    "slug": "/produtos/perkins-classica",
-    "description": "Máquina de Escrever Braille",
-    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/imagem_produto_maquina_de_escrever_braille_perkins_classica_bac06fd8a4.jpg",
-    "type": "Produto",
-    "content": "Máquina de Escrever Braille [{\"type\":\"paragraph\",\"children\":[{\"text\":\"Fabricada em 1951, a máquina de escrever Braille Perkins Clássica continua a ser a mais conhecida e usada mundialmente. A Perkins Clássica é funcional e auxilia todos os dias as pessoas cegas a escreverem suas anotações e estudos sem necessitar do computador o tempo todo. Durável e segura, suporta papel Braille até formato A4.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Possui 6 teclas do telcado Braille, barra de espaço, tecla de retrocesso e de avanço de linha;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Suporta papéis até o formato A4;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Guias de margem na parte de trás da máquina;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Disponível em três cores: azul, verde e chumbo (conferir disponibilidade de cores);\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Inclui capa protetora e apagador de madeira;\",\"type\":\"text\"}]}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"code\":true,\"text\":\" \",\"type\":\"text\"}]}] Cegueira Máquina de Escrever Braille Perkins",
-    "categories": "Cegueira",
-    "fabricante": "Perkins"
-  },
-  {
-    "id": "product-101",
-    "title": "Onyx Deskset HD 24\"",
-    "slug": "/produtos/onyx-deskset-24",
-    "description": "Lupa Eletrônica de Mesa",
-    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/foto_ampliador_portatil_onyx_deskset_hd_1ac3e7f161.jpg",
-    "type": "Produto",
-    "content": "Lupa Eletrônica de Mesa [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O ONYX Deskset HD é uma lupa eletrônica de mesa que se adapta em vários ambientes e atividades para aumentar a sua produtividade na escola, no trabalho e em casa. O novo design elegante integra uma câmera de alta definição e um monitor que permite você visualizar o que você desejar, seja do outro da sala ou em cima da sua mesa. A câmera três-em-um flexível oferece modos de leitura do documento, à distância e autovisualização com controles versáteis.\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" 33 modos de cor;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Amplia até 131 vezes (depende do tamanho do monitor);\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" 3 modos de visualização: documento, distância e autovisualização;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Recursos como Congelar Quadro, Bloqueio de Foco e Máscaras e Linhas de Leitura.\",\"type\":\"text\"}]}]}] Baixa Visão Ampliadores Eletrônicos de Mesa Freedom Scientific",
-    "categories": "Baixa Visão",
-    "fabricante": "Freedom Scientific"
-  },
-  {
-    "id": "product-219",
-    "title": "Basic",
-    "slug": "/produtos/basic",
-    "description": "Impressora Braille de Médio Porte",
-    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/foto_basic_angulo_lateral_7e62f45378.jpg",
-    "type": "Produto",
-    "content": "Impressora Braille de Médio Porte [{\"type\":\"paragraph\",\"children\":[{\"text\":\"Impressora Braille de Papel de Formulário Contínuo mais vendida do mundo e com mais de 6.000 equipamentos instalados pelo Brasil. A Index Basic tem uma história bem sucedida, além de compacta, é fácil de usar. Utiliza papel de formulário contínuo para produzir impressão braille de ambos os lados.\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Velocidade de impressão de 123 caracteres por segundo (CPS), considerando o código braille da grafia da língua portuguesa; \",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Capacidade máxima de impressão de até 140 caracteres por segundo e 400 páginas por hora;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"46 caracteres por linha em formulário contínuo;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Impressão direta de arquivos doc, docx, pdf e txt, sem a necessidade de softwares ou dispositivos externos;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Imprime direto do Pen-drive, sem a necessidade de softwares ou dispositivos externos;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Imprime direto de dispositivos móveis, iOs e Android, sem a necessidade de softwares ou dispositivos externos;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Compatível com o software brasileiro de transcrição braille “Braille Fácil”;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Acompanha software Tactile Graphics para conversão e impressão de imagens e desenhos;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Impressão Braille horizontal e vertical em modo “dobra-Z” para fácil encadernação;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Painel de Controle com Braille, texto, luz LED e retorno por voz sintetizada em português do Brasil;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Conexões nativas para uso autônomo: Wireless, Bluetooth, USB, Rede, WebPrint, Pen-drive;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Tecnologia idB Print para transcrição do texto tinta para o Braille direto pela impressora; \",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Gráficos Táteis de alta resolução – 500 DPI;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Largura do papel: até 12,8 polegadas (325 mm);\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Comprimento do papel: até 17 polegadas (431 mm);\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Compatível com as plataformas Windows, iOS, Android e Linux.\",\"type\":\"text\"}]}]}] Cegueira Impressoras Braille Formulário Contínuo Index Braille",
-    "categories": "Cegueira",
-    "fabricante": "Index Braille"
-  },
-  {
-    "id": "product-159",
-    "title": "Fanfold",
-    "slug": "/produtos/fanfold",
-    "description": "Impressora Braille de Grande Porte",
-    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/fanfold_2_d6467e5425.jpg",
-    "type": "Produto",
-    "content": "Impressora Braille de Grande Porte [{\"type\":\"paragraph\",\"children\":[{\"text\":\"Inovadora impressora Braille que imprime em papel de formulário contínuo de alta velocidade.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Velocidade de impressão de 1000 páginas por hora – 330 cps;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Impressão direta de arquivos doc, docx, pdf e txt, sem necessidade de software externo;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Imprime direto de pendrive;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Imprime a partir de dispositivos móveis, iOs e Android, sem necessidade de software;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Compatível com software de transcrição Braille Fácil;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Impressão Braille horizontal e vertical em modo “dobra-Z” para fácil encadernação;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Painel de Controle com Braille, texto, luz LED e retorno em áudio;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Conexão: Wireless, Bluetooth, USB, Rede, WebPrint, Pendrive;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Caixa acústica integrada para abafar ruído 63 dB(A);\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Gráficos Táteis de alta resolução: 20 DPI;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Compatível com as plataformas Windows, iOS, Android e Linux.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\\n\",\"type\":\"text\"},{\"code\":true,\"text\":\" \",\"type\":\"text\"}]}] Cegueira Impressoras Braille Formulário Contínuo Index Braille",
-    "categories": "Cegueira",
-    "fabricante": "Index Braille"
-  },
-  {
-    "id": "product-131",
-    "title": "Teclado Ampliado",
-    "slug": "/produtos/teclado-ampliado",
-    "description": "Teclado Ampliado Tecassistiva",
-    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/foto_teclado_ampliado_tecassistiva_7dd42d87d4.jpg",
-    "type": "Produto",
-    "content": "Teclado Ampliado Tecassistiva [{\"type\":\"paragraph\",\"children\":[{\"text\":\"Novo Teclado com as letras ampliadas da Tecassistiva, com o teclado preto, teclas amarelas e letras pretas.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Possui teclas ampliadas para facilitar a visualização da pessoa com baixa visão;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Teclado Preto, tecla amarela, letra preta de elevado contraste visual;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Possui aumento das letras em 5x em relação ao teclado normal;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Compatível IBM PC Windows 7 ou superior, compatível com Apple OS 10 ou superior;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Possui conexão USB;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Padrão do teclado: ABNT2.\",\"type\":\"text\"}]}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]}] Baixa Visão Teclado Ampliado com Contraste Tecassistiva",
-    "categories": "Baixa Visão",
     "fabricante": "Tecassistiva"
-  },
-  {
-    "id": "product-153",
-    "title": "BrailleBox",
-    "slug": "/produtos/braille-box",
-    "description": "Impressora Braille de Grande Porte",
-    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/braillebox_01_77e5081169.jpg",
-    "type": "Produto",
-    "content": "Impressora Braille de Grande Porte [{\"type\":\"paragraph\",\"children\":[{\"text\":\"Impressora de alta velocidade em produção Braille.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" 900 páginas por hora e 300 caracteres por segundo (cps);\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Alimentador de Papel de grande capacidade – mais que 400 páginas;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Impressão direta de arquivos doc, docx, pdf e txt, sem necessidade de software externo;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Imprime direto de pendrive;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Imprime a partir de dispositivos móveis: iOs e Android, sem necessidade de software;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Compatível com software de transcrição Braille Fácil;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Impressão Braille horizontal e vertical;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Painel de Controle com Braille, texto, luz LED e retorno em áudio;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Conexão: Wireless, Bluetooth, USB, Rede, WebPrint, Pendrive;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Caixa acústica integrada, desenvolvida para ser silenciosa ( \",\"type\":\"text\"}]}] Cegueira Impressoras Braille Folha Solta Index Braille",
-    "categories": "Cegueira",
-    "fabricante": "Index Braille"
   },
   {
     "id": "product-90",
@@ -328,17 +185,6 @@
     "content": "Ampliador de Mesa com Voz [{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"O Onyx OCR amplia e lê em voz alta qualquer documento. A voz clara, ampliação e alto contraste torna a leitura muito mais fácil. Confortavelmente deixe de ler os textos ampliados e permita o ONYX OCR ler os documentos para você quando a leitura se tornar muito cansativa.\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Visualização à distância, do documento, auto-visualização e funcionalidade OCR;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Monitor Sensível ao Toque (tela touch screen): com ícones e letras grandes;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Mais de 60 vozes de leitura em mais de 31 idiomas;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Salva e abre documentos em um cartão SD ou pen drive USB;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Câmera OCR de 13 Megapixels;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Ampliação de 1.7x até 131x em um monitor de 24 polegadas.\",\"type\":\"text\"}]}]}] Baixa Visão Ampliadores Eletrônicos de Mesa Freedom Scientific",
     "categories": "Baixa Visão",
     "fabricante": "Freedom Scientific"
-  },
-  {
-    "id": "product-103",
-    "title": "Transformer HD com Voz",
-    "slug": "/produtos/transformer-hd-com-voz",
-    "description": "Ampliador Portátil com Voz",
-    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/transformer_hd_magnifier_13_f1866b4300.jpg",
-    "type": "Produto",
-    "content": "Ampliador Portátil com Voz [{\"type\":\"paragraph\",\"children\":[{\"text\":\"Transformer HD é um ampliador de vídeo portátil de alto desempenho com uma câmera Full HD 1080p 3-em-1, com Wi-Fi, OCR. O Transformer HD possui conectividade Wi-Fi, HDMI e USB 3.0 integrada para o seu laptop, computador desktop ou monitor. Compatível com programas de software de ampliação populares, o Transformer HD é uma solução portátil e poderosa de baixa visão para escola, trabalho ou casa.\",\"type\":\"text\"}]}] Baixa Visão Ampliadores e Leitores Portáteis Enhanced Vision",
-    "categories": "Baixa Visão",
-    "fabricante": "Enhanced Vision"
   },
   {
     "id": "product-162",
@@ -396,7 +242,183 @@
     "fabricante": "Freedom Scientific"
   },
   {
-    "id": "doc-215-150",
+    "id": "product-226",
+    "title": "Guia de Assinatura",
+    "slug": "/produtos/guia-assinatura",
+    "description": "",
+    "imageUrl": null,
+    "type": "Produto",
+    "content": "",
+    "categories": "",
+    "fabricante": ""
+  },
+  {
+    "id": "product-103",
+    "title": "Transformer HD com Voz",
+    "slug": "/produtos/transformer-hd-com-voz",
+    "description": "Ampliador Portátil com Voz",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/transformer_hd_magnifier_13_f1866b4300.jpg",
+    "type": "Produto",
+    "content": "Ampliador Portátil com Voz [{\"type\":\"paragraph\",\"children\":[{\"text\":\"Transformer HD é um ampliador de vídeo portátil de alto desempenho com uma câmera Full HD 1080p 3-em-1, com Wi-Fi, OCR. O Transformer HD possui conectividade Wi-Fi, HDMI e USB 3.0 integrada para o seu laptop, computador desktop ou monitor. Compatível com programas de software de ampliação populares, o Transformer HD é uma solução portátil e poderosa de baixa visão para escola, trabalho ou casa.\",\"type\":\"text\"}]}] Baixa Visão Ampliadores e Leitores Portáteis Enhanced Vision",
+    "categories": "Baixa Visão",
+    "fabricante": "Enhanced Vision"
+  },
+  {
+    "id": "product-153",
+    "title": "BrailleBox",
+    "slug": "/produtos/braille-box",
+    "description": "Impressora Braille de Grande Porte",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/braillebox_01_77e5081169.jpg",
+    "type": "Produto",
+    "content": "Impressora Braille de Grande Porte [{\"type\":\"paragraph\",\"children\":[{\"text\":\"Impressora de alta velocidade em produção Braille.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" 900 páginas por hora e 300 caracteres por segundo (cps);\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Alimentador de Papel de grande capacidade – mais que 400 páginas;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Impressão direta de arquivos doc, docx, pdf e txt, sem necessidade de software externo;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Imprime direto de pendrive;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Imprime a partir de dispositivos móveis: iOs e Android, sem necessidade de software;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Compatível com software de transcrição Braille Fácil;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Impressão Braille horizontal e vertical;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Painel de Controle com Braille, texto, luz LED e retorno em áudio;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Conexão: Wireless, Bluetooth, USB, Rede, WebPrint, Pendrive;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Caixa acústica integrada, desenvolvida para ser silenciosa ( \",\"type\":\"text\"}]}] Cegueira Impressoras Braille Folha Solta Index Braille",
+    "categories": "Cegueira",
+    "fabricante": "Index Braille"
+  },
+  {
+    "id": "product-131",
+    "title": "Teclado Ampliado",
+    "slug": "/produtos/teclado-ampliado",
+    "description": "Teclado Ampliado Tecassistiva",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/foto_teclado_ampliado_tecassistiva_7dd42d87d4.jpg",
+    "type": "Produto",
+    "content": "Teclado Ampliado Tecassistiva [{\"type\":\"paragraph\",\"children\":[{\"text\":\"Novo Teclado com as letras ampliadas da Tecassistiva, com o teclado preto, teclas amarelas e letras pretas.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Possui teclas ampliadas para facilitar a visualização da pessoa com baixa visão;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Teclado Preto, tecla amarela, letra preta de elevado contraste visual;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Possui aumento das letras em 5x em relação ao teclado normal;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Compatível IBM PC Windows 7 ou superior, compatível com Apple OS 10 ou superior;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Possui conexão USB;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Padrão do teclado: ABNT2.\",\"type\":\"text\"}]}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]}] Baixa Visão Teclado Ampliado com Contraste Tecassistiva",
+    "categories": "Baixa Visão",
+    "fabricante": "Tecassistiva"
+  },
+  {
+    "id": "product-101",
+    "title": "Onyx Deskset HD 24\"",
+    "slug": "/produtos/onyx-deskset-24",
+    "description": "Lupa Eletrônica de Mesa",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/foto_ampliador_portatil_onyx_deskset_hd_1ac3e7f161.jpg",
+    "type": "Produto",
+    "content": "Lupa Eletrônica de Mesa [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O ONYX Deskset HD é uma lupa eletrônica de mesa que se adapta em vários ambientes e atividades para aumentar a sua produtividade na escola, no trabalho e em casa. O novo design elegante integra uma câmera de alta definição e um monitor que permite você visualizar o que você desejar, seja do outro da sala ou em cima da sua mesa. A câmera três-em-um flexível oferece modos de leitura do documento, à distância e autovisualização com controles versáteis.\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" 33 modos de cor;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Amplia até 131 vezes (depende do tamanho do monitor);\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" 3 modos de visualização: documento, distância e autovisualização;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Recursos como Congelar Quadro, Bloqueio de Foco e Máscaras e Linhas de Leitura.\",\"type\":\"text\"}]}]}] Baixa Visão Ampliadores Eletrônicos de Mesa Freedom Scientific",
+    "categories": "Baixa Visão",
+    "fabricante": "Freedom Scientific"
+  },
+  {
+    "id": "product-67",
+    "title": "Focus 80 Blue",
+    "slug": "/produtos/focus-80-blue",
+    "description": "Linha Braille de 80 Células",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/focus_80_blue_pequeno_4c89f13439.jpg",
+    "type": "Produto",
+    "content": "Linha Braille de 80 Células [{\"type\":\"paragraph\",\"children\":[{\"text\":\"A Focus 80 Blue é a linha Braille mais completa do mercado que une 80 células Braille sem qualquer divisão, a um teclado Braille de 8 teclas incrivelmente sensíveis e silenciosas. A linha Braille possui no total 21 teclas adicionais de controle para total interação com o JAWS, incluindo 2 Balanceadores de Navegação.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" 80 células Braille com 80 teclas de posicionamento do cursor;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Teclado Braille de 8 teclas silenciosas e de resposta super eficaz;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" 21 teclas adicionais de controle incluindo teclas de deslocamento, botões de deslocamento, balanceadores, shift, entre outras funções;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Linha Braille sem divisão entre as células (sem cápsulas), para uma leitura mais eficaz e confortável;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Compatível com os computadores Windows OS, Mac OS, dispositivos Apple e Android;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Modo de Aprendizado Braille;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Permite o ajuste da firmeza dos pontos;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Autonomia de 10 horas da bateria de íons lítio, recarregável através do USB;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Inclui ligação Bluetooth 2.0.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"code\":true,\"text\":\" \",\"type\":\"text\"}]}] Cegueira Linhas Braille Freedom Scientific",
+    "categories": "Cegueira",
+    "fabricante": "Freedom Scientific"
+  },
+  {
+    "id": "product-220",
+    "title": "PUMA 7",
+    "slug": "/produtos/puma-7",
+    "description": "Impressora para Produção Braille",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/foto_impressora_grande_producao_puma_7_4de440181b.jpg",
+    "type": "Produto",
+    "content": "Impressora para Produção Braille [{\"type\":\"paragraph\",\"children\":[{\"text\":\"Impressora Braille de produção pesada, com capacidade de imprimir em papeis e diferentes materiais como Zinco, alumínio, plástico, ferro, etiquetas, entre outros.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Tela touch fácil de usar com um gerenciador do menu intuitivo;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Recebimento, armazenamento e impressão de arquivos via USB ou interface serial;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Interponto fácil de ajustar placa após placa – a placa são prendidas somente por dois buracos;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Controle de Impressão de Gráfico e Texto através de vários softwares, assim como: Duxbury, Firebird, BrailleGraf, Monet, TactileView ou RTFC;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Velocidade: Máximo de 15 CPS – Braille de 6 pontos.\",\"type\":\"text\"}]}] Cegueira Impressora Braille Grande Produção BrailleTec",
+    "categories": "Cegueira",
+    "fabricante": "BrailleTec"
+  },
+  {
+    "id": "product-71",
+    "title": "Ruby 10",
+    "slug": "/produtos/ruby-10",
+    "description": "Lupa Eletrônica com Voz",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/ruby10_3e7c21c2ee.jpg",
+    "type": "Produto",
+    "content": "Lupa Eletrônica com Voz [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O modelo RUBY 10 é uma lupa digital com voz, uma tela tátil de 10 polegadas e três câmeras.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Oferece ampliação de 2x até 24x e recursos como digitalização e leitura de documentos, conexão com monitor externo e modos de visualização exclusivos.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"É leve, fácil de usar e ideal para ampliar textos, revistas, rótulos e fotografias. Com recursos como ColorSight+, GlareGuard™ e EdgeScribe™, proporciona uma experiência visual aprimorada.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"O RUBY 10 é uma solução versátil para ampliação e leitura em qualquer lugar.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Ampliação de 2x até 24x;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Tela tátil de 10 polegadas;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Tela e botões táteis de alto contraste;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Portátil e leve – ideal para levar para qualquer lugar;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Amplie objetos pequenos e letras reduzidas de forma simples;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Visualização de objetos a curtas distâncias;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Possui braço extensível que permite você visualizar qualquer objeto que esteja na sua mão e escrever (no modelo com voz permite ativar a opção OCR);\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Ligação a monitor externo através de Miracast ou USB;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Guarde imagens e documentos digitalizados;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Digitalização e leitura de documentos;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Ligue os fones de ouvido para ouvir documentos com toda a privacidade;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Bolsa de transporte e pano de limpeza de tela incluídos.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]}] Baixa Visão Ampliadores e Leitores Portáteis Freedom Scientific",
+    "categories": "Baixa Visão",
+    "fabricante": "Freedom Scientific"
+  },
+  {
+    "id": "product-147",
+    "title": "ZoomText Ampliador",
+    "slug": "/produtos/zoomtext-ampliador",
+    "description": "Ampliador de Telas",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/ZT_Ampliador_7ca535d15b.jpg",
+    "type": "Produto",
+    "content": "Ampliador de Telas [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O ZoomText Ampliador é um software de ampliação avançado que aumenta e otimiza todo na tela do computador, facilitando visualmente o uso do computador para pessoas com baixa visão.\",\"type\":\"text\"}]}] Baixa Visão Software Ampliador de Telas Freedom Scientific",
+    "categories": "Baixa Visão",
+    "fabricante": "Freedom Scientific"
+  },
+  {
+    "id": "product-157",
+    "title": "ClearView 24″ Full HD com Voz",
+    "slug": "/produtos/clearview-24-com-voz",
+    "description": "Ampliador de Mesa com Voz",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/Clear_View_255c3b3291.jpg",
+    "type": "Produto",
+    "content": "Ampliador de Mesa com Voz [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O novo ClearView C com Voz é uma lupa eletrônica de mesa única que foi desenvolvida para melhorar a sua experiência de leitura. Selecione a sua voz de leitura preferida e sente-se, relaxe e ouça aos documentos enquanto são lidos em alta voz. A combinação de uma voz clara com ampliação e alto contraste torna a leitura muito mais fácil.\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Ampliação Contínua: 1,5x – 75x (opcional: até 170x);\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Tela panorâmica de 24 polegadas;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Processador de Vídeo de Alta Definição Superior 1080p para imagens ultra-nítidas e vivas;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Mais de 74 vozes de leitura em 36 idiomas;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Visualize e ouça documentos longos com Texto-para-Áudio;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Funcionalidade Aponte & Leia: interface tátil intuitiva, toque na coluna, parágrafo ou palavra na tela para ler instantaneamente;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"16 combinações de cor de alto-contraste para melhorar o contraste para melhor visibilidade, de 1 até 4 combinações de cores pré-definidas selecionáveis;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Leitura assistida com reconhecimento da zona do texto automática;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Permite armazenar documentos e imagens para depois visualizar quando quiser;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Visualização de fotos digitais;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Menu com fonte e ícone grandes.\",\"type\":\"text\"}]}]}] Baixa Visão Ampliadores Eletrônicos de Mesa Optelec",
+    "categories": "Baixa Visão",
+    "fabricante": "Optelec"
+  },
+  {
+    "id": "product-149",
+    "title": "Fusion",
+    "slug": "/produtos/fusion",
+    "description": "Software Ampliador e Leitor de Telas",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/ZT_Fusion_2bb3defec2.jpg",
+    "type": "Produto",
+    "content": "Software Ampliador e Leitor de Telas [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O Fusion é a ferramenta perfeita e única para indivíduos com qualquer nível de deficiência visual. O Fusion oferece o melhor dos dois mundos – ZoomText, com ampliação de tela e otimizações visuais para facilitar a visualização da tela, junto com o poder e velocidade do software leitor de tela mais completo do mercado JAWS.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Ao juntar o ZoomText com o JAWS, o Fusion possui sintetizadores de voz de alta qualidade como Eloquence e Vocalizer Expressive, teclas de acesso poderosas incluindo navegação na web e uma ampla variedade de opções custodiáveis.\",\"type\":\"text\"}]}] Cegueira, Baixa Visão Software Leitor de Telas e Ampliador  Freedom Scientific",
+    "categories": "Cegueira, Baixa Visão",
+    "fabricante": "Freedom Scientific"
+  },
+  {
+    "id": "product-137",
+    "title": "Ruby XL HD",
+    "slug": "/produtos/ruby-xl-hd",
+    "description": "Lupa Eletrônica de 5\" Portátil",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/RUBY_XL_HD_front_flat_lay_FS_Logo_65c82da618.webp",
+    "type": "Produto",
+    "content": "Lupa Eletrônica de 5\" Portátil [{\"type\":\"paragraph\",\"children\":[{\"text\":\"Lupa eletrônica portátil Ruby XL HD com imagens claras de alta definição na palma da sua mão. A tela de 5 polegadas define até os pequenos detalhes.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Tela panorâmica LCD de 5 polegadas;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Zoom contínuo com ampliação de 2x–14x;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Leitura rápida sem perder o foco;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Luz LED embutida;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Design leve e ergonômico;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Braço articulado de 2 posições;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Suporte para leitura vertical;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Botões táteis com cores de alto contraste para fácil orientação;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" 20 Modos de visualização de cor de alto contraste;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Função Congelar Quadro com ampliação ajustável;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Máscaras e linhas de leitura ajustáveis;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Salve até 80 imagens e envie para o computador através da porta USB;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Recurso de modo de apresentação de slides;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Inclui bateria, carregador, pulseira, estojo e cabo USB.\",\"type\":\"text\"}]}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"code\":true,\"text\":\" \",\"type\":\"text\"}]}] Baixa Visão Ampliadores Eletrônicos Portáteis Freedom Scientific",
+    "categories": "Baixa Visão",
+    "fabricante": "Freedom Scientific"
+  },
+  {
+    "id": "product-146",
+    "title": "ZoomText Ampliador com Voz",
+    "slug": "/produtos/zoomtext-com-voz",
+    "description": "Ampliador de Telas com Voz",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/ZT_Ampliador_Leitor_474fda5299.jpg",
+    "type": "Produto",
+    "content": "Ampliador de Telas com Voz [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O ZoomText Ampliador/Leitor é um software completamente integrado que lê e amplia criado para usuários com baixa visão. O Ampliador e Leitor aumenta e otimiza tudo na tela do seu computador, lê o que você digita e conforme você navega no programa, automaticamente lê documentos, páginas web e email.\",\"type\":\"text\"}]}] Baixa Visão Software Ampliador de Telas Freedom Scientific",
+    "categories": "Baixa Visão",
+    "fabricante": "Freedom Scientific"
+  },
+  {
+    "id": "product-221",
+    "title": "NSF Excel",
+    "slug": "/produtos/nsf-excel",
+    "description": "Impressora para Produção Braille",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/NSF_Excel_a7cabe7bdb.png",
+    "type": "Produto",
+    "content": "Impressora para Produção Braille [{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Tamanho máximo da folha: 47cm x 52cm;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Área de impressão: 30,8cm x 44,8cm;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Velocidade de impressão: Até 5.500 impressões por hora (iph);\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Estampagem a quente;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Relevo seco e estampagem de folha em relevo;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Corte e vinco;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Fusão de folha de alta velocidade;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Até 8 posições de impressão programáveis por folha;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Remoção de resíduos em linha (opcional).\",\"type\":\"text\"}]}]}] Cegueira Impressora Braille Grande Produção binderhaus",
+    "categories": "Cegueira",
+    "fabricante": "binderhaus"
+  },
+  {
+    "id": "product-138",
+    "title": "Perkins Clássica",
+    "slug": "/produtos/perkins-classica",
+    "description": "Máquina de Escrever Braille",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/imagem_produto_maquina_de_escrever_braille_perkins_classica_bac06fd8a4.jpg",
+    "type": "Produto",
+    "content": "Máquina de Escrever Braille [{\"type\":\"paragraph\",\"children\":[{\"text\":\"Fabricada em 1951, a máquina de escrever Braille Perkins Clássica continua a ser a mais conhecida e usada mundialmente. A Perkins Clássica é funcional e auxilia todos os dias as pessoas cegas a escreverem suas anotações e estudos sem necessitar do computador o tempo todo. Durável e segura, suporta papel Braille até formato A4.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Possui 6 teclas do telcado Braille, barra de espaço, tecla de retrocesso e de avanço de linha;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Suporta papéis até o formato A4;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Guias de margem na parte de trás da máquina;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Disponível em três cores: azul, verde e chumbo (conferir disponibilidade de cores);\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Inclui capa protetora e apagador de madeira;\",\"type\":\"text\"}]}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"code\":true,\"text\":\" \",\"type\":\"text\"}]}] Cegueira Máquina de Escrever Braille Perkins",
+    "categories": "Cegueira",
+    "fabricante": "Perkins"
+  },
+  {
+    "id": "product-159",
+    "title": "Fanfold",
+    "slug": "/produtos/fanfold",
+    "description": "Impressora Braille de Grande Porte",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/fanfold_2_d6467e5425.jpg",
+    "type": "Produto",
+    "content": "Impressora Braille de Grande Porte [{\"type\":\"paragraph\",\"children\":[{\"text\":\"Inovadora impressora Braille que imprime em papel de formulário contínuo de alta velocidade.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Velocidade de impressão de 1000 páginas por hora – 330 cps;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Impressão direta de arquivos doc, docx, pdf e txt, sem necessidade de software externo;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Imprime direto de pendrive;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Imprime a partir de dispositivos móveis, iOs e Android, sem necessidade de software;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Compatível com software de transcrição Braille Fácil;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Impressão Braille horizontal e vertical em modo “dobra-Z” para fácil encadernação;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Painel de Controle com Braille, texto, luz LED e retorno em áudio;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Conexão: Wireless, Bluetooth, USB, Rede, WebPrint, Pendrive;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Caixa acústica integrada para abafar ruído 63 dB(A);\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Gráficos Táteis de alta resolução: 20 DPI;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Compatível com as plataformas Windows, iOS, Android e Linux.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\\n\",\"type\":\"text\"},{\"code\":true,\"text\":\" \",\"type\":\"text\"}]}] Cegueira Impressoras Braille Formulário Contínuo Index Braille",
+    "categories": "Cegueira",
+    "fabricante": "Index Braille"
+  },
+  {
+    "id": "doc-228-150",
     "title": "montagem-basic.pdf - Abafador para Impressora Index Braille",
     "slug": "/produtos/abafador-index",
     "description": "Documento do produto Abafador para Impressora Index Braille",
@@ -409,7 +431,7 @@
     "content": "montagem-basic.pdf PDF Abafador para Impressora Index Braille"
   },
   {
-    "id": "doc-215-151",
+    "id": "doc-228-151",
     "title": "montagem-everest.pdf - Abafador para Impressora Index Braille",
     "slug": "/produtos/abafador-index",
     "description": "Documento do produto Abafador para Impressora Index Braille",
@@ -422,7 +444,7 @@
     "content": "montagem-everest.pdf PDF Abafador para Impressora Index Braille"
   },
   {
-    "id": "doc-219-83",
+    "id": "doc-229-83",
     "title": "guia_basic.pdf - Basic",
     "slug": "/produtos/basic",
     "description": "Documento do produto Basic",
@@ -435,7 +457,7 @@
     "content": "guia_basic.pdf PDF Basic"
   },
   {
-    "id": "doc-219-84",
+    "id": "doc-229-84",
     "title": "catalogo_basic.pdf - Basic",
     "slug": "/produtos/basic",
     "description": "Documento do produto Basic",
@@ -448,7 +470,7 @@
     "content": "catalogo_basic.pdf PDF Basic"
   },
   {
-    "id": "doc-219-85",
+    "id": "doc-229-85",
     "title": "manual_avancado_basic.pdf - Basic",
     "slug": "/produtos/basic",
     "description": "Documento do produto Basic",
@@ -604,7 +626,7 @@
     "content": "manual_avancado_clearview.pdf PDF ClearView 24″ Full HD com Voz"
   },
   {
-    "id": "doc-223-49",
+    "id": "doc-231-49",
     "title": "guia_everest.docx - Everest",
     "slug": "/produtos/everest",
     "description": "Documento do produto Everest",
@@ -617,7 +639,7 @@
     "content": "guia_everest.docx Word Everest"
   },
   {
-    "id": "doc-223-50",
+    "id": "doc-231-50",
     "title": "manual_avancado_everest.docx - Everest",
     "slug": "/produtos/everest",
     "description": "Documento do produto Everest",
@@ -630,7 +652,7 @@
     "content": "manual_avancado_everest.docx Word Everest"
   },
   {
-    "id": "doc-223-48",
+    "id": "doc-231-48",
     "title": "catalogo_everest.pdf - Everest",
     "slug": "/produtos/everest",
     "description": "Documento do produto Everest",
@@ -719,6 +741,19 @@
     "fileName": "FINAL-Liber-folder-297x210mm-4x4-1-dobra-modelo-simples.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/FINAL_Liber_folder_297x210mm_4x4_1_dobra_modelo_simples_16deff9800.pdf",
     "content": "FINAL-Liber-folder-297x210mm-4x4-1-dobra-modelo-simples.pdf PDF Liber"
+  },
+  {
+    "id": "doc-239-133",
+    "title": "FINAL-Liber-folder-297x210mm-4x4-1-dobra-modelo-simples.pdf - Liber + 2026.AI",
+    "slug": "/produtos/liber-mais-2026",
+    "description": "Documento do produto Liber + 2026.AI",
+    "type": "Documento",
+    "documentType": "PDF",
+    "productTitle": "Liber + 2026.AI",
+    "productSlug": "/produtos/liber-mais-2026",
+    "fileName": "FINAL-Liber-folder-297x210mm-4x4-1-dobra-modelo-simples.pdf",
+    "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/FINAL_Liber_folder_297x210mm_4x4_1_dobra_modelo_simples_16deff9800.pdf",
+    "content": "FINAL-Liber-folder-297x210mm-4x4-1-dobra-modelo-simples.pdf PDF Liber + 2026.AI"
   },
   {
     "id": "doc-71-128",
@@ -996,7 +1031,7 @@
     "type": "Software/Driver"
   },
   {
-    "id": "software-18",
+    "id": "software-29",
     "title": "Leitor de Telas JAWS ",
     "slug": "/suporte",
     "description": "Tipo: Software",
@@ -1010,15 +1045,15 @@
     "type": "Software/Driver"
   },
   {
-    "id": "software-21",
-    "title": "Fusion",
+    "id": "software-23",
+    "title": "OpenBook",
     "slug": "/suporte",
     "description": "Tipo: Software",
     "type": "Software/Driver"
   },
   {
-    "id": "software-23",
-    "title": "OpenBook",
+    "id": "software-33",
+    "title": "Fusion",
     "slug": "/suporte",
     "description": "Tipo: Software",
     "type": "Software/Driver"
@@ -1036,7 +1071,7 @@
     "title": "Tecassistiva",
     "slug": "src\\app\\tecassistiva\\page.js",
     "description": "import Link from 'next/link'; import Image from 'next/image'; import TestimonialSection from '@/components/TestimonialSection'; import SocialMediaSect...",
-    "content": "import Link from 'next/link'; import Image from 'next/image'; import TestimonialSection from '@/components/TestimonialSection'; import SocialMediaSection from '@/components/SocialMediaSection'; // Lazy load API functions to avoid compilation during SSG async function getAllTestimonials() { const { getAllTestimonials: _getAllTestimonials } = await import('@/lib/api'); return _getAllTestimonials(); } // Componente da Página export default async function TecassistivaPage() { const testimonials = await getAllTestimonials(); return ( {/* O padding foi ajustado para ser responsivo */} {/* Breadcrumbs */} Página Inicial &gt; A Tecassistiva {/* Seção Principal */} Tecassistiva {/* Texto de apresentação em 2 colunas */} A Tecassistiva é uma empresa brasileira especializada em soluções de tecnologia assistiva voltadas para a inclusão educacional e social de pessoas com deficiência. Atuamos há mais de duas décadas oferecendo equipamentos, softwares e serviços que ampliam a autonomia, o acesso à informação e as oportunidades de aprendizagem para estudantes, profissionais e instituições em todo o país. Nosso compromisso é entregar tecnologia que transforma vidas. Por isso desenvolvemos e representamos soluções de alto desempenho para pessoas com deficiência visual e outras necessidades específicas, atendendo escolas, secretarias de educação, universidades, empresas e órgãos públicos com excelência e responsabilidade. Trabalhamos lado a lado com educadores, gestores e equipes técnicas para garantir diagnósticos precisos, implementações eficientes e suporte contínuo. Mais do que fornecer produtos, construímos projetos completos que fortalecem políticas de inclusão, aprimoram processos e garantem resultados reais na prática. A Tecassistiva acredita que acessibilidade não é apenas um serviço, é um valor, uma causa e um compromisso permanente com um Brasil mais inclusivo, justo e conectado às necessidades de todos. {/* Vídeo Institucional */} Vídeo Apresentação Teca {/* Seção Missão, Visão e Valores com o novo layout */} Missão Desenvolver e disseminar Tecnologia Assistiva no Brasil, por meio da oferta de produtos e serviços de excelência que contribuam para a melhoria da qualidade de vida das pessoas com deficiência e da comunidade em geral. Visão Ser a empresa de referência em Tecnologia Assistiva, reconhecida pela comunidade, colaboradores, fornecedores e investidores, pela qualidade de seus produtos, serviços e apoio institucional. Valores •Valorização da Pessoa com Deficiência •Ética •Inovação •Trabalho em equipe •Qualidade •Sustentabilidade ); }",
+    "content": "import Link from 'next/link'; import Image from 'next/image'; import TestimonialSection from '@/components/TestimonialSection'; import SocialMediaSection from '@/components/SocialMediaSection'; // Lazy load API functions to avoid compilation during SSG async function getAllTestimonials() { const { getAllTestimonials: _getAllTestimonials } = await import('@/lib/api'); return _getAllTestimonials(); } // Componente da Página export default async function TecassistivaPage() { const testimonials = await getAllTestimonials(); return ( {/* O padding foi ajustado para ser responsivo */} {/* Breadcrumbs */} Página Inicial &gt; A Tecassistiva {/* Seção Principal */} Tecassistiva {/* Texto de apresentação em 2 colunas */} Desde 2008, a Tecassistiva é a empresa brasileira lider nacional de desenvolvimento, implementação de soluções e suporte pós-venda em soluções de tecnologia assistiva de comunicação aumentativa e alternativa para a deficiência visual. Suas soluções sáo particularmente voltadas para a inclusão educacional e social de pessoas com deficiência. Atuamos há duas décadas oferecendo equipamentos, softwares e serviços que ampliam a autonomia, o acesso à informação e as oportunidades de aprendizagem para estudantes, profissionais e instituições em todo o País. osso compromisso é entregar tecnologia que transforma vidas. Por isso desenvolvemos e representamos soluções de alto desempenho para pessoas com deficiência visual e outras necessidades específicas, atendendo Escolas, Secretarias de Educação, Universidades, Empresas e órgãos públicos com excelência e responsabilidade. Trabalhamos lado a lado com educadores, gestores e equipes técnicas para garantir diagnósticos precisos, implementações eficientes e suporte contínuo. Mais do que fornecer tecnologia, construímos projetos completos que fortalecem políticas de inclusão, aprimoram processos e garantem resultados reais na vida prática das pessoas. A Tecassistiva acredita que acessibilidade não é apenas um serviço, é um valor, uma causa e um compromisso permanente com um Brasil mais inclusivo, justo e conectado às necessidades de Todos. {/* Vídeo Institucional */} Vídeo Apresentação Teca {/* Seção Missão, Visão e Valores com o novo layout */} Missão Desenvolver e disseminar Tecnologia Assistiva no Brasil, por meio da oferta de produtos e serviços de excelência que contribuam para a melhoria da qualidade de vida das pessoas com deficiência e da comunidade em geral. Visão Ser a empresa de referência em Tecnologia Assistiva, reconhecida pela comunidade, colaboradores, fornecedores e investidores, pela qualidade de seus produtos, serviços e apoio institucional. Valores •Valorização da Pessoa com Deficiência •Ética •Inovação •Trabalho em equipe •Qualidade •Sustentabilidade ); }",
     "type": "Página"
   },
   {
@@ -1081,10 +1116,10 @@
   },
   {
     "id": "page-src\\app\\imersao\\[slug]\\page.js",
-    "title": "{productData.nome}",
+    "title": "Src\\app\\imersao\\[slug]\\page.js",
     "slug": "src\\app\\imersao\\[slug]\\page.js",
-    "description": "import Image from 'next/image'; import Link from 'next/link'; import { notFound } from 'next/navigation'; // Lazy load API functions to avoid compilat...",
-    "content": "import Image from 'next/image'; import Link from 'next/link'; import { notFound } from 'next/navigation'; // Lazy load API functions to avoid compilation during SSG async function getImersaoBySlug(slug) { const { getImersaoBySlug: _getImersaoBySlug } = await import('@/lib/api'); return _getImersaoBySlug(slug); } export async function generateStaticParams() { try { // With output: export, we need at least one param even if routes don't exist yet // Return a placeholder to satisfy the requirement console.log('[imersao] Generating static params...'); return [{ slug: 'placeholder' }]; } catch (error) { console.error('[imersao] Error generating static params:', error); return [{ slug: 'placeholder' }]; } } export async function generateMetadata({ params }) { const { slug } = params; const imersao = await getImersaoBySlug(slug); if (!imersao || !imersao.attributes) { return { title: 'Página de Imersão não encontrada' }; } const { produto: productData } = imersao.attributes; if (!productData) { return { title: 'Página de Imersão não encontrada' }; } return { title: `Imersão: ${productData.nome}`, }; } export default async function ImersaoPage({ params }) { const { slug } = params; console.log(`📄 Renderizando página de imersão: ${slug}`); const imersao = await getImersaoBySlug(slug); if (!imersao || !imersao.attributes) { console.error(`❌ ERRO: Imersão não encontrada para slug: ${slug}`); notFound(); } const { produto: productData, curso, guia, manual, botoes_padrao = true, personalizado } = imersao.attributes; if (!productData) { console.error(`❌ ERRO: Imersão \"${slug}\" não tem produto vinculado`); notFound(); } console.log(`✅ Imersão renderizada com sucesso: ${slug}`); const imageUrl = productData.imagem_principal?.url; const buttonClassName = \"bg-[#002554] text-white py-3 px-6 font-bold text-lg hover:bg-tec-blue-light transition-colors duration-300\"; return ( {productData.nome} {imageUrl && ( )} Sua IMERSÃO com {productData.genero_descricao === 'feminino' ? 'a' : 'o'}{' '} {productData.descricao_curta} começa aqui! {botoes_padrao ? ( <> {curso && ( Curso Completo )} {guia && ( Guia do Usuário )} {manual && ( Manual )} Catálogo Teca ) : ( personalizado && personalizado.map((botao) => ( {botao.texto_do_botao} )) )} ); }",
+    "description": "import Image from 'next/image'; import Link from 'next/link'; import { notFound } from 'next/navigation'; // --- Internal Fetch Logic for Build Stabil...",
+    "content": "import Image from 'next/image'; import Link from 'next/link'; import { notFound } from 'next/navigation'; // --- Internal Fetch Logic for Build Stability --- // We duplicate this here to ensure generateStaticParams never crashes the build // even if api.js has issues or env vars are missing during the build phase. async function internalFetchAPI(endpoint) { const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL; const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN; if (!STRAPI_URL || !STRAPI_TOKEN) { console.warn(\"[Imersão] Variáveis de ambiente não definidas. Retornando dados vazios.\"); return null; } try { let base = STRAPI_URL.replace(/\\/+$/g, ''); if (base.endsWith('/api')) { base = base.replace(/\\/api$/, ''); } const path_ep = endpoint.replace(/^\\/+/, ''); const url = `${base}/${path_ep}`; const res = await fetch(url, { headers: { 'Authorization': `Bearer ${STRAPI_TOKEN}` }, next: { revalidate: 60 } // Cache for 60 seconds }); if (!res.ok) { console.error(`[Imersão] API Error: ${res.status}`); return null; } return await res.json(); } catch (error) { console.error(`[Imersão] Erro ao fazer fetch: ${error.message}`); return null; } } function normalizeDataArray(response) { if (!response) return []; const data = response.data || []; return data; } async function getImersaoBySlugInternal(slug) { const populateQuery = 'populate[personalizado]=*&populate[produto][fields][0]=nome&populate[produto][fields][1]=descricao_curta&populate[produto][populate][0]=imagem_principal&populate[produto][populate][1]=categorias&populate[produto][populate][2]=relacao_fabricante&fields[0]=genero_descricao&fields[1]=curso&fields[2]=guia&fields[3]=manual&fields[4]=botoes_padrao'; const res = await internalFetchAPI(`/api/imersaos?filters[slug][$eq]=${slug}&${populateQuery}`); const data = normalizeDataArray(res); if (data.length === 0) return null; const item = data[0]; if (item.attributes) { return item; } const { id, ...attributes } = item; return { id, attributes }; } async function getAllImersaoSlugsInternal() { const res = await internalFetchAPI('/api/imersaos?fields[0]=slug&pagination[limit]=1000'); const items = normalizeDataArray(res); return items.map(i => ({ slug: i.attributes?.slug || i.slug, })).filter(i => i.slug); } // --- Page Functions --- export async function generateStaticParams() { try { const imersoes = await getAllImersaoSlugsInternal(); if (!imersoes || imersoes.length === 0) { console.log('[imersao] Nenhuma imersão encontrada (ou erro de API) para gerar páginas estáticas.'); return []; } return imersoes.map((imersao) => ({ slug: imersao.attributes?.slug || imersao.slug, })); } catch (error) { console.error('[imersao] Error generating static params:', error); return []; } } export async function generateMetadata({ params }) { const { slug } = params; const imersao = await getImersaoBySlugInternal(slug); if (!imersao || !imersao.attributes) { return { title: 'Página de Imersão não encontrada' }; } const { produto: productData } = imersao.attributes; if (!productData) { return { title: 'Página de Imersão não encontrada' }; } return { title: `Imersão: ${productData.nome}`, }; } export default async function ImersaoPage({ params }) { const { slug } = params; console.log(`📄 Renderizando página de imersão: ${slug}`); const imersao = await getImersaoBySlugInternal(slug); if (!imersao || !imersao.attributes) { console.error(`❌ ERRO: Imersão não encontrada para slug: ${slug}`); notFound(); } const { produto: productData, curso, guia, manual, botoes_padrao = true, personalizado, genero_descricao } = imersao.attributes; if (!productData) { console.error(`❌ ERRO: Imersão \"${slug}\" não tem produto vinculado`); notFound(); } console.log(`✅ Imersão renderizada com sucesso: ${slug}`); const imageUrl = productData.imagem_principal?.url; // Extract manufacturer name safely const fabricanteData = productData.relacao_fabricante?.data?.attributes || productData.relacao_fabricante?.data || productData.relacao_fabricante; const fabricanteNome = fabricanteData?.nome || ''; return ( {/* Background Logo Watermark */} {/* Glassmorphism Card */} {/* Product Image (Rounded) */} {imageUrl ? ( ) : ( Sem imagem )} {/* Welcome Text */} Sua IMERSÃO com {genero_descricao === 'feminino' ? 'a' : 'o'}{' '} {fabricanteNome} {productData.nome} começa aqui! {/* Action Buttons (Linktree Style) */} {botoes_padrao ? ( <> {curso && ( Curso Completo )} {guia && ( Guia do Usuário )} {manual && ( Manual )} ) : ( personalizado && personalizado.map((botao) => ( {botao.texto_do_botao} )) )} {/* Secondary Button */} Ver Catálogo Completo {/* Social Media Icons */} © {new Date().getFullYear()} Tecassistiva ); }",
     "type": "Página"
   },
   {

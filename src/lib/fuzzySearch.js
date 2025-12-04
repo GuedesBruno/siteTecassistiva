@@ -70,7 +70,7 @@ export function fuzzySearch(query, items, options = {}) {
       if (!value) return;
 
       const normalizedValue = String(value).toLowerCase();
-      
+
       // 1. Busca exata (maior prioridade)
       if (normalizedValue.includes(normalizedQuery)) {
         bestScore = 1.0;
@@ -79,24 +79,26 @@ export function fuzzySearch(query, items, options = {}) {
       }
 
       // 2. Busca por palavras individuais
-      const queryWords = normalizedQuery.split(/\s+/);
-      const valueWords = normalizedValue.split(/\s+/);
-      
-      let wordMatchCount = 0;
+      const queryWords = normalizedQuery.split(/\s+/).filter(w => w.length > 0);
+      const valueWords = normalizedValue.split(/\s+/).filter(w => w.length > 0);
+
+      let matchedQueryWords = 0;
       queryWords.forEach(qWord => {
+        // Verifica se a palavra da busca existe no texto (parcialmente)
+        // Apenas vWord.includes(qWord) é válido (ex: "cadeira" acha "cadeiras")
         if (valueWords.some(vWord => vWord.includes(qWord))) {
-          wordMatchCount++;
+          matchedQueryWords++;
         }
       });
-      
-      const wordMatchScore = wordMatchCount / queryWords.length;
-      
+
+      const wordMatchScore = matchedQueryWords / Math.max(queryWords.length, 1);
+
       // 3. Busca fuzzy por proximidade
       const fuzzyScore = calculateSimilarity(normalizedQuery, normalizedValue);
 
       // Usa o melhor score entre palavra e fuzzy
       const score = Math.max(wordMatchScore, fuzzyScore);
-      
+
       if (score > bestScore) {
         bestScore = score;
         matchedKey = key;
@@ -159,19 +161,20 @@ export function hybridSearch(query, items, options = {}) {
       }
 
       // Busca por palavras
-      const queryWords = normalizedQuery.split(/\s+/);
-      const valueWords = normalizedValue.split(/\s+/);
-      
-      let wordMatchCount = 0;
+      const queryWords = normalizedQuery.split(/\s+/).filter(w => w.length > 0);
+      const valueWords = normalizedValue.split(/\s+/).filter(w => w.length > 0);
+
+      let matchedQueryWords = 0;
       queryWords.forEach(qWord => {
-        valueWords.forEach(vWord => {
-          if (vWord.includes(qWord) || qWord.includes(vWord)) {
-            wordMatchCount++;
-          }
-        });
+        // Verifica se a palavra da busca existe no texto (parcialmente)
+        // Apenas vWord.includes(qWord) é válido (ex: "cadeira" acha "cadeiras")
+        // qWord.includes(vWord) causava falsos positivos (ex: "cadeira" achava "a")
+        if (valueWords.some(vWord => vWord.includes(qWord))) {
+          matchedQueryWords++;
+        }
       });
-      
-      const wordMatchScore = wordMatchCount / Math.max(queryWords.length, 1);
+
+      const wordMatchScore = matchedQueryWords / Math.max(queryWords.length, 1);
 
       // Busca fuzzy
       const fuzzyScore = calculateSimilarity(normalizedQuery, normalizedValue);
