@@ -30,7 +30,7 @@ export default function BannerSlider({ banners }) {
   }
 
   return (
-    <section className="relative h-[70vh] sm:h-[60vh] md:h-[72vh] bg-gray-200">
+    <section className="relative h-[56vh] sm:h-[48vh] md:h-[58vh] bg-gray-200">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         spaceBetween={0}
@@ -67,17 +67,16 @@ export default function BannerSlider({ banners }) {
                   </div>
                 </div>
 
-                <div className="w-full lg:w-3/5 h-64 lg:h-full relative">
+                <div className="w-full lg:w-3/5 h-64 lg:h-full relative bg-gray-100">
                   {fullImageUrl ? (
                     <>
                       <Image
                         src={fullImageUrl}
                         alt={imageAlt}
                         fill
-                        className="object-cover"
+                        className="object-contain"
                         priority={index === 0}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-l from-black/30 to-transparent pointer-events-none" />
                     </>
                   ) : (
                     <div className="w-full h-full bg-gray-400 flex items-center justify-center">

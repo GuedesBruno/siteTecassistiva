@@ -28,12 +28,12 @@ export default function ProductCard({ product }) {
 
       <Link href={`/produtos/${slug}`} className="flex flex-col flex-grow">
         {/* Imagem do Produto */}
-        <div className="relative w-full h-48 bg-gray-200">
+        <div className="relative w-full h-48 bg-white border-b border-gray-100">
           <Image
             src={imageUrl}
             alt={imagem_principal?.data?.attributes?.alternativeText || imagem_principal?.alternativeText || `Imagem de ${productName}`}
             fill
-            className={isPlaceholder ? "object-contain p-8" : "object-cover"}
+            className="object-contain p-4"
           />
         </div>
         {/* Descrição */}
@@ -41,6 +41,6 @@ export default function ProductCard({ product }) {
           <p className="text-sm text-gray-700">{description}</p>
         </div>
       </Link>
-    </div>
+    </div >
   );
 }

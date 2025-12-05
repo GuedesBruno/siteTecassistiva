@@ -113,16 +113,16 @@ export default function ProductFinderWizard({ categories = [], products = [] }) 
                     Qual sua necessidade hoje?
                 </h2>
 
-                <form onSubmit={handleInputSubmit} className="w-full max-w-2xl relative group">
+                <form onSubmit={handleInputSubmit} className="w-full max-w-lg relative group">
                     <div className="relative">
-                        <FaSearch className="absolute left-6 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl group-focus-within:text-tec-blue transition-colors duration-300" />
+                        <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg group-focus-within:text-tec-blue transition-colors duration-300" />
                         <input
                             type="text"
                             list="suggestions-list"
                             value={userInput}
                             onChange={(e) => setUserInput(e.target.value)}
                             placeholder="Ex: Cegueira, Linha Braille, Lupa..."
-                            className="w-full pl-16 pr-6 py-6 text-xl rounded-full border-2 border-gray-200 focus:border-tec-blue focus:ring-4 focus:ring-blue-100 outline-none transition-all duration-300 shadow-sm"
+                            className="w-full pl-12 pr-6 py-3 text-base rounded-full border-2 border-gray-200 focus:border-tec-blue focus:ring-4 focus:ring-blue-100 outline-none transition-all duration-300 shadow-sm"
                         />
                     </div>
                     <datalist id="suggestions-list">
@@ -134,9 +134,9 @@ export default function ProductFinderWizard({ categories = [], products = [] }) 
                     {userInput && (
                         <button
                             type="submit"
-                            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-tec-blue text-white p-3 rounded-full hover:bg-blue-700 transition-colors shadow-md"
+                            className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-tec-blue text-white p-2 rounded-full hover:bg-blue-700 transition-colors shadow-md"
                         >
-                            <FaArrowRight />
+                            <FaArrowRight className="text-sm" />
                         </button>
                     )}
                 </form>
