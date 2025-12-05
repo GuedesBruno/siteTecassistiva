@@ -1,23 +1,11 @@
 import React from 'react';
 
-const InfoCard = ({ title, children, actionLabel, onClick, isActive, isPrev, isNext }) => {
-    // Base styles - Modern, Clean, White
-    let containerClasses = "group relative w-full rounded-2xl overflow-hidden transition-all duration-500 ease-out bg-white border border-gray-100 cursor-pointer sticky top-0 flex-shrink-0";
+const InfoCard = ({ title, children, actionLabel, onClick, isSticky = false, variant = 'white' }) => {
+    // Base styles - Modern, Clean
+    const bgClass = variant === 'blue' ? 'bg-gray-100 border-gray-200' : 'bg-white border-gray-100';
 
-    // State-based modifications
-    if (isActive) {
-        // Active: Popped out, shadow, clear
-        containerClasses += " scale-100 opacity-100 z-20 shadow-xl ring-1 ring-black/5";
-    } else if (isPrev) {
-        // Prev: Pushed back slightly, NO FADE, just subtle scale to show depth
-        containerClasses += " scale-[0.98] opacity-100 z-0 shadow-md";
-    } else if (isNext) {
-        // Next: Ready to enter, fully visible
-        containerClasses += " scale-100 opacity-100 z-10 shadow-sm";
-    } else {
-        // Default (fallback)
-        containerClasses += " scale-100 opacity-100 z-10 shadow-sm hover:shadow-md";
-    }
+    // Simple container classes
+    let containerClasses = `group relative w-full rounded-2xl overflow-hidden transition-all duration-300 ease-out ${bgClass} border cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-blue-300`;
 
     return (
         <div
@@ -32,13 +20,13 @@ const InfoCard = ({ title, children, actionLabel, onClick, isActive, isPrev, isN
 
                 {/* Title */}
                 {title && (
-                    <h3 className={`text-xl md:text-2xl font-bold mb-4 leading-tight transition-colors duration-300 ${isActive ? 'text-tec-blue' : 'text-gray-700'}`}>
+                    <h3 className="text-xl md:text-2xl font-bold mb-4 leading-tight text-[#002554]">
                         {title}
                     </h3>
                 )}
 
                 {/* Content Body */}
-                <div className="text-gray-600 flex-grow prose max-w-none mb-6">
+                <div className="text-black flex-grow prose max-w-none mb-6">
                     {children}
                 </div>
 

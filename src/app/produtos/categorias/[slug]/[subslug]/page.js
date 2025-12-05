@@ -97,16 +97,16 @@ export default async function SubCategoryPage({ params }) {
   }
 
   return (
-    <div className="py-8">
-      <div className="flex flex-col md:flex-row py-8 px-4">
-        <aside className="w-full md:w-1/4 lg:w-1/5 md:pr-2">
+    <div className="container mx-auto px-4 py-8 min-h-screen">
+      <div className="flex flex-col md:flex-row gap-8">
+        <aside className="w-full md:w-1/3 lg:w-1/4">
           <CategoryMenu
             categories={allCategories}
             activeCategorySlug={slug}
             activeSubcategorySlug={subslug}
           />
         </aside>
-        <main className="w-full md:w-3/4 lg:w-4/5 md:pl-2">
+        <main className="w-full md:w-2/3 lg:w-3/4">
           <Breadcrumbs items={breadcrumbs} />
           <Suspense fallback={<div>Carregando...</div>}>
             <ProductDisplay

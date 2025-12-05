@@ -241,7 +241,31 @@ export async function getProductsBySubcategorySlug(subslug) {
 }
 
 export async function getOpenAtas() {
-  const response = await fetchAPI('/api/atas?sort=ordem:asc&populate[0]=item_ata.relacao_produto&populate[1]=documentos');
+  // Using explicit populate syntax to ensure deep nesting works for components and relations.
+  // item_ata is a component (repeating). relacao_produto is a relation in that component. imagem_principal is a media field in the product.
+  const query = qs.stringify({
+    sort: 'ordem:asc',
+    populate: {
+      item_ata: {
+        populate: {
+          relacao_produto: {
+            populate: {
+              imagem_principal: {
+                fields: ['url', 'alternativeText', 'width', 'height']
+              }
+            }
+          }
+        }
+      },
+      documentos: {
+        fields: ['url', 'name', 'ext', 'size']
+      }
+    }
+  }, {
+    encodeValuesOnly: true,
+  });
+
+  const response = await fetchAPI(`/api/atas?${query}`);
   const data = normalizeDataArray(response);
   // Manually normalize if attributes is missing
   return data.map(item => {

@@ -11,11 +11,10 @@ import SoftwareListMenu from './SoftwareListMenu'; // Novo menu para softwares
 const TabButton = ({ label, isActive, onClick }) => (
   <button
     onClick={onClick}
-    className={`px-4 py-3 font-semibold border-b-4 transition-colors duration-300 ${
-      isActive
+    className={`px-4 py-3 font-semibold border-b-4 transition-colors duration-300 ${isActive
         ? 'border-blue-500 text-blue-600'
         : 'border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-300'
-    }`}
+      }`}
   >
     {label}
   </button>
@@ -53,7 +52,7 @@ export default function SupportPageClient({ products, software, categories }) {
   const handleSubcategorySelect = (subcategory) => {
     setSelectedItem(null);
     setSelectedSubcategory(subcategory);
-    const parentCategory = categories.find(cat => 
+    const parentCategory = categories.find(cat =>
       cat.attributes.subcategorias?.data?.some(sub => sub.attributes.slug === subcategory.slug)
     );
     setSelectedCategory(parentCategory || null);
@@ -103,29 +102,29 @@ export default function SupportPageClient({ products, software, categories }) {
   const relevantSubcatSlugs = new Set(productsWithDocs.flatMap(p => extractSlugs(getAttrs(p).subcategorias)));
 
   categories.forEach(cat => {
-      const catAttrs = getAttrs(cat);
-      const subcatSlugs = extractSlugs(catAttrs.subcategorias);
-      const hasRelevantSubcat = subcatSlugs.some(subslug => relevantSubcatSlugs.has(subslug));
-      if (hasRelevantSubcat) {
-          relevantCatSlugs.add(catAttrs.slug);
-      }
+    const catAttrs = getAttrs(cat);
+    const subcatSlugs = extractSlugs(catAttrs.subcategorias);
+    const hasRelevantSubcat = subcatSlugs.some(subslug => relevantSubcatSlugs.has(subslug));
+    if (hasRelevantSubcat) {
+      relevantCatSlugs.add(catAttrs.slug);
+    }
   });
 
   const filteredCategoriesForMenu = categories
-      .filter(cat => cat && relevantCatSlugs.has(getAttrs(cat).slug))
-      .map(cat => {
-          const catAttrs = getAttrs(cat);
-          const subcategoriesData = Array.isArray(catAttrs.subcategorias) 
-            ? catAttrs.subcategorias 
-            : (catAttrs.subcategorias?.data || []);
-          return {
-              ...catAttrs,
-              id: cat.id,
-              subcategorias: subcategoriesData
-                .filter(sub => sub && relevantSubcatSlugs.has(getAttrs(sub).slug))
-                .map(s => ({...getAttrs(s), id: s.id}))
-          };
-      });
+    .filter(cat => cat && relevantCatSlugs.has(getAttrs(cat).slug))
+    .map(cat => {
+      const catAttrs = getAttrs(cat);
+      const subcategoriesData = Array.isArray(catAttrs.subcategorias)
+        ? catAttrs.subcategorias
+        : (catAttrs.subcategorias?.data || []);
+      return {
+        ...catAttrs,
+        id: cat.id,
+        subcategorias: subcategoriesData
+          .filter(sub => sub && relevantSubcatSlugs.has(getAttrs(sub).slug))
+          .map(s => ({ ...getAttrs(s), id: s.id }))
+      };
+    });
 
   const filteredProducts = productsWithDocs.filter(product => {
     const pAttrs = getAttrs(product);
@@ -143,6 +142,10 @@ export default function SupportPageClient({ products, software, categories }) {
   const softwares = software
     .filter(s => s && (s?.attributes && s.attributes.tipo !== 'Driver' && s.attributes.tipo !== 'Utilitario' || !s?.attributes?.tipo))
     .sort((a, b) => {
+      const ordemA = getAttrs(a).ordem ?? 9999;
+      const ordemB = getAttrs(b).ordem ?? 9999;
+      if (ordemA !== ordemB) return ordemA - ordemB;
+
       const nameA = getAttrs(a).nome || '';
       const nameB = getAttrs(b).nome || '';
       return nameA.localeCompare(nameB);
@@ -151,6 +154,10 @@ export default function SupportPageClient({ products, software, categories }) {
   const drivers = software
     .filter(s => s && s?.attributes && (s.attributes.tipo === 'Driver' || s.attributes.tipo === 'Utilitario'))
     .sort((a, b) => {
+      const ordemA = getAttrs(a).ordem ?? 9999;
+      const ordemB = getAttrs(b).ordem ?? 9999;
+      if (ordemA !== ordemB) return ordemA - ordemB;
+
       const nameA = getAttrs(a).nome || '';
       const nameB = getAttrs(b).nome || '';
       return nameA.localeCompare(nameB);
@@ -162,7 +169,7 @@ export default function SupportPageClient({ products, software, categories }) {
         return (
           <>
             <h2 className="text-2xl font-bold mb-4">Categorias</h2>
-            <CategoryMenu 
+            <CategoryMenu
               categories={filteredCategoriesForMenu}
               onCategorySelect={handleCategorySelect}
               onSubcategorySelect={handleSubcategorySelect}
@@ -208,58 +215,58 @@ export default function SupportPageClient({ products, software, categories }) {
       case 'contato':
         return (
           <div className="bg-white p-8 rounded-lg shadow-md border border-gray-200">
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">Fale com nosso Suporte Técnico</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="space-y-6">
-                      <div className="flex items-start">
-                          <FaPhoneAlt className="text-blue-600 mt-1 mr-4 flex-shrink-0" size={20} />
-                          <div>
-                              <h3 className="font-semibold text-lg">Telefone</h3>
-                              <a 
-                                href="tel:+5511326643111" 
-                                className="text-blue-600 hover:text-blue-800 hover:underline font-medium"
-                              >
-                                +55 (11) 3266-4311
-                              </a>
-                              <p className="text-sm text-gray-500 mt-1">Ao ligar, escolha a <span className="font-bold">opção 2</span> para ser direcionado ao Suporte.</p>
-                          </div>
-                      </div>
-                      <div className="flex items-start">
-                          <FaWhatsapp className="text-green-500 mt-1 mr-4 flex-shrink-0" size={22} />
-                          <div>
-                              <h3 className="font-semibold text-lg">WhatsApp</h3>
-                              <a 
-                                href="https://wa.me/5511995978139" 
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-green-600 hover:text-green-800 hover:underline font-medium"
-                              >
-                                +55 (11) 99597-8139
-                              </a>
-                              <p className="text-sm text-gray-500 mt-1">Ao iniciar a conversa, escolha a <span className="font-bold">opção 2</span> no menu para falar com o Suporte.</p>
-                          </div>
-                      </div>
-                      <div className="flex items-start">
-                          <FaEnvelope className="text-red-500 mt-1 mr-4 flex-shrink-0" size={20} />
-                          <div>
-                              <h3 className="font-semibold text-lg">E-mail</h3>
-                              <a 
-                                href="mailto:suporte@tecassistiva.com.br" 
-                                className="text-red-600 hover:text-red-800 hover:underline font-medium"
-                              >
-                                suporte@tecassistiva.com.br
-                              </a>
-                          </div>
-                      </div>
+            <h2 className="text-2xl font-bold text-gray-800 mb-6">Fale com nosso Suporte Técnico</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="space-y-6">
+                <div className="flex items-start">
+                  <FaPhoneAlt className="text-blue-600 mt-1 mr-4 flex-shrink-0" size={20} />
+                  <div>
+                    <h3 className="font-semibold text-lg">Telefone</h3>
+                    <a
+                      href="tel:+5511326643111"
+                      className="text-blue-600 hover:text-blue-800 hover:underline font-medium"
+                    >
+                      +55 (11) 3266-4311
+                    </a>
+                    <p className="text-sm text-gray-500 mt-1">Ao ligar, escolha a <span className="font-bold">opção 2</span> para ser direcionado ao Suporte.</p>
                   </div>
-                  <div className="bg-blue-50 p-6 rounded-lg border border-blue-200 flex items-start">
-                      <FaCertificate className="text-blue-600 mt-1 mr-4 flex-shrink-0" size={24} />
-                      <div>
-                          <h3 className="font-semibold text-lg text-blue-800">Equipe Certificada</h3>
-                          <p className="text-gray-700 mt-2">Nossos técnicos são treinados e certificados diretamente pelas fabricantes dos produtos. Como representantes oficiais da maioria das marcas que trabalhamos, garantimos um suporte especializado e de alta qualidade para você.</p>
-                      </div>
+                </div>
+                <div className="flex items-start">
+                  <FaWhatsapp className="text-green-500 mt-1 mr-4 flex-shrink-0" size={22} />
+                  <div>
+                    <h3 className="font-semibold text-lg">WhatsApp</h3>
+                    <a
+                      href="https://wa.me/5511995978139"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-green-600 hover:text-green-800 hover:underline font-medium"
+                    >
+                      +55 (11) 99597-8139
+                    </a>
+                    <p className="text-sm text-gray-500 mt-1">Ao iniciar a conversa, escolha a <span className="font-bold">opção 2</span> no menu para falar com o Suporte.</p>
                   </div>
+                </div>
+                <div className="flex items-start">
+                  <FaEnvelope className="text-red-500 mt-1 mr-4 flex-shrink-0" size={20} />
+                  <div>
+                    <h3 className="font-semibold text-lg">E-mail</h3>
+                    <a
+                      href="mailto:suporte@tecassistiva.com.br"
+                      className="text-red-600 hover:text-red-800 hover:underline font-medium"
+                    >
+                      suporte@tecassistiva.com.br
+                    </a>
+                  </div>
+                </div>
               </div>
+              <div className="bg-blue-50 p-6 rounded-lg border border-blue-200 flex items-start">
+                <FaCertificate className="text-blue-600 mt-1 mr-4 flex-shrink-0" size={24} />
+                <div>
+                  <h3 className="font-semibold text-lg text-blue-800">Equipe Certificada</h3>
+                  <p className="text-gray-700 mt-2">Nossos técnicos são treinados e certificados diretamente pelas fabricantes dos produtos. Como representantes oficiais da maioria das marcas que trabalhamos, garantimos um suporte especializado e de alta qualidade para você.</p>
+                </div>
+              </div>
+            </div>
           </div>
         );
       default:

@@ -113,67 +113,6 @@ const VideoCard = ({ video, onVideoClick }) => {
   );
 };
 
-// Componente reutilizável para listar cards com efeito sticky e foco 3D
-const StickyCardList = ({ items }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const containerRef = useRef(null);
-  const cardRefs = useRef([]);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const handleScroll = () => {
-      const containerTop = container.getBoundingClientRect().top;
-
-      let newActiveIndex = cardRefs.current.length - 1; // Default to last if all are stuck
-
-      for (let i = 0; i < cardRefs.current.length; i++) {
-        const card = cardRefs.current[i];
-        if (!card) continue;
-
-        const cardTop = card.getBoundingClientRect().top - containerTop;
-
-        // Find the first card that is NOT stuck (scrolling up)
-        // The active card is the one immediately BEFORE it (the one currently stuck/visible on top)
-        if (cardTop > 20) {
-          newActiveIndex = i - 1;
-          break;
-        }
-      }
-
-      if (newActiveIndex < 0) newActiveIndex = 0; // Safety for first item
-
-      setActiveIndex(newActiveIndex);
-    };
-
-    container.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initialize
-
-    return () => container.removeEventListener('scroll', handleScroll);
-  }, [items]);
-
-  return (
-    <div
-      ref={containerRef}
-      className="flex flex-col gap-6 overflow-y-auto h-[calc(100vh-var(--header-height)-60px)] scroll-smooth px-1 pb-20 no-scrollbar relative overscroll-contain"
-    >
-      {items.map((item, idx) => (
-        <div key={idx} ref={el => cardRefs.current[idx] = el} className="contents">
-          <InfoCard
-            title={item.title}
-            isActive={idx === activeIndex}
-            isPrev={idx < activeIndex}
-            isNext={idx > activeIndex}
-          >
-            {item.content}
-          </InfoCard>
-        </div>
-      ))}
-    </div>
-  );
-};
-
 // Helper para agrupar conteúdo Rich Text por títulos
 const groupContentByHeading = (content) => {
   if (!content || !Array.isArray(content)) return [{ title: null, content: <RichTextRenderer content={content} /> }];
@@ -348,7 +287,7 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">{p.nome}</h1>
 
             {/* Descrição Longa (Rich Text) ao lado da imagem */}
-            <div className="prose prose-lg text-gray-600 mb-8 leading-relaxed">
+            <div className="prose prose-lg mb-8 [&>div:first-child]:text-xl [&>div:first-child]:font-medium [&>div:first-child]:text-gray-900 [&>div:first-child]:leading-relaxed">
               {p.descricao_longa ? (
                 <RichTextRenderer content={p.descricao_longa} />
               ) : (
@@ -396,7 +335,18 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
                 <div key={tab.name} className={activeTab === tab.name ? 'block' : 'hidden'}>
                   {/* Lógica para Visão Geral e Características Funcionais (Cards Verticais) */}
                   {(tab.name === 'Visão Geral' || tab.name === 'Características Funcionais') && (
-                    <StickyCardList items={groupContentByHeading(tab.content)} />
+                    <div className="flex flex-col gap-6">
+                      {groupContentByHeading(tab.content).map((item, idx) => (
+                        <InfoCard
+                          key={idx}
+                          title={item.title}
+                          variant="blue"
+                          isSticky={false}
+                        >
+                          {item.content}
+                        </InfoCard>
+                      ))}
+                    </div>
                   )}
 
                   {tab.name === 'Fotos' && (
@@ -437,14 +387,19 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
                     </div>
                   )}
 
-                  {/* Lógica para Especificações Técnicas Estruturadas (Cards Verticais) */}
+                  {/* Lógica para Especificações Técnicas Estruturadas (Lista Normal) */}
                   {tab.name === 'Características Técnicas' && tab.isStructured && (
-                    <StickyCardList
-                      items={tab.content.map(group => ({
-                        title: group.titulo,
-                        content: <SpecsTable specGroups={[group]} showTitle={false} />
-                      }))}
-                    />
+                    <div className="flex flex-col gap-6">
+                      {tab.content.map((group, idx) => (
+                        <InfoCard
+                          key={idx}
+                          title={group.titulo}
+                          isSticky={false}
+                        >
+                          <SpecsTable specGroups={[group]} showTitle={false} />
+                        </InfoCard>
+                      ))}
+                    </div>
                   )}
 
                   {tab.name === 'Características Técnicas' && !tab.isStructured && (
