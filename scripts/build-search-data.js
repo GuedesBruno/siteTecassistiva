@@ -6,6 +6,7 @@ import { glob } from 'glob';
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
 // Função auxiliar para fetch API
+// Função auxiliar para fetch API com timeout
 async function fetchAPI(endpoint) {
   const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
   const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN;
@@ -22,17 +23,28 @@ async function fetchAPI(endpoint) {
     const path_ep = endpoint.replace(/^\/+/, '');
     const url = `${base}/${path_ep}`;
 
+    // Adiciona timeout de 300 segundos (5 minutos)
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 300000);
+
     const res = await fetch(url, {
       headers: { 'Authorization': `Bearer ${STRAPI_TOKEN}` },
+      signal: controller.signal,
     });
+
+    clearTimeout(timeoutId);
 
     if (!res.ok) {
       throw new Error(`API Error: ${res.status}`);
     }
-    
+
     return await res.json();
   } catch (error) {
-    console.error(`Erro ao fazer fetch: ${error.message}`);
+    if (error.name === 'AbortError') {
+      console.error(`Timeout ao fazer fetch: ${endpoint}`);
+    } else {
+      console.error(`Erro ao fazer fetch: ${error.message} (${endpoint})`);
+    }
     throw error;
   }
 }
@@ -60,83 +72,131 @@ function stripTags(content) {
     .trim();
 }
 
+// Função que busca TODAS as páginas (paginação automática)
+async function fetchAllData(endpoint) {
+  let allData = [];
+  let page = 1;
+  let pageCount = 1;
+  const limit = 30; // Reduzido para 30 para garantir que não dê timeout
+
+  // Garante separador de query
+  const sep = endpoint.includes('?') ? '&' : '?';
+
+  // Remove qualquer paginação existente na string original para evitar conflito
+  const cleanEndpoint = endpoint.replace(/&?pagination\[limit\]=\d+/g, '').replace(/&?pagination\[page\]=\d+/g, '');
+
+  do {
+    // console.log(`   > Buscando página ${page}...`); // Debug opcional
+    const pagedUrl = `${cleanEndpoint}${sep}pagination[page]=${page}&pagination[limit]=${limit}`;
+
+    try {
+      const res = await fetchAPI(pagedUrl);
+
+      if (res.data) {
+        allData = allData.concat(res.data);
+        if (res.meta && res.meta.pagination) {
+          pageCount = res.meta.pagination.pageCount;
+        } else {
+          // Se não tiver paginação, deve ser single type ou array simples, para por aqui
+          pageCount = 1;
+        }
+      } else {
+        // Fallback
+        if (Array.isArray(res)) allData = allData.concat(res);
+        pageCount = 0;
+      }
+    } catch (err) {
+      console.error(`Erro na página ${page} de ${cleanEndpoint}:`, err.message);
+      throw err;
+    }
+
+    page++;
+  } while (page <= pageCount);
+
+  return allData;
+}
+
 async function generateSearchData() {
   console.log('Iniciando a geração de dados de busca abrangente...');
 
   try {
-    // Fetch data from APIs
-    const [products, productsWithDocs, atas, software] = await Promise.all([
-      fetchAPI('/api/produtos?populate[0]=imagem_principal&populate[1]=subcategorias&populate[2]=categorias&pagination[limit]=1000&sort=ordem:asc').then(d => normalizeDataArray(d)),
-      fetchAPI('/api/produtos?populate[0]=documentos&populate[1]=categorias&populate[2]=subcategorias&pagination[limit]=1000&sort=nome:asc').then(d => {
-        const rawData = normalizeDataArray(d);
-        return rawData.map(item => {
-          if (item.attributes) return item;
-          const { id, ...attributes } = item;
-          return { id, attributes };
-        });
-      }),
-      fetchAPI('/api/atas?sort=ordem:asc&pagination[limit]=1000').then(d => normalizeDataArray(d)),
-      fetchAPI('/api/softwares?fields[0]=nome&fields[1]=tipo&populate[instaladores]=*&pagination[limit]=1000').then(d => normalizeDataArray(d)),
-    ]);
+    // Fetch data from APIs sequencialmente com paginação robusta
+    console.log('Buscando produtos...');
+    const products = await fetchAllData('/api/produtos?populate[0]=imagem_principal&populate[1]=subcategorias&populate[2]=categorias&sort=ordem:asc');
+
+    console.log('Buscando produtos com documentos...');
+    const productsWithDocsRaw = await fetchAllData('/api/produtos?populate[0]=documentos&populate[1]=categorias&populate[2]=subcategorias&sort=nome:asc');
+    // Normalizar
+    const productsWithDocs = productsWithDocsRaw.map(item => {
+      const { id, ...attributes } = item.attributes ? item : { id: item.id, ...item };
+      return { id, attributes };
+    });
+
+    console.log('Buscando atas...');
+    const atas = await fetchAllData('/api/atas?sort=ordem:asc');
+
+    console.log('Buscando softwares...');
+    const software = await fetchAllData('/api/softwares?fields[0]=nome&fields[1]=tipo&populate[instaladores]=*');
+
 
     // Process API data - Products
     const productData = products.map(p => {
-        const attrs = p.attributes || p;
-        const imageUrl = getStrapiMediaUrl(attrs.imagem_principal?.data?.attributes?.url || attrs.imagem_principal?.url);
-        
-        // Extrai categorias e subcategorias
-        const categoriesArray = Array.isArray(attrs.categorias) 
-          ? attrs.categorias 
-          : (attrs.categorias?.data || []);
-        const subcategoriesArray = Array.isArray(attrs.subcategorias) 
-          ? attrs.subcategorias 
-          : (attrs.subcategorias?.data || []);
-        
-        const categories = categoriesArray
-          .map(c => (c.attributes?.nome || c.nome))
-          .filter(Boolean)
-          .join(', ');
-        
-        const subcategories = subcategoriesArray
-          .map(s => (s.attributes?.nome || s.nome))
-          .filter(Boolean)
-          .join(', ');
-        
-        // Combina conteúdo para busca mais completa
-        const content = [
-          attrs.descricao_curta || '',
-          attrs.descricao_longa ? stripTags(JSON.stringify(attrs.descricao_longa)) : '',
-          categories,
-          subcategories,
-          attrs.Fabricante || '',
-        ].filter(Boolean).join(' ');
-        
-        return {
-            id: `product-${p.id}`,
-            title: attrs.nome,
-            slug: `/produtos/${attrs.slug}`,
-            description: attrs.descricao_curta || '',
-            imageUrl: imageUrl || null,
-            type: 'Produto',
-            content: content,
-            categories: categories,
-            fabricante: attrs.Fabricante || '',
-        }
+      const attrs = p.attributes || p;
+      const imageUrl = getStrapiMediaUrl(attrs.imagem_principal?.data?.attributes?.url || attrs.imagem_principal?.url);
+
+      // Extrai categorias e subcategorias
+      const categoriesArray = Array.isArray(attrs.categorias)
+        ? attrs.categorias
+        : (attrs.categorias?.data || []);
+      const subcategoriesArray = Array.isArray(attrs.subcategorias)
+        ? attrs.subcategorias
+        : (attrs.subcategorias?.data || []);
+
+      const categories = categoriesArray
+        .map(c => (c.attributes?.nome || c.nome))
+        .filter(Boolean)
+        .join(', ');
+
+      const subcategories = subcategoriesArray
+        .map(s => (s.attributes?.nome || s.nome))
+        .filter(Boolean)
+        .join(', ');
+
+      // Combina conteúdo para busca mais completa
+      const content = [
+        attrs.descricao_curta || '',
+        attrs.descricao_longa ? stripTags(JSON.stringify(attrs.descricao_longa)) : '',
+        categories,
+        subcategories,
+        attrs.Fabricante || '',
+      ].filter(Boolean).join(' ');
+
+      return {
+        id: `product-${p.id}`,
+        title: attrs.nome,
+        slug: `/produtos/${attrs.slug}`,
+        description: attrs.descricao_curta || '',
+        imageUrl: imageUrl || null,
+        type: 'Produto',
+        content: content,
+        categories: categories,
+        fabricante: attrs.Fabricante || '',
+      }
     });
 
     // Extract documents from products
     const documentData = [];
     productsWithDocs.forEach(p => {
       const attrs = p.attributes || p;
-      const documentosArray = Array.isArray(attrs.documentos) 
-        ? attrs.documentos 
+      const documentosArray = Array.isArray(attrs.documentos)
+        ? attrs.documentos
         : (attrs.documentos?.data || []);
-      
+
       documentosArray.forEach(doc => {
         const docAttrs = doc.attributes || doc;
         const fileName = docAttrs.name || docAttrs.nome || 'Documento';
         const fileUrl = docAttrs.url || '';
-        
+
         // Extrai extensão do arquivo
         const extension = fileName.split('.').pop().toLowerCase();
         const docType = {
@@ -148,7 +208,7 @@ async function generateSearchData() {
           'txt': 'Texto',
           'zip': 'Compactado',
         }[extension] || 'Documento';
-        
+
         documentData.push({
           id: `doc-${p.id}-${doc.id}`,
           title: `${fileName} - ${attrs.nome}`,
@@ -166,26 +226,26 @@ async function generateSearchData() {
     });
 
     const ataData = atas.map(a => {
-        const attrs = a.attributes || a;
-        return {
-            id: `ata-${a.id}`,
-            title: attrs.orgao,
-            slug: '/atas-abertas',
-            description: attrs.descricao || '',
-            type: 'Ata',
-        }
+      const attrs = a.attributes || a;
+      return {
+        id: `ata-${a.id}`,
+        title: attrs.orgao,
+        slug: '/atas-abertas',
+        description: attrs.descricao || '',
+        type: 'Ata',
+      }
     });
 
     const softwareData = software.map(s => {
-        const attrs = s.attributes || s;
-        const tipo = attrs.tipo || 'Software/Driver';
-        return {
-            id: `software-${s.id}`,
-            title: attrs.nome,
-            slug: '/suporte',
-            description: `Tipo: ${tipo}`,
-            type: 'Software/Driver',
-        }
+      const attrs = s.attributes || s;
+      const tipo = attrs.tipo || 'Software/Driver';
+      return {
+        id: `software-${s.id}`,
+        title: attrs.nome,
+        slug: '/suporte',
+        description: `Tipo: ${tipo}`,
+        type: 'Software/Driver',
+      }
     });
 
     // Process static pages
@@ -201,7 +261,7 @@ async function generateSearchData() {
         .replace('/page.js', '') || '/';
 
       const description = textContent.substring(0, 150) + '...';
-      
+
       let title = slug.split('/').pop() || 'Página Inicial';
       title = title.charAt(0).toUpperCase() + title.slice(1).replace(/-/g, ' ');
 

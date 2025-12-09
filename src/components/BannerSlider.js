@@ -56,8 +56,8 @@ export default function BannerSlider({ banners }) {
             <SwiperSlide key={banner.id}>
               <div className={`w-full h-auto md:h-[58vh] flex flex-col md:flex-row ${isReversed ? 'md:flex-row-reverse' : ''}`}>
 
-                {/* Text Section - Order 1 on Mobile (Top) */}
-                <div className="w-full md:w-2/5 order-1 md:order-none bg-white flex items-center justify-center p-6 md:p-12">
+                {/* Text Section - Order 2 on Mobile (Bottom) */}
+                <div className="w-full md:w-2/5 order-2 md:order-none bg-white flex items-center justify-center p-6 md:p-12">
                   <div className="max-w-md text-center md:text-left">
                     <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-4 text-[#002554]">{titulo}</h1>
                     <p className="text-base sm:text-lg md:text-xl mb-6 text-[#002554] md:text-justify">{subtitulo}</p>
@@ -70,15 +70,15 @@ export default function BannerSlider({ banners }) {
                   </div>
                 </div>
 
-                {/* Image Section - Order 2 on Mobile (Bottom) */}
-                <div className="w-full md:w-3/5 order-2 md:order-none h-[400px] sm:h-[500px] md:h-full relative bg-white">
+                {/* Image Section - Order 1 on Mobile (Top) */}
+                <div className="w-full md:w-3/5 order-1 md:order-none h-72 sm:h-96 md:h-full relative bg-white">
                   {fullImageUrl ? (
                     <>
                       <Image
                         src={fullImageUrl}
                         alt={imageAlt}
                         fill
-                        className="object-contain"
+                        className="object-contain object-top"
                         priority={index === 0}
                       />
                     </>
