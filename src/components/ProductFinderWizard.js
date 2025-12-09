@@ -110,7 +110,7 @@ export default function ProductFinderWizard({ categories = [], products = [] }) 
         return (
             <div className="flex flex-col items-center justify-center min-h-[50vh] bg-white rounded-xl shadow-lg p-8 md:p-14 animate-fade-in-up border border-gray-100">
                 <h2 className="text-3xl md:text-5xl font-extrabold text-tec-blue mb-8 text-center leading-tight">
-                    Qual sua necessidade hoje?
+                    O que você busca?
                 </h2>
 
                 <form onSubmit={handleInputSubmit} className="w-full max-w-lg relative group">

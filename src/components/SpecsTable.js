@@ -33,17 +33,17 @@ const SpecsTable = ({ specGroups, showTitle = true }) => {
                             return (
                                 <div key={itemIndex} className="flex flex-col md:flex-row md:items-stretch shadow-sm rounded-lg overflow-hidden border border-gray-100 hover:shadow-md transition-shadow duration-200">
                                     {/* Label Rectangle */}
-                                    <div className="bg-blue-50 px-6 py-3 md:w-1/2 flex items-center justify-end text-right border-b md:border-b-0 md:border-r border-blue-100">
+                                    <div className="bg-blue-50 px-6 py-3 md:w-1/2 flex items-center justify-start text-left border-b md:border-b-0 md:border-r border-blue-100">
                                         <span className="font-bold text-black text-sm uppercase tracking-wide">
                                             {item.label}
                                         </span>
                                     </div>
 
                                     {/* Value Rectangle */}
-                                    <div className="bg-white px-6 py-3 md:w-1/2 flex items-center justify-start text-left">
+                                    <div className="bg-white px-6 py-3 md:w-1/2 flex items-center justify-center text-center">
                                         <span className="text-gray-600 font-medium text-lg w-full">
                                             {isBooleanTrue ? (
-                                                <div className="flex items-center justify-start">
+                                                <div className="flex items-center justify-center">
                                                     <CheckIcon />
                                                 </div>
                                             ) : (

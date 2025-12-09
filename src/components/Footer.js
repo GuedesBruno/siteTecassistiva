@@ -9,14 +9,16 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-8">
 
           {/* Coluna 1: Sobre e Contato */}
-          <div className="md:col-span-3">
-            <Image
-              src="/logo-tecassistiva.svg"
-              alt="Tecassistiva Logo"
-              width={180}
-              height={45}
-              className="mb-4"
-            />
+          <div className="md:col-span-3 text-center md:text-left">
+            <div className="flex justify-center md:justify-start">
+              <Image
+                src="/logo-tecassistiva.svg"
+                alt="Tecassistiva Logo"
+                width={180}
+                height={45}
+                className="mb-4"
+              />
+            </div>
             <div className="mt-6">
               <p className="text-gray-300"><strong>Telefone:</strong> +55 (11) 3266-4311</p>
               <p className="text-gray-300 mt-2"><strong>Endereço:</strong> R. das Camélias, 37</p>
@@ -29,7 +31,7 @@ export default function Footer() {
           <div className="md:col-span-9 flex flex-col md:flex-row md:justify-end gap-8 md:gap-16">
 
             {/* Coluna 2: Links Institucionais */}
-            <div className="md:text-right">
+            <div className="text-center md:text-right">
               <h3 className="text-lg font-bold mb-4">Institucional</h3>
               <ul className="space-y-2">
                 <li><Link href="/tecassistiva" className="text-gray-400 hover:text-white">Quem Somos</Link></li>
@@ -39,7 +41,7 @@ export default function Footer() {
             </div>
 
             {/* Coluna 3: Links de Produtos */}
-            <div className="md:text-right">
+            <div className="text-center md:text-right">
               <h3 className="text-lg font-bold mb-4">Produtos</h3>
               <ul className="space-y-2">
                 <li><Link href="/ambientes" className="text-gray-400 hover:text-white">Soluções por Ambientes</Link></li>
@@ -51,7 +53,7 @@ export default function Footer() {
             </div>
 
             {/* Coluna 4: Links de Suporte */}
-            <div className="md:text-right">
+            <div className="text-center md:text-right">
               <h3 className="text-lg font-bold mb-4">Suporte</h3>
               <ul className="space-y-2">
                 <li><Link href="/suporte?tab=softwares" className="text-gray-400 hover:text-white">Softwares</Link></li>

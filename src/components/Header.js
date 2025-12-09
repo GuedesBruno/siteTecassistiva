@@ -151,11 +151,9 @@ export default function Header({ categories = [] }) {
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Abrir menu"
-            className="text-white focus:outline-none"
+            className="text-white focus:outline-none font-bold text-sm uppercase tracking-wider"
           >
-            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
-            </svg>
+            Menu
           </button>
         </div>
       </div>
@@ -165,14 +163,14 @@ export default function Header({ categories = [] }) {
         className={`lg:hidden fixed top-0 left-0 w-full h-full bg-tec-blue z-[100] transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'
           }`}
       >
-        <div className="container mx-auto px-4 py-4 flex flex-col">
-          <div className="flex justify-between items-center mb-8">
+        <div className="container mx-auto px-4 py-4 flex flex-col items-center text-center">
+          <div className="flex justify-between items-center mb-4 w-full">
             <Link href="/" onClick={() => setIsMenuOpen(false)}>
               <Image
                 src="/logo-tecassistiva.svg"
                 alt="Tecassistiva"
-                width={140}
-                height={40}
+                width={120}
+                height={35}
                 priority
               />
             </Link>
@@ -187,50 +185,50 @@ export default function Header({ categories = [] }) {
             </button>
           </div>
 
-          <nav className="flex flex-col space-y-6">
-            <Link href="/tecassistiva" onClick={() => setIsMenuOpen(false)} className="text-white text-lg font-semibold">A Tecassistiva</Link>
-            <div className="flex flex-col space-y-4">
-              <Link href="/produtos" onClick={() => setIsMenuOpen(false)} className="text-white text-lg font-semibold">Produtos</Link>
-              <div className="flex flex-col space-y-2 pl-4">
+          {/* Formulário de Busca movido para o topo */}
+          <form onSubmit={handleSearchSubmit} className="relative mb-6 w-full max-w-sm">
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Buscar..."
+              className="w-full px-4 py-2 rounded-full text-gray-800 text-sm focus:outline-none shadow-md"
+            />
+            <button type="submit" aria-label="Buscar" className="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 text-tec-blue">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </button>
+          </form>
+
+          <nav className="flex flex-col space-y-2 w-full overflow-y-auto max-h-[60vh] pb-4">
+            <Link href="/tecassistiva" onClick={() => setIsMenuOpen(false)} className="text-white text-base font-semibold py-1">A Tecassistiva</Link>
+            <div className="flex flex-col space-y-1 items-center">
+              <Link href="/produtos" onClick={() => setIsMenuOpen(false)} className="text-white text-base font-semibold py-1">Produtos</Link>
+              <div className="flex flex-col space-y-1 pl-4 items-center">
                 {Array.isArray(categories) && categories.map(category => {
                   const cat = category.attributes || category;
                   return (
-                    <Link key={cat.slug || category.id} href={`/produtos/categorias/${cat.slug}`} onClick={() => setIsMenuOpen(false)} className="text-white text-base">
+                    <Link key={cat.slug || category.id} href={`/produtos/categorias/${cat.slug}`} onClick={() => setIsMenuOpen(false)} className="text-gray-200 text-sm py-0.5">
                       {cat.nome}
                     </Link>
                   );
                 })}
               </div>
             </div>
-            <Link href="/atas-abertas" onClick={() => setIsMenuOpen(false)} className="text-white text-lg font-semibold">Atas Abertas</Link>
-            <div className="flex flex-col space-y-4">
-              <Link href="/suporte" onClick={() => setIsMenuOpen(false)} className="text-white text-lg font-semibold">Suporte</Link>
-              <div className="flex flex-col space-y-2 pl-4">
+            <Link href="/atas-abertas" onClick={() => setIsMenuOpen(false)} className="text-white text-base font-semibold py-1">Atas Abertas</Link>
+            <div className="flex flex-col space-y-1 items-center">
+              <Link href="/suporte" onClick={() => setIsMenuOpen(false)} className="text-white text-base font-semibold py-1">Suporte</Link>
+              <div className="flex flex-col space-y-1 pl-4 items-center">
                 {supportMenuItems.map(item => (
-                  <Link key={item.name} href={item.slug} onClick={() => setIsMenuOpen(false)} className="text-white text-base">
+                  <Link key={item.name} href={item.slug} onClick={() => setIsMenuOpen(false)} className="text-gray-200 text-sm py-0.5">
                     {item.name}
                   </Link>
                 ))}
               </div>
             </div>
-            <Link href="/contato" onClick={() => setIsMenuOpen(false)} className="text-white text-lg font-semibold">Contato</Link>
+            <Link href="/contato" onClick={() => setIsMenuOpen(false)} className="text-white text-base font-semibold py-1">Contato</Link>
           </nav>
-
-          {/* Formulário de Busca no Menu Mobile */}
-          <form onSubmit={handleSearchSubmit} className="relative mt-8">
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Buscar..."
-              className="w-full px-3 py-2 bg-white text-gray-800 focus:outline-none"
-            />
-            <button type="submit" aria-label="Buscar" className="absolute right-0 top-0 mt-2 mr-2">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </button>
-          </form>
         </div>
       </div>
     </header>
