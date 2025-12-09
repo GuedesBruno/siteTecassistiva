@@ -146,13 +146,11 @@ const groupContentByHeading = (content) => {
 };
 
 export default function ProductDetail({ product, breadcrumbs = [] }) {
-  const [activeTab, setActiveTab] = useState('Visão Geral');
-  const [selectedVideo, setSelectedVideo] = useState(null); // Estado para o modal
-  const [swiper, setSwiper] = useState(null); // Estado para controlar o Swiper
   const { attributes: p } = product;
-  const images = [p.imagem_principal, ...(p.galeria_de_imagens || [])].filter(Boolean);
 
-  console.log('Product videos raw:', p.videos);
+  // --- Data Processing ---
+
+  // 1. Videos
   let videoList = [];
   if (typeof p.videos === 'string') {
     videoList = p.videos.split('\n').filter(link => link.trim() !== '').map((link, index) => ({
@@ -160,7 +158,7 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
       attributes: {
         link: link.trim(),
         titulo: 'Vídeo',
-        thumbnail: null // Thumbnail will be fetched by VideoCard
+        thumbnail: null
       }
     }));
   } else if (Array.isArray(p.videos)) {
@@ -173,19 +171,48 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
     return { ...video, videoId };
   }).filter(v => v.videoId);
 
-  // Determine content for Technical Characteristics tab
+  // 2. Specs
   const hasStructuredSpecs = p.especificacoes_por_categoria && p.especificacoes_por_categoria.length > 0;
   const technicalSpecsContent = hasStructuredSpecs ? p.especificacoes_por_categoria : p.caracteristicas_tecnicas;
 
-  const tabs = [
-    { name: 'Visão Geral', content: p.visao_geral },
-    { name: 'Características Funcionais', content: p.caracteristicas_funcionais },
-    { name: 'Características Técnicas', content: technicalSpecsContent, isStructured: hasStructuredSpecs },
-    { name: 'Produtos Relacionados', content: p.relacao_acessorios?.data },
-    { name: 'Downloads', content: p.documentos },
-    { name: 'Fotos', content: p.galeria_de_imagens },
-    { name: 'Vídeos', content: p.videos },
+  // 3. Images (for gallery)
+  const images = [p.imagem_principal, ...(p.galeria_de_imagens || [])].filter(Boolean);
+
+  // --- Tabs Logic ---
+  const hasContent = (data) => {
+    if (!data) return false;
+    if (Array.isArray(data)) return data.length > 0;
+    if (typeof data === 'string') return data.trim().length > 0;
+    return true;
+  };
+
+  const allTabs = [
+    { name: 'Visão Geral', content: p.visao_geral, isVisible: hasContent(p.visao_geral) },
+    { name: 'Características Funcionais', content: p.caracteristicas_funcionais, isVisible: hasContent(p.caracteristicas_funcionais) },
+    { name: 'Características Técnicas', content: technicalSpecsContent, isStructured: hasStructuredSpecs, isVisible: hasContent(technicalSpecsContent) },
+    { name: 'Produtos Relacionados', content: p.relacao_acessorios?.data, isVisible: p.relacao_acessorios?.data?.length > 0 },
+    { name: 'Downloads', content: p.documentos, isVisible: hasContent(p.documentos) },
+    { name: 'Fotos', content: p.galeria_de_imagens, isVisible: hasContent(p.galeria_de_imagens) },
+    { name: 'Vídeos', content: p.videos, isVisible: videoData.length > 0 },
   ];
+
+  // Filter only visible tabs
+  const tabs = allTabs.filter(t => t.isVisible);
+  const initialTab = tabs.length > 0 ? tabs[0].name : '';
+
+  // --- State ---
+  // Initialize with the first visible tab
+  const [activeTab, setActiveTab] = useState(initialTab);
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [swiper, setSwiper] = useState(null);
+
+  // Effect to handle prop changes or empty states
+  useEffect(() => {
+    // If current activeTab is not in the visible list, reset to first visible
+    if (tabs.length > 0 && !tabs.find(t => t.name === activeTab)) {
+      setActiveTab(tabs[0].name);
+    }
+  }, [p.slug, tabs, activeTab]); // Depend on slug to reset on product change
 
   return (
     <>
