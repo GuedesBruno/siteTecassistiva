@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
 import { glob } from 'glob';
+import qs from 'qs';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
@@ -35,7 +36,15 @@ async function fetchAPI(endpoint) {
     clearTimeout(timeoutId);
 
     if (!res.ok) {
-      throw new Error(`API Error: ${res.status}`);
+      // Tenta ler o erro
+      let errorMsg = `API Error: ${res.status}`;
+      try {
+        const errorBody = await res.json();
+        if (errorBody && errorBody.error && errorBody.error.message) {
+          errorMsg += ` - ${errorBody.error.message}`;
+        }
+      } catch (e) { /* ignore */ }
+      throw new Error(errorMsg);
     }
 
     return await res.json();
@@ -79,15 +88,28 @@ async function fetchAllData(endpoint) {
   let pageCount = 1;
   const limit = 30; // Reduzido para 30 para garantir que não dê timeout
 
-  // Garante separador de query
-  const sep = endpoint.includes('?') ? '&' : '?';
+  const [pathPart, queryPart] = endpoint.split('?');
+  const queryParams = queryPart ? qs.parse(queryPart) : {};
 
   // Remove qualquer paginação existente na string original para evitar conflito
-  const cleanEndpoint = endpoint.replace(/&?pagination\[limit\]=\d+/g, '').replace(/&?pagination\[page\]=\d+/g, '');
+  if (queryParams.pagination) {
+    delete queryParams.pagination;
+  }
 
   do {
     // console.log(`   > Buscando página ${page}...`); // Debug opcional
-    const pagedUrl = `${cleanEndpoint}${sep}pagination[page]=${page}&pagination[limit]=${limit}`;
+
+    const currentParams = {
+      ...queryParams,
+      pagination: {
+        page: page,
+        pageSize: limit // CORRECTED: Strapi v4 uses pageSize with page
+      }
+    };
+
+    // Encode parameters standardly (brackets encoded) to match safely with strict fetch/servers
+    const queryString = qs.stringify(currentParams);
+    const pagedUrl = `${pathPart}?${queryString}`;
 
     try {
       const res = await fetchAPI(pagedUrl);
@@ -106,7 +128,7 @@ async function fetchAllData(endpoint) {
         pageCount = 0;
       }
     } catch (err) {
-      console.error(`Erro na página ${page} de ${cleanEndpoint}:`, err.message);
+      console.error(`Erro na página ${page} de ${pathPart}:`, err.message);
       throw err;
     }
 
