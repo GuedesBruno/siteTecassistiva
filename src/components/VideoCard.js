@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react';
 import { getStrapiMediaUrl } from '@/lib/media';
 
 // Função auxiliar para extrair ID do vídeo
-const getVideoId = (url) => {
+// Função auxiliar para extrair ID do vídeo
+export const getVideoId = (url) => {
     if (!url) return null;
     let match = /vimeo\.com\/([\d\/a-zA-Z]+)/i.exec(url);
     if (match && match[1]) return { type: 'vimeo', id: match[1] };
