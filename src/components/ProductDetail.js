@@ -226,7 +226,7 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
 
             {/* WhatsApp Button */}
             <a
-              href={`https://wa.me/5511999999999?text=Olá, gostaria de saber mais sobre o produto ${p.nome}`}
+              href={`https://wa.me/5511995978139?text=Olá, gostaria de saber mais sobre o produto ${p.nome}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-8 py-4 bg-green-500 hover:bg-green-600 text-white text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 w-full sm:w-auto"

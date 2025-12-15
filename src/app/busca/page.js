@@ -25,15 +25,22 @@ function SearchResults() {
           throw new Error('Não foi possível carregar o índice de busca.');
         }
         const data = await response.json();
-        
+
         if (!query) {
           setResults({});
         } else {
           // Usa busca fuzzy/híbrida para encontrar resultados mesmo com typos
           const searchResults = hybridSearch(query, data, {
             keys: ['title', 'description', 'content', 'categories', 'fabricante'],
-            exactThreshold: 0.6,
-            fuzzyThreshold: 0.4,
+            weights: {
+              title: 1.5,
+              categories: 1.2,
+              fabricante: 1.2,
+              description: 0.8,
+              content: 0.6,
+            },
+            exactThreshold: 0.9,
+            fuzzyThreshold: 0.6,
             maxResults: 100,
           });
 
@@ -92,8 +99,8 @@ function SearchResults() {
                       nome: item.title,
                       slug: item.slug.replace('/produtos/', ''),
                       descricao_curta: item.description,
-                      imagem_principal: { 
-                        url: item.imageUrl 
+                      imagem_principal: {
+                        url: item.imageUrl
                       },
                     }
                   };

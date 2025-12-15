@@ -128,7 +128,8 @@ export function fuzzySearch(query, items, options = {}) {
 export function hybridSearch(query, items, options = {}) {
   const {
     keys = ['title', 'description', 'content'],
-    exactThreshold = 0.8, // Se encontrar com 80%+ de similiaridade, consideramos exato
+    weights = {}, // Pesos para cada chave (ex: { title: 1.0, description: 0.5 })
+    exactThreshold = 0.8,
     fuzzyThreshold = 0.5,
     maxResults = 50,
   } = options;
@@ -141,6 +142,10 @@ export function hybridSearch(query, items, options = {}) {
   const results = [];
   const seen = new Set();
 
+  // Pre-calculate query words for performance
+  const queryWords = normalizedQuery.split(/\s+/).filter(w => w.length > 0);
+  const maxQueryWords = Math.max(queryWords.length, 1);
+
   items.forEach(item => {
     if (seen.has(item.id)) return;
 
@@ -152,42 +157,50 @@ export function hybridSearch(query, items, options = {}) {
       if (!value) return;
 
       const normalizedValue = String(value).toLowerCase();
+      const weight = weights[key] !== undefined ? weights[key] : 1;
 
-      // Busca exata - máxima prioridade
+      let score = 0;
+      let currentMatchType = 'none';
+
+      // 1. Busca exata (substring)
       if (normalizedValue.includes(normalizedQuery)) {
-        bestScore = 1.0;
-        matchType = 'exact';
-        return;
+        score = 1.0;
+        currentMatchType = 'exact';
+      } else {
+        // 2. Busca por palavras
+        const valueWords = normalizedValue.split(/\s+/).filter(w => w.length > 0);
+
+        let matchedQueryWords = 0;
+        queryWords.forEach(qWord => {
+          if (valueWords.some(vWord => vWord.includes(qWord))) {
+            matchedQueryWords++;
+          }
+        });
+
+        const wordMatchScore = matchedQueryWords / maxQueryWords;
+
+        // 3. Busca fuzzy
+        const fuzzyScore = calculateSimilarity(normalizedQuery, normalizedValue);
+
+        score = Math.max(wordMatchScore, fuzzyScore);
+        currentMatchType = 'fuzzy';
       }
 
-      // Busca por palavras
-      const queryWords = normalizedQuery.split(/\s+/).filter(w => w.length > 0);
-      const valueWords = normalizedValue.split(/\s+/).filter(w => w.length > 0);
+      // Aplica o peso
+      const weightedScore = score * weight;
 
-      let matchedQueryWords = 0;
-      queryWords.forEach(qWord => {
-        // Verifica se a palavra da busca existe no texto (parcialmente)
-        // Apenas vWord.includes(qWord) é válido (ex: "cadeira" acha "cadeiras")
-        // qWord.includes(vWord) causava falsos positivos (ex: "cadeira" achava "a")
-        if (valueWords.some(vWord => vWord.includes(qWord))) {
-          matchedQueryWords++;
-        }
-      });
-
-      const wordMatchScore = matchedQueryWords / Math.max(queryWords.length, 1);
-
-      // Busca fuzzy
-      const fuzzyScore = calculateSimilarity(normalizedQuery, normalizedValue);
-      const finalScore = Math.max(wordMatchScore, fuzzyScore);
-
-      if (finalScore > bestScore) {
-        bestScore = finalScore;
-        matchType = finalScore >= exactThreshold ? 'exact' : 'fuzzy';
+      if (weightedScore > bestScore) {
+        bestScore = weightedScore;
+        // Se o score ponderado for alto o suficiente, consideramos exato para fins de ordenação?
+        // Ou mantemos o tipo original? Vamos manter o tipo original se o score bruto for alto.
+        matchType = score >= exactThreshold ? 'exact' : 'fuzzy';
       }
     });
 
-    // Adiciona se passou no threshold apropriado
+    // Usa o limiar apropriado. Note que comparamos o bestScore (já ponderado) com o threshold.
+    // Isso significa que campos com peso baixo precisarão de match muito forte para passar.
     const threshold = matchType === 'exact' ? exactThreshold : fuzzyThreshold;
+
     if (bestScore >= threshold) {
       results.push({
         ...item,
@@ -198,13 +211,13 @@ export function hybridSearch(query, items, options = {}) {
     }
   });
 
-  // Ordena: exatos primeiro, depois por score
+  // Ordena
   return results
     .sort((a, b) => {
-      // Prioriza exatos
+      // Prioriza exatos reais
       if (a.matchType === 'exact' && b.matchType !== 'exact') return -1;
       if (a.matchType !== 'exact' && b.matchType === 'exact') return 1;
-      // Depois por score
+      // Depois por score ponderado
       return b.score - a.score;
     })
     .slice(0, maxResults)
