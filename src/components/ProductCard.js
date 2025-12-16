@@ -26,7 +26,7 @@ export default function ProductCard({ product }) {
         <h3 className="text-lg truncate">{productName}</h3>
       </div>
 
-      <Link href={`/produtos/${slug}`} className="flex flex-col flex-grow">
+      <Link href={`/produtos/${slug}`} className="flex flex-col flex-grow" aria-label={`Ver detalhes de ${productName}`}>
         {/* Imagem do Produto */}
         <div className="relative w-full h-48 bg-white border-b border-gray-100">
           <Image

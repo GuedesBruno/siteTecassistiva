@@ -67,7 +67,7 @@ export default function CategoryMenu({
 
     if (isCallbackMode) {
       return (
-        <button onClick={() => isSub ? handleSubcategoryClick(item) : handleCategoryClick(item)} className={className}>
+        <button type="button" onClick={() => isSub ? handleSubcategoryClick(item) : handleCategoryClick(item)} className={className}>
           {attrs.nome}
         </button>
       );
@@ -84,6 +84,7 @@ export default function CategoryMenu({
   return (
     <div className="w-full bg-white p-4 rounded-lg shadow-md border border-gray-200 md:p-0 md:bg-transparent md:shadow-none md:border-none">
       <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex justify-between items-center p-4 border border-gray-200 rounded-lg md:hidden"
       >

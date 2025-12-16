@@ -53,7 +53,7 @@ export default async function SuportePage() {
 
   return (
     <div className="bg-gray-50">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-2 pb-2">
+      <div className="container mx-auto px-4 py-3">
         <Breadcrumbs items={breadcrumbs} />
       </div>
       <Suspense fallback={<div className="text-center py-16">Carregando conteúdo do suporte...</div>}>

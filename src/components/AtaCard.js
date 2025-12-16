@@ -116,6 +116,11 @@ export default function AtaCard({ ata }) {
                       imagemUrl = getStrapiMediaUrl(imgData.url);
                     }
 
+                    // Specific fallback for "Curso de Sensibilização"
+                    if (!imagemUrl && produtoNome.toLowerCase().includes('curso de sensibilização')) {
+                      imagemUrl = '/Icon-teca-educa.png';
+                    }
+
                     return (
                       <button
                         key={item.id}

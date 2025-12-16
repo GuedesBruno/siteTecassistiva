@@ -4,6 +4,9 @@ export default function ImersaoLayout({ children }) {
   return (
     <>
       <style>{`
+        body {
+          /* Adiciona classe para permitir cantos arredondados */
+        }
         header, footer {
           display: none;
         }
@@ -11,7 +14,9 @@ export default function ImersaoLayout({ children }) {
           padding-top: 0 !important;
         }
       `}</style>
-      {children}
+      <div className="imersao-page">
+        {children}
+      </div>
       <WhatsAppButton />
     </>
   );

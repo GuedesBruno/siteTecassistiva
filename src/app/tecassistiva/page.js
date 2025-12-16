@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import TestimonialSection from '@/components/TestimonialSection';
 import SocialMediaSection from '@/components/SocialMediaSection';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 // Lazy load API functions to avoid compilation during SSG
 async function getAllTestimonials() {
@@ -13,17 +14,20 @@ async function getAllTestimonials() {
 export default async function TecassistivaPage() {
   const testimonials = await getAllTestimonials();
 
+  const breadcrumbs = [
+    { name: 'Página Inicial', path: '/' },
+    { name: 'A Tecassistiva', path: '/tecassistiva' },
+  ];
+
   return (
     <div className="bg-white">
-      {/* O padding foi ajustado para ser responsivo */}
-      <div className="container mx-auto px-4 md:px-12 lg:px-24 py-12">
-        {/* Breadcrumbs */}
-        <div className="text-sm text-gray-500 mb-8">
-          <Link href="/" className="hover:underline">Página Inicial</Link>
-          <span className="mx-2">&gt;</span>
-          <span className="font-semibold text-gray-700">A Tecassistiva</span>
-        </div>
+      {/* Breadcrumbs padronizados */}
+      <div className="container mx-auto px-4 py-3">
+        <Breadcrumbs items={breadcrumbs} />
+      </div>
 
+      {/* O padding foi ajustado para ser responsivo */}
+      <div className="container mx-auto px-4 md:px-12 lg:px-24 py-6">
         {/* Seção Principal */}
         <section className="mb-5">
           <h1 className="text-5xl font-extrabold text-gray-900 mb-8">Tecassistiva</h1>

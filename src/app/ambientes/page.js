@@ -11,11 +11,11 @@ export default function AmbientesPage() {
 
   return (
     <div className="w-full">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-3">
         <Breadcrumbs items={breadcrumbs} />
-        <h1 className="text-4xl font-extrabold text-gray-900 mb-10 text-center">Soluções por Ambientes</h1>
+        <h1 className="text-4xl font-extrabold text-gray-900 mb-10 text-center mt-4">Soluções por Ambientes</h1>
       </div>
-      
+
       <div className="container mx-auto px-4 pb-16">
         <div className="space-y-0">
           {ambientesData.map((ambiente, index) => {
@@ -25,10 +25,10 @@ export default function AmbientesPage() {
             const buttonColor = index % 2 === 0 ? 'bg-white text-tec-blue hover:bg-gray-100' : 'bg-tec-blue text-white hover:bg-blue-800';
 
             return (
-              <div 
-                key={ambiente.id} 
+              <div
+                key={ambiente.id}
                 className={`group flex flex-col md:flex-row items-stretch md:h-[300px] rounded-lg overflow-hidden shadow-lg`}>
-                
+
                 {/* Coluna da Imagem com Efeito de Zoom */}
                 <div className={`w-full md:w-1/2 ${isReversed ? 'md:order-last' : ''} overflow-hidden`}>
                   <Link href={`/ambientes/${ambiente.slug}`} className="block h-full">
@@ -49,8 +49,8 @@ export default function AmbientesPage() {
                     <p className="text-lg mb-6">
                       Descubra as soluções de tecnologia assistiva ideais para o ambiente de {ambiente.nome.toLowerCase()}.
                     </p>
-                    <Link 
-                      href={`/ambientes/${ambiente.slug}`} 
+                    <Link
+                      href={`/ambientes/${ambiente.slug}`}
                       className={`inline-block font-bold py-3 px-8 rounded-lg transition-colors duration-300 shadow-md ${buttonColor}`}>
                       Ver Soluções
                     </Link>

@@ -4,6 +4,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Montserrat } from 'next/font/google';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import SkipToContent from '@/components/SkipToContent';
 import Script from 'next/script';
 import { getAllCategories } from '@/lib/api';
 
@@ -80,8 +81,9 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="pt-BR" className={`${montserrat.variable} font-sans`}>
       <body className="flex flex-col min-h-screen bg-gray-50 text-gray-800">
+        <SkipToContent />
         <Header categories={categories} />
-        <main className="flex-grow z-0" style={{ paddingTop: 'var(--header-height, 6rem)' }}>
+        <main id="main-content" className="flex-grow z-0" style={{ paddingTop: 'var(--header-height, 6rem)' }}>
           {children}
         </main>
         <Footer />

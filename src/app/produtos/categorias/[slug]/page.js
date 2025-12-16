@@ -59,8 +59,10 @@ export default async function CategoryPage({ params }) {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-8 min-h-screen">
-      <div className="flex flex-col md:flex-row gap-8">
+    <div className="container mx-auto px-4 py-3">
+      <Breadcrumbs items={breadcrumbs} />
+
+      <div className="flex flex-col md:flex-row gap-8 mt-6">
         <aside className="w-full md:w-1/3 lg:w-1/4">
           <CategoryMenu
             categories={allCategories}
@@ -68,7 +70,6 @@ export default async function CategoryPage({ params }) {
           />
         </aside>
         <main className="w-full md:w-2/3 lg:w-3/4">
-          <Breadcrumbs items={breadcrumbs} />
           <Suspense fallback={<div>Carregando...</div>}>
             <CategoryProductList
               category={category}

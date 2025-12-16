@@ -71,7 +71,7 @@ export default function Header({ categories = [] }) {
     <header ref={headerRef} className={`bg-tec-blue shadow-md z-[80] fixed top-0 left-0 right-0`}> {/* Anexa a ref para medir a altura do cabeçalho */}
       <div className={`container mx-auto px-4 flex items-center justify-between transition-all duration-300 ease-in-out ${isScrolled ? 'py-2' : 'py-4'}`}>
         <div className="flex items-center gap-6">
-          <Link href="/" className="flex items-center">
+          <Link href="/" className="flex items-center" aria-label="Tecassistiva - Página inicial">
             <Image
               src={isScrolled ? "/icon-tecassistiva.svg" : "/logo-tecassistiva.svg"}
               alt="Tecassistiva"
@@ -84,16 +84,16 @@ export default function Header({ categories = [] }) {
 
         {/* Container para alinhar Navegação e Busca à direita */}
         <div className="hidden lg:flex items-center">
-          <nav className="flex items-center space-x-8 flex-wrap">
+          <nav className="flex items-center space-x-8 flex-wrap" aria-label="Navegação principal">
             <Link href="/tecassistiva" className="text-white hover:text-tec-blue-light transition font-semibold">A Tecassistiva</Link>
             <div className="relative group py-4 -my-4">
-              <Link href="/produtos" className="text-white hover:text-tec-blue-light transition font-semibold">
+              <Link href="/produtos" className="text-white hover:text-tec-blue-light transition font-semibold" aria-haspopup="true" aria-expanded="false">
                 Produtos
               </Link>
-              <div className="absolute left-1/2 transform -translate-x-1/2 top-full mt-0 w-72 bg-white shadow-lg hidden group-hover:block z-[120] border">
+              <div className="absolute left-1/2 transform -translate-x-1/2 top-full mt-0 w-72 bg-white shadow-lg hidden group-hover:block z-[120] border" role="menu">
                 <div className="py-2">
                   <div className="border-b last:border-b-0">
-                    <Link href="/ambientes" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">
+                    <Link href="/ambientes" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100" role="menuitem">
                       Ambientes
                     </Link>
                   </div>
@@ -101,7 +101,7 @@ export default function Header({ categories = [] }) {
                     const cat = category.attributes || category;
                     return (
                       <div key={cat.slug || category.id} className="border-b last:border-b-0">
-                        <Link href={`/produtos/categorias/${cat.slug}`} className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">
+                        <Link href={`/produtos/categorias/${cat.slug}`} className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100" role="menuitem">
                           {cat.nome}
                         </Link>
                       </div>
@@ -112,14 +112,14 @@ export default function Header({ categories = [] }) {
             </div>
             <Link href="/atas-abertas" className="text-white hover:text-tec-blue-light transition font-semibold">Atas Abertas</Link>
             <div className="relative group py-4 -my-4">
-              <Link href="/suporte" className="text-white hover:text-tec-blue-light transition font-semibold">
+              <Link href="/suporte" className="text-white hover:text-tec-blue-light transition font-semibold" aria-haspopup="true" aria-expanded="false">
                 Suporte
               </Link>
-              <div className="absolute left-1/2 transform -translate-x-1/2 top-full mt-0 w-72 bg-white shadow-lg hidden group-hover:block z-[120] border">
+              <div className="absolute left-1/2 transform -translate-x-1/2 top-full mt-0 w-72 bg-white shadow-lg hidden group-hover:block z-[120] border" role="menu">
                 <div className="py-2">
                   {supportMenuItems.map(item => (
                     <div key={item.name} className="border-b last:border-b-0">
-                      <Link href={item.slug} className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">
+                      <Link href={item.slug} className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100" role="menuitem">
                         {item.name}
                       </Link>
                     </div>
@@ -131,7 +131,7 @@ export default function Header({ categories = [] }) {
           </nav>
 
           {/* Formulário de Busca Interativo */}
-          <form onSubmit={handleSearchSubmit} className="relative group flex items-center ml-6">
+          <form onSubmit={handleSearchSubmit} className="relative group flex items-center ml-6" role="search" aria-label="Buscar no site">
             <input
               type="text"
               value={searchTerm}
@@ -186,7 +186,7 @@ export default function Header({ categories = [] }) {
           </div>
 
           {/* Formulário de Busca movido para o topo */}
-          <form onSubmit={handleSearchSubmit} className="relative mb-6 w-full max-w-sm">
+          <form onSubmit={handleSearchSubmit} className="relative mb-6 w-full max-w-sm" role="search" aria-label="Buscar no site">
             <input
               type="text"
               value={searchTerm}
@@ -201,7 +201,7 @@ export default function Header({ categories = [] }) {
             </button>
           </form>
 
-          <nav className="flex flex-col space-y-2 w-full overflow-y-auto max-h-[60vh] pb-4">
+          <nav className="flex flex-col space-y-2 w-full overflow-y-auto max-h-[60vh] pb-4" aria-label="Menu de navegação mobile">
             <Link href="/tecassistiva" onClick={() => setIsMenuOpen(false)} className="text-white text-base font-semibold py-1">A Tecassistiva</Link>
             <div className="flex flex-col space-y-1 items-center">
               <Link href="/produtos" onClick={() => setIsMenuOpen(false)} className="text-white text-base font-semibold py-1">Produtos</Link>

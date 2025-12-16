@@ -39,3 +39,18 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Documentation and analysis files (temporary)
+DEPLOY.md
+CHECKLIST_ALTERACOES.md
+ANALISE_COMPLETA.md
+SEO_IMPLEMENTACAO.md
+RELATORIO_FINAL.md
+PROBLEMA_IDENTIFICADO.md
+SOLUCAO_PROPOSTA.md
+
+# VSCode settings (optional - uncomment if you don't want to share)
+# .vscode/
+
+# Gemini AI artifacts (user-specific)
+.gemini/

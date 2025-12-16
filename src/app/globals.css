@@ -1,55 +1,115 @@
 @tailwind base;
-
 @tailwind components;
 @tailwind utilities;
 
 
 /* Força a remoção de cantos arredondados em todo o site, conforme solicitado. */
-.rounded, .rounded-sm, .rounded-md, .rounded-lg, .rounded-xl, .rounded-2xl, .rounded-full {
-	border-radius: 0 !important;
+/* Exceção: páginas de imersão podem usar cantos arredondados */
+/* Exceção: ícones de redes sociais na página de imersão */
+/* Detecta automaticamente via classe ou wrapper */
+body:not(:has(.imersao-page)) .rounded,
+body:not(:has(.imersao-page)) .rounded-sm,
+body:not(:has(.imersao-page)) .rounded-md,
+body:not(:has(.imersao-page)) .rounded-lg,
+body:not(:has(.imersao-page)) .rounded-xl,
+body:not(:has(.imersao-page)) .rounded-2xl,
+body:not(:has(.imersao-page)) .rounded-full {
+  border-radius: 0 !important;
+}
+
+/* Garante que elementos dentro de .imersao-page mantenham seus cantos arredondados */
+.imersao-page .rounded {
+  border-radius: 0.25rem !important;
+}
+
+.imersao-page .rounded-sm {
+  border-radius: 0.125rem !important;
+}
+
+.imersao-page .rounded-md {
+  border-radius: 0.375rem !important;
+}
+
+.imersao-page .rounded-lg {
+  border-radius: 0.5rem !important;
+}
+
+.imersao-page .rounded-xl {
+  border-radius: 0.75rem !important;
+}
+
+.imersao-page .rounded-2xl {
+  border-radius: 1rem !important;
+}
+
+.imersao-page .rounded-3xl {
+  border-radius: 1.5rem !important;
+}
+
+.imersao-page .rounded-full {
+  border-radius: 9999px !important;
 }
 
 /* Estilos personalizados para a navegação do Carrossel de Produtos em Destaque */
-.featured-products-prev, 
+.featured-products-prev,
 .featured-products-next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-    color: #002554 !important; /* Cor dos ícones */
-    background-color: rgba(255, 255, 255, 0.7); /* Fundo branco semi-transparente */
-    border-radius: 50%;
-    width: 40px !important;
-    height: 40px !important;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  color: #002554 !important;
+  /* Cor dos ícones */
+  background-color: rgba(255, 255, 255, 0.7);
+  /* Fundo branco semi-transparente */
+  border-radius: 50%;
+  width: 40px !important;
+  height: 40px !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .featured-products-prev {
-    left: 2rem;
+  left: 2rem;
 }
 
 .featured-products-next {
-    right: 2rem;
+  right: 2rem;
 }
 
-.featured-products-prev:hover, 
+.featured-products-prev:hover,
 .featured-products-next:hover {
-    background-color: rgba(255, 255, 255, 1); /* Fundo branco opaco no hover */
+  background-color: rgba(255, 255, 255, 1);
+  /* Fundo branco opaco no hover */
 }
 
-.featured-products-prev::after, 
+.featured-products-prev::after,
 .featured-products-next::after {
-    font-size: 18px !important; /* Tamanho dos ícones de seta */
-    font-weight: 900;
+  font-size: 18px !important;
+  /* Tamanho dos ícones de seta */
+  font-weight: 900;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 .no-scrollbar::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .no-scrollbar {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+/* Custom focus styles for better accessibility */
+*:focus-visible {
+  outline: 2px solid #002554;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Ensure featured product carousel navigation buttons have rounded corners */
+.swiper-button-next,
+.swiper-button-prev {
+  border-radius: 50% !important;
 }

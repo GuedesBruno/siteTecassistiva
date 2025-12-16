@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { Navigation, Pagination, Autoplay, Keyboard, A11y } from 'swiper/modules';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getStrapiMediaUrl } from '@/lib/media';
@@ -30,13 +30,19 @@ export default function BannerSlider({ banners }) {
   }
 
   return (
-    <section className="relative h-auto md:h-[58vh] bg-white group">
+    <section className="relative h-auto md:h-[58vh] bg-white group" aria-label="Destaques principais">
       <Swiper
-        modules={[Navigation, Pagination, Autoplay]}
+        modules={[Navigation, Pagination, Autoplay, Keyboard, A11y]}
         spaceBetween={0}
         slidesPerView={1}
         navigation={isMounted}
         pagination={{ clickable: true }}
+        keyboard={{ enabled: true }}
+        a11y={{
+          prevSlideMessage: 'Slide anterior',
+          nextSlideMessage: 'Próximo slide',
+          paginationBulletMessage: 'Ir para slide {{index}}'
+        }}
         loop={true}
         autoplay={{ delay: 10000, disableOnInteraction: false }}
         autoHeight={true}
@@ -59,7 +65,7 @@ export default function BannerSlider({ banners }) {
                 {/* Text Section - Order 2 on Mobile (Bottom) */}
                 <div className="w-full md:w-2/5 order-2 md:order-none bg-white flex items-center justify-center p-6 md:p-12">
                   <div className="max-w-md text-center md:text-left">
-                    <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-4 text-[#002554]">{titulo}</h1>
+                    <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-4 text-[#002554]">{titulo}</h2>
                     <p className="text-base sm:text-lg md:text-xl mb-6 text-[#002554] md:text-justify">{subtitulo}</p>
                     {texto_comercial && (
                       <p className="text-sm sm:text-base mb-6 text-[#002554] md:text-justify">{texto_comercial}</p>

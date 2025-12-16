@@ -151,7 +151,8 @@ export default function ProductFinderWizard({ categories = [], products = [] }) 
                         const cAttrs = getAttrs(cat);
                         return (
                             <button
-                                key={cat.id || cAttrs.slug} // Fallback key
+                                type="button"
+                                key={cat.id || cAttrs.slug}
                                 onClick={() => {
                                     setUserInput(cAttrs.nome);
                                     handleCategorySelect(cat);
@@ -174,7 +175,7 @@ export default function ProductFinderWizard({ categories = [], products = [] }) 
 
         return (
             <div className="flex flex-col min-h-[50vh] animate-fade-in-up">
-                <button onClick={handleStartOver} className="self-start mb-6 text-sm text-gray-500 hover:text-tec-blue flex items-center gap-2">
+                <button type="button" onClick={handleStartOver} className="self-start mb-6 text-sm text-gray-500 hover:text-tec-blue flex items-center gap-2">
                     <FaUndo /> Começar de novo
                 </button>
 
@@ -188,6 +189,7 @@ export default function ProductFinderWizard({ categories = [], products = [] }) 
                         const subAttrs = getAttrs(sub);
                         return (
                             <button
+                                type="button"
                                 key={sub.id || subAttrs.slug}
                                 onClick={() => handleSubcategorySelect(sub)}
                                 className="bg-white p-8 rounded-xl shadow-md border border-gray-100 hover:border-tec-blue hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 text-center flex flex-col items-center justify-center gap-4 group h-48"
@@ -199,6 +201,7 @@ export default function ProductFinderWizard({ categories = [], products = [] }) 
                         );
                     })}
                     <button
+                        type="button"
                         onClick={() => {
                             // Show all for this category
                             const relevant = products.filter(p => {
@@ -228,7 +231,7 @@ export default function ProductFinderWizard({ categories = [], products = [] }) 
         return (
             <div className="space-y-8 animate-fade-in-up">
                 <div className="flex justify-between items-center border-b border-gray-200 pb-4">
-                    <button onClick={handleStartOver} className="text-tec-blue font-semibold flex items-center gap-2 hover:opacity-80 transition-opacity">
+                    <button type="button" onClick={handleStartOver} className="text-tec-blue font-semibold flex items-center gap-2 hover:opacity-80 transition-opacity">
                         <FaUndo /> Nova Pesquisa
                     </button>
                     <div className="text-sm text-gray-500">

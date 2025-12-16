@@ -31,17 +31,17 @@ export default function Footer() {
           <div className="md:col-span-9 flex flex-col md:flex-row md:justify-end gap-8 md:gap-16">
 
             {/* Coluna 2: Links Institucionais */}
-            <div className="text-center md:text-right">
+            <nav className="text-center md:text-right" aria-label="Links institucionais">
               <h3 className="text-lg font-bold mb-4">Institucional</h3>
               <ul className="space-y-2">
                 <li><Link href="/tecassistiva" className="text-gray-400 hover:text-white">Quem Somos</Link></li>
                 <li><Link href="/atas-abertas" className="text-gray-400 hover:text-white">Atas Abertas</Link></li>
                 <li><Link href="/contato" className="text-gray-400 hover:text-white">Contato</Link></li>
               </ul>
-            </div>
+            </nav>
 
             {/* Coluna 3: Links de Produtos */}
-            <div className="text-center md:text-right">
+            <nav className="text-center md:text-right" aria-label="Links de produtos">
               <h3 className="text-lg font-bold mb-4">Produtos</h3>
               <ul className="space-y-2">
                 <li><Link href="/ambientes" className="text-gray-400 hover:text-white">Soluções por Ambientes</Link></li>
@@ -50,10 +50,10 @@ export default function Footer() {
                 <li><Link href="/produtos/categorias/recursos-pedagogicos" className="text-gray-400 hover:text-white">Recurso Pedagógico</Link></li>
                 <li><Link href="/produtos/categorias/deficiencia-motora-e-cognitiva" className="text-gray-400 hover:text-white">Deficiência Motora e Cognitiva</Link></li>
               </ul>
-            </div>
+            </nav>
 
             {/* Coluna 4: Links de Suporte */}
-            <div className="text-center md:text-right">
+            <nav className="text-center md:text-right" aria-label="Links de suporte">
               <h3 className="text-lg font-bold mb-4">Suporte</h3>
               <ul className="space-y-2">
                 <li><Link href="/suporte?tab=softwares" className="text-gray-400 hover:text-white">Softwares</Link></li>
@@ -61,10 +61,10 @@ export default function Footer() {
                 <li><Link href="/suporte?tab=drivers" className="text-gray-400 hover:text-white">Drivers e Utilitários</Link></li>
                 <li><Link href="/suporte?tab=contato" className="text-gray-400 hover:text-white">Contato do Suporte</Link></li>
               </ul>
-            </div>
+            </nav>
           </div>
 
-        </div>
+        </div >
         <div className="border-t border-gray-700 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-500 text-sm">&copy; {currentYear} Tecassistiva. Todos os direitos reservados.</p>
           <div className="flex space-x-4 mt-4 md:mt-0">
@@ -76,7 +76,7 @@ export default function Footer() {
             </Link>
           </div>
         </div>
-      </div>
-    </footer>
+      </div >
+    </footer >
   );
 }
