@@ -67,12 +67,31 @@ export async function generateMetadata({ params }) {
       productAttributes.imagem_principal?.url
     );
 
+    // Dynamic Title Generation for SEO
+    // Ex: "Basic Index Braille - Impressoras Braille | Tecassistiva"
+    let seoTitle = productAttributes.nome;
+
+    const manufacturer = productAttributes.Fabricante ||
+      productAttributes.relacao_fabricante?.data?.attributes?.nome;
+
+    const category = productAttributes.categorias?.data?.[0]?.attributes?.nome ||
+      productAttributes.categorias?.[0]?.nome;
+
+    if (manufacturer && !seoTitle.includes(manufacturer)) {
+      seoTitle += ` ${manufacturer}`;
+    }
+
+    if (category) {
+      seoTitle += ` - ${category}`;
+    }
+
     return {
-      title: productAttributes.nome,
+      title: seoTitle,
       description: description,
       keywords: [
         productAttributes.nome,
-        productAttributes.Fabricante,
+        manufacturer,
+        category,
         'tecnologia assistiva',
         'acessibilidade'
       ].filter(Boolean).join(', '),
@@ -143,6 +162,7 @@ export default async function ProductPage({ params }) {
       url: `https://www.tecassistiva.com.br/produtos/${slug}`,
       priceCurrency: 'BRL',
       price: '0', // Preço sob consulta, campo obrigatório para produto válido
+      priceValidUntil: new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0], // Data futura válida para evitar erro
       availability: 'https://schema.org/InStock',
       seller: {
         '@type': 'Organization',

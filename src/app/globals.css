@@ -113,3 +113,9 @@ body:not(:has(.imersao-page)) .rounded-full {
 .swiper-button-prev {
   border-radius: 50% !important;
 }
+
+/* Hide native datalist arrow in Chrome/Edge */
+.hide-datalist-arrow::-webkit-calendar-picker-indicator {
+  display: none !important;
+  opacity: 0 !important;
+}

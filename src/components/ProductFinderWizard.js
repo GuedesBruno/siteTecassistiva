@@ -1,13 +1,14 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef } from 'react';
 import ProductDisplay from './ProductDisplay';
-import { FaSearch, FaArrowRight, FaUndo } from 'react-icons/fa';
+import { FaSearch, FaArrowRight, FaUndo, FaChevronDown } from 'react-icons/fa';
 
 // Helper to safely access attributes whether nested or flattened
 const getAttrs = (item) => item?.attributes || item || {};
 
 export default function ProductFinderWizard({ categories = [], products = [] }) {
+    const inputRef = useRef(null);
     const [step, setStep] = useState(1);
     const [userInput, setUserInput] = useState('');
     const [selectedCategory, setSelectedCategory] = useState(null);
@@ -106,6 +107,17 @@ export default function ProductFinderWizard({ categories = [], products = [] }) 
     // --- Render Steps ---
 
     // Step 1: Initial Question
+    const [showSuggestions, setShowSuggestions] = useState(false);
+
+    // Filter suggestions based on input if needed, or show all top-level categories when empty?
+    // Current wizard logic relies on "suggestions" which is categories + products.
+    // Let's filter it based on input or show all if empty (acting like a select)
+    const displaySuggestions = useMemo(() => {
+        if (!userInput) return suggestions.slice(0, 50); // Show first 50 if empty (covers most categories/important products)
+        const lower = userInput.toLowerCase();
+        return suggestions.filter(s => s.label.toLowerCase().includes(lower)).slice(0, 100);
+    }, [userInput, suggestions]);
+
     if (step === 1) {
         return (
             <div className="flex flex-col items-center justify-center min-h-[50vh] bg-white rounded-xl shadow-lg p-8 md:p-14 animate-fade-in-up border border-gray-100">
@@ -113,28 +125,67 @@ export default function ProductFinderWizard({ categories = [], products = [] }) 
                     O que você busca?
                 </h2>
 
-                <form onSubmit={handleInputSubmit} className="w-full max-w-lg relative group">
+                <form onSubmit={handleInputSubmit} className="w-full max-w-lg relative group z-20">
                     <div className="relative">
-                        <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg group-focus-within:text-tec-blue transition-colors duration-300" />
+                        <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg group-focus-within:text-tec-blue transition-colors duration-300 pointer-events-none" />
                         <input
+                            ref={inputRef}
                             type="text"
-                            list="suggestions-list"
                             value={userInput}
-                            onChange={(e) => setUserInput(e.target.value)}
+                            onChange={(e) => {
+                                setUserInput(e.target.value);
+                                setShowSuggestions(true);
+                            }}
+                            onFocus={() => setShowSuggestions(true)}
+                            onBlur={() => setTimeout(() => setShowSuggestions(false), 200)} // Delay to allow click on item
                             placeholder="Ex: Cegueira, Linha Braille, Lupa..."
-                            className="w-full pl-12 pr-6 py-3 text-base rounded-full border-2 border-gray-200 focus:border-tec-blue focus:ring-4 focus:ring-blue-100 outline-none transition-all duration-300 shadow-sm"
+                            className="w-full pl-12 pr-14 py-3 text-base rounded-full border-2 border-gray-200 focus:border-tec-blue focus:ring-4 focus:ring-blue-100 outline-none transition-all duration-300 shadow-sm appearance-none"
+                            autoComplete="off"
                         />
+
+                        {/* Custom Dropdown Arrow - Toggle Button */}
+                        <div
+                            onClick={(e) => {
+                                e.preventDefault();
+                                if (showSuggestions && userInput) {
+                                    // If list is open and user typed, maybe clear? or just close.
+                                    setShowSuggestions(!showSuggestions);
+                                } else {
+                                    inputRef.current?.focus();
+                                    setShowSuggestions(!showSuggestions);
+                                }
+                            }}
+                            className="absolute right-2 top-1/2 transform -translate-y-1/2 w-9 h-9 flex items-center justify-center bg-gray-50 border border-gray-200 rounded-lg text-gray-400 hover:bg-white hover:border-tec-blue hover:text-tec-blue cursor-pointer transition-all duration-200 shadow-sm z-30"
+                            title={showSuggestions ? "Esconder opções" : "Mostrar opções"}
+                        >
+                            <FaChevronDown className={`text-sm transition-transform duration-200 ${showSuggestions ? 'rotate-180' : ''}`} />
+                        </div>
                     </div>
-                    <datalist id="suggestions-list">
-                        {suggestions.map((s, idx) => (
-                            <option key={idx} value={s.label} />
-                        ))}
-                    </datalist>
+
+                    {/* Custom Dropdown List */}
+                    {showSuggestions && displaySuggestions.length > 0 && (
+                        <ul className="absolute top-full left-0 w-full mt-2 bg-white rounded-xl shadow-xl border border-gray-100 max-h-60 overflow-y-auto z-50 animate-fade-in">
+                            {displaySuggestions.map((s, idx) => (
+                                <li
+                                    key={idx}
+                                    onClick={() => {
+                                        setUserInput(s.label);
+                                        setShowSuggestions(false);
+                                        // Optional: Auto submit or let user click button
+                                    }}
+                                    className="px-6 py-3 hover:bg-gray-50 cursor-pointer text-gray-700 hover:text-tec-blue transition-colors border-b border-gray-50 last:border-0 flex items-center gap-2"
+                                >
+                                    <span className="w-2 h-2 rounded-full bg-gray-300"></span>
+                                    {s.label}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
 
                     {userInput && (
                         <button
                             type="submit"
-                            className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-tec-blue text-white p-2 rounded-full hover:bg-blue-700 transition-colors shadow-md"
+                            className="absolute right-14 top-1/2 transform -translate-y-1/2 bg-tec-blue text-white p-2 rounded-full hover:bg-blue-700 transition-colors shadow-md z-30"
                         >
                             <FaArrowRight className="text-sm" />
                         </button>

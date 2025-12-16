@@ -20,7 +20,8 @@ function SearchResults() {
       setIsLoading(true);
       setError(null);
       try {
-        const response = await fetch(`/search-data.json?v=${new Date().getTime()}`);
+        // Busca com cache enabled (removido timestamp forçado)
+        const response = await fetch('/search-data.json');
         if (!response.ok) {
           throw new Error('Não foi possível carregar o índice de busca.');
         }
