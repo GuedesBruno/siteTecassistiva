@@ -1,16 +1,11 @@
 import React from 'react';
 import { getStrapiMediaUrl } from '@/lib/media';
-
-const DownloadIcon = () => (
-  <svg className="w-5 h-5 mr-2 inline-block flex-shrink-0 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-  </svg>
-);
+import { FaDownload } from 'react-icons/fa';
 
 // Função para ordenar os documentos
 const sortDocuments = (docs) => {
   if (!docs || !Array.isArray(docs)) return [];
-  
+
   // Filtrar documentos nulos e extrair atributos
   const validDocs = docs.filter(doc => doc).map(doc => {
     const attrs = doc.attributes || doc;
@@ -21,19 +16,18 @@ const sortDocuments = (docs) => {
   return [...validDocs].sort((a, b) => {
     const nameA = (a.name || '').toLowerCase();
     const nameB = (b.name || '').toLowerCase();
-    
+
     const orderA = Object.keys(order).find(key => nameA.includes(key)) ? order[Object.keys(order).find(key => nameA.includes(key))] : 99;
     const orderB = Object.keys(order).find(key => nameB.includes(key)) ? order[Object.keys(order).find(key => nameB.includes(key))] : 99;
 
     if (orderA !== orderB) return orderA - orderB;
-    return nameA.localeCompare(nameB); // Fallback para ordem alfabética
+    return nameA.localeCompare(nameB);
   });
 };
 
 export default function DocumentListItem({ product }) {
   const { nome, documentos } = product;
-  
-  // Lidar com ambas estruturas: documentos.data ou documentos direto
+
   const docsArray = Array.isArray(documentos) ? documentos : (documentos?.data || []);
 
   if (docsArray.length === 0) {
@@ -43,33 +37,37 @@ export default function DocumentListItem({ product }) {
   const sortedDocs = sortDocuments(docsArray);
 
   return (
-    <div className="border-b border-gray-200 py-4 last:border-b-0 flex items-start">
-      <div className="w-1/3 font-bold text-gray-800 pr-4">
-        <h3 className="text-lg">{nome}</h3>
+    <div
+      className="bg-white border-2 border-gray-300 shadow-lg rounded-xl mb-4 p-4 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:border-blue-400 hover:bg-blue-50"
+    >
+      {/* Header com linha divisória */}
+      <div className="border-b-2 border-gray-200 pb-3 mb-4">
+        <h3 className="text-base font-bold text-[#002554]">
+          {nome}
+        </h3>
       </div>
-      <div className="w-2/3">
-        <ul className="space-y-2">
-          {sortedDocs.map((doc) => {
-            const docUrl = doc.url || doc.attributes?.url;
-            const docName = doc.name || doc.attributes?.name;
-            
-            if (!docUrl || !docName) return null;
-            
-            return (
-              <li key={doc.id}>
-                <a
-                  href={getStrapiMediaUrl(docUrl)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200"
-                >
-                  <DownloadIcon />
-                  <span>{docName}</span>
-                </a>
-              </li>
-            );
-          })}
-        </ul>
+
+      {/* Download links horizontais */}
+      <div className="flex flex-wrap gap-3">
+        {sortedDocs.map((doc) => {
+          const docUrl = doc.url || doc.attributes?.url;
+          const docName = doc.name || doc.attributes?.name;
+
+          if (!docUrl || !docName) return null;
+
+          return (
+            <a
+              key={doc.id}
+              href={getStrapiMediaUrl(docUrl)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-[#002554] hover:bg-[#003d7a] text-white text-sm font-medium rounded-lg transition-all duration-200 hover:scale-105 shadow-sm"
+            >
+              <FaDownload size={12} />
+              <span>{docName}</span>
+            </a>
+          );
+        })}
       </div>
     </div>
   );

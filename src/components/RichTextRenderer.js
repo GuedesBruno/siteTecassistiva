@@ -56,16 +56,16 @@ export default function RichTextRenderer({ content }) {
           default: return <h2 key={index} className="text-3xl font-bold my-5 text-[#002554] leading-tight">{children}</h2>;
         }
       case 'paragraph':
-        return <div key={index} className="mb-6 leading-relaxed text-gray-700 text-lg">{children}</div>;
+        return <div key={index} className="mb-6 leading-relaxed text-gray-700" style={{ fontSize: 'inherit' }}>{children}</div>;
       case 'list':
         if (node.format === 'ordered') {
-          return <ol key={index} className="list-decimal list-inside mb-6 pl-4 space-y-2 text-gray-700 text-lg marker:text-[#002554] marker:font-bold">{children}</ol>;
+          return <ol key={index} className="list-decimal list-inside mb-6 pl-4 space-y-2 text-gray-700 marker:text-[#002554] marker:font-bold" style={{ fontSize: 'inherit' }}>{children}</ol>;
         }
-        return <ul key={index} className="list-disc list-inside mb-6 pl-4 space-y-2 text-gray-700 text-lg marker:text-[#002554]">{children}</ul>;
+        return <ul key={index} className="list-disc list-inside mb-6 pl-4 space-y-2 text-gray-700 marker:text-[#002554]" style={{ fontSize: 'inherit' }}>{children}</ul>;
       case 'list-item':
         return <li key={index} className="pl-2">{children}</li>;
       case 'link':
-        return <a key={index} href={node.url} className="text-blue-600 hover:text-blue-800 hover:underline font-medium transition-colors" rel="noopener noreferrer">{children}</a>;
+        return <a key={index} href={node.url} className="text-blue-600 hover:text-blue-800 hover:underline font-medium transition-colors" style={{ lineHeight: '1.3' }} rel="noopener noreferrer">{children}</a>;
       case 'image':
         return <Image key={index} src={node.image.url} alt={node.image.alternativeText || 'Imagem do conteúdo'} width={node.image.width || 800} height={node.image.height || 600} className="my-8 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300" />;
       default:

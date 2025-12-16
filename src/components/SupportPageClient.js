@@ -6,14 +6,15 @@ import { FaWhatsapp, FaPhoneAlt, FaEnvelope, FaCertificate } from 'react-icons/f
 import DocumentListItem from './DocumentListItem';
 import SoftwareListItem from './SoftwareListItem';
 import CategoryMenu from './CategoryMenu';
-import SoftwareListMenu from './SoftwareListMenu'; // Novo menu para softwares
+import SoftwareListMenu from './SoftwareListMenu';
+
 
 const TabButton = ({ label, isActive, onClick }) => (
   <button
     onClick={onClick}
     className={`px-4 py-3 font-semibold border-b-4 transition-colors duration-300 ${isActive
-        ? 'border-blue-500 text-blue-600'
-        : 'border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-300'
+      ? 'border-blue-500 text-blue-600'
+      : 'border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-300'
       }`}
   >
     {label}
@@ -185,7 +186,7 @@ export default function SupportPageClient({ products, software, categories }) {
       case 'contato':
         return null;
       default:
-        return null;
+        return null; // ou manter vazio
     }
   };
 
@@ -201,12 +202,12 @@ export default function SupportPageClient({ products, software, categories }) {
         );
       case 'softwares':
       case 'drivers':
-        if (selectedItem) {
-          return <SoftwareListItem software={selectedItem} />;
-        }
-        const itemsToShow = activeTab === 'softwares' ? softwares : drivers;
+        const allItems = activeTab === 'softwares' ? softwares : drivers;
+        const itemsToShow = selectedItem
+          ? allItems.filter(item => item.id === selectedItem.id)
+          : allItems;
         return (
-          <div className="flex flex-col space-y-4">
+          <div className="flex flex-col">
             {itemsToShow.map(item => (
               <SoftwareListItem key={item.id} software={item} />
             ))}
@@ -275,25 +276,29 @@ export default function SupportPageClient({ products, software, categories }) {
   };
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <header className="mb-8">
-        <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">Central de Suporte</h1>
-        <p className="mt-3 text-lg text-gray-600">Encontre documentos, softwares e drivers para nossos produtos.</p>
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <header className="mb-3 text-center">
+        <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Central de Suporte</h1>
+        <p className="mt-2 text-lg text-gray-600 max-w-2xl mx-auto">
+          Encontre documentos, softwares e drivers para seus produtos.
+        </p>
       </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-        <aside className="lg:col-span-1">
-          <div className="sticky top-24">
-            {renderSidebarContent()}
-          </div>
-        </aside>
+        {activeTab !== 'contato' && (
+          <aside className="lg:col-span-1">
+            <div className="sticky top-24">
+              {renderSidebarContent()}
+            </div>
+          </aside>
+        )}
 
-        <main className="lg:col-span-3">
+        <main className={activeTab !== 'contato' ? "lg:col-span-3" : "lg:col-span-4"}>
           <div className="border-b border-gray-200 mb-8">
-            <nav className="-mb-px flex flex-wrap" aria-label="Tabs">
+            <nav className="-mb-px flex flex-wrap justify-center space-x-8" aria-label="Tabs">
               <TabButton label="Softwares" isActive={activeTab === 'softwares'} onClick={() => handleTabClick('softwares')} />
-              <TabButton label="Manuais e Documentos" isActive={activeTab === 'documentos'} onClick={() => handleTabClick('documentos')} />
               <TabButton label="Drivers e Utilitários" isActive={activeTab === 'drivers'} onClick={() => handleTabClick('drivers')} />
+              <TabButton label="Manuais e Documentos" isActive={activeTab === 'documentos'} onClick={() => handleTabClick('documentos')} />
               <TabButton label="Contato do Suporte" isActive={activeTab === 'contato'} onClick={() => handleTabClick('contato')} />
             </nav>
           </div>
