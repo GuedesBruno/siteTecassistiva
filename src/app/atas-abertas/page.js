@@ -7,6 +7,16 @@ import SocialMediaSection from '@/components/SocialMediaSection';
 // Prevent static generation - use on-demand ISR
 export const revalidate = 3600; // Revalidate every hour
 
+export const metadata = {
+  title: 'Atas Abertas',
+  description: 'Consulte as atas de registro de preços abertas para adesão (carona). Adquira produtos de tecnologia assistiva com preços registrados.',
+  openGraph: {
+    title: 'Atas Abertas | Tecassistiva',
+    description: 'Atas de registro de preços para adesão em tecnologia assistiva',
+    url: 'https://www.tecassistiva.com.br/atas-abertas'
+  }
+}
+
 // Lazy load API functions to avoid compilation during SSG
 async function getOpenAtas() {
   const { getOpenAtas: _getOpenAtas } = await import('@/lib/api');

@@ -44,7 +44,7 @@
     "fabricante": "Tecassistiva"
   },
   {
-    "id": "product-205",
+    "id": "product-290",
     "title": "Focus 40 Blue",
     "slug": "/produtos/focus-40-blue",
     "description": "Linha Braille de 40 células",
@@ -55,7 +55,7 @@
     "fabricante": "Freedom Scientific"
   },
   {
-    "id": "product-246",
+    "id": "product-311",
     "title": "Teca-Fuser",
     "slug": "/produtos/teca-fuser",
     "description": "Impressora Térmica mais rápida e eficiente do mercado",
@@ -66,7 +66,7 @@
     "fabricante": "American Thermoform"
   },
   {
-    "id": "product-207",
+    "id": "product-266",
     "title": "ClearReader",
     "slug": "/produtos/clearreader",
     "description": "Leitor e digitalizador autônomo",
@@ -77,18 +77,18 @@
     "fabricante": "Optelec"
   },
   {
-    "id": "product-208",
+    "id": "product-260",
     "title": "Brinca Braille",
     "slug": "/produtos/brinca-braille",
     "description": "Ferramenta interativa para aprendizado do braille",
     "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/Brinca_Braille_5a4d0fc6a0.jpg",
     "type": "Produto",
-    "content": "Ferramenta interativa para aprendizado do braille [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O Brinca Braille torna o aprendizado do Braille divertido, interativo e fácil através de blocos com pontos Braille em tamanho jumbo e encaixe magnético, retorno em áudio e muitas atividades. O ponto Braille de tamanho jumbo é adequado para crianças em fase de aprendizado, ajuda a fortalecer e adequar o movimento dos dedos. Os alunos podem acompanhar facilmente as atividades com áudio dinâmico e orientação tátil.\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Linha Braille com 9 células Braille jumbo;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Cada célula Braille funciona como um bloco magnético de encaixe fácil para crianças;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"As células Braille são destacáveis, possuem encaixe magnético e podem ser manuseadas individualmente;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Áudio interativo e orientação tátil e simples para fácil aprendizado de uso;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Modo de Auto-Aprendizado, onde os alunos de todas as idades podem desfrutar da independência de aprender Braille sem ter que pedir ajuda;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Modo de Ensino funciona através do aplicativo para fácil visibilidade e interação do professor;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Os dois modos possuem as atividades: Ler, Ler & Escrever, Ditado.\",\"type\":\"text\"}]}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]}] Cegueira Alfabetização Braille  Ohfa Tech",
+    "content": "Ferramenta interativa para aprendizado do braille [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O Brinca Braille torna o aprendizado do Braille divertido, interativo e fácil através de blocos com pontos Braille em tamanho jumbo e encaixe magnético, retorno em áudio e muitas atividades. O ponto Braille de tamanho jumbo é adequado para crianças em fase de aprendizado, ajuda a fortalecer e adequar o movimento dos dedos. Os alunos podem acompanhar facilmente as atividades com áudio dinâmico e orientação tátil.\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Linha Braille com 9 células Braille jumbo;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Cada célula Braille funciona como um bloco magnético de encaixe fácil para crianças;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"As células Braille são destacáveis, possuem encaixe magnético e podem ser manuseadas individualmente;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Áudio interativo e orientação tátil e simples para fácil aprendizado de uso;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Modo de Auto aprendizado, onde os alunos de todas as idades podem desfrutar da independência de aprender Braille sem ter que pedir ajuda;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Modo de Ensino funciona através do aplicativo para fácil visibilidade e interação do professor;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Os dois modos possuem as atividades: Ler, Ler & Escrever, Ditado.\",\"type\":\"text\"}]}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]}] Cegueira Alfabetização Braille  Ohfa Tech",
     "categories": "Cegueira",
     "fabricante": "Ohfa Tech"
   },
   {
-    "id": "product-209",
+    "id": "product-299",
     "title": "Multiplano",
     "slug": "/produtos/multiplano",
     "description": "Matemática Concreta",
@@ -99,7 +99,18 @@
     "fabricante": "Multipalno"
   },
   {
-    "id": "product-210",
+    "id": "product-276",
+    "title": "ClearView 24″ Full HD com Voz",
+    "slug": "/produtos/clearview-24-com-voz",
+    "description": "Ampliador Eletrônico de Mesa com Voz",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/Clear_View_255c3b3291.jpg",
+    "type": "Produto",
+    "content": "Ampliador Eletrônico de Mesa com Voz [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O novo ClearView C com Voz é uma lupa eletrônica de mesa única que foi desenvolvida para melhorar a sua experiência de leitura. Selecione a sua voz de leitura preferida e sente-se, relaxe e ouça aos documentos enquanto são lidos em alta voz. A combinação de uma voz clara com ampliação e alto contraste torna a leitura muito mais fácil.\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Ampliação Contínua: 1,5x – 75x (opcional: até 170x);\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Tela panorâmica de 24 polegadas;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Processador de Vídeo de Alta Definição Superior 1080p para imagens ultra nítidas e vivas;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Mais de 74 vozes de leitura em 36 idiomas;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Visualize e ouça documentos longos com Texto-para-Áudio;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Funcionalidade Aponte & Leia: interface tátil intuitiva, toque na coluna, parágrafo ou palavra na tela para ler instantaneamente;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"16 combinações de cor de alto contraste para melhorar o contraste para melhor visibilidade, de 1 até 4 combinações de cores pré-definidas selecionáveis;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Leitura assistida com reconhecimento da zona do texto automática;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Permite armazenar documentos e imagens para depois visualizar quando quiser;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Visualização de fotos digitais;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Menu com fonte e ícone grandes.\",\"type\":\"text\"}]}]}] Baixa Visão Ampliadores Eletrônicos de Mesa Optelec",
+    "categories": "Baixa Visão",
+    "fabricante": "Optelec"
+  },
+  {
+    "id": "product-269",
     "title": "ClearView 24″ Full HD",
     "slug": "/produtos/clearview-24",
     "description": "Ampliador Eletrônico de Mesa com Voz",
@@ -110,7 +121,7 @@
     "fabricante": "Optelec"
   },
   {
-    "id": "product-212",
+    "id": "product-316",
     "title": "Ruby 7 HD",
     "slug": "/produtos/ruby-7-hd",
     "description": "Lupa eletrônica portátil",
@@ -121,7 +132,7 @@
     "fabricante": "Freedom Scientific"
   },
   {
-    "id": "product-224",
+    "id": "product-315",
     "title": "Tutor",
     "slug": "/produtos/tutor",
     "description": "Máquina de escrever e impressora braille",
@@ -132,7 +143,7 @@
     "fabricante": "Mountbatten"
   },
   {
-    "id": "product-222",
+    "id": "product-313",
     "title": "Traveller HD",
     "slug": "/produtos/traveller-hd",
     "description": "Ampliador Eletrônico Portátil",
@@ -143,7 +154,7 @@
     "fabricante": "Optelec"
   },
   {
-    "id": "product-229",
+    "id": "product-319",
     "title": "Basic",
     "slug": "/produtos/basic",
     "description": "Impressora Braille de Médio Porte",
@@ -176,7 +187,7 @@
     "fabricante": "ZyChen"
   },
   {
-    "id": "product-228",
+    "id": "product-252",
     "title": "Abafador para Impressora Index Braille",
     "slug": "/produtos/abafador-index",
     "description": "Abafador de ruídos para impressora Index Braille Basic e Index Braille Everest.",
@@ -187,29 +198,7 @@
     "fabricante": "Tecassistiva"
   },
   {
-    "id": "product-146",
-    "title": "ZoomText Ampliador com Voz",
-    "slug": "/produtos/zoomtext-com-voz",
-    "description": "Ampliador de Telas com Voz",
-    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/ZT_Ampliador_Leitor_474fda5299.jpg",
-    "type": "Produto",
-    "content": "Ampliador de Telas com Voz [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O ZoomText Ampliador/Leitor é um software completamente integrado que lê e amplia criado para usuários com baixa visão. O Ampliador e Leitor aumenta e otimiza tudo na tela do seu computador, lê o que você digita e conforme você navega no programa, automaticamente lê documentos, páginas web e email.\",\"type\":\"text\"}]}] Baixa Visão Software Ampliador de Telas Freedom Scientific",
-    "categories": "Baixa Visão",
-    "fabricante": "Freedom Scientific"
-  },
-  {
-    "id": "product-221",
-    "title": "NSF Excel",
-    "slug": "/produtos/nsf-excel",
-    "description": "Impressora para Produção Braille",
-    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/NSF_Excel_a7cabe7bdb.png",
-    "type": "Produto",
-    "content": "Impressora para Produção Braille [{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Tamanho máximo da folha: 47cm x 52cm;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Área de impressão: 30,8cm x 44,8cm;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Velocidade de impressão: Até 5.500 impressões por hora (iph);\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Estampagem a quente;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Relevo seco e estampagem de folha em relevo;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Corte e vinco;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Fusão de folha de alta velocidade;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Até 8 posições de impressão programáveis por folha;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Remoção de resíduos em linha (opcional).\",\"type\":\"text\"}]}]}] Cegueira Impressora Braille Grande Produção binderhaus",
-    "categories": "Cegueira",
-    "fabricante": "binderhaus"
-  },
-  {
-    "id": "product-103",
+    "id": "product-312",
     "title": "Transformer HD com Voz",
     "slug": "/produtos/transformer-hd-com-voz",
     "description": "Ampliador Portátil com Voz",
@@ -220,7 +209,7 @@
     "fabricante": "Enhanced Vision"
   },
   {
-    "id": "product-138",
+    "id": "product-304",
     "title": "Perkins Clássica",
     "slug": "/produtos/perkins-classica",
     "description": "Máquina de Escrever Braille",
@@ -231,7 +220,7 @@
     "fabricante": "Perkins"
   },
   {
-    "id": "product-159",
+    "id": "product-284",
     "title": "Fanfold",
     "slug": "/produtos/fanfold",
     "description": "Impressora Braille de Grande Porte",
@@ -242,7 +231,7 @@
     "fabricante": "Index Braille"
   },
   {
-    "id": "product-136",
+    "id": "product-309",
     "title": "Ruby HD",
     "slug": "/produtos/ruby-hd",
     "description": "Lupa Eletrônica de 4.3\" Portátil",
@@ -253,7 +242,7 @@
     "fabricante": "Freedom Scientific"
   },
   {
-    "id": "product-90",
+    "id": "product-301",
     "title": "Onyx OCR",
     "slug": "/produtos/onyx-ocr",
     "description": "Ampliador de Mesa com Voz",
@@ -264,7 +253,7 @@
     "fabricante": "Freedom Scientific"
   },
   {
-    "id": "product-162",
+    "id": "product-291",
     "title": "Teclado Colmeia",
     "slug": "/produtos/teclado-colmeia",
     "description": "Teclado ampliado com colmeia",
@@ -275,7 +264,7 @@
     "fabricante": "Tecassistiva"
   },
   {
-    "id": "product-151",
+    "id": "product-253",
     "title": "Big Red",
     "slug": "/produtos/big-red",
     "description": "Acionador de Pressão com Grande Botão",
@@ -286,7 +275,7 @@
     "fabricante": "Abblenet"
   },
   {
-    "id": "product-142",
+    "id": "product-296",
     "title": "Jaws",
     "slug": "/produtos/jaws",
     "description": "Software Leitor de Telas",
@@ -297,7 +286,7 @@
     "fabricante": "Freedom Scientific"
   },
   {
-    "id": "product-152",
+    "id": "product-254",
     "title": "BigTrack 2",
     "slug": "/produtos/big-track",
     "description": "Mouse Estacionário com Grande Esfera",
@@ -330,7 +319,7 @@
     "fabricante": ""
   },
   {
-    "id": "product-67",
+    "id": "product-289",
     "title": "Focus 80 Blue",
     "slug": "/produtos/focus-80-blue",
     "description": "Linha Braille de 80 Células",
@@ -341,7 +330,7 @@
     "fabricante": "Freedom Scientific"
   },
   {
-    "id": "product-220",
+    "id": "product-302",
     "title": "PUMA 7",
     "slug": "/produtos/puma-7",
     "description": "Impressora para Produção Braille",
@@ -352,7 +341,7 @@
     "fabricante": "BrailleTec"
   },
   {
-    "id": "product-71",
+    "id": "product-300",
     "title": "Ruby 10",
     "slug": "/produtos/ruby-10",
     "description": "Lupa Eletrônica com Voz",
@@ -363,7 +352,7 @@
     "fabricante": "Freedom Scientific"
   },
   {
-    "id": "product-131",
+    "id": "product-293",
     "title": "Teclado Ampliado",
     "slug": "/produtos/teclado-ampliado",
     "description": "Teclado Ampliado Tecassistiva",
@@ -374,7 +363,7 @@
     "fabricante": "Tecassistiva"
   },
   {
-    "id": "product-147",
+    "id": "product-285",
     "title": "ZoomText Ampliador",
     "slug": "/produtos/zoomtext-ampliador",
     "description": "Ampliador de Telas",
@@ -385,18 +374,7 @@
     "fabricante": "Freedom Scientific"
   },
   {
-    "id": "product-157",
-    "title": "ClearView 24″ Full HD com Voz",
-    "slug": "/produtos/clearview-24-com-voz",
-    "description": "Ampliador de Mesa com Voz",
-    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/Clear_View_255c3b3291.jpg",
-    "type": "Produto",
-    "content": "Ampliador de Mesa com Voz [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O novo ClearView C com Voz é uma lupa eletrônica de mesa única que foi desenvolvida para melhorar a sua experiência de leitura. Selecione a sua voz de leitura preferida e sente-se, relaxe e ouça aos documentos enquanto são lidos em alta voz. A combinação de uma voz clara com ampliação e alto contraste torna a leitura muito mais fácil.\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Ampliação Contínua: 1,5x – 75x (opcional: até 170x);\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Tela panorâmica de 24 polegadas;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Processador de Vídeo de Alta Definição Superior 1080p para imagens ultra-nítidas e vivas;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Mais de 74 vozes de leitura em 36 idiomas;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Visualize e ouça documentos longos com Texto-para-Áudio;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Funcionalidade Aponte & Leia: interface tátil intuitiva, toque na coluna, parágrafo ou palavra na tela para ler instantaneamente;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"16 combinações de cor de alto-contraste para melhorar o contraste para melhor visibilidade, de 1 até 4 combinações de cores pré-definidas selecionáveis;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Leitura assistida com reconhecimento da zona do texto automática;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Permite armazenar documentos e imagens para depois visualizar quando quiser;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Visualização de fotos digitais;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Menu com fonte e ícone grandes.\",\"type\":\"text\"}]}]}] Baixa Visão Ampliadores Eletrônicos de Mesa Optelec",
-    "categories": "Baixa Visão",
-    "fabricante": "Optelec"
-  },
-  {
-    "id": "product-149",
+    "id": "product-292",
     "title": "Fusion",
     "slug": "/produtos/fusion",
     "description": "Software Ampliador e Leitor de Telas",
@@ -407,7 +385,7 @@
     "fabricante": "Freedom Scientific"
   },
   {
-    "id": "product-137",
+    "id": "product-310",
     "title": "Ruby XL HD",
     "slug": "/produtos/ruby-xl-hd",
     "description": "Lupa Eletrônica de 5\" Portátil",
@@ -418,7 +396,7 @@
     "fabricante": "Freedom Scientific"
   },
   {
-    "id": "product-153",
+    "id": "product-257",
     "title": "BrailleBox",
     "slug": "/produtos/braille-box",
     "description": "Impressora Braille de Grande Porte",
@@ -429,7 +407,29 @@
     "fabricante": "Index Braille"
   },
   {
-    "id": "doc-228-150",
+    "id": "product-283",
+    "title": "ZoomText Ampliador com Voz",
+    "slug": "/produtos/zoomtext-com-voz",
+    "description": "Ampliador de Telas com Voz",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/ZT_Ampliador_Leitor_474fda5299.jpg",
+    "type": "Produto",
+    "content": "Ampliador de Telas com Voz [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O ZoomText Ampliador/Leitor é um software completamente integrado que lê e amplia criado para usuários com baixa visão. O Ampliador e Leitor aumenta e otimiza tudo na tela do seu computador, lê o que você digita e conforme você navega no programa, automaticamente lê documentos, páginas web e email.\",\"type\":\"text\"}]}] Baixa Visão Software Ampliador de Telas Freedom Scientific",
+    "categories": "Baixa Visão",
+    "fabricante": "Freedom Scientific"
+  },
+  {
+    "id": "product-221",
+    "title": "NSF Excel",
+    "slug": "/produtos/nsf-excel",
+    "description": "Impressora para Produção Braille",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/NSF_Excel_a7cabe7bdb.png",
+    "type": "Produto",
+    "content": "Impressora para Produção Braille [{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Tamanho máximo da folha: 47cm x 52cm;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Área de impressão: 30,8cm x 44,8cm;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Velocidade de impressão: Até 5.500 impressões por hora (iph);\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Estampagem a quente;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Relevo seco e estampagem de folha em relevo;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Corte e vinco;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Fusão de folha de alta velocidade;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Até 8 posições de impressão programáveis por folha;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Remoção de resíduos em linha (opcional).\",\"type\":\"text\"}]}]}] Cegueira Impressora Braille Grande Produção binderhaus",
+    "categories": "Cegueira",
+    "fabricante": "binderhaus"
+  },
+  {
+    "id": "doc-252-150",
     "title": "montagem-basic.pdf - Abafador para Impressora Index Braille",
     "slug": "/produtos/abafador-index",
     "description": "Documento do produto Abafador para Impressora Index Braille",
@@ -442,7 +442,7 @@
     "content": "montagem-basic.pdf PDF Abafador para Impressora Index Braille"
   },
   {
-    "id": "doc-228-151",
+    "id": "doc-252-151",
     "title": "montagem-everest.pdf - Abafador para Impressora Index Braille",
     "slug": "/produtos/abafador-index",
     "description": "Documento do produto Abafador para Impressora Index Braille",
@@ -455,7 +455,7 @@
     "content": "montagem-everest.pdf PDF Abafador para Impressora Index Braille"
   },
   {
-    "id": "doc-229-83",
+    "id": "doc-319-83",
     "title": "guia_basic.pdf - Basic",
     "slug": "/produtos/basic",
     "description": "Documento do produto Basic",
@@ -468,7 +468,7 @@
     "content": "guia_basic.pdf PDF Basic"
   },
   {
-    "id": "doc-229-84",
+    "id": "doc-319-84",
     "title": "catalogo_basic.pdf - Basic",
     "slug": "/produtos/basic",
     "description": "Documento do produto Basic",
@@ -481,7 +481,7 @@
     "content": "catalogo_basic.pdf PDF Basic"
   },
   {
-    "id": "doc-229-85",
+    "id": "doc-319-85",
     "title": "manual_avancado_basic.pdf - Basic",
     "slug": "/produtos/basic",
     "description": "Documento do produto Basic",
@@ -494,7 +494,7 @@
     "content": "manual_avancado_basic.pdf PDF Basic"
   },
   {
-    "id": "doc-153-118",
+    "id": "doc-257-118",
     "title": "catalogo_braillebox.pdf - BrailleBox",
     "slug": "/produtos/braille-box",
     "description": "Documento do produto BrailleBox",
@@ -507,7 +507,7 @@
     "content": "catalogo_braillebox.pdf PDF BrailleBox"
   },
   {
-    "id": "doc-208-76",
+    "id": "doc-260-76",
     "title": "manual_avancado_brinca_braille.pdf - Brinca Braille",
     "slug": "/produtos/brinca-braille",
     "description": "Documento do produto Brinca Braille",
@@ -520,7 +520,7 @@
     "content": "manual_avancado_brinca_braille.pdf PDF Brinca Braille"
   },
   {
-    "id": "doc-208-75",
+    "id": "doc-260-75",
     "title": "catalogo_brinca_braille.pdf - Brinca Braille",
     "slug": "/produtos/brinca-braille",
     "description": "Documento do produto Brinca Braille",
@@ -533,7 +533,7 @@
     "content": "catalogo_brinca_braille.pdf PDF Brinca Braille"
   },
   {
-    "id": "doc-208-74",
+    "id": "doc-260-74",
     "title": "guia_brinca_braille.pdf - Brinca Braille",
     "slug": "/produtos/brinca-braille",
     "description": "Documento do produto Brinca Braille",
@@ -546,7 +546,7 @@
     "content": "guia_brinca_braille.pdf PDF Brinca Braille"
   },
   {
-    "id": "doc-207-86",
+    "id": "doc-266-86",
     "title": "manual_avancado_clearreader.pdf - ClearReader",
     "slug": "/produtos/clearreader",
     "description": "Documento do produto ClearReader",
@@ -559,7 +559,7 @@
     "content": "manual_avancado_clearreader.pdf PDF ClearReader"
   },
   {
-    "id": "doc-207-87",
+    "id": "doc-266-87",
     "title": "guia_clearreader.pdf - ClearReader",
     "slug": "/produtos/clearreader",
     "description": "Documento do produto ClearReader",
@@ -572,7 +572,7 @@
     "content": "guia_clearreader.pdf PDF ClearReader"
   },
   {
-    "id": "doc-207-22",
+    "id": "doc-266-22",
     "title": "catalogo_clearreader.pdf - ClearReader",
     "slug": "/produtos/clearreader",
     "description": "Documento do produto ClearReader",
@@ -585,7 +585,7 @@
     "content": "catalogo_clearreader.pdf PDF ClearReader"
   },
   {
-    "id": "doc-210-59",
+    "id": "doc-269-59",
     "title": "catalogo_clearview.pdf - ClearView 24″ Full HD",
     "slug": "/produtos/clearview-24",
     "description": "Documento do produto ClearView 24″ Full HD",
@@ -598,7 +598,7 @@
     "content": "catalogo_clearview.pdf PDF ClearView 24″ Full HD"
   },
   {
-    "id": "doc-210-60",
+    "id": "doc-269-60",
     "title": "manual_avancado_clearview.pdf - ClearView 24″ Full HD",
     "slug": "/produtos/clearview-24",
     "description": "Documento do produto ClearView 24″ Full HD",
@@ -611,7 +611,7 @@
     "content": "manual_avancado_clearview.pdf PDF ClearView 24″ Full HD"
   },
   {
-    "id": "doc-157-59",
+    "id": "doc-276-59",
     "title": "catalogo_clearview.pdf - ClearView 24″ Full HD com Voz",
     "slug": "/produtos/clearview-24-com-voz",
     "description": "Documento do produto ClearView 24″ Full HD com Voz",
@@ -624,7 +624,7 @@
     "content": "catalogo_clearview.pdf PDF ClearView 24″ Full HD com Voz"
   },
   {
-    "id": "doc-157-60",
+    "id": "doc-276-60",
     "title": "manual_avancado_clearview.pdf - ClearView 24″ Full HD com Voz",
     "slug": "/produtos/clearview-24-com-voz",
     "description": "Documento do produto ClearView 24″ Full HD com Voz",
@@ -676,7 +676,7 @@
     "content": "catalogo_everest.pdf PDF Everest"
   },
   {
-    "id": "doc-159-119",
+    "id": "doc-284-119",
     "title": "catalogo_fanfold.pdf - Fanfold",
     "slug": "/produtos/fanfold",
     "description": "Documento do produto Fanfold",
@@ -689,7 +689,7 @@
     "content": "catalogo_fanfold.pdf PDF Fanfold"
   },
   {
-    "id": "doc-205-88",
+    "id": "doc-290-88",
     "title": "guia_focus40_v5.pdf - Focus 40 Blue",
     "slug": "/produtos/focus-40-blue",
     "description": "Documento do produto Focus 40 Blue",
@@ -702,7 +702,7 @@
     "content": "guia_focus40_v5.pdf PDF Focus 40 Blue"
   },
   {
-    "id": "doc-205-89",
+    "id": "doc-290-89",
     "title": "manual_avancado_focus40_v5.pdf - Focus 40 Blue",
     "slug": "/produtos/focus-40-blue",
     "description": "Documento do produto Focus 40 Blue",
@@ -715,7 +715,7 @@
     "content": "manual_avancado_focus40_v5.pdf PDF Focus 40 Blue"
   },
   {
-    "id": "doc-205-90",
+    "id": "doc-290-90",
     "title": "catalogo_focus40_v5.pdf - Focus 40 Blue",
     "slug": "/produtos/focus-40-blue",
     "description": "Documento do produto Focus 40 Blue",
@@ -728,7 +728,7 @@
     "content": "catalogo_focus40_v5.pdf PDF Focus 40 Blue"
   },
   {
-    "id": "doc-67-125",
+    "id": "doc-289-125",
     "title": "catalogo_focus80.pdf - Focus 80 Blue",
     "slug": "/produtos/focus-80-blue",
     "description": "Documento do produto Focus 80 Blue",
@@ -767,7 +767,7 @@
     "content": "catalogo_liber-2026-ai.pdf PDF Liber 2026.AI"
   },
   {
-    "id": "doc-71-128",
+    "id": "doc-300-128",
     "title": "catalogo_ruby10.pdf - Ruby 10",
     "slug": "/produtos/ruby-10",
     "description": "Documento do produto Ruby 10",
@@ -780,7 +780,7 @@
     "content": "catalogo_ruby10.pdf PDF Ruby 10"
   },
   {
-    "id": "doc-212-71",
+    "id": "doc-316-71",
     "title": "guia_ruby7.pdf - Ruby 7 HD",
     "slug": "/produtos/ruby-7-hd",
     "description": "Documento do produto Ruby 7 HD",
@@ -793,7 +793,7 @@
     "content": "guia_ruby7.pdf PDF Ruby 7 HD"
   },
   {
-    "id": "doc-212-72",
+    "id": "doc-316-72",
     "title": "manual_avancado_ruby7.pdf - Ruby 7 HD",
     "slug": "/produtos/ruby-7-hd",
     "description": "Documento do produto Ruby 7 HD",
@@ -806,7 +806,7 @@
     "content": "manual_avancado_ruby7.pdf PDF Ruby 7 HD"
   },
   {
-    "id": "doc-212-73",
+    "id": "doc-316-73",
     "title": "catalogo_ruby7.pdf - Ruby 7 HD",
     "slug": "/produtos/ruby-7-hd",
     "description": "Documento do produto Ruby 7 HD",
@@ -819,7 +819,7 @@
     "content": "catalogo_ruby7.pdf PDF Ruby 7 HD"
   },
   {
-    "id": "doc-136-159",
+    "id": "doc-309-159",
     "title": "catalogo_rubyhd.pdf - Ruby HD",
     "slug": "/produtos/ruby-hd",
     "description": "Documento do produto Ruby HD",
@@ -832,7 +832,7 @@
     "content": "catalogo_rubyhd.pdf PDF Ruby HD"
   },
   {
-    "id": "doc-137-156",
+    "id": "doc-310-156",
     "title": "catalaogo_rubyxl.pdf - Ruby XL HD",
     "slug": "/produtos/ruby-xl-hd",
     "description": "Documento do produto Ruby XL HD",
@@ -845,7 +845,7 @@
     "content": "catalaogo_rubyxl.pdf PDF Ruby XL HD"
   },
   {
-    "id": "doc-137-152",
+    "id": "doc-310-152",
     "title": "guia_rubyxl.pdf - Ruby XL HD",
     "slug": "/produtos/ruby-xl-hd",
     "description": "Documento do produto Ruby XL HD",
@@ -858,7 +858,7 @@
     "content": "guia_rubyxl.pdf PDF Ruby XL HD"
   },
   {
-    "id": "doc-137-153",
+    "id": "doc-310-153",
     "title": "manual_rubyxl.pdf - Ruby XL HD",
     "slug": "/produtos/ruby-xl-hd",
     "description": "Documento do produto Ruby XL HD",
@@ -871,7 +871,7 @@
     "content": "manual_rubyxl.pdf PDF Ruby XL HD"
   },
   {
-    "id": "doc-246-82",
+    "id": "doc-311-82",
     "title": "guia_teca-fuser.pdf - Teca-Fuser",
     "slug": "/produtos/teca-fuser",
     "description": "Documento do produto Teca-Fuser",
@@ -884,7 +884,7 @@
     "content": "guia_teca-fuser.pdf PDF Teca-Fuser"
   },
   {
-    "id": "doc-246-81",
+    "id": "doc-311-81",
     "title": "manual_avancado_teca-fuser.pdf - Teca-Fuser",
     "slug": "/produtos/teca-fuser",
     "description": "Documento do produto Teca-Fuser",
@@ -897,7 +897,7 @@
     "content": "manual_avancado_teca-fuser.pdf PDF Teca-Fuser"
   },
   {
-    "id": "doc-246-80",
+    "id": "doc-311-80",
     "title": "catalogo_teca-fuser.pdf - Teca-Fuser",
     "slug": "/produtos/teca-fuser",
     "description": "Documento do produto Teca-Fuser",
@@ -910,7 +910,7 @@
     "content": "catalogo_teca-fuser.pdf PDF Teca-Fuser"
   },
   {
-    "id": "doc-222-77",
+    "id": "doc-313-77",
     "title": "catalogo_traveller.pdf - Traveller HD",
     "slug": "/produtos/traveller-hd",
     "description": "Documento do produto Traveller HD",
@@ -923,7 +923,7 @@
     "content": "catalogo_traveller.pdf PDF Traveller HD"
   },
   {
-    "id": "doc-222-78",
+    "id": "doc-313-78",
     "title": "guia_traveller.pdf - Traveller HD",
     "slug": "/produtos/traveller-hd",
     "description": "Documento do produto Traveller HD",
@@ -936,7 +936,7 @@
     "content": "guia_traveller.pdf PDF Traveller HD"
   },
   {
-    "id": "doc-222-79",
+    "id": "doc-313-79",
     "title": "manual_avancado_traveller.pdf - Traveller HD",
     "slug": "/produtos/traveller-hd",
     "description": "Documento do produto Traveller HD",
@@ -949,7 +949,7 @@
     "content": "manual_avancado_traveller.pdf PDF Traveller HD"
   },
   {
-    "id": "doc-224-68",
+    "id": "doc-315-68",
     "title": "catalogo_tutor.pdf - Tutor",
     "slug": "/produtos/tutor",
     "description": "Documento do produto Tutor",
@@ -962,7 +962,7 @@
     "content": "catalogo_tutor.pdf PDF Tutor"
   },
   {
-    "id": "doc-224-69",
+    "id": "doc-315-69",
     "title": "guia_tutor.pdf - Tutor",
     "slug": "/produtos/tutor",
     "description": "Documento do produto Tutor",
@@ -975,7 +975,7 @@
     "content": "guia_tutor.pdf PDF Tutor"
   },
   {
-    "id": "doc-224-70",
+    "id": "doc-315-70",
     "title": "manual_avancado_tutor.pdf - Tutor",
     "slug": "/produtos/tutor",
     "description": "Documento do produto Tutor",
@@ -988,7 +988,7 @@
     "content": "manual_avancado_tutor.pdf PDF Tutor"
   },
   {
-    "id": "doc-147-178",
+    "id": "doc-285-178",
     "title": "ZoomText_Guia_do_Usuario_Portugues_Brasil.pdf - ZoomText Ampliador",
     "slug": "/produtos/zoomtext-ampliador",
     "description": "Documento do produto ZoomText Ampliador",
@@ -1001,7 +1001,7 @@
     "content": "ZoomText_Guia_do_Usuario_Portugues_Brasil.pdf PDF ZoomText Ampliador"
   },
   {
-    "id": "doc-146-178",
+    "id": "doc-283-178",
     "title": "ZoomText_Guia_do_Usuario_Portugues_Brasil.pdf - ZoomText Ampliador com Voz",
     "slug": "/produtos/zoomtext-com-voz",
     "description": "Documento do produto ZoomText Ampliador com Voz",
@@ -1028,6 +1028,13 @@
     "type": "Ata"
   },
   {
+    "id": "software-51",
+    "title": "ZoomText com Voz",
+    "slug": "/suporte",
+    "description": "Tipo: Software",
+    "type": "Software/Driver"
+  },
+  {
     "id": "software-26",
     "title": "Index Braille",
     "slug": "/suporte",
@@ -1035,10 +1042,10 @@
     "type": "Software/Driver"
   },
   {
-    "id": "software-15",
-    "title": "Focus 40",
+    "id": "software-52",
+    "title": "Fusion",
     "slug": "/suporte",
-    "description": "Tipo: Driver",
+    "description": "Tipo: Software",
     "type": "Software/Driver"
   },
   {
@@ -1049,21 +1056,21 @@
     "type": "Software/Driver"
   },
   {
-    "id": "software-33",
-    "title": "Fusion",
+    "id": "software-44",
+    "title": "Focus 40",
     "slug": "/suporte",
-    "description": "Tipo: Software",
+    "description": "Tipo: Driver",
     "type": "Software/Driver"
   },
   {
-    "id": "software-35",
+    "id": "software-45",
     "title": "JAWS ",
     "slug": "/suporte",
     "description": "Tipo: Software",
     "type": "Software/Driver"
   },
   {
-    "id": "software-36",
+    "id": "software-48",
     "title": "ZoomText",
     "slug": "/suporte",
     "description": "Tipo: Software",
@@ -1082,7 +1089,7 @@
     "title": "Tecassistiva",
     "slug": "src\\app\\tecassistiva\\page.js",
     "description": "import Link from 'next/link'; import Image from 'next/image'; import TestimonialSection from '@/components/TestimonialSection'; import SocialMediaSect...",
-    "content": "import Link from 'next/link'; import Image from 'next/image'; import TestimonialSection from '@/components/TestimonialSection'; import SocialMediaSection from '@/components/SocialMediaSection'; // Lazy load API functions to avoid compilation during SSG async function getAllTestimonials() { const { getAllTestimonials: _getAllTestimonials } = await import('@/lib/api'); return _getAllTestimonials(); } // Componente da Página export default async function TecassistivaPage() { const testimonials = await getAllTestimonials(); return ( {/* O padding foi ajustado para ser responsivo */} {/* Breadcrumbs */} Página Inicial &gt; A Tecassistiva {/* Seção Principal */} Tecassistiva {/* Texto de apresentação em 2 colunas */} Desde 2008, a Tecassistiva é a empresa brasileira lider nacional de desenvolvimento, implementação de soluções e suporte pós-venda em soluções de tecnologia assistiva de comunicação aumentativa e alternativa para a deficiência visual. Suas soluções sáo particularmente voltadas para a inclusão educacional e social de pessoas com deficiência. Atuamos há duas décadas oferecendo equipamentos, softwares e serviços que ampliam a autonomia, o acesso à informação e as oportunidades de aprendizagem para estudantes, profissionais e instituições em todo o País. osso compromisso é entregar tecnologia que transforma vidas. Por isso desenvolvemos e representamos soluções de alto desempenho para pessoas com deficiência visual e outras necessidades específicas, atendendo Escolas, Secretarias de Educação, Universidades, Empresas e órgãos públicos com excelência e responsabilidade. Trabalhamos lado a lado com educadores, gestores e equipes técnicas para garantir diagnósticos precisos, implementações eficientes e suporte contínuo. Mais do que fornecer tecnologia, construímos projetos completos que fortalecem políticas de inclusão, aprimoram processos e garantem resultados reais na vida prática das pessoas. A Tecassistiva acredita que acessibilidade não é apenas um serviço, é um valor, uma causa e um compromisso permanente com um Brasil mais inclusivo, justo e conectado às necessidades de Todos. {/* Vídeo Institucional */} Vídeo Apresentação Teca {/* Seção Missão, Visão e Valores com o novo layout */} Missão Desenvolver e disseminar Tecnologia Assistiva no Brasil, por meio da oferta de produtos e serviços de excelência que contribuam para a melhoria da qualidade de vida das pessoas com deficiência e da comunidade em geral. Visão Ser a empresa de referência em Tecnologia Assistiva, reconhecida pela comunidade, colaboradores, fornecedores e investidores, pela qualidade de seus produtos, serviços e apoio institucional. Valores •Valorização da Pessoa com Deficiência •Ética •Inovação •Trabalho em equipe •Qualidade •Sustentabilidade ); }",
+    "content": "import Link from 'next/link'; import Image from 'next/image'; import TestimonialSection from '@/components/TestimonialSection'; import SocialMediaSection from '@/components/SocialMediaSection'; import Breadcrumbs from '@/components/Breadcrumbs'; // Lazy load API functions to avoid compilation during SSG async function getAllTestimonials() { const { getAllTestimonials: _getAllTestimonials } = await import('@/lib/api'); return _getAllTestimonials(); } // Componente da Página export default async function TecassistivaPage() { const testimonials = await getAllTestimonials(); const breadcrumbs = [ { name: 'Página Inicial', path: '/' }, { name: 'A Tecassistiva', path: '/tecassistiva' }, ]; return ( {/* Breadcrumbs padronizados */} {/* O padding foi ajustado para ser responsivo */} {/* Seção Principal */} Tecassistiva {/* Texto de apresentação em 2 colunas */} Desde 2008, a Tecassistiva é a empresa brasileira lider nacional de desenvolvimento, implementação de soluções e suporte pós-venda em soluções de tecnologia assistiva de comunicação aumentativa e alternativa para a deficiência visual. Suas soluções sáo particularmente voltadas para a inclusão educacional e social de pessoas com deficiência. Atuamos há duas décadas oferecendo equipamentos, softwares e serviços que ampliam a autonomia, o acesso à informação e as oportunidades de aprendizagem para estudantes, profissionais e instituições em todo o País. osso compromisso é entregar tecnologia que transforma vidas. Por isso desenvolvemos e representamos soluções de alto desempenho para pessoas com deficiência visual e outras necessidades específicas, atendendo Escolas, Secretarias de Educação, Universidades, Empresas e órgãos públicos com excelência e responsabilidade. Trabalhamos lado a lado com educadores, gestores e equipes técnicas para garantir diagnósticos precisos, implementações eficientes e suporte contínuo. Mais do que fornecer tecnologia, construímos projetos completos que fortalecem políticas de inclusão, aprimoram processos e garantem resultados reais na vida prática das pessoas. A Tecassistiva acredita que acessibilidade não é apenas um serviço, é um valor, uma causa e um compromisso permanente com um Brasil mais inclusivo, justo e conectado às necessidades de Todos. {/* Vídeo Institucional */} Vídeo Apresentação Teca {/* Seção Missão, Visão e Valores com o novo layout */} Missão Desenvolver e disseminar Tecnologia Assistiva no Brasil, por meio da oferta de produtos e serviços de excelência que contribuam para a melhoria da qualidade de vida das pessoas com deficiência e da comunidade em geral. Visão Ser a empresa de referência em Tecnologia Assistiva, reconhecida pela comunidade, colaboradores, fornecedores e investidores, pela qualidade de seus produtos, serviços e apoio institucional. Valores •Valorização da Pessoa com Deficiência •Ética •Inovação •Trabalho em equipe •Qualidade •Sustentabilidade ); }",
     "type": "Página"
   },
   {
@@ -1094,11 +1101,19 @@
     "type": "Página"
   },
   {
+    "id": "page-src\\app\\busca\\page.js",
+    "title": "Resultados da Busca",
+    "slug": "src\\app\\busca\\page.js",
+    "description": "\"use client\"; import { useSearchParams } from 'next/navigation'; import { useEffect, useState, Suspense } from 'react'; import ProductCard from '@/com...",
+    "content": "\"use client\"; import { useSearchParams } from 'next/navigation'; import { useEffect, useState, Suspense } from 'react'; import ProductCard from '@/components/ProductCard'; import SearchResultCard from '@/components/SearchResultCard'; import Link from 'next/link'; import { hybridSearch } from '@/lib/fuzzySearch'; function SearchResults() { const searchParams = useSearchParams(); const query = searchParams.get('q'); const [results, setResults] = useState({}); const [isLoading, setIsLoading] = useState(true); const [error, setError] = useState(null); useEffect(() => { const performSearch = async () => { setIsLoading(true); setError(null); try { const response = await fetch(`/search-data.json?v=${new Date().getTime()}`); if (!response.ok) { throw new Error('Não foi possível carregar o índice de busca.'); } const data = await response.json(); if (!query) { setResults({}); } else { // Usa busca fuzzy/híbrida para encontrar resultados mesmo com typos const searchResults = hybridSearch(query, data, { keys: ['title', 'description', 'content', 'categories', 'fabricante'], weights: { title: 1.5, categories: 1.2, fabricante: 1.2, description: 0.8, content: 0.6, }, exactThreshold: 0.9, fuzzyThreshold: 0.6, maxResults: 100, }); // Agrupa os resultados por tipo const groupedResults = searchResults.reduce((acc, item) => { const type = item.type || 'Outros'; if (!acc[type]) { acc[type] = []; } acc[type].push(item); return acc; }, {}); setResults(groupedResults); } } catch (err) { setError('Falha ao carregar os dados de busca. Tente recarregar a página.'); console.error(err); } finally { setIsLoading(false); } }; performSearch(); }, [query]); if (isLoading) { return Carregando resultados... ; } if (error) { return {error} ; } const resultKeys = Object.keys(results); return ( Resultados da Busca Você buscou por: {query} {resultKeys.length > 0 ? ( resultKeys.map(type => ( {type} ({results[type].length}) {results[type].map(item => { if (type === 'Produto') { // O ProductCard espera uma estrutura de dados específica. // Mapeamos o `imageUrl` do resultado da busca para o formato que o card espera. const product = { id: item.id.replace('product-', ''), attributes: { nome: item.title, slug: item.slug.replace('/produtos/', ''), descricao_curta: item.description, imagem_principal: { url: item.imageUrl }, } }; return ; } return ; })} )) ) : ( Nenhum resultado encontrado para este termo. )} ); } export default function SearchPage() { return ( Carregando busca... }> ); }",
+    "type": "Página"
+  },
+  {
     "id": "page-src\\app\\contato\\page.js",
     "title": "Contato",
     "slug": "src\\app\\contato\\page.js",
-    "description": "import Link from 'next/link'; import ContactForm from '@/components/ContactForm'; import Image from 'next/image'; export default function ContatoPage(...",
-    "content": "import Link from 'next/link'; import ContactForm from '@/components/ContactForm'; import Image from 'next/image'; export default function ContatoPage() { return ( Página Inicial &gt; Contato Contato Fale conosco para dúvidas, orçamentos e suporte. Preencha o formulário ou utilize um de nossos canais de atendimento. {/* Coluna do Formulário */} {/* Coluna de Informações */} Informações Telefone: +55 (11) 3266-4311 WhatsApp: +55 (11) 9 9597-8139 Email: teca@tecassistiva.com.br Endereço: R. das Camélias, 37 - Mirandópolis, São Paulo - SP Horário de Atendimento: Seg-Qui 8h-18h e Sexta 8h-17h Nossas Redes Nossa Localização ); }",
+    "description": "import Link from 'next/link'; import ContactForm from '@/components/ContactForm'; import Image from 'next/image'; import Breadcrumbs from '@/component...",
+    "content": "import Link from 'next/link'; import ContactForm from '@/components/ContactForm'; import Image from 'next/image'; import Breadcrumbs from '@/components/Breadcrumbs'; export default function ContatoPage() { const breadcrumbs = [ { name: 'Página Inicial', path: '/' }, { name: 'Contato', path: '/contato' }, ]; return ( {/* Breadcrumbs padronizados */} Contato Fale conosco para dúvidas, orçamentos e suporte. Preencha o formulário ou utilize um de nossos canais de atendimento. {/* Coluna do Formulário */} {/* Coluna de Informações */} Informações Telefone: +55 (11) 3266-4311 WhatsApp: +55 (11) 9 9597-8139 Email: teca@tecassistiva.com.br Endereço: R. das Camélias, 37 - Mirandópolis, São Paulo - SP Horário de Atendimento: Seg-Qui 8h-18h e Sexta 8h-17h Nossas Redes Nossa Localização ); }",
     "type": "Página"
   },
   {
@@ -1106,15 +1121,7 @@
     "title": "Atas Abertas",
     "slug": "src\\app\\atas-abertas\\page.js",
     "description": "import Breadcrumbs from '@/components/Breadcrumbs'; import AtaCard from '@/components/AtaCard'; import ContactForm from '@/components/ContactForm'; im...",
-    "content": "import Breadcrumbs from '@/components/Breadcrumbs'; import AtaCard from '@/components/AtaCard'; import ContactForm from '@/components/ContactForm'; import AdvantagesSection from '@/components/AdvantagesSection'; import SocialMediaSection from '@/components/SocialMediaSection'; // Prevent static generation - use on-demand ISR export const revalidate = 3600; // Revalidate every hour // Lazy load API functions to avoid compilation during SSG async function getOpenAtas() { const { getOpenAtas: _getOpenAtas } = await import('@/lib/api'); return _getOpenAtas(); } export default async function AtasAbertasPage() { let atas = []; try { atas = await getOpenAtas(); } catch (error) { console.error('Erro ao carregar atas abertas:', error); atas = []; } const breadcrumbs = [ { name: 'Página Inicial', path: '/' }, { name: 'Atas Abertas', path: '/atas-abertas' }, ]; return ( {/* 1. Seção de Título e Introdução */} Atas Abertas Você sabe o que é um Sistema de Registro de Preço (SRP)? Se você já conhece, clique aqui e acesse as ATAS abertas . O que é o Sistema de Registro de Preços – SRP? Placeholder: O Sistema de Registro de Preços (SRP) é um procedimento especial de licitação que seleciona a proposta mais vantajosa para futuras e eventuais contratações governamentais. Em vez de realizar uma licitação para cada compra, o órgão público registra os preços de produtos e serviços de fornecedores qualificados, que se comprometem a manter a oferta por um período determinado (geralmente 12 meses). O que é uma Ata de Registro de Preços – ARP? Placeholder: A Ata de Registro de Preços (ARP) é o documento que formaliza o resultado do SRP. Nela, são registrados os preços, os fornecedores, os produtos e as condições de fornecimento. Essa ata funciona como um \"cardápio\" de produtos e serviços que os órgãos públicos podem adquirir de forma ágil e sem a necessidade de um novo processo licitatório completo, bastando apenas emitir uma ordem de compra. Queremos te contar mais, clique aqui. {/* 2. Seção da Lista de Atas */} Lista de ATAS disponíveis para você: {atas && atas.length > 0 ? ( atas.map((ata) => ) ) : ( Nenhuma ata aberta encontrada no momento. Por favor, verifique novamente mais tarde ou entre em contato para mais informações. )} {/* 3. Seção do Formulário de Contato */} {/* 4. Seção de Vantagens */} ); }",
-    "type": "Página"
-  },
-  {
-    "id": "page-src\\app\\busca\\page.js",
-    "title": "Resultados da Busca",
-    "slug": "src\\app\\busca\\page.js",
-    "description": "\"use client\"; import { useSearchParams } from 'next/navigation'; import { useEffect, useState, Suspense } from 'react'; import ProductCard from '@/com...",
-    "content": "\"use client\"; import { useSearchParams } from 'next/navigation'; import { useEffect, useState, Suspense } from 'react'; import ProductCard from '@/components/ProductCard'; import SearchResultCard from '@/components/SearchResultCard'; import Link from 'next/link'; import { hybridSearch } from '@/lib/fuzzySearch'; function SearchResults() { const searchParams = useSearchParams(); const query = searchParams.get('q'); const [results, setResults] = useState({}); const [isLoading, setIsLoading] = useState(true); const [error, setError] = useState(null); useEffect(() => { const performSearch = async () => { setIsLoading(true); setError(null); try { const response = await fetch(`/search-data.json?v=${new Date().getTime()}`); if (!response.ok) { throw new Error('Não foi possível carregar o índice de busca.'); } const data = await response.json(); if (!query) { setResults({}); } else { // Usa busca fuzzy/híbrida para encontrar resultados mesmo com typos const searchResults = hybridSearch(query, data, { keys: ['title', 'description', 'content', 'categories', 'fabricante'], exactThreshold: 0.6, fuzzyThreshold: 0.4, maxResults: 100, }); // Agrupa os resultados por tipo const groupedResults = searchResults.reduce((acc, item) => { const type = item.type || 'Outros'; if (!acc[type]) { acc[type] = []; } acc[type].push(item); return acc; }, {}); setResults(groupedResults); } } catch (err) { setError('Falha ao carregar os dados de busca. Tente recarregar a página.'); console.error(err); } finally { setIsLoading(false); } }; performSearch(); }, [query]); if (isLoading) { return Carregando resultados... ; } if (error) { return {error} ; } const resultKeys = Object.keys(results); return ( Resultados da Busca Você buscou por: {query} {resultKeys.length > 0 ? ( resultKeys.map(type => ( {type} ({results[type].length}) {results[type].map(item => { if (type === 'Produto') { // O ProductCard espera uma estrutura de dados específica. // Mapeamos o `imageUrl` do resultado da busca para o formato que o card espera. const product = { id: item.id.replace('product-', ''), attributes: { nome: item.title, slug: item.slug.replace('/produtos/', ''), descricao_curta: item.description, imagem_principal: { url: item.imageUrl }, } }; return ; } return ; })} )) ) : ( Nenhum resultado encontrado para este termo. )} ); } export default function SearchPage() { return ( Carregando busca... }> ); }",
+    "content": "import Breadcrumbs from '@/components/Breadcrumbs'; import AtaCard from '@/components/AtaCard'; import ContactForm from '@/components/ContactForm'; import AdvantagesSection from '@/components/AdvantagesSection'; import SocialMediaSection from '@/components/SocialMediaSection'; // Prevent static generation - use on-demand ISR export const revalidate = 3600; // Revalidate every hour // Lazy load API functions to avoid compilation during SSG async function getOpenAtas() { const { getOpenAtas: _getOpenAtas } = await import('@/lib/api'); return _getOpenAtas(); } export default async function AtasAbertasPage() { let atas = []; try { atas = await getOpenAtas(); } catch (error) { console.error('Erro ao carregar atas abertas:', error); atas = []; } const breadcrumbs = [ { name: 'Página Inicial', path: '/' }, { name: 'Atas Abertas', path: '/atas-abertas' }, ]; return ( {/* 1. Seção de Título e Introdução */} Atas Abertas Você sabe o que é um Sistema de Registro de Preço (SRP)? Se você já conhece, clique aqui e acesse as ATAS abertas . {/* Textos explicativos em 2 colunas */} {/* Coluna 1: SRP */} O que é o Sistema de Registro de Preços – SRP? O Sistema de Registro de Preços (SRP) é um procedimento especial de licitação que seleciona a proposta mais vantajosa para futuras e eventuais contratações governamentais. Em vez de realizar uma licitação para cada compra, o órgão público registra os preços de produtos e serviços de fornecedores qualificados, que se comprometem a manter a oferta por um período determinado (geralmente 12 meses). {/* Coluna 2: ARP */} O que é uma Ata de Registro de Preços – ARP? A Ata de Registro de Preços (ARP) é o documento que formaliza o resultado do SRP. Nela, são registrados os preços, os fornecedores, os produtos e as condições de fornecimento. Essa ata funciona como um \"cardápio\" de produtos e serviços que os órgãos públicos podem adquirir de forma ágil e sem a necessidade de um novo processo licitatório completo, bastando apenas emitir uma ordem de compra. Queremos te contar mais, clique aqui. {/* 2. Seção da Lista de Atas */} Lista de ATAS disponíveis para você: {atas && atas.length > 0 ? ( atas.map((ata) => ) ) : ( Nenhuma ata aberta encontrada no momento. Por favor, verifique novamente mais tarde ou entre em contato para mais informações. )} {/* 3. Seção do Formulário de Contato */} {/* 4. Seção de Vantagens */} ); }",
     "type": "Página"
   },
   {

@@ -122,7 +122,42 @@ export default async function ProductPage({ params }) {
     { name: p.nome, path: null }
   ];
 
+  // Prepara o JSON-LD para Schema.org
+  const imageUrl = getStrapiMediaUrl(
+    p.imagem_principal?.data?.attributes?.url ||
+    p.imagem_principal?.url
+  );
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: p.nome,
+    image: imageUrl ? [imageUrl] : [],
+    description: p.descricao_curta || p.descricao,
+    brand: {
+      '@type': 'Brand',
+      name: p.Fabricante || 'Tecassistiva'
+    },
+    offers: {
+      '@type': 'Offer',
+      url: `https://www.tecassistiva.com.br/produtos/${slug}`,
+      priceCurrency: 'BRL',
+      price: '0', // Preço sob consulta, campo obrigatório para produto válido
+      availability: 'https://schema.org/InStock',
+      seller: {
+        '@type': 'Organization',
+        name: 'Tecassistiva'
+      }
+    }
+  };
+
   return (
-    <ProductDetail product={product} breadcrumbs={breadcrumbs} />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <ProductDetail product={product} breadcrumbs={breadcrumbs} />
+    </>
   );
 }

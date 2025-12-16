@@ -3,6 +3,15 @@ import ContactForm from '@/components/ContactForm';
 import Image from 'next/image';
 import Breadcrumbs from '@/components/Breadcrumbs';
 
+export const metadata = {
+  title: 'Fale Conosco',
+  description: 'Entre em contato com a Tecassistiva. Tire suas dúvidas sobre tecnologia assistiva, solicite orçamentos e obtenha suporte técnico.',
+  openGraph: {
+    title: 'Fale Conosco | Tecassistiva',
+    description: 'Entre em contato com a Tecassistiva para dúvidas, orçamentos e suporte',
+    url: 'https://www.tecassistiva.com.br/contato'
+  }
+}
 
 export default function ContatoPage() {
   const breadcrumbs = [

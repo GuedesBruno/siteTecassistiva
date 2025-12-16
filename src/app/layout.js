@@ -69,10 +69,6 @@ export const metadata = {
     shortcut: '/favicon-16x16.png',
   },
   manifest: '/manifest.json',
-  verification: {
-    google: 'google-site-verification-code-here',
-    // yandex: 'yandex-verification-code-here',
-  }
 }
 
 export default async function RootLayout({ children }) {

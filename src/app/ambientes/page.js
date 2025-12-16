@@ -3,6 +3,16 @@ import Image from 'next/image';
 import { ambientesData } from '@/lib/ambientes-data'; // Importa os dados estáticos
 import Breadcrumbs from '@/components/Breadcrumbs';
 
+export const metadata = {
+  title: 'Soluções por Ambientes',
+  description: 'Descubra soluções de tecnologia assistiva para diferentes ambientes: escolas, empresas, residências e mais.',
+  openGraph: {
+    title: 'Soluções por Ambientes | Tecassistiva',
+    description: 'Tecnologia assistiva para escolas, empresas e residências',
+    url: 'https://www.tecassistiva.com.br/ambientes'
+  }
+}
+
 export default function AmbientesPage() {
   const breadcrumbs = [
     { name: 'Página Inicial', path: '/' },

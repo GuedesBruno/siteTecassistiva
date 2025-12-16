@@ -5,6 +5,16 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 // Prevent static generation - use on-demand ISR
 export const revalidate = 3600; // Revalidate every hour
 
+export const metadata = {
+  title: 'Suporte Técnico',
+  description: 'Acesse softwares, drivers, manuais e documentação técnica para produtos de tecnologia assistiva da Tecassistiva.',
+  openGraph: {
+    title: 'Suporte Técnico | Tecassistiva',
+    description: 'Softwares, drivers e documentação para produtos de tecnologia assistiva',
+    url: 'https://www.tecassistiva.com.br/suporte'
+  }
+}
+
 // Lazy load API functions to avoid compilation during SSG
 async function getProductsWithDocuments() {
   const { getProductsWithDocuments: _getProductsWithDocuments } = await import('@/lib/api');
