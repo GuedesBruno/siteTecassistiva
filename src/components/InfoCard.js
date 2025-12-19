@@ -1,22 +1,26 @@
 import React from 'react';
 
-const InfoCard = ({ title, children, actionLabel, onClick, isSticky = false, variant = 'white' }) => {
+const InfoCard = ({ title, children, actionLabel, onClick, isSticky = false, variant = 'white', allowOverflow = false }) => {
     // Base styles - Modern, Clean
     const bgClass = variant === 'blue' ? 'bg-gray-100 border-gray-200' : 'bg-white border-gray-100';
 
     // Simple container classes
-    let containerClasses = `group relative w-full rounded-2xl overflow-hidden transition-all duration-300 ease-out ${bgClass} border cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-blue-300`;
+    // REMOVED: overflow-hidden from here if allowOverflow is true
+    let containerClasses = `group relative w-full rounded-2xl transition-all duration-300 ease-out ${bgClass} border cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-blue-300 ${allowOverflow ? '' : 'overflow-hidden'}`;
 
     return (
         <div
             className={containerClasses}
             onClick={onClick}
         >
-            {/* Decorative Top Accent (Cleaner) */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-tec-blue/5 to-transparent rounded-bl-full -mr-10 -mt-10 transition-transform duration-700 group-hover:scale-110" />
+            {/* Background Decoration Clipper */}
+            <div className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none">
+                {/* Decorative Top Accent (Cleaner) */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-tec-blue/5 to-transparent rounded-bl-full -mr-10 -mt-10 transition-transform duration-700 group-hover:scale-110" />
+            </div>
 
             {/* Content Container */}
-            <div className="relative p-6 md:p-8 flex flex-col h-full z-10">
+            <div className="relative p-6 md:p-8 flex flex-col h-full z-10 w-full">
 
                 {/* Title */}
                 {title && (

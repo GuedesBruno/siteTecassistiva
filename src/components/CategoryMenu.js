@@ -74,8 +74,10 @@ export default function CategoryMenu({
     }
 
     const href = isSub ? `${basePath}/${parentSlug}/${slug}` : `${basePath}/${slug}`;
+    // Debug logging
+    // console.log('Rendering Link:', { label: attrs.nome, href, isSub, parentSlug });
     return (
-      <Link href={href} className={className}>
+      <Link href={href} className={className} onClick={(e) => console.log('Link clicked:', href)}>
         {attrs.nome}
       </Link>
     );

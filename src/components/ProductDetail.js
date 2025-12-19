@@ -12,6 +12,7 @@ import RichTextRenderer from './RichTextRenderer';
 import SpecsTable from './SpecsTable';
 import Breadcrumbs from './Breadcrumbs';
 import InfoCard from './InfoCard';
+import ComparisonButton from './ComparisonButton';
 import ProductCard from './ProductCard'; // Usando componente global
 import VideoCard, { getVideoId } from './VideoCard'; // Usando componente extraído
 
@@ -319,20 +320,88 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
                   {/* Lógica para Especificações Técnicas Estruturadas (Lista Normal) */}
                   {tab.name === 'Características Técnicas' && tab.isStructured && (
                     <div className="flex flex-col gap-6">
-                      {tab.content.map((group, idx) => (
-                        <InfoCard
-                          key={idx}
-                          title={group.titulo}
-                          isSticky={false}
-                        >
-                          <SpecsTable specGroups={[group]} showTitle={false} />
-                        </InfoCard>
-                      ))}
+                      {tab.content.map((group, idx) => {
+                        const groupTitle = group.titulo?.trim();
+                        // Normalize strings for comparison
+                        const groupTitleLower = groupTitle?.toLowerCase() || '';
+
+                        // Collect all possible fields to check for "Index Braille" identity
+                        const identityFields = [
+                          p.Fabricante,
+                          p.fabricante,
+                          p.relacao_fabricante?.data?.attributes?.nome,
+                          p.nome,
+                          p.slug
+                        ];
+
+                        // Keywords that identify Index Braille products
+                        const indexKeywords = ['index braille', 'index', 'basic', 'everest', 'fanfold', 'braillebox', 'braille box'];
+
+                        const isIndexBraille = identityFields.some(field => {
+                          if (!field) return false;
+                          const val = field.toString().toLowerCase();
+                          return indexKeywords.some(keyword => val.includes(keyword));
+                        });
+
+                        // Check for 'impressão' or 'impressao'
+                        const isImpressaoGroup = groupTitleLower.includes('impressão') || groupTitleLower.includes('impressao');
+
+                        console.log(`[ProductDetail] Group: "${groupTitle}" (Match: ${isImpressaoGroup}), IsIndex: ${isIndexBraille} (Identity Check: ${p.nome})`);
+
+                        return (
+                          <InfoCard
+                            key={idx}
+                            title={group.titulo}
+                            isSticky={false}
+                            allowOverflow={isImpressaoGroup && isIndexBraille}
+                          >
+                            <SpecsTable
+                              specGroups={[group]}
+                              showTitle={false}
+                              showComparisonButton={isImpressaoGroup && isIndexBraille}
+                            />
+                          </InfoCard>
+                        );
+                      })}
                     </div>
                   )}
 
                   {tab.name === 'Características Técnicas' && !tab.isStructured && (
-                    <InfoCard title="Especificações">
+                    <InfoCard title="Especificações" allowOverflow={(() => {
+                      const identityFields = [
+                        p.Fabricante,
+                        p.fabricante,
+                        p.relacao_fabricante?.data?.attributes?.nome,
+                        p.nome,
+                        p.slug
+                      ];
+                      const indexKeywords = ['index braille', 'index', 'basic', 'everest', 'fanfold', 'braillebox', 'braille box'];
+                      return identityFields.some(field => {
+                        if (!field) return false;
+                        const val = field.toString().toLowerCase();
+                        return indexKeywords.some(keyword => val.includes(keyword));
+                      });
+                    })()}>
+                      {(() => {
+                        const identityFields = [
+                          p.Fabricante,
+                          p.fabricante,
+                          p.relacao_fabricante?.data?.attributes?.nome,
+                          p.nome,
+                          p.slug
+                        ];
+                        const indexKeywords = ['index braille', 'index', 'basic', 'everest', 'fanfold', 'braillebox', 'braille box'];
+
+                        const isIndexBraille = identityFields.some(field => {
+                          if (!field) return false;
+                          const val = field.toString().toLowerCase();
+                          return indexKeywords.some(keyword => val.includes(keyword));
+                        });
+
+                        console.log('[ProductDetail] Unstructured Specs - IsIndex:', isIndexBraille, p.nome);
+
+                        return isIndexBraille ? <ComparisonButton /> : null;
+                      })()}
                       {typeof tab.content === 'string' ? <div className="whitespace-pre-line">{tab.content}</div> : <RichTextRenderer content={tab.content} />}
                     </InfoCard>
                   )}
