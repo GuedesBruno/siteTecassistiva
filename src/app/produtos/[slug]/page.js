@@ -68,21 +68,21 @@ export async function generateMetadata({ params }) {
     );
 
     // Dynamic Title Generation for SEO
-    // Ex: "Basic Index Braille - Impressoras Braille | Tecassistiva"
+    // Ex: "Everest - Index Braille | Impressoras Braille Folha Solta"
     let seoTitle = productAttributes.nome;
 
     const manufacturer = productAttributes.Fabricante ||
       productAttributes.relacao_fabricante?.data?.attributes?.nome;
 
-    const category = productAttributes.categorias?.data?.[0]?.attributes?.nome ||
-      productAttributes.categorias?.[0]?.nome;
+    const subcategory = productAttributes.subcategorias?.data?.[0]?.attributes?.nome ||
+      productAttributes.subcategorias?.[0]?.nome;
 
     if (manufacturer && !seoTitle.includes(manufacturer)) {
-      seoTitle += ` ${manufacturer}`;
+      seoTitle += ` - ${manufacturer}`;
     }
 
-    if (category) {
-      seoTitle += ` - ${category}`;
+    if (subcategory) {
+      seoTitle += ` | ${subcategory}`;
     }
 
     return {
@@ -91,7 +91,7 @@ export async function generateMetadata({ params }) {
       keywords: [
         productAttributes.nome,
         manufacturer,
-        category,
+        subcategory,
         'tecnologia assistiva',
         'acessibilidade'
       ].filter(Boolean).join(', '),

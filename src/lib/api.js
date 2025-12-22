@@ -106,6 +106,7 @@ export async function getProductBySlug(slug) {
       'caracteristicas_tecnicas',
       'visao_geral',
       'videos',
+      'Fabricante',
     ],
     populate: {
       imagem_principal: { fields: ['url', 'alternativeText', 'width', 'height'] },
