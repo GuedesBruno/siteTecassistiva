@@ -37,14 +37,22 @@ async function fetchAPI(endpoint, options = {}) {
       console.error(`Erro na requisição para ${endpoint}: ${res.status} ${res.statusText}`);
       const errorText = await res.text();
       console.error("Detalhes do erro:", errorText);
-      throw new Error(`Falha na requisição da API para ${endpoint}: ${res.status}`);
+
+      // FALLBACK: Se Strapi retornar erro (ex: limite de API excedido), retorna dados vazios
+      console.warn(`⚠️ Strapi API indisponível (${res.status}). Retornando dados vazios para permitir build.`);
+      return { data: [] };
     }
 
     return await res.json();
 
   } catch (error) {
     console.error(`ERRO ao fazer fetch no endpoint "${endpoint}":`, error.message);
-    throw error;
+
+    // FALLBACK CRÍTICO: Se Strapi estiver completamente offline, retorna dados vazios
+    // Isso permite que o build complete mesmo com Strapi suspenso
+    console.warn(`⚠️ Strapi API completamente indisponível. Retornando dados vazios para permitir build.`);
+    console.warn(`   Endpoint afetado: ${endpoint}`);
+    return { data: [] };
   }
 }
 

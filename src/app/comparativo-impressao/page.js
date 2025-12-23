@@ -18,7 +18,7 @@ export default function ComparativoPage() {
 
                     <div className="container mx-auto px-4 relative z-10 text-center">
                         <h1 className="text-2xl md:text-4xl font-extrabold mb-3 tracking-tight leading-tight text-gray-900">
-                            Velocidade de Impressão <span className="text-tec-blue">Em Braille</span>
+                            Você sabe como escolher uma  <span className="text-tec-blue">Impressora Braille?</span>
                         </h1>
                         <p className="text-sm md:text-base text-gray-600 max-w-3xl mx-auto leading-relaxed font-medium">
                             Entenda por que a velocidade nominal nem sempre reflete a realidade da sua produção e aprenda a avaliar corretamente.
@@ -34,73 +34,121 @@ export default function ComparativoPage() {
                                 Métodos de Medição
                             </div>
                             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 leading-tight">
-                                O mercado sempre usou 2 formas de medir
+                                Conheça as formas de medição que o mercado utiliza
                             </h2>
                             <p className="text-gray-600 text-lg leading-relaxed max-w-3xl mx-auto">
-                                Comparar impressoras apenas pelo número de "caracteres por segundo" pode ser enganoso se você não souber qual texto foi usado no teste.
+                                A forma correta de avaliar a velocidade de uma impressora Braille é pelos caracteres por segundo (CPS). Contudo, além dos dois métodos legítimos de medição, existe uma terceira forma usada estrategicamente para inflar números e ludibriar o comprador.
                             </p>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-                            {/* Column 1: Texto Uniforme */}
-                            <div className="flex flex-col gap-6">
-                                <div className="flex gap-4 p-4 rounded-xl bg-gray-50 border border-gray-100">
-                                    <div className="flex-shrink-0 w-12 h-12 bg-white text-tec-blue rounded-full flex items-center justify-center font-bold text-xl shadow-sm border border-gray-100">
-                                        1
-                                    </div>
-                                    <div>
-                                        <h3 className="font-bold text-gray-900 text-lg">Texto Uniforme</h3>
-                                        <p className="text-gray-500 mt-1 text-sm leading-relaxed">
-                                            Utiliza um texto padrão mundial, como a Bíblia que é igual em todos os países. Ótimo para padronização laboratorial.
-                                        </p>
-                                    </div>
+                        {/* Row 1: Description Cards */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                            {/* Card 1: Texto Uniforme */}
+                            <div className="flex gap-4 p-6 rounded-xl bg-white border-2 border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                                <div className="flex-shrink-0 w-12 h-12 bg-tec-blue text-white rounded-full flex items-center justify-center font-bold text-xl">
+                                    1
                                 </div>
-
-                                {/* Visual 1 */}
-                                <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-200 relative group hover:shadow-md transition-all transform -rotate-1 hover:rotate-0 duration-500 flex-grow">
-                                    <h4 className="text-gray-400 uppercase text-xs font-bold tracking-widest mb-4">Teste de Texto Uniforme</h4>
-                                    <div className="space-y-2 font-serif text-gray-500 text-xs md:text-sm leading-relaxed text-justify">
-                                        <p>No princípio, criou Deus os céus e a terra. A terra, porém, estava sem forma e vazia; havia trevas sobre a face do abismo, e o Espírito de Deus pairava por sobre as águas.</p>
-                                        <p>Disse Deus: Haja luz; e houve luz. E viu Deus que a luz era boa; e fez separação entre a luz e as trevas.</p>
-                                        <p>Chamou Deus à luz Dia e às trevas, Noite. Houve tarde e manhã, o primeiro dia.</p>
-                                    </div>
-                                    <div className="absolute inset-0 flex items-center justify-center -translate-y-32">
-                                        <span className="bg-gray-100/90 backdrop-blur px-4 py-2 rounded-lg text-gray-600 font-bold border border-gray-200 text-sm">
-                                            Padrão Previsível
-                                        </span>
-                                    </div>
+                                <div>
+                                    <h3 className="font-bold text-gray-900 text-lg mb-2">O Alfabeto Inglês</h3>
+                                    <p className="text-gray-600 text-sm leading-relaxed">
+                                        Imprimir "ABC..." repetidamente. É um teste de estresse mecânico puro, ideal para medir a velocidade máxima da impressora.
+                                    </p>
                                 </div>
                             </div>
 
-                            {/* Column 2: Alfabeto Puro */}
-                            <div className="flex flex-col gap-6">
-                                <div className="flex gap-4 p-4 rounded-xl bg-gray-50 border border-gray-100">
-                                    <div className="flex-shrink-0 w-12 h-12 bg-white text-tec-blue rounded-full flex items-center justify-center font-bold text-xl shadow-sm border border-gray-100">
-                                        2
-                                    </div>
-                                    <div>
-                                        <h3 className="font-bold text-gray-900 text-lg">O Alfabeto Puro</h3>
-                                        <p className="text-gray-500 mt-1 text-sm leading-relaxed">
-                                            Imprimir "ABC..." repetidamente. É um teste de estresse mecânico puro, ideal para medir a velocidade máxima da impressora.
-                                        </p>
-                                    </div>
+                            {/* Card 2: Alfabeto Puro */}
+                            <div className="flex gap-4 p-6 rounded-xl bg-white border-2 border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                                <div className="flex-shrink-0 w-12 h-12 bg-tec-blue text-white rounded-full flex items-center justify-center font-bold text-xl">
+                                    2
                                 </div>
+                                <div>
+                                    <h3 className="font-bold text-gray-900 text-lg mb-2">O Alfabeto Português</h3>
+                                    <p className="text-gray-600 text-sm leading-relaxed">
+                                        Além dos caracteres do alfabeto internacional, ele também conta com os caracteres especiais e acentos da grafia portuguesa.
+                                    </p>
+                                </div>
+                            </div>
 
-                                {/* Visual 2 */}
-                                <div className="bg-gray-50 rounded-3xl p-8 transform rotate-1 hover:rotate-0 transition-transform duration-500 border border-gray-200 relative flex-grow">
-                                    <h4 className="text-gray-400 uppercase text-xs font-bold tracking-widest mb-4">Simulação de Teste</h4>
-                                    <div className="space-y-2 font-mono text-gray-500 text-sm overflow-hidden select-none">
-                                        <p>ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOP...</p>
-                                        <p>ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOP...</p>
-                                        <p>ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOP...</p>
-                                        <p>ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOP...</p>
-                                        <p>ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOP...</p>
-                                    </div>
-                                    <div className="absolute inset-0 flex items-center justify-center -translate-y-32">
-                                        <span className="bg-white/90 backdrop-blur px-6 py-3 rounded-lg shadow-lg text-gray-600 font-bold border border-gray-100">
-                                            Teste Sintético
-                                        </span>
-                                    </div>
+                            {/* Card 3: Enganoso */}
+                            <div className="flex gap-4 p-6 rounded-xl bg-red-50 border-2 border-red-300 shadow-sm hover:shadow-md transition-shadow">
+                                <div className="flex-shrink-0 w-12 h-12 bg-red-600 text-white rounded-full flex items-center justify-center text-2xl">
+                                    ⚠️
+                                </div>
+                                <div>
+                                    <h3 className="font-bold text-gray-900 text-lg mb-2">O Enganoso</h3>
+                                    <p className="text-gray-600 text-sm leading-relaxed">
+                                        Teste que não reflete a realidade brasileira. Pode inflar artificialmente os números de velocidade.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Row 2: Badges */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                            <div className="flex justify-center">
+                                <span className="inline-block bg-gray-100 px-6 py-3 rounded-lg text-gray-700 font-bold border-2 border-gray-300 shadow-sm">
+                                    Padrão
+                                </span>
+                            </div>
+                            <div className="flex justify-center">
+                                <span className="inline-block bg-gray-100 px-6 py-3 rounded-lg text-gray-700 font-bold border-2 border-gray-300 shadow-sm">
+                                    Recomendado
+                                </span>
+                            </div>
+                            <div className="flex justify-center">
+                                <span className="inline-block bg-red-500 px-6 py-3 rounded-lg text-white font-bold border-2 border-red-600 shadow-md">
+                                    Ilusório
+                                </span>
+                            </div>
+                        </div>
+
+                        {/* Row 3: Test/Simulation Cards */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            {/* Test Card 1: Texto Uniforme */}
+                            <div className="bg-white rounded-2xl p-6 border-2 border-gray-200 shadow-sm min-h-[320px] flex flex-col">
+                                <h4 className="text-gray-400 uppercase text-xs font-bold tracking-widest mb-4">SIMULAÇÃO DE TESTE</h4>
+                                <div className="font-serif text-gray-600 text-lg md:text-xl leading-relaxed flex-grow" style={{ whiteSpace: 'nowrap' }}>
+                                    <p>abcdefghijklmnopqrstuvwxyz</p>
+                                </div>
+                                <div className="mt-4 pt-4 border-t border-gray-200">
+                                    <p className="text-xs text-gray-400 mb-2 uppercase tracking-wide font-semibold">Representação em Braille:</p>
+                                    <p className="text-lg md:text-xl text-gray-700 leading-relaxed" style={{ fontFamily: 'monospace', overflowWrap: 'break-word', wordWrap: 'break-word', wordBreak: 'break-all' }}>⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵</p>
+                                </div>
+                                <div className="mt-4 flex flex-col items-center gap-2">
+                                    <img src="/teste1.jpg" alt="Média de pontos" className="w-32 h-auto rounded-lg shadow-md" />
+                                    <p className="text-sm font-semibold text-gray-700">Média de 3.02 pontos por caractere</p>
+                                </div>
+                            </div>
+
+                            {/* Test Card 2: Alfabeto */}
+                            <div className="bg-gray-50 rounded-2xl p-6 border-2 border-gray-200 shadow-sm min-h-[320px] flex flex-col">
+                                <h4 className="text-gray-400 uppercase text-xs font-bold tracking-widest mb-4">SIMULAÇÃO DE TESTE</h4>
+                                <div className="font-mono text-gray-600 text-lg md:text-xl leading-relaxed flex-grow">
+                                    <p style={{ whiteSpace: 'nowrap' }}>abcdefghijklmnopqrstuvwxyz</p>
+                                    <p style={{ whiteSpace: 'nowrap' }}><span className="font-bold">áàâãéêíóôõúç</span></p>
+                                </div>
+                                <div className="mt-4 pt-4 border-t border-gray-200">
+                                    <p className="text-lg md:text-xl text-gray-700 leading-relaxed" style={{ fontFamily: 'monospace', overflowWrap: 'break-word', wordWrap: 'break-word', wordBreak: 'break-all' }}>⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵⠷⠡⠜⠩⠿⠣⠌⠾⠬⠹⠾⠯</p>
+                                </div>
+                                <div className="mt-4 flex flex-col items-center gap-2">
+                                    <img src="/teste2.jpg" alt="Média de pontos" className="w-32 h-auto rounded-lg shadow-md" />
+                                    <p className="text-sm font-semibold text-gray-700">Média de 3.41 pontos por caractere</p>
+                                </div>
+                            </div>
+
+                            {/* Test Card 3: Enganoso */}
+                            <div className="bg-red-50 rounded-2xl p-6 border-2 border-red-200 shadow-sm min-h-[320px] flex flex-col">
+                                <h4 className="text-red-400 uppercase text-xs font-bold tracking-widest mb-4">⚠️ TESTE NÃO RECOMENDADO</h4>
+                                <div className="font-mono text-gray-400 text-lg md:text-xl leading-relaxed flex-grow" style={{ whiteSpace: 'nowrap' }}>
+                                    <p>aaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                                </div>
+                                <div className="mt-4 pt-4 border-t border-red-200">
+                                    <p className="text-xs text-red-300 mb-2 uppercase tracking-wide font-semibold">Representação em Braille:</p>
+                                    <p className="text-lg md:text-xl text-gray-400 leading-relaxed" style={{ fontFamily: 'monospace', overflowWrap: 'break-word', wordWrap: 'break-word', wordBreak: 'break-all' }}>⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁</p>
+                                </div>
+                                <div className="mt-4 flex flex-col items-center gap-2">
+                                    <img src="/teste3.jpg" alt="Média de pontos" className="w-32 h-auto rounded-lg shadow-md" />
+                                    <p className="text-sm font-semibold text-red-600">Média de 1 ponto por caractere</p>
                                 </div>
                             </div>
                         </div>
@@ -111,18 +159,30 @@ export default function ComparativoPage() {
                 <section className="py-4 md:py-8 bg-gray-50 border-t border-gray-200">
                     <div className="container mx-auto px-4 max-w-5xl text-center">
                         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                            O Padrão Brasileiro
+                            O que diz a Justiça Brasileira?
                         </h2>
                         <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12">
-                            Para o mercado nacional, a justiça brasileira recomenda testar com <strong className="text-tec-blue">todos</strong> os caracteres que existem na língua portuguesa. Isso inclui acentos e cedilhas que exigem mais da impressora.
+                            De acordo com a 7ª vara do Tribunal de Justiça do Paraná, para o mercado nacional, recomenda-se testar com <strong className="text-tec-blue">todos</strong> os caracteres que existem na língua portuguesa. Isso inclui letras acentuadas que melhor simulam um cenário real de produção.
+                            Com esse teste constatamos que a média de pontos por caracteres aumenta de 3.02, no caso do alfabeto ingês, para 3.41 pontos por caractere, no caso do alfabeto português.
                         </p>
 
                         <div className="bg-white p-4 md:p-6 rounded-3xl shadow-xl border border-blue-100 relative overflow-hidden group">
                             <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-tec-blue via-blue-400 to-tec-blue"></div>
                             <p className="text-sm text-gray-400 mb-4 uppercase tracking-widest font-semibold">Tabela de Teste Real</p>
-                            <p className="font-mono text-2xl md:text-4xl text-gray-800 tracking-wide leading-normal whitespace-nowrap">
-                                ABCDEFGHIJKLMNOPQRSTUVWXYZ<span className="text-tec-blue font-black">ÁÀÂÃÉÊÍÓÔÕÚÇ</span>
-                            </p>
+                            <div className="flex justify-center gap-0.5 md:gap-1 overflow-x-auto">
+                                {['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'].map((char, i) => (
+                                    <div key={i} className="flex flex-col items-center flex-shrink-0">
+                                        <span className="font-mono text-lg md:text-2xl text-gray-800">{char}</span>
+                                        <span className="font-mono text-base md:text-xl text-gray-600">{'⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵'[i]}</span>
+                                    </div>
+                                ))}
+                                {[{ char: 'á', braille: '⠷' }, { char: 'à', braille: '⠡' }, { char: 'â', braille: '⠜' }, { char: 'ã', braille: '⠩' }, { char: 'é', braille: '⠿' }, { char: 'ê', braille: '⠣' }, { char: 'í', braille: '⠌' }, { char: 'ó', braille: '⠾' }, { char: 'ô', braille: '⠬' }, { char: 'õ', braille: '⠹' }, { char: 'ú', braille: '⠾' }, { char: 'ç', braille: '⠯' }].map((item, i) => (
+                                    <div key={`accent-${i}`} className="flex flex-col items-center flex-shrink-0">
+                                        <span className="font-mono text-lg md:text-2xl text-tec-blue font-black">{item.char}</span>
+                                        <span className="font-mono text-base md:text-xl text-tec-blue font-black">{item.braille}</span>
+                                    </div>
+                                ))}
+                            </div>
                             <p className="mt-8 text-gray-500 text-center">
                                 Estes caracteres extras forçam a impressora a trabalhar mais, revelando a verdadeira velocidade de produção no Brasil.
                             </p>
@@ -130,61 +190,47 @@ export default function ComparativoPage() {
                     </div>
                 </section>
 
-                {/* CTA & Video Section */}
+                {/* COMMENTED OUT - Veja a Diferença Section
                 <section className="py-8 md:py-16 bg-tec-blue relative overflow-hidden">
-                    {/* Background Shapes */}
-                    <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
-                        <div className="absolute w-96 h-96 bg-white opacity-5 rounded-full -top-20 -left-20"></div>
-                        <div className="absolute w-[500px] h-[500px] bg-white opacity-5 rounded-full -bottom-40 -right-20"></div>
-                    </div>
+                    ... (section content commented out)
+                </section>
+                */}
 
-                    <div className="container mx-auto px-4 relative z-10">
-                        <div className="text-center mb-16">
-                            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-                                Veja a Diferença
+                {/* Expert Report Section */}
+                <section className="py-12 md:py-20 bg-gradient-to-br from-blue-50 to-white">
+                    <div className="container mx-auto px-4 max-w-4xl">
+                        <div className="text-center mb-12">
+                            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+                                Conheça o Laudo da Perícia
                             </h2>
-                            <p className="text-blue-100 text-lg max-w-2xl mx-auto">
-                                Disponibilizamos materiais exclusivos para você aprofundar seu conhecimento técnico.
+                            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                                Acesse o documento oficial da 7ª Vara do Tribunal de Justiça do Paraná que fundamenta os testes de velocidade para o mercado brasileiro.
                             </p>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                            {/* Card 1 */}
-                            <div className="bg-white rounded-2xl p-8 hover:-translate-y-2 transition-transform duration-300 shadow-2xl flex flex-col items-center text-center">
-                                <div className="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center text-3xl mb-6">
-                                    ⚖️
+                        <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 border border-blue-100">
+                            <div className="flex flex-col md:flex-row items-center gap-8">
+                                <div className="flex-shrink-0">
+                                    <div className="w-24 h-24 bg-gradient-to-br from-tec-blue to-blue-600 rounded-2xl flex items-center justify-center text-5xl shadow-lg">
+                                        📄
+                                    </div>
                                 </div>
-                                <h3 className="text-2xl font-bold text-gray-900 mb-3">Perícia Judicial</h3>
-                                <p className="text-gray-500 mb-8 flex-grow">
-                                    Acesse o relatório técnico detalhado que fundamenta esses testes e entenda os critérios legais.
-                                </p>
-                                <button className="w-full py-4 bg-gray-900 text-white rounded-xl font-bold hover:bg-gray-800 transition-colors shadow-lg hover:shadow-xl">
-                                    Ler Relatório
-                                </button>
-                            </div>
-
-                            {/* Card 2 */}
-                            <div className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl p-8 hover:-translate-y-2 transition-transform duration-300 shadow-2xl flex flex-col items-center text-center text-white border border-blue-500/30">
-                                <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center text-3xl mb-6 backdrop-blur">
-                                    ▶️
+                                <div className="flex-grow text-center md:text-left">
+                                    <h3 className="text-2xl font-bold text-gray-900 mb-3">Laudo Técnico Oficial</h3>
+                                    <p className="text-gray-600 mb-6">
+                                        Documento técnico detalhado com os testes de velocidade de impressão Braille no Brasil.
+                                    </p>
+                                    <a
+                                        href="/laudo-pericia.pdf"
+                                        download
+                                        className="inline-flex items-center gap-3 px-8 py-4 bg-tec-blue text-white rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
+                                    >
+                                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                        </svg>
+                                        Baixar Laudo Completo
+                                    </a>
                                 </div>
-                                <h3 className="text-2xl font-bold text-white mb-3">Vídeos Comparativos</h3>
-                                <p className="text-blue-100 mb-8 flex-grow">
-                                    Assista lado a lado impressoras rodando o teste do Alfabeto vs. o teste do Padrão Brasileiro.
-                                </p>
-                                <button className="w-full py-4 bg-white text-tec-blue rounded-xl font-bold hover:bg-blue-50 transition-colors shadow-lg hover:shadow-xl">
-                                    Assistir Agora
-                                </button>
-                            </div>
-                        </div>
-
-                        <div className="mt-20 max-w-4xl mx-auto bg-gray-900 rounded-3xl overflow-hidden shadow-2xl ring-8 ring-white/10">
-                            <div className="aspect-video w-full flex items-center justify-center bg-gray-800 relative group cursor-pointer">
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-60"></div>
-                                <div className="w-24 h-24 bg-white/20 backdrop-blur rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                                    <div className="ml-2 w-0 h-0 border-t-[10px] border-t-transparent border-l-[20px] border-l-white border-b-[10px] border-b-transparent"></div>
-                                </div>
-                                <p className="absolute bottom-6 font-medium text-white/80">Preview: Teste de Velocidade em Tempo Real</p>
                             </div>
                         </div>
                     </div>
