@@ -6,8 +6,7 @@ const nextConfig = {
   trailingSlash: true,
 
   // Adicionado para gerar um site estático compatível com hospedagem sem Node.js
-  // TEMPORARIAMENTE DESABILITADO: Strapi offline - impossível gerar páginas estáticas
-  // output: 'export',
+  output: 'export',
 
   reactStrictMode: true,
   images: {
