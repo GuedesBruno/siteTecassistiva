@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "node scripts/build-search-data.js && node scripts/generate-sitemap.mjs && next build",
+    "build": "next build",
+    "build:full": "node scripts/build-search-data.js && node scripts/generate-sitemap.mjs && next build",
     "build:search": "node scripts/build-search-data.js",
     "start": "next start",
     "lint": "next lint"
