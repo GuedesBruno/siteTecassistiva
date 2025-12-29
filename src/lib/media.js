@@ -1,5 +1,5 @@
 // Pure utility functions for media URL handling
-// These don't import @/lib/api to avoid loading problematic dependencies during static export
+// These don't import @/lib/api to avoid loading problematic dependencies during static export.
 
 export function getStrapiURL() {
   let base = (process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337').replace(/\/+$/g, '');
