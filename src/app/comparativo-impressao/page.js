@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import PasswordProtection from '@/components/PasswordProtection';
 
@@ -8,6 +8,10 @@ export const metadata = {
 };
 
 export default function ComparativoPage() {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
         <PasswordProtection password="senh@!">
             <main className="min-h-screen bg-white font-sans">
@@ -41,10 +45,10 @@ export default function ComparativoPage() {
                             </p>
                         </div>
 
-                        {/* Row 1: Description Cards */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                            {/* Card 1: Texto Uniforme */}
-                            <div className="flex gap-4 p-6 rounded-xl bg-blue-100 border-2 border-blue-200 shadow-sm hover:shadow-md transition-shadow">
+                        {/* Methods: Vertical on mobile (card→badge→sim), Horizontal on desktop (3 cols) */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            {/* Method 1: English Alphabet - Card */}
+                            <div className="flex gap-4 p-6 rounded-xl bg-blue-100 border-2 border-blue-200 shadow-sm hover:shadow-md transition-shadow order-1">
                                 <div className="flex-shrink-0 w-12 h-12 bg-blue-200 text-gray-900 rounded-full flex items-center justify-center font-bold text-xl">
                                     1
                                 </div>
@@ -56,8 +60,8 @@ export default function ComparativoPage() {
                                 </div>
                             </div>
 
-                            {/* Card 2: Alfabeto Puro */}
-                            <div className="flex gap-4 p-6 rounded-xl bg-blue-500 border-2 border-blue-600 shadow-sm hover:shadow-md transition-shadow">
+                            {/* Method 2: Portuguese Alphabet - Card */}
+                            <div className="flex gap-4 p-6 rounded-xl bg-blue-500 border-2 border-blue-600 shadow-sm hover:shadow-md transition-shadow order-4 md:order-2">
                                 <div className="flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-xl">
                                     2
                                 </div>
@@ -69,8 +73,8 @@ export default function ComparativoPage() {
                                 </div>
                             </div>
 
-                            {/* Card 3: Enganoso */}
-                            <div className="flex gap-4 p-6 rounded-xl bg-red-50 border-2 border-red-300 shadow-sm hover:shadow-md transition-shadow">
+                            {/* Method 3: Misleading - Card */}
+                            <div className="flex gap-4 p-6 rounded-xl bg-red-50 border-2 border-red-300 shadow-sm hover:shadow-md transition-shadow order-7 md:order-3">
                                 <div className="flex-shrink-0 w-12 h-12 bg-red-600 text-white rounded-full flex items-center justify-center text-2xl">
                                     ⚠️
                                 </div>
@@ -81,31 +85,30 @@ export default function ComparativoPage() {
                                     </p>
                                 </div>
                             </div>
-                        </div>
 
-                        {/* Row 2: Badges */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                            <div className="flex justify-center">
+                            {/* Method 1: English - Badge */}
+                            <div className="flex justify-center order-2 md:order-4">
                                 <span className="inline-block bg-gray-100 px-6 py-3 rounded-lg text-gray-700 font-bold border-2 border-gray-300 shadow-sm">
                                     Padrão
                                 </span>
                             </div>
-                            <div className="flex justify-center">
+
+                            {/* Method 2: Portuguese - Badge */}
+                            <div className="flex justify-center order-5">
                                 <span className="inline-block bg-gray-100 px-6 py-3 rounded-lg text-gray-700 font-bold border-2 border-gray-300 shadow-sm">
                                     Recomendado
                                 </span>
                             </div>
-                            <div className="flex justify-center">
+
+                            {/* Method 3: Misleading - Badge */}
+                            <div className="flex justify-center order-8 md:order-6">
                                 <span className="inline-block bg-red-500 px-6 py-3 rounded-lg text-white font-bold border-2 border-red-600 shadow-md">
                                     Ilusório
                                 </span>
                             </div>
-                        </div>
 
-                        {/* Row 3: Test/Simulation Cards */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            {/* Test Card 1: Texto Uniforme */}
-                            <div className="bg-white rounded-2xl p-6 border-2 border-gray-200 shadow-sm min-h-[320px] flex flex-col">
+                            {/* Method 1: English - Simulation */}
+                            <div className="bg-white rounded-2xl p-6 border-2 border-gray-200 shadow-sm min-h-[320px] flex flex-col order-3 md:order-7">
                                 <h4 className="text-gray-400 uppercase text-xs font-bold tracking-widest mb-4">SIMULAÇÃO DE TESTE</h4>
                                 <div className="font-serif text-gray-600 text-lg md:text-xl leading-relaxed flex-grow" style={{ whiteSpace: 'nowrap' }}>
                                     <p>abcdefghijklmnopqrstuvwxyz</p>
@@ -120,8 +123,8 @@ export default function ComparativoPage() {
                                 </div>
                             </div>
 
-                            {/* Test Card 2: Alfabeto */}
-                            <div className="bg-gray-50 rounded-2xl p-6 border-2 border-gray-200 shadow-sm min-h-[320px] flex flex-col">
+                            {/* Method 2: Portuguese - Simulation */}
+                            <div className="bg-gray-50 rounded-2xl p-6 border-2 border-gray-200 shadow-sm min-h-[320px] flex flex-col order-6 md:order-8">
                                 <h4 className="text-gray-400 uppercase text-xs font-bold tracking-widest mb-4">SIMULAÇÃO DE TESTE</h4>
                                 <div className="font-mono text-gray-600 text-lg md:text-xl leading-relaxed flex-grow">
                                     <p style={{ whiteSpace: 'nowrap' }}>abcdefghijklmnopqrstuvwxyz</p>
@@ -136,8 +139,8 @@ export default function ComparativoPage() {
                                 </div>
                             </div>
 
-                            {/* Test Card 3: Enganoso */}
-                            <div className="bg-red-50 rounded-2xl p-6 border-2 border-red-200 shadow-sm min-h-[320px] flex flex-col">
+                            {/* Method 3: Misleading - Simulation */}
+                            <div className="bg-red-50 rounded-2xl p-6 border-2 border-red-200 shadow-sm min-h-[320px] flex flex-col order-9">
                                 <h4 className="text-red-400 uppercase text-xs font-bold tracking-widest mb-4">⚠️ TESTE NÃO RECOMENDADO</h4>
                                 <div className="font-mono text-gray-400 text-lg md:text-xl leading-relaxed flex-grow" style={{ whiteSpace: 'nowrap' }}>
                                     <p>aaaaaaaaaaaaaaaaaaaaaaaaaa</p>
