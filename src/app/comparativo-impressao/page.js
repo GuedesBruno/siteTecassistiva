@@ -20,7 +20,7 @@ export default function ComparativoPage() {
                         <h1 className="text-2xl md:text-4xl font-extrabold mb-3 tracking-tight leading-tight text-gray-900">
                             Você sabe como escolher uma  <span className="text-tec-blue">Impressora Braille?</span>
                         </h1>
-                        <p className="text-sm md:text-base text-gray-600 max-w-3xl mx-auto leading-relaxed font-medium">
+                        <p className="text-sm md:text-base text-gray-600 max-w-3xl mx-auto leading-relaxed font-medium text-justify">
                             Entenda por que a velocidade nominal nem sempre reflete a realidade da sua produção e aprenda a avaliar corretamente.
                         </p>
                     </div>
@@ -36,7 +36,7 @@ export default function ComparativoPage() {
                             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 leading-tight">
                                 Conheça as formas de medição que o mercado utiliza
                             </h2>
-                            <p className="text-gray-600 text-lg leading-relaxed max-w-3xl mx-auto">
+                            <p className="text-gray-600 text-lg leading-relaxed max-w-3xl mx-auto text-justify">
                                 A forma correta de avaliar a velocidade de uma impressora Braille é pelos caracteres por segundo (CPS). Contudo, além dos dois métodos legítimos de medição, existe uma terceira forma usada estrategicamente para inflar números e ludibriar o comprador.
                             </p>
                         </div>
@@ -44,27 +44,27 @@ export default function ComparativoPage() {
                         {/* Row 1: Description Cards */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                             {/* Card 1: Texto Uniforme */}
-                            <div className="flex gap-4 p-6 rounded-xl bg-white border-2 border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-                                <div className="flex-shrink-0 w-12 h-12 bg-tec-blue text-white rounded-full flex items-center justify-center font-bold text-xl">
+                            <div className="flex gap-4 p-6 rounded-xl bg-blue-100 border-2 border-blue-200 shadow-sm hover:shadow-md transition-shadow">
+                                <div className="flex-shrink-0 w-12 h-12 bg-blue-200 text-gray-900 rounded-full flex items-center justify-center font-bold text-xl">
                                     1
                                 </div>
                                 <div>
                                     <h3 className="font-bold text-gray-900 text-lg mb-2">O Alfabeto Inglês</h3>
-                                    <p className="text-gray-600 text-sm leading-relaxed">
-                                        Imprimir "ABC..." repetidamente. É um teste de estresse mecânico puro, ideal para medir a velocidade máxima da impressora.
+                                    <p className="text-gray-700 text-sm leading-relaxed">
+                                        Imprimir "ABC...XYZ" repetidamente. É o método utilizado nos testes tradicionais, considerando o alfabeto inglês.
                                     </p>
                                 </div>
                             </div>
 
                             {/* Card 2: Alfabeto Puro */}
-                            <div className="flex gap-4 p-6 rounded-xl bg-white border-2 border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-                                <div className="flex-shrink-0 w-12 h-12 bg-tec-blue text-white rounded-full flex items-center justify-center font-bold text-xl">
+                            <div className="flex gap-4 p-6 rounded-xl bg-blue-500 border-2 border-blue-600 shadow-sm hover:shadow-md transition-shadow">
+                                <div className="flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-xl">
                                     2
                                 </div>
                                 <div>
-                                    <h3 className="font-bold text-gray-900 text-lg mb-2">O Alfabeto Português</h3>
-                                    <p className="text-gray-600 text-sm leading-relaxed">
-                                        Além dos caracteres do alfabeto internacional, ele também conta com os caracteres especiais e acentos da grafia portuguesa.
+                                    <h3 className="font-bold text-white text-lg mb-2">O Alfabeto Português</h3>
+                                    <p className="text-white text-sm leading-relaxed">
+                                        Além dos caracteres do alfabeto inglês, ele também conta com os caracteres especiais e acentos da grafia portuguesa.
                                     </p>
                                 </div>
                             </div>
@@ -77,7 +77,7 @@ export default function ComparativoPage() {
                                 <div>
                                     <h3 className="font-bold text-gray-900 text-lg mb-2">O Enganoso</h3>
                                     <p className="text-gray-600 text-sm leading-relaxed">
-                                        Teste que não reflete a realidade brasileira. Pode inflar artificialmente os números de velocidade.
+                                        Teste que não reflete a realidade brasileira. Criado para enganar os usuários e inflar artificialmente os números de velocidade.
                                     </p>
                                 </div>
                             </div>
@@ -155,15 +155,127 @@ export default function ComparativoPage() {
                     </div>
                 </section>
 
+                {/* Performance Comparison Table Section */}
+                <section className="py-8 md:py-12 bg-white">
+                    <div className="container mx-auto px-4">
+                        {/* Performance Comparison Table */}
+                        <div className="max-w-5xl mx-auto">
+                            {/* Table Title */}
+                            <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 text-center">
+                                Resultados oficiais dos testes de produção da impressora ViewPlus Columbia
+                            </h3>
+
+                            <div className="overflow-x-auto">
+                                <table className="w-full border-collapse bg-white shadow-lg rounded-lg overflow-hidden">
+                                    <thead>
+                                        <tr className="bg-gray-100">
+                                            <th className="border border-gray-300 px-4 py-3 text-center text-sm md:text-base font-bold text-gray-900">
+                                                Modo de teste
+                                            </th>
+                                            <th className="border border-gray-300 px-4 py-3 text-center text-sm md:text-base font-bold text-gray-900">
+                                                Configuração*
+                                            </th>
+                                            <th className="border border-gray-300 px-4 py-3 text-center text-sm md:text-base font-bold text-gray-900">
+                                                Modo de impressão
+                                            </th>
+                                            <th className="border border-gray-300 px-4 py-3 text-center text-sm md:text-base font-bold text-gray-900">
+                                                CPS**
+                                            </th>
+                                            <th className="border border-gray-300 px-4 py-3 text-center text-sm md:text-base font-bold text-gray-900">
+                                                PPH***
+                                            </th>
+                                            <th className="border border-gray-300 px-4 py-3 text-center text-sm md:text-base font-bold text-gray-900">
+                                                Fonte
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {/* 1. Alfabeto Inglês - Light Blue */}
+                                        <tr className="bg-blue-100 hover:bg-blue-200 transition-colors">
+                                            <td className="border border-blue-200 px-4 py-3 text-center text-sm md:text-base text-gray-900">
+                                                Alfabeto Inglês
+                                            </td>
+                                            <td className="border border-blue-200 px-4 py-3 text-center text-sm md:text-base text-gray-900">
+                                                43 CPL × 28 LPP
+                                            </td>
+                                            <td className="border border-blue-200 px-4 py-3 text-center text-sm md:text-base text-gray-900">
+                                                Draft
+                                            </td>
+                                            <td className="border border-blue-200 px-4 py-3 text-center text-sm md:text-base font-bold text-gray-900">
+                                                70
+                                            </td>
+                                            <td className="border border-blue-200 px-4 py-3 text-center text-sm md:text-base font-bold text-gray-900">
+                                                210
+                                            </td>
+                                            <td className="border border-blue-200 px-4 py-3 text-center text-sm md:text-base font-bold text-gray-900">
+                                                SGS
+                                            </td>
+                                        </tr>
+                                        {/* 2. Alfabeto Português - Vibrant Blue */}
+                                        <tr className="bg-blue-500 text-white hover:bg-blue-600 transition-colors">
+                                            <td className="border border-blue-600 px-4 py-3 text-center text-sm md:text-base font-bold">
+                                                Alfabeto Português
+                                            </td>
+                                            <td className="border border-blue-600 px-4 py-3 text-center text-sm md:text-base font-bold">
+                                                43 CPL × 28 LPP
+                                            </td>
+                                            <td className="border border-blue-600 px-4 py-3 text-center text-sm md:text-base font-bold">
+                                                Draft
+                                            </td>
+                                            <td className="border border-blue-600 px-4 py-3 text-center text-sm md:text-base font-bold">
+                                                51
+                                            </td>
+                                            <td className="border border-blue-600 px-4 py-3 text-center text-sm md:text-base font-bold">
+                                                183
+                                            </td>
+                                            <td className="border border-blue-600 px-4 py-3 text-center text-sm md:text-base font-bold">
+                                                TJPR
+                                            </td>
+                                        </tr>
+                                        {/* 3. Enganoso (Somente "a") - Red */}
+                                        <tr className="bg-red-500 text-white hover:bg-red-600 transition-colors">
+                                            <td className="border border-red-600 px-4 py-3 text-center text-sm md:text-base font-bold">
+                                                Enganoso (Somente "a")
+                                            </td>
+                                            <td className="border border-red-600 px-4 py-3 text-center text-sm md:text-base font-bold">
+                                                43 CPL × 28 LPP
+                                            </td>
+                                            <td className="border border-red-600 px-4 py-3 text-center text-sm md:text-base font-bold">
+                                                Draft
+                                            </td>
+                                            <td className="border border-red-600 px-4 py-3 text-center text-sm md:text-base font-bold">
+                                                175
+                                            </td>
+                                            <td className="border border-red-600 px-4 py-3 text-center text-sm md:text-base font-bold">
+                                                625
+                                            </td>
+                                            <td className="border border-red-600 px-4 py-3 text-center text-sm md:text-base font-bold">
+                                                TJPR
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            {/* Table Footnotes */}
+                            <div className="mt-4 text-xs md:text-sm text-gray-600 space-y-1">
+                                <p>* 43 Caracteres por linha (CPL) X 28 Linhas por página (LPP)</p>
+                                <p>** (CPS) Caracteres por segundo</p>
+                                <p>*** (PPH) Páginas por hora</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 {/* Section 2: A Solução (Brasil) */}
                 <section className="py-4 md:py-8 bg-gray-50 border-t border-gray-200">
                     <div className="container mx-auto px-4 max-w-5xl text-center">
                         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
                             O que diz a Justiça Brasileira?
                         </h2>
-                        <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12">
-                            De acordo com a 7ª vara do Tribunal de Justiça do Paraná, para o mercado nacional, recomenda-se testar com <strong className="text-tec-blue">todos</strong> os caracteres que existem na língua portuguesa. Isso inclui letras acentuadas que melhor simulam um cenário real de produção.
-                            Com esse teste constatamos que a média de pontos por caracteres aumenta de 3.02, no caso do alfabeto ingês, para 3.41 pontos por caractere, no caso do alfabeto português.
+                        <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12 text-justify">
+                            O Laudo pericial da 7ª vara do TJPR recomenda que os testes de desempenho utilizem o alfabeto completo da língua portuguesa, com caracteres acentuados, para maior fidelidade à grafia oficial .
+                            Os resultados mostraram que a média de pontos braille por caractere aumenta de 3,02 (alfabeto inglês) para 3,41 (alfabeto português).
                         </p>
 
                         <div className="bg-white p-4 md:p-6 rounded-3xl shadow-xl border border-blue-100 relative overflow-hidden group">
@@ -203,7 +315,7 @@ export default function ComparativoPage() {
                             <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
                                 Conheça o Laudo da Perícia
                             </h2>
-                            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                            <p className="text-xl text-gray-600 max-w-2xl mx-auto text-justify">
                                 Acesse o documento oficial da 7ª Vara do Tribunal de Justiça do Paraná que fundamenta os testes de velocidade para o mercado brasileiro.
                             </p>
                         </div>
@@ -235,7 +347,347 @@ export default function ComparativoPage() {
                         </div>
                     </div>
                 </section>
+
+                {/* Index Braille Basic Performance Table Section */}
+                <section className="py-8 md:py-12 bg-gray-50">
+                    <div className="container mx-auto px-4">
+                        {/* Performance Comparison Table */}
+                        <div className="max-w-5xl mx-auto">
+                            {/* Table Title */}
+                            <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 text-center">
+                                Resultados oficiais dos testes de produção da impressora Index Braille Basic
+                            </h3>
+
+                            <div className="overflow-x-auto">
+                                <table className="w-full border-collapse bg-white shadow-lg rounded-lg overflow-hidden">
+                                    <thead>
+                                        <tr className="bg-gray-100">
+                                            <th className="border border-gray-300 px-4 py-3 text-center text-sm md:text-base font-bold text-gray-900">
+                                                Modo de teste
+                                            </th>
+                                            <th className="border border-gray-300 px-4 py-3 text-center text-sm md:text-base font-bold text-gray-900">
+                                                Configuração*
+                                            </th>
+                                            <th className="border border-gray-300 px-4 py-3 text-center text-sm md:text-base font-bold text-gray-900">
+                                                Modo de impressão
+                                            </th>
+                                            <th className="border border-gray-300 px-4 py-3 text-center text-sm md:text-base font-bold text-gray-900">
+                                                CPS**
+                                            </th>
+                                            <th className="border border-gray-300 px-4 py-3 text-center text-sm md:text-base font-bold text-gray-900">
+                                                PPH***
+                                            </th>
+                                            <th className="border border-gray-300 px-4 py-3 text-center text-sm md:text-base font-bold text-gray-900">
+                                                Fonte
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {/* 1. Alfabeto Inglês - Light Blue */}
+                                        <tr className="bg-blue-100 hover:bg-blue-200 transition-colors">
+                                            <td className="border border-blue-200 px-4 py-3 text-center text-sm md:text-base text-gray-900">
+                                                Alfabeto Inglês
+                                            </td>
+                                            <td className="border border-blue-200 px-4 py-3 text-center text-sm md:text-base text-gray-900">
+                                                46 CPL × 29 LPP
+                                            </td>
+                                            <td className="border border-blue-200 px-4 py-3 text-center text-sm md:text-base text-gray-900">
+                                                Draft
+                                            </td>
+                                            <td className="border border-blue-200 px-4 py-3 text-center text-sm md:text-base font-bold text-gray-900">
+                                                140
+                                            </td>
+                                            <td className="border border-blue-200 px-4 py-3 text-center text-sm md:text-base font-bold text-gray-900">
+                                                378
+                                            </td>
+                                            <td className="border border-blue-200 px-4 py-3 text-center text-sm md:text-base font-bold text-gray-900">
+                                                SGS
+                                            </td>
+                                        </tr>
+                                        {/* 2. Alfabeto Português - Vibrant Blue */}
+                                        <tr className="bg-blue-500 text-white hover:bg-blue-600 transition-colors">
+                                            <td className="border border-blue-600 px-4 py-3 text-center text-sm md:text-base font-bold">
+                                                Alfabeto Português
+                                            </td>
+                                            <td className="border border-blue-600 px-4 py-3 text-center text-sm md:text-base font-bold">
+                                                46 CPL × 29 LPP
+                                            </td>
+                                            <td className="border border-blue-600 px-4 py-3 text-center text-sm md:text-base font-bold">
+                                                Draft
+                                            </td>
+                                            <td className="border border-blue-600 px-4 py-3 text-center text-sm md:text-base font-bold">
+                                                139
+                                            </td>
+                                            <td className="border border-blue-600 px-4 py-3 text-center text-sm md:text-base font-bold">
+                                                375
+                                            </td>
+                                            <td className="border border-blue-600 px-4 py-3 text-center text-sm md:text-base font-bold">
+                                                Padrão TJPR
+                                            </td>
+                                        </tr>
+                                        {/* 3. Enganoso (Somente "a") - Red */}
+                                        <tr className="bg-red-500 text-white hover:bg-red-600 transition-colors">
+                                            <td className="border border-red-600 px-4 py-3 text-center text-sm md:text-base font-bold">
+                                                Enganoso (Somente "a")
+                                            </td>
+                                            <td className="border border-red-600 px-4 py-3 text-center text-sm md:text-base font-bold">
+                                                46 CPL × 29 LPP
+                                            </td>
+                                            <td className="border border-red-600 px-4 py-3 text-center text-sm md:text-base font-bold">
+                                                Draft
+                                            </td>
+                                            <td className="border border-red-600 px-4 py-3 text-center text-sm md:text-base font-bold">
+                                                333
+                                            </td>
+                                            <td className="border border-red-600 px-4 py-3 text-center text-sm md:text-base font-bold">
+                                                898
+                                            </td>
+                                            <td className="border border-red-600 px-4 py-3 text-center text-sm md:text-base font-bold">
+                                                Padrão TJPR
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            {/* Table Footnotes */}
+                            <div className="mt-4 text-xs md:text-sm text-gray-600 space-y-1">
+                                <p>* 46 Caracteres por linha (CPL) X 29 Linhas por página (LPP)</p>
+                                <p>** (CPS) Caracteres por segundo</p>
+                                <p>*** (PPH) Páginas por hora</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Comparative Summary Section */}
+                <section className="py-12 md:py-16 bg-white border-t border-gray-200">
+                    <div className="container mx-auto px-4 max-w-6xl">
+                        <div className="text-center mb-12">
+                            <div className="inline-block px-4 py-1 bg-green-100 text-green-700 rounded-full font-semibold text-sm mb-4">
+                                Análise Comparativa
+                            </div>
+                            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                                Por que a Index Braille Basic é Superior?
+                            </h2>
+                            <p className="text-xl text-gray-600 max-w-3xl mx-auto text-justify">
+                                Além da velocidade de impressão significativamente maior, a Index Braille Basic oferece economia substancial de papel através de sua configuração otimizada de impressão em papel 11" × 12".
+                            </p>
+                        </div>
+
+                        {/* Comparison Cards */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                            {/* Speed Comparison Card */}
+                            <div className="bg-gradient-to-br from-blue-50 to-white p-8 rounded-2xl border-2 border-blue-200 shadow-lg">
+                                <div className="flex items-center gap-3 mb-6">
+                                    <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-2xl">
+                                        ⚡
+                                    </div>
+                                    <h3 className="text-2xl font-bold text-gray-900">Vantagem em Velocidade</h3>
+                                </div>
+                                <div className="space-y-4">
+                                    <div className="bg-white p-4 rounded-lg border border-blue-100">
+                                        <p className="text-sm text-gray-600 mb-2">Teste com Alfabeto Português (Real)</p>
+                                        <div className="flex items-baseline gap-2">
+                                            <span className="text-3xl font-bold text-blue-600">139 CPS</span>
+                                            <span className="text-gray-500">vs</span>
+                                            <span className="text-xl text-gray-400 line-through">51 CPS</span>
+                                        </div>
+                                        <p className="text-sm font-semibold text-green-600 mt-2">
+                                            ✓ 173% mais rápida (quase 3x a velocidade)
+                                        </p>
+                                    </div>
+                                    <div className="bg-white p-4 rounded-lg border border-blue-100">
+                                        <p className="text-sm text-gray-600 mb-2">Páginas por Hora (PPH)</p>
+                                        <div className="flex items-baseline gap-2">
+                                            <span className="text-3xl font-bold text-blue-600">375 PPH</span>
+                                            <span className="text-gray-500">vs</span>
+                                            <span className="text-xl text-gray-400 line-through">183 PPH</span>
+                                        </div>
+                                        <p className="text-sm font-semibold text-green-600 mt-2">
+                                            ✓ 105% mais produtiva (mais que o dobro)
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Time Economy Card */}
+                            <div className="bg-gradient-to-br from-purple-50 to-white p-8 rounded-2xl border-2 border-purple-200 shadow-lg">
+                                <div className="flex items-center gap-3 mb-6">
+                                    <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center text-2xl">
+                                        ⏱️
+                                    </div>
+                                    <h3 className="text-2xl font-bold text-gray-900">Economia de Tempo</h3>
+                                </div>
+                                <div className="space-y-4">
+                                    <div className="bg-white p-4 rounded-lg border border-purple-100">
+                                        <p className="text-sm text-gray-600 mb-2">Produção de 10.000 páginas</p>
+                                        <div className="flex items-baseline gap-2">
+                                            <span className="text-3xl font-bold text-purple-600">27h</span>
+                                            <span className="text-gray-500">vs</span>
+                                            <span className="text-xl text-gray-400 line-through">55h</span>
+                                        </div>
+                                        <p className="text-sm text-gray-600 mt-2">
+                                            Index Basic vs ViewPlus Columbia
+                                        </p>
+                                    </div>
+                                    <div className="bg-white p-4 rounded-lg border border-purple-100">
+                                        <p className="text-sm text-gray-600 mb-2">Tempo economizado</p>
+                                        <div className="text-3xl font-bold text-purple-600 mb-2">
+                                            28 horas
+                                        </div>
+                                        <p className="text-sm font-semibold text-green-600">
+                                            ✓ 51% menos tempo de produção
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Paper Economy Card */}
+                            <div className="bg-gradient-to-br from-green-50 to-white p-8 rounded-2xl border-2 border-green-200 shadow-lg">
+                                <div className="flex items-center gap-3 mb-6">
+                                    <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-2xl">
+                                        🌱
+                                    </div>
+                                    <h3 className="text-2xl font-bold text-gray-900">Economia de Papel</h3>
+                                </div>
+                                <div className="space-y-4">
+                                    <div className="bg-white p-4 rounded-lg border border-green-100">
+                                        <p className="text-sm text-gray-600 mb-2">Caracteres por Página (11" × 12")</p>
+                                        <div className="flex items-baseline gap-2">
+                                            <span className="text-3xl font-bold text-green-600">1334</span>
+                                            <span className="text-gray-500">vs</span>
+                                            <span className="text-xl text-gray-400 line-through">1204</span>
+                                        </div>
+                                        <p className="text-sm text-gray-600 mt-2">
+                                            46 CPL × 29 LPP vs 43 CPL × 28 LPP
+                                        </p>
+                                    </div>
+                                    <div className="bg-white p-4 rounded-lg border border-green-100">
+                                        <p className="text-sm text-gray-600 mb-2">Economia em 10.000 páginas</p>
+                                        <div className="text-3xl font-bold text-green-600 mb-2">
+                                            <span className="text-lg">Cerca de</span> 970 folhas
+                                        </div>
+                                        <p className="text-sm font-semibold text-green-600">
+                                            ✓ 10,8% menos papel necessário
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Detailed Explanation */}
+                        <div className="bg-gray-50 p-8 rounded-2xl border border-gray-200">
+                            <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+                                Entenda os Comparativos Completos
+                            </h3>
+
+                            {/* Speed and Productivity Comparison */}
+                            <div className="mb-8">
+                                <h4 className="font-bold text-xl text-blue-600 mb-4">⚡ Velocidade e Produtividade</h4>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                    <div>
+                                        <h5 className="font-bold text-lg text-gray-900 mb-3">ViewPlus Columbia</h5>
+                                        <ul className="space-y-2 text-gray-700">
+                                            <li className="flex items-start gap-2">
+                                                <span className="text-blue-500 font-bold">•</span>
+                                                <span>Velocidade (Português): 51 CPS</span>
+                                            </li>
+                                            <li className="flex items-start gap-2">
+                                                <span className="text-blue-500 font-bold">•</span>
+                                                <span>Produtividade: 183 PPH</span>
+                                            </li>
+                                            <li className="flex items-start gap-2">
+                                                <span className="text-blue-500 font-bold">•</span>
+                                                <span>Tempo para 10.000 páginas: 55 horas</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h5 className="font-bold text-lg text-green-700 mb-3">Index Braille Basic</h5>
+                                        <ul className="space-y-2 text-gray-700">
+                                            <li className="flex items-start gap-2">
+                                                <span className="text-green-500 font-bold">•</span>
+                                                <span>Velocidade (Português): 139 CPS</span>
+                                            </li>
+                                            <li className="flex items-start gap-2">
+                                                <span className="text-green-500 font-bold">•</span>
+                                                <span>Produtividade: 375 PPH</span>
+                                            </li>
+                                            <li className="flex items-start gap-2">
+                                                <span className="text-green-500 font-bold">•</span>
+                                                <span>Tempo para 10.000 páginas: 27 horas</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Paper Economy Comparison */}
+                            <div className="mb-8">
+                                <h4 className="font-bold text-xl text-green-600 mb-4">🌱 Economia de Papel</h4>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                    <div>
+                                        <h5 className="font-bold text-lg text-gray-900 mb-3">ViewPlus Columbia</h5>
+                                        <ul className="space-y-2 text-gray-700">
+                                            <li className="flex items-start gap-2">
+                                                <span className="text-blue-500 font-bold">•</span>
+                                                <span>Configuração: 43 CPL × 28 LPP</span>
+                                            </li>
+                                            <li className="flex items-start gap-2">
+                                                <span className="text-blue-500 font-bold">•</span>
+                                                <span>Total: 1.204 caracteres por página</span>
+                                            </li>
+                                            <li className="flex items-start gap-2">
+                                                <span className="text-blue-500 font-bold">•</span>
+                                                <span>Para 100.000 caracteres: ~83 páginas</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h5 className="font-bold text-lg text-green-700 mb-3">Index Braille Basic</h5>
+                                        <ul className="space-y-2 text-gray-700">
+                                            <li className="flex items-start gap-2">
+                                                <span className="text-green-500 font-bold">•</span>
+                                                <span>Configuração: 46 CPL × 29 LPP</span>
+                                            </li>
+                                            <li className="flex items-start gap-2">
+                                                <span className="text-green-500 font-bold">•</span>
+                                                <span>Total: 1.334 caracteres por página</span>
+                                            </li>
+                                            <li className="flex items-start gap-2">
+                                                <span className="text-green-500 font-bold">•</span>
+                                                <span>Para 100.000 caracteres: ~75 páginas</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Summary Box */}
+                            <div className="p-6 bg-white rounded-xl border-2 border-green-300">
+                                <p className="text-center text-lg font-semibold text-gray-900 mb-4">
+                                    <span className="text-green-600 text-2xl">💰</span> Resumo das Vantagens da Index Braille Basic
+                                </p>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                                    <div className="p-3 bg-blue-50 rounded-lg">
+                                        <p className="text-sm text-gray-600">Velocidade</p>
+                                        <p className="text-xl font-bold text-blue-600">173% mais rápida</p>
+                                    </div>
+                                    <div className="p-3 bg-purple-50 rounded-lg">
+                                        <p className="text-sm text-gray-600">Economia de Tempo</p>
+                                        <p className="text-xl font-bold text-purple-600">28h economizadas</p>
+                                    </div>
+                                    <div className="p-3 bg-green-50 rounded-lg">
+                                        <p className="text-sm text-gray-600">Economia de Papel</p>
+                                        <p className="text-xl font-bold text-green-600">970 folhas a menos</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </main>
-        </PasswordProtection>
+        </PasswordProtection >
     );
 }
