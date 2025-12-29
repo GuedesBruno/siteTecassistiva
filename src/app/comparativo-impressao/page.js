@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function ComparativoPage() {
     return (
-        <PasswordProtection password="cuidadasuavida">
+        <PasswordProtection password="senh@!">
             <main className="min-h-screen bg-white font-sans">
                 {/* Hero Section */}
                 <section className="bg-gray-50 py-6 md:py-8 relative overflow-hidden border-b border-gray-200">
