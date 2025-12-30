@@ -1,6 +1,4 @@
-'use client';
-
-import React, { useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import PasswordProtection from '@/components/PasswordProtection';
 
@@ -10,10 +8,6 @@ export const metadata = {
 };
 
 export default function ComparativoPage() {
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
-
     return (
         <PasswordProtection password="senh@!">
             <main className="min-h-screen bg-white font-sans">
