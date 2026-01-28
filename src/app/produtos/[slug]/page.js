@@ -89,6 +89,7 @@ export async function generateMetadata({ params }) {
       title: seoTitle,
       description: description,
       keywords: [
+        productAttributes.palavras_chave, // Palavras-chave manuais do Strapi (Prioridade)
         productAttributes.nome,
         manufacturer,
         subcategory,

@@ -56,18 +56,29 @@ async function getAllProductSlugs() {
 async function getAllCategoryPaths() {
   const data = await fetchAPI('/api/categorias?fields[0]=slug&populate[subcategorias][fields][0]=slug&pagination[limit]=200');
   const categories = normalizeDataArray(data);
-  return categories.map(c => {
-    const attrs = c.attributes || c;
-    const subcategorias = Array.isArray(attrs.subcategorias)
-      ? attrs.subcategorias
-      : (attrs.subcategorias?.data || []);
+  return categories.flatMap(c => {
+    const catAttrs = c.attributes || c;
+    const catSlug = catAttrs.slug;
 
-    return {
-      slug: attrs.slug,
-      subcategorias: subcategorias.map(s => ({
-        slug: s.attributes?.slug || s.slug,
-      })),
-    };
+    // Base category path
+    const paths = [{ slug: catSlug }];
+
+    // Subcategory paths
+    const subcategorias = Array.isArray(catAttrs.subcategorias)
+      ? catAttrs.subcategorias
+      : (catAttrs.subcategorias?.data || []);
+
+    subcategorias.forEach(s => {
+      const subAttrs = s.attributes || s;
+      if (subAttrs.slug) {
+        paths.push({
+          slug: catSlug,
+          subCategorySlug: subAttrs.slug // Usando um nome de propriedade clara para diferenciar
+        });
+      }
+    });
+
+    return paths;
   });
 }
 
@@ -111,18 +122,23 @@ async function generateSitemap() {
         </url>
       `).join('')}
 
-      ${categoryPaths.map(c => `
+      ${categoryPaths.map(c => {
+    if (c.subCategorySlug) {
+      // É uma subcategoria
+      return `
+        <url>
+          <loc>${`${SITE_URL}/produtos/categorias/${c.slug}/${c.subCategorySlug}`}</loc>
+          <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+        </url>`;
+    } else {
+      // É uma categoria pai
+      return `
         <url>
           <loc>${`${SITE_URL}/produtos/categorias/${c.slug}`}</loc>
           <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
-        </url>
-        ${(c.subcategorias || []).map(sub => `
-          <url>
-            <loc>${`${SITE_URL}/produtos/categorias/${c.slug}/${sub.slug}`}</loc>
-            <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
-          </url>
-        `).join('')}
-      `).join('')}
+        </url>`;
+    }
+  }).join('')}
 
       ${imersaoSlugs.map(i => `
         <url>
