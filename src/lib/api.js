@@ -115,7 +115,6 @@ export async function getProductBySlug(slug) {
       'visao_geral',
       'videos',
       'Fabricante',
-      'palavras_chave',
     ],
     populate: {
       imagem_principal: { fields: ['url', 'alternativeText', 'width', 'height'] },
