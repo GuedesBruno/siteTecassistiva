@@ -5,7 +5,7 @@ import ManufacturersGrid from "@/components/ManufacturersGrid";
 import TestimonialSection from "@/components/TestimonialSection";
 import Link from 'next/link';
 
-// Lazy load API functions to avoid compilation during SSG
+// Lazy load API functions to avoid compilation during SSG.
 async function getBanners() {
   const { getBanners: _getBanners } = await import("@/lib/api");
   return _getBanners();
