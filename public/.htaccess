@@ -36,9 +36,12 @@
   Redirect 301 /produtos/categorias/cegueira/impressoras-braille-folha-solta/ /produtos/categorias/cegueira/impressora-braille-folha-solta/
   Redirect 301 /produtos/categorias/cegueira/impressoras-braille-formulario-continuo/ /produtos/categorias/cegueira/impressora-braille-formulario-continuo/
   Redirect 301 /produtos/categorias/cegueira/impressoras-braille-grande-producao/ /produtos/categorias/cegueira/impressora-braille-grande-producao/
-  Redirect 301 /produtos/categorias/cegueira/linhas-braille/ /produtos/categorias/cegueira/linha-braille/
+  # Redirect 301 /produtos/categorias/cegueira/linhas-braille/ /produtos/categorias/cegueira/linha-braille/ (Slug ainda é PLURAL no Strapi)
   Redirect 301 /produtos/categorias/baixa-visao/ampliadores-eletronicos-portateis/ /produtos/categorias/baixa-visao/ampliador-eletronico-portatil/
   Redirect 301 /produtos/categorias/baixa-visao/ampliadores-eletronicos-de-mesa/ /produtos/categorias/baixa-visao/ampliador-eletronico-de-mesa/
+  
+  # Correção de mudança de nome de categoria
+  Redirect 301 /produtos/categorias/recursos-pedagogicos/ /produtos/categorias/ferramenta-pedagogica/
 
   # --- Linhas Braille e Computadores ---
   Redirect 301 /catalogo/liber/ /produtos/liber/
