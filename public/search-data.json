@@ -50,7 +50,7 @@
     "description": "Linha Braille de 40 células",
     "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/Focus_40_principal_af080f049f.jpg",
     "type": "Produto",
-    "content": "Linha Braille de 40 células [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O novo modelo da linha braille Focus 40 Blue é durável, leve, possui as especificações testadas MIL-STD-810G, e design robusto para os desafios do dia-a-dia. Seu teclado amigável, painel de controle inteligente, e requintados pontos braille tornam o uso da linha Focus 40 Blue silencioso e suave. Com conectividade Bluetooth para 5 dispositivos, Scratchpad integrado, porta USB, e design portátil, compacto, e robusto, a Focus 40 Blue assegura fácil operação, esteja você indo de um lugar para outro no trabalho, viajando pelo mundo ou simplesmente relaxando em casa.\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"40 células braille com 40 teclas de posicionamento do cursor;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Teclado Braille de 8 pontos;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Superfície da linha Braille contínua, sem divisão entre as células;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Navegação no documento flexível com balanceadores de navegação programáveis por linha, sentença, parágrafo ou por deslocamento de painel clássico;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Botão Menu, posicionado ao meio acima dos cursores, para acesso rápido ao calendário, relógio, conexões Bluetooth e mais;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Scratchpad integrado com leitor de livros BRF;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Cartão Micro SD até 32 GB;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Selecione a firmeza do Braille que você mais se sente confortável com o VariBraille;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Conexão micro USB-C – sempre com o lado direito para cima para reduzir o desgaste.\",\"type\":\"text\"}]}]}] Cegueira Linhas Braille Freedom Scientific",
+    "content": "Linha Braille de 40 células [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O novo modelo da linha braille Focus 40 Blue é durável, leve, possui as especificações testadas MIL-STD-810G, e design robusto para os desafios do dia-a-dia. Seu teclado amigável, painel de controle inteligente, e requintados pontos braille tornam o uso da linha Focus 40 Blue silencioso e suave. Com conectividade Bluetooth para 5 dispositivos, Scratchpad integrado, porta USB, e design portátil, compacto, e robusto, a Focus 40 Blue assegura fácil operação, esteja você indo de um lugar para outro no trabalho, viajando pelo mundo ou simplesmente relaxando em casa.\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"40 células braille com 40 teclas de posicionamento do cursor;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Teclado Braille de 8 pontos;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Superfície da linha Braille contínua, sem divisão entre as células;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Navegação no documento flexível com balanceadores de navegação programáveis por linha, sentença, parágrafo ou por deslocamento de painel clássico;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Botão Menu, posicionado ao meio acima dos cursores, para acesso rápido ao calendário, relógio, conexões Bluetooth e mais;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Scratchpad integrado com leitor de livros BRF;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Cartão Micro SD até 32 GB;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Selecione a firmeza do Braille que você mais se sente confortável com o VariBraille;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Conexão micro USB-C – sempre com o lado direito para cima para reduzir o desgaste.\",\"type\":\"text\"}]}]}] Cegueira Linha Braille Freedom Scientific",
     "categories": "Cegueira",
     "fabricante": "Freedom Scientific"
   },
@@ -121,7 +121,7 @@
     "fabricante": "Optelec"
   },
   {
-    "id": "product-316",
+    "id": "product-325",
     "title": "Ruby 7 HD",
     "slug": "/produtos/ruby-7-hd",
     "description": "Lupa eletrônica portátil",
@@ -325,7 +325,7 @@
     "description": "Linha Braille de 80 Células",
     "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/focus_80_blue_pequeno_4c89f13439.jpg",
     "type": "Produto",
-    "content": "Linha Braille de 80 Células [{\"type\":\"paragraph\",\"children\":[{\"text\":\"A Focus 80 Blue é a linha Braille mais completa do mercado que une 80 células Braille sem qualquer divisão, a um teclado Braille de 8 teclas incrivelmente sensíveis e silenciosas. A linha Braille possui no total 21 teclas adicionais de controle para total interação com o JAWS, incluindo 2 Balanceadores de Navegação.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" 80 células Braille com 80 teclas de posicionamento do cursor;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Teclado Braille de 8 teclas silenciosas e de resposta super eficaz;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" 21 teclas adicionais de controle incluindo teclas de deslocamento, botões de deslocamento, balanceadores, shift, entre outras funções;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Linha Braille sem divisão entre as células (sem cápsulas), para uma leitura mais eficaz e confortável;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Compatível com os computadores Windows OS, Mac OS, dispositivos Apple e Android;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Modo de Aprendizado Braille;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Permite o ajuste da firmeza dos pontos;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Autonomia de 10 horas da bateria de íons lítio, recarregável através do USB;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Inclui ligação Bluetooth 2.0.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"code\":true,\"text\":\" \",\"type\":\"text\"}]}] Cegueira Linhas Braille Freedom Scientific",
+    "content": "Linha Braille de 80 Células [{\"type\":\"paragraph\",\"children\":[{\"text\":\"A Focus 80 Blue é a linha Braille mais completa do mercado que une 80 células Braille sem qualquer divisão, a um teclado Braille de 8 teclas incrivelmente sensíveis e silenciosas. A linha Braille possui no total 21 teclas adicionais de controle para total interação com o JAWS, incluindo 2 Balanceadores de Navegação.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" 80 células Braille com 80 teclas de posicionamento do cursor;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Teclado Braille de 8 teclas silenciosas e de resposta super eficaz;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" 21 teclas adicionais de controle incluindo teclas de deslocamento, botões de deslocamento, balanceadores, shift, entre outras funções;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Linha Braille sem divisão entre as células (sem cápsulas), para uma leitura mais eficaz e confortável;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Compatível com os computadores Windows OS, Mac OS, dispositivos Apple e Android;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Modo de Aprendizado Braille;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Permite o ajuste da firmeza dos pontos;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Autonomia de 10 horas da bateria de íons lítio, recarregável através do USB;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Inclui ligação Bluetooth 2.0.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"code\":true,\"text\":\" \",\"type\":\"text\"}]}] Cegueira Linha Braille Freedom Scientific",
     "categories": "Cegueira",
     "fabricante": "Freedom Scientific"
   },
@@ -396,7 +396,7 @@
     "fabricante": "Freedom Scientific"
   },
   {
-    "id": "product-257",
+    "id": "product-324",
     "title": "BrailleBox",
     "slug": "/produtos/braille-box",
     "description": "Impressora Braille de Grande Porte",
@@ -494,7 +494,7 @@
     "content": "manual_avancado_basic.pdf PDF Basic"
   },
   {
-    "id": "doc-257-118",
+    "id": "doc-324-118",
     "title": "catalogo_braillebox.pdf - BrailleBox",
     "slug": "/produtos/braille-box",
     "description": "Documento do produto BrailleBox",
@@ -780,7 +780,7 @@
     "content": "catalogo_ruby10.pdf PDF Ruby 10"
   },
   {
-    "id": "doc-316-71",
+    "id": "doc-325-71",
     "title": "guia_ruby7.pdf - Ruby 7 HD",
     "slug": "/produtos/ruby-7-hd",
     "description": "Documento do produto Ruby 7 HD",
@@ -793,7 +793,7 @@
     "content": "guia_ruby7.pdf PDF Ruby 7 HD"
   },
   {
-    "id": "doc-316-72",
+    "id": "doc-325-72",
     "title": "manual_avancado_ruby7.pdf - Ruby 7 HD",
     "slug": "/produtos/ruby-7-hd",
     "description": "Documento do produto Ruby 7 HD",
@@ -806,7 +806,7 @@
     "content": "manual_avancado_ruby7.pdf PDF Ruby 7 HD"
   },
   {
-    "id": "doc-316-73",
+    "id": "doc-325-73",
     "title": "catalogo_ruby7.pdf - Ruby 7 HD",
     "slug": "/produtos/ruby-7-hd",
     "description": "Documento do produto Ruby 7 HD",
@@ -1081,7 +1081,7 @@
     "title": "Tecassistiva",
     "slug": "src\\app\\page.js",
     "description": "import BannerSlider from \"@/components/BannerSlider\"; import FeaturedProductsSlider from \"@/components/FeaturedProductsSlider\"; import VideoSection fr...",
-    "content": "import BannerSlider from \"@/components/BannerSlider\"; import FeaturedProductsSlider from \"@/components/FeaturedProductsSlider\"; import VideoSection from \"@/components/VideoSection\"; import ManufacturersGrid from \"@/components/ManufacturersGrid\"; import TestimonialSection from \"@/components/TestimonialSection\"; import Link from 'next/link'; // Lazy load API functions to avoid compilation during SSG async function getBanners() { const { getBanners: _getBanners } = await import(\"@/lib/api\"); return _getBanners(); } async function getFeaturedProducts() { const { getFeaturedProducts: _getFeaturedProducts } = await import(\"@/lib/api\"); return _getFeaturedProducts(); } async function getManufacturers() { const { getManufacturers: _getManufacturers } = await import(\"@/lib/api\"); return _getManufacturers(); } async function getAllTestimonials() { const { getAllTestimonials: _getAllTestimonials } = await import(\"@/lib/api\"); return _getAllTestimonials(); } async function getHomeVideos() { const { getHomeVideos: _getHomeVideos } = await import(\"@/lib/api\"); return _getHomeVideos(); } export default async function Home() { // Busca os dados da API em paralelo para otimizar o tempo de build const [banners, featuredProducts, manufacturers, testimonials, homeVideos] = await Promise.all([ getBanners(), getFeaturedProducts(), getManufacturers(), getAllTestimonials(), getHomeVideos(), ]); return ( {/* Seção Sobre a Tecassistiva */} Tecassistiva {/* Mobile Version - Truncated */} A Tecassistiva é uma empresa brasileira especializada em soluções de tecnologia assistiva voltadas à inclusão educacional e social de pessoas com deficiência. Atuamos há mais de duas décadas oferecendo equipamentos, softwares e serviços que ampliam a autonomia, o acesso à informação e as oportunidades de aprendizagem para estudantes, profissionais e instituições em todo o país. Nosso compromisso é entregar tecnologia que transforma vidas... {/* Desktop Version - Full Text */} A Tecassistiva é uma empresa brasileira especializada em soluções de tecnologia assistiva voltadas à inclusão educacional e social de pessoas com deficiência. Atuamos há mais de duas décadas oferecendo equipamentos, softwares e serviços que ampliam a autonomia, o acesso à informação e as oportunidades de aprendizagem para estudantes, profissionais e instituições em todo o país. Nosso compromisso é entregar tecnologia que transforma vidas. Por isso desenvolvemos e representamos soluções de alto desempenho para pessoas com deficiência visual e outras necessidades específicas, atendendo escolas, secretarias de educação, universidades, bibliotecas, empresas e órgãos públicos em geral com excelência e responsabilidade. Conheça a nossa história {/* Novas seções adicionadas */} ); }",
+    "content": "import BannerSlider from \"@/components/BannerSlider\"; import FeaturedProductsSlider from \"@/components/FeaturedProductsSlider\"; import VideoSection from \"@/components/VideoSection\"; import ManufacturersGrid from \"@/components/ManufacturersGrid\"; import TestimonialSection from \"@/components/TestimonialSection\"; import Link from 'next/link'; // Lazy load API functions to avoid compilation during SSG. async function getBanners() { const { getBanners: _getBanners } = await import(\"@/lib/api\"); return _getBanners(); } async function getFeaturedProducts() { const { getFeaturedProducts: _getFeaturedProducts } = await import(\"@/lib/api\"); return _getFeaturedProducts(); } async function getManufacturers() { const { getManufacturers: _getManufacturers } = await import(\"@/lib/api\"); return _getManufacturers(); } async function getAllTestimonials() { const { getAllTestimonials: _getAllTestimonials } = await import(\"@/lib/api\"); return _getAllTestimonials(); } async function getHomeVideos() { const { getHomeVideos: _getHomeVideos } = await import(\"@/lib/api\"); return _getHomeVideos(); } export default async function Home() { // Busca os dados da API em paralelo para otimizar o tempo de build const [banners, featuredProducts, manufacturers, testimonials, homeVideos] = await Promise.all([ getBanners(), getFeaturedProducts(), getManufacturers(), getAllTestimonials(), getHomeVideos(), ]); return ( {/* Seção Sobre a Tecassistiva */} Tecassistiva {/* Mobile Version - Truncated */} A Tecassistiva é uma empresa brasileira especializada em soluções de tecnologia assistiva voltadas à inclusão educacional e social de pessoas com deficiência. Atuamos há mais de duas décadas oferecendo equipamentos, softwares e serviços que ampliam a autonomia, o acesso à informação e as oportunidades de aprendizagem para estudantes, profissionais e instituições em todo o país. Nosso compromisso é entregar tecnologia que transforma vidas... {/* Desktop Version - Full Text */} A Tecassistiva é uma empresa brasileira especializada em soluções de tecnologia assistiva voltadas à inclusão educacional e social de pessoas com deficiência. Atuamos há mais de duas décadas oferecendo equipamentos, softwares e serviços que ampliam a autonomia, o acesso à informação e as oportunidades de aprendizagem para estudantes, profissionais e instituições em todo o país. Nosso compromisso é entregar tecnologia que transforma vidas. Por isso desenvolvemos e representamos soluções de alto desempenho para pessoas com deficiência visual e outras necessidades específicas, atendendo escolas, secretarias de educação, universidades, bibliotecas, empresas e órgãos públicos em geral com excelência e responsabilidade. Conheça a nossa história {/* Novas seções adicionadas */} ); }",
     "type": "Página"
   },
   {
