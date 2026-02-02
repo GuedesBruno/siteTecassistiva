@@ -129,4 +129,4 @@ export async function generateMetadata({ params }) {
 
 ## Avisar Quando Pronto
 
-Quando criar o campo JSON no Strapi, avise para implementarmos o código! 🚀
+Quando criar o campo JSON no Strapi, avise para implementarmos o código!
