@@ -7,8 +7,8 @@ import qs from 'qs';
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
 // Função auxiliar para fetch API
-// Função auxiliar para fetch API com timeout
-async function fetchAPI(endpoint) {
+// Função auxiliar para fetch API com timeout e retry
+async function fetchAPI(endpoint, retries = 3) {
   const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
   const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN;
 
@@ -16,46 +16,64 @@ async function fetchAPI(endpoint) {
     throw new Error("Variáveis de ambiente não definidas");
   }
 
-  try {
-    let base = STRAPI_URL.replace(/\/+$/g, '');
-    if (base.endsWith('/api')) {
-      base = base.replace(/\/api$/, '');
+  let lastError;
+
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      let base = STRAPI_URL.replace(/\/+$/g, '');
+      if (base.endsWith('/api')) {
+        base = base.replace(/\/api$/, '');
+      }
+      const path_ep = endpoint.replace(/^\/+/, '');
+      const url = `${base}/${path_ep}`;
+
+      // Aumenta timeout para 600 segundos (10 minutos)
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 600000);
+
+      if (attempt > 1) {
+        console.log(`  Tentativa ${attempt}/${retries} para ${endpoint}...`);
+      }
+
+      const res = await fetch(url, {
+        headers: { 'Authorization': `Bearer ${STRAPI_TOKEN}` },
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeoutId);
+
+      if (!res.ok) {
+        // Tenta ler o erro
+        let errorMsg = `API Error: ${res.status}`;
+        try {
+          const errorBody = await res.json();
+          if (errorBody && errorBody.error && errorBody.error.message) {
+            errorMsg += ` - ${errorBody.error.message}`;
+          }
+        } catch (e) { /* ignore */ }
+        throw new Error(errorMsg);
+      }
+
+      return await res.json();
+    } catch (error) {
+      lastError = error;
+
+      if (error.name === 'AbortError') {
+        console.error(`Timeout ao fazer fetch (tentativa ${attempt}/${retries}): ${endpoint}`);
+      } else {
+        console.error(`Erro ao fazer fetch (tentativa ${attempt}/${retries}): ${error.message} (${endpoint})`);
+      }
+
+      // Se não for a última tentativa, aguarda antes de tentar novamente (exponential backoff)
+      if (attempt < retries) {
+        const waitTime = Math.min(1000 * Math.pow(2, attempt - 1), 10000); // Max 10s
+        console.log(`  Aguardando ${waitTime}ms antes de tentar novamente...`);
+        await new Promise(resolve => setTimeout(resolve, waitTime));
+      }
     }
-    const path_ep = endpoint.replace(/^\/+/, '');
-    const url = `${base}/${path_ep}`;
-
-    // Adiciona timeout de 300 segundos (5 minutos)
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 300000);
-
-    const res = await fetch(url, {
-      headers: { 'Authorization': `Bearer ${STRAPI_TOKEN}` },
-      signal: controller.signal,
-    });
-
-    clearTimeout(timeoutId);
-
-    if (!res.ok) {
-      // Tenta ler o erro
-      let errorMsg = `API Error: ${res.status}`;
-      try {
-        const errorBody = await res.json();
-        if (errorBody && errorBody.error && errorBody.error.message) {
-          errorMsg += ` - ${errorBody.error.message}`;
-        }
-      } catch (e) { /* ignore */ }
-      throw new Error(errorMsg);
-    }
-
-    return await res.json();
-  } catch (error) {
-    if (error.name === 'AbortError') {
-      console.error(`Timeout ao fazer fetch: ${endpoint}`);
-    } else {
-      console.error(`Erro ao fazer fetch: ${error.message} (${endpoint})`);
-    }
-    throw error;
   }
+
+  throw lastError;
 }
 
 function getStrapiMediaUrl(path) {
