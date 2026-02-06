@@ -359,7 +359,7 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
                               specGroups={[group]}
                               showTitle={false}
                               // Temporariamente desabilitado
-                              showComparisonButton={false} // {isImpressaoGroup && isIndexBraille}
+                              showComparisonButton={isImpressaoGroup && isIndexBraille}
                             />
                           </InfoCard>
                         );
@@ -402,7 +402,7 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
                         console.log('[ProductDetail] Unstructured Specs - IsIndex:', isIndexBraille, p.nome);
 
                         // Temporariamente desabilitado
-                        return null; // isIndexBraille ? <ComparisonButton /> : null;
+                        return isIndexBraille ? <ComparisonButton /> : null;
                       })()}
                       {typeof tab.content === 'string' ? <div className="whitespace-pre-line">{tab.content}</div> : <RichTextRenderer content={tab.content} />}
                     </InfoCard>

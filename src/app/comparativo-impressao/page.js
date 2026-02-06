@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import PasswordProtection from '@/components/PasswordProtection';
 
 export const metadata = {
     title: 'Comparativo de Velocidade de Impressão Braille | Tecassistiva',
@@ -9,762 +8,516 @@ export const metadata = {
 
 export default function ComparativoPage() {
     return (
-        <PasswordProtection password="senh@!">
-            <main className="min-h-screen bg-white font-sans">
-                {/* Hero Section */}
-                <section className="bg-gray-50 py-6 md:py-8 relative overflow-hidden border-b border-gray-200">
-                    <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 bg-blue-100 rounded-full blur-3xl opacity-40"></div>
-                    <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-gray-200 rounded-full blur-3xl opacity-40"></div>
+        <main className="min-h-screen bg-white font-sans">
+            {/* Hero Section */}
+            <section className="bg-gray-50 py-6 md:py-8 relative overflow-hidden border-b border-gray-200">
+                <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 bg-blue-100 rounded-full blur-3xl opacity-40"></div>
+                <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-gray-200 rounded-full blur-3xl opacity-40"></div>
 
-                    <div className="container mx-auto px-4 relative z-10 text-center">
-                        <h1 className="text-2xl md:text-4xl font-extrabold mb-3 tracking-tight leading-tight text-gray-900">
-                            Você sabe como escolher uma  <span className="text-tec-blue">Impressora Braille?</span>
-                        </h1>
-                        <p className="text-sm md:text-base text-gray-600 max-w-3xl mx-auto leading-relaxed font-medium text-center">
-                            Entenda por que a velocidade nominal nem sempre reflete a realidade da sua produção e aprenda a avaliar corretamente.
-                        </p>
-                    </div>
-                </section>
+                <div className="container mx-auto px-4 relative z-10 text-center">
+                    <h1 className="text-2xl md:text-4xl font-extrabold mb-3 tracking-tight leading-tight text-gray-900">
+                        Você sabe como escolher uma  <span className="text-tec-blue">Impressora Braille?</span>
+                    </h1>
+                    <p className="text-sm md:text-base text-gray-600 max-w-3xl mx-auto leading-relaxed font-medium text-center">
+                        Entenda por que a velocidade nominal nem sempre reflete a realidade da sua produção e aprenda a avaliar corretamente.
+                    </p>
+                </div>
+            </section>
 
-                {/* Section 1: O Problema (Métodos) */}
-                <section className="py-4 md:py-8">
-                    <div className="container mx-auto px-4 max-w-6xl">
-                        <div className="text-center mb-12">
-                            <div className="inline-block px-4 py-1 bg-blue-100 text-tec-blue rounded-full font-semibold text-sm mb-4">
-                                Métodos de Medição
-                            </div>
-                            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 leading-tight">
-                                Conheça as formas de medição que o mercado utiliza
-                            </h2>
-                            <p className="text-gray-600 text-lg leading-relaxed max-w-3xl mx-auto text-justify">
-                                A forma correta de avaliar a velocidade de uma impressora Braille é pelos caracteres por segundo (CPS) que ela produz. Contudo, além dos dois métodos legítimos de medição, existe uma terceira forma usada estrategicamente para inflar números e ludibriar o comprador.
-                            </p>
+            {/* Section 1: O Problema (Métodos) */}
+            <section className="py-4 md:py-8">
+                <div className="container mx-auto px-4 max-w-6xl">
+                    <div className="text-center mb-12">
+                        <div className="inline-block px-4 py-1 bg-blue-100 text-tec-blue rounded-full font-semibold text-sm mb-4">
+                            Métodos de Medição
                         </div>
-
-                        {/* Methods: Vertical on mobile (card→badge→sim), Horizontal on desktop (3 cols) */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            {/* Method 1: Portuguese Alphabet - Card (Was Method 2) */}
-                            <div className="flex gap-4 p-6 rounded-xl bg-blue-500 border-2 border-blue-600 shadow-sm hover:shadow-md transition-shadow order-1 md:order-1">
-                                <div className="flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-xl">
-                                    1
-                                </div>
-                                <div>
-                                    <h3 className="font-bold text-white text-lg mb-2">O Alfabeto Português</h3>
-                                    <p className="text-white text-sm leading-relaxed">
-                                        Além dos caracteres do alfabeto inglês, ele também conta com os caracteres acentuados e cedilha, conforme grafia portuguesa.
-                                    </p>
-                                </div>
-                            </div>
-
-                            {/* Method 2: English Alphabet - Card (Was Method 1) */}
-                            <div className="flex gap-4 p-6 rounded-xl bg-blue-50 border-2 border-blue-100 shadow-sm hover:shadow-md transition-shadow order-4 md:order-2">
-                                <div className="flex-shrink-0 w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold text-xl">
-                                    2
-                                </div>
-                                <div>
-                                    <h3 className="font-bold text-gray-900 text-lg mb-2">O Alfabeto Inglês</h3>
-                                    <p className="text-gray-700 text-sm leading-relaxed">
-                                        Imprimir "ABC...XYZ" repetidamente é o método utilizado nos testes tradicionais, considerando o alfabeto inglês.
-                                    </p>
-                                </div>
-                            </div>
-
-                            {/* Method 3: Misleading - Card */}
-                            <div className="flex gap-4 p-6 rounded-xl bg-red-50 border-2 border-red-300 shadow-sm hover:shadow-md transition-shadow order-7 md:order-3">
-                                <div className="flex-shrink-0 w-12 h-12 bg-red-600 text-white rounded-full flex items-center justify-center text-2xl">
-                                    ⚠️
-                                </div>
-                                <div>
-                                    <h3 className="font-bold text-gray-900 text-lg mb-2">O Enganoso</h3>
-                                    <p className="text-gray-600 text-sm leading-relaxed">
-                                        Teste que não reflete a realidade produtiva, criado para enganar os usuários e inflar artificialmente os números de velocidade.
-                                    </p>
-                                </div>
-                            </div>
-
-                            {/* Method 1: Portuguese - Badge */}
-                            <div className="flex justify-center order-2 md:order-4">
-                                <span className="inline-block bg-gray-100 px-6 py-3 rounded-lg text-gray-700 font-bold border-2 border-gray-300 shadow-sm">
-                                    Recomendado
-                                </span>
-                            </div>
-
-                            {/* Method 2: English - Badge */}
-                            <div className="flex justify-center order-5 md:order-5">
-                                <span className="inline-block bg-gray-100 px-6 py-3 rounded-lg text-gray-700 font-bold border-2 border-gray-300 shadow-sm">
-                                    Padrão
-                                </span>
-                            </div>
-
-                            {/* Method 3: Misleading - Badge */}
-                            <div className="flex justify-center order-8 md:order-6">
-                                <span className="inline-block bg-red-500 px-6 py-3 rounded-lg text-white font-bold border-2 border-red-600 shadow-md">
-                                    Ilusório
-                                </span>
-                            </div>
-
-                            {/* Method 1: Portuguese - Simulation */}
-                            <div className="bg-gray-50 rounded-2xl p-6 border-2 border-gray-200 shadow-sm min-h-[320px] flex flex-col order-3 md:order-7">
-                                <h4 className="text-gray-400 uppercase text-xs font-bold tracking-widest mb-4">SIMULAÇÃO DE TESTE</h4>
-                                <div className="font-mono text-gray-600 text-lg md:text-xl leading-relaxed flex-grow">
-                                    <p style={{ whiteSpace: 'nowrap' }}>abcdefghijklmnopqrstuvwxyz</p>
-                                    <p style={{ whiteSpace: 'nowrap' }}><span className="font-bold">áàâãéêíóôõúç</span></p>
-                                </div>
-                                <div className="mt-4 pt-4 border-t border-gray-200">
-                                    <p className="text-lg md:text-xl text-gray-700 leading-relaxed" style={{ fontFamily: 'monospace', overflowWrap: 'break-word', wordWrap: 'break-word', wordBreak: 'break-all' }}>⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵⠷⠡⠜⠩⠿⠣⠌⠾⠬⠹⠾⠯</p>
-                                </div>
-                                <div className="mt-4 flex flex-col items-center gap-2">
-                                    <img src="/teste2.jpg" alt="Média de pontos" className="w-32 h-auto rounded-lg shadow-md" />
-                                    <p className="text-sm font-semibold text-gray-700">Média de 3.41 pontos por caractere</p>
-                                </div>
-                            </div>
-
-                            {/* Method 2: English - Simulation */}
-                            <div className="bg-white rounded-2xl p-6 border-2 border-gray-200 shadow-sm min-h-[320px] flex flex-col order-6 md:order-8">
-                                <h4 className="text-gray-400 uppercase text-xs font-bold tracking-widest mb-4">SIMULAÇÃO DE TESTE</h4>
-                                <div className="font-serif text-gray-600 text-lg md:text-xl leading-relaxed flex-grow" style={{ whiteSpace: 'nowrap' }}>
-                                    <p>abcdefghijklmnopqrstuvwxyz</p>
-                                </div>
-                                <div className="mt-4 pt-4 border-t border-gray-200">
-                                    <p className="text-xs text-gray-400 mb-2 uppercase tracking-wide font-semibold">Representação em Braille:</p>
-                                    <p className="text-lg md:text-xl text-gray-700 leading-relaxed" style={{ fontFamily: 'monospace', overflowWrap: 'break-word', wordWrap: 'break-word', wordBreak: 'break-all' }}>⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵</p>
-                                </div>
-                                <div className="mt-4 flex flex-col items-center gap-2">
-                                    <img src="/teste1.jpg" alt="Média de pontos" className="w-32 h-auto rounded-lg shadow-md" />
-                                    <p className="text-sm font-semibold text-gray-700">Média de 3.02 pontos por caractere</p>
-                                </div>
-                            </div>
-
-                            {/* Method 3: Misleading - Simulation */}
-                            <div className="bg-red-50 rounded-2xl p-6 border-2 border-red-200 shadow-sm min-h-[320px] flex flex-col order-9 md:order-9">
-                                <h4 className="text-red-400 uppercase text-xs font-bold tracking-widest mb-4">⚠️ TESTE NÃO RECOMENDADO</h4>
-                                <div className="font-mono text-gray-400 text-lg md:text-xl leading-relaxed flex-grow" style={{ whiteSpace: 'nowrap' }}>
-                                    <p>aaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-                                </div>
-                                <div className="mt-4 pt-4 border-t border-red-200">
-                                    <p className="text-xs text-red-300 mb-2 uppercase tracking-wide font-semibold">Representação em Braille:</p>
-                                    <p className="text-lg md:text-xl text-gray-400 leading-relaxed" style={{ fontFamily: 'monospace', overflowWrap: 'break-word', wordWrap: 'break-word', wordBreak: 'break-all' }}>⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁</p>
-                                </div>
-                                <div className="mt-4 flex flex-col items-center gap-2">
-                                    <img src="/teste3.jpg" alt="Média de pontos" className="w-32 h-auto rounded-lg shadow-md" />
-                                    <p className="text-sm font-semibold text-red-600">Média de 1 ponto por caractere</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                {/* Performance Comparison Table Section */}
-                <section className="py-8 md:py-12 bg-white">
-                    <div className="container mx-auto px-4">
-                        {/* Performance Comparison Table */}
-                        <div className="max-w-5xl mx-auto">
-                            {/* Table Title */}
-                            <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2 text-center">
-                                Resultados oficiais dos testes de produção da impressora ViewPlus Columbia
-                            </h3>
-                            <h5 className="text-xl md:text-2x1 text-gray-900 mb-4 text-center">
-                                Tribunal de Justiça do Paraná
-                            </h5>
-
-                            <div className="overflow-x-auto">
-                                <table className="w-full border-collapse bg-white shadow-lg rounded-lg overflow-hidden">
-                                    <thead>
-                                        <tr className="bg-gray-100">
-                                            <th className="border border-gray-300 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
-                                                Modo de teste
-                                            </th>
-                                            <th className="border border-gray-300 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
-                                                Configuração*
-                                            </th>
-                                            <th className="border border-gray-300 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
-                                                Modo de impressão
-                                            </th>
-                                            <th className="border border-gray-300 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
-                                                CPS**
-                                            </th>
-                                            <th className="border border-gray-300 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
-                                                PPH***
-                                            </th>
-                                            <th className="border border-gray-300 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
-                                                Fonte
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {/* 1. Alfabeto Português - Vibrant Blue */}
-                                        <tr className="bg-blue-500 text-white hover:bg-blue-600 transition-colors">
-                                            <td className="border border-blue-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
-                                                Alfabeto Português
-                                            </td>
-                                            <td className="border border-blue-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
-                                                40 CPL × 25 LPP
-                                            </td>
-                                            <td className="border border-blue-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
-                                                Draft
-                                            </td>
-                                            <td className="border border-blue-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
-                                                63
-                                            </td>
-                                            <td className="border border-blue-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
-                                                226
-                                            </td>
-                                            <td className="border border-blue-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
-                                                TJPR
-                                            </td>
-                                        </tr>
-                                        {/* 2. Alfabeto Inglês - Light Blue */}
-                                        <tr className="bg-blue-100 hover:bg-blue-200 transition-colors">
-                                            <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm text-gray-900">
-                                                Alfabeto Inglês
-                                            </td>
-                                            <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm text-gray-900">
-                                                46 CPL × 27 LPP
-                                            </td>
-                                            <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm text-gray-900">
-                                                Draft
-                                            </td>
-                                            <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
-                                                77
-                                            </td>
-                                            <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
-                                                220
-                                            </td>
-                                            <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
-                                                TJPR
-                                            </td>
-                                        </tr>
-                                        {/* 3. Alfabeto Inglês - Light Blue (Duplicated) */}
-                                        <tr className="bg-blue-100 hover:bg-blue-200 transition-colors">
-                                            <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm text-gray-900">
-                                                Alfabeto Inglês
-                                            </td>
-                                            <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm text-gray-900">
-                                                40 CPL × 25 LPP
-                                            </td>
-                                            <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm text-gray-900">
-                                                Draft
-                                            </td>
-                                            <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
-                                                87
-                                            </td>
-                                            <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
-                                                313
-                                            </td>
-                                            <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
-                                                TJPR
-                                            </td>
-                                        </tr>
-                                        {/* 3. Enganoso (Somente "a") - Red */}
-                                        <tr className="bg-red-500 text-white hover:bg-red-600 transition-colors">
-                                            <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
-                                                Enganoso (Somente "a")
-                                            </td>
-                                            <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
-                                                40 CPL × 25 LPP
-                                            </td>
-                                            <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
-                                                Draft
-                                            </td>
-                                            <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
-                                                214
-                                            </td>
-                                            <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
-                                                771
-                                            </td>
-                                            <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
-                                                TJPR
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            {/* Table Footnotes */}
-                            <div className="mt-4 text-xs md:text-sm text-gray-600 space-y-1">
-                                <p>* 43 Caracteres por linha (CPL) X 28 Linhas por página (LPP)</p>
-                                <p>** (CPS) Caracteres por segundo</p>
-                                <p>*** (PPH) Páginas por hora</p>
-                                <p>**** (TJPR) Tribunal de Justiça do Paraná</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                {/* Section 2: A Solução (Brasil) */}
-                <section className="py-4 md:py-8 bg-gray-50 border-t border-gray-200">
-                    <div className="container mx-auto px-4 max-w-5xl text-center">
-                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                            O que diz a Justiça Brasileira?
+                        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 leading-tight">
+                            Conheça as formas de medição que o mercado utiliza
                         </h2>
-                        <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12 text-justify">
-                            O Laudo pericial da 7ª vara do Tribunal de Justiça do Paraná recomenda que os testes de desempenho utilizem o alfabeto completo da língua portuguesa, com caracteres acentuados, para maior fidelidade à grafia oficial .
-                            Os resultados mostraram que a média de pontos braille por caractere aumenta de 3,02 (alfabeto inglês) para 3,41 (alfabeto português).
+                        <p className="text-gray-600 text-lg leading-relaxed max-w-3xl mx-auto text-justify">
+                            A forma correta de avaliar a velocidade de uma impressora Braille é pelos caracteres por segundo (CPS) que ela produz. Contudo, além dos dois métodos legítimos de medição, existe uma terceira forma usada estrategicamente para inflar números e ludibriar o comprador.
                         </p>
+                    </div>
 
-                        <div className="bg-white p-4 md:p-6 rounded-3xl shadow-xl border border-blue-100 relative overflow-hidden group">
-                            <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-tec-blue via-blue-400 to-tec-blue"></div>
-                            <p className="text-sm text-gray-400 mb-4 uppercase tracking-widest font-semibold">Tabela de Teste Real</p>
-                            <div className="flex justify-center gap-0.5 md:gap-1 overflow-x-auto">
-                                {['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'].map((char, i) => (
-                                    <div key={i} className="flex flex-col items-center flex-shrink-0">
-                                        <span className="font-mono text-lg md:text-2xl text-gray-800">{char}</span>
-                                        <span className="font-mono text-base md:text-xl text-gray-600">{'⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵'[i]}</span>
-                                    </div>
-                                ))}
-                                {[{ char: 'á', braille: '⠷' }, { char: 'à', braille: '⠡' }, { char: 'â', braille: '⠜' }, { char: 'ã', braille: '⠩' }, { char: 'é', braille: '⠿' }, { char: 'ê', braille: '⠣' }, { char: 'í', braille: '⠌' }, { char: 'ó', braille: '⠾' }, { char: 'ô', braille: '⠬' }, { char: 'õ', braille: '⠹' }, { char: 'ú', braille: '⠾' }, { char: 'ç', braille: '⠯' }].map((item, i) => (
-                                    <div key={`accent-${i}`} className="flex flex-col items-center flex-shrink-0">
-                                        <span className="font-mono text-lg md:text-2xl text-tec-blue font-black">{item.char}</span>
-                                        <span className="font-mono text-base md:text-xl text-tec-blue font-black">{item.braille}</span>
-                                    </div>
-                                ))}
+                    {/* Methods: Vertical on mobile (card→badge→sim), Horizontal on desktop (3 cols) */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {/* Method 1: Portuguese Alphabet - Card (Was Method 2) */}
+                        <div className="flex gap-4 p-6 rounded-xl bg-blue-500 border-2 border-blue-600 shadow-sm hover:shadow-md transition-shadow order-1 md:order-1">
+                            <div className="flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-xl">
+                                1
                             </div>
-                            <p className="mt-8 text-gray-500 text-center">
-                                Estes caracteres extras forçam a impressora a trabalhar mais, revelando a verdadeira velocidade de produção no Brasil.
-                            </p>
+                            <div>
+                                <h3 className="font-bold text-white text-lg mb-2">O Alfabeto Português</h3>
+                                <p className="text-white text-sm leading-relaxed">
+                                    Além dos caracteres do alfabeto inglês, ele também conta com os caracteres acentuados e cedilha, conforme grafia portuguesa.
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Method 2: English Alphabet - Card (Was Method 1) */}
+                        <div className="flex gap-4 p-6 rounded-xl bg-blue-50 border-2 border-blue-100 shadow-sm hover:shadow-md transition-shadow order-4 md:order-2">
+                            <div className="flex-shrink-0 w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold text-xl">
+                                2
+                            </div>
+                            <div>
+                                <h3 className="font-bold text-gray-900 text-lg mb-2">O Alfabeto Inglês</h3>
+                                <p className="text-gray-700 text-sm leading-relaxed">
+                                    Imprimir "ABC...XYZ" repetidamente é o método utilizado nos testes tradicionais, considerando o alfabeto inglês.
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Method 3: Misleading - Card */}
+                        <div className="flex gap-4 p-6 rounded-xl bg-red-50 border-2 border-red-300 shadow-sm hover:shadow-md transition-shadow order-7 md:order-3">
+                            <div className="flex-shrink-0 w-12 h-12 bg-red-600 text-white rounded-full flex items-center justify-center text-2xl">
+                                ⚠️
+                            </div>
+                            <div>
+                                <h3 className="font-bold text-gray-900 text-lg mb-2">O Enganoso</h3>
+                                <p className="text-gray-600 text-sm leading-relaxed">
+                                    Teste que não reflete a realidade produtiva, criado para enganar os usuários e inflar artificialmente os números de velocidade.
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Method 1: Portuguese - Badge */}
+                        <div className="flex justify-center order-2 md:order-4">
+                            <span className="inline-block bg-gray-100 px-6 py-3 rounded-lg text-gray-700 font-bold border-2 border-gray-300 shadow-sm">
+                                Recomendado
+                            </span>
+                        </div>
+
+                        {/* Method 2: English - Badge */}
+                        <div className="flex justify-center order-5 md:order-5">
+                            <span className="inline-block bg-gray-100 px-6 py-3 rounded-lg text-gray-700 font-bold border-2 border-gray-300 shadow-sm">
+                                Padrão Internacional
+                            </span>
+                        </div>
+
+                        {/* Method 3: Misleading - Badge */}
+                        <div className="flex justify-center order-8 md:order-6">
+                            <span className="inline-block bg-red-500 px-6 py-3 rounded-lg text-white font-bold border-2 border-red-600 shadow-md">
+                                Ilusório
+                            </span>
+                        </div>
+
+                        {/* Method 1: Portuguese - Simulation */}
+                        <div className="bg-gray-50 rounded-2xl p-6 border-2 border-gray-200 shadow-sm min-h-[320px] flex flex-col order-3 md:order-7">
+                            <h4 className="text-gray-400 uppercase text-xs font-bold tracking-widest mb-4">SIMULAÇÃO DE TESTE</h4>
+                            <div className="font-mono text-gray-600 text-lg md:text-xl leading-relaxed flex-grow">
+                                <p style={{ whiteSpace: 'nowrap' }}>abcdefghijklmnopqrstuvwxyz</p>
+                                <p style={{ whiteSpace: 'nowrap' }}><span className="font-bold">áàâãéêíóôõúç</span></p>
+                            </div>
+                            <div className="mt-4 pt-4 border-t border-gray-200">
+                                <p className="text-lg md:text-xl text-gray-700 leading-relaxed" style={{ fontFamily: 'monospace', overflowWrap: 'break-word', wordWrap: 'break-word', wordBreak: 'break-all' }}>⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵⠷⠡⠜⠩⠿⠣⠌⠾⠬⠹⠾⠯</p>
+                            </div>
+                            <div className="mt-4 flex flex-col items-center gap-2">
+                                <img src="/teste2.jpg" alt="Média de pontos" className="w-32 h-auto rounded-lg shadow-md" />
+                                <p className="text-sm font-semibold text-gray-700">Média de 3.41 pontos por caractere</p>
+                            </div>
+                        </div>
+
+                        {/* Method 2: English - Simulation */}
+                        <div className="bg-white rounded-2xl p-6 border-2 border-gray-200 shadow-sm min-h-[320px] flex flex-col order-6 md:order-8">
+                            <h4 className="text-gray-400 uppercase text-xs font-bold tracking-widest mb-4">SIMULAÇÃO DE TESTE</h4>
+                            <div className="font-serif text-gray-600 text-lg md:text-xl leading-relaxed flex-grow" style={{ whiteSpace: 'nowrap' }}>
+                                <p>abcdefghijklmnopqrstuvwxyz</p>
+                            </div>
+                            <div className="mt-4 pt-4 border-t border-gray-200">
+                                <p className="text-xs text-gray-400 mb-2 uppercase tracking-wide font-semibold">Representação em Braille:</p>
+                                <p className="text-lg md:text-xl text-gray-700 leading-relaxed" style={{ fontFamily: 'monospace', overflowWrap: 'break-word', wordWrap: 'break-word', wordBreak: 'break-all' }}>⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵</p>
+                            </div>
+                            <div className="mt-4 flex flex-col items-center gap-2">
+                                <img src="/teste1.jpg" alt="Média de pontos" className="w-32 h-auto rounded-lg shadow-md" />
+                                <p className="text-sm font-semibold text-gray-700">Média de 3.02 pontos por caractere</p>
+                            </div>
+                        </div>
+
+                        {/* Method 3: Misleading - Simulation */}
+                        <div className="bg-red-50 rounded-2xl p-6 border-2 border-red-200 shadow-sm min-h-[320px] flex flex-col order-9 md:order-9">
+                            <h4 className="text-red-400 uppercase text-xs font-bold tracking-widest mb-4">⚠️ "TESTE" DE BRINCADEIRA </h4>
+                            <div className="font-mono text-gray-400 text-lg md:text-xl leading-relaxed flex-grow" style={{ whiteSpace: 'nowrap' }}>
+                                <p>aaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                            </div>
+                            <div className="mt-4 pt-4 border-t border-red-200">
+                                <p className="text-xs text-red-300 mb-2 uppercase tracking-wide font-semibold">Representação em Braille:</p>
+                                <p className="text-lg md:text-xl text-gray-400 leading-relaxed" style={{ fontFamily: 'monospace', overflowWrap: 'break-word', wordWrap: 'break-word', wordBreak: 'break-all' }}>⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁</p>
+                            </div>
+                            <div className="mt-4 flex flex-col items-center gap-2">
+                                <img src="/teste3.jpg" alt="Média de pontos" className="w-32 h-auto rounded-lg shadow-md" />
+                                <p className="text-sm font-semibold text-red-600">Média de 1 ponto por caractere</p>
+                            </div>
                         </div>
                     </div>
-                </section>
+                </div>
+            </section>
 
-                {/* COMMENTED OUT - Veja a Diferença Section
+            {/* Performance Comparison Table Section */}
+            <section className="py-8 md:py-12 bg-white">
+                <div className="container mx-auto px-4">
+                    {/* Performance Comparison Table */}
+                    <div className="max-w-5xl mx-auto">
+                        {/* Table Title */}
+                        <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2 text-center">
+                            Resultados oficiais dos testes de produção da impressora ViewPlus Columbia
+                        </h3>
+                        <h5 className="text-xl md:text-2x1 text-gray-900 mb-4 text-center">
+                            Tribunal de Justiça do Paraná
+                        </h5>
+
+                        <div className="overflow-x-auto">
+                            <table className="w-full border-collapse bg-white shadow-lg rounded-lg overflow-hidden">
+                                <thead>
+                                    <tr className="bg-gray-100">
+                                        <th className="border border-gray-300 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
+                                            Modo de teste
+                                        </th>
+                                        <th className="border border-gray-300 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
+                                            Configuração*
+                                        </th>
+                                        <th className="border border-gray-300 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
+                                            Modo de impressão
+                                        </th>
+                                        <th className="border border-gray-300 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
+                                            CPS**
+                                        </th>
+                                        <th className="border border-gray-300 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
+                                            PPH***
+                                        </th>
+                                        <th className="border border-gray-300 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
+                                            Fonte
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {/* 1. Alfabeto Português - Vibrant Blue */}
+                                    <tr className="bg-blue-500 text-white hover:bg-blue-600 transition-colors">
+                                        <td className="border border-blue-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
+                                            Alfabeto Português
+                                        </td>
+                                        <td className="border border-blue-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
+                                            40 CPL × 25 LPP
+                                        </td>
+                                        <td className="border border-blue-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
+                                            Draft
+                                        </td>
+                                        <td className="border border-blue-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
+                                            63
+                                        </td>
+                                        <td className="border border-blue-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
+                                            226
+                                        </td>
+                                        <td className="border border-blue-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
+                                            TJPR
+                                        </td>
+                                    </tr>
+                                    {/* 2. Alfabeto Inglês - Light Blue */}
+                                    <tr className="bg-blue-100 hover:bg-blue-200 transition-colors">
+                                        <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm text-gray-900">
+                                            Alfabeto Inglês
+                                        </td>
+                                        <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm text-gray-900">
+                                            46 CPL × 27 LPP
+                                        </td>
+                                        <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm text-gray-900">
+                                            Draft
+                                        </td>
+                                        <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
+                                            77
+                                        </td>
+                                        <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
+                                            220
+                                        </td>
+                                        <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
+                                            TJPR
+                                        </td>
+                                    </tr>
+                                    {/* 3. Alfabeto Inglês - Light Blue (Duplicated) */}
+                                    <tr className="bg-blue-100 hover:bg-blue-200 transition-colors">
+                                        <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm text-gray-900">
+                                            Alfabeto Inglês
+                                        </td>
+                                        <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm text-gray-900">
+                                            43 CPL × 28 LPP
+                                        </td>
+                                        <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm text-gray-900">
+                                            Draft
+                                        </td>
+                                        <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
+                                            70
+                                        </td>
+                                        <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
+                                            210
+                                        </td>
+                                        <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
+                                            SGS
+                                        </td>
+                                    </tr>
+                                    {/* 3. Alfabeto Inglês - Light Blue (Duplicated) */}
+                                    <tr className="bg-blue-100 hover:bg-blue-200 transition-colors">
+                                        <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm text-gray-900">
+                                            Alfabeto Inglês
+                                        </td>
+                                        <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm text-gray-900">
+                                            40 CPL × 25 LPP
+                                        </td>
+                                        <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm text-gray-900">
+                                            Draft
+                                        </td>
+                                        <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
+                                            87
+                                        </td>
+                                        <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
+                                            313
+                                        </td>
+                                        <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
+                                            TJPR
+                                        </td>
+                                    </tr>
+                                    {/* 3. Enganoso (Somente "a") - Red */}
+                                    <tr className="bg-red-500 text-white hover:bg-red-600 transition-colors">
+                                        <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
+                                            Enganoso (Somente "a")
+                                        </td>
+                                        <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
+                                            40 CPL × 25 LPP
+                                        </td>
+                                        <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
+                                            Draft
+                                        </td>
+                                        <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
+                                            214
+                                        </td>
+                                        <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
+                                            771
+                                        </td>
+                                        <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
+                                            TJPR
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        {/* Table Footnotes */}
+                        <div className="mt-4 text-xs md:text-sm text-gray-600 space-y-1">
+                            <p>* 43 Caracteres por linha (CPL) X 28 Linhas por página (LPP)</p>
+                            <p>** (CPS) Caracteres por segundo</p>
+                            <p>*** (PPH) Páginas por hora</p>
+                            <p>**** (TJPR) Tribunal de Justiça do Paraná</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Section 2: A Solução (Brasil) */}
+            <section className="py-4 md:py-8 bg-gray-50 border-t border-gray-200">
+                <div className="container mx-auto px-4 max-w-5xl text-center">
+                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                        O que diz a Justiça Brasileira?
+                    </h2>
+                    <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12 text-justify">
+                        O Laudo pericial da 7ª vara do Tribunal de Justiça do Paraná recomenda que os testes de desempenho utilizem o alfabeto completo da língua portuguesa, com caracteres acentuados, para maior fidelidade à grafia oficial.
+                    </p>
+                    <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12 text-justify">
+                        Os resultados mostraram que a média de pontos braille por caractere aumenta de 3,02 (alfabeto inglês) para 3,41 (alfabeto português).
+                    </p>
+
+                    <div className="bg-white p-4 md:p-6 rounded-3xl shadow-xl border border-blue-100 relative overflow-hidden group">
+                        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-tec-blue via-blue-400 to-tec-blue"></div>
+                        <p className="text-sm text-gray-400 mb-4 uppercase tracking-widest font-semibold">Tabela de Teste Real</p>
+                        <div className="flex justify-center gap-0.5 md:gap-1 overflow-x-auto">
+                            {['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'].map((char, i) => (
+                                <div key={i} className="flex flex-col items-center flex-shrink-0">
+                                    <span className="font-mono text-lg md:text-2xl text-gray-800">{char}</span>
+                                    <span className="font-mono text-base md:text-xl text-gray-600">{'⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵'[i]}</span>
+                                </div>
+                            ))}
+                            {[{ char: 'á', braille: '⠷' }, { char: 'à', braille: '⠡' }, { char: 'â', braille: '⠜' }, { char: 'ã', braille: '⠩' }, { char: 'é', braille: '⠿' }, { char: 'ê', braille: '⠣' }, { char: 'í', braille: '⠌' }, { char: 'ó', braille: '⠾' }, { char: 'ô', braille: '⠬' }, { char: 'õ', braille: '⠹' }, { char: 'ú', braille: '⠾' }, { char: 'ç', braille: '⠯' }].map((item, i) => (
+                                <div key={`accent-${i}`} className="flex flex-col items-center flex-shrink-0">
+                                    <span className="font-mono text-lg md:text-2xl text-tec-blue font-black">{item.char}</span>
+                                    <span className="font-mono text-base md:text-xl text-tec-blue font-black">{item.braille}</span>
+                                </div>
+                            ))}
+                        </div>
+                        <p className="mt-8 text-black text-center">
+                            Qualquer teste que não inclua a complexidade do padrão da grafia Braille brasileira:
+                            <br />
+                            não exige a capacidade necessária da impressora e é propositalmente criado para ludibriar potenciais clientes.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            {/* COMMENTED OUT - Veja a Diferença Section
                 <section className="py-8 md:py-16 bg-tec-blue relative overflow-hidden">
                     ... (section content commented out)
                 </section>
                 */}
 
-                {/* Expert Report Section */}
-                <section className="py-12 md:py-20 bg-gradient-to-br from-blue-50 to-white">
-                    <div className="container mx-auto px-4 max-w-4xl">
-                        <div className="text-center mb-12">
-                            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
-                                Conheça o Laudo da Perícia
-                            </h2>
-                            <p className="text-xl text-gray-600 max-w-2xl mx-auto text-justify">
-                                Acesse o documento oficial da 7ª Vara do Tribunal de Justiça do Paraná que fundamenta os testes de velocidade para o mercado brasileiro.
-                            </p>
-                        </div>
-
-                        <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 border border-blue-100">
-                            <div className="flex flex-col md:flex-row items-center gap-8">
-                                <div className="flex-shrink-0">
-                                    <div className="w-24 h-24 bg-gradient-to-br from-tec-blue to-blue-600 rounded-2xl flex items-center justify-center text-5xl shadow-lg">
-                                        📄
-                                    </div>
-                                </div>
-                                <div className="flex-grow text-center md:text-left">
-                                    <h3 className="text-2xl font-bold text-gray-900 mb-3">Laudo Técnico Oficial</h3>
-                                    <p className="text-gray-600 mb-6">
-                                        Documento técnico detalhado com os testes de velocidade de impressão Braille no Brasil.
-                                    </p>
-                                    <a
-                                        href="/laudo-pericia.pdf"
-                                        download
-                                        className="inline-flex items-center gap-3 px-8 py-4 bg-tec-blue text-white rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
-                                    >
-                                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                        </svg>
-                                        Baixar Laudo Completo
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+            {/* Expert Report Section */}
+            <section className="py-12 md:py-20 bg-gradient-to-br from-blue-50 to-white">
+                <div className="container mx-auto px-4 max-w-4xl">
+                    <div className="text-center mb-12">
+                        <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+                            Conheça o Laudo da Perícia
+                        </h2>
+                        <p className="text-xl text-gray-600 max-w-2xl mx-auto text-justify">
+                            Acesse o documento oficial da 7ª Vara do Tribunal de Justiça do Paraná que fundamenta os testes de velocidade para o mercado brasileiro.
+                        </p>
                     </div>
-                </section>
 
-                {/* Index Braille Basic Performance Table Section */}
-                <section className="py-8 md:py-12 bg-gray-50">
-                    <div className="container mx-auto px-4">
-                        {/* Performance Comparison Table */}
-                        <div className="max-w-5xl mx-auto">
-                            {/* Table Title */}
-                            <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 text-center">
-                                Resultado dos testes de produção da impressora INDEX BASIC
-                            </h3>
-
-                            <div className="overflow-x-auto">
-                                <table className="w-full border-collapse bg-white shadow-lg rounded-lg overflow-hidden">
-                                    <thead>
-                                        <tr className="bg-gray-100">
-                                            <th className="border border-gray-300 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
-                                                Modo de teste
-                                            </th>
-                                            <th className="border border-gray-300 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
-                                                Configuração*
-                                            </th>
-                                            <th className="border border-gray-300 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
-                                                Modo de impressão
-                                            </th>
-                                            <th className="border border-gray-300 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
-                                                CPS**
-                                            </th>
-                                            <th className="border border-gray-300 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
-                                                PPH***
-                                            </th>
-                                            <th className="border border-gray-300 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
-                                                Fonte
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {/* 1. Alfabeto Português - Vibrant Blue */}
-                                        <tr className="bg-blue-500 text-white hover:bg-blue-600 transition-colors">
-                                            <td className="border border-blue-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
-                                                Alfabeto Português
-                                            </td>
-                                            <td className="border border-blue-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
-                                                46 CPL × 29 LPP
-                                            </td>
-                                            <td className="border border-blue-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
-                                                Draft
-                                            </td>
-                                            <td className="border border-blue-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
-                                                139
-                                            </td>
-                                            <td className="border border-blue-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
-                                                375
-                                            </td>
-                                            <td className="border border-blue-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
-                                                Padrão TJPR
-                                            </td>
-                                        </tr>
-                                        {/* 2. Alfabeto Inglês - Light Blue */}
-                                        <tr className="bg-blue-100 hover:bg-blue-200 transition-colors">
-                                            <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm text-gray-900">
-                                                Alfabeto Inglês
-                                            </td>
-                                            <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm text-gray-900">
-                                                46 CPL × 29 LPP
-                                            </td>
-                                            <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm text-gray-900">
-                                                Draft
-                                            </td>
-                                            <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
-                                                140
-                                            </td>
-                                            <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
-                                                378
-                                            </td>
-                                            <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
-                                                SGS
-                                            </td>
-                                        </tr>
-                                        {/* 3. Enganoso (Somente "a") - Red */}
-                                        <tr className="bg-red-500 text-white hover:bg-red-600 transition-colors">
-                                            <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
-                                                Enganoso (Somente "a")
-                                            </td>
-                                            <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
-                                                46 CPL × 29 LPP
-                                            </td>
-                                            <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
-                                                Draft
-                                            </td>
-                                            <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
-                                                333
-                                            </td>
-                                            <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
-                                                898
-                                            </td>
-                                            <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
-                                                Padrão TJPR
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            {/* Table Footnotes */}
-                            <div className="mt-4 text-xs md:text-sm text-gray-600 space-y-1">
-                                <p>* 46 Caracteres por linha (CPL) X 29 Linhas por página (LPP)</p>
-                                <p>** (CPS) Caracteres por segundo</p>
-                                <p>*** (PPH) Páginas por hora</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                {/* Comparative Summary Section */}
-                <section className="py-12 md:py-16 bg-white border-t border-gray-200">
-                    <div className="container mx-auto px-4 max-w-6xl">
-                        <div className="text-center mb-12">
-                            <div className="inline-block px-4 py-1 bg-green-100 text-green-700 rounded-full font-semibold text-sm mb-4">
-                                Análise Comparativa
-                            </div>
-                            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                                Por que a INDEX BASIC é Superior?
-                            </h2>
-                            <p className="text-xl text-gray-600 max-w-3xl mx-auto text-justify">
-                                Além da velocidade de impressão significativamente maior, a INDEX BASIC oferece economia substancial de papel através de sua configuração otimizada de impressão em papel 11" × 12".
-                            </p>
-                        </div>
-
-                        {/* Comparison Cards */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                            {/* Speed Comparison Card */}
-                            <div className="bg-gradient-to-br from-blue-50 to-white p-8 rounded-2xl border-2 border-blue-200 shadow-lg">
-                                <div className="flex items-center gap-3 mb-6">
-                                    <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-2xl">
-                                        ⚡
-                                    </div>
-                                    <h3 className="text-2xl font-bold text-gray-900">Vantagem em Velocidade</h3>
-                                </div>
-                                <div className="space-y-4">
-                                    <div className="bg-white p-4 rounded-lg border border-blue-100">
-                                        <p className="text-sm text-gray-600 mb-2">Teste com Alfabeto Português (Real)</p>
-                                        <div className="flex items-baseline gap-2">
-                                            <span className="text-3xl font-bold text-blue-600">139 CPS</span>
-                                            <span className="text-gray-500">vs</span>
-                                            <span className="text-xl text-gray-400 line-through">63 CPS</span>
-                                        </div>
-                                        <p className="text-sm font-semibold text-green-600 mt-2">
-                                            ✓ 121% mais rápida (mais que o dobro)
-                                        </p>
-                                    </div>
-                                    <div className="bg-white p-4 rounded-lg border border-blue-100">
-                                        <p className="text-sm text-gray-600 mb-2">Páginas por Hora (PPH)</p>
-                                        <div className="flex items-baseline gap-2">
-                                            <span className="text-3xl font-bold text-blue-600">375 PPH</span>
-                                            <span className="text-gray-500">vs</span>
-                                            <span className="text-xl text-gray-400 line-through">226 PPH</span>
-                                        </div>
-                                        <p className="text-sm font-semibold text-green-600 mt-2">
-                                            ✓ 66% mais produtiva
-                                        </p>
-                                    </div>
+                    <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 border border-blue-100">
+                        <div className="flex flex-col md:flex-row items-center gap-8">
+                            <div className="flex-shrink-0">
+                                <div className="w-24 h-24 bg-gradient-to-br from-tec-blue to-blue-600 rounded-2xl flex items-center justify-center text-5xl shadow-lg">
+                                    📄
                                 </div>
                             </div>
-
-                            {/* Time Economy Card */}
-                            <div className="bg-gradient-to-br from-purple-50 to-white p-8 rounded-2xl border-2 border-purple-200 shadow-lg">
-                                <div className="flex items-center gap-3 mb-6">
-                                    <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center text-2xl">
-                                        ⏱️
-                                    </div>
-                                    <h3 className="text-2xl font-bold text-gray-900">Economia de Tempo</h3>
-                                </div>
-                                <div className="space-y-4">
-                                    <div className="bg-white p-4 rounded-lg border border-purple-100">
-                                        <p className="text-sm text-gray-600 mb-2">Produção de 10.000 páginas</p>
-                                        <div className="flex items-baseline gap-2">
-                                            <span className="text-3xl font-bold text-purple-600">27h</span>
-                                            <span className="text-gray-500">vs</span>
-                                            <span className="text-xl text-gray-400 line-through">44h</span>
-                                        </div>
-                                        <p className="text-sm text-gray-600 mt-2">
-                                            Index Basic vs ViewPlus Columbia
-                                        </p>
-                                    </div>
-                                    <div className="bg-white p-4 rounded-lg border border-purple-100">
-                                        <p className="text-sm text-gray-600 mb-2">Tempo economizado</p>
-                                        <div className="text-3xl font-bold text-purple-600 mb-2">
-                                            18 horas
-                                        </div>
-                                        <p className="text-sm font-semibold text-green-600">
-                                            ✓ 40% menos tempo de produção
-                                        </p>
-                                        <p className="text-xs text-gray-500 italic mt-1">
-                                            (Resultados consideram uma produção de 10.000 páginas)
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Paper Economy Card */}
-                            <div className="bg-gradient-to-br from-green-50 to-white p-8 rounded-2xl border-2 border-green-200 shadow-lg">
-                                <div className="flex items-center gap-3 mb-6">
-                                    <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-2xl">
-                                        🌱
-                                    </div>
-                                    <h3 className="text-2xl font-bold text-gray-900">Economia de Papel</h3>
-                                </div>
-                                <div className="space-y-4">
-                                    <div className="bg-white p-4 rounded-lg border border-green-100">
-                                        <p className="text-sm text-gray-600 mb-2">Caracteres por Página (11" × 12")</p>
-                                        <div className="flex items-baseline gap-2">
-                                            <span className="text-3xl font-bold text-green-600">1334</span>
-                                            <span className="text-gray-500">vs</span>
-                                            <span className="text-xl text-gray-400 line-through">1000</span>
-                                        </div>
-                                        <p className="text-sm text-gray-600 mt-2">
-                                            46 CPL × 29 LPP vs 40 CPL × 25 LPP
-                                        </p>
-                                    </div>
-                                    <div className="bg-white p-4 rounded-lg border border-green-100">
-                                        <p className="text-sm text-gray-600 mb-2">Economia em 10.000 páginas</p>
-                                        <div className="text-3xl font-bold text-green-600 mb-2">
-                                            <span className="text-lg">Cerca de</span> 3.340 folhas
-                                        </div>
-                                        <p className="text-sm font-semibold text-green-600">
-                                            ✓ 25% menos papel necessário
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Modern Technologies Card - Full Width */}
-                        <div className="mb-12 bg-gradient-to-br from-orange-50 to-white p-8 rounded-2xl border-2 border-orange-200 shadow-lg">
-                            <div className="flex items-center justify-center gap-3 mb-8">
-                                <div className="flex items-center justify-center">
-                                    <img src="/indexlogo.png" alt="Index Braille" className="h-12 w-auto" />
-                                </div>
-                                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 text-center">Tecnologias Modernas Exclusivas</h3>
-                            </div>
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                                {[
-                                    {
-                                        icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" /></svg>,
-                                        title: 'Autonomia Total',
-                                        desc: 'Impressora independente: não precisa de nenhum outro dispositivo para produzir.'
-                                    },
-                                    { icon: '📶', title: 'Wireless Wi-Fi', desc: 'Conexão sem fios estável e de longo alcance para impressão remota.' },
-                                    { icon: '📲', title: 'Bluetooth 4.0', desc: 'Imprima diretamente do seu SmartPhone (Android ou iOS) com facilidade.' },
-                                    {
-                                        icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25V9m7.5 0A2.25 2.25 0 0118 11.25v9a2.25 2.25 0 01-2.25 2.25h-7.5A2.25 2.25 0 016 20.25v-9A2.25 2.25 0 018.25 9m7.5 0H8.25" /></svg>,
-                                        title: 'Porta USB (Pendrive)',
-                                        desc: 'Autonomia total: imprima arquivos direto do Pendrive, sem computador.',
-                                        titleClassName: 'whitespace-nowrap text-base'
-                                    },
-                                    {
-                                        icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 scale-x-[-1]"><path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" /></svg>,
-                                        title: 'Serviço Web (IP)',
-                                        desc: 'Acesso através do IP para impressão, configuração e suporte remoto.'
-                                    },
-                                    { icon: '📄', title: 'Impressão Direta (idB)', desc: 'Imprime arquivos .docx e .pdf convertendo automaticamente para Braille.' },
-                                    { icon: '🔊', title: 'Feedback de Voz', desc: 'Alto-falante integrado com feedback falado em português de todas as ações.' },
-                                    { icon: '⌨️', title: 'Painel Acessível', desc: 'Painel de controle com teclas em Braille e feedback sonoro e luminoso.' }
-                                ].map((item, i) => (
-                                    <div key={i} className="flex flex-col items-center text-center gap-1 p-4 bg-white rounded-xl border border-orange-100 shadow-sm hover:shadow-md transition-shadow">
-                                        <div className="text-3xl shrink-0 flex items-center justify-center w-12 h-12 text-orange-500">{item.icon}</div>
-                                        <div>
-                                            <h4 className={`font-bold text-gray-900 mb-2 ${item.titleClassName || 'text-lg'}`}>{item.title}</h4>
-                                            <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-
-                            <div className="mt-8 text-center">
-                                <p className="text-gray-600 text-center max-w-3xl mx-auto">
-                                    Tecnologia Index, única no mercado com acessibilidade total de fábrica.
+                            <div className="flex-grow text-center md:text-left">
+                                <h3 className="text-2xl font-bold text-gray-900 mb-3">Laudo Técnico Oficial</h3>
+                                <p className="text-gray-600 mb-6">
+                                    Documento técnico detalhado com os testes de velocidade de impressão Braille no Brasil.
                                 </p>
-                            </div>
-                        </div>
-
-                        {/* Detailed Explanation */}
-                        <div className="bg-gray-50 p-8 rounded-2xl border border-gray-200">
-                            <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-                                Entenda os Comparativos Completos
-                            </h3>
-
-                            {/* Speed and Productivity Comparison */}
-                            <div className="mb-8">
-                                <h4 className="font-bold text-xl text-blue-600 mb-4">⚡ Velocidade e Produtividade</h4>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                    <div>
-                                        <h5 className="font-bold text-lg text-gray-900 mb-3">ViewPlus Columbia</h5>
-                                        <ul className="space-y-2 text-gray-700">
-                                            <li className="flex items-start gap-2">
-                                                <span className="text-blue-500 font-bold">•</span>
-                                                <span>Velocidade (Português): 63 CPS</span>
-                                            </li>
-                                            <li className="flex items-start gap-2">
-                                                <span className="text-blue-500 font-bold">•</span>
-                                                <span>Produtividade: 226 PPH</span>
-                                            </li>
-                                            <li className="flex items-start gap-2">
-                                                <span className="text-blue-500 font-bold">•</span>
-                                                <span>Tempo para 10.000 páginas: 44 horas</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <h5 className="font-bold text-lg text-green-700 mb-3">Index Braille Basic</h5>
-                                        <ul className="space-y-2 text-gray-700">
-                                            <li className="flex items-start gap-2">
-                                                <span className="text-green-500 font-bold">•</span>
-                                                <span>Velocidade (Português): 139 CPS</span>
-                                            </li>
-                                            <li className="flex items-start gap-2">
-                                                <span className="text-green-500 font-bold">•</span>
-                                                <span>Produtividade: 375 PPH</span>
-                                            </li>
-                                            <li className="flex items-start gap-2">
-                                                <span className="text-green-500 font-bold">•</span>
-                                                <span>Tempo para 10.000 páginas: 27 horas</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Paper Economy Comparison */}
-                            <div className="mb-8">
-                                <h4 className="font-bold text-xl text-green-600 mb-4">🌱 Economia de Papel</h4>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                    <div>
-                                        <h5 className="font-bold text-lg text-gray-900 mb-3">ViewPlus Columbia</h5>
-                                        <ul className="space-y-2 text-gray-700">
-                                            <li className="flex items-start gap-2">
-                                                <span className="text-blue-500 font-bold">•</span>
-                                                <span>Configuração: 40 CPL × 25 LPP</span>
-                                            </li>
-                                            <li className="flex items-start gap-2">
-                                                <span className="text-blue-500 font-bold">•</span>
-                                                <span>Total: 1.000 caracteres por página</span>
-                                            </li>
-                                            <li className="flex items-start gap-2">
-                                                <span className="text-blue-500 font-bold">•</span>
-                                                <span>Para 100.000 caracteres: 100 páginas</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <h5 className="font-bold text-lg text-green-700 mb-3">Index Braille Basic</h5>
-                                        <ul className="space-y-2 text-gray-700">
-                                            <li className="flex items-start gap-2">
-                                                <span className="text-green-500 font-bold">•</span>
-                                                <span>Configuração: 46 CPL × 29 LPP</span>
-                                            </li>
-                                            <li className="flex items-start gap-2">
-                                                <span className="text-green-500 font-bold">•</span>
-                                                <span>Total: 1.334 caracteres por página</span>
-                                            </li>
-                                            <li className="flex items-start gap-2">
-                                                <span className="text-green-500 font-bold">•</span>
-                                                <span>Para 100.000 caracteres: ~75 páginas</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Summary Box */}
-                            <div className="p-6 bg-white rounded-xl border-2 border-green-300">
-                                <p className="text-center text-lg font-semibold text-gray-900 mb-4">
-                                    <span className="text-green-600 text-2xl">💰</span> Resumo das vantagens da INDEX BASIC
-                                </p>
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-                                    <div className="p-3 bg-blue-50 rounded-lg">
-                                        <p className="text-sm text-gray-600">Velocidade</p>
-                                        <p className="text-xl font-bold text-blue-600">121% mais rápida</p>
-                                    </div>
-                                    <div className="p-3 bg-purple-50 rounded-lg">
-                                        <p className="text-sm text-gray-600">Economia de Tempo</p>
-                                        <p className="text-xl font-bold text-purple-600">18h economizadas</p>
-                                    </div>
-                                    <div className="p-3 bg-green-50 rounded-lg">
-                                        <p className="text-sm text-gray-600">Economia de Papel</p>
-                                        <p className="text-xl font-bold text-green-600">3.340 folhas a menos</p>
-                                    </div>
-                                </div>
+                                <a
+                                    href="/laudo-pericia.pdf"
+                                    download
+                                    className="inline-flex items-center gap-3 px-8 py-4 bg-tec-blue text-white rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
+                                >
+                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                    </svg>
+                                    Baixar Laudo Completo
+                                </a>
                             </div>
                         </div>
                     </div>
-                </section>
-            </main>
-        </PasswordProtection >
+                </div>
+            </section>
+
+            {/* Index Braille Basic Performance Table Section */}
+            <section className="py-8 md:py-12 bg-gray-50">
+                <div className="container mx-auto px-4">
+                    {/* Performance Comparison Table */}
+                    <div className="max-w-5xl mx-auto">
+                        {/* Table Title */}
+                        <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 text-center">
+                            Resultado dos testes de produção da impressora INDEX BASIC
+                        </h3>
+
+                        <div className="overflow-x-auto">
+                            <table className="w-full border-collapse bg-white shadow-lg rounded-lg overflow-hidden">
+                                <thead>
+                                    <tr className="bg-gray-100">
+                                        <th className="border border-gray-300 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
+                                            Modo de teste
+                                        </th>
+                                        <th className="border border-gray-300 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
+                                            Configuração*
+                                        </th>
+                                        <th className="border border-gray-300 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
+                                            Modo de impressão
+                                        </th>
+                                        <th className="border border-gray-300 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
+                                            CPS**
+                                        </th>
+                                        <th className="border border-gray-300 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
+                                            PPH***
+                                        </th>
+                                        <th className="border border-gray-300 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
+                                            Fonte
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {/* 1. Alfabeto Português - Vibrant Blue */}
+                                    <tr className="bg-blue-500 text-white hover:bg-blue-600 transition-colors">
+                                        <td className="border border-blue-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
+                                            Alfabeto Português
+                                        </td>
+                                        <td className="border border-blue-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
+                                            46 CPL × 29 LPP
+                                        </td>
+                                        <td className="border border-blue-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
+                                            Draft
+                                        </td>
+                                        <td className="border border-blue-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
+                                            139
+                                        </td>
+                                        <td className="border border-blue-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
+                                            375
+                                        </td>
+                                        <td className="border border-blue-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
+                                            Padrão TJPR
+                                        </td>
+                                    </tr>
+                                    {/* 2. Alfabeto Inglês - Light Blue */}
+                                    <tr className="bg-blue-100 hover:bg-blue-200 transition-colors">
+                                        <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm text-gray-900">
+                                            Alfabeto Inglês
+                                        </td>
+                                        <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm text-gray-900">
+                                            46 CPL × 29 LPP
+                                        </td>
+                                        <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm text-gray-900">
+                                            Draft
+                                        </td>
+                                        <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
+                                            140
+                                        </td>
+                                        <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
+                                            378
+                                        </td>
+                                        <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold text-gray-900">
+                                            SGS
+                                        </td>
+                                    </tr>
+                                    {/* 3. Enganoso (Somente "a") - Red */}
+                                    <tr className="bg-red-500 text-white hover:bg-red-600 transition-colors">
+                                        <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
+                                            Enganoso (Somente "a")
+                                        </td>
+                                        <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
+                                            46 CPL × 29 LPP
+                                        </td>
+                                        <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
+                                            Draft
+                                        </td>
+                                        <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
+                                            333
+                                        </td>
+                                        <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
+                                            898
+                                        </td>
+                                        <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
+                                            Padrão ViewPlus
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        {/* Table Footnotes */}
+                        <div className="mt-4 text-xs md:text-sm text-gray-600 space-y-1">
+                            <p>* 46 Caracteres por linha (CPL) X 29 Linhas por página (LPP)</p>
+                            <p>** (CPS) Caracteres por segundo</p>
+                            <p>*** (PPH) Páginas por hora</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Link to Detailed Comparison Page */}
+            <section className="py-12 bg-white border-t border-gray-200">
+                <div className="container mx-auto px-4 text-center">
+                    <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+                        Quer ver o comparativo completo de tecnologia e velocidade?
+                    </h2>
+                    <Link href="/vantagens-index-basic" className="inline-flex items-center justify-center px-8 py-4 bg-green-600 text-white font-bold rounded-xl shadow-lg hover:bg-green-700 transition-all hover:-translate-y-1">
+                        Saiba porque a INDEX BASIC é Superior.
+                    </Link>
+                </div>
+            </section>
+        </main>
     );
 }
