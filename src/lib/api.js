@@ -375,7 +375,7 @@ export async function getManufacturerBySlug(slug) {
 }
 
 export async function getImersaoBySlug(slug) {
-  const populateQuery = 'populate[personalizado]=*&populate[produto][fields][0]=nome&populate[produto][fields][1]=descricao_curta&populate[produto][populate][0]=imagem_principal&populate[produto][populate][1]=categorias&populate[produto][populate][2]=relacao_fabricante&fields[0]=genero_descricao&fields[1]=curso&fields[2]=guia&fields[3]=manual&fields[4]=botoes_padrao';
+  const populateQuery = 'populate[personalizado]=*&populate[produto][fields][0]=nome&populate[produto][fields][1]=descricao_curta&populate[produto][populate][0]=imagem_principal&populate[produto][populate][1]=categorias&populate[produto][populate][2]=relacao_fabricante&fields[0]=genero_descricao&fields[1]=curso&fields[2]=guia&fields[3]=manual&fields[4]=botoes_padrao&fields[5]=link_playstore&fields[6]=link_appstore';
   const res = await fetchAPI(`/api/imersaos?filters[slug][$eq]=${slug}&${populateQuery}`);
   const data = normalizeDataArray(res);
   if (data.length === 0) return null;
