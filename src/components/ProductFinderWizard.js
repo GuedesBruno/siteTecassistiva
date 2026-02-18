@@ -15,7 +15,7 @@ export default function ProductFinderWizard({ categories = [], products = [] }) 
     const [selectedSubcategory, setSelectedSubcategory] = useState(null);
     const [filteredProducts, setFilteredProducts] = useState([]);
 
-    // Create a combined list of suggestions (Categories + Product Names)
+    // Create a combined list of suggestions (Categories + Subcategories + Product Names)
     const suggestions = useMemo(() => {
         const catSuggestions = categories.map(c => {
             const attrs = getAttrs(c);
@@ -26,6 +26,23 @@ export default function ProductFinderWizard({ categories = [], products = [] }) 
             };
         }).filter(s => s.label);
 
+        const subcatSuggestions = [];
+        categories.forEach(c => {
+            const cAttrs = getAttrs(c);
+            const subcats = cAttrs.subcategorias?.data || cAttrs.subcategorias || [];
+            subcats.forEach(s => {
+                const sAttrs = getAttrs(s);
+                if (sAttrs.nome) {
+                    subcatSuggestions.push({
+                        type: 'subcategory',
+                        label: sAttrs.nome,
+                        value: s,
+                        parentCategory: c // Optional: needed for context?
+                    });
+                }
+            });
+        });
+
         const prodSuggestions = products.map(p => {
             const attrs = getAttrs(p);
             return {
@@ -35,7 +52,7 @@ export default function ProductFinderWizard({ categories = [], products = [] }) 
             };
         }).filter(s => s.label);
 
-        return [...catSuggestions, ...prodSuggestions];
+        return [...catSuggestions, ...subcatSuggestions, ...prodSuggestions];
     }, [categories, products]);
 
     const handleInputSubmit = (e) => {
@@ -45,14 +62,33 @@ export default function ProductFinderWizard({ categories = [], products = [] }) 
         if (match) {
             if (match.type === 'category') {
                 handleCategorySelect(match.value);
+            } else if (match.type === 'subcategory') {
+                if (match.parentCategory) {
+                    setSelectedCategory(match.parentCategory);
+                }
+                handleSubcategorySelect(match.value);
             } else {
                 handleProductSelect(match.value);
             }
         } else {
             // Fuzzy search or fallback: display list of products matching text
-            const matches = products.filter(p =>
-                getAttrs(p).nome?.toLowerCase().includes(userInput.toLowerCase())
-            );
+            const lowerInput = userInput.toLowerCase();
+            const matches = products.filter(p => {
+                const attrs = getAttrs(p);
+                const nameMatch = attrs.nome?.toLowerCase().includes(lowerInput);
+                const descMatch = attrs.descricao_curta?.toLowerCase().includes(lowerInput) ||
+                    attrs.descricao_longa?.toLowerCase().includes(lowerInput);
+
+                // Check categories and subcategories
+                const pCats = attrs.categorias?.data || attrs.categorias || [];
+                const catMatch = pCats.some(c => getAttrs(c).nome?.toLowerCase().includes(lowerInput));
+
+                const pSubcats = attrs.subcategorias?.data || attrs.subcategorias || [];
+                const subcatMatch = pSubcats.some(s => getAttrs(s).nome?.toLowerCase().includes(lowerInput));
+
+                return nameMatch || descMatch || catMatch || subcatMatch;
+            });
+
             if (matches.length > 0) {
                 setFilteredProducts(matches);
                 setStep(3);
