@@ -10,7 +10,7 @@ async function fetchAPI(endpoint, options = {}) {
     throw new Error("Variáveis de ambiente da API do Strapi não definidas.");
   }
 
-  // Validação adicional para evitar placeholders óbvios (ex: 'seu-strapi') ou URLs sem protocolo
+  // Validação adicional para evitar placeholders óbvios (ex: 'seu-strapi') ou URLs sem protocolo.
   if (!/^https?:\/\//i.test(STRAPI_URL) || /seu-?strapi|your[_-]?strapi/i.test(STRAPI_URL)) {
     console.error(`NEXT_PUBLIC_STRAPI_URL inválida detectada: ${STRAPI_URL}`);
     throw new Error('NEXT_PUBLIC_STRAPI_URL inválida. Defina uma URL válida (ex: https://meu-strapi.exemplo) nas variáveis de ambiente ou secrets do CI.');
