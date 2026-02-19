@@ -220,6 +220,7 @@ async function generateSearchData() {
         type: 'Produto',
         content: content,
         categories: categories,
+        subcategories: subcategories,
         fabricante: attrs.Fabricante || '',
       }
     });
