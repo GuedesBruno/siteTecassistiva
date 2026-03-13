@@ -1,4 +1,4 @@
-import fs from 'fs';
+﻿import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
 import { glob } from 'glob';
@@ -6,14 +6,14 @@ import qs from 'qs';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
-// Função auxiliar para fetch API
-// Função auxiliar para fetch API com timeout e retry
+// Fun├º├úo auxiliar para fetch API
+// Fun├º├úo auxiliar para fetch API com timeout e retry
 async function fetchAPI(endpoint, retries = 3) {
   const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
   const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN;
 
   if (!STRAPI_URL || !STRAPI_TOKEN) {
-    throw new Error("Variáveis de ambiente não definidas");
+    throw new Error("Vari├íveis de ambiente n├úo definidas");
   }
 
   let lastError;
@@ -64,7 +64,7 @@ async function fetchAPI(endpoint, retries = 3) {
         console.error(`Erro ao fazer fetch (tentativa ${attempt}/${retries}): ${error.message} (${endpoint})`);
       }
 
-      // Se não for a última tentativa, aguarda antes de tentar novamente (exponential backoff)
+      // Se n├úo for a ├║ltima tentativa, aguarda antes de tentar novamente (exponential backoff)
       if (attempt < retries) {
         const waitTime = Math.min(1000 * Math.pow(2, attempt - 1), 10000); // Max 10s
         console.log(`  Aguardando ${waitTime}ms antes de tentar novamente...`);
@@ -99,23 +99,23 @@ function stripTags(content) {
     .trim();
 }
 
-// Função que busca TODAS as páginas (paginação automática)
+// Fun├º├úo que busca TODAS as p├íginas (pagina├º├úo autom├ítica)
 async function fetchAllData(endpoint) {
   let allData = [];
   let page = 1;
   let pageCount = 1;
-  const limit = 30; // Reduzido para 30 para garantir que não dê timeout
+  const limit = 30; // Reduzido para 30 para garantir que n├úo d├¬ timeout
 
   const [pathPart, queryPart] = endpoint.split('?');
   const queryParams = queryPart ? qs.parse(queryPart) : {};
 
-  // Remove qualquer paginação existente na string original para evitar conflito
+  // Remove qualquer pagina├º├úo existente na string original para evitar conflito
   if (queryParams.pagination) {
     delete queryParams.pagination;
   }
 
   do {
-    // console.log(`   > Buscando página ${page}...`); // Debug opcional
+    // console.log(`   > Buscando p├ígina ${page}...`); // Debug opcional
 
     const currentParams = {
       ...queryParams,
@@ -137,7 +137,7 @@ async function fetchAllData(endpoint) {
         if (res.meta && res.meta.pagination) {
           pageCount = res.meta.pagination.pageCount;
         } else {
-          // Se não tiver paginação, deve ser single type ou array simples, para por aqui
+          // Se n├úo tiver pagina├º├úo, deve ser single type ou array simples, para por aqui
           pageCount = 1;
         }
       } else {
@@ -146,7 +146,7 @@ async function fetchAllData(endpoint) {
         pageCount = 0;
       }
     } catch (err) {
-      console.error(`Erro na página ${page} de ${pathPart}:`, err.message);
+      console.error(`Erro na p├ígina ${page} de ${pathPart}:`, err.message);
       throw err;
     }
 
@@ -157,7 +157,7 @@ async function fetchAllData(endpoint) {
 }
 
 async function generateSearchData() {
-  console.log('Iniciando a geração de dados de busca abrangente...');
+  console.log('Iniciando a gera├º├úo de dados de busca abrangente...');
 
   const publicDir = path.join(process.cwd(), 'public');
   const outputPath = path.join(publicDir, 'search-data.json');
@@ -188,12 +188,12 @@ async function generateSearchData() {
 
     const software = await safeFetch('softwares', '/api/softwares?fields[0]=nome&fields[1]=tipo&populate[instaladores]=*');
 
-    // Se todos os dados da API vieram vazios (API completamente indisponível),
-    // tenta reutilizar o arquivo de busca do último build bem-sucedido
+    // Se todos os dados da API vieram vazios (API completamente indispon├¡vel),
+    // tenta reutilizar o arquivo de busca do ├║ltimo build bem-sucedido
     const apiTotalItems = products.length + productsWithDocsRaw.length + atas.length + software.length;
     if (apiTotalItems === 0 && fs.existsSync(outputPath)) {
-      console.warn('AVISO: Nenhum dado retornado pela API. Reutilizando search-data.json do último build bem-sucedido.');
-      console.log('Build continuará sem atualizar os dados de busca.');
+      console.warn('AVISO: Nenhum dado retornado pela API. Reutilizando search-data.json do ├║ltimo build bem-sucedido.');
+      console.log('Build continuar├í sem atualizar os dados de busca.');
       return;
     }
 
@@ -221,7 +221,7 @@ async function generateSearchData() {
         .filter(Boolean)
         .join(', ');
 
-      // Combina conteúdo para busca mais completa
+      // Combina conte├║do para busca mais completa
       const content = [
         attrs.descricao_curta || '',
         attrs.descricao_longa ? stripTags(JSON.stringify(attrs.descricao_longa)) : '',
@@ -257,7 +257,7 @@ async function generateSearchData() {
         const fileName = docAttrs.name || docAttrs.nome || 'Documento';
         const fileUrl = docAttrs.url || '';
 
-        // Extrai extensão do arquivo
+        // Extrai extens├úo do arquivo
         const extension = fileName.split('.').pop().toLowerCase();
         const docType = {
           'pdf': 'PDF',
@@ -322,7 +322,7 @@ async function generateSearchData() {
 
       const description = textContent.substring(0, 150) + '...';
 
-      let title = slug.split('/').pop() || 'Página Inicial';
+      let title = slug.split('/').pop() || 'P├ígina Inicial';
       title = title.charAt(0).toUpperCase() + title.slice(1).replace(/-/g, ' ');
 
       const titleMatch = content.match(/<h1[^>]*>([^<]+)<\/h1>/);
@@ -336,7 +336,7 @@ async function generateSearchData() {
         slug: slug,
         description: description,
         content: textContent,
-        type: 'Página',
+        type: 'P├ígina',
       };
     });
 
@@ -364,7 +364,7 @@ async function generateSearchData() {
     console.log(`- ${documentData.length} Documentos`);
     console.log(`- ${ataData.length} Atas`);
     console.log(`- ${softwareData.length} Softwares/Drivers`);
-    console.log(`- ${pageData.length} Páginas`);
+    console.log(`- ${pageData.length} P├íginas`);
 
   } catch (error) {
     console.error('ERRO FATAL ao gerar os dados de busca:', error);
