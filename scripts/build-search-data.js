@@ -159,24 +159,43 @@ async function fetchAllData(endpoint) {
 async function generateSearchData() {
   console.log('Iniciando a geração de dados de busca abrangente...');
 
-  try {
-    // Fetch data from APIs sequencialmente com paginação robusta
-    console.log('Buscando produtos...');
-    const products = await fetchAllData('/api/produtos?populate[0]=imagem_principal&populate[1]=subcategorias&populate[2]=categorias&sort=ordem:asc');
+  const publicDir = path.join(process.cwd(), 'public');
+  const outputPath = path.join(publicDir, 'search-data.json');
 
-    console.log('Buscando produtos com documentos...');
-    const productsWithDocsRaw = await fetchAllData('/api/produtos?populate[0]=documentos&populate[1]=categorias&populate[2]=subcategorias&sort=nome:asc');
+  // Helper para buscar com fallback seguro
+  async function safeFetch(label, endpoint) {
+    try {
+      console.log(`Buscando ${label}...`);
+      return await fetchAllData(endpoint);
+    } catch (err) {
+      console.warn(`AVISO: Falha ao buscar ${label} (${err.message}). Usando array vazio como fallback.`);
+      return [];
+    }
+  }
+
+  try {
+    // Fetch data from APIs com fallback individual por recurso
+    const products = await safeFetch('produtos', '/api/produtos?populate[0]=imagem_principal&populate[1]=subcategorias&populate[2]=categorias&sort=ordem:asc');
+
+    const productsWithDocsRaw = await safeFetch('produtos com documentos', '/api/produtos?populate[0]=documentos&populate[1]=categorias&populate[2]=subcategorias&sort=nome:asc');
     // Normalizar
     const productsWithDocs = productsWithDocsRaw.map(item => {
       const { id, ...attributes } = item.attributes ? item : { id: item.id, ...item };
       return { id, attributes };
     });
 
-    console.log('Buscando atas...');
-    const atas = await fetchAllData('/api/atas?sort=ordem:asc');
+    const atas = await safeFetch('atas', '/api/atas?sort=ordem:asc');
 
-    console.log('Buscando softwares...');
-    const software = await fetchAllData('/api/softwares?fields[0]=nome&fields[1]=tipo&populate[instaladores]=*');
+    const software = await safeFetch('softwares', '/api/softwares?fields[0]=nome&fields[1]=tipo&populate[instaladores]=*');
+
+    // Se todos os dados da API vieram vazios (API completamente indisponível),
+    // tenta reutilizar o arquivo de busca do último build bem-sucedido
+    const apiTotalItems = products.length + productsWithDocsRaw.length + atas.length + software.length;
+    if (apiTotalItems === 0 && fs.existsSync(outputPath)) {
+      console.warn('AVISO: Nenhum dado retornado pela API. Reutilizando search-data.json do último build bem-sucedido.');
+      console.log('Build continuará sem atualizar os dados de busca.');
+      return;
+    }
 
 
     // Process API data - Products
@@ -331,8 +350,7 @@ async function generateSearchData() {
       ...pageData,
     ];
 
-    const publicDir = path.join(process.cwd(), 'public');
-    const outputPath = path.join(publicDir, 'search-data.json');
+
 
     if (!fs.existsSync(publicDir)) {
       fs.mkdirSync(publicDir);
