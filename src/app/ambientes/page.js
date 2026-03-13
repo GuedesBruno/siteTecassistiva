@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { ambientesData } from '@/lib/ambientes-data'; // Importa os dados estáticos
+import { ambientesData } from '@/lib/ambientes-data'; // Importa os dados estáticos.
 import Breadcrumbs from '@/components/Breadcrumbs';
 
 export const metadata = {
