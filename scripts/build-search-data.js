@@ -1,4 +1,4 @@
-﻿import fs from 'fs';
+import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
 import { glob } from 'glob';
@@ -6,14 +6,14 @@ import qs from 'qs';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
-// Fun├º├úo auxiliar para fetch API
-// Fun├º├úo auxiliar para fetch API com timeout e retry
-async function fetchAPI(endpoint, retries = 3) {
+// Função auxiliar para fetch API
+// Função auxiliar para fetch API com timeout e retry mais agressivo para lidar com 503s do Strapi Cloud
+async function fetchAPI(endpoint, retries = 5) {
   const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
   const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN;
 
   if (!STRAPI_URL || !STRAPI_TOKEN) {
-    throw new Error("Vari├íveis de ambiente n├úo definidas");
+    throw new Error("Variáveis de ambiente não definidas");
   }
 
   let lastError;
@@ -64,9 +64,10 @@ async function fetchAPI(endpoint, retries = 3) {
         console.error(`Erro ao fazer fetch (tentativa ${attempt}/${retries}): ${error.message} (${endpoint})`);
       }
 
-      // Se n├úo for a ├║ltima tentativa, aguarda antes de tentar novamente (exponential backoff)
+      // Se não for a última tentativa, aguarda antes de tentar novamente (exponential backoff com tempo maior)
       if (attempt < retries) {
-        const waitTime = Math.min(1000 * Math.pow(2, attempt - 1), 10000); // Max 10s
+        // Incrementa o backoff: 2s, 4s, 8s, 16s... máximo 30s
+        const waitTime = Math.min(2000 * Math.pow(2, attempt - 1), 30000);
         console.log(`  Aguardando ${waitTime}ms antes de tentar novamente...`);
         await new Promise(resolve => setTimeout(resolve, waitTime));
       }
@@ -117,17 +118,12 @@ async function fetchAllData(endpoint) {
   do {
     // console.log(`   > Buscando p├ígina ${page}...`); // Debug opcional
 
-    const currentParams = {
-      ...queryParams,
-      pagination: {
-        page: page,
-        pageSize: limit // CORRECTED: Strapi v4 uses pageSize with page
-      }
-    };
-
-    // Encode parameters standardly (brackets encoded) to match safely with strict fetch/servers
-    const queryString = qs.stringify(currentParams);
-    const pagedUrl = `${pathPart}?${queryString}`;
+    // Simplifica a paginação: anexa diretamente como string sem usar qs.
+    // O qs.stringify às vezes codifica arrays complexos de um jeito que o Strapi Cloud
+    // recusa com 503 Timeout
+    const pagedUrl = queryPart 
+      ? `${pathPart}?${queryPart}&pagination[page]=${page}&pagination[pageSize]=${limit}`
+      : `${pathPart}?pagination[page]=${page}&pagination[pageSize]=${limit}`;
 
     try {
       const res = await fetchAPI(pagedUrl);
