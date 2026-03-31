@@ -7,7 +7,7 @@ dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
 const SITE_URL = 'https://www.tecassistiva.com.br';
 
-// Funções de fetch sem dependência de src/lib/api.js
+// Funções de fetch sem dependência de src/lib/api.js.
 async function fetchAPI(endpoint) {
   const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
   const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN;
