@@ -15,21 +15,47 @@
   # ----------------------------------------------------------------------
 
   # --- Ampliadores e Lupas Eletrônicas ---
-  Redirect 301 /catalogo/clearview-24-full-hd/ /produtos/clearview-24/
-  Redirect 301 /catalogo/ruby-7-hd/ /produtos/ruby-7-hd/
-  Redirect 301 /catalogo/ruby-xl-hd-2/ /produtos/ruby-xl-hd/
-  Redirect 301 /catalogo/onyx-portatil-hd/ /produtos/onyx-deskset-24/
-  Redirect 301 /catalogo/onyx-ocr/ /produtos/onyx-ocr/
-  Redirect 301 /catalogo/travellerhd.pdf /produtos/traveller-hd/
-  Redirect 301 /catalogo/ruby-10/ /produtos/ruby-10/
-  Redirect 301 /catalogo/clearreader/ /produtos/clearreader/
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^catalogo/clearview-24-full-hd/?$ /produtos/clearview-24/ [L,R=301]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^catalogo/ruby-7-hd/?$ /produtos/ruby-7-hd/ [L,R=301]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^catalogo/ruby-xl-hd-2/?$ /produtos/ruby-xl-hd/ [L,R=301]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^catalogo/onyx-portatil-hd/?$ /produtos/onyx-deskset-24/ [L,R=301]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^catalogo/onyx-ocr/?$ /produtos/onyx-ocr/ [L,R=301]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^catalogo/travellerhd\.pdf$ /produtos/traveller-hd/ [L,R=301]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^catalogo/ruby-10/?$ /produtos/ruby-10/ [L,R=301]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^catalogo/clearreader/?$ /produtos/clearreader/ [L,R=301]
 
   # --- Impressoras Braille ---
-  Redirect 301 /catalogo/index-braillebox/ /produtos/braille-box/
-  Redirect 301 /catalogo/index-fanfold/ /produtos/fanfold/
-  Redirect 301 /catalogo/index-basic/ /produtos/basic/
-  Redirect 301 /catalogo/puma-7/ /produtos/puma-7/
-  Redirect 301 /catalogo/index-everest/ /produtos/everest/
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^catalogo/index-braillebox/?$ /produtos/braille-box/ [L,R=301]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^catalogo/index-fanfold/?$ /produtos/fanfold/ [L,R=301]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^catalogo/index-basic/?$ /produtos/basic/ [L,R=301]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^catalogo/puma-7/?$ /produtos/puma-7/ [L,R=301]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^catalogo/index-everest/?$ /produtos/everest/ [L,R=301]
   Redirect 301 /cegueira/impressoras-braille-grande-producao/ /produtos/nsf-excel/
 
   # --- Correções Plural -> Singular (Categorias/Subcategorias) ---
@@ -44,31 +70,59 @@
   Redirect 301 /produtos/categorias/recursos-pedagogicos/ /produtos/categorias/ferramenta-pedagogica/
 
   # --- Linhas Braille e Computadores ---
-  Redirect 301 /catalogo/liber/ /produtos/liber/
-  Redirect 301 /catalogo/focus-40-blue-v5/ /produtos/focus-40-blue/
-  Redirect 301 /catalogo/focus-80-blue/ /produtos/focus-80-blue/
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^catalogo/liber/?$ /produtos/liber/ [L,R=301]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^catalogo/focus-40-blue-v5/?$ /produtos/focus-40-blue/ [L,R=301]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^catalogo/focus-80-blue/?$ /produtos/focus-80-blue/ [L,R=301]
 
   # --- Máquinas de Escrever e Educacional ---
-  Redirect 301 /catalogo/mountbatten-tutor/ /produtos/tutor/
-  Redirect 301 /catalogo/perkins-classica/ /produtos/perkins-classica/
-  Redirect 301 /catalogo/brincabraille/ /produtos/brinca-braille/
-  Redirect 301 /catalogo/multiplano/ /produtos/multiplano/
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^catalogo/mountbatten-tutor/?$ /produtos/tutor/ [L,R=301]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^catalogo/perkins-classica/?$ /produtos/perkins-classica/ [L,R=301]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^catalogo/brincabraille/?$ /produtos/brinca-braille/ [L,R=301]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^catalogo/multiplano/?$ /produtos/multiplano/ [L,R=301]
 
   # --- Acessórios e Outros ---
-  Redirect 301 /catalogo/abafador-index/ /produtos/abafador-index/
-  Redirect 301 /catalogo/big-red/ /produtos/big-red/
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^catalogo/abafador-index/?$ /produtos/abafador-index/ [L,R=301]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^catalogo/big-red/?$ /produtos/big-red/ [L,R=301]
   Redirect 301 /cegueira/maquina-fusora/ /produtos/teca-fuser/
   
   # --- Papéis e Suprimentos ---
-  Redirect 301 /catalogo/papel-a3-fusora-100-folhas-a3/ /produtos/papel-encapsulado-a3/
-  Redirect 301 /catalogo/papel-a4-fusora-100-folhas-a4/ /produtos/papel-encapsulado-a4/
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^catalogo/papel-a3-fusora-100-folhas-a3/?$ /produtos/papel-encapsulado-a3/ [L,R=301]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^catalogo/papel-a4-fusora-100-folhas-a4/?$ /produtos/papel-encapsulado-a4/ [L,R=301]
 
   # --- Teclados e Mouses ---
-  Redirect 301 /catalogo/teclado-ampliado-tecassistiva/ /produtos/teclado-ampliado/
-  Redirect 301 /catalogo/bigtrack/ /produtos/big-track/
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^catalogo/teclado-ampliado-tecassistiva/?$ /produtos/teclado-ampliado/ [L,R=301]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^catalogo/bigtrack/?$ /produtos/big-track/ [L,R=301]
 
   # --- REGRA GENÉRICA (Tenta salvar outros produtos) ---
-  RedirectMatch 301 ^/catalogo/(.*)$ /produtos/$1/
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^catalogo/(.*)$ /produtos/$1/ [L,R=301]
 
   # ----------------------------------------------------------------------
   # 3. LÓGICA DO NEXT.JS (O trecho que você enviou)
