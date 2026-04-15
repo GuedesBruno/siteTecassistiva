@@ -1,8 +1,8 @@
 import React from 'react';
 
 export const metadata = {
-    title: 'Vantagens Exclusivas Index Basic | Tecassistiva',
-    description: 'Descubra por que a Index Basic é superior em velocidade, economia e tecnologia comparada a outras impressoras Braille.',
+    title: 'Impressora Braille Index Basic: Vantagens Exclusivas | Tecassistiva',
+    description: 'Descubra por que a Impressora Braille Index Basic é superior em velocidade, economia e tecnologia comparada a outras impressoras Braille do mercado.',
 };
 
 export default function VantagensPage() {
@@ -15,9 +15,9 @@ export default function VantagensPage() {
                         <div className="inline-block px-4 py-1 bg-green-100 text-green-700 rounded-full font-semibold text-sm mb-4">
                             Análise Comparativa
                         </div>
-                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                            Por que a INDEX BASIC é Superior?
-                        </h2>
+                        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                            Por que a Impressora Braille INDEX BASIC é Superior?
+                        </h1>
                         <p className="text-xl text-gray-600 max-w-3xl mx-auto text-justify">
                             Além da velocidade de impressão significativamente maior, a INDEX BASIC é uma impressora verdadeiramente moderna e tecnológica, oferecendo recursos de conectividade (Wi-Fi, Bluetooth) e acessibilidade que a colocam gerações à frente.
                         </p>

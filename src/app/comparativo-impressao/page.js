@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 
 export const metadata = {
-    title: 'Comparativo de Velocidade de Impressão Braille | Tecassistiva',
+    title: 'Comparativo de Velocidade: Impressora Braille | Tecassistiva',
     description: 'Entenda como analisar a velocidade real de uma impressora Braille e a importância dos testes com caracteres da língua portuguesa.',
 };
 
