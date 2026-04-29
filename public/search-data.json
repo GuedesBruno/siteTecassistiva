@@ -1,18 +1,6 @@
 [
   {
-    "id": "product-393",
-    "title": "Liber+ 2026.AI",
-    "slug": "/produtos/liber-mais-2026",
-    "description": "Computador braille",
-    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/LIBER_43b8e6a64a.jpg",
-    "type": "Produto",
-    "content": "Computador braille [{\"type\":\"paragraph\",\"children\":[{\"text\":\"Com Patente Brasileira, o Liber + 2026.AI é o mais completo computador acessível para o aluno com deficiência visual integrando teclado ampliado e monitor de 10” com bateria inclusa.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Crie seus arquivos, digitalize textos impressos, compartilhe email, ouça os seus livros preferidos, viaje pela internet, tudo através de um dispositivo com retorno em áudio, braille, vibração e texto ampliado.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"O novo Liber + 2026.AI inova mais uma vez lendo texto manuscrito, descrevendo imagens e criando um diálogo educativo, falando com o Liber ou escrevendo no teclado ampliado do Liber, sobre tudo o que o aluno precisar e saber com recurso a AI de última geração.\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Computador braille acessível Octa core Kryo 585, com 1 TB de disco e 64GB + 8GB de memória interna;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Retorno em áudio e ampliado;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Conexão HDMI para um monitor externo para as pessoas com baixa visão acompanharem o texto ampliado e em alto contraste;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Tela LCD de 4 polegadas para educadores e pais acompanharem a atividade dos alunos; \",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Teclado QWERTY ampliado de alto contraste;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Uma câmera de 16 MP acoplada no braço móvel permitem a digitalização de documentos impressos e com a ajuda do software OCR o Liber lê o texto digitalizado; \",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Gerenciamento de arquivos na memória interna e nas memórias externas (USB e cartão SD);\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Possui calculadora matemática, calculadora científica e calculadora estatística;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Leia livros digitais em formato Daisy, ePub;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Reproduza áudio em MP3, WAV e OGG.\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Grave áudio de aulas ou conversas.\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Acesse aos seus e-mails;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Navegue na internet;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Diferentes formas de personalização do Liber + para diferentes modos de utilização do usuário (iniciante e avançado);\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Gerenciamento de arquivos nas extensões PDF, TXT, BRL, BRF, ZIP, ZBK.\",\"type\":\"text\"}]}]}] Baixa Visão Computador Inclusivo Tecassistiva",
-    "categories": "Baixa Visão",
-    "subcategories": "Computador Inclusivo",
-    "fabricante": "Tecassistiva"
-  },
-  {
-    "id": "product-392",
+    "id": "product-415",
     "title": "Liber 2026.AI",
     "slug": "/produtos/liber",
     "description": "Computador braille",
@@ -21,6 +9,18 @@
     "content": "Computador braille [{\"type\":\"paragraph\",\"children\":[{\"text\":\"Com Patente Brasileira, o Liber Braille 2026.AI é o mais completo computador braille acessível integrando linha braille de 40 caracteres e teclado braille de 8 pontos e 1TB de memória.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Crie seus arquivos, digitalize textos impressos, compartilhe email, ouça os seus livros preferidos, viaje pela internet, tudo através de um dispositivo com retorno em áudio, braille, vibração, e texto ampliado.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"O novo Liber Braille 2026.AI inova mais uma vez lendo texto manuscrito, descrevendo imagens e criando um diálogo educativo, falando com o Liber ou escrevendo no teclado braille do Liber, sobre tudo o que o aluno precisar de saber com recurso a AI de última geração.\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Computador braille acessível Octa-core Kryo 585, com 1 TB de disco e 64GB+8GB de memória interna;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Retorno em braille, áudio e/ou ampliado;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Linha braille de 40 células braille;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Duplo cursor braille (um para suporte braille, outro para suporte áudio);\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Teclado braille padrão perkins de 8 teclas\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Conexão HDMI para um monitor externo para as pessoas com baixa visão acompanharem o texto ampliado e em alto contraste;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Tela LCD de 4 polegadas para educadores e pais acompanharem a atividade dos alunos;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Uma câmera de 16 MP acoplada no braço móvel permitem a digitalização de documentos impressos e com a ajuda do software OCR o Liber lê o texto digitalizado;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Função Aprendizado Braille para treinar o conhecimento em braille;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Gerenciamento de arquivos na memória interna e nas memórias externas (USB e cartão SD);\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Possui calculadora matemática, calculadora científica e calculadora estatística;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Leia livros digitais em formato Daisy, ePub; Reproduza áudio em MP3, WAV e OGG;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Grave áudio de aulas ou conversas;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Acesse aos seus e-mails;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Navegue na internet;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Diferentes formas de personalização do Liber para diferentes modos de utilização do usuário (iniciante e avançado);\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Gerenciamento de arquivos nas extensões PDF, TXT, BRL, BRF, ZIP, ZBK.\",\"type\":\"text\"}]}]}] Cegueira Computador Braille Tecassistiva",
     "categories": "Cegueira",
     "subcategories": "Computador Braille",
+    "fabricante": "Tecassistiva"
+  },
+  {
+    "id": "product-416",
+    "title": "Liber+ 2026.AI",
+    "slug": "/produtos/liber-mais-2026",
+    "description": "Computador braille",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/LIBER_43b8e6a64a.jpg",
+    "type": "Produto",
+    "content": "Computador braille [{\"type\":\"paragraph\",\"children\":[{\"text\":\"Com Patente Brasileira, o Liber + 2026.AI é o mais completo computador acessível para o aluno com deficiência visual integrando teclado ampliado e monitor de 10” com bateria inclusa.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Crie seus arquivos, digitalize textos impressos, compartilhe email, ouça os seus livros preferidos, viaje pela internet, tudo através de um dispositivo com retorno em áudio, braille, vibração e texto ampliado.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"O novo Liber + 2026.AI inova mais uma vez lendo texto manuscrito, descrevendo imagens e criando um diálogo educativo, falando com o Liber ou escrevendo no teclado ampliado do Liber, sobre tudo o que o aluno precisar e saber com recurso a AI de última geração.\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Computador braille acessível Octa core Kryo 585, com 1 TB de disco e 64GB + 8GB de memória interna;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Retorno em áudio e ampliado;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Conexão HDMI para um monitor externo para as pessoas com baixa visão acompanharem o texto ampliado e em alto contraste;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Tela LCD de 4 polegadas para educadores e pais acompanharem a atividade dos alunos; \",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Teclado QWERTY ampliado de alto contraste;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Uma câmera de 16 MP acoplada no braço móvel permitem a digitalização de documentos impressos e com a ajuda do software OCR o Liber lê o texto digitalizado; \",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Gerenciamento de arquivos na memória interna e nas memórias externas (USB e cartão SD);\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Possui calculadora matemática, calculadora científica e calculadora estatística;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Leia livros digitais em formato Daisy, ePub;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Reproduza áudio em MP3, WAV e OGG.\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Grave áudio de aulas ou conversas.\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Acesse aos seus e-mails;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Navegue na internet;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Diferentes formas de personalização do Liber + para diferentes modos de utilização do usuário (iniciante e avançado);\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Gerenciamento de arquivos nas extensões PDF, TXT, BRL, BRF, ZIP, ZBK.\",\"type\":\"text\"}]}]}] Baixa Visão Computador Inclusivo Tecassistiva",
+    "categories": "Baixa Visão",
+    "subcategories": "Computador Inclusivo",
     "fabricante": "Tecassistiva"
   },
   {
@@ -36,18 +36,6 @@
     "fabricante": "Index Braille"
   },
   {
-    "id": "product-387",
-    "title": "Focus 40 Blue",
-    "slug": "/produtos/focus-40-blue",
-    "description": "Linha braille de 40 células",
-    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/Focus_40_principal_af080f049f.jpg",
-    "type": "Produto",
-    "content": "Linha braille de 40 células [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O novo modelo da linha braille Focus 40 Blue é durável, leve, possui as especificações testadas MIL-STD-810G, e design robusto para os desafios do dia-a-dia. Seu teclado amigável, painel de controle inteligente, e requintados pontos braille tornam o uso da linha Focus 40 Blue silencioso e suave. Com conectividade Bluetooth para 5 dispositivos, Scratchpad integrado, porta USB, e design portátil, compacto, e robusto, a Focus 40 Blue assegura fácil operação, esteja você indo de um lugar para outro no trabalho, viajando pelo mundo ou simplesmente relaxando em casa.\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"40 células braille com 40 teclas de posicionamento do cursor;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Teclado Braille de 8 pontos;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Superfície da linha Braille contínua, sem divisão entre as células;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Navegação no documento flexível com balanceadores de navegação programáveis por linha, sentença, parágrafo ou por deslocamento de painel clássico;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Botão Menu, posicionado ao meio acima dos cursores, para acesso rápido ao calendário, relógio, conexões Bluetooth e mais;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Scratchpad integrado com leitor de livros BRF;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Cartão Micro SD até 32 GB;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Selecione a firmeza do Braille que você mais se sente confortável com o VariBraille;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Conexão micro USB-C – sempre com o lado direito para cima para reduzir o desgaste.\",\"type\":\"text\"}]}]}] Cegueira Linha Braille Freedom Scientific",
-    "categories": "Cegueira",
-    "subcategories": "Linha Braille",
-    "fabricante": "Freedom Scientific"
-  },
-  {
     "id": "product-381",
     "title": "Braille Stage",
     "slug": "/produtos/braille-stage",
@@ -58,6 +46,18 @@
     "categories": "Cegueira",
     "subcategories": "Computador Braille",
     "fabricante": "Tecassistiva"
+  },
+  {
+    "id": "product-387",
+    "title": "Focus 40 Blue",
+    "slug": "/produtos/focus-40-blue",
+    "description": "Linha braille de 40 células",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/Focus_40_principal_af080f049f.jpg",
+    "type": "Produto",
+    "content": "Linha braille de 40 células [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O novo modelo da linha braille Focus 40 Blue é durável, leve, possui as especificações testadas MIL-STD-810G, e design robusto para os desafios do dia-a-dia. Seu teclado amigável, painel de controle inteligente, e requintados pontos braille tornam o uso da linha Focus 40 Blue silencioso e suave. Com conectividade Bluetooth para 5 dispositivos, Scratchpad integrado, porta USB, e design portátil, compacto, e robusto, a Focus 40 Blue assegura fácil operação, esteja você indo de um lugar para outro no trabalho, viajando pelo mundo ou simplesmente relaxando em casa.\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"40 células braille com 40 teclas de posicionamento do cursor;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Teclado Braille de 8 pontos;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Superfície da linha Braille contínua, sem divisão entre as células;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Navegação no documento flexível com balanceadores de navegação programáveis por linha, sentença, parágrafo ou por deslocamento de painel clássico;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Botão Menu, posicionado ao meio acima dos cursores, para acesso rápido ao calendário, relógio, conexões Bluetooth e mais;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Scratchpad integrado com leitor de livros BRF;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Cartão Micro SD até 32 GB;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Selecione a firmeza do Braille que você mais se sente confortável com o VariBraille;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Conexão micro USB-C – sempre com o lado direito para cima para reduzir o desgaste.\",\"type\":\"text\"}]}]}] Cegueira Linha Braille Freedom Scientific",
+    "categories": "Cegueira",
+    "subcategories": "Linha Braille",
+    "fabricante": "Freedom Scientific"
   },
   {
     "id": "product-408",
@@ -72,7 +72,7 @@
     "fabricante": "American Thermoform"
   },
   {
-    "id": "product-349",
+    "id": "product-411",
     "title": "ClearReader",
     "slug": "/produtos/clearreader",
     "description": "Leitor e digitalizador autônomo",
@@ -216,6 +216,30 @@
     "fabricante": "Tecassistiva"
   },
   {
+    "id": "product-398",
+    "title": "Onyx Deskset HD 24\"",
+    "slug": "/produtos/onyx-deskset-24",
+    "description": "Lupa eletrônica de mesa",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/foto_ampliador_portatil_onyx_deskset_hd_1ac3e7f161.jpg",
+    "type": "Produto",
+    "content": "Lupa eletrônica de mesa [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O ONYX Deskset HD é uma lupa eletrônica de mesa que se adapta em vários ambientes e atividades para aumentar a sua produtividade na escola, no trabalho e em casa. O novo design elegante integra uma câmera de alta definição e um monitor que permite você visualizar o que você desejar, seja do outro da sala ou em cima da sua mesa. A câmera três-em-um flexível oferece modos de leitura do documento, à distância e autovisualização com controles versáteis.\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" 33 modos de cor;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Amplia até 131 vezes (depende do tamanho do monitor);\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" 3 modos de visualização: documento, distância e autovisualização;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Recursos como Congelar Quadro, Bloqueio de Foco e Máscaras e Linhas de Leitura.\",\"type\":\"text\"}]}]}] Baixa Visão Ampliador Eletrônico de Mesa Freedom Scientific",
+    "categories": "Baixa Visão",
+    "subcategories": "Ampliador Eletrônico de Mesa",
+    "fabricante": "Freedom Scientific"
+  },
+  {
+    "id": "product-399",
+    "title": "Onyx OCR",
+    "slug": "/produtos/onyx-ocr",
+    "description": "Ampliador de mesa com voz",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/foto_ampliador_e_leitor_autonomo_onyx_ocr_51055c0b80.jpg",
+    "type": "Produto",
+    "content": "Ampliador de mesa com voz [{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"O Onyx OCR amplia e lê em voz alta qualquer documento. A voz clara, ampliação e alto contraste torna a leitura muito mais fácil. Confortavelmente deixe de ler os textos ampliados e permita o ONYX OCR ler os documentos para você quando a leitura se tornar muito cansativa.\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Visualização à distância, do documento, auto-visualização e funcionalidade OCR;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Monitor Sensível ao Toque (tela touch screen): com ícones e letras grandes;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Mais de 60 vozes de leitura em mais de 31 idiomas;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Salva e abre documentos em um cartão SD ou pen drive USB;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Câmera OCR de 13 Megapixels;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Ampliação de 1.7x até 131x em um monitor de 24 polegadas.\",\"type\":\"text\"}]}]}] Baixa Visão Ampliador Eletrônico de Mesa Freedom Scientific",
+    "categories": "Baixa Visão",
+    "subcategories": "Ampliador Eletrônico de Mesa",
+    "fabricante": "Freedom Scientific"
+  },
+  {
     "id": "product-402",
     "title": "Perkins Clássica",
     "slug": "/produtos/perkins-classica",
@@ -226,18 +250,6 @@
     "categories": "Cegueira",
     "subcategories": "Máquina de Escrever Braille",
     "fabricante": "Perkins"
-  },
-  {
-    "id": "product-404",
-    "title": "Ruby HD",
-    "slug": "/produtos/ruby-hd",
-    "description": "Lupa eletrônica de 4.3\" portátil",
-    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/RUBY_HD_1_Front_FS_Logo_9694ec3886.webp",
-    "type": "Produto",
-    "content": "Lupa eletrônica de 4.3\" portátil [{\"type\":\"paragraph\",\"children\":[{\"text\":\"A lupa eletrônica portátil Ruby HD combina uma câmera de alta definição em um equipamento compacto e leve que oferece a ampliação que você necessita.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Tela LCD de 4.3 polegadas;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Zoom contínuo com ampliação de 2x–13x;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Leitura rápida sem perder o foco;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Luz LED embutida;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Design leve e ergonômico;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Braço articulado multi-funcional;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" O braço se torna apoio para leitura horizontal;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Botões táteis com cores de alto contraste para fácil orientação;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" 20 Modos de visualização de cor de alto contraste;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Função Congelar Quadro com ampliação ajustável;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Máscaras e linhas de leitura ajustáveis;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Salve até 80 imagens e envie para o computador através da porta USB;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Autonomia de bateria até 2 horas\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Recurso de modo de apresentação de slides;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Inclui bateria, carregador, pulseira, estojo e cabo USB;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Suporte de leitura opcional.\",\"type\":\"text\"}]}]}] Baixa Visão Ampliador Eletrônico Portátil Freedom Scientific",
-    "categories": "Baixa Visão",
-    "subcategories": "Ampliador Eletrônico Portátil",
-    "fabricante": "Freedom Scientific"
   },
   {
     "id": "product-405",
@@ -264,15 +276,15 @@
     "fabricante": "Tecassistiva"
   },
   {
-    "id": "product-403",
-    "title": "Ruby 10",
-    "slug": "/produtos/ruby-10",
-    "description": "Lupa eletrônica com voz",
-    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/ruby10_3e7c21c2ee.jpg",
+    "id": "product-404",
+    "title": "Ruby HD",
+    "slug": "/produtos/ruby-hd",
+    "description": "Lupa eletrônica de 4.3\" portátil",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/RUBY_HD_1_Front_FS_Logo_9694ec3886.webp",
     "type": "Produto",
-    "content": "Lupa eletrônica com voz [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O modelo RUBY 10 é uma lupa digital com voz, uma tela tátil de 10 polegadas e três câmeras.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Oferece ampliação de 2x até 24x e recursos como digitalização e leitura de documentos, conexão com monitor externo e modos de visualização exclusivos.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"É leve, fácil de usar e ideal para ampliar textos, revistas, rótulos e fotografias. Com recursos como ColorSight+, GlareGuard™ e EdgeScribe™, proporciona uma experiência visual aprimorada.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"O RUBY 10 é uma solução versátil para ampliação e leitura em qualquer lugar.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Ampliação de 2x até 24x;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Tela tátil de 10 polegadas;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Tela e botões táteis de alto contraste;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Portátil e leve – ideal para levar para qualquer lugar;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Amplie objetos pequenos e letras reduzidas de forma simples;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Visualização de objetos a curtas distâncias;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Possui braço extensível que permite você visualizar qualquer objeto que esteja na sua mão e escrever (no modelo com voz permite ativar a opção OCR);\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Ligação a monitor externo através de Miracast ou USB;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Guarde imagens e documentos digitalizados;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Digitalização e leitura de documentos;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Ligue os fones de ouvido para ouvir documentos com toda a privacidade;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Bolsa de transporte e pano de limpeza de tela incluídos.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]}] Baixa Visão Ampliador e Leitor Portátil Freedom Scientific",
+    "content": "Lupa eletrônica de 4.3\" portátil [{\"type\":\"paragraph\",\"children\":[{\"text\":\"A lupa eletrônica portátil Ruby HD combina uma câmera de alta definição em um equipamento compacto e leve que oferece a ampliação que você necessita.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Tela LCD de 4.3 polegadas;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Zoom contínuo com ampliação de 2x–13x;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Leitura rápida sem perder o foco;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Luz LED embutida;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Design leve e ergonômico;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Braço articulado multi-funcional;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" O braço se torna apoio para leitura horizontal;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Botões táteis com cores de alto contraste para fácil orientação;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" 20 Modos de visualização de cor de alto contraste;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Função Congelar Quadro com ampliação ajustável;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Máscaras e linhas de leitura ajustáveis;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Salve até 80 imagens e envie para o computador através da porta USB;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Autonomia de bateria até 2 horas\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Recurso de modo de apresentação de slides;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Inclui bateria, carregador, pulseira, estojo e cabo USB;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Suporte de leitura opcional.\",\"type\":\"text\"}]}]}] Baixa Visão Ampliador Eletrônico Portátil Freedom Scientific",
     "categories": "Baixa Visão",
-    "subcategories": "Ampliador e Leitor Portátil",
+    "subcategories": "Ampliador Eletrônico Portátil",
     "fabricante": "Freedom Scientific"
   },
   {
@@ -286,18 +298,6 @@
     "categories": "Baixa Visão",
     "subcategories": "Software Ampliador de Telas",
     "fabricante": "Freedom Scientific"
-  },
-  {
-    "id": "product-406",
-    "title": "Teclado Ampliado",
-    "slug": "/produtos/teclado-ampliado",
-    "description": "Teclado ampliado Tecassistiva",
-    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/foto_teclado_ampliado_tecassistiva_7dd42d87d4.jpg",
-    "type": "Produto",
-    "content": "Teclado ampliado Tecassistiva [{\"type\":\"paragraph\",\"children\":[{\"text\":\"Novo Teclado com as letras ampliadas da Tecassistiva, com o teclado preto, teclas amarelas e letras pretas.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Possui teclas ampliadas para facilitar a visualização da pessoa com baixa visão;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Teclado Preto, tecla amarela, letra preta de elevado contraste visual;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Possui aumento das letras em 5x em relação ao teclado normal;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Compatível IBM PC Windows 7 ou superior, compatível com Apple OS 10 ou superior;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Possui conexão USB;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Padrão do teclado: ABNT2.\",\"type\":\"text\"}]}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]}] Baixa Visão Teclado Ampliado com Contraste Tecassistiva",
-    "categories": "Baixa Visão",
-    "subcategories": "Teclado Ampliado com Contraste",
-    "fabricante": "Tecassistiva"
   },
   {
     "id": "product-375",
@@ -336,6 +336,18 @@
     "fabricante": "Enhanced Vision"
   },
   {
+    "id": "product-412",
+    "title": "Ruby 10",
+    "slug": "/produtos/ruby-10",
+    "description": "Lupa eletrônica com voz",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/ruby10_3e7c21c2ee.jpg",
+    "type": "Produto",
+    "content": "Lupa eletrônica com voz [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O modelo RUBY 10 é uma lupa digital com voz, uma tela tátil de 10 polegadas e três câmeras.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Oferece ampliação de 2x até 24x e recursos como digitalização e leitura de documentos, conexão com monitor externo e modos de visualização exclusivos.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"É leve, fácil de usar e ideal para ampliar textos, revistas, rótulos e fotografias. Com recursos como ColorSight+, GlareGuard™ e EdgeScribe™, proporciona uma experiência visual aprimorada.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"O RUBY 10 é uma solução versátil para ampliação e leitura em qualquer lugar.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Ampliação de 2x até 24x;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Tela tátil de 10 polegadas;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Tela e botões táteis de alto contraste;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Portátil e leve – ideal para levar para qualquer lugar;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Amplie objetos pequenos e letras reduzidas de forma simples;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Visualização de objetos a curtas distâncias;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Possui braço extensível que permite você visualizar qualquer objeto que esteja na sua mão e escrever (no modelo com voz permite ativar a opção OCR);\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Ligação a monitor externo através de Miracast ou USB;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Guarde imagens e documentos digitalizados;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Digitalização e leitura de documentos;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Ligue os fones de ouvido para ouvir documentos com toda a privacidade;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\" Bolsa de transporte e pano de limpeza de tela incluídos.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]}] Baixa Visão Ampliador e Leitor Portátil Freedom Scientific",
+    "categories": "Baixa Visão",
+    "subcategories": "Ampliador e Leitor Portátil",
+    "fabricante": "Freedom Scientific"
+  },
+  {
     "id": "product-379",
     "title": "Big Red",
     "slug": "/produtos/big-red",
@@ -360,6 +372,18 @@
     "fabricante": "Abblenet"
   },
   {
+    "id": "product-410",
+    "title": "Leia Fácil!",
+    "slug": "/produtos/leiafacil",
+    "description": "",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/leia_facil_a885e25e01.jpg",
+    "type": "Produto",
+    "content": "Deficiência Motora e Cognitiva Escaner com Voz",
+    "categories": "Deficiência Motora e Cognitiva",
+    "subcategories": "Escaner com Voz",
+    "fabricante": ""
+  },
+  {
     "id": "product-226",
     "title": "Guia de Assinatura",
     "slug": "/produtos/guia-assinatura",
@@ -370,6 +394,18 @@
     "categories": "",
     "subcategories": "",
     "fabricante": ""
+  },
+  {
+    "id": "product-413",
+    "title": "Teclado Ampliado",
+    "slug": "/produtos/teclado-ampliado",
+    "description": "Teclado ampliado Tecassistiva",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/foto_teclado_ampliado_tecassistiva_7dd42d87d4.jpg",
+    "type": "Produto",
+    "content": "Teclado ampliado Tecassistiva [{\"type\":\"paragraph\",\"children\":[{\"text\":\"Novo Teclado com as letras ampliadas da Tecassistiva, com o teclado preto, teclas amarelas e letras pretas.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Possui teclas ampliadas para facilitar a visualização da pessoa com baixa visão;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Teclado Preto, tecla amarela, letra preta de elevado contraste visual;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Possui aumento das letras em 4x em relação ao teclado normal;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Compatível IBM PC Windows 7 ou superior, compatível com Apple OS 10 ou superior;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Possui conexão USB;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Padrão do teclado: ABNT2.\",\"type\":\"text\"}]}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]}] Baixa Visão Teclado Ampliado com Contraste Tecassistiva",
+    "categories": "Baixa Visão",
+    "subcategories": "Teclado Ampliado com Contraste",
+    "fabricante": "Tecassistiva"
   },
   {
     "id": "product-386",
@@ -454,30 +490,6 @@
     "categories": "Cegueira",
     "subcategories": "Impressora Braille: Grande Produção",
     "fabricante": "BrailleTec"
-  },
-  {
-    "id": "product-398",
-    "title": "Onyx Deskset HD 24\"",
-    "slug": "/produtos/onyx-deskset-24",
-    "description": "Lupa eletrônica de mesa",
-    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/foto_ampliador_portatil_onyx_deskset_hd_1ac3e7f161.jpg",
-    "type": "Produto",
-    "content": "Lupa eletrônica de mesa [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O ONYX Deskset HD é uma lupa eletrônica de mesa que se adapta em vários ambientes e atividades para aumentar a sua produtividade na escola, no trabalho e em casa. O novo design elegante integra uma câmera de alta definição e um monitor que permite você visualizar o que você desejar, seja do outro da sala ou em cima da sua mesa. A câmera três-em-um flexível oferece modos de leitura do documento, à distância e autovisualização com controles versáteis.\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" 33 modos de cor;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Amplia até 131 vezes (depende do tamanho do monitor);\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" 3 modos de visualização: documento, distância e autovisualização;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Recursos como Congelar Quadro, Bloqueio de Foco e Máscaras e Linhas de Leitura.\",\"type\":\"text\"}]}]}] Baixa Visão Ampliador Eletrônico de Mesa Freedom Scientific",
-    "categories": "Baixa Visão",
-    "subcategories": "Ampliador Eletrônico de Mesa",
-    "fabricante": "Freedom Scientific"
-  },
-  {
-    "id": "product-399",
-    "title": "Onyx OCR",
-    "slug": "/produtos/onyx-ocr",
-    "description": "Ampliador de mesa com voz",
-    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/foto_ampliador_e_leitor_autonomo_onyx_ocr_51055c0b80.jpg",
-    "type": "Produto",
-    "content": "Ampliador de mesa com voz [{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"O Onyx OCR amplia e lê em voz alta qualquer documento. A voz clara, ampliação e alto contraste torna a leitura muito mais fácil. Confortavelmente deixe de ler os textos ampliados e permita o ONYX OCR ler os documentos para você quando a leitura se tornar muito cansativa.\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Visualização à distância, do documento, auto-visualização e funcionalidade OCR;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Monitor Sensível ao Toque (tela touch screen): com ícones e letras grandes;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Mais de 60 vozes de leitura em mais de 31 idiomas;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Salva e abre documentos em um cartão SD ou pen drive USB;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Câmera OCR de 13 Megapixels;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Ampliação de 1.7x até 131x em um monitor de 24 polegadas.\",\"type\":\"text\"}]}]}] Baixa Visão Ampliador Eletrônico de Mesa Freedom Scientific",
-    "categories": "Baixa Visão",
-    "subcategories": "Ampliador Eletrônico de Mesa",
-    "fabricante": "Freedom Scientific"
   },
   {
     "id": "doc-252-150",
@@ -597,7 +609,7 @@
     "content": "guia_brinca_braille.pdf PDF Brinca Braille"
   },
   {
-    "id": "doc-349-86",
+    "id": "doc-411-86",
     "title": "manual_avancado_clearreader.pdf - ClearReader",
     "slug": "/produtos/clearreader",
     "description": "Documento do produto ClearReader",
@@ -610,7 +622,7 @@
     "content": "manual_avancado_clearreader.pdf PDF ClearReader"
   },
   {
-    "id": "doc-349-87",
+    "id": "doc-411-87",
     "title": "guia_clearreader.pdf - ClearReader",
     "slug": "/produtos/clearreader",
     "description": "Documento do produto ClearReader",
@@ -623,7 +635,7 @@
     "content": "guia_clearreader.pdf PDF ClearReader"
   },
   {
-    "id": "doc-349-22",
+    "id": "doc-411-22",
     "title": "catalogo_clearreader.pdf - ClearReader",
     "slug": "/produtos/clearreader",
     "description": "Documento do produto ClearReader",
@@ -792,7 +804,7 @@
     "content": "catalogo_focus80.pdf PDF Focus 80 Blue"
   },
   {
-    "id": "doc-392-184",
+    "id": "doc-415-184",
     "title": "catalogo_liber-2026-ai.pdf - Liber 2026.AI",
     "slug": "/produtos/liber",
     "description": "Documento do produto Liber 2026.AI",
@@ -805,7 +817,7 @@
     "content": "catalogo_liber-2026-ai.pdf PDF Liber 2026.AI"
   },
   {
-    "id": "doc-393-183",
+    "id": "doc-416-183",
     "title": "catalogo_liber+2026ai.pdf - Liber+ 2026.AI",
     "slug": "/produtos/liber-mais-2026",
     "description": "Documento do produto Liber+ 2026.AI",
@@ -818,7 +830,33 @@
     "content": "catalogo_liber+2026ai.pdf PDF Liber+ 2026.AI"
   },
   {
-    "id": "doc-403-128",
+    "id": "doc-412-202",
+    "title": "manual_avancado_ruby10.pdf - Ruby 10",
+    "slug": "/produtos/ruby-10",
+    "description": "Documento do produto Ruby 10",
+    "type": "Documento",
+    "documentType": "PDF",
+    "productTitle": "Ruby 10",
+    "productSlug": "/produtos/ruby-10",
+    "fileName": "manual_avancado_ruby10.pdf",
+    "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/manual_avancado_ruby10_8f71ca7e48.pdf",
+    "content": "manual_avancado_ruby10.pdf PDF Ruby 10"
+  },
+  {
+    "id": "doc-412-201",
+    "title": "guia_ruby10.pdf - Ruby 10",
+    "slug": "/produtos/ruby-10",
+    "description": "Documento do produto Ruby 10",
+    "type": "Documento",
+    "documentType": "PDF",
+    "productTitle": "Ruby 10",
+    "productSlug": "/produtos/ruby-10",
+    "fileName": "guia_ruby10.pdf",
+    "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/guia_ruby10_05b94778be.pdf",
+    "content": "guia_ruby10.pdf PDF Ruby 10"
+  },
+  {
+    "id": "doc-412-128",
     "title": "catalogo_ruby10.pdf - Ruby 10",
     "slug": "/produtos/ruby-10",
     "description": "Documento do produto Ruby 10",
@@ -1137,10 +1175,10 @@
   },
   {
     "id": "page-src\\app\\vantagens-index-basic\\page.js",
-    "title": "Src\\app\\vantagens index basic\\page.js",
+    "title": "\r\n                            Por que a Impressora Braille INDEX BASIC é Superior?\r\n                        ",
     "slug": "src\\app\\vantagens-index-basic\\page.js",
-    "description": "import React from 'react'; export const metadata = { title: 'Vantagens Exclusivas Index Basic | Tecassistiva', description: 'Descubra por que a Index ...",
-    "content": "import React from 'react'; export const metadata = { title: 'Vantagens Exclusivas Index Basic | Tecassistiva', description: 'Descubra por que a Index Basic é superior em velocidade, economia e tecnologia comparada a outras impressoras Braille.', }; export default function VantagensPage() { return ( {/* Comparative Summary Section */} Análise Comparativa Por que a INDEX BASIC é Superior? Além da velocidade de impressão significativamente maior, a INDEX BASIC é uma impressora verdadeiramente moderna e tecnológica, oferecendo recursos de conectividade (Wi-Fi, Bluetooth) e acessibilidade que a colocam gerações à frente. {/* Comparison Cards */} {/* Speed Comparison Card */} ⚡ Vantagem em Velocidade Teste com Alfabeto Português (Real) 139 CPS vs 63 CPS ✓ 121% mais rápida (mais que o dobro) Páginas por Hora (PPH) 375 PPH vs 226 PPH ✓ 66% mais produtiva {/* Time Economy Card */} ⏱️ Economia de Tempo Produção de 10.000 páginas 27h vs 44h Index Basic vs ViewPlus Columbia Tempo economizado 18 horas ✓ 40% menos tempo de produção (Resultados consideram uma produção de 10.000 páginas) {/* Modern Technology Card */} 📱 Impressora Moderna Transcritor Automático (idB) Imprime Word/PDF direto (sem software extra) Acesso via IP (Web) Controle total pelo navegador Wi-Fi & Bluetooth Impressão Sem Fio {/* Modern Technologies Card - Full Width */} Tecnologias Modernas Exclusivas {[ { icon: , title: 'Autonomia Total', desc: 'Impressora independente: não precisa de nenhum outro dispositivo para produzir.' }, { icon: '📶', title: 'Wireless Wi-Fi', desc: 'Conexão sem fios estável e de longo alcance para impressão remota.' }, { icon: '📲', title: 'Bluetooth 4.0', desc: 'Imprima diretamente do seu SmartPhone (Android ou iOS) com facilidade.' }, { icon: , title: 'Porta USB (Pendrive)', desc: 'Autonomia total: imprima arquivos direto do Pendrive, sem computador.', titleClassName: 'whitespace-nowrap text-base' }, { icon: , title: 'Serviço Web (IP)', desc: 'Acesso através do IP para impressão, configuração e suporte remoto.' }, { icon: '📄', title: 'Impressão Direta (idB)', desc: 'Imprime arquivos .docx e .pdf convertendo automaticamente para Braille.' }, { icon: '🔊', title: 'Feedback de Voz', desc: 'Alto-falante integrado com feedback falado em português de todas as ações.' }, { icon: '⌨️', title: 'Painel Acessível', desc: 'Painel de controle com teclas em Braille e feedback sonoro e luminoso.' } ].map((item, i) => ( {item.icon} {item.title} {item.desc} ))} Tecnologia Index, única no mercado com acessibilidade total de fábrica. {/* Detailed Explanation */} Entenda os Comparativos Completos {/* Speed and Productivity Comparison */} ⚡ Velocidade e Produtividade ViewPlus Columbia • Velocidade (Português): 63 CPS • Produtividade: 226 PPH • Tempo para 10.000 páginas: 44 horas Index Braille Basic • Velocidade (Português): 139 CPS • Produtividade: 375 PPH • Tempo para 10.000 páginas: 27 horas {/* Technology Comparison */} 📱 Tecnologia e Modernidade Outras Impressoras • Transcrição: Não possui (Requer software pago) • Acesso Web (IP): Não possui • Conexão: Apenas USB • Acessibilidade: Painel não acessível Index Braille Basic • Transcrição: Nativo (idB gratuito integrado) • Acesso Web (IP): Nativo (via navegador) • Conexão: Wi-Fi, Bluetooth, Rede e USB • Acessibilidade: Painel com Braille e retorno em Voz (Pt-BR) {/* Summary Box */} 💰 Resumo das vantagens da INDEX BASIC Velocidade 121% mais rápida Economia de Tempo 18h economizadas Tecnologia Conectividade + Acessibilidade + Autonomia ); }",
+    "description": "import React from 'react'; export const metadata = { title: 'Impressora Braille Index Basic: Vantagens Exclusivas | Tecassistiva', description: 'Descu...",
+    "content": "import React from 'react'; export const metadata = { title: 'Impressora Braille Index Basic: Vantagens Exclusivas | Tecassistiva', description: 'Descubra por que a Impressora Braille Index Basic é superior em velocidade, economia e tecnologia comparada a outras impressoras Braille do mercado.', }; export default function VantagensPage() { return ( {/* Comparative Summary Section */} Análise Comparativa Por que a Impressora Braille INDEX BASIC é Superior? Além da velocidade de impressão significativamente maior, a INDEX BASIC é uma impressora verdadeiramente moderna e tecnológica, oferecendo recursos de conectividade (Wi-Fi, Bluetooth) e acessibilidade que a colocam gerações à frente. {/* Comparison Cards */} {/* Speed Comparison Card */} ⚡ Vantagem em Velocidade Teste com Alfabeto Português (Real) 139 CPS vs 63 CPS ✓ 121% mais rápida (mais que o dobro) Páginas por Hora (PPH) 375 PPH vs 226 PPH ✓ 66% mais produtiva {/* Time Economy Card */} ⏱️ Economia de Tempo Produção de 10.000 páginas 27h vs 44h Index Basic vs ViewPlus Columbia Tempo economizado 18 horas ✓ 40% menos tempo de produção (Resultados consideram uma produção de 10.000 páginas) {/* Modern Technology Card */} 📱 Impressora Moderna Transcritor Automático (idB) Imprime Word/PDF direto (sem software extra) Acesso via IP (Web) Controle total pelo navegador Wi-Fi & Bluetooth Impressão Sem Fio {/* Modern Technologies Card - Full Width */} Tecnologias Modernas Exclusivas {[ { icon: , title: 'Autonomia Total', desc: 'Impressora independente: não precisa de nenhum outro dispositivo para produzir.' }, { icon: '📶', title: 'Wireless Wi-Fi', desc: 'Conexão sem fios estável e de longo alcance para impressão remota.' }, { icon: '📲', title: 'Bluetooth 4.0', desc: 'Imprima diretamente do seu SmartPhone (Android ou iOS) com facilidade.' }, { icon: , title: 'Porta USB (Pendrive)', desc: 'Autonomia total: imprima arquivos direto do Pendrive, sem computador.', titleClassName: 'whitespace-nowrap text-base' }, { icon: , title: 'Serviço Web (IP)', desc: 'Acesso através do IP para impressão, configuração e suporte remoto.' }, { icon: '📄', title: 'Impressão Direta (idB)', desc: 'Imprime arquivos .docx e .pdf convertendo automaticamente para Braille.' }, { icon: '🔊', title: 'Feedback de Voz', desc: 'Alto-falante integrado com feedback falado em português de todas as ações.' }, { icon: '⌨️', title: 'Painel Acessível', desc: 'Painel de controle com teclas em Braille e feedback sonoro e luminoso.' } ].map((item, i) => ( {item.icon} {item.title} {item.desc} ))} Tecnologia Index, única no mercado com acessibilidade total de fábrica. {/* Detailed Explanation */} Entenda os Comparativos Completos {/* Speed and Productivity Comparison */} ⚡ Velocidade e Produtividade ViewPlus Columbia • Velocidade (Português): 63 CPS • Produtividade: 226 PPH • Tempo para 10.000 páginas: 44 horas Index Braille Basic • Velocidade (Português): 139 CPS • Produtividade: 375 PPH • Tempo para 10.000 páginas: 27 horas {/* Technology Comparison */} 📱 Tecnologia e Modernidade Outras Impressoras • Transcrição: Não possui (Requer software pago) • Acesso Web (IP): Não possui • Conexão: Apenas USB • Acessibilidade: Painel não acessível Index Braille Basic • Transcrição: Nativo (idB gratuito integrado) • Acesso Web (IP): Nativo (via navegador) • Conexão: Wi-Fi, Bluetooth, Rede e USB • Acessibilidade: Painel com Braille e retorno em Voz (Pt-BR) {/* Summary Box */} 💰 Resumo das vantagens da INDEX BASIC Velocidade 121% mais rápida Economia de Tempo 18h economizadas Tecnologia Conectividade + Acessibilidade + Autonomia ); }",
     "type": "P├ígina"
   },
   {
@@ -1179,8 +1217,8 @@
     "id": "page-src\\app\\comparativo-impressao\\page.js",
     "title": "Src\\app\\comparativo impressao\\page.js",
     "slug": "src\\app\\comparativo-impressao\\page.js",
-    "description": "import React from 'react'; import Link from 'next/link'; export const metadata = { title: 'Comparativo de Velocidade de Impressão Braille | Tecassisti...",
-    "content": "import React from 'react'; import Link from 'next/link'; export const metadata = { title: 'Comparativo de Velocidade de Impressão Braille | Tecassistiva', description: 'Entenda como analisar a velocidade real de uma impressora Braille e a importância dos testes com caracteres da língua portuguesa.', }; export default function ComparativoPage() { return ( {/* Hero Section */} Você sabe como escolher uma Impressora Braille? Entenda por que a velocidade nominal nem sempre reflete a realidade da sua produção e aprenda a avaliar corretamente. {/* Section 1: O Problema (Métodos) */} Métodos de Medição Conheça as formas de medição que o mercado utiliza A forma correta de avaliar a velocidade de uma impressora Braille é pelos caracteres por segundo (CPS) que ela produz. Contudo, além dos dois métodos legítimos de medição, existe uma terceira forma usada estrategicamente para inflar números e ludibriar o comprador. {/* Methods: Vertical on mobile (card→badge→sim), Horizontal on desktop (3 cols) */} {/* Method 1: Portuguese Alphabet - Card (Was Method 2) */} 1 O Alfabeto Português Além dos caracteres do alfabeto inglês, ele também conta com os caracteres acentuados e cedilha, conforme grafia portuguesa. {/* Method 2: English Alphabet - Card (Was Method 1) */} 2 O Alfabeto Inglês Imprimir \"ABC...XYZ\" repetidamente é o método utilizado nos testes tradicionais, considerando o alfabeto inglês. {/* Method 3: Misleading - Card */} ⚠️ O Enganoso Teste que não reflete a realidade produtiva, criado para enganar os usuários e inflar artificialmente os números de velocidade. {/* Method 1: Portuguese - Badge */} Recomendado {/* Method 2: English - Badge */} Padrão Internacional {/* Method 3: Misleading - Badge */} Ilusório {/* Method 1: Portuguese - Simulation */} SIMULAÇÃO DE TESTE abcdefghijklmnopqrstuvwxyz áàâãéêíóôõúç ⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵⠷⠡⠜⠩⠿⠣⠌⠾⠬⠹⠾⠯ Média de 3.41 pontos por caractere {/* Method 2: English - Simulation */} SIMULAÇÃO DE TESTE abcdefghijklmnopqrstuvwxyz Representação em Braille: ⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵ Média de 3.02 pontos por caractere {/* Method 3: Misleading - Simulation */} ⚠️ \"TESTE\" DE BRINCADEIRA aaaaaaaaaaaaaaaaaaaaaaaaaa Representação em Braille: ⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁ Média de 1 ponto por caractere {/* Performance Comparison Table Section */} {/* Performance Comparison Table */} {/* Table Title */} Resultados oficiais dos testes de produção da impressora ViewPlus Columbia Tribunal de Justiça do Paraná Modo de teste Configuração* Modo de impressão CPS** PPH*** Fonte {/* 1. Alfabeto Português - Vibrant Blue */} Alfabeto Português 40 CPL × 25 LPP Draft 63 226 TJPR {/* 2. Alfabeto Inglês - Light Blue */} Alfabeto Inglês 46 CPL × 27 LPP Draft 77 220 TJPR {/* 3. Alfabeto Inglês - Light Blue (Duplicated) */} Alfabeto Inglês 43 CPL × 28 LPP Draft 70 210 SGS {/* 3. Alfabeto Inglês - Light Blue (Duplicated) */} Alfabeto Inglês 40 CPL × 25 LPP Draft 87 313 TJPR {/* 3. Enganoso (Somente \"a\") - Red */} Enganoso (Somente \"a\") 40 CPL × 25 LPP Draft 214 771 TJPR {/* Table Footnotes */} * 43 Caracteres por linha (CPL) X 28 Linhas por página (LPP) ** (CPS) Caracteres por segundo *** (PPH) Páginas por hora **** (TJPR) Tribunal de Justiça do Paraná {/* Section 2: A Solução (Brasil) */} O que diz a Justiça Brasileira? O Laudo pericial da 7ª vara do Tribunal de Justiça do Paraná recomenda que os testes de desempenho utilizem o alfabeto completo da língua portuguesa, com caracteres acentuados, para maior fidelidade à grafia oficial. Os resultados mostraram que a média de pontos braille por caractere aumenta de 3,02 (alfabeto inglês) para 3,41 (alfabeto português). Tabela de Teste Real {['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'].map((char, i) => ( {char} {'⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵'[i]} ))} {[{ char: 'á', braille: '⠷' }, { char: 'à', braille: '⠡' }, { char: 'â', braille: '⠜' }, { char: 'ã', braille: '⠩' }, { char: 'é', braille: '⠿' }, { char: 'ê', braille: '⠣' }, { char: 'í', braille: '⠌' }, { char: 'ó', braille: '⠾' }, { char: 'ô', braille: '⠬' }, { char: 'õ', braille: '⠹' }, { char: 'ú', braille: '⠾' }, { char: 'ç', braille: '⠯' }].map((item, i) => ( {item.char} {item.braille} ))} Qualquer teste que não inclua a complexidade do padrão da grafia Braille brasileira: não exige a capacidade necessária da impressora e é propositalmente criado para ludibriar potenciais clientes. {/* COMMENTED OUT - Veja a Diferença Section ... (section content commented out) */} {/* Expert Report Section */} Conheça o Laudo da Perícia Acesse o documento oficial da 7ª Vara do Tribunal de Justiça do Paraná que fundamenta os testes de velocidade para o mercado brasileiro. 📄 Laudo Técnico Oficial Documento técnico detalhado com os testes de velocidade de impressão Braille no Brasil. Baixar Laudo Completo {/* Index Braille Basic Performance Table Section */} {/* Performance Comparison Table */} {/* Table Title */} Resultado dos testes de produção da impressora INDEX BASIC Modo de teste Configuração* Modo de impressão CPS** PPH*** Fonte {/* 1. Alfabeto Português - Vibrant Blue */} Alfabeto Português 46 CPL × 29 LPP Draft 139 375 Padrão TJPR {/* 2. Alfabeto Inglês - Light Blue */} Alfabeto Inglês 46 CPL × 29 LPP Draft 140 378 SGS {/* 3. Enganoso (Somente \"a\") - Red */} Enganoso (Somente \"a\") 46 CPL × 29 LPP Draft 333 898 Padrão ViewPlus {/* Table Footnotes */} * 46 Caracteres por linha (CPL) X 29 Linhas por página (LPP) ** (CPS) Caracteres por segundo *** (PPH) Páginas por hora {/* Link to Detailed Comparison Page */} Quer ver o comparativo completo de tecnologia e velocidade? Saiba porque a INDEX BASIC é Superior. ); }",
+    "description": "import React from 'react'; import Link from 'next/link'; export const metadata = { title: 'Comparativo de Velocidade: Impressora Braille | Tecassistiv...",
+    "content": "import React from 'react'; import Link from 'next/link'; export const metadata = { title: 'Comparativo de Velocidade: Impressora Braille | Tecassistiva', description: 'Entenda como analisar a velocidade real de uma impressora Braille e a importância dos testes com caracteres da língua portuguesa.', }; export default function ComparativoPage() { return ( {/* Hero Section */} Você sabe como escolher uma Impressora Braille? Entenda por que a velocidade nominal nem sempre reflete a realidade da sua produção e aprenda a avaliar corretamente. {/* Section 1: O Problema (Métodos) */} Métodos de Medição Conheça as formas de medição que o mercado utiliza A forma correta de avaliar a velocidade de uma impressora Braille é pelos caracteres por segundo (CPS) que ela produz. Contudo, além dos dois métodos legítimos de medição, existe uma terceira forma usada estrategicamente para inflar números e ludibriar o comprador. {/* Methods: Vertical on mobile (card→badge→sim), Horizontal on desktop (3 cols) */} {/* Method 1: Portuguese Alphabet - Card (Was Method 2) */} 1 O Alfabeto Português Além dos caracteres do alfabeto inglês, ele também conta com os caracteres acentuados e cedilha, conforme grafia portuguesa. {/* Method 2: English Alphabet - Card (Was Method 1) */} 2 O Alfabeto Inglês Imprimir \"ABC...XYZ\" repetidamente é o método utilizado nos testes tradicionais, considerando o alfabeto inglês. {/* Method 3: Misleading - Card */} ⚠️ O Enganoso Teste que não reflete a realidade produtiva, criado para enganar os usuários e inflar artificialmente os números de velocidade. {/* Method 1: Portuguese - Badge */} Recomendado {/* Method 2: English - Badge */} Padrão Internacional {/* Method 3: Misleading - Badge */} Ilusório {/* Method 1: Portuguese - Simulation */} SIMULAÇÃO DE TESTE abcdefghijklmnopqrstuvwxyz áàâãéêíóôõúç ⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵⠷⠡⠜⠩⠿⠣⠌⠾⠬⠹⠾⠯ Média de 3.41 pontos por caractere {/* Method 2: English - Simulation */} SIMULAÇÃO DE TESTE abcdefghijklmnopqrstuvwxyz Representação em Braille: ⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵ Média de 3.02 pontos por caractere {/* Method 3: Misleading - Simulation */} ⚠️ \"TESTE\" DE BRINCADEIRA aaaaaaaaaaaaaaaaaaaaaaaaaa Representação em Braille: ⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁ Média de 1 ponto por caractere {/* Performance Comparison Table Section */} {/* Performance Comparison Table */} {/* Table Title */} Resultados oficiais dos testes de produção da impressora ViewPlus Columbia Tribunal de Justiça do Paraná Modo de teste Configuração* Modo de impressão CPS** PPH*** Fonte {/* 1. Alfabeto Português - Vibrant Blue */} Alfabeto Português 40 CPL × 25 LPP Draft 63 226 TJPR {/* 2. Alfabeto Inglês - Light Blue */} Alfabeto Inglês 46 CPL × 27 LPP Draft 77 220 TJPR {/* 3. Alfabeto Inglês - Light Blue (Duplicated) */} Alfabeto Inglês 43 CPL × 28 LPP Draft 70 210 SGS {/* 3. Alfabeto Inglês - Light Blue (Duplicated) */} Alfabeto Inglês 40 CPL × 25 LPP Draft 87 313 TJPR {/* 3. Enganoso (Somente \"a\") - Red */} Enganoso (Somente \"a\") 40 CPL × 25 LPP Draft 214 771 TJPR {/* Table Footnotes */} * 43 Caracteres por linha (CPL) X 28 Linhas por página (LPP) ** (CPS) Caracteres por segundo *** (PPH) Páginas por hora **** (TJPR) Tribunal de Justiça do Paraná {/* Section 2: A Solução (Brasil) */} O que diz a Justiça Brasileira? O Laudo pericial da 7ª vara do Tribunal de Justiça do Paraná recomenda que os testes de desempenho utilizem o alfabeto completo da língua portuguesa, com caracteres acentuados, para maior fidelidade à grafia oficial. Os resultados mostraram que a média de pontos braille por caractere aumenta de 3,02 (alfabeto inglês) para 3,41 (alfabeto português). Tabela de Teste Real {['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'].map((char, i) => ( {char} {'⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵'[i]} ))} {[{ char: 'á', braille: '⠷' }, { char: 'à', braille: '⠡' }, { char: 'â', braille: '⠜' }, { char: 'ã', braille: '⠩' }, { char: 'é', braille: '⠿' }, { char: 'ê', braille: '⠣' }, { char: 'í', braille: '⠌' }, { char: 'ó', braille: '⠾' }, { char: 'ô', braille: '⠬' }, { char: 'õ', braille: '⠹' }, { char: 'ú', braille: '⠾' }, { char: 'ç', braille: '⠯' }].map((item, i) => ( {item.char} {item.braille} ))} Qualquer teste que não inclua a complexidade do padrão da grafia Braille brasileira: não exige a capacidade necessária da impressora e é propositalmente criado para ludibriar potenciais clientes. {/* COMMENTED OUT - Veja a Diferença Section ... (section content commented out) */} {/* Expert Report Section */} Conheça o Laudo da Perícia Acesse o documento oficial da 7ª Vara do Tribunal de Justiça do Paraná que fundamenta os testes de velocidade para o mercado brasileiro. 📄 Laudo Técnico Oficial Documento técnico detalhado com os testes de velocidade de impressão Braille no Brasil. Baixar Laudo Completo {/* Index Braille Basic Performance Table Section */} {/* Performance Comparison Table */} {/* Table Title */} Resultado dos testes de produção da impressora INDEX BASIC Modo de teste Configuração* Modo de impressão CPS** PPH*** Fonte {/* 1. Alfabeto Português - Vibrant Blue */} Alfabeto Português 46 CPL × 29 LPP Draft 139 375 Padrão TJPR {/* 2. Alfabeto Inglês - Light Blue */} Alfabeto Inglês 46 CPL × 29 LPP Draft 140 378 SGS {/* 3. Enganoso (Somente \"a\") - Red */} Enganoso (Somente \"a\") 46 CPL × 29 LPP Draft 333 898 Padrão ViewPlus {/* Table Footnotes */} * 46 Caracteres por linha (CPL) X 29 Linhas por página (LPP) ** (CPS) Caracteres por segundo *** (PPH) Páginas por hora {/* Link to Detailed Comparison Page */} Quer ver o comparativo completo de tecnologia e velocidade? Saiba porque a INDEX BASIC é Superior. ); }",
     "type": "P├ígina"
   },
   {

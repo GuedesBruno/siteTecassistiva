@@ -1,4 +1,4 @@
-# Links de PDFs para Strapi
+# Links de PDFs para Strapi.
 
 ## 📘 Guias (14 arquivos)
 
