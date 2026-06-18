@@ -68,8 +68,8 @@ export async function generateMetadata({ params }) {
     );
 
     // Dynamic Title Generation for SEO
-    // Ex: "Everest - Index Braille | Impressoras Braille Folha Solta"
-    let seoTitle = productAttributes.nome;
+    // Ex: "Impressora Braille: Folha Solta | Index Braille | Everest-D V5"
+    let seoTitleParts = [];
 
     const manufacturer = productAttributes.Fabricante ||
       productAttributes.relacao_fabricante?.data?.attributes?.nome;
@@ -77,18 +77,25 @@ export async function generateMetadata({ params }) {
     const subcategory = productAttributes.subcategorias?.data?.[0]?.attributes?.nome ||
       productAttributes.subcategorias?.[0]?.nome;
 
-    if (manufacturer && !seoTitle.includes(manufacturer)) {
-      seoTitle += ` - ${manufacturer}`;
+    if (subcategory) {
+      seoTitleParts.push(subcategory);
     }
 
-    if (subcategory) {
-      seoTitle += ` | ${subcategory}`;
+    if (manufacturer) {
+      seoTitleParts.push(manufacturer);
     }
+
+    seoTitleParts.push(productAttributes.nome);
+
+    const seoTitle = seoTitleParts.join(' | ');
 
     return {
       title: seoTitle,
       description: description,
       keywords: [
+        // Palavras-chave do Strapi (JSON array) - Prioridade
+        ...(Array.isArray(productAttributes.palavras_chave) ? productAttributes.palavras_chave : []),
+        // Fallback: gera keywords automaticamente se campo estiver vazio
         productAttributes.nome,
         manufacturer,
         subcategory,

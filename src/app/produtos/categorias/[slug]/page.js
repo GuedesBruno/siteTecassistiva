@@ -31,9 +31,23 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
+  const { slug } = params;
+  const categoryData = await getCategoryBySlug(slug);
+  const category = categoryData?.data?.[0]?.attributes;
+
+  if (!category) {
+    return {
+      title: 'Produtos | Tecassistiva',
+      description: 'Confira nossos produtos.',
+    };
+  }
+
   return {
-    title: 'Produtos | Tecassistiva',
-    description: 'Confira nossos produtos.',
+    title: `${category.nome} | Tecassistiva`,
+    description: category.descricao || `Confira a categoria ${category.nome} na Tecassistiva.`,
+    alternates: {
+      canonical: `https://www.tecassistiva.com.br/produtos/categorias/${slug}`,
+    },
   };
 }
 

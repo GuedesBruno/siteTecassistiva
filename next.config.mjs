@@ -5,7 +5,7 @@ const nextConfig = {
   // (ex: /tecassistiva/index.html), o que é 100% compatível com o seu .htaccess.
   trailingSlash: true,
 
-  // Adicionado para gerar um site estático compatível com hospedagem sem Node.js
+  // Adicionado para gerar um site estático compatível com hospedagem sem Node.js.
   output: 'export',
 
   reactStrictMode: true,

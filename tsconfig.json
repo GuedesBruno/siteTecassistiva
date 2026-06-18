@@ -34,8 +34,9 @@
     "**/*.ts",
     "**/*.tsx",
     "**/*.js",
-    "**/*.jsx"
-, "postcss.config.cjs"  ],
+    "**/*.jsx",
+    "postcss.config.cjs"
+  ],
   "exclude": [
     "node_modules"
   ]

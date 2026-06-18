@@ -7,8 +7,8 @@ import qs from 'qs';
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
 // Função auxiliar para fetch API
-// Função auxiliar para fetch API com timeout
-async function fetchAPI(endpoint) {
+// Função auxiliar para fetch API com timeout e retry mais agressivo para lidar com 503s do Strapi Cloud
+async function fetchAPI(endpoint, retries = 5) {
   const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
   const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN;
 
@@ -16,46 +16,65 @@ async function fetchAPI(endpoint) {
     throw new Error("Variáveis de ambiente não definidas");
   }
 
-  try {
-    let base = STRAPI_URL.replace(/\/+$/g, '');
-    if (base.endsWith('/api')) {
-      base = base.replace(/\/api$/, '');
+  let lastError;
+
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      let base = STRAPI_URL.replace(/\/+$/g, '');
+      if (base.endsWith('/api')) {
+        base = base.replace(/\/api$/, '');
+      }
+      const path_ep = endpoint.replace(/^\/+/, '');
+      const url = `${base}/${path_ep}`;
+
+      // Aumenta timeout para 600 segundos (10 minutos)
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 600000);
+
+      if (attempt > 1) {
+        console.log(`  Tentativa ${attempt}/${retries} para ${endpoint}...`);
+      }
+
+      const res = await fetch(url, {
+        headers: { 'Authorization': `Bearer ${STRAPI_TOKEN}` },
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeoutId);
+
+      if (!res.ok) {
+        // Tenta ler o erro
+        let errorMsg = `API Error: ${res.status}`;
+        try {
+          const errorBody = await res.json();
+          if (errorBody && errorBody.error && errorBody.error.message) {
+            errorMsg += ` - ${errorBody.error.message}`;
+          }
+        } catch (e) { /* ignore */ }
+        throw new Error(errorMsg);
+      }
+
+      return await res.json();
+    } catch (error) {
+      lastError = error;
+
+      if (error.name === 'AbortError') {
+        console.error(`Timeout ao fazer fetch (tentativa ${attempt}/${retries}): ${endpoint}`);
+      } else {
+        console.error(`Erro ao fazer fetch (tentativa ${attempt}/${retries}): ${error.message} (${endpoint})`);
+      }
+
+      // Se não for a última tentativa, aguarda antes de tentar novamente (exponential backoff com tempo maior)
+      if (attempt < retries) {
+        // Incrementa o backoff: 2s, 4s, 8s, 16s... máximo 30s
+        const waitTime = Math.min(2000 * Math.pow(2, attempt - 1), 30000);
+        console.log(`  Aguardando ${waitTime}ms antes de tentar novamente...`);
+        await new Promise(resolve => setTimeout(resolve, waitTime));
+      }
     }
-    const path_ep = endpoint.replace(/^\/+/, '');
-    const url = `${base}/${path_ep}`;
-
-    // Adiciona timeout de 300 segundos (5 minutos)
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 300000);
-
-    const res = await fetch(url, {
-      headers: { 'Authorization': `Bearer ${STRAPI_TOKEN}` },
-      signal: controller.signal,
-    });
-
-    clearTimeout(timeoutId);
-
-    if (!res.ok) {
-      // Tenta ler o erro
-      let errorMsg = `API Error: ${res.status}`;
-      try {
-        const errorBody = await res.json();
-        if (errorBody && errorBody.error && errorBody.error.message) {
-          errorMsg += ` - ${errorBody.error.message}`;
-        }
-      } catch (e) { /* ignore */ }
-      throw new Error(errorMsg);
-    }
-
-    return await res.json();
-  } catch (error) {
-    if (error.name === 'AbortError') {
-      console.error(`Timeout ao fazer fetch: ${endpoint}`);
-    } else {
-      console.error(`Erro ao fazer fetch: ${error.message} (${endpoint})`);
-    }
-    throw error;
   }
+
+  throw lastError;
 }
 
 function getStrapiMediaUrl(path) {
@@ -81,35 +100,30 @@ function stripTags(content) {
     .trim();
 }
 
-// Função que busca TODAS as páginas (paginação automática)
+// Fun├º├úo que busca TODAS as p├íginas (pagina├º├úo autom├ítica)
 async function fetchAllData(endpoint) {
   let allData = [];
   let page = 1;
   let pageCount = 1;
-  const limit = 30; // Reduzido para 30 para garantir que não dê timeout
+  const limit = 30; // Reduzido para 30 para garantir que n├úo d├¬ timeout
 
   const [pathPart, queryPart] = endpoint.split('?');
   const queryParams = queryPart ? qs.parse(queryPart) : {};
 
-  // Remove qualquer paginação existente na string original para evitar conflito
+  // Remove qualquer pagina├º├úo existente na string original para evitar conflito
   if (queryParams.pagination) {
     delete queryParams.pagination;
   }
 
   do {
-    // console.log(`   > Buscando página ${page}...`); // Debug opcional
+    // console.log(`   > Buscando p├ígina ${page}...`); // Debug opcional
 
-    const currentParams = {
-      ...queryParams,
-      pagination: {
-        page: page,
-        pageSize: limit // CORRECTED: Strapi v4 uses pageSize with page
-      }
-    };
-
-    // Encode parameters standardly (brackets encoded) to match safely with strict fetch/servers
-    const queryString = qs.stringify(currentParams);
-    const pagedUrl = `${pathPart}?${queryString}`;
+    // Simplifica a paginação: anexa diretamente como string sem usar qs.
+    // O qs.stringify às vezes codifica arrays complexos de um jeito que o Strapi Cloud
+    // recusa com 503 Timeout
+    const pagedUrl = queryPart 
+      ? `${pathPart}?${queryPart}&pagination[page]=${page}&pagination[pageSize]=${limit}`
+      : `${pathPart}?pagination[page]=${page}&pagination[pageSize]=${limit}`;
 
     try {
       const res = await fetchAPI(pagedUrl);
@@ -119,7 +133,7 @@ async function fetchAllData(endpoint) {
         if (res.meta && res.meta.pagination) {
           pageCount = res.meta.pagination.pageCount;
         } else {
-          // Se não tiver paginação, deve ser single type ou array simples, para por aqui
+          // Se n├úo tiver pagina├º├úo, deve ser single type ou array simples, para por aqui
           pageCount = 1;
         }
       } else {
@@ -128,7 +142,7 @@ async function fetchAllData(endpoint) {
         pageCount = 0;
       }
     } catch (err) {
-      console.error(`Erro na página ${page} de ${pathPart}:`, err.message);
+      console.error(`Erro na p├ígina ${page} de ${pathPart}:`, err.message);
       throw err;
     }
 
@@ -139,26 +153,45 @@ async function fetchAllData(endpoint) {
 }
 
 async function generateSearchData() {
-  console.log('Iniciando a geração de dados de busca abrangente...');
+  console.log('Iniciando a gera├º├úo de dados de busca abrangente...');
+
+  const publicDir = path.join(process.cwd(), 'public');
+  const outputPath = path.join(publicDir, 'search-data.json');
+
+  // Helper para buscar com fallback seguro
+  async function safeFetch(label, endpoint) {
+    try {
+      console.log(`Buscando ${label}...`);
+      return await fetchAllData(endpoint);
+    } catch (err) {
+      console.warn(`AVISO: Falha ao buscar ${label} (${err.message}). Usando array vazio como fallback.`);
+      return [];
+    }
+  }
 
   try {
-    // Fetch data from APIs sequencialmente com paginação robusta
-    console.log('Buscando produtos...');
-    const products = await fetchAllData('/api/produtos?populate[0]=imagem_principal&populate[1]=subcategorias&populate[2]=categorias&sort=ordem:asc');
+    // Fetch data from APIs com fallback individual por recurso
+    const products = await safeFetch('produtos', '/api/produtos?populate[0]=imagem_principal&populate[1]=subcategorias&populate[2]=categorias&sort=ordem:asc');
 
-    console.log('Buscando produtos com documentos...');
-    const productsWithDocsRaw = await fetchAllData('/api/produtos?populate[0]=documentos&populate[1]=categorias&populate[2]=subcategorias&sort=nome:asc');
+    const productsWithDocsRaw = await safeFetch('produtos com documentos', '/api/produtos?populate[0]=documentos&populate[1]=categorias&populate[2]=subcategorias&sort=nome:asc');
     // Normalizar
     const productsWithDocs = productsWithDocsRaw.map(item => {
       const { id, ...attributes } = item.attributes ? item : { id: item.id, ...item };
       return { id, attributes };
     });
 
-    console.log('Buscando atas...');
-    const atas = await fetchAllData('/api/atas?sort=ordem:asc');
+    const atas = await safeFetch('atas', '/api/atas?sort=ordem:asc');
 
-    console.log('Buscando softwares...');
-    const software = await fetchAllData('/api/softwares?fields[0]=nome&fields[1]=tipo&populate[instaladores]=*');
+    const software = await safeFetch('softwares', '/api/softwares?fields[0]=nome&fields[1]=tipo&populate[instaladores]=*');
+
+    // Se todos os dados da API vieram vazios (API completamente indispon├¡vel),
+    // tenta reutilizar o arquivo de busca do ├║ltimo build bem-sucedido
+    const apiTotalItems = products.length + productsWithDocsRaw.length + atas.length + software.length;
+    if (apiTotalItems === 0 && fs.existsSync(outputPath)) {
+      console.warn('AVISO: Nenhum dado retornado pela API. Reutilizando search-data.json do ├║ltimo build bem-sucedido.');
+      console.log('Build continuar├í sem atualizar os dados de busca.');
+      return;
+    }
 
 
     // Process API data - Products
@@ -184,7 +217,7 @@ async function generateSearchData() {
         .filter(Boolean)
         .join(', ');
 
-      // Combina conteúdo para busca mais completa
+      // Combina conte├║do para busca mais completa
       const content = [
         attrs.descricao_curta || '',
         attrs.descricao_longa ? stripTags(JSON.stringify(attrs.descricao_longa)) : '',
@@ -202,6 +235,7 @@ async function generateSearchData() {
         type: 'Produto',
         content: content,
         categories: categories,
+        subcategories: subcategories,
         fabricante: attrs.Fabricante || '',
       }
     });
@@ -219,7 +253,7 @@ async function generateSearchData() {
         const fileName = docAttrs.name || docAttrs.nome || 'Documento';
         const fileUrl = docAttrs.url || '';
 
-        // Extrai extensão do arquivo
+        // Extrai extens├úo do arquivo
         const extension = fileName.split('.').pop().toLowerCase();
         const docType = {
           'pdf': 'PDF',
@@ -284,7 +318,7 @@ async function generateSearchData() {
 
       const description = textContent.substring(0, 150) + '...';
 
-      let title = slug.split('/').pop() || 'Página Inicial';
+      let title = slug.split('/').pop() || 'P├ígina Inicial';
       title = title.charAt(0).toUpperCase() + title.slice(1).replace(/-/g, ' ');
 
       const titleMatch = content.match(/<h1[^>]*>([^<]+)<\/h1>/);
@@ -298,7 +332,7 @@ async function generateSearchData() {
         slug: slug,
         description: description,
         content: textContent,
-        type: 'Página',
+        type: 'P├ígina',
       };
     });
 
@@ -312,8 +346,7 @@ async function generateSearchData() {
       ...pageData,
     ];
 
-    const publicDir = path.join(process.cwd(), 'public');
-    const outputPath = path.join(publicDir, 'search-data.json');
+
 
     if (!fs.existsSync(publicDir)) {
       fs.mkdirSync(publicDir);
@@ -327,7 +360,7 @@ async function generateSearchData() {
     console.log(`- ${documentData.length} Documentos`);
     console.log(`- ${ataData.length} Atas`);
     console.log(`- ${softwareData.length} Softwares/Drivers`);
-    console.log(`- ${pageData.length} Páginas`);
+    console.log(`- ${pageData.length} P├íginas`);
 
   } catch (error) {
     console.error('ERRO FATAL ao gerar os dados de busca:', error);

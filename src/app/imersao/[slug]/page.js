@@ -47,7 +47,7 @@ function normalizeDataArray(response) {
 }
 
 async function getImersaoBySlugInternal(slug) {
-    const populateQuery = 'populate[personalizado]=*&populate[produto][fields][0]=nome&populate[produto][fields][1]=descricao_curta&populate[produto][populate][0]=imagem_principal&populate[produto][populate][1]=categorias&populate[produto][populate][2]=relacao_fabricante&fields[0]=genero_descricao&fields[1]=curso&fields[2]=guia&fields[3]=manual&fields[4]=botoes_padrao';
+    const populateQuery = 'populate[personalizado]=*&populate[produto][fields][0]=nome&populate[produto][fields][1]=descricao_curta&populate[produto][populate][0]=imagem_principal&populate[produto][populate][1]=categorias&populate[produto][populate][2]=relacao_fabricante&fields[0]=genero_descricao&fields[1]=curso&fields[2]=guia&fields[3]=manual&fields[4]=botoes_padrao&fields[5]=link_playstore&fields[6]=link_appstore';
     const res = await internalFetchAPI(`/api/imersaos?filters[slug][$eq]=${slug}&${populateQuery}`);
     const data = normalizeDataArray(res);
     if (data.length === 0) return null;
@@ -119,7 +119,7 @@ export default async function ImersaoPage({ params }) {
         notFound();
     }
 
-    const { produto: productData, curso, guia, manual, botoes_padrao = true, personalizado, genero_descricao } = imersao.attributes;
+    const { produto: productData, curso, guia, manual, botoes_padrao = true, personalizado, genero_descricao, link_playstore, link_appstore } = imersao.attributes;
 
     if (!productData) {
         console.error(`❌ ERRO: Imersão "${slug}" não tem produto vinculado`);
@@ -183,7 +183,7 @@ export default async function ImersaoPage({ params }) {
                 </p>
 
                 {/* Action Buttons (Linktree Style) */}
-                <div className="w-full space-y-2 mb-4">
+                <div className="w-full space-y-2 mb-2">
                     {botoes_padrao ? (
                         <>
                             {curso && (
@@ -264,18 +264,69 @@ export default async function ImersaoPage({ params }) {
                             </Link>
                         ))
                     )}
+                </div>
+
+                {/* App Store & Play Store Badges */}
+                {(link_playstore || link_appstore) && (
+                    <div className="flex w-full gap-3 mb-4 shrink-0">
+                        {link_appstore && (
+                            <Link
+                                href={link_appstore}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex-1 flex items-center justify-center p-2 bg-gradient-to-r from-white/10 to-white/5 hover:from-white/20 hover:to-white/10 border border-white/20 rounded-2xl transition-all duration-300 group"
+                            >
+                                <div className="relative w-8 h-8 mr-2 transition-transform group-hover:scale-110">
+                                    <Image
+                                        src="/app-store-badge.svg"
+                                        alt="Apple Logo"
+                                        fill
+                                        className="object-contain" // Assumes the SVG is white/monochrome or fits the theme
+                                    />
+                                </div>
+                                <div className="flex flex-col items-start leading-none">
+                                    <span className="text-[8px] text-white/70 uppercase tracking-wider">APP DISPONÍVEL NA</span>
+                                    <span className="font-bold text-white text-base">App Store</span>
+                                </div>
+                            </Link>
+                        )}
+                        {link_playstore && (
+                            <Link
+                                href={link_playstore}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex-1 flex items-center justify-center p-2 bg-gradient-to-r from-white/10 to-white/5 hover:from-white/20 hover:to-white/10 border border-white/20 rounded-2xl transition-all duration-300 group"
+                            >
+                                <div className="relative w-8 h-8 mr-2 transition-transform group-hover:scale-110">
+                                    <Image
+                                        src="/google-play-badge.svg"
+                                        alt="Android Logo"
+                                        fill
+                                        className="object-contain"
+                                    />
+                                </div>
+                                <div className="flex flex-col items-start leading-none">
+                                    <span className="text-[8px] text-white/70 uppercase tracking-wider">APP DISPONÍVEL NA</span>
+                                    <span className="font-bold text-white text-base">Play Store</span>
+                                </div>
+                            </Link>
+                        )}
+                    </div>
+                )}
+
+                <div className="w-full space-y-2 mb-0">
 
                     {/* Secondary Button */}
                     <Link
                         href="/produtos"
-                        className="flex items-center justify-center p-3 mt-2 border border-white/30 rounded-xl text-white/80 hover:bg-white/10 hover:text-white transition-all duration-300 text-sm font-medium tracking-wider uppercase shrink-0"
+                        className="flex items-center justify-center p-3 border border-white/30 rounded-xl text-white/80 hover:bg-white/10 hover:text-white transition-all duration-300 text-sm font-medium tracking-wider uppercase shrink-0"
                     >
                         Ver Catálogo Completo
                     </Link>
                 </div>
 
                 {/* Social Media Icons */}
-                <div className="flex space-x-6 mt-auto pt-4 shrink-0">
+                <div className="flex space-x-6 mt-2 shrink-0">
                     <Link href="https://www.instagram.com/tecassistiva/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-all transform hover:scale-110 border border-white/10">
                         <Image src="/logo_instagram.svg" alt="Instagram" width={20} height={20} className="brightness-0 invert" />
                     </Link>

@@ -16,7 +16,7 @@ const ComparisonButton = () => {
 
     const text = variant === 0
         ? "Clique para entender as diferenças entre impressoras Braille"
-        : "Clique para saber avaliar um impressora Braille";
+        : "Clique para saber avaliar uma impressora Braille";
 
     return (
         <>

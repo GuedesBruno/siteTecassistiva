@@ -32,12 +32,13 @@ function SearchResults() {
         } else {
           // Usa busca fuzzy/híbrida para encontrar resultados mesmo com typos
           const searchResults = hybridSearch(query, data, {
-            keys: ['title', 'description', 'content', 'categories', 'fabricante'],
+            keys: ['title', 'subcategories', 'categories', 'fabricante', 'description', 'content'],
             weights: {
               title: 1.5,
+              subcategories: 1.4,
               categories: 1.2,
               fabricante: 1.2,
-              description: 0.8,
+              description: 1.0,
               content: 0.6,
             },
             exactThreshold: 0.9,

@@ -48,7 +48,7 @@ export default async function TecassistivaPage() {
                 Desde 2008, a Tecassistiva é a empresa brasileira lider nacional de desenvolvimento, implementação de soluções e suporte pós-venda em soluções de tecnologia assistiva de comunicação aumentativa e alternativa para a deficiência visual. Suas soluções sáo particularmente voltadas para a inclusão educacional e social de pessoas com deficiência. Atuamos há duas décadas oferecendo equipamentos, softwares e serviços que ampliam a autonomia, o acesso à informação e as oportunidades de aprendizagem para estudantes, profissionais e instituições em todo o País.
               </p>
               <p className="mb-6">
-                osso compromisso é entregar tecnologia que transforma vidas.
+                Nosso compromisso é entregar tecnologia que transforma vidas.
                 Por isso desenvolvemos e representamos soluções de alto desempenho para pessoas com deficiência visual e outras necessidades específicas, atendendo Escolas, Secretarias de Educação, Universidades, Empresas e órgãos públicos com excelência e responsabilidade.
                 Trabalhamos lado a lado com educadores, gestores e equipes técnicas para garantir diagnósticos precisos, implementações eficientes e suporte contínuo.
               </p>

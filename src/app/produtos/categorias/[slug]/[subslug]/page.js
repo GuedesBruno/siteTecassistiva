@@ -54,9 +54,36 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  // TODO: Buscar o nome da subcategoria específica para um título mais descritivo
+  const { slug, subslug } = params;
+  const categoryData = await getCategoryBySlug(slug);
+  const category = categoryData?.data?.[0]?.attributes;
+
+  if (!category) {
+    return {
+      title: 'Produtos | Tecassistiva',
+    };
+  }
+
+  // Encontrar a subcategoria específica
+  const subcategoriesArray = Array.isArray(category.subcategorias)
+    ? category.subcategorias
+    : (category.subcategorias?.data || []);
+
+  const subcategory = subcategoriesArray.find(s => (s.attributes || s).slug === subslug);
+  const subcategoryName = subcategory ? (subcategory.attributes || subcategory).nome : '';
+
+  if (subcategoryName) {
+    return {
+      title: `${subcategoryName} | Tecassistiva`,
+      description: `Confira nossos produtos em ${subcategoryName}.`,
+      alternates: {
+        canonical: `https://www.tecassistiva.com.br/produtos/categorias/${slug}/${subslug}`,
+      },
+    };
+  }
+
   return {
-    title: `Produtos | Tecassistiva`,
+    title: `${category.nome} | Tecassistiva`,
   };
 }
 
@@ -96,8 +123,43 @@ export default async function SubCategoryPage({ params }) {
     breadcrumbs.push({ name: subcategoryName, path: `/produtos/categorias/${category.slug}/${subslug}` });
   }
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    'itemListElement': [
+      {
+        '@type': 'ListItem',
+        'position': 1,
+        'name': 'Página Inicial',
+        'item': 'https://www.tecassistiva.com.br'
+      },
+      {
+        '@type': 'ListItem',
+        'position': 2,
+        'name': 'Produtos',
+        'item': 'https://www.tecassistiva.com.br/produtos'
+      },
+      {
+        '@type': 'ListItem',
+        'position': 3,
+        'name': category.nome,
+        'item': `https://www.tecassistiva.com.br/produtos/categorias/${category.slug}`
+      },
+      ...(subcategoryName ? [{
+        '@type': 'ListItem',
+        'position': 4,
+        'name': subcategoryName,
+        'item': `https://www.tecassistiva.com.br/produtos/categorias/${category.slug}/${subslug}`
+      }] : [])
+    ]
+  };
+
   return (
     <div className="container mx-auto px-4 py-8 min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="flex flex-col md:flex-row gap-8">
         <aside className="w-full md:w-1/3 lg:w-1/4">
           <CategoryMenu
