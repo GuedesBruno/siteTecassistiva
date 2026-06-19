@@ -80,7 +80,7 @@ export async function getAllProductsForDisplay() {
   try {
     // Populating subcategorias, categorias e imagem_principal para display completo
     const populateQuery = 'populate[0]=imagem_principal&populate[1]=subcategorias&populate[2]=categorias';
-    const productsData = await fetchAPI(`/api/produtos?${populateQuery}&pagination[limit]=1000&sort=ordem:asc`);
+    const productsData = await fetchAPI(`/api/produtos?${populateQuery}&filters[ocultar_do_catalogo][$ne]=true&pagination[limit]=1000&sort=ordem:asc`);
     return sortItemsByOrder(normalizeDataArray(productsData));
   } catch (error) {
     console.error(`Falha ao buscar todos os produtos:`, error);
@@ -94,7 +94,7 @@ export async function getAllProducts() {
 }
 
 export async function getFeaturedProducts() {
-  const response = await fetchAPI('/api/produtos?filters[destaque][$eq]=true&fields[0]=nome&fields[1]=slug&fields[2]=descricao_curta&populate=imagem_principal');
+  const response = await fetchAPI('/api/produtos?filters[destaque][$eq]=true&filters[ocultar_do_catalogo][$ne]=true&fields[0]=nome&fields[1]=slug&fields[2]=descricao_curta&populate=imagem_principal');
   return normalizeDataArray(response);
 }
 
@@ -103,6 +103,9 @@ export async function getProductBySlug(slug) {
     filters: {
       slug: {
         $eq: slug,
+      },
+      ocultar_do_catalogo: {
+        $ne: true,
       },
     },
     fields: [
@@ -182,9 +185,32 @@ export async function getCategoryBySlug(slug) {
     if (data.length === 0) return { data: [] };
 
     const normalized = data.map((item) => {
+      const attrs = item.attributes ? item.attributes : item;
+      const id = item.id;
+      
+      // Filtrar produtos ocultos da categoria principal
+      if (attrs.produtos && attrs.produtos.data) {
+        attrs.produtos.data = attrs.produtos.data.filter(p => {
+          const pAttrs = p.attributes || p;
+          return pAttrs.ocultar_do_catalogo !== true;
+        });
+      }
+      
+      // Filtrar produtos ocultos das subcategorias
+      if (attrs.subcategorias && attrs.subcategorias.data) {
+        attrs.subcategorias.data.forEach(sub => {
+          const subAttrs = sub.attributes || sub;
+          if (subAttrs.produtos && subAttrs.produtos.data) {
+            subAttrs.produtos.data = subAttrs.produtos.data.filter(p => {
+              const pAttrs = p.attributes || p;
+              return pAttrs.ocultar_do_catalogo !== true;
+            });
+          }
+        });
+      }
+      
       if (item.attributes) return item;
-      const { id, ...rest } = item;
-      return { id, attributes: rest };
+      return { id, attributes: attrs };
     });
 
     return { data: normalized };
@@ -241,12 +267,12 @@ export async function getAllCategoryPaths() {
 
 export async function getProductsByCategorySlug(slug) {
   const filters = `filters[$or][0][categorias][slug][$eq]=${slug}&filters[$or][1][subcategorias][categorias][slug][$eq]=${slug}`;
-  const response = await fetchAPI(`/api/produtos?${filters}&populate=*&sort=ordem:asc`);
+  const response = await fetchAPI(`/api/produtos?${filters}&filters[ocultar_do_catalogo][$ne]=true&populate=*&sort=ordem:asc`);
   return sortItemsByOrder(normalizeDataArray(response));
 }
 
 export async function getProductsBySubcategorySlug(subslug) {
-  const response = await fetchAPI(`/api/produtos?filters[subcategorias][slug][$eq]=${subslug}&populate=*&sort=ordem:asc`);
+  const response = await fetchAPI(`/api/produtos?filters[subcategorias][slug][$eq]=${subslug}&filters[ocultar_do_catalogo][$ne]=true&populate=*&sort=ordem:asc`);
   return sortItemsByOrder(normalizeDataArray(response));
 }
 
@@ -364,7 +390,7 @@ export async function getAllSimplePages() {
 }
 
 export async function getProductsByManufacturerSlug(slug) {
-  const response = await fetchAPI(`/api/produtos?filters[relacao_fabricante][slug][$eq]=${slug}&populate=*&sort=ordem:asc`);
+  const response = await fetchAPI(`/api/produtos?filters[relacao_fabricante][slug][$eq]=${slug}&filters[ocultar_do_catalogo][$ne]=true&populate=*&sort=ordem:asc`);
   return sortItemsByOrder(normalizeDataArray(response));
 }
 
