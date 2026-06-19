@@ -80,8 +80,9 @@ export async function getAllProductsForDisplay() {
   try {
     // Populating subcategorias, categorias e imagem_principal para display completo
     const populateQuery = 'populate[0]=imagem_principal&populate[1]=subcategorias&populate[2]=categorias';
-    const productsData = await fetchAPI(`/api/produtos?${populateQuery}&filters[ocultar_do_catalogo][$ne]=true&pagination[limit]=1000&sort=ordem:asc`);
-    return sortItemsByOrder(normalizeDataArray(productsData));
+    const productsData = await fetchAPI(`/api/produtos?${populateQuery}&pagination[limit]=1000&sort=ordem:asc`);
+    const data = normalizeDataArray(productsData);
+    return sortItemsByOrder(data.filter(item => (item.attributes || item).ocultar_do_catalogo !== true));
   } catch (error) {
     console.error(`Falha ao buscar todos os produtos:`, error);
     return [];
@@ -94,8 +95,9 @@ export async function getAllProducts() {
 }
 
 export async function getFeaturedProducts() {
-  const response = await fetchAPI('/api/produtos?filters[destaque][$eq]=true&filters[ocultar_do_catalogo][$ne]=true&fields[0]=nome&fields[1]=slug&fields[2]=descricao_curta&populate=imagem_principal');
-  return normalizeDataArray(response);
+  const response = await fetchAPI('/api/produtos?filters[destaque][$eq]=true&fields[0]=nome&fields[1]=slug&fields[2]=descricao_curta&populate=imagem_principal');
+  const data = normalizeDataArray(response);
+  return data.filter(item => (item.attributes || item).ocultar_do_catalogo !== true);
 }
 
 export async function getProductBySlug(slug) {
@@ -103,9 +105,6 @@ export async function getProductBySlug(slug) {
     filters: {
       slug: {
         $eq: slug,
-      },
-      ocultar_do_catalogo: {
-        $ne: true,
       },
     },
     fields: [
@@ -140,6 +139,12 @@ export async function getProductBySlug(slug) {
   if (data.length === 0) return null;
 
   const item = data[0];
+  
+  // Se o produto estiver oculto do catálogo, fingimos que não existe
+  if ((item.attributes || item).ocultar_do_catalogo === true) {
+    return null;
+  }
+
   // The API response might already be normalized, but this ensures it is.
   if (item.attributes) return item;
 
@@ -267,13 +272,15 @@ export async function getAllCategoryPaths() {
 
 export async function getProductsByCategorySlug(slug) {
   const filters = `filters[$or][0][categorias][slug][$eq]=${slug}&filters[$or][1][subcategorias][categorias][slug][$eq]=${slug}`;
-  const response = await fetchAPI(`/api/produtos?${filters}&filters[ocultar_do_catalogo][$ne]=true&populate=*&sort=ordem:asc`);
-  return sortItemsByOrder(normalizeDataArray(response));
+  const response = await fetchAPI(`/api/produtos?${filters}&populate=*&sort=ordem:asc`);
+  const data = normalizeDataArray(response);
+  return sortItemsByOrder(data.filter(item => (item.attributes || item).ocultar_do_catalogo !== true));
 }
 
 export async function getProductsBySubcategorySlug(subslug) {
-  const response = await fetchAPI(`/api/produtos?filters[subcategorias][slug][$eq]=${subslug}&filters[ocultar_do_catalogo][$ne]=true&populate=*&sort=ordem:asc`);
-  return sortItemsByOrder(normalizeDataArray(response));
+  const response = await fetchAPI(`/api/produtos?filters[subcategorias][slug][$eq]=${subslug}&populate=*&sort=ordem:asc`);
+  const data = normalizeDataArray(response);
+  return sortItemsByOrder(data.filter(item => (item.attributes || item).ocultar_do_catalogo !== true));
 }
 
 export async function getOpenAtas() {
@@ -390,8 +397,9 @@ export async function getAllSimplePages() {
 }
 
 export async function getProductsByManufacturerSlug(slug) {
-  const response = await fetchAPI(`/api/produtos?filters[relacao_fabricante][slug][$eq]=${slug}&filters[ocultar_do_catalogo][$ne]=true&populate=*&sort=ordem:asc`);
-  return sortItemsByOrder(normalizeDataArray(response));
+  const response = await fetchAPI(`/api/produtos?filters[relacao_fabricante][slug][$eq]=${slug}&populate=*&sort=ordem:asc`);
+  const data = normalizeDataArray(response);
+  return sortItemsByOrder(data.filter(item => (item.attributes || item).ocultar_do_catalogo !== true));
 }
 
 export async function getManufacturerBySlug(slug) {

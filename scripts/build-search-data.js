@@ -170,10 +170,11 @@ async function generateSearchData() {
   }
 
   try {
-    // Fetch data from APIs com fallback individual por recurso
-    const products = await safeFetch('produtos', '/api/produtos?populate[0]=imagem_principal&populate[1]=subcategorias&populate[2]=categorias&filters[ocultar_do_catalogo][$ne]=true&sort=ordem:asc');
+    const productsData = await safeFetch('produtos', '/api/produtos?populate[0]=imagem_principal&populate[1]=subcategorias&populate[2]=categorias&sort=ordem:asc');
+    const products = productsData.filter(item => (item.attributes || item).ocultar_do_catalogo !== true);
 
-    const productsWithDocsRaw = await safeFetch('produtos com documentos', '/api/produtos?populate[0]=documentos&populate[1]=categorias&populate[2]=subcategorias&filters[ocultar_do_catalogo][$ne]=true&sort=nome:asc');
+    const productsWithDocsData = await safeFetch('produtos com documentos', '/api/produtos?populate[0]=documentos&populate[1]=categorias&populate[2]=subcategorias&sort=nome:asc');
+    const productsWithDocsRaw = productsWithDocsData.filter(item => (item.attributes || item).ocultar_do_catalogo !== true);
     // Normalizar
     const productsWithDocs = productsWithDocsRaw.map(item => {
       const { id, ...attributes } = item.attributes ? item : { id: item.id, ...item };
