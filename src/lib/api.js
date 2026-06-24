@@ -82,7 +82,7 @@ export async function getAllProductsForDisplay() {
     const populateQuery = 'populate[0]=imagem_principal&populate[1]=subcategorias&populate[2]=categorias';
     const productsData = await fetchAPI(`/api/produtos?${populateQuery}&pagination[limit]=1000&sort=ordem:asc`);
     const data = normalizeDataArray(productsData);
-    return sortItemsByOrder(data.filter(item => (item.attributes || item).ocultar_do_catalogo !== true));
+    return sortItemsByOrder(data.filter(item => item && (item.attributes || item).ocultar_do_catalogo !== true));
   } catch (error) {
     console.error(`Falha ao buscar todos os produtos:`, error);
     return [];
@@ -97,7 +97,7 @@ export async function getAllProducts() {
 export async function getFeaturedProducts() {
   const response = await fetchAPI('/api/produtos?filters[destaque][$eq]=true&fields[0]=nome&fields[1]=slug&fields[2]=descricao_curta&populate=imagem_principal');
   const data = normalizeDataArray(response);
-  return data.filter(item => (item.attributes || item).ocultar_do_catalogo !== true);
+  return data.filter(item => item && (item.attributes || item).ocultar_do_catalogo !== true);
 }
 
 export async function getProductBySlug(slug) {
@@ -140,6 +140,8 @@ export async function getProductBySlug(slug) {
 
   const item = data[0];
   
+  if (!item) return null;
+
   // Se o produto estiver oculto do catálogo, fingimos que não existe
   if ((item.attributes || item).ocultar_do_catalogo === true) {
     return null;
@@ -194,19 +196,22 @@ export async function getCategoryBySlug(slug) {
       const id = item.id;
       
       // Filtrar produtos ocultos da categoria principal
-      if (attrs.produtos && attrs.produtos.data) {
+      if (attrs.produtos && Array.isArray(attrs.produtos.data)) {
         attrs.produtos.data = attrs.produtos.data.filter(p => {
+          if (!p) return false;
           const pAttrs = p.attributes || p;
           return pAttrs.ocultar_do_catalogo !== true;
         });
       }
       
       // Filtrar produtos ocultos das subcategorias
-      if (attrs.subcategorias && attrs.subcategorias.data) {
+      if (attrs.subcategorias && Array.isArray(attrs.subcategorias.data)) {
         attrs.subcategorias.data.forEach(sub => {
+          if (!sub) return;
           const subAttrs = sub.attributes || sub;
-          if (subAttrs.produtos && subAttrs.produtos.data) {
+          if (subAttrs.produtos && Array.isArray(subAttrs.produtos.data)) {
             subAttrs.produtos.data = subAttrs.produtos.data.filter(p => {
+              if (!p) return false;
               const pAttrs = p.attributes || p;
               return pAttrs.ocultar_do_catalogo !== true;
             });
@@ -274,13 +279,13 @@ export async function getProductsByCategorySlug(slug) {
   const filters = `filters[$or][0][categorias][slug][$eq]=${slug}&filters[$or][1][subcategorias][categorias][slug][$eq]=${slug}`;
   const response = await fetchAPI(`/api/produtos?${filters}&populate=*&sort=ordem:asc`);
   const data = normalizeDataArray(response);
-  return sortItemsByOrder(data.filter(item => (item.attributes || item).ocultar_do_catalogo !== true));
+  return sortItemsByOrder(data.filter(item => item && (item.attributes || item).ocultar_do_catalogo !== true));
 }
 
 export async function getProductsBySubcategorySlug(subslug) {
   const response = await fetchAPI(`/api/produtos?filters[subcategorias][slug][$eq]=${subslug}&populate=*&sort=ordem:asc`);
   const data = normalizeDataArray(response);
-  return sortItemsByOrder(data.filter(item => (item.attributes || item).ocultar_do_catalogo !== true));
+  return sortItemsByOrder(data.filter(item => item && (item.attributes || item).ocultar_do_catalogo !== true));
 }
 
 export async function getOpenAtas() {
@@ -399,7 +404,7 @@ export async function getAllSimplePages() {
 export async function getProductsByManufacturerSlug(slug) {
   const response = await fetchAPI(`/api/produtos?filters[relacao_fabricante][slug][$eq]=${slug}&populate=*&sort=ordem:asc`);
   const data = normalizeDataArray(response);
-  return sortItemsByOrder(data.filter(item => (item.attributes || item).ocultar_do_catalogo !== true));
+  return sortItemsByOrder(data.filter(item => item && (item.attributes || item).ocultar_do_catalogo !== true));
 }
 
 export async function getManufacturerBySlug(slug) {
