@@ -21,11 +21,13 @@ export default function SearchResultCard({ result }) {
                     {result.fileName}
                   </h3>
                 </a>
-                <Link href={result.slug} className="block">
-                  <p className="text-sm text-tec-blue hover:underline">
-                    Produto: {result.productTitle}
-                  </p>
-                </Link>
+                {!result.isProductHidden && (
+                  <Link href={result.slug} className="block">
+                    <p className="text-sm text-tec-blue hover:underline">
+                      Produto: {result.productTitle}
+                    </p>
+                  </Link>
+                )}
               </div>
             </div>
 

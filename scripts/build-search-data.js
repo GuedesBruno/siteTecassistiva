@@ -174,7 +174,8 @@ async function generateSearchData() {
     const products = productsData.filter(item => item && (item.attributes || item).ocultar_do_catalogo !== true);
 
     const productsWithDocsData = await safeFetch('produtos com documentos', '/api/produtos?populate[0]=documentos&populate[1]=categorias&populate[2]=subcategorias&sort=nome:asc');
-    const productsWithDocsRaw = productsWithDocsData.filter(item => item && (item.attributes || item).ocultar_do_catalogo !== true);
+    // Não filtramos produtos com documentos, pois queremos que os manuais de produtos ocultos fiquem disponíveis na busca e suporte
+    const productsWithDocsRaw = productsWithDocsData;
     // Normalizar
     const productsWithDocs = productsWithDocsRaw.map(item => {
       const { id, ...attributes } = item.attributes ? item : { id: item.id, ...item };
@@ -278,6 +279,7 @@ async function generateSearchData() {
           fileName: fileName,
           fileUrl: getStrapiMediaUrl(fileUrl),
           content: `${fileName} ${docType} ${attrs.nome}`,
+          isProductHidden: attrs.ocultar_do_catalogo === true,
         });
       });
     });
