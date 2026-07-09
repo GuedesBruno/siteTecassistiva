@@ -1,18 +1,6 @@
 [
   {
-    "id": "product-415",
-    "title": "Liber 2026.AI",
-    "slug": "/produtos/liber",
-    "description": "Computador braille",
-    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/IMG_3073_9263c61138.jpg",
-    "type": "Produto",
-    "content": "Computador braille [{\"type\":\"paragraph\",\"children\":[{\"text\":\"Com Patente Brasileira, o Liber Braille 2026.AI é o mais completo computador braille acessível integrando linha braille de 40 caracteres e teclado braille de 8 pontos e 1TB de memória.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Crie seus arquivos, digitalize textos impressos, compartilhe email, ouça os seus livros preferidos, viaje pela internet, tudo através de um dispositivo com retorno em áudio, braille, vibração, e texto ampliado.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"O novo Liber Braille 2026.AI inova mais uma vez lendo texto manuscrito, descrevendo imagens e criando um diálogo educativo, falando com o Liber ou escrevendo no teclado braille do Liber, sobre tudo o que o aluno precisar de saber com recurso a AI de última geração.\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Computador braille acessível Octa-core Kryo 585, com 1 TB de disco e 64GB+8GB de memória interna;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Retorno em braille, áudio e/ou ampliado;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Linha braille de 40 células braille;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Duplo cursor braille (um para suporte braille, outro para suporte áudio);\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Teclado braille padrão perkins de 8 teclas\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Conexão HDMI para um monitor externo para as pessoas com baixa visão acompanharem o texto ampliado e em alto contraste;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Tela LCD de 4 polegadas para educadores e pais acompanharem a atividade dos alunos;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Uma câmera de 16 MP acoplada no braço móvel permitem a digitalização de documentos impressos e com a ajuda do software OCR o Liber lê o texto digitalizado;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Função Aprendizado Braille para treinar o conhecimento em braille;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Gerenciamento de arquivos na memória interna e nas memórias externas (USB e cartão SD);\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Possui calculadora matemática, calculadora científica e calculadora estatística;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Leia livros digitais em formato Daisy, ePub; Reproduza áudio em MP3, WAV e OGG;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Grave áudio de aulas ou conversas;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Acesse aos seus e-mails;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Navegue na internet;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Diferentes formas de personalização do Liber para diferentes modos de utilização do usuário (iniciante e avançado);\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Gerenciamento de arquivos nas extensões PDF, TXT, BRL, BRF, ZIP, ZBK.\",\"type\":\"text\"}]}]}] Cegueira Computador Braille Tecassistiva",
-    "categories": "Cegueira",
-    "subcategories": "Computador Braille",
-    "fabricante": "Tecassistiva"
-  },
-  {
-    "id": "product-416",
+    "id": "product-419",
     "title": "Liber+ 2026.AI",
     "slug": "/produtos/liber-mais-2026",
     "description": "Computador braille",
@@ -21,6 +9,18 @@
     "content": "Computador braille [{\"type\":\"paragraph\",\"children\":[{\"text\":\"Com Patente Brasileira, o Liber + 2026.AI é o mais completo computador acessível para o aluno com deficiência visual integrando teclado ampliado e monitor de 10” com bateria inclusa.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Crie seus arquivos, digitalize textos impressos, compartilhe email, ouça os seus livros preferidos, viaje pela internet, tudo através de um dispositivo com retorno em áudio, braille, vibração e texto ampliado.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"O novo Liber + 2026.AI inova mais uma vez lendo texto manuscrito, descrevendo imagens e criando um diálogo educativo, falando com o Liber ou escrevendo no teclado ampliado do Liber, sobre tudo o que o aluno precisar e saber com recurso a AI de última geração.\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Computador braille acessível Octa core Kryo 585, com 1 TB de disco e 64GB + 8GB de memória interna;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Retorno em áudio e ampliado;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Conexão HDMI para um monitor externo para as pessoas com baixa visão acompanharem o texto ampliado e em alto contraste;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Tela LCD de 4 polegadas para educadores e pais acompanharem a atividade dos alunos; \",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Teclado QWERTY ampliado de alto contraste;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Uma câmera de 16 MP acoplada no braço móvel permitem a digitalização de documentos impressos e com a ajuda do software OCR o Liber lê o texto digitalizado; \",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Gerenciamento de arquivos na memória interna e nas memórias externas (USB e cartão SD);\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Possui calculadora matemática, calculadora científica e calculadora estatística;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Leia livros digitais em formato Daisy, ePub;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Reproduza áudio em MP3, WAV e OGG.\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Grave áudio de aulas ou conversas.\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Acesse aos seus e-mails;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Navegue na internet;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Diferentes formas de personalização do Liber + para diferentes modos de utilização do usuário (iniciante e avançado);\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Gerenciamento de arquivos nas extensões PDF, TXT, BRL, BRF, ZIP, ZBK.\",\"type\":\"text\"}]}]}] Baixa Visão Computador Inclusivo Tecassistiva",
     "categories": "Baixa Visão",
     "subcategories": "Computador Inclusivo",
+    "fabricante": "Tecassistiva"
+  },
+  {
+    "id": "product-420",
+    "title": "Liber 2026.AI",
+    "slug": "/produtos/liber",
+    "description": "Computador braille",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/IMG_3073_9263c61138.jpg",
+    "type": "Produto",
+    "content": "Computador braille [{\"type\":\"paragraph\",\"children\":[{\"text\":\"Com Patente Brasileira, o Liber Braille 2026.AI é o mais completo computador braille acessível integrando linha braille de 40 caracteres e teclado braille de 8 pontos e 1TB de memória.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Crie seus arquivos, digitalize textos impressos, compartilhe email, ouça os seus livros preferidos, viaje pela internet, tudo através de um dispositivo com retorno em áudio, braille, vibração, e texto ampliado.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"O novo Liber Braille 2026.AI inova mais uma vez lendo texto manuscrito, descrevendo imagens e criando um diálogo educativo, falando com o Liber ou escrevendo no teclado braille do Liber, sobre tudo o que o aluno precisar de saber com recurso a AI de última geração.\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Computador braille acessível Octa-core Kryo 585, com 1 TB de disco e 64GB+8GB de memória interna;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Retorno em braille, áudio e/ou ampliado;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Linha braille de 40 células braille;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Duplo cursor braille (um para suporte braille, outro para suporte áudio);\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Teclado braille padrão perkins de 8 teclas\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Conexão HDMI para um monitor externo para as pessoas com baixa visão acompanharem o texto ampliado e em alto contraste;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Tela LCD de 4 polegadas para educadores e pais acompanharem a atividade dos alunos;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Uma câmera de 16 MP acoplada no braço móvel permitem a digitalização de documentos impressos e com a ajuda do software OCR o Liber lê o texto digitalizado;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Função Aprendizado Braille para treinar o conhecimento em braille;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Gerenciamento de arquivos na memória interna e nas memórias externas (USB e cartão SD);\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Possui calculadora matemática, calculadora científica e calculadora estatística;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Leia livros digitais em formato Daisy, ePub; Reproduza áudio em MP3, WAV e OGG;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Grave áudio de aulas ou conversas;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Acesse aos seus e-mails;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Navegue na internet;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Diferentes formas de personalização do Liber para diferentes modos de utilização do usuário (iniciante e avançado);\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Gerenciamento de arquivos nas extensões PDF, TXT, BRL, BRF, ZIP, ZBK.\",\"type\":\"text\"}]}]}] Cegueira Computador Braille Tecassistiva",
+    "categories": "Cegueira",
+    "subcategories": "Computador Braille",
     "fabricante": "Tecassistiva"
   },
   {
@@ -60,13 +60,13 @@
     "fabricante": "Freedom Scientific"
   },
   {
-    "id": "product-408",
+    "id": "product-423",
     "title": "Teca-Fuser",
     "slug": "/produtos/teca-fuser",
     "description": "Impressora térmica de relevos táteis",
     "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/Tecafuser_bcaf26479f.png",
     "type": "Produto",
-    "content": "Impressora térmica de relevos táteis [{\"type\":\"paragraph\",\"children\":[{\"text\":\"A impressora térmica de relevos Teca-Fuser é a fusora mais rápida e eficiente do mercado mundial desenvolvida especialmente para o mercado brasileiro.\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Possibilita a produção de 8 páginas por minuto;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Bivolt Automático;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Construída totalmente em aço inoxidável;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Inicialização e finalização automáticas;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Permite aos pais e educadores criarem os seus próprios diagramas de forma rápida e fácil, basta imprimir em impressoras a laser, tirar uma fotocópia ou escrever com uma caneta preta para ter as formas em relevo;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Permite criar diagramas a cores ficando em relevo as áreas em preto;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Comporta papel até o tamanho A3;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Possui dois sensores de segurança;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Acompanha 200 folhas A4 e 100 folhas A3 (apenas disponível no pacote de inicialização).\",\"type\":\"text\"}]}]}] Cegueira Impressora Térmica de Relevos American Thermoform",
+    "content": "Impressora térmica de relevos táteis [{\"type\":\"paragraph\",\"children\":[{\"text\":\"A impressora térmica de relevos Teca-Fuser é a fusora mais rápida e eficiente do mercado mundial desenvolvida especialmente para o mercado brasileiro.\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Possibilita a produção de 8 páginas por minuto;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Bivolt Automático;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Construída totalmente em aço inoxidável;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Inicialização e finalização automáticas;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Permite aos pais e educadores criarem os seus próprios diagramas de forma rápida e fácil, basta imprimir em impressoras a laser, tirar uma fotocópia ou escrever com uma caneta preta para ter as formas em relevo;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Permite criar diagramas a cores ficando em relevo as áreas em preto;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Comporta papel até o tamanho A3;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Possui dois sensores de segurança;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Acompanha 100 folhas A4 e 100 folhas A3 (apenas disponível no pacote de inicialização).\",\"type\":\"text\"}]}]}] Cegueira Impressora Térmica de Relevos American Thermoform",
     "categories": "Cegueira",
     "subcategories": "Impressora Térmica de Relevos",
     "fabricante": "American Thermoform"
@@ -216,6 +216,18 @@
     "fabricante": "Tecassistiva"
   },
   {
+    "id": "product-397",
+    "title": "PUMA 7",
+    "slug": "/produtos/puma-7",
+    "description": "Impressora para produção braille",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/foto_impressora_grande_producao_puma_7_4de440181b.jpg",
+    "type": "Produto",
+    "content": "Impressora para produção braille [{\"type\":\"paragraph\",\"children\":[{\"text\":\"Impressora Braille de produção pesada, com capacidade de imprimir em papeis e diferentes materiais como Zinco, alumínio, plástico, ferro, etiquetas, entre outros.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Tela touch fácil de usar com um gerenciador do menu intuitivo;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Recebimento, armazenamento e impressão de arquivos via USB ou interface serial;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Interponto fácil de ajustar placa após placa – a placa são prendidas somente por dois buracos;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Controle de Impressão de Gráfico e Texto através de vários softwares, assim como: Duxbury, Firebird, BrailleGraf, Monet, TactileView ou RTFC;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Velocidade: Máximo de 15 CPS – Braille de 6 pontos.\",\"type\":\"text\"}]}] Cegueira Impressora Braille: Grande Produção BrailleTec",
+    "categories": "Cegueira",
+    "subcategories": "Impressora Braille: Grande Produção",
+    "fabricante": "BrailleTec"
+  },
+  {
     "id": "product-398",
     "title": "Onyx Deskset HD 24\"",
     "slug": "/produtos/onyx-deskset-24",
@@ -286,6 +298,18 @@
     "categories": "Baixa Visão",
     "subcategories": "Ampliador Eletrônico Portátil",
     "fabricante": "Freedom Scientific"
+  },
+  {
+    "id": "product-421",
+    "title": "Guia de Assinatura",
+    "slug": "/produtos/guia-assinatura",
+    "description": "",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/1779993740989_9a88ad62ff.png",
+    "type": "Produto",
+    "content": "",
+    "categories": "",
+    "subcategories": "",
+    "fabricante": ""
   },
   {
     "id": "product-374",
@@ -384,18 +408,6 @@
     "fabricante": ""
   },
   {
-    "id": "product-226",
-    "title": "Guia de Assinatura",
-    "slug": "/produtos/guia-assinatura",
-    "description": "",
-    "imageUrl": null,
-    "type": "Produto",
-    "content": "",
-    "categories": "",
-    "subcategories": "",
-    "fabricante": ""
-  },
-  {
     "id": "product-413",
     "title": "Teclado Ampliado",
     "slug": "/produtos/teclado-ampliado",
@@ -480,18 +492,6 @@
     "fabricante": "Tecassistiva"
   },
   {
-    "id": "product-397",
-    "title": "PUMA 7",
-    "slug": "/produtos/puma-7",
-    "description": "Impressora para produção braille",
-    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/foto_impressora_grande_producao_puma_7_4de440181b.jpg",
-    "type": "Produto",
-    "content": "Impressora para produção braille [{\"type\":\"paragraph\",\"children\":[{\"text\":\"Impressora Braille de produção pesada, com capacidade de imprimir em papeis e diferentes materiais como Zinco, alumínio, plástico, ferro, etiquetas, entre outros.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Tela touch fácil de usar com um gerenciador do menu intuitivo;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Recebimento, armazenamento e impressão de arquivos via USB ou interface serial;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Interponto fácil de ajustar placa após placa – a placa são prendidas somente por dois buracos;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Controle de Impressão de Gráfico e Texto através de vários softwares, assim como: Duxbury, Firebird, BrailleGraf, Monet, TactileView ou RTFC;\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Velocidade: Máximo de 15 CPS – Braille de 6 pontos.\",\"type\":\"text\"}]}] Cegueira Impressora Braille: Grande Produção BrailleTec",
-    "categories": "Cegueira",
-    "subcategories": "Impressora Braille: Grande Produção",
-    "fabricante": "BrailleTec"
-  },
-  {
     "id": "doc-252-150",
     "title": "montagem-basic.pdf - Abafador para Impressora Index Braille",
     "slug": "/produtos/abafador-index",
@@ -502,7 +502,8 @@
     "productSlug": "/produtos/abafador-index",
     "fileName": "montagem-basic.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/montagem_basic_382295f209.pdf",
-    "content": "montagem-basic.pdf PDF Abafador para Impressora Index Braille"
+    "content": "montagem-basic.pdf PDF Abafador para Impressora Index Braille",
+    "isProductHidden": false
   },
   {
     "id": "doc-252-151",
@@ -515,7 +516,8 @@
     "productSlug": "/produtos/abafador-index",
     "fileName": "montagem-everest.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/montagem_everest_32d944f833.pdf",
-    "content": "montagem-everest.pdf PDF Abafador para Impressora Index Braille"
+    "content": "montagem-everest.pdf PDF Abafador para Impressora Index Braille",
+    "isProductHidden": false
   },
   {
     "id": "doc-377-83",
@@ -528,7 +530,8 @@
     "productSlug": "/produtos/basic",
     "fileName": "guia_basic.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/guia_basic_03b9240374.pdf",
-    "content": "guia_basic.pdf PDF Basic"
+    "content": "guia_basic.pdf PDF Basic",
+    "isProductHidden": false
   },
   {
     "id": "doc-377-84",
@@ -541,7 +544,8 @@
     "productSlug": "/produtos/basic",
     "fileName": "catalogo_basic.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/catalogo_basic_bcadfc4339.pdf",
-    "content": "catalogo_basic.pdf PDF Basic"
+    "content": "catalogo_basic.pdf PDF Basic",
+    "isProductHidden": false
   },
   {
     "id": "doc-377-85",
@@ -554,7 +558,8 @@
     "productSlug": "/produtos/basic",
     "fileName": "manual_avancado_basic.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/manual_avancado_basic_ad6f41d8cf.pdf",
-    "content": "manual_avancado_basic.pdf PDF Basic"
+    "content": "manual_avancado_basic.pdf PDF Basic",
+    "isProductHidden": false
   },
   {
     "id": "doc-382-118",
@@ -567,7 +572,8 @@
     "productSlug": "/produtos/braille-box",
     "fileName": "catalogo_braillebox.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/catalogo_braillebox_f1d80dd08b.pdf",
-    "content": "catalogo_braillebox.pdf PDF BrailleBox"
+    "content": "catalogo_braillebox.pdf PDF BrailleBox",
+    "isProductHidden": false
   },
   {
     "id": "doc-350-76",
@@ -580,7 +586,8 @@
     "productSlug": "/produtos/brinca-braille",
     "fileName": "manual_avancado_brinca_braille.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/manual_avancado_brinca_braille_591347d7fb.pdf",
-    "content": "manual_avancado_brinca_braille.pdf PDF Brinca Braille"
+    "content": "manual_avancado_brinca_braille.pdf PDF Brinca Braille",
+    "isProductHidden": false
   },
   {
     "id": "doc-350-75",
@@ -593,7 +600,8 @@
     "productSlug": "/produtos/brinca-braille",
     "fileName": "catalogo_brinca_braille.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/catalogo_brinca_braille_b18ca17e14.pdf",
-    "content": "catalogo_brinca_braille.pdf PDF Brinca Braille"
+    "content": "catalogo_brinca_braille.pdf PDF Brinca Braille",
+    "isProductHidden": false
   },
   {
     "id": "doc-350-74",
@@ -606,7 +614,8 @@
     "productSlug": "/produtos/brinca-braille",
     "fileName": "guia_brinca_braille.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/guia_brinca_braille_0362b54c68.pdf",
-    "content": "guia_brinca_braille.pdf PDF Brinca Braille"
+    "content": "guia_brinca_braille.pdf PDF Brinca Braille",
+    "isProductHidden": false
   },
   {
     "id": "doc-411-86",
@@ -619,7 +628,8 @@
     "productSlug": "/produtos/clearreader",
     "fileName": "manual_avancado_clearreader.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/manual_avancado_clearreader_c711b3d31b.pdf",
-    "content": "manual_avancado_clearreader.pdf PDF ClearReader"
+    "content": "manual_avancado_clearreader.pdf PDF ClearReader",
+    "isProductHidden": false
   },
   {
     "id": "doc-411-87",
@@ -632,7 +642,8 @@
     "productSlug": "/produtos/clearreader",
     "fileName": "guia_clearreader.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/guia_clearreader_c47b4ab978.pdf",
-    "content": "guia_clearreader.pdf PDF ClearReader"
+    "content": "guia_clearreader.pdf PDF ClearReader",
+    "isProductHidden": false
   },
   {
     "id": "doc-411-22",
@@ -645,7 +656,8 @@
     "productSlug": "/produtos/clearreader",
     "fileName": "catalogo_clearreader.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/Catalogo_Clear_Reader_4f6e0847c1.pdf",
-    "content": "catalogo_clearreader.pdf PDF ClearReader"
+    "content": "catalogo_clearreader.pdf PDF ClearReader",
+    "isProductHidden": false
   },
   {
     "id": "doc-383-59",
@@ -658,7 +670,8 @@
     "productSlug": "/produtos/clearview-24",
     "fileName": "catalogo_clearview.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/catalogo_clearview_ee14b9d3af.pdf",
-    "content": "catalogo_clearview.pdf PDF ClearView 24″ Full HD"
+    "content": "catalogo_clearview.pdf PDF ClearView 24″ Full HD",
+    "isProductHidden": false
   },
   {
     "id": "doc-383-60",
@@ -671,7 +684,8 @@
     "productSlug": "/produtos/clearview-24",
     "fileName": "manual_avancado_clearview.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/Clear_View_com_voz_ac01b392f0.pdf",
-    "content": "manual_avancado_clearview.pdf PDF ClearView 24″ Full HD"
+    "content": "manual_avancado_clearview.pdf PDF ClearView 24″ Full HD",
+    "isProductHidden": false
   },
   {
     "id": "doc-384-59",
@@ -684,7 +698,8 @@
     "productSlug": "/produtos/clearview-24-com-voz",
     "fileName": "catalogo_clearview.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/catalogo_clearview_ee14b9d3af.pdf",
-    "content": "catalogo_clearview.pdf PDF ClearView 24″ Full HD com Voz"
+    "content": "catalogo_clearview.pdf PDF ClearView 24″ Full HD com Voz",
+    "isProductHidden": false
   },
   {
     "id": "doc-384-60",
@@ -697,7 +712,8 @@
     "productSlug": "/produtos/clearview-24-com-voz",
     "fileName": "manual_avancado_clearview.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/Clear_View_com_voz_ac01b392f0.pdf",
-    "content": "manual_avancado_clearview.pdf PDF ClearView 24″ Full HD com Voz"
+    "content": "manual_avancado_clearview.pdf PDF ClearView 24″ Full HD com Voz",
+    "isProductHidden": false
   },
   {
     "id": "doc-385-49",
@@ -710,7 +726,8 @@
     "productSlug": "/produtos/everest",
     "fileName": "guia_everest.docx",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/guia_everest_6fbdf0524f.docx",
-    "content": "guia_everest.docx Word Everest"
+    "content": "guia_everest.docx Word Everest",
+    "isProductHidden": false
   },
   {
     "id": "doc-385-50",
@@ -723,7 +740,8 @@
     "productSlug": "/produtos/everest",
     "fileName": "manual_avancado_everest.docx",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/manual_everest_1e27a4d37b.docx",
-    "content": "manual_avancado_everest.docx Word Everest"
+    "content": "manual_avancado_everest.docx Word Everest",
+    "isProductHidden": false
   },
   {
     "id": "doc-385-48",
@@ -736,7 +754,8 @@
     "productSlug": "/produtos/everest",
     "fileName": "catalogo_everest.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/catalogo_everest_2d511059ef.pdf",
-    "content": "catalogo_everest.pdf PDF Everest"
+    "content": "catalogo_everest.pdf PDF Everest",
+    "isProductHidden": false
   },
   {
     "id": "doc-386-119",
@@ -749,7 +768,8 @@
     "productSlug": "/produtos/fanfold",
     "fileName": "catalogo_fanfold.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/fanfold_c071abc541.pdf",
-    "content": "catalogo_fanfold.pdf PDF Fanfold"
+    "content": "catalogo_fanfold.pdf PDF Fanfold",
+    "isProductHidden": false
   },
   {
     "id": "doc-387-88",
@@ -762,7 +782,8 @@
     "productSlug": "/produtos/focus-40-blue",
     "fileName": "guia_focus40_v5.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/guia_focus40_v5_4bf6a03476.pdf",
-    "content": "guia_focus40_v5.pdf PDF Focus 40 Blue"
+    "content": "guia_focus40_v5.pdf PDF Focus 40 Blue",
+    "isProductHidden": false
   },
   {
     "id": "doc-387-89",
@@ -775,7 +796,8 @@
     "productSlug": "/produtos/focus-40-blue",
     "fileName": "manual_avancado_focus40_v5.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/manual_avancado_focus40_v5_01283d154a.pdf",
-    "content": "manual_avancado_focus40_v5.pdf PDF Focus 40 Blue"
+    "content": "manual_avancado_focus40_v5.pdf PDF Focus 40 Blue",
+    "isProductHidden": false
   },
   {
     "id": "doc-387-90",
@@ -788,7 +810,8 @@
     "productSlug": "/produtos/focus-40-blue",
     "fileName": "catalogo_focus40_v5.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/catalogo_focus40_v5_d2ab481ccf.pdf",
-    "content": "catalogo_focus40_v5.pdf PDF Focus 40 Blue"
+    "content": "catalogo_focus40_v5.pdf PDF Focus 40 Blue",
+    "isProductHidden": false
   },
   {
     "id": "doc-394-125",
@@ -801,10 +824,11 @@
     "productSlug": "/produtos/focus-80-blue",
     "fileName": "catalogo_focus80.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/catalogo_focus80_851133ede4.pdf",
-    "content": "catalogo_focus80.pdf PDF Focus 80 Blue"
+    "content": "catalogo_focus80.pdf PDF Focus 80 Blue",
+    "isProductHidden": false
   },
   {
-    "id": "doc-415-184",
+    "id": "doc-420-184",
     "title": "catalogo_liber-2026-ai.pdf - Liber 2026.AI",
     "slug": "/produtos/liber",
     "description": "Documento do produto Liber 2026.AI",
@@ -814,10 +838,11 @@
     "productSlug": "/produtos/liber",
     "fileName": "catalogo_liber-2026-ai.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/catalogo_liber_2026_ai_3e4612abab.pdf",
-    "content": "catalogo_liber-2026-ai.pdf PDF Liber 2026.AI"
+    "content": "catalogo_liber-2026-ai.pdf PDF Liber 2026.AI",
+    "isProductHidden": false
   },
   {
-    "id": "doc-416-183",
+    "id": "doc-419-183",
     "title": "catalogo_liber+2026ai.pdf - Liber+ 2026.AI",
     "slug": "/produtos/liber-mais-2026",
     "description": "Documento do produto Liber+ 2026.AI",
@@ -827,7 +852,8 @@
     "productSlug": "/produtos/liber-mais-2026",
     "fileName": "catalogo_liber+2026ai.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/catalogo_liber_2026ai_e3d1127a0d.pdf",
-    "content": "catalogo_liber+2026ai.pdf PDF Liber+ 2026.AI"
+    "content": "catalogo_liber+2026ai.pdf PDF Liber+ 2026.AI",
+    "isProductHidden": false
   },
   {
     "id": "doc-412-202",
@@ -840,7 +866,8 @@
     "productSlug": "/produtos/ruby-10",
     "fileName": "manual_avancado_ruby10.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/manual_avancado_ruby10_8f71ca7e48.pdf",
-    "content": "manual_avancado_ruby10.pdf PDF Ruby 10"
+    "content": "manual_avancado_ruby10.pdf PDF Ruby 10",
+    "isProductHidden": false
   },
   {
     "id": "doc-412-201",
@@ -853,7 +880,8 @@
     "productSlug": "/produtos/ruby-10",
     "fileName": "guia_ruby10.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/guia_ruby10_05b94778be.pdf",
-    "content": "guia_ruby10.pdf PDF Ruby 10"
+    "content": "guia_ruby10.pdf PDF Ruby 10",
+    "isProductHidden": false
   },
   {
     "id": "doc-412-128",
@@ -866,7 +894,8 @@
     "productSlug": "/produtos/ruby-10",
     "fileName": "catalogo_ruby10.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/catalogo_ruby10_91dda2827e.pdf",
-    "content": "catalogo_ruby10.pdf PDF Ruby 10"
+    "content": "catalogo_ruby10.pdf PDF Ruby 10",
+    "isProductHidden": false
   },
   {
     "id": "doc-364-71",
@@ -879,7 +908,8 @@
     "productSlug": "/produtos/ruby-7-hd",
     "fileName": "guia_ruby7.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/guia_ruby7_459ab0919c.pdf",
-    "content": "guia_ruby7.pdf PDF Ruby 7 HD"
+    "content": "guia_ruby7.pdf PDF Ruby 7 HD",
+    "isProductHidden": false
   },
   {
     "id": "doc-364-72",
@@ -892,7 +922,8 @@
     "productSlug": "/produtos/ruby-7-hd",
     "fileName": "manual_avancado_ruby7.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/manual_avancado_ruby7_1bbd9ee4f4.pdf",
-    "content": "manual_avancado_ruby7.pdf PDF Ruby 7 HD"
+    "content": "manual_avancado_ruby7.pdf PDF Ruby 7 HD",
+    "isProductHidden": false
   },
   {
     "id": "doc-364-73",
@@ -905,7 +936,8 @@
     "productSlug": "/produtos/ruby-7-hd",
     "fileName": "catalogo_ruby7.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/catalogo_ruby7_87fb631e0a.pdf",
-    "content": "catalogo_ruby7.pdf PDF Ruby 7 HD"
+    "content": "catalogo_ruby7.pdf PDF Ruby 7 HD",
+    "isProductHidden": false
   },
   {
     "id": "doc-404-159",
@@ -918,7 +950,8 @@
     "productSlug": "/produtos/ruby-hd",
     "fileName": "catalogo_rubyhd.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/rubyhd_b6f06f1434.pdf",
-    "content": "catalogo_rubyhd.pdf PDF Ruby HD"
+    "content": "catalogo_rubyhd.pdf PDF Ruby HD",
+    "isProductHidden": false
   },
   {
     "id": "doc-405-156",
@@ -931,7 +964,8 @@
     "productSlug": "/produtos/ruby-xl-hd",
     "fileName": "catalaogo_rubyxl.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/catalaogo_rubyxl_b3b1110947.pdf",
-    "content": "catalaogo_rubyxl.pdf PDF Ruby XL HD"
+    "content": "catalaogo_rubyxl.pdf PDF Ruby XL HD",
+    "isProductHidden": false
   },
   {
     "id": "doc-405-152",
@@ -944,7 +978,8 @@
     "productSlug": "/produtos/ruby-xl-hd",
     "fileName": "guia_rubyxl.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/guia_rubyxl_bbe3788aa4.pdf",
-    "content": "guia_rubyxl.pdf PDF Ruby XL HD"
+    "content": "guia_rubyxl.pdf PDF Ruby XL HD",
+    "isProductHidden": false
   },
   {
     "id": "doc-405-153",
@@ -957,10 +992,25 @@
     "productSlug": "/produtos/ruby-xl-hd",
     "fileName": "manual_rubyxl.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/manual_rubyxl_d3951e33c9.pdf",
-    "content": "manual_rubyxl.pdf PDF Ruby XL HD"
+    "content": "manual_rubyxl.pdf PDF Ruby XL HD",
+    "isProductHidden": false
   },
   {
-    "id": "doc-408-82",
+    "id": "doc-426-205",
+    "title": "Guia_Sara-PC.pdf - Sara PC",
+    "slug": "/produtos/sara-pc",
+    "description": "Documento do produto Sara PC",
+    "type": "Documento",
+    "documentType": "PDF",
+    "productTitle": "Sara PC",
+    "productSlug": "/produtos/sara-pc",
+    "fileName": "Guia_Sara-PC.pdf",
+    "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/Guia_Sara_PC_765e252457.pdf",
+    "content": "Guia_Sara-PC.pdf PDF Sara PC",
+    "isProductHidden": true
+  },
+  {
+    "id": "doc-423-82",
     "title": "guia_teca-fuser.pdf - Teca-Fuser",
     "slug": "/produtos/teca-fuser",
     "description": "Documento do produto Teca-Fuser",
@@ -970,10 +1020,11 @@
     "productSlug": "/produtos/teca-fuser",
     "fileName": "guia_teca-fuser.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/guia_teca_fuser_07683846c2.pdf",
-    "content": "guia_teca-fuser.pdf PDF Teca-Fuser"
+    "content": "guia_teca-fuser.pdf PDF Teca-Fuser",
+    "isProductHidden": false
   },
   {
-    "id": "doc-408-81",
+    "id": "doc-423-81",
     "title": "manual_avancado_teca-fuser.pdf - Teca-Fuser",
     "slug": "/produtos/teca-fuser",
     "description": "Documento do produto Teca-Fuser",
@@ -983,10 +1034,11 @@
     "productSlug": "/produtos/teca-fuser",
     "fileName": "manual_avancado_teca-fuser.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/manual_avancado_teca_fuser_1fc303061d.pdf",
-    "content": "manual_avancado_teca-fuser.pdf PDF Teca-Fuser"
+    "content": "manual_avancado_teca-fuser.pdf PDF Teca-Fuser",
+    "isProductHidden": false
   },
   {
-    "id": "doc-408-80",
+    "id": "doc-423-204",
     "title": "catalogo_teca-fuser.pdf - Teca-Fuser",
     "slug": "/produtos/teca-fuser",
     "description": "Documento do produto Teca-Fuser",
@@ -995,8 +1047,9 @@
     "productTitle": "Teca-Fuser",
     "productSlug": "/produtos/teca-fuser",
     "fileName": "catalogo_teca-fuser.pdf",
-    "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/catalogo_teca_fuser_d016ef5f3e.pdf",
-    "content": "catalogo_teca-fuser.pdf PDF Teca-Fuser"
+    "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/catalogo_teca_fuser_4dc9a78f48.pdf",
+    "content": "catalogo_teca-fuser.pdf PDF Teca-Fuser",
+    "isProductHidden": false
   },
   {
     "id": "doc-376-77",
@@ -1009,7 +1062,8 @@
     "productSlug": "/produtos/traveller-hd",
     "fileName": "catalogo_traveller.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/catalogo_traveller_3863ce37d3.pdf",
-    "content": "catalogo_traveller.pdf PDF Traveller HD"
+    "content": "catalogo_traveller.pdf PDF Traveller HD",
+    "isProductHidden": false
   },
   {
     "id": "doc-376-78",
@@ -1022,7 +1076,8 @@
     "productSlug": "/produtos/traveller-hd",
     "fileName": "guia_traveller.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/guia_traveller_8a54dd2397.pdf",
-    "content": "guia_traveller.pdf PDF Traveller HD"
+    "content": "guia_traveller.pdf PDF Traveller HD",
+    "isProductHidden": false
   },
   {
     "id": "doc-376-79",
@@ -1035,7 +1090,8 @@
     "productSlug": "/produtos/traveller-hd",
     "fileName": "manual_avancado_traveller.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/manual_avanado_traveller_413ddff6d7.pdf",
-    "content": "manual_avancado_traveller.pdf PDF Traveller HD"
+    "content": "manual_avancado_traveller.pdf PDF Traveller HD",
+    "isProductHidden": false
   },
   {
     "id": "doc-372-68",
@@ -1048,7 +1104,8 @@
     "productSlug": "/produtos/tutor",
     "fileName": "catalogo_tutor.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/catalogo_tutor_56127e5783.pdf",
-    "content": "catalogo_tutor.pdf PDF Tutor"
+    "content": "catalogo_tutor.pdf PDF Tutor",
+    "isProductHidden": false
   },
   {
     "id": "doc-372-69",
@@ -1061,7 +1118,8 @@
     "productSlug": "/produtos/tutor",
     "fileName": "guia_tutor.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/guia_tutor_fa2d25b42a.pdf",
-    "content": "guia_tutor.pdf PDF Tutor"
+    "content": "guia_tutor.pdf PDF Tutor",
+    "isProductHidden": false
   },
   {
     "id": "doc-372-70",
@@ -1074,7 +1132,8 @@
     "productSlug": "/produtos/tutor",
     "fileName": "manual_avancado_tutor.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/manual_avancado_tutor_68cdaa10af.pdf",
-    "content": "manual_avancado_tutor.pdf PDF Tutor"
+    "content": "manual_avancado_tutor.pdf PDF Tutor",
+    "isProductHidden": false
   },
   {
     "id": "doc-375-178",
@@ -1087,7 +1146,8 @@
     "productSlug": "/produtos/zoomtext-ampliador",
     "fileName": "ZoomText_Guia_do_Usuario_Portugues_Brasil.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/Zoom_Text_Guia_do_Usuario_Portugues_Brasil_f6a398e656.pdf",
-    "content": "ZoomText_Guia_do_Usuario_Portugues_Brasil.pdf PDF ZoomText Ampliador"
+    "content": "ZoomText_Guia_do_Usuario_Portugues_Brasil.pdf PDF ZoomText Ampliador",
+    "isProductHidden": false
   },
   {
     "id": "doc-374-178",
@@ -1100,7 +1160,8 @@
     "productSlug": "/produtos/zoomtext-com-voz",
     "fileName": "ZoomText_Guia_do_Usuario_Portugues_Brasil.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/Zoom_Text_Guia_do_Usuario_Portugues_Brasil_f6a398e656.pdf",
-    "content": "ZoomText_Guia_do_Usuario_Portugues_Brasil.pdf PDF ZoomText Ampliador com Voz"
+    "content": "ZoomText_Guia_do_Usuario_Portugues_Brasil.pdf PDF ZoomText Ampliador com Voz",
+    "isProductHidden": false
   },
   {
     "id": "ata-21",
