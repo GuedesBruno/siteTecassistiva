@@ -1,4 +1,4 @@
-// Este arquivo define a estrutura estática para os ambientes.
+// Este arquivo define a estrutura estática para os ambientes
 // As imagens (grid e banner) devem ser colocadas na pasta `public/ambientes/`.
 
 export const ambientesData = [
