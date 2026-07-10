@@ -4,7 +4,7 @@ import ContactForm from '@/components/ContactForm';
 import AdvantagesSection from '@/components/AdvantagesSection';
 import SocialMediaSection from '@/components/SocialMediaSection';
 
-// Prevent static generation - use on-demand ISR
+// Previne geracao estatica - usa sob demanda ISR
 export const revalidate = 3600; // Revalidate every hour
 
 export const metadata = {
@@ -17,7 +17,7 @@ export const metadata = {
   }
 }
 
-// Lazy load API functions to avoid compilation during SSG
+// Carrega as funções da API sob demanda para evitar compilação durante a geração estática
 async function getOpenAtas() {
   const { getOpenAtas: _getOpenAtas } = await import('@/lib/api');
   return _getOpenAtas();
