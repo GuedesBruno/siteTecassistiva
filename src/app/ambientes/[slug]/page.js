@@ -82,9 +82,9 @@ export default async function AmbienteDetalhePage({ params }) {
 
   // Caso 2: O ambiente lista os produtos diretamente (lógica original)
   const allProducts = await getAllProductsForDisplay();
-  const produtosRecomendados = allProducts.filter(product => 
-    ambiente.productSlugs?.includes(product.slug)
-  );
+  const produtosRecomendados = (ambiente.productSlugs || [])
+    .map(slug => allProducts.find(product => product.slug === slug))
+    .filter(Boolean);
 
   return (
     <div>

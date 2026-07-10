@@ -28,7 +28,7 @@ export const ambientesData = [
         slug: 'biblioteca-escolar',
         nome: 'Biblioteca',
         imagem: '/ambientes/Biblioteca.jpg', // Placeholder
-        productSlugs: ['clearreader', 'focus-40-blue', 'traveller-hd', 'clearview-24']
+        productSlugs: ['clearreader', 'focus-40-blue', 'traveller-hd', 'clearview-24', 'teclado-ampliado']
       }
     ]
   },
@@ -38,7 +38,7 @@ export const ambientesData = [
     nome: 'Biblioteca Acessível',
     imagem_grid: '/ambientes/biblioteca-apresentacao.jpg',
     imagem_banner: '/ambientes/biblioteca-apresentacao.jpg',
-    productSlugs: ['clearreader', 'focus-40-blue', 'ruby-7-hd', 'traveller-hd', 'clearview-24', 'everest', 'abafador-index']
+    productSlugs: ['clearreader', 'focus-40-blue', 'ruby-7-hd', 'traveller-hd', 'clearview-24', 'everest', 'abafador-index', 'teclado-ampliado']
   },
   {
     id: 3,
@@ -66,7 +66,7 @@ export const ambientesData = [
         slug: 'biblioteca-if',
         nome: 'Biblioteca',
         imagem: '/ambientes/Biblioteca.jpg', // Placeholder
-        productSlugs: ['clearreader', 'focus-40-blue', 'traveller-hd', 'clearview-24']
+        productSlugs: ['clearreader', 'focus-40-blue', 'traveller-hd', 'clearview-24', 'teclado-ampliado']
       }
     ]
   },
@@ -96,7 +96,7 @@ export const ambientesData = [
         slug: 'biblioteca-uf',
         nome: 'Biblioteca',
         imagem: '/ambientes/Biblioteca.jpg', // Placeholder
-        productSlugs: ['clearreader', 'focus-40-blue', 'traveller-hd', 'clearview-24']
+        productSlugs: ['clearreader', 'focus-40-blue', 'traveller-hd', 'clearview-24', 'teclado-ampliado']
       }
     ]
   }

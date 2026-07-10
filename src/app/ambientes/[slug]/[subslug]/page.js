@@ -46,9 +46,9 @@ export default async function SubAmbientePage({ params }) {
   }
 
   const allProducts = await getAllProductsForDisplay();
-  const produtosRecomendados = allProducts.filter(product =>
-    subAmbiente.productSlugs?.includes(product.slug)
-  );
+  const produtosRecomendados = (subAmbiente.productSlugs || [])
+    .map(slug => allProducts.find(product => product.slug === slug))
+    .filter(Boolean);
 
   const breadcrumbs = [
     { name: 'Página Inicial', path: '/' },
