@@ -6,7 +6,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import fs from 'fs';
 import path from 'path';
 
-// Lazy load API functions to avoid compilation during SSG
+// Funções de API de carregamento padrão para evitar a acumulação durante o SSG
 async function getCategoryBySlug(slug) {
   const { getCategoryBySlug: _getCategoryBySlug } = await import("@/lib/api");
   return _getCategoryBySlug(slug);
