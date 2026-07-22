@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { ambientesData } from '@/lib/ambientes-data'; // Importa os dados estáticos.
+import { getAmbientes } from '@/lib/api';
 import Breadcrumbs from '@/components/Breadcrumbs';
 
 export const metadata = {
@@ -13,11 +13,13 @@ export const metadata = {
   }
 }
 
-export default function AmbientesPage() {
+export default async function AmbientesPage() {
   const breadcrumbs = [
     { name: 'Página Inicial', path: '/' },
     { name: 'Soluções por Ambientes', path: '/ambientes' },
   ];
+
+  const ambientesData = await getAmbientes();
 
   return (
     <div className="w-full">
@@ -57,7 +59,7 @@ export default function AmbientesPage() {
                   <div className="max-w-md text-center">
                     <h2 className="text-3xl font-bold mb-4">{ambiente.nome}</h2>
                     <p className="text-lg mb-6">
-                      Descubra as soluções de tecnologia assistiva ideais para o ambiente de {ambiente.nome.toLowerCase()}.
+                      {ambiente.descricao || `Descubra as soluções de tecnologia assistiva ideais para o ambiente de ${ambiente.nome.toLowerCase()}.`}
                     </p>
                     <Link
                       href={`/ambientes/${ambiente.slug}`}

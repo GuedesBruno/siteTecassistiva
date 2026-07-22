@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ambientesData } from '@/lib/ambientes-data';
+import { getAmbientes } from '@/lib/api';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import ProductCard from '@/components/ProductCard';
 import { notFound } from 'next/navigation';
@@ -11,14 +11,16 @@ async function getAllProductsForDisplay() {
   return _getAllProductsForDisplay();
 }
 
-// Gera as páginas estáticas no momento do build a partir dos dados estáticos
+// Gera as páginas estáticas no momento do build a partir dos dados do backend
 export async function generateStaticParams() {
+  const ambientesData = await getAmbientes();
   return ambientesData.map((ambiente) => ({
     slug: ambiente.slug,
   }));
 }
 
 export async function generateMetadata({ params }) {
+  const ambientesData = await getAmbientes();
   const ambiente = ambientesData.find(a => a.slug === params.slug);
   if (!ambiente) {
     return { title: 'Ambiente não encontrado' };
@@ -30,6 +32,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function AmbienteDetalhePage({ params }) {
+  const ambientesData = await getAmbientes();
   const ambiente = ambientesData.find(a => a.slug === params.slug);
 
   if (!ambiente) {

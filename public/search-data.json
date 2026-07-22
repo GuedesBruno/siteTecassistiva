@@ -24,7 +24,7 @@
     "fabricante": "Tecassistiva"
   },
   {
-    "id": "product-385",
+    "id": "product-429",
     "title": "Everest",
     "slug": "/produtos/everest",
     "description": "Impressora braille de médio porte",
@@ -108,18 +108,6 @@
     "fabricante": "Multipalno"
   },
   {
-    "id": "product-383",
-    "title": "ClearView 24″ Full HD",
-    "slug": "/produtos/clearview-24",
-    "description": "Ampliador eletrônico de mesa",
-    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/Clear_View_255c3b3291.jpg",
-    "type": "Produto",
-    "content": "Ampliador eletrônico de mesa [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O Ampliador de Mesa ClearView C HD 24” possui uma tela panorâmica de 24 polegadas e uma câmera de alta definição, o exclusivo formato em C oferece mais espaço de trabalho para ler seu jornal favorito, apreciar artesanato ou escrever um cheque sem se restringir em movimento.\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Ampliação Contínua: 1,5x – 150x;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Tela panorâmica HD de 24 polegadas;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Processador de Vídeo de Alta Definição Superior 1080p para imagens ultra-nítidas e vivas;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Controle de Ampliação destacável para facilitar o controlo da ampliação quando coberto por folhas grandes;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Função que permite diminuir o zoom rapidamente, localizar a área desejada e ampliar novamente;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"16 combinações de cor de alto-contraste para melhorar o contraste para melhor visibilidade, de 1 até 4 combinações de cores pré-definidas selecionáveis;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Ajuste de brilho e ajuste da intensidade da luz LED de leitura.\",\"type\":\"text\"}]}]}] Baixa Visão Ampliador Eletrônico de Mesa Optelec",
-    "categories": "Baixa Visão",
-    "subcategories": "Ampliador Eletrônico de Mesa",
-    "fabricante": "Optelec"
-  },
-  {
     "id": "product-384",
     "title": "ClearView 24″ Full HD com Voz",
     "slug": "/produtos/clearview-24-com-voz",
@@ -127,6 +115,18 @@
     "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/Clear_View_255c3b3291.jpg",
     "type": "Produto",
     "content": "Ampliador eletrônico de mesa com voz [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O novo ClearView C com Voz é uma lupa eletrônica de mesa única que foi desenvolvida para melhorar a sua experiência de leitura. Selecione a sua voz de leitura preferida e sente-se, relaxe e ouça aos documentos enquanto são lidos em alta voz. A combinação de uma voz clara com ampliação e alto contraste torna a leitura muito mais fácil.\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Ampliação Contínua: 1,5x – 150x;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Tela panorâmica de 24 polegadas;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Processador de Vídeo de Alta Definição Superior 1080p para imagens ultra nítidas e vivas;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Mais de 74 vozes de leitura em 36 idiomas;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Visualize e ouça documentos longos com Texto-para-Áudio;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Funcionalidade Aponte & Leia: interface tátil intuitiva, toque na coluna, parágrafo ou palavra na tela para ler instantaneamente;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"16 combinações de cor de alto contraste para melhorar o contraste para melhor visibilidade, de 1 até 4 combinações de cores pré-definidas selecionáveis;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Leitura assistida com reconhecimento da zona do texto automática;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Permite armazenar documentos e imagens para depois visualizar quando quiser;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Visualização de fotos digitais;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Menu com fonte e ícone grandes.\",\"type\":\"text\"}]}]}] Baixa Visão Ampliador Eletrônico de Mesa Optelec",
+    "categories": "Baixa Visão",
+    "subcategories": "Ampliador Eletrônico de Mesa",
+    "fabricante": "Optelec"
+  },
+  {
+    "id": "product-383",
+    "title": "ClearView 24″ Full HD",
+    "slug": "/produtos/clearview-24",
+    "description": "Ampliador eletrônico de mesa",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/Clear_View_255c3b3291.jpg",
+    "type": "Produto",
+    "content": "Ampliador eletrônico de mesa [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O Ampliador de Mesa ClearView C HD 24” possui uma tela panorâmica de 24 polegadas e uma câmera de alta definição, o exclusivo formato em C oferece mais espaço de trabalho para ler seu jornal favorito, apreciar artesanato ou escrever um cheque sem se restringir em movimento.\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\"Ampliação Contínua: 1,5x – 150x;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Tela panorâmica HD de 24 polegadas;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Processador de Vídeo de Alta Definição Superior 1080p para imagens ultra-nítidas e vivas;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Controle de Ampliação destacável para facilitar o controlo da ampliação quando coberto por folhas grandes;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Função que permite diminuir o zoom rapidamente, localizar a área desejada e ampliar novamente;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"16 combinações de cor de alto-contraste para melhorar o contraste para melhor visibilidade, de 1 até 4 combinações de cores pré-definidas selecionáveis;\",\"type\":\"text\"}]},{\"type\":\"list-item\",\"children\":[{\"text\":\"Ajuste de brilho e ajuste da intensidade da luz LED de leitura.\",\"type\":\"text\"}]}]}] Baixa Visão Ampliador Eletrônico de Mesa Optelec",
     "categories": "Baixa Visão",
     "subcategories": "Ampliador Eletrônico de Mesa",
     "fabricante": "Optelec"
@@ -324,7 +324,19 @@
     "fabricante": "Freedom Scientific"
   },
   {
-    "id": "product-375",
+    "id": "product-427",
+    "title": "Jaws",
+    "slug": "/produtos/jaws",
+    "description": "Software leitor de telas",
+    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/SW_01_FS_0001_jaws_capa_43cb5d9e84.jpg",
+    "type": "Produto",
+    "content": "Software leitor de telas [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O JAWS é o software leitor de tela mais popular do mundo! Desenvolvido para usuários cegos, o JAWS lê alto o que está aparecendo na tela do seu PC e oferece acesso eficaz aos aplicativos. Você será capaz de navegar na Internet, escrever um documento, ler seus emails e criar apresentações a partir do seu escritório, por acesso remoto ou a partir de casa.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Sintetizador Eloquence e Sintetizador Vocalizer Direct inclusos sem nenhum custo extra, com mais de 20 idiomas e vozes de alta qualidade;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Recurso OCR para arquivos de imagem ou PDF inacessíveis;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Suporte Touch Screen para o Windows 8, Windows 10 e 11;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Suporte completo para tablet executando Windows 8.1, 10 e 11;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Leitor DAISY Embutido (FS Reader);\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Ajuda Sensível ao Contexto (Insert+F1, Insert+H e Insert+W) e Mensagens de Ajuda para auxiliar novos usuários começando no Windows;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" JAWS Tandem Web incluso (ferramenta valiosa para treinamento e suporte remoto);\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Totalmente compatível com os softwares ZoomText, Fusion e OpenBook;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Leitura de títulos de linhas e colunas e Células Monitoras no Excel;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Modo de Estudo Braille para aprendizado do Braille;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Recurso Falar Tudo com avanço e retrocesso rápido em combinação com teclas de navegação rápida;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Compatível com Windows 10, Windows 11, Windows Server 2019 e 2016;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Compatibilidade com o Office 2013, 2016 e 365;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Suporte para Google Chrome, Firefox, Skype, Adobe Acrobat, Microsoft Edge entre muitos outros;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Linguagem de scripts poderosa para personalizar a experiência do usuário em qualquer aplicação;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Suporte para aplicativos nativos do Windows;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Recurso Rótulos Personalizados, para modificar identificadores para fala e Braille, ajustando de acordo com as necessidades do usuário;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Ferramentas da Web assim como Web Personalizada e Posicionar Marcadores para personalizar o JAWS em específicas páginas da web, atendendo as necessidades individuais;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Busca de Texto de Tela com contexto do histórico específico;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Suporta também a maioria das linhas Braille;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Suporte opcional Tandem Direct, plataformas Citrix, Serviço Terminal e área de trabalho remoto;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" O serviço Imagem Inteligente reconhece imagens e a descreve;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Assistente de voz para apontar comandos usados com menos frequência;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Suporta a câmera PEARL para acesso direto de documentos impressos ou livros;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Se torne mais eficiente com Skim Reading e Text Analyzer.\",\"type\":\"text\"}]}]}] Cegueira Software Leitor de Telas Freedom Scientific",
+    "categories": "Cegueira",
+    "subcategories": "Software Leitor de Telas",
+    "fabricante": "Freedom Scientific"
+  },
+  {
+    "id": "product-428",
     "title": "ZoomText Ampliador",
     "slug": "/produtos/zoomtext-ampliador",
     "description": "Ampliador de telas",
@@ -441,18 +453,6 @@
     "content": "Software leitor e ampliador de telas [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O Fusion é a ferramenta perfeita e única para indivíduos com qualquer nível de deficiência visual. O Fusion oferece o melhor dos dois mundos – ZoomText, com ampliação de tela e otimizações visuais para facilitar a visualização da tela, junto com o poder e velocidade do software leitor de tela mais completo do mercado JAWS.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Ao juntar o ZoomText com o JAWS, o Fusion possui sintetizadores de voz de alta qualidade como Eloquence e Vocalizer Expressive, teclas de acesso poderosas incluindo navegação na web e uma ampla variedade de opções custodiáveis.\",\"type\":\"text\"}]}] Cegueira, Baixa Visão Software Leitor e Ampliador de Telas Freedom Scientific",
     "categories": "Cegueira, Baixa Visão",
     "subcategories": "Software Leitor e Ampliador de Telas",
-    "fabricante": "Freedom Scientific"
-  },
-  {
-    "id": "product-391",
-    "title": "Jaws",
-    "slug": "/produtos/jaws",
-    "description": "Software leitor de telas",
-    "imageUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/SW_01_FS_0001_jaws_capa_43cb5d9e84.jpg",
-    "type": "Produto",
-    "content": "Software leitor de telas [{\"type\":\"paragraph\",\"children\":[{\"text\":\"O JAWS é o software leitor de tela mais popular do mundo! Desenvolvido para usuários cegos, o JAWS lê alto o que está aparecendo na tela do seu PC e oferece acesso eficaz aos aplicativos. Você será capaz de navegar na Internet, escrever um documento, ler seus emails e criar apresentações a partir do seu escritório, por acesso remoto ou a partir de casa.\",\"type\":\"text\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"\",\"type\":\"text\"}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Sintetizador Eloquence e Sintetizador Vocalizer Direct inclusos sem nenhum custo extra, com mais de 20 idiomas e vozes de alta qualidade;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Recurso OCR para arquivos de imagem ou PDF inacessíveis;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Suporte Touch Screen para o Windows 8, Windows 10 e 11;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Suporte completo para tablet executando Windows 8.1, 10 e 11;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Leitor DAISY Embutido (FS Reader);\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Ajuda Sensível ao Contexto (Insert+F1, Insert+H e Insert+W) e Mensagens de Ajuda para auxiliar novos usuários começando no Windows;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" JAWS Tandem Web incluso (ferramenta valiosa para treinamento e suporte remoto);\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Totalmente compatível com os softwares ZoomText, Fusion e OpenBook;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Leitura de títulos de linhas e colunas e Células Monitoras no Excel;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Modo de Estudo Braille para aprendizado do Braille;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Recurso Falar Tudo com avanço e retrocesso rápido em combinação com teclas de navegação rápida;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Compatível com Windows 10, Windows 11, Windows Server 2019 e 2016;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Compatibilidade com o Office 2013, 2016 e 365;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Suporte para Google Chrome, Firefox, Skype, Adobe Acrobat, Microsoft Edge entre muitos outros;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Linguagem de scripts poderosa para personalizar a experiência do usuário em qualquer aplicação;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Suporte para aplicativos nativos do Windows;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Recurso Rótulos Personalizados, para modificar identificadores para fala e Braille, ajustando de acordo com as necessidades do usuário;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Ferramentas da Web assim como Web Personalizada e Posicionar Marcadores para personalizar o JAWS em específicas páginas da web, atendendo as necessidades individuais;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Busca de Texto de Tela com contexto do histórico específico;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Suporta também a maioria das linhas Braille;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Suporte opcional Tandem Direct, plataformas Citrix, Serviço Terminal e área de trabalho remoto;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" O serviço Imagem Inteligente reconhece imagens e a descreve;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Assistente de voz para apontar comandos usados com menos frequência;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Suporta a câmera PEARL para acesso direto de documentos impressos ou livros;\",\"type\":\"text\"}]}]},{\"type\":\"list\",\"format\":\"unordered\",\"children\":[{\"type\":\"list-item\",\"children\":[{\"text\":\" Se torne mais eficiente com Skim Reading e Text Analyzer.\",\"type\":\"text\"}]}]}] Cegueira Software Leitor de Telas Freedom Scientific",
-    "categories": "Cegueira",
-    "subcategories": "Software Leitor de Telas",
     "fabricante": "Freedom Scientific"
   },
   {
@@ -716,35 +716,35 @@
     "isProductHidden": false
   },
   {
-    "id": "doc-385-49",
-    "title": "guia_everest.docx - Everest",
+    "id": "doc-429-209",
+    "title": "guia_everest.pdf - Everest",
     "slug": "/produtos/everest",
     "description": "Documento do produto Everest",
     "type": "Documento",
-    "documentType": "Word",
+    "documentType": "PDF",
     "productTitle": "Everest",
     "productSlug": "/produtos/everest",
-    "fileName": "guia_everest.docx",
-    "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/guia_everest_6fbdf0524f.docx",
-    "content": "guia_everest.docx Word Everest",
+    "fileName": "guia_everest.pdf",
+    "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/guia_everest_d5eff07f21.pdf",
+    "content": "guia_everest.pdf PDF Everest",
     "isProductHidden": false
   },
   {
-    "id": "doc-385-50",
-    "title": "manual_avancado_everest.docx - Everest",
+    "id": "doc-429-210",
+    "title": "manual_everest.pdf - Everest",
     "slug": "/produtos/everest",
     "description": "Documento do produto Everest",
     "type": "Documento",
-    "documentType": "Word",
+    "documentType": "PDF",
     "productTitle": "Everest",
     "productSlug": "/produtos/everest",
-    "fileName": "manual_avancado_everest.docx",
-    "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/manual_everest_1e27a4d37b.docx",
-    "content": "manual_avancado_everest.docx Word Everest",
+    "fileName": "manual_everest.pdf",
+    "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/manual_everest_3f3912b1c3.pdf",
+    "content": "manual_everest.pdf PDF Everest",
     "isProductHidden": false
   },
   {
-    "id": "doc-385-48",
+    "id": "doc-429-48",
     "title": "catalogo_everest.pdf - Everest",
     "slug": "/produtos/everest",
     "description": "Documento do produto Everest",
@@ -825,6 +825,48 @@
     "fileName": "catalogo_focus80.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/catalogo_focus80_851133ede4.pdf",
     "content": "catalogo_focus80.pdf PDF Focus 80 Blue",
+    "isProductHidden": false
+  },
+  {
+    "id": "doc-427-208",
+    "title": "Atalhos Jaws.pdf - Jaws",
+    "slug": "/produtos/jaws",
+    "description": "Documento do produto Jaws",
+    "type": "Documento",
+    "documentType": "PDF",
+    "productTitle": "Jaws",
+    "productSlug": "/produtos/jaws",
+    "fileName": "Atalhos Jaws.pdf",
+    "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/Atalhos_Jaws_b4ae547553.pdf",
+    "content": "Atalhos Jaws.pdf PDF Jaws",
+    "isProductHidden": false
+  },
+  {
+    "id": "doc-427-206",
+    "title": "Comandos Jaws para Linha Braille.pdf - Jaws",
+    "slug": "/produtos/jaws",
+    "description": "Documento do produto Jaws",
+    "type": "Documento",
+    "documentType": "PDF",
+    "productTitle": "Jaws",
+    "productSlug": "/produtos/jaws",
+    "fileName": "Comandos Jaws para Linha Braille.pdf",
+    "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/Comandos_Jaws_para_Linha_Braille_054770dd47.pdf",
+    "content": "Comandos Jaws para Linha Braille.pdf PDF Jaws",
+    "isProductHidden": false
+  },
+  {
+    "id": "doc-427-207",
+    "title": "Jaws Tandem.pdf - Jaws",
+    "slug": "/produtos/jaws",
+    "description": "Documento do produto Jaws",
+    "type": "Documento",
+    "documentType": "PDF",
+    "productTitle": "Jaws",
+    "productSlug": "/produtos/jaws",
+    "fileName": "Jaws Tandem.pdf",
+    "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/Jaws_Tandem_7b2a69e0d3.pdf",
+    "content": "Jaws Tandem.pdf PDF Jaws",
     "isProductHidden": false
   },
   {
@@ -1136,31 +1178,31 @@
     "isProductHidden": false
   },
   {
-    "id": "doc-375-178",
-    "title": "ZoomText_Guia_do_Usuario_Portugues_Brasil.pdf - ZoomText Ampliador",
+    "id": "doc-428-178",
+    "title": "Guia_do_Usuario.pdf - ZoomText Ampliador",
     "slug": "/produtos/zoomtext-ampliador",
     "description": "Documento do produto ZoomText Ampliador",
     "type": "Documento",
     "documentType": "PDF",
     "productTitle": "ZoomText Ampliador",
     "productSlug": "/produtos/zoomtext-ampliador",
-    "fileName": "ZoomText_Guia_do_Usuario_Portugues_Brasil.pdf",
+    "fileName": "Guia_do_Usuario.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/Zoom_Text_Guia_do_Usuario_Portugues_Brasil_f6a398e656.pdf",
-    "content": "ZoomText_Guia_do_Usuario_Portugues_Brasil.pdf PDF ZoomText Ampliador",
+    "content": "Guia_do_Usuario.pdf PDF ZoomText Ampliador",
     "isProductHidden": false
   },
   {
     "id": "doc-374-178",
-    "title": "ZoomText_Guia_do_Usuario_Portugues_Brasil.pdf - ZoomText Ampliador com Voz",
+    "title": "Guia_do_Usuario.pdf - ZoomText Ampliador com Voz",
     "slug": "/produtos/zoomtext-com-voz",
     "description": "Documento do produto ZoomText Ampliador com Voz",
     "type": "Documento",
     "documentType": "PDF",
     "productTitle": "ZoomText Ampliador com Voz",
     "productSlug": "/produtos/zoomtext-com-voz",
-    "fileName": "ZoomText_Guia_do_Usuario_Portugues_Brasil.pdf",
+    "fileName": "Guia_do_Usuario.pdf",
     "fileUrl": "https://innovative-friendship-159ff40007.media.strapiapp.com/Zoom_Text_Guia_do_Usuario_Portugues_Brasil_f6a398e656.pdf",
-    "content": "ZoomText_Guia_do_Usuario_Portugues_Brasil.pdf PDF ZoomText Ampliador com Voz",
+    "content": "Guia_do_Usuario.pdf PDF ZoomText Ampliador com Voz",
     "isProductHidden": false
   },
   {
@@ -1295,15 +1337,15 @@
     "title": "Atas Abertas",
     "slug": "src\\app\\atas-abertas\\page.js",
     "description": "import Breadcrumbs from '@/components/Breadcrumbs'; import AtaCard from '@/components/AtaCard'; import ContactForm from '@/components/ContactForm'; im...",
-    "content": "import Breadcrumbs from '@/components/Breadcrumbs'; import AtaCard from '@/components/AtaCard'; import ContactForm from '@/components/ContactForm'; import AdvantagesSection from '@/components/AdvantagesSection'; import SocialMediaSection from '@/components/SocialMediaSection'; // Prevent static generation - use on-demand ISR export const revalidate = 3600; // Revalidate every hour export const metadata = { title: 'Atas Abertas', description: 'Consulte as atas de registro de preços abertas para adesão (carona). Adquira produtos de tecnologia assistiva com preços registrados.', openGraph: { title: 'Atas Abertas | Tecassistiva', description: 'Atas de registro de preços para adesão em tecnologia assistiva', url: 'https://www.tecassistiva.com.br/atas-abertas' } } // Lazy load API functions to avoid compilation during SSG async function getOpenAtas() { const { getOpenAtas: _getOpenAtas } = await import('@/lib/api'); return _getOpenAtas(); } export default async function AtasAbertasPage() { let atas = []; try { atas = await getOpenAtas(); } catch (error) { console.error('Erro ao carregar atas abertas:', error); atas = []; } const breadcrumbs = [ { name: 'Página Inicial', path: '/' }, { name: 'Atas Abertas', path: '/atas-abertas' }, ]; return ( {/* 1. Seção de Título e Introdução */} Atas Abertas Você sabe o que é um Sistema de Registro de Preço (SRP)? Se você já conhece, clique aqui e acesse as ATAS abertas . {/* Textos explicativos em 2 colunas */} {/* Coluna 1: SRP */} O que é o Sistema de Registro de Preços – SRP? O Sistema de Registro de Preços (SRP) é um procedimento especial de licitação que seleciona a proposta mais vantajosa para futuras e eventuais contratações governamentais. Em vez de realizar uma licitação para cada compra, o órgão público registra os preços de produtos e serviços de fornecedores qualificados, que se comprometem a manter a oferta por um período determinado (geralmente 12 meses). {/* Coluna 2: ARP */} O que é uma Ata de Registro de Preços – ARP? A Ata de Registro de Preços (ARP) é o documento que formaliza o resultado do SRP. Nela, são registrados os preços, os fornecedores, os produtos e as condições de fornecimento. Essa ata funciona como um \"cardápio\" de produtos e serviços que os órgãos públicos podem adquirir de forma ágil e sem a necessidade de um novo processo licitatório completo, bastando apenas emitir uma ordem de compra. Queremos te contar mais, clique aqui. {/* 2. Seção da Lista de Atas */} Lista de ATAS disponíveis para você: {atas && atas.length > 0 ? ( atas.map((ata) => ) ) : ( Nenhuma ata aberta encontrada no momento. Por favor, verifique novamente mais tarde ou entre em contato para mais informações. )} {/* 3. Seção do Formulário de Contato */} {/* 4. Seção de Vantagens */} ); }",
+    "content": "import Breadcrumbs from '@/components/Breadcrumbs'; import AtaCard from '@/components/AtaCard'; import ContactForm from '@/components/ContactForm'; import AdvantagesSection from '@/components/AdvantagesSection'; import SocialMediaSection from '@/components/SocialMediaSection'; // Previne geracao estatica - usa sob demanda ISR export const revalidate = 3600; // Revalidate every hour export const metadata = { title: 'Atas Abertas', description: 'Consulte as atas de registro de preços abertas para adesão (carona). Adquira produtos de tecnologia assistiva com preços registrados.', openGraph: { title: 'Atas Abertas | Tecassistiva', description: 'Atas de registro de preços para adesão em tecnologia assistiva', url: 'https://www.tecassistiva.com.br/atas-abertas' } } // Carrega as funções da API sob demanda para evitar compilação durante a geração estática async function getOpenAtas() { const { getOpenAtas: _getOpenAtas } = await import('@/lib/api'); return _getOpenAtas(); } export default async function AtasAbertasPage() { let atas = []; try { atas = await getOpenAtas(); } catch (error) { console.error('Erro ao carregar atas abertas:', error); atas = []; } const breadcrumbs = [ { name: 'Página Inicial', path: '/' }, { name: 'Atas Abertas', path: '/atas-abertas' }, ]; return ( {/* 1. Seção de Título e Introdução */} Atas Abertas Você sabe o que é um Sistema de Registro de Preço (SRP)? Se você já conhece, clique aqui e acesse as ATAS abertas . {/* Textos explicativos em 2 colunas */} {/* Coluna 1: SRP */} O que é o Sistema de Registro de Preços – SRP? O Sistema de Registro de Preços (SRP) é um procedimento especial de licitação que seleciona a proposta mais vantajosa para futuras e eventuais contratações governamentais. Em vez de realizar uma licitação para cada compra, o órgão público registra os preços de produtos e serviços de fornecedores qualificados, que se comprometem a manter a oferta por um período determinado (geralmente 12 meses). {/* Coluna 2: ARP */} O que é uma Ata de Registro de Preços – ARP? A Ata de Registro de Preços (ARP) é o documento que formaliza o resultado do SRP. Nela, são registrados os preços, os fornecedores, os produtos e as condições de fornecimento. Essa ata funciona como um \"cardápio\" de produtos e serviços que os órgãos públicos podem adquirir de forma ágil e sem a necessidade de um novo processo licitatório completo, bastando apenas emitir uma ordem de compra. Queremos te contar mais, clique aqui. {/* 2. Seção da Lista de Atas */} Lista de ATAS disponíveis para você: {atas && atas.length > 0 ? ( atas.map((ata) => ) ) : ( Nenhuma ata aberta encontrada no momento. Por favor, verifique novamente mais tarde ou entre em contato para mais informações. )} {/* 3. Seção do Formulário de Contato */} {/* 4. Seção de Vantagens */} ); }",
     "type": "P├ígina"
   },
   {
     "id": "page-src\\app\\ambientes\\page.js",
     "title": "Soluções por Ambientes",
     "slug": "src\\app\\ambientes\\page.js",
-    "description": "import Link from 'next/link'; import Image from 'next/image'; import { ambientesData } from '@/lib/ambientes-data'; // Importa os dados estáticos. imp...",
-    "content": "import Link from 'next/link'; import Image from 'next/image'; import { ambientesData } from '@/lib/ambientes-data'; // Importa os dados estáticos. import Breadcrumbs from '@/components/Breadcrumbs'; export const metadata = { title: 'Soluções por Ambientes', description: 'Descubra soluções de tecnologia assistiva para diferentes ambientes: escolas, empresas, residências e mais.', openGraph: { title: 'Soluções por Ambientes | Tecassistiva', description: 'Tecnologia assistiva para escolas, empresas e residências', url: 'https://www.tecassistiva.com.br/ambientes' } } export default function AmbientesPage() { const breadcrumbs = [ { name: 'Página Inicial', path: '/' }, { name: 'Soluções por Ambientes', path: '/ambientes' }, ]; return ( Soluções por Ambientes {ambientesData.map((ambiente, index) => { const isReversed = index % 2 !== 0; const textBgColor = index % 2 === 0 ? 'bg-tec-blue text-white' : 'bg-gray-200 text-gray-800'; const buttonColor = index % 2 === 0 ? 'bg-white text-tec-blue hover:bg-gray-100' : 'bg-tec-blue text-white hover:bg-blue-800'; return ( {/* Coluna da Imagem com Efeito de Zoom */} {/* Coluna do Texto e Botão */} {ambiente.nome} Descubra as soluções de tecnologia assistiva ideais para o ambiente de {ambiente.nome.toLowerCase()}. Ver Soluções ) })} ); }",
+    "description": "import Link from 'next/link'; import Image from 'next/image'; import { getAmbientes } from '@/lib/api'; import Breadcrumbs from '@/components/Breadcru...",
+    "content": "import Link from 'next/link'; import Image from 'next/image'; import { getAmbientes } from '@/lib/api'; import Breadcrumbs from '@/components/Breadcrumbs'; export const metadata = { title: 'Soluções por Ambientes', description: 'Descubra soluções de tecnologia assistiva para diferentes ambientes: escolas, empresas, residências e mais.', openGraph: { title: 'Soluções por Ambientes | Tecassistiva', description: 'Tecnologia assistiva para escolas, empresas e residências', url: 'https://www.tecassistiva.com.br/ambientes' } } export default async function AmbientesPage() { const breadcrumbs = [ { name: 'Página Inicial', path: '/' }, { name: 'Soluções por Ambientes', path: '/ambientes' }, ]; const ambientesData = await getAmbientes(); return ( Soluções por Ambientes {ambientesData.map((ambiente, index) => { const isReversed = index % 2 !== 0; const textBgColor = index % 2 === 0 ? 'bg-tec-blue text-white' : 'bg-gray-200 text-gray-800'; const buttonColor = index % 2 === 0 ? 'bg-white text-tec-blue hover:bg-gray-100' : 'bg-tec-blue text-white hover:bg-blue-800'; return ( {/* Coluna da Imagem com Efeito de Zoom */} {/* Coluna do Texto e Botão */} {ambiente.nome} Descubra as soluções de tecnologia assistiva ideais para o ambiente de {ambiente.nome.toLowerCase()}. Ver Soluções ) })} ); }",
     "type": "P├ígina"
   },
   {
@@ -1318,16 +1360,16 @@
     "id": "page-src\\app\\ambientes\\[slug]\\page.js",
     "title": "{`Soluções para ${ambiente.nome}`}",
     "slug": "src\\app\\ambientes\\[slug]\\page.js",
-    "description": "import Image from 'next/image'; import Link from 'next/link'; import { ambientesData } from '@/lib/ambientes-data'; import Breadcrumbs from '@/compone...",
-    "content": "import Image from 'next/image'; import Link from 'next/link'; import { ambientesData } from '@/lib/ambientes-data'; import Breadcrumbs from '@/components/Breadcrumbs'; import ProductCard from '@/components/ProductCard'; import { notFound } from 'next/navigation'; // Lazy load API functions to avoid compilation during SSG async function getAllProductsForDisplay() { const { getAllProductsForDisplay: _getAllProductsForDisplay } = await import('@/lib/api'); return _getAllProductsForDisplay(); } // Gera as páginas estáticas no momento do build a partir dos dados estáticos export async function generateStaticParams() { return ambientesData.map((ambiente) => ({ slug: ambiente.slug, })); } export async function generateMetadata({ params }) { const ambiente = ambientesData.find(a => a.slug === params.slug); if (!ambiente) { return { title: 'Ambiente não encontrado' }; } return { title: `${ambiente.nome} | Soluções por Ambientes`, description: `Produtos recomendados para o ambiente: ${ambiente.nome}`, }; } export default async function AmbienteDetalhePage({ params }) { const ambiente = ambientesData.find(a => a.slug === params.slug); if (!ambiente) { notFound(); } const breadcrumbs = [ { name: 'Página Inicial', path: '/' }, { name: 'Soluções por Ambientes', path: '/ambientes' }, { name: ambiente.nome, path: `/ambientes/${ambiente.slug}` }, ]; // Caso 1: O ambiente tem sub-ambientes para exibir como cartões if (ambiente.subAmbientes && ambiente.subAmbientes.length > 0) { return ( {`Soluções para ${ambiente.nome}`} Selecione uma área abaixo para ver os produtos e recursos de tecnologia assistiva recomendados. {ambiente.subAmbientes.map(sub => ( {sub.nome} ))} ← Voltar para Ambientes ); } // Caso 2: O ambiente lista os produtos diretamente (lógica original) const allProducts = await getAllProductsForDisplay(); const produtosRecomendados = allProducts.filter(product => ambiente.productSlugs?.includes(product.slug) ); return ( {ambiente.nome} {produtosRecomendados.map(produto => ( ))} {produtosRecomendados.length === 0 && ( Nenhum produto recomendado para este ambiente no momento. )} ← Voltar para Ambientes ); }",
+    "description": "import Image from 'next/image'; import Link from 'next/link'; import { getAmbientes } from '@/lib/api'; import Breadcrumbs from '@/components/Breadcru...",
+    "content": "import Image from 'next/image'; import Link from 'next/link'; import { getAmbientes } from '@/lib/api'; import Breadcrumbs from '@/components/Breadcrumbs'; import ProductCard from '@/components/ProductCard'; import { notFound } from 'next/navigation'; // Lazy load API functions to avoid compilation during SSG async function getAllProductsForDisplay() { const { getAllProductsForDisplay: _getAllProductsForDisplay } = await import('@/lib/api'); return _getAllProductsForDisplay(); } // Gera as páginas estáticas no momento do build a partir dos dados do backend export async function generateStaticParams() { const ambientesData = await getAmbientes(); return ambientesData.map((ambiente) => ({ slug: ambiente.slug, })); } export async function generateMetadata({ params }) { const ambientesData = await getAmbientes(); const ambiente = ambientesData.find(a => a.slug === params.slug); if (!ambiente) { return { title: 'Ambiente não encontrado' }; } return { title: `${ambiente.nome} | Soluções por Ambientes`, description: `Produtos recomendados para o ambiente: ${ambiente.nome}`, }; } export default async function AmbienteDetalhePage({ params }) { const ambientesData = await getAmbientes(); const ambiente = ambientesData.find(a => a.slug === params.slug); if (!ambiente) { notFound(); } const breadcrumbs = [ { name: 'Página Inicial', path: '/' }, { name: 'Soluções por Ambientes', path: '/ambientes' }, { name: ambiente.nome, path: `/ambientes/${ambiente.slug}` }, ]; // Caso 1: O ambiente tem sub-ambientes para exibir como cartões if (ambiente.subAmbientes && ambiente.subAmbientes.length > 0) { return ( {`Soluções para ${ambiente.nome}`} Selecione uma área abaixo para ver os produtos e recursos de tecnologia assistiva recomendados. {ambiente.subAmbientes.map(sub => ( {sub.nome} ))} ← Voltar para Ambientes ); } // Caso 2: O ambiente lista os produtos diretamente (lógica original) const allProducts = await getAllProductsForDisplay(); const produtosRecomendados = (ambiente.productSlugs || []) .map(slug => allProducts.find(product => product.slug === slug)) .filter(Boolean); return ( {ambiente.nome} {produtosRecomendados.map(produto => ( ))} {produtosRecomendados.length === 0 && ( Nenhum produto recomendado para este ambiente no momento. )} ← Voltar para Ambientes ); }",
     "type": "P├ígina"
   },
   {
     "id": "page-src\\app\\ambientes\\[slug]\\[subslug]\\page.js",
     "title": "{subAmbiente.nome}",
     "slug": "src\\app\\ambientes\\[slug]\\[subslug]\\page.js",
-    "description": "import Image from 'next/image'; import Link from 'next/link'; import { ambientesData } from '@/lib/ambientes-data'; import Breadcrumbs from '@/compone...",
-    "content": "import Image from 'next/image'; import Link from 'next/link'; import { ambientesData } from '@/lib/ambientes-data'; import Breadcrumbs from '@/components/Breadcrumbs'; import ProductCard from '@/components/ProductCard'; import { notFound } from 'next/navigation'; // Lazy load API functions to avoid compilation during SSG async function getAllProductsForDisplay() { const { getAllProductsForDisplay: _getAllProductsForDisplay } = await import('@/lib/api'); return _getAllProductsForDisplay(); } // Gera as páginas estáticas para todas as sub-categorias no momento do build export async function generateStaticParams() { const paths = []; ambientesData.forEach(ambiente => { if (ambiente.subAmbientes) { ambiente.subAmbientes.forEach(sub => { paths.push({ slug: ambiente.slug, subslug: sub.slug }); }); } }); return paths; } export async function generateMetadata({ params }) { const ambiente = ambientesData.find(a => a.slug === params.slug); const subAmbiente = ambiente?.subAmbientes?.find(s => s.slug === params.subslug); if (!subAmbiente) { return { title: 'Página não encontrada' }; } return { title: `${subAmbiente.nome} | ${ambiente.nome}`, description: `Produtos recomendados para ${subAmbiente.nome} no ambiente ${ambiente.nome}.`, }; } export default async function SubAmbientePage({ params }) { const ambiente = ambientesData.find(a => a.slug === params.slug); const subAmbiente = ambiente?.subAmbientes?.find(s => s.slug === params.subslug); if (!ambiente || !subAmbiente) { notFound(); } const allProducts = await getAllProductsForDisplay(); const produtosRecomendados = allProducts.filter(product => subAmbiente.productSlugs?.includes(product.slug) ); const breadcrumbs = [ { name: 'Página Inicial', path: '/' }, { name: 'Soluções por Ambientes', path: '/ambientes' }, { name: ambiente.nome, path: `/ambientes/${ambiente.slug}` }, { name: subAmbiente.nome, path: `/ambientes/${ambiente.slug}/${subAmbiente.slug}` }, ]; return ( {subAmbiente.nome} {produtosRecomendados.map(produto => ( ))} {produtosRecomendados.length === 0 && ( Nenhum produto recomendado para esta área no momento. )} {`← Voltar para ${ambiente.nome}`} ); }",
+    "description": "import Image from 'next/image'; import Link from 'next/link'; import { getAmbientes } from '@/lib/api'; import Breadcrumbs from '@/components/Breadcru...",
+    "content": "import Image from 'next/image'; import Link from 'next/link'; import { getAmbientes } from '@/lib/api'; import Breadcrumbs from '@/components/Breadcrumbs'; import ProductCard from '@/components/ProductCard'; import { notFound } from 'next/navigation'; // Lazy load API functions to avoid compilation during SSG async function getAllProductsForDisplay() { const { getAllProductsForDisplay: _getAllProductsForDisplay } = await import('@/lib/api'); return _getAllProductsForDisplay(); } // Gera as páginas estáticas para todas as sub-categorias no momento do build export async function generateStaticParams() { const paths = []; const ambientesData = await getAmbientes(); ambientesData.forEach(ambiente => { if (ambiente.subAmbientes) { ambiente.subAmbientes.forEach(sub => { paths.push({ slug: ambiente.slug, subslug: sub.slug }); }); } }); return paths; } export async function generateMetadata({ params }) { const ambientesData = await getAmbientes(); const ambiente = ambientesData.find(a => a.slug === params.slug); const subAmbiente = ambiente?.subAmbientes?.find(s => s.slug === params.subslug); if (!subAmbiente) { return { title: 'Página não encontrada' }; } return { title: `${subAmbiente.nome} | ${ambiente.nome}`, description: `Produtos recomendados para ${subAmbiente.nome} no ambiente ${ambiente.nome}.`, }; } export default async function SubAmbientePage({ params }) { const ambientesData = await getAmbientes(); const ambiente = ambientesData.find(a => a.slug === params.slug); const subAmbiente = ambiente?.subAmbientes?.find(s => s.slug === params.subslug); if (!ambiente || !subAmbiente) { notFound(); } const allProducts = await getAllProductsForDisplay(); const produtosRecomendados = (subAmbiente.productSlugs || []) .map(slug => allProducts.find(product => product.slug === slug)) .filter(Boolean); const breadcrumbs = [ { name: 'Página Inicial', path: '/' }, { name: 'Soluções por Ambientes', path: '/ambientes' }, { name: ambiente.nome, path: `/ambientes/${ambiente.slug}` }, { name: subAmbiente.nome, path: `/ambientes/${ambiente.slug}/${subAmbiente.slug}` }, ]; return ( {subAmbiente.nome} {produtosRecomendados.map(produto => ( ))} {produtosRecomendados.length === 0 && ( Nenhum produto recomendado para esta área no momento. )} {`← Voltar para ${ambiente.nome}`} ); }",
     "type": "P├ígina"
   }
 ]

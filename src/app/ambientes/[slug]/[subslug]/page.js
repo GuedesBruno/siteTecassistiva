@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ambientesData } from '@/lib/ambientes-data';
+import { getAmbientes } from '@/lib/api';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import ProductCard from '@/components/ProductCard';
 import { notFound } from 'next/navigation';
@@ -14,6 +14,7 @@ async function getAllProductsForDisplay() {
 // Gera as páginas estáticas para todas as sub-categorias no momento do build
 export async function generateStaticParams() {
   const paths = [];
+  const ambientesData = await getAmbientes();
   ambientesData.forEach(ambiente => {
     if (ambiente.subAmbientes) {
       ambiente.subAmbientes.forEach(sub => {
@@ -25,6 +26,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
+  const ambientesData = await getAmbientes();
   const ambiente = ambientesData.find(a => a.slug === params.slug);
   const subAmbiente = ambiente?.subAmbientes?.find(s => s.slug === params.subslug);
 
@@ -38,6 +40,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function SubAmbientePage({ params }) {
+  const ambientesData = await getAmbientes();
   const ambiente = ambientesData.find(a => a.slug === params.slug);
   const subAmbiente = ambiente?.subAmbientes?.find(s => s.slug === params.subslug);
 

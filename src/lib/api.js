@@ -1,5 +1,6 @@
 import qs from 'qs';
 import { sortItemsByOrder } from './utils';
+import { ambientesData as mockAmbientes } from './ambientes-data';
 
 async function fetchAPI(endpoint, options = {}) {
   const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
@@ -461,6 +462,72 @@ export async function getAllImersaoSlugs() {
   } catch (error) {
     console.error(`❌ ERRO ao buscar imersões:`, error.message);
     return [];
+  }
+}
+
+export async function getAmbientes() {
+  try {
+    // Busca ambientes pai com todos os sub_ambientes e produtos aninhados usando qs (mais seguro)
+    const query = qs.stringify({
+      populate: {
+        imagem_grid: { fields: ['url', 'alternativeText'] },
+        produtos: { fields: ['slug'] },
+        sub_ambientes: {
+          populate: {
+            imagem: { fields: ['url', 'alternativeText'] },
+            produtos: { fields: ['slug'] }
+          }
+        }
+      },
+      pagination: { limit: 100 }
+    }, { encodeValuesOnly: true });
+
+    const response = await fetchAPI(`/api/ambientes?${query}`);
+    const data = normalizeDataArray(response);
+
+    // Se o Strapi estiver vazio ou não configurado ainda, usa o mock local estático para o site não quebrar
+    if (data.length === 0) {
+      console.warn("⚠️ Nenhum ambiente retornado pelo Strapi. Usando dados estáticos como fallback temporário.");
+      return mockAmbientes;
+    }
+
+    // Transforma os dados do Strapi na estrutura exata que o frontend (páginas) já espera
+    const ambientesTree = data.map(item => {
+      const attrs = item.attributes || item;
+      
+      const produtosPai = Array.isArray(attrs.produtos) ? attrs.produtos : (attrs.produtos?.data || []);
+      
+      const parsedAmbiente = {
+        id: item.id || attrs.id,
+        slug: attrs.slug,
+        nome: attrs.nome,
+        descricao: attrs.descricao || null,
+        imagem_grid: getStrapiMediaUrl(attrs.imagem_grid?.data?.attributes?.url || attrs.imagem_grid?.url),
+        imagem_banner: getStrapiMediaUrl(attrs.imagem_banner?.data?.attributes?.url || attrs.imagem_banner?.url),
+        productSlugs: produtosPai.map(p => (p.attributes || p).slug),
+      };
+
+      if (attrs.sub_ambientes && attrs.sub_ambientes.length > 0) {
+        parsedAmbiente.subAmbientes = attrs.sub_ambientes.map(sub => {
+          const subProdutos = Array.isArray(sub.produtos) ? sub.produtos : (sub.produtos?.data || []);
+          return {
+            id: sub.id,
+            slug: sub.slug,
+            nome: sub.nome,
+            imagem: getStrapiMediaUrl(sub.imagem?.data?.attributes?.url || sub.imagem?.url),
+            productSlugs: subProdutos.map(p => (p.attributes || p).slug),
+          };
+        });
+      }
+
+      return parsedAmbiente;
+    });
+
+    return ambientesTree;
+
+  } catch (error) {
+    console.error("Falha crítica ao buscar ambientes no Strapi, usando mock estático:", error);
+    return mockAmbientes; // FALLBACK de segurança
   }
 }
 
