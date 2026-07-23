@@ -2,9 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-// --- Internal Fetch Logic for Build Stability ---
-// We duplicate this here to ensure generateStaticParams never crashes the build
-// even if api.js has issues or env vars are missing during the build phase.
+// --- Lógica interna de busca para estabilidade do build ---
 
 async function internalFetchAPI(endpoint) {
     const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
@@ -25,7 +23,7 @@ async function internalFetchAPI(endpoint) {
 
         const res = await fetch(url, {
             headers: { 'Authorization': `Bearer ${STRAPI_TOKEN}` },
-            next: { revalidate: 60 } // Cache for 60 seconds
+            next: { revalidate: 60 } // Cache por 60 segundos
         });
 
         if (!res.ok) {
