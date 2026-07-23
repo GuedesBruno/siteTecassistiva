@@ -5,7 +5,7 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import ProductCard from '@/components/ProductCard';
 import { notFound } from 'next/navigation';
 
-// Lazy load API functions to avoid compilation during SSG
+// Lazy load API functions to avoid compilation during SSG.
 async function getAllProductsForDisplay() {
   const { getAllProductsForDisplay: _getAllProductsForDisplay } = await import('@/lib/api');
   return _getAllProductsForDisplay();
@@ -65,21 +65,21 @@ export default async function SubAmbientePage({ params }) {
       <div className="container mx-auto px-4 py-8">
         <Breadcrumbs items={breadcrumbs} />
         <h1 className="text-4xl font-extrabold text-gray-900 my-6">{subAmbiente.nome}</h1>
-        
+
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {produtosRecomendados.map(produto => (
             <ProductCard key={produto.id} product={produto} />
           ))}
         </div>
-        
+
         {produtosRecomendados.length === 0 && (
           <p className="text-center text-gray-600 my-12">Nenhum produto recomendado para esta área no momento.</p>
         )}
 
         <div className="text-center mt-12">
-            <Link href={`/ambientes/${ambiente.slug}`} className="bg-tec-blue text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition-colors">
-                {`← Voltar para ${ambiente.nome}`}
-            </Link>
+          <Link href={`/ambientes/${ambiente.slug}`} className="bg-tec-blue text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition-colors">
+            {`← Voltar para ${ambiente.nome}`}
+          </Link>
         </div>
       </div>
     </div>
