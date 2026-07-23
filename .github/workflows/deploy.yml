@@ -52,7 +52,7 @@ jobs:
           sudo apt-get install -y lftp
           echo "Starting lftp deploy to $FTP_HOST -> $REMOTE_DIR (uploading contents of out/)"
           cd out
-          lftp -u "$FTP_USER","$FTP_PASS" "$FTP_HOST" -e "mirror -R --only-newer --no-perms --parallel=5 --exclude-glob logs* --exclude-glob access_log* --exclude-glob error_log* . \"$REMOTE_DIR\"; bye"
+          lftp -u "$FTP_USER","$FTP_PASS" "$FTP_HOST" -e "mirror -R --no-perms --parallel=5 --exclude-glob logs* --exclude-glob access_log* --exclude-glob error_log* . \"$REMOTE_DIR\"; bye"
 
       - name: Done
         run: echo "Deploy finished"
