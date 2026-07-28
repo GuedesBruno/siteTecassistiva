@@ -112,7 +112,7 @@ export default function ComparativoPage() {
                                 <p className="text-lg md:text-xl text-gray-700 leading-relaxed" style={{ fontFamily: 'monospace', overflowWrap: 'break-word', wordWrap: 'break-word', wordBreak: 'break-all' }}>⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵⠷⠡⠜⠩⠿⠣⠌⠾⠬⠹⠾⠯</p>
                             </div>
                             <div className="mt-4 flex flex-col items-center gap-2">
-                                <img src="/teste2.jpg" alt="Média de pontos" className="w-32 h-auto rounded-lg shadow-md" />
+                                <img src="/teste2.jpg" alt="Gráfico mostrando média de 3.41 pontos por caractere" className="w-32 h-auto rounded-lg shadow-md" />
                                 <p className="text-sm font-semibold text-gray-700">Média de 3.41 pontos por caractere</p>
                             </div>
                         </div>
@@ -128,7 +128,7 @@ export default function ComparativoPage() {
                                 <p className="text-lg md:text-xl text-gray-700 leading-relaxed" style={{ fontFamily: 'monospace', overflowWrap: 'break-word', wordWrap: 'break-word', wordBreak: 'break-all' }}>⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵</p>
                             </div>
                             <div className="mt-4 flex flex-col items-center gap-2">
-                                <img src="/teste1.jpg" alt="Média de pontos" className="w-32 h-auto rounded-lg shadow-md" />
+                                <img src="/teste1.jpg" alt="Gráfico mostrando média de 3.02 pontos por caractere" className="w-32 h-auto rounded-lg shadow-md" />
                                 <p className="text-sm font-semibold text-gray-700">Média de 3.02 pontos por caractere</p>
                             </div>
                         </div>
@@ -144,7 +144,7 @@ export default function ComparativoPage() {
                                 <p className="text-lg md:text-xl text-gray-400 leading-relaxed" style={{ fontFamily: 'monospace', overflowWrap: 'break-word', wordWrap: 'break-word', wordBreak: 'break-all' }}>⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁</p>
                             </div>
                             <div className="mt-4 flex flex-col items-center gap-2">
-                                <img src="/teste3.jpg" alt="Média de pontos" className="w-32 h-auto rounded-lg shadow-md" />
+                                <img src="/teste3.jpg" alt="Gráfico mostrando média de 1 ponto por caractere" className="w-32 h-auto rounded-lg shadow-md" />
                                 <p className="text-sm font-semibold text-red-600">Média de 1 ponto por caractere</p>
                             </div>
                         </div>
@@ -161,7 +161,7 @@ export default function ComparativoPage() {
                         <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2 text-center">
                             Resultados oficiais dos testes de produção da impressora ViewPlus Columbia
                         </h3>
-                        <h5 className="text-xl md:text-2x1 text-gray-900 mb-4 text-center">
+                        <h5 className="text-xl md:text-2xl text-gray-900 mb-4 text-center">
                             Tribunal de Justiça do Paraná
                         </h5>
 
@@ -232,7 +232,7 @@ export default function ComparativoPage() {
                                             TJPR
                                         </td>
                                     </tr>
-                                    {/* 3. Alfabeto Inglês - Light Blue (Duplicated) */}
+                                    {/* 3. Alfabeto Inglês - Teste Adicional 1 */}
                                     <tr className="bg-blue-100 hover:bg-blue-200 transition-colors">
                                         <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm text-gray-900">
                                             Alfabeto Inglês
@@ -253,7 +253,7 @@ export default function ComparativoPage() {
                                             SGS
                                         </td>
                                     </tr>
-                                    {/* 3. Alfabeto Inglês - Light Blue (Duplicated) */}
+                                    {/* 3. Alfabeto Inglês - Teste Adicional 2 */}
                                     <tr className="bg-blue-100 hover:bg-blue-200 transition-colors">
                                         <td className="border border-blue-200 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm text-gray-900">
                                             Alfabeto Inglês
@@ -348,12 +348,6 @@ export default function ComparativoPage() {
                     </div>
                 </div>
             </section>
-
-            {/* COMMENTED OUT - Veja a Diferença Section
-                <section className="py-8 md:py-16 bg-tec-blue relative overflow-hidden">
-                    ... (section content commented out)
-                </section>
-                */}
 
             {/* Expert Report Section */}
             <section className="py-12 md:py-20 bg-gradient-to-br from-blue-50 to-white">

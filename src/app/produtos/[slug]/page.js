@@ -1,5 +1,6 @@
 import { getStrapiMediaUrl } from '@/lib/media';
 import ProductDetail from '@/components/ProductDetail';
+import FloatingComparativoBanner from '@/components/FloatingComparativoBanner';
 import { notFound } from 'next/navigation';
 import fs from 'fs';
 import path from 'path';
@@ -185,6 +186,9 @@ export default async function ProductPage({ params }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <ProductDetail product={product} breadcrumbs={breadcrumbs} />
+      {(slug === 'everest' || slug === 'basic') && (
+        <FloatingComparativoBanner />
+      )}
     </>
   );
 }
