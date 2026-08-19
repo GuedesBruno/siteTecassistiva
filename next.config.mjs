@@ -1,8 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // AQUI ESTÁ A CORREÇÃO CRÍTICA PARA O ERRO 404/403:
   // Esta linha força o Next.js a criar uma pasta para cada rota
-  // (ex: /tecassistiva/index.html), o que é 100% compatível com o seu .htaccess.
   trailingSlash: true,
 
   // Adicionado para gerar um site estático compatível com hospedagem sem Node.js.
@@ -14,15 +12,9 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'light-dog-088c5ec318.strapiapp.com', // Mantém a sua URL correta
+        hostname: 'backend.tecassistiva.com.br', // Seu novo servidor VPS
         port: '',
         pathname: '/uploads/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'innovative-friendship-159ff40007.media.strapiapp.com',
-        port: '',
-        pathname: '/**',
       },
       {
         protocol: 'http',
