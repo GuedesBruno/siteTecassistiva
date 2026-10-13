@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { getStrapiMediaUrl } from '@/lib/media';
 
 // --- Lógica interna de busca para estabilidade do build ---
 
@@ -126,7 +127,8 @@ export default async function ImersaoPage({ params }) {
 
     console.log(`✅ Imersão renderizada com sucesso: ${slug}`);
 
-    const imageUrl = productData.imagem_principal?.url;
+    const imagePath = productData.imagem_principal?.data?.attributes?.url || productData.imagem_principal?.url;
+    const imageUrl = getStrapiMediaUrl(imagePath);
 
     // Extract manufacturer name safely
     const fabricanteData = productData.relacao_fabricante?.data?.attributes ||
