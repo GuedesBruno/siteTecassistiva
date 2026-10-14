@@ -164,6 +164,8 @@ async function generateSearchData() {
       console.log(`Buscando ${label}...`);
       return await fetchAllData(endpoint);
     } catch (err) {
+      // Em CI (deploy) não publica busca incompleta: falha o build
+      if (process.env.CI) throw err;
       console.warn(`AVISO: Falha ao buscar ${label} (${err.message}). Usando array vazio como fallback.`);
       return [];
     }
