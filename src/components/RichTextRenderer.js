@@ -6,6 +6,7 @@ import { safeUrl } from '@/lib/safeUrl';
 const ALLOWED_IFRAME_HOSTS = {
   'player.vimeo.com': () => true,
   'www.youtube.com': (pathname) => pathname.startsWith('/embed/'),
+  'www.youtube-nocookie.com': (pathname) => pathname.startsWith('/embed/'),
 };
 
 // Extrai e valida o src de um <iframe ...> escrito no CMS; retorna null se não for permitido
@@ -13,7 +14,8 @@ const getAllowedIframeSrc = (html) => {
   const match = /<iframe[^>]*\ssrc\s*=\s*["']([^"']+)["']/i.exec(html);
   if (!match) return null;
   try {
-    const url = new URL(match[1]);
+    // O HTML escrito no CMS traz "&amp;" nas query strings; decodifica antes de validar
+    const url = new URL(match[1].replace(/&amp;/g, '&'));
     const isAllowed = url.protocol === 'https:' && ALLOWED_IFRAME_HOSTS[url.hostname]?.(url.pathname);
     return isAllowed ? url.toString() : null;
   } catch {
@@ -63,6 +65,7 @@ export default function RichTextRenderer({ content }) {
                 allow="autoplay; fullscreen; picture-in-picture"
                 allowFullScreen
                 loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
               />
             </div>
           );
