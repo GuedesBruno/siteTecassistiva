@@ -3,10 +3,13 @@
 import { useEffect, useRef } from 'react';
 
 const FOCUSABLE =
-  'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), iframe, [tabindex]:not([tabindex="-1"])';
+  'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 // Gerencia o foco de um diálogo modal: foco inicial dentro do diálogo, trap do Tab,
 // fechamento com Esc e retorno do foco ao elemento que abriu o diálogo.
+// iframes ficam fora do trap (o foco dentro deles não gera keydown aqui): quem usa iframe deve
+// colocar uma sentinela focável depois dele que devolva o foco ao diálogo (ver VideoModal).
+// Foco inicial: elemento com data-autofocus, se houver; senão o primeiro focável.
 // Uso: const dialogRef = useModalFocus(isOpen, onClose); <div ref={dialogRef} tabIndex={-1} role="dialog" ...>
 export function useModalFocus(isOpen, onClose) {
   const dialogRef = useRef(null);
@@ -19,7 +22,7 @@ export function useModalFocus(isOpen, onClose) {
     const dialog = dialogRef.current;
 
     // Foco inicial: primeiro elemento focável (botão de fechar) ou o próprio diálogo
-    const first = dialog?.querySelector(FOCUSABLE);
+    const first = dialog?.querySelector('[data-autofocus]') || dialog?.querySelector(FOCUSABLE);
     (first || dialog)?.focus();
 
     const handleKeyDown = (event) => {

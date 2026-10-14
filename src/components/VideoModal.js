@@ -12,6 +12,7 @@ import { useModalFocus } from '@/lib/useModalFocus';
  */
 export default function VideoModal({ videoInfo, onClose }) {
   const wakeLockRef = useRef(null);
+  const closeButtonRef = useRef(null);
 
   // Foco inicial, trap do Tab, Esc para fechar e retorno do foco ao elemento que abriu o modal
   const dialogRef = useModalFocus(Boolean(videoInfo), onClose);
@@ -60,10 +61,10 @@ export default function VideoModal({ videoInfo, onClose }) {
 
   if (videoInfo.type === 'vimeo') {
     const [id, hash] = videoInfo.id.split('/');
-    videoSrc = `https://player.vimeo.com/video/${id}?autoplay=1${hash ? `&h=${hash}` : ''}`;
+    videoSrc = `https://player.vimeo.com/video/${id}${hash ? `?h=${hash}` : ''}`;
     videoTitle = videoInfo.title ? `Vídeo: ${videoInfo.title}` : `Player de vídeo do Vimeo para o ID ${videoInfo.id}`;
   } else if (videoInfo.type === 'youtube') {
-    videoSrc = `https://www.youtube.com/embed/${videoInfo.id}?autoplay=1`;
+    videoSrc = `https://www.youtube.com/embed/${videoInfo.id}`;
     videoTitle = videoInfo.title ? `Vídeo: ${videoInfo.title}` : `Player de vídeo do YouTube para o ID ${videoInfo.id}`;
   }
 
@@ -82,7 +83,9 @@ export default function VideoModal({ videoInfo, onClose }) {
         onClick={(e) => e.stopPropagation()} // Impede o fechamento ao clicar no conteúdo do modal
       >
         <button
+          ref={closeButtonRef}
           onClick={onClose}
+          data-autofocus
           className="absolute top-4 right-4 text-white bg-gray-800 rounded-full h-10 w-10 flex items-center justify-center text-2xl z-10 hover:bg-gray-600 transition-colors"
           aria-label="Fechar vídeo"
         >
@@ -97,6 +100,8 @@ export default function VideoModal({ videoInfo, onClose }) {
             allowFullScreen
             title={videoTitle}
           ></iframe>
+          {/* Sentinela: ao sair do player com Tab, devolve o foco ao botão Fechar (evita vazar para a página) */}
+          <div tabIndex={0} onFocus={() => closeButtonRef.current?.focus()} />
         </div>
       </div>
     </div>
