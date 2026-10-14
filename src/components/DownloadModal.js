@@ -36,7 +36,7 @@ export default function DownloadModal({ isOpen, onClose, version, softwareName, 
                     </div>
                     <button
                         onClick={onClose}
-                        className="text-gray-400 hover:text-gray-600 transition-colors p-1"
+                        className="text-gray-700 hover:text-gray-900 transition-colors h-10 w-10 flex items-center justify-center"
                         aria-label="Fechar modal de download"
                     >
                         <FaTimes size={20} aria-hidden="true" />

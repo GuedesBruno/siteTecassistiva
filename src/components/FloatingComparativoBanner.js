@@ -17,7 +17,7 @@ export default function FloatingComparativoBanner() {
       {/* Área de contato invisível e fixa para estabilizar o hover enquanto o filho "pula" */}
       <div className="absolute inset-0 -top-8 -bottom-4 -left-12 -right-4 bg-transparent z-[-1]"></div>
 
-      <div className={`relative flex items-center justify-end transition-transform duration-500 ease-in-out ${isHovered ? 'translate-y-0' : 'animate-bounce motion-reduce:animate-none'}`}>
+      <div className={`relative flex items-center justify-end transition-transform duration-500 ease-in-out ${isHovered ? 'translate-y-0' : 'animate-[bounce_1s_ease-in-out_3] motion-reduce:animate-none'}`}>
         <Link href="/comparativo-impressao" className="relative flex items-center justify-end group">
         
         {/* Expanded Baloon text */}

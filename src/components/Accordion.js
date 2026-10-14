@@ -21,6 +21,7 @@ export default function Accordion({ title, content, isOpen, onToggle }) {
 
   return (
     <div className="border-t border-gray-200 py-4">
+      <h3 className="m-0">
       <button
         type="button"
         onClick={onToggle} // Usa o manipulador de toggle recebido por props
@@ -40,6 +41,7 @@ export default function Accordion({ title, content, isOpen, onToggle }) {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
         </svg>
       </button>
+      </h3>
       <div id={panelId} hidden={!isOpen} className="mt-4 prose prose-sm max-w-none text-gray-700">
         {renderedContent}
       </div>
