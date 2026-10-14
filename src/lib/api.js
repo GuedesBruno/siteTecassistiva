@@ -2,6 +2,10 @@ import qs from 'qs';
 import { sortItemsByOrder } from './utils';
 import { ambientesData as mockAmbientes } from './ambientes-data';
 
+// Em CI (deploy) qualquer falha da API deve interromper o build; fora de CI mantemos o fallback com dados vazios.
+const IS_CI = Boolean(process.env.CI);
+const DEBUG = Boolean(process.env.DEBUG);
+
 async function fetchAPI(endpoint, options = {}) {
   const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
   const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN;
@@ -25,7 +29,7 @@ async function fetchAPI(endpoint, options = {}) {
     const path = endpoint.replace(/^\/+/, '');
     const url = `${base}/${path}`;
 
-    console.log(`🔌 Fetching API: ${url}`); // Log para debug
+    if (DEBUG) console.log(`Fetching API: ${endpoint}`);
 
     const fetchOptions = {
       headers: { 'Authorization': `Bearer ${STRAPI_TOKEN}` },
@@ -36,8 +40,9 @@ async function fetchAPI(endpoint, options = {}) {
 
     if (!res.ok) {
       console.error(`Erro na requisição para ${endpoint}: ${res.status} ${res.statusText}`);
-      const errorText = await res.text();
-      console.error("Detalhes do erro:", errorText);
+      if (IS_CI) {
+        throw new Error(`Falha na API do Strapi (${res.status}) em ${endpoint}`);
+      }
 
       // FALLBACK: Se Strapi retornar erro (ex: limite de API excedido), retorna dados vazios
       console.warn(`⚠️ Strapi API indisponível (${res.status}). Retornando dados vazios para permitir build.`);
@@ -48,6 +53,7 @@ async function fetchAPI(endpoint, options = {}) {
 
   } catch (error) {
     console.error(`ERRO ao fazer fetch no endpoint "${endpoint}":`, error.message);
+    if (IS_CI) throw error;
 
     // FALLBACK CRÍTICO: Se Strapi estiver completamente offline, retorna dados vazios
     // Isso permite que o build complete mesmo com Strapi suspenso
@@ -431,20 +437,14 @@ export async function getImersaoBySlug(slug) {
 export async function getAllImersaoSlugs() {
   // ADICIONADO: populate[produto][fields] para verificar se existe relação
   const populateQuery = 'populate[produto][fields][0]=slug&populate[produto][fields][1]=nome&fields[0]=slug';
-  console.log(`🔍 Buscando imersões com populate: /api/imersaos?${populateQuery}`);
 
   try {
     const res = await fetchAPI(`/api/imersaos?${populateQuery}`);
-    console.log(`✅ Resposta da API:`, JSON.stringify(res, null, 2).substring(0, 500));
-
     const data = normalizeDataArray(res);
-    console.log(`📊 Data após normalize:`, data.length, 'itens');
-
     // Normalize each item if the attributes object is missing
     const normalizedData = data.map(item => {
       if (!item) return null;
       if (item.attributes) {
-        console.log(`  - Item com slug: ${item.attributes?.slug}, produto: ${item.attributes?.produto?.data ? 'SIM' : 'NÃO'}`);
         return item;
       }
       const { id, ...attributes } = item;
@@ -457,7 +457,6 @@ export async function getAllImersaoSlugs() {
       item.attributes?.produto?.data
     );
 
-    console.log(`✅ Imersões com produto vinculado: ${filtered.length}`);
     return filtered;
   } catch (error) {
     console.error(`❌ ERRO ao buscar imersões:`, error.message);

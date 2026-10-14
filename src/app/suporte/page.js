@@ -8,6 +8,7 @@ export const revalidate = 3600; // Revalidate every hour
 export const metadata = {
   title: 'Suporte Técnico',
   description: 'Acesse softwares, drivers, manuais e documentação técnica para produtos de tecnologia assistiva da Tecassistiva.',
+  alternates: { canonical: '/suporte/' },
   openGraph: {
     title: 'Suporte Técnico | Tecassistiva',
     description: 'Softwares, drivers e documentação para produtos de tecnologia assistiva',
@@ -46,15 +47,6 @@ export default async function SuportePage() {
   } catch (error) {
     console.error('Erro ao carregar dados da página de suporte:', error);
   }
-
-  // DEBUG: Log para verificar os dados
-  console.log('=== SUPORTE PAGE DEBUG ===');
-  console.log('Total de produtos com documentos:', products?.length || 0);
-  if (products?.length > 0) {
-    console.log('Primeiro produto:', JSON.stringify(products[0], null, 2));
-  }
-  console.log('Total de categorias:', categories?.length || 0);
-  console.log('=========================');
 
   const breadcrumbs = [
     { name: 'Página Inicial', path: '/' },
