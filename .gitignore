@@ -54,3 +54,6 @@ SOLUCAO_PROPOSTA.md
 
 # Gemini AI artifacts (user-specific)
 .gemini/
+
+# permite versionar o exemplo de variáveis (sem valores reais)
+!.env.example
