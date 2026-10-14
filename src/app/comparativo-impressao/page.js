@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function ComparativoPage() {
     return (
-        <main className="min-h-screen bg-white font-sans">
+        <div className="min-h-screen bg-white font-sans">
             {/* Hero Section */}
             <section className="bg-gray-50 py-6 md:py-8 relative overflow-hidden border-b border-gray-200">
                 <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 bg-blue-100 rounded-full blur-3xl opacity-40"></div>
@@ -513,6 +513,6 @@ export default function ComparativoPage() {
                     </Link>
                 </div>
             </section>
-        </main>
+        </div>
     );
 }

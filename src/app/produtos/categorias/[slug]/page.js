@@ -83,13 +83,13 @@ export default async function CategoryPage({ params }) {
             activeCategorySlug={slug}
           />
         </aside>
-        <main className="w-full md:w-2/3 lg:w-3/4">
+        <div className="w-full md:w-2/3 lg:w-3/4">
           <Suspense fallback={<div>Carregando...</div>}>
             <CategoryProductList
               category={category}
             />
           </Suspense>
-        </main>
+        </div>
       </div>
     </div>
   );

@@ -168,7 +168,7 @@ export default async function SubCategoryPage({ params }) {
             activeSubcategorySlug={subslug}
           />
         </aside>
-        <main className="w-full md:w-2/3 lg:w-3/4">
+        <div className="w-full md:w-2/3 lg:w-3/4">
           <Breadcrumbs items={breadcrumbs} />
           <Suspense fallback={<div>Carregando...</div>}>
             <ProductDisplay
@@ -176,7 +176,7 @@ export default async function SubCategoryPage({ params }) {
               products={products}
             />
           </Suspense>
-        </main>
+        </div>
       </div>
     </div>
   );

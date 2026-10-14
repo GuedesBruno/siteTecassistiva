@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function VantagensPage() {
     return (
-        <main className="min-h-screen bg-white font-sans">
+        <div className="min-h-screen bg-white font-sans">
             {/* Comparative Summary Section */}
             <section className="py-12 md:py-16 bg-white">
                 <div className="container mx-auto px-4 max-w-6xl">
@@ -290,6 +290,6 @@ export default function VantagensPage() {
                     </div>
                 </div>
             </section>
-        </main>
+        </div>
     );
 }
