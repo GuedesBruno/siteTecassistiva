@@ -10,6 +10,7 @@ export default function ContactForm({ title, subtitle, formName }) {
     celular: '',
     email: '',
     mensagem: '',
+    _gotcha: '', // honeypot: campo oculto que humanos não preenchem
   });
 
   const [status, setStatus] = useState(null);
@@ -23,10 +24,22 @@ export default function ContactForm({ title, subtitle, formName }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const endpoint = process.env.NEXT_PUBLIC_FORM_ENDPOINT;
+    if (!endpoint) {
+      setStatus('Erro: o formulário não está configurado no momento. Entre em contato pelo WhatsApp ou por e-mail.');
+      return;
+    }
+
+    // Honeypot preenchido: provável robô. Finge sucesso sem enviar.
+    if (formData._gotcha) {
+      setStatus('Mensagem enviada com sucesso!');
+      return;
+    }
+
     setStatus('Enviando...');
 
     try {
-      const endpoint = process.env.NEXT_PUBLIC_FORM_ENDPOINT || 'https://formspree.io/f/YOUR_FORM_ID';
       const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
@@ -47,6 +60,7 @@ export default function ContactForm({ title, subtitle, formName }) {
           celular: '',
           email: '',
           mensagem: '',
+          _gotcha: '',
         });
       } else {
         setStatus('Erro ao enviar mensagem. Tente novamente.');
@@ -63,6 +77,20 @@ export default function ContactForm({ title, subtitle, formName }) {
       <form onSubmit={handleSubmit} className="space-y-2" aria-label="Formulário de contato">
         <input type="hidden" name="_subject" value={`Novo Contato via ${formName}`} />
 
+        {/* Honeypot anti-spam: escondido de pessoas e de leitores de tela */}
+        <div className="hidden" aria-hidden="true">
+          <label htmlFor="_gotcha">Não preencha este campo</label>
+          <input
+            type="text"
+            id="_gotcha"
+            name="_gotcha"
+            value={formData._gotcha}
+            onChange={handleChange}
+            tabIndex={-1}
+            autoComplete="off"
+          />
+        </div>
+
         {/* Primeira linha: Nome, Instituição, Departamento */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           {/* Nome */}
@@ -74,6 +102,7 @@ export default function ContactForm({ title, subtitle, formName }) {
               type="text"
               id="nome"
               name="nome"
+              maxLength={100}
               value={formData.nome}
               onChange={handleChange}
               required
@@ -91,6 +120,7 @@ export default function ContactForm({ title, subtitle, formName }) {
               type="text"
               id="instituicao"
               name="instituicao"
+              maxLength={150}
               value={formData.instituicao}
               onChange={handleChange}
               required
@@ -108,6 +138,7 @@ export default function ContactForm({ title, subtitle, formName }) {
               type="text"
               id="departamento"
               name="departamento"
+              maxLength={100}
               value={formData.departamento}
               onChange={handleChange}
               className="p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full text-sm"
@@ -126,6 +157,7 @@ export default function ContactForm({ title, subtitle, formName }) {
               type="tel"
               id="celular"
               name="celular"
+              maxLength={20}
               value={formData.celular}
               onChange={handleChange}
               required
@@ -143,6 +175,7 @@ export default function ContactForm({ title, subtitle, formName }) {
               type="email"
               id="email"
               name="email"
+              maxLength={254}
               value={formData.email}
               onChange={handleChange}
               required
@@ -163,6 +196,7 @@ export default function ContactForm({ title, subtitle, formName }) {
             value={formData.mensagem}
             onChange={handleChange}
             rows="3"
+            maxLength={2000}
             placeholder="Digite sua dúvida ou solicitação"
             className="p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full text-sm"
             aria-describedby="mensagem-hint"
@@ -187,6 +221,10 @@ export default function ContactForm({ title, subtitle, formName }) {
             Fale agora
           </a>
         </div>
+
+        <p className="text-xs text-gray-600 text-center">
+          Ao enviar, você concorda que a Tecassistiva use seus dados apenas para responder a esta solicitação (LGPD).
+        </p>
 
         {status && (
           <div
