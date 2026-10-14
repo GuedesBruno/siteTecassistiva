@@ -7,6 +7,14 @@ on:
   repository_dispatch:
     types: [strapi_update]
 
+permissions:
+  contents: read
+
+# Evita dois deploys simultâneos no FTP, sem cancelar o que já está em andamento.
+concurrency:
+  group: deploy-producao
+  cancel-in-progress: false
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -17,7 +25,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
           cache: 'npm'
 
       - name: Install dependencies
@@ -30,15 +38,19 @@ jobs:
           NEXT_PUBLIC_FORM_ENDPOINT: ${{ secrets.NEXT_PUBLIC_FORM_ENDPOINT }}
         run: npm run build
 
-      - name: Ensure out exists (export if needed)
+      - name: Verificar saída do build (out/)
         shell: bash
         run: |
           set -euo pipefail
-          if [ -d out ]; then
-            echo "out/ exists"
-          else
-            echo "Running next export to generate out/ (if required)"
-            npx next export || true
+          if [ ! -d out ]; then
+            echo "::error::A pasta out/ não existe. Build não gerou o site estático."
+            exit 1
+          fi
+          PRODUTOS=$(find out/produtos -mindepth 2 -maxdepth 2 -name index.html | wc -l)
+          echo "Páginas de produto/subpasta em out/produtos: $PRODUTOS"
+          if [ "$PRODUTOS" -lt 20 ]; then
+            echo "::error::Poucas páginas de produto ($PRODUTOS < 20). Provável falha na API do Strapi; deploy abortado."
+            exit 1
           fi
 
       - name: Deploy via FTP using lftp (upload contents of out/)
@@ -58,3 +70,10 @@ jobs:
 
       - name: Done
         run: echo "Deploy finished"
+
+      - name: Avisar n8n em caso de erro
+        if: failure()
+        env:
+          N8N_WEBHOOK_URL: ${{ secrets.N8N_WEBHOOK_URL }}
+        run: |
+          curl --fail --max-time 10 -X POST "$N8N_WEBHOOK_URL"             -H "Content-Type: application/json"             -d '{"projeto": "Site Tecassistiva", "status": "Falha no Deploy", "log_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"}' || true
