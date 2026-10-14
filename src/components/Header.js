@@ -9,8 +9,12 @@ export default function Header({ categories = [] }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [openMenu, setOpenMenu] = useState(null); // submenu desktop aberto por teclado/clique: 'produtos' | 'suporte' | null
   const router = useRouter();
   const headerRef = useRef(null);
+  const menuButtonRef = useRef(null);
+  const closeButtonRef = useRef(null);
+  const submenuButtonRefs = useRef({});
 
   const supportMenuItems = [
     { name: 'Softwares', slug: '/suporte?tab=softwares' },
@@ -59,6 +63,87 @@ export default function Header({ categories = [] }) {
     };
   }, []); // Array de dependências vazio para rodar apenas uma vez na montagem
 
+  // Menu mobile: Esc fecha e devolve o foco ao botão "Menu"; ao abrir, o foco vai para o botão de fechar
+  const closeMobileMenu = (restoreFocus = false) => {
+    setIsMenuOpen(false);
+    if (restoreFocus) menuButtonRef.current?.focus();
+  };
+
+  useEffect(() => {
+    if (!isMenuOpen) return;
+    closeButtonRef.current?.focus();
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') closeMobileMenu(true);
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isMenuOpen]);
+
+  // Submenus desktop (disclosure): Esc fecha e devolve o foco ao botão; sair do foco do grupo fecha
+  const handleSubmenuKeyDown = (e, name) => {
+    if (e.key === 'Escape' && openMenu === name) {
+      setOpenMenu(null);
+      submenuButtonRefs.current[name]?.focus();
+    }
+  };
+
+  const handleSubmenuBlur = (e, name) => {
+    if (openMenu === name && !e.currentTarget.contains(e.relatedTarget)) {
+      setOpenMenu(null);
+    }
+  };
+
+  const renderDesktopSubmenu = (name, label, href, items) => (
+    <div
+      className="relative group py-4 -my-4"
+      onKeyDown={(e) => handleSubmenuKeyDown(e, name)}
+      onBlur={(e) => handleSubmenuBlur(e, name)}
+    >
+      <div className="flex items-center">
+        <Link href={href} className="text-white hover:text-tec-blue-light transition font-semibold">
+          {label}
+        </Link>
+        <button
+          type="button"
+          ref={(el) => { submenuButtonRefs.current[name] = el; }}
+          onClick={() => setOpenMenu(openMenu === name ? null : name)}
+          aria-expanded={openMenu === name}
+          aria-controls={`submenu-${name}`}
+          aria-label={`Submenu de ${label}`}
+          className="ml-1 p-1 text-white"
+        >
+          <svg className={`h-4 w-4 transition-transform ${openMenu === name ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+      </div>
+      <div
+        id={`submenu-${name}`}
+        className={`absolute left-1/2 transform -translate-x-1/2 top-full mt-0 w-72 bg-white shadow-lg z-[120] border ${openMenu === name ? 'block' : 'hidden group-hover:block'}`}
+      >
+        <ul className="py-2">
+          {items.map(item => (
+            <li key={item.key} className="border-b last:border-b-0">
+              <Link href={item.href} className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+
+  const productMenuItems = [
+    { key: 'ambientes', href: '/ambientes', label: 'Ambientes' },
+    ...(Array.isArray(categories) ? categories.map(category => {
+      const cat = category.attributes || category;
+      return { key: cat.slug || category.id, href: `/produtos/categorias/${cat.slug}`, label: cat.nome };
+    }) : []),
+  ];
+
+  const supportItems = supportMenuItems.map(item => ({ key: item.name, href: item.slug, label: item.name }));
+
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (searchTerm.trim()) {
@@ -86,47 +171,9 @@ export default function Header({ categories = [] }) {
         <div className="hidden lg:flex items-center">
           <nav className="flex items-center space-x-8 flex-wrap" aria-label="Navegação principal">
             <Link href="/tecassistiva" className="text-white hover:text-tec-blue-light transition font-semibold">A Tecassistiva</Link>
-            <div className="relative group py-4 -my-4">
-              <Link href="/produtos" className="text-white hover:text-tec-blue-light transition font-semibold" aria-haspopup="true" aria-expanded="false">
-                Produtos
-              </Link>
-              <div className="absolute left-1/2 transform -translate-x-1/2 top-full mt-0 w-72 bg-white shadow-lg hidden group-hover:block z-[120] border" role="menu">
-                <div className="py-2">
-                  <div className="border-b last:border-b-0">
-                    <Link href="/ambientes" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100" role="menuitem">
-                      Ambientes
-                    </Link>
-                  </div>
-                  {Array.isArray(categories) && categories.map(category => {
-                    const cat = category.attributes || category;
-                    return (
-                      <div key={cat.slug || category.id} className="border-b last:border-b-0">
-                        <Link href={`/produtos/categorias/${cat.slug}`} className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100" role="menuitem">
-                          {cat.nome}
-                        </Link>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
+            {renderDesktopSubmenu('produtos', 'Produtos', '/produtos', productMenuItems)}
             <Link href="/atas-abertas" className="text-white hover:text-tec-blue-light transition font-semibold">Atas Abertas</Link>
-            <div className="relative group py-4 -my-4">
-              <Link href="/suporte" className="text-white hover:text-tec-blue-light transition font-semibold" aria-haspopup="true" aria-expanded="false">
-                Suporte
-              </Link>
-              <div className="absolute left-1/2 transform -translate-x-1/2 top-full mt-0 w-72 bg-white shadow-lg hidden group-hover:block z-[120] border" role="menu">
-                <div className="py-2">
-                  {supportMenuItems.map(item => (
-                    <div key={item.name} className="border-b last:border-b-0">
-                      <Link href={item.slug} className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100" role="menuitem">
-                        {item.name}
-                      </Link>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+            {renderDesktopSubmenu('suporte', 'Suporte', '/suporte', supportItems)}
             <Link href="/contato" className="text-white hover:text-tec-blue-light transition font-semibold">Contato</Link>
           </nav>
 
@@ -137,7 +184,8 @@ export default function Header({ categories = [] }) {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Buscar..."
-              className="px-3 py-1.5 border-y border-l border-gray-300 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-tec-blue-light w-0 opacity-0 group-hover:w-40 group-focus-within:w-40 group-hover:opacity-100 group-focus-within:opacity-100 transition-all duration-300 ease-in-out"
+              aria-label="Buscar no site"
+              className="px-3 py-1.5 border-y border-l border-gray-300 text-sm text-gray-800 focus:ring-2 focus:ring-tec-blue-light w-0 opacity-0 group-hover:w-40 group-focus-within:w-40 group-hover:opacity-100 group-focus-within:opacity-100 transition-all duration-300 ease-in-out"
             />
             <button type="submit" aria-label="Buscar" className="bg-white px-3 py-1.5 border-y border-r border-gray-300 hover:bg-gray-100 transition-colors">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -149,9 +197,12 @@ export default function Header({ categories = [] }) {
 
         <div className="lg:hidden flex items-center">
           <button
+            ref={menuButtonRef}
+            type="button"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Abrir menu"
-            className="text-white focus:outline-none font-bold text-sm uppercase tracking-wider"
+            aria-expanded={isMenuOpen}
+            aria-controls="menu-mobile"
+            className="text-white font-bold text-sm uppercase tracking-wider"
           >
             Menu
           </button>
@@ -160,7 +211,9 @@ export default function Header({ categories = [] }) {
 
       {/* Menu Mobile */}
       <div
-        className={`lg:hidden fixed top-0 left-0 w-full h-full bg-tec-blue z-[100] transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'
+        id="menu-mobile"
+        inert={isMenuOpen ? undefined : ''}
+        className={`lg:hidden fixed top-0 left-0 w-full h-full bg-tec-blue z-[100] transform transition-[transform,visibility] duration-300 ease-in-out motion-reduce:transition-none ${isMenuOpen ? 'translate-x-0 visible' : '-translate-x-full invisible'
           }`}
       >
         <div className="container mx-auto px-4 py-4 flex flex-col items-center text-center">
@@ -175,11 +228,13 @@ export default function Header({ categories = [] }) {
               />
             </Link>
             <button
-              onClick={() => setIsMenuOpen(false)}
+              ref={closeButtonRef}
+              type="button"
+              onClick={() => closeMobileMenu(true)}
               aria-label="Fechar menu"
-              className="text-white focus:outline-none"
+              className="text-white"
             >
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -192,7 +247,8 @@ export default function Header({ categories = [] }) {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Buscar..."
-              className="w-full px-4 py-2 rounded-full text-gray-800 text-sm focus:outline-none shadow-md"
+              aria-label="Buscar no site"
+              className="w-full px-4 py-2 rounded-full text-gray-800 text-sm shadow-md"
             />
             <button type="submit" aria-label="Buscar" className="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 text-tec-blue">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
