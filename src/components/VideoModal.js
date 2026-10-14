@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { useModalFocus } from '@/lib/useModalFocus';
 
 /**
  * Um componente de modal para exibir um player de vídeo do Vimeo ou YouTube.
@@ -12,19 +13,8 @@ import { useEffect, useRef } from 'react';
 export default function VideoModal({ videoInfo, onClose }) {
   const wakeLockRef = useRef(null);
 
-  // Lida com a tecla "Esc" para fechar o modal
-  useEffect(() => {
-    const handleEsc = (event) => {
-      if (event.key === 'Escape') {
-        onClose();
-      }
-    };
-    window.addEventListener('keydown', handleEsc);
-
-    return () => {
-      window.removeEventListener('keydown', handleEsc);
-    };
-  }, [onClose]);
+  // Foco inicial, trap do Tab, Esc para fechar e retorno do foco ao elemento que abriu o modal
+  const dialogRef = useModalFocus(Boolean(videoInfo), onClose);
 
   // Efeito para gerenciar o Wake Lock
   useEffect(() => {
@@ -71,14 +61,19 @@ export default function VideoModal({ videoInfo, onClose }) {
   if (videoInfo.type === 'vimeo') {
     const [id, hash] = videoInfo.id.split('/');
     videoSrc = `https://player.vimeo.com/video/${id}?autoplay=1${hash ? `&h=${hash}` : ''}`;
-    videoTitle = `Player de vídeo do Vimeo para o ID ${videoInfo.id}`;
+    videoTitle = videoInfo.title ? `Vídeo: ${videoInfo.title}` : `Player de vídeo do Vimeo para o ID ${videoInfo.id}`;
   } else if (videoInfo.type === 'youtube') {
     videoSrc = `https://www.youtube.com/embed/${videoInfo.id}?autoplay=1`;
-    videoTitle = `Player de vídeo do YouTube para o ID ${videoInfo.id}`;
+    videoTitle = videoInfo.title ? `Vídeo: ${videoInfo.title}` : `Player de vídeo do YouTube para o ID ${videoInfo.id}`;
   }
 
   return (
     <div
+      ref={dialogRef}
+      tabIndex={-1}
+      role="dialog"
+      aria-modal="true"
+      aria-label={videoTitle}
       className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-[100]"
       onClick={onClose} // Fecha ao clicar no overlay
     >

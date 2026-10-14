@@ -1,12 +1,18 @@
 import React from 'react';
+import { useModalFocus } from '@/lib/useModalFocus';
 import { FaTimes, FaDownload } from 'react-icons/fa';
 import RichTextRenderer from './RichTextRenderer';
 
 export default function DownloadModal({ isOpen, onClose, version, softwareName, links }) {
+    // Foco inicial, trap do Tab, Esc para fechar e retorno do foco ao elemento que abriu o modal
+    const dialogRef = useModalFocus(isOpen, onClose);
+
     if (!isOpen) return null;
 
     return (
         <div
+            ref={dialogRef}
+            tabIndex={-1}
             className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
             onClick={onClose}
             role="dialog"

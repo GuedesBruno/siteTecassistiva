@@ -51,7 +51,7 @@ export default function VideoCard({ video, onVideoClick }) {
 
     return (
         <div className="group block rounded-lg shadow-md overflow-hidden transform hover:-translate-y-1 transition-all duration-300 text-left w-full bg-white border border-gray-100">
-            <button onClick={() => onVideoClick(videoInfo)} className="relative block w-full">
+            <button onClick={() => onVideoClick({ ...videoInfo, title: attrs.titulo })} className="relative block w-full">
                 <div className="aspect-square">
                     {thumbnailUrl ? (
                         <img src={thumbnailUrl} alt={attrs.titulo} className="w-full h-full object-cover" />
