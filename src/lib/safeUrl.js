@@ -4,13 +4,16 @@
 // (javascript:, data:, vbscript: etc.) devolve null.
 const ALLOWED_PROTOCOLS = ['https:', 'http:', 'mailto:', 'tel:'];
 
+const INTERNAL_PATH = /^\/(?![\/\\])[^\\\u0000-\u001f\s]*$/;
+
 export function safeUrl(url) {
   if (typeof url !== 'string') return null;
   const value = url.trim();
   if (!value) return null;
 
-  // Caminho interno (mas não "//host", que é protocolo relativo) ou âncora
-  if ((value.startsWith('/') && !value.startsWith('//')) || value.startsWith('#')) {
+  // Caminho interno ou âncora. Rejeita "//host" (protocolo relativo), barra invertida,
+  // caracteres de controle e espaços, que alguns navegadores normalizam para "//host".
+  if (INTERNAL_PATH.test(value) || value.startsWith('#')) {
     return value;
   }
 
