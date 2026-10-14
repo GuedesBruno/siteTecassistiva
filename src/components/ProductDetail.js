@@ -8,6 +8,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { getStrapiMediaUrl } from '@/lib/media';
 import { safeUrl } from '@/lib/safeUrl';
+import { handleTablistKeyDown } from '@/lib/tabsKeyboard';
 import VideoModal from './VideoModal';
 import RichTextRenderer from './RichTextRenderer';
 import SpecsTable from './SpecsTable';
@@ -152,8 +153,8 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
                       </div>
                     </SwiperSlide>
                   ))}
-                  <div className="swiper-button-prev !text-white after:!text-2xl !w-10 !h-10 !bg-tec-blue/50 !rounded-full !shadow-md hover:!bg-tec-blue transition-all opacity-0 group-hover:opacity-100"></div>
-                  <div className="swiper-button-next !text-white after:!text-2xl !w-10 !h-10 !bg-tec-blue/50 !rounded-full !shadow-md hover:!bg-tec-blue transition-all opacity-0 group-hover:opacity-100"></div>
+                  <button type="button" aria-label="Foto anterior" className="swiper-button-prev !text-white after:!text-2xl !w-10 !h-10 !bg-tec-blue/50 !rounded-full !shadow-md hover:!bg-tec-blue transition-all opacity-0 group-hover:opacity-100 focus-visible:opacity-100"></button>
+                  <button type="button" aria-label="Próxima foto" className="swiper-button-next !text-white after:!text-2xl !w-10 !h-10 !bg-tec-blue/50 !rounded-full !shadow-md hover:!bg-tec-blue transition-all opacity-0 group-hover:opacity-100 focus-visible:opacity-100"></button>
                 </Swiper>
               ) : (
                 <div className="w-full h-full flex items-center justify-center bg-gray-50 text-gray-400">
@@ -206,8 +207,8 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
                       <VideoCard video={video} onVideoClick={setSelectedVideo} />
                     </SwiperSlide>
                   ))}
-                  <div className="video-swiper-button-prev swiper-button-prev !text-white after:!text-xl !w-8 !h-8 !bg-tec-blue/50 !rounded-full !shadow-md hover:!bg-tec-blue transition-all opacity-0 group-hover/video:opacity-100"></div>
-                  <div className="video-swiper-button-next swiper-button-next !text-white after:!text-xl !w-8 !h-8 !bg-tec-blue/50 !rounded-full !shadow-md hover:!bg-tec-blue transition-all opacity-0 group-hover/video:opacity-100"></div>
+                  <button type="button" aria-label="Vídeos anteriores" className="video-swiper-button-prev swiper-button-prev !text-white after:!text-xl !w-8 !h-8 !bg-tec-blue/50 !rounded-full !shadow-md hover:!bg-tec-blue transition-all opacity-0 group-hover/video:opacity-100 focus-visible:opacity-100"></button>
+                  <button type="button" aria-label="Próximos vídeos" className="video-swiper-button-next swiper-button-next !text-white after:!text-xl !w-8 !h-8 !bg-tec-blue/50 !rounded-full !shadow-md hover:!bg-tec-blue transition-all opacity-0 group-hover/video:opacity-100 focus-visible:opacity-100"></button>
                 </Swiper>
               </div>
             )}
@@ -243,12 +244,25 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
 
         <div className="w-full">
           <div className="border-b border-gray-200 sticky top-[var(--header-height)] z-40 bg-white transition-all duration-300">
-            <nav className="-mb-px flex space-x-2 md:space-x-4 overflow-x-auto no-scrollbar" aria-label="Tabs">
-              {tabs.map((tab) => (
+            <div role="tablist" aria-label="Informações do produto" className="-mb-px flex space-x-2 md:space-x-4 overflow-x-auto no-scrollbar">
+              {tabs.map((tab, tabIndex) => (
                 tab.content && (
                   <button
                     key={tab.name}
+                    type="button"
+                    role="tab"
+                    id={`product-tab-${tabIndex}`}
+                    aria-selected={activeTab === tab.name}
+                    aria-controls={`product-tabpanel-${tabIndex}`}
+                    tabIndex={activeTab === tab.name ? 0 : -1}
                     onClick={() => setActiveTab(tab.name)}
+                    onKeyDown={(e) => handleTablistKeyDown(
+                      e,
+                      tabs.filter(t => t.content).map(t => t.name),
+                      tab.name,
+                      setActiveTab,
+                      (name) => `product-tab-${tabs.findIndex(t => t.name === name)}`
+                    )}
                     className={`px-4 py-3 text-sm md:text-base font-semibold transition-colors duration-200 whitespace-nowrap ${activeTab === tab.name
                       ? 'border-b-2 border-tec-blue text-tec-blue'
                       : 'text-gray-500 hover:text-tec-blue'
@@ -258,12 +272,18 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
                   </button>
                 )
               ))}
-            </nav>
+            </div>
           </div>
           <div className="py-8">
             <div className="prose max-w-none">
-              {tabs.map((tab) => (
-                <div key={tab.name} className={activeTab === tab.name ? 'block' : 'hidden'}>
+              {tabs.map((tab, tabIndex) => (
+                <div
+                  key={tab.name}
+                  role="tabpanel"
+                  id={`product-tabpanel-${tabIndex}`}
+                  aria-labelledby={`product-tab-${tabIndex}`}
+                  className={activeTab === tab.name ? 'block' : 'hidden'}
+                >
                   {/* Lógica para Visão Geral e Características Funcionais (Cards Verticais) */}
                   {(tab.name === 'Visão Geral' || tab.name === 'Características Funcionais') && (
                     <div className="flex flex-col gap-6">

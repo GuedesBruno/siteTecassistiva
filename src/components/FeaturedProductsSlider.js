@@ -6,8 +6,11 @@ import 'swiper/css';
 import 'swiper/css/navigation'; // Importa o CSS da navegação
 import { Navigation, Autoplay } from 'swiper/modules'; // Importa os módulos necessários
 import ProductCard from './ProductCard';
+import CarouselAutoplayToggle, { useCarouselAutoplay } from './CarouselAutoplayToggle';
 
 export default function FeaturedProductsSlider({ products }) {
+  const { onSwiper, paused, toggle } = useCarouselAutoplay();
+
   if (!Array.isArray(products) || products.length === 0) {
     return <p>Nenhum produto em destaque no momento.</p>;
   }
@@ -22,6 +25,7 @@ export default function FeaturedProductsSlider({ products }) {
         </div>
         <Swiper
           modules={[Navigation, Autoplay]} // Adiciona Autoplay
+          onSwiper={onSwiper}
           spaceBetween={30}
           slidesPerView={4} // Define 4 colunas como padrão para telas grandes
           navigation={{
@@ -54,8 +58,9 @@ export default function FeaturedProductsSlider({ products }) {
         </div>
       </div>
       {/* Botões de navegação personalizados movidos para fora do container */}
-      <div className="swiper-button-prev featured-products-prev"></div>
-      <div className="swiper-button-next featured-products-next"></div>
+      <button type="button" className="swiper-button-prev featured-products-prev" aria-label="Produtos anteriores"></button>
+      <button type="button" className="swiper-button-next featured-products-next" aria-label="Próximos produtos"></button>
+      <CarouselAutoplayToggle paused={paused} onToggle={toggle} label="carrossel de produtos em destaque" className="bottom-4 left-4" />
     </section>
   );
 }

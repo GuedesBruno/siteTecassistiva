@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getStrapiMediaUrl } from '@/lib/media';
 import { safeUrl } from '@/lib/safeUrl';
+import CarouselAutoplayToggle, { useCarouselAutoplay } from './CarouselAutoplayToggle';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -14,6 +15,7 @@ import 'swiper/css/pagination';
 
 export default function BannerSlider({ banners }) {
   const [isMounted, setIsMounted] = useState(false);
+  const { onSwiper, paused, toggle } = useCarouselAutoplay();
 
   useEffect(() => {
     setIsMounted(true);
@@ -36,7 +38,8 @@ export default function BannerSlider({ banners }) {
         modules={[Navigation, Pagination, Autoplay, Keyboard, A11y]}
         spaceBetween={0}
         slidesPerView={1}
-        navigation={isMounted}
+        onSwiper={onSwiper}
+        navigation={isMounted ? { prevEl: '.banner-slider-prev', nextEl: '.banner-slider-next' } : false}
         pagination={{ clickable: true }}
         keyboard={{ enabled: true }}
         a11y={{
@@ -106,6 +109,9 @@ export default function BannerSlider({ banners }) {
           );
         })}
       </Swiper>
+      <button type="button" className="swiper-button-prev banner-slider-prev" aria-label="Banner anterior"></button>
+      <button type="button" className="swiper-button-next banner-slider-next" aria-label="Próximo banner"></button>
+      <CarouselAutoplayToggle paused={paused} onToggle={toggle} label="carrossel de banners" className="bottom-4 left-4" />
     </section>
   );
 }

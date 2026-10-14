@@ -5,20 +5,24 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import CarouselAutoplayToggle, { useCarouselAutoplay } from './CarouselAutoplayToggle';
 
 export default function TestimonialSection({ depoimentos }) {
+  const { onSwiper, paused, toggle } = useCarouselAutoplay();
+
   if (!depoimentos || depoimentos.length === 0) {
     return null;
   }
 
   return (
-    <section className="bg-gray-100 py-10">
+    <section className="bg-gray-100 py-10 relative">
       <div className="container mx-auto px-4 md:px-12 lg:px-24">
         <div className="text-center mb-8">
           <h2 className="text-4xl font-extrabold text-gray-900">Depoimentos</h2>
         </div>
         <Swiper
           modules={[Pagination, Autoplay]}
+          onSwiper={onSwiper}
           spaceBetween={30}
           slidesPerView={1}
           loop={depoimentos.length > 1}
@@ -54,6 +58,7 @@ export default function TestimonialSection({ depoimentos }) {
           <div className="swiper-pagination-testimonials !absolute !bottom-0 !left-1/2 !-translate-x-1/2 flex justify-center space-x-2"></div>
         </Swiper>
       </div>
+      <CarouselAutoplayToggle paused={paused} onToggle={toggle} label="carrossel de depoimentos" className="bottom-4 left-4" />
     </section>
   );
 }
