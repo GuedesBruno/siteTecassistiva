@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
+import { Navigation, A11y } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { getStrapiMediaUrl } from '@/lib/media';
@@ -110,6 +110,7 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
   const [activeTab, setActiveTab] = useState(initialTab);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [swiper, setSwiper] = useState(null);
+  const [activeImage, setActiveImage] = useState(0);
 
   // Effect to handle prop changes or empty states
   useEffect(() => {
@@ -131,8 +132,14 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
             <div className="aspect-square relative rounded-2xl overflow-hidden bg-white shadow-lg border border-gray-100">
               {images.length > 0 ? (
                 <Swiper
-                  modules={[Navigation]}
+                  modules={[Navigation, A11y]}
                   onSwiper={setSwiper}
+                  onSlideChange={(sw) => setActiveImage(sw.realIndex)}
+                  a11y={{
+                    prevSlideMessage: 'Foto anterior',
+                    nextSlideMessage: 'Próxima foto',
+                    slideLabelMessage: 'Foto {{index}} de {{slidesLength}}',
+                  }}
                   navigation={{
                     prevEl: '.swiper-button-prev',
                     nextEl: '.swiper-button-next',
@@ -169,18 +176,21 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
             {images.length > 1 && (
               <div className="mt-4 grid grid-cols-5 gap-2">
                 {images.map((img, idx) => (
-                  <div
+                  <button
                     key={img.id || idx}
-                    className="aspect-square relative rounded-lg overflow-hidden border border-gray-200 cursor-pointer hover:border-tec-blue transition-colors"
-                    onClick={() => swiper?.slideTo(idx)}
+                    type="button"
+                    aria-label={`Ver foto ${idx + 1} de ${images.length}`}
+                    aria-current={activeImage === idx ? 'true' : undefined}
+                    className={`aspect-square relative rounded-lg overflow-hidden border-2 transition-colors ${activeImage === idx ? 'border-tec-blue' : 'border-gray-200 hover:border-tec-blue'}`}
+                    onClick={() => swiper?.slideToLoop(idx)}
                   >
                     <Image
                       src={getStrapiMediaUrl(img.url)}
-                      alt={`Thumbnail ${idx + 1}`}
+                      alt=""
                       fill
                       className="object-cover"
                     />
-                  </div>
+                  </button>
                 ))}
               </div>
             )}
@@ -263,7 +273,7 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
                       setActiveTab,
                       (name) => `product-tab-${tabs.findIndex(t => t.name === name)}`
                     )}
-                    className={`px-4 py-3 text-sm md:text-base font-semibold transition-colors duration-200 whitespace-nowrap ${activeTab === tab.name
+                    className={`px-4 py-3 text-sm md:text-base font-semibold transition-colors duration-200 whitespace-nowrap focus-visible:outline-offset-[-2px] ${activeTab === tab.name
                       ? 'border-b-2 border-tec-blue text-tec-blue'
                       : 'text-gray-500 hover:text-tec-blue'
                       }`}
@@ -282,7 +292,7 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
                   role="tabpanel"
                   id={`product-tabpanel-${tabIndex}`}
                   aria-labelledby={`product-tab-${tabIndex}`}
-                  className={activeTab === tab.name ? 'block' : 'hidden'}
+                  className={`scroll-mt-14 ${activeTab === tab.name ? 'block' : 'hidden'}`}
                 >
                   {/* Lógica para Visão Geral e Características Funcionais (Cards Verticais) */}
                   {(tab.name === 'Visão Geral' || tab.name === 'Características Funcionais') && (
