@@ -2,7 +2,7 @@
 "use client";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Autoplay } from 'swiper/modules';
+import { Pagination, Autoplay, A11y } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import CarouselAutoplayToggle, { useCarouselAutoplay } from './CarouselAutoplayToggle';
@@ -21,8 +21,9 @@ export default function TestimonialSection({ depoimentos }) {
           <h2 className="text-4xl font-extrabold text-gray-900">Depoimentos</h2>
         </div>
         <Swiper
-          modules={[Pagination, Autoplay]}
+          modules={[Pagination, Autoplay, A11y]}
           onSwiper={onSwiper}
+          watchSlidesProgress
           spaceBetween={30}
           slidesPerView={1}
           loop={depoimentos.length > 1}
@@ -33,6 +34,11 @@ export default function TestimonialSection({ depoimentos }) {
           pagination={{
             clickable: true,
             el: '.swiper-pagination-testimonials',
+          }}
+          a11y={{
+            prevSlideMessage: 'Depoimento anterior',
+            nextSlideMessage: 'Próximo depoimento',
+            paginationBulletMessage: 'Ir para o depoimento {{index}}',
           }}
           className="relative"
         >
