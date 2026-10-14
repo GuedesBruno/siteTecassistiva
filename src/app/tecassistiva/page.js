@@ -13,6 +13,7 @@ async function getAllTestimonials() {
 export const metadata = {
   title: 'Sobre Nós',
   description: 'Conheça a Tecassistiva, empresa especializada em tecnologia assistiva e acessibilidade. Nossa história, missão e valores.',
+  alternates: { canonical: '/tecassistiva/' },
   openGraph: {
     title: 'Sobre Nós | Tecassistiva',
     description: 'Conheça a Tecassistiva e nossa missão de promover inclusão através da tecnologia assistiva',

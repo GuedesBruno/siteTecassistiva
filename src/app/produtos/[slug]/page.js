@@ -103,7 +103,7 @@ export async function generateMetadata({ params }) {
         'tecnologia assistiva',
         'acessibilidade'
       ].filter(Boolean).join(', '),
-      canonical: `https://www.tecassistiva.com.br/produtos/${productAttributes.slug}/`,
+      alternates: { canonical: `/produtos/${productAttributes.slug}/` },
       openGraph: {
         title: productAttributes.nome,
         description: description,

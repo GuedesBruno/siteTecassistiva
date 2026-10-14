@@ -10,6 +10,7 @@ export const revalidate = 3600; // Revalidate every hour
 export const metadata = {
   title: 'Atas Abertas',
   description: 'Consulte as atas de registro de preços abertas para adesão (carona). Adquira produtos de tecnologia assistiva com preços registrados.',
+  alternates: { canonical: '/atas-abertas/' },
   openGraph: {
     title: 'Atas Abertas | Tecassistiva',
     description: 'Atas de registro de preços para adesão em tecnologia assistiva',

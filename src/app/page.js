@@ -31,6 +31,10 @@ async function getHomeVideos() {
   return _getHomeVideos();
 }
 
+export const metadata = {
+  alternates: { canonical: '/' },
+};
+
 export default async function Home() {
   // Busca os dados da API em paralelo para otimizar o tempo de build
   const [banners, featuredProducts, manufacturers, testimonials, homeVideos] = await Promise.all([

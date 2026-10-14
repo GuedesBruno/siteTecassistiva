@@ -6,6 +6,7 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 export const metadata = {
   title: 'Fale Conosco',
   description: 'Entre em contato com a Tecassistiva. Tire suas dúvidas sobre tecnologia assistiva, solicite orçamentos e obtenha suporte técnico.',
+  alternates: { canonical: '/contato/' },
   openGraph: {
     title: 'Fale Conosco | Tecassistiva',
     description: 'Entre em contato com a Tecassistiva para dúvidas, orçamentos e suporte',

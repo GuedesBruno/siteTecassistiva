@@ -4,6 +4,7 @@ import Link from 'next/link';
 export const metadata = {
     title: 'Comparativo de Velocidade: Impressora Braille | Tecassistiva',
     description: 'Entenda como analisar a velocidade real de uma impressora Braille e a importância dos testes com caracteres da língua portuguesa.',
+    alternates: { canonical: '/comparativo-impressao/' },
 };
 
 export default function ComparativoPage() {

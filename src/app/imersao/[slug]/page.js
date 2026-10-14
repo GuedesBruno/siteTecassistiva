@@ -103,6 +103,7 @@ export async function generateMetadata({ params }) {
 
     return {
         title: `Imersão: ${productData.nome}`,
+        alternates: { canonical: `/imersao/${slug}/` },
     };
 }
 

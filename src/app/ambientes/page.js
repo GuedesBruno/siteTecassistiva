@@ -6,6 +6,7 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 export const metadata = {
   title: 'Soluções por Ambientes',
   description: 'Descubra soluções de tecnologia assistiva para diferentes ambientes: escolas, empresas, residências e mais.',
+  alternates: { canonical: '/ambientes/' },
   openGraph: {
     title: 'Soluções por Ambientes | Tecassistiva',
     description: 'Tecnologia assistiva para escolas, empresas e residências',

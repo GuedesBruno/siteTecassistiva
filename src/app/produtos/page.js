@@ -16,6 +16,10 @@ async function getAllProductsForDisplay() {
   return _getAllProductsForDisplay();
 }
 
+export const metadata = {
+  alternates: { canonical: '/produtos/' },
+};
+
 export default async function AllProductsPage() {
   const [allCategories, allProducts] = await Promise.all([
     getAllCategories(),

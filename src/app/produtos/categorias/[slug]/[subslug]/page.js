@@ -77,7 +77,7 @@ export async function generateMetadata({ params }) {
       title: `${subcategoryName} | Tecassistiva`,
       description: `Confira nossos produtos em ${subcategoryName}.`,
       alternates: {
-        canonical: `https://www.tecassistiva.com.br/produtos/categorias/${slug}/${subslug}`,
+        canonical: `/produtos/categorias/${slug}/${subslug}/`,
       },
     };
   }
