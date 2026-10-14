@@ -6,6 +6,24 @@ import { ambientesData as mockAmbientes } from './ambientes-data';
 const IS_CI = Boolean(process.env.CI);
 const DEBUG = Boolean(process.env.DEBUG);
 
+const MAX_ATTEMPTS = 3;
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+// Repete erros de rede e respostas 5xx (3 tentativas, espera de 1s e 2s). 4xx não é repetido.
+async function fetchWithRetry(url, options, endpoint) {
+  for (let attempt = 1; ; attempt++) {
+    try {
+      const res = await fetch(url, options);
+      if (res.status < 500 || attempt === MAX_ATTEMPTS) return res;
+      console.warn(`Tentativa ${attempt}/${MAX_ATTEMPTS} falhou (${res.status}) em ${endpoint}`);
+    } catch (error) {
+      if (attempt === MAX_ATTEMPTS) throw error;
+      console.warn(`Tentativa ${attempt}/${MAX_ATTEMPTS} falhou (${error.message}) em ${endpoint}`);
+    }
+    await sleep(1000 * attempt);
+  }
+}
+
 async function fetchAPI(endpoint, options = {}) {
   const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
   const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN;
@@ -36,7 +54,7 @@ async function fetchAPI(endpoint, options = {}) {
       ...options,
     };
 
-    const res = await fetch(url, fetchOptions);
+    const res = await fetchWithRetry(url, fetchOptions, endpoint);
 
     if (!res.ok) {
       console.error(`Erro na requisição para ${endpoint}: ${res.status} ${res.statusText}`);
