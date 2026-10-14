@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useRef } from 'react';
+import { useState, useMemo, useRef, useEffect, useId } from 'react';
 import ProductDisplay from './ProductDisplay';
 import { FaSearch, FaArrowRight, FaUndo, FaChevronDown } from 'react-icons/fa';
 
@@ -9,6 +9,9 @@ const getAttrs = (item) => item?.attributes || item || {};
 
 export default function ProductFinderWizard({ categories = [], products = [] }) {
     const inputRef = useRef(null);
+    const baseId = useId();
+    const listboxId = `${baseId}-listbox`;
+    const optionId = (idx) => `${baseId}-opt-${idx}`;
     const [step, setStep] = useState(1);
     const [userInput, setUserInput] = useState('');
     const [selectedCategory, setSelectedCategory] = useState(null);
@@ -144,6 +147,7 @@ export default function ProductFinderWizard({ categories = [], products = [] }) 
 
     // Step 1: Initial Question
     const [showSuggestions, setShowSuggestions] = useState(false);
+    const [activeIndex, setActiveIndex] = useState(-1);
 
     // Filter suggestions based on input if needed, or show all top-level categories when empty?
     // Current wizard logic relies on "suggestions" which is categories + products.
@@ -154,6 +158,43 @@ export default function ProductFinderWizard({ categories = [], products = [] }) 
         return suggestions.filter(s => s.label.toLowerCase().includes(lower)).slice(0, 100);
     }, [userInput, suggestions]);
 
+    const isListOpen = showSuggestions && displaySuggestions.length > 0;
+
+    // Mantém a opção ativa visível ao navegar com as setas
+    useEffect(() => {
+        if (activeIndex >= 0) {
+            document.getElementById(optionId(activeIndex))?.scrollIntoView({ block: 'nearest' });
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [activeIndex]);
+
+    const selectSuggestion = (s) => {
+        setUserInput(s.label);
+        setShowSuggestions(false);
+        setActiveIndex(-1);
+    };
+
+    const handleInputKeyDown = (e) => {
+        const count = displaySuggestions.length;
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            if (!isListOpen) { setShowSuggestions(true); return; }
+            setActiveIndex(i => (i + 1) % count);
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            if (!isListOpen) { setShowSuggestions(true); return; }
+            setActiveIndex(i => (i <= 0 ? count - 1 : i - 1));
+        } else if (e.key === 'Enter' && isListOpen && activeIndex >= 0 && displaySuggestions[activeIndex]) {
+            e.preventDefault();
+            selectSuggestion(displaySuggestions[activeIndex]);
+        } else if (e.key === 'Escape' && showSuggestions) {
+            e.preventDefault();
+            e.stopPropagation();
+            setShowSuggestions(false);
+            setActiveIndex(-1);
+        }
+    };
+
     if (step === 1) {
         return (
             <div className="flex flex-col items-center justify-center min-h-[50vh] bg-white rounded-xl shadow-lg p-8 md:p-14 animate-fade-in-up border border-gray-100">
@@ -161,9 +202,19 @@ export default function ProductFinderWizard({ categories = [], products = [] }) 
                     O que você busca?
                 </h2>
 
-                <form onSubmit={handleInputSubmit} className="w-full max-w-lg relative group z-20">
+                <form
+                    onSubmit={handleInputSubmit}
+                    className="w-full max-w-lg relative group z-20"
+                    onBlur={(e) => {
+                        // Fecha a lista só quando o foco sai do formulário (input, botões e lista)
+                        if (!e.currentTarget.contains(e.relatedTarget)) {
+                            setShowSuggestions(false);
+                            setActiveIndex(-1);
+                        }
+                    }}
+                >
                     <div className="relative">
-                        <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg group-focus-within:text-tec-blue transition-colors duration-300 pointer-events-none" />
+                        <FaSearch aria-hidden="true" className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg group-focus-within:text-tec-blue transition-colors duration-300 pointer-events-none" />
                         <input
                             ref={inputRef}
                             type="text"
@@ -171,48 +222,62 @@ export default function ProductFinderWizard({ categories = [], products = [] }) 
                             onChange={(e) => {
                                 setUserInput(e.target.value);
                                 setShowSuggestions(true);
+                                setActiveIndex(-1);
                             }}
                             onFocus={() => setShowSuggestions(true)}
-                            onBlur={() => setTimeout(() => setShowSuggestions(false), 200)} // Delay to allow click on item
+                            onKeyDown={handleInputKeyDown}
+                            role="combobox"
+                            aria-expanded={isListOpen}
+                            aria-controls={listboxId}
+                            aria-autocomplete="list"
+                            aria-activedescendant={isListOpen && activeIndex >= 0 ? optionId(activeIndex) : undefined}
                             placeholder="Ex: Cegueira, Linha Braille, Lupa..."
                             aria-label="O que você busca? Digite uma necessidade ou produto"
-                            className="w-full pl-12 pr-14 py-3 text-base rounded-full border-2 border-gray-200 focus:border-tec-blue focus:ring-4 focus:ring-blue-100 outline-none transition-all duration-300 shadow-sm appearance-none"
+                            className="w-full pl-12 pr-14 py-3 text-base rounded-full border-2 border-gray-200 focus:border-tec-blue focus:ring-4 focus:ring-blue-100 transition-all duration-300 shadow-sm appearance-none"
                             autoComplete="off"
                         />
 
                         {/* Custom Dropdown Arrow - Toggle Button */}
-                        <div
-                            onClick={(e) => {
-                                e.preventDefault();
-                                if (showSuggestions && userInput) {
-                                    // If list is open and user typed, maybe clear? or just close.
-                                    setShowSuggestions(!showSuggestions);
-                                } else {
-                                    inputRef.current?.focus();
-                                    setShowSuggestions(!showSuggestions);
-                                }
+                        <button
+                            type="button"
+                            onClick={() => {
+                                if (!showSuggestions) inputRef.current?.focus();
+                                setShowSuggestions(!showSuggestions);
+                                setActiveIndex(-1);
                             }}
+                            aria-label="Mostrar opções"
+                            aria-expanded={isListOpen}
+                            aria-controls={listboxId}
                             className="absolute right-2 top-1/2 transform -translate-y-1/2 w-9 h-9 flex items-center justify-center bg-gray-50 border border-gray-200 rounded-lg text-gray-400 hover:bg-white hover:border-tec-blue hover:text-tec-blue cursor-pointer transition-all duration-200 shadow-sm z-30"
-                            title={showSuggestions ? "Esconder opções" : "Mostrar opções"}
                         >
-                            <FaChevronDown className={`text-sm transition-transform duration-200 ${showSuggestions ? 'rotate-180' : ''}`} />
-                        </div>
+                            <FaChevronDown aria-hidden="true" className={`text-sm transition-transform duration-200 ${showSuggestions ? 'rotate-180' : ''}`} />
+                        </button>
+                    </div>
+
+                    {/* Região viva: informa a quantidade de sugestões */}
+                    <div role="status" aria-live="polite" className="sr-only">
+                        {isListOpen ? `${displaySuggestions.length} ${displaySuggestions.length === 1 ? 'sugestão disponível' : 'sugestões disponíveis'}` : ''}
                     </div>
 
                     {/* Custom Dropdown List */}
-                    {showSuggestions && displaySuggestions.length > 0 && (
-                        <ul className="absolute top-full left-0 w-full mt-2 bg-white rounded-xl shadow-xl border border-gray-100 max-h-60 overflow-y-auto z-50 animate-fade-in">
+                    {isListOpen && (
+                        <ul
+                            id={listboxId}
+                            role="listbox"
+                            aria-label="Sugestões"
+                            className="absolute top-full left-0 w-full mt-2 bg-white rounded-xl shadow-xl border border-gray-100 max-h-60 overflow-y-auto z-50 animate-fade-in"
+                        >
                             {displaySuggestions.map((s, idx) => (
                                 <li
                                     key={idx}
-                                    onClick={() => {
-                                        setUserInput(s.label);
-                                        setShowSuggestions(false);
-                                        // Optional: Auto submit or let user click button
-                                    }}
-                                    className="px-6 py-3 hover:bg-gray-50 cursor-pointer text-gray-700 hover:text-tec-blue transition-colors border-b border-gray-50 last:border-0 flex items-center gap-2"
+                                    id={optionId(idx)}
+                                    role="option"
+                                    aria-selected={idx === activeIndex}
+                                    onMouseDown={(e) => e.preventDefault()} // mantém o foco no input para o clique registrar
+                                    onClick={() => selectSuggestion(s)}
+                                    className={`px-6 py-3 hover:bg-gray-50 cursor-pointer text-gray-700 hover:text-tec-blue transition-colors border-b border-gray-50 last:border-0 flex items-center gap-2 ${idx === activeIndex ? 'bg-gray-100 text-tec-blue' : ''}`}
                                 >
-                                    <span className="w-2 h-2 rounded-full bg-gray-300"></span>
+                                    <span aria-hidden="true" className="w-2 h-2 rounded-full bg-gray-300"></span>
                                     {s.label}
                                 </li>
                             ))}
@@ -222,9 +287,10 @@ export default function ProductFinderWizard({ categories = [], products = [] }) 
                     {userInput && (
                         <button
                             type="submit"
+                            aria-label="Buscar"
                             className="absolute right-14 top-1/2 transform -translate-y-1/2 bg-tec-blue text-white p-2 rounded-full hover:bg-blue-700 transition-colors shadow-md z-30"
                         >
-                            <FaArrowRight className="text-sm" />
+                            <FaArrowRight aria-hidden="true" className="text-sm" />
                         </button>
                     )}
                 </form>
