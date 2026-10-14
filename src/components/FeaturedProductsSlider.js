@@ -26,6 +26,7 @@ export default function FeaturedProductsSlider({ products }) {
         <Swiper
           modules={[Navigation, Autoplay]} // Adiciona Autoplay
           onSwiper={onSwiper}
+          watchSlidesProgress
           spaceBetween={30}
           slidesPerView={4} // Define 4 colunas como padrão para telas grandes
           navigation={{

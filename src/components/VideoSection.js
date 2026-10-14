@@ -108,6 +108,7 @@ export default function VideoSection({ videos }) {
         <Swiper
           modules={[Navigation, Autoplay]}
           onSwiper={onSwiper}
+          watchSlidesProgress
           spaceBetween={30}
           navigation={{
             prevEl: '.video-section-prev',

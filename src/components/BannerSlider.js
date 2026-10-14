@@ -39,6 +39,7 @@ export default function BannerSlider({ banners }) {
         spaceBetween={0}
         slidesPerView={1}
         onSwiper={onSwiper}
+        watchSlidesProgress
         navigation={isMounted ? { prevEl: '.banner-slider-prev', nextEl: '.banner-slider-next' } : false}
         pagination={{ clickable: true }}
         keyboard={{ enabled: true }}
@@ -67,7 +68,7 @@ export default function BannerSlider({ banners }) {
               <div className={`w-full min-h-[58vh] flex flex-col md:flex-row ${isReversed ? 'md:flex-row-reverse' : ''}`}>
 
                 {/* Text Section - Order 2 on Mobile (Bottom) */}
-                <div className="w-full md:w-1/2 lg:w-2/5 order-2 md:order-none bg-white flex items-center justify-center p-6 md:p-8 lg:p-12">
+                <div className="w-full md:w-1/2 lg:w-2/5 order-2 md:order-none bg-white flex items-center justify-center p-6 pb-20 md:p-8 lg:p-12">
                   <div className="w-full max-w-lg text-center md:text-left">
                     <h2 className="text-[clamp(1.75rem,4vw,3.5rem)] font-extrabold leading-tight mb-4 text-[#002554] break-words">
                       {titulo}

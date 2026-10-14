@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 // Controla o autoplay de um carrossel Swiper: respeita prefers-reduced-motion
 // (autoplay começa desligado) e permite pausar/reproduzir pelo botão.
+// Também marca como inert os slides fora da vista.
 export function useCarouselAutoplay() {
   const [swiper, setSwiper] = useState(null);
   const [paused, setPaused] = useState(false);
@@ -23,6 +24,33 @@ export function useCarouselAutoplay() {
       swiper.autoplay.start();
     }
   }, [swiper, paused]);
+
+  // Slides fora da vista ficam inert + aria-hidden (sem foco nem leitura por leitor de tela).
+  // Requer watchSlidesProgress no Swiper para marcar os slides visíveis.
+  useEffect(() => {
+    if (!swiper) return;
+    const sync = () => {
+      if (swiper.destroyed) return;
+      swiper.slides.forEach((el) => {
+        const visible = el.classList.contains('swiper-slide-visible') || el.classList.contains('swiper-slide-active');
+        el.toggleAttribute('inert', !visible);
+        if (visible) el.removeAttribute('aria-hidden');
+        else el.setAttribute('aria-hidden', 'true');
+      });
+    };
+    sync();
+    swiper.on('transitionEnd', sync);
+    swiper.on('resize', sync);
+    swiper.on('breakpoint', sync);
+    swiper.on('update', sync);
+    return () => {
+      if (swiper.destroyed) return;
+      swiper.off('transitionEnd', sync);
+      swiper.off('resize', sync);
+      swiper.off('breakpoint', sync);
+      swiper.off('update', sync);
+    };
+  }, [swiper]);
 
   const toggle = useCallback(() => setPaused((value) => !value), []);
 

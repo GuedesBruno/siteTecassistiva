@@ -160,8 +160,8 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
                       </div>
                     </SwiperSlide>
                   ))}
-                  <button type="button" aria-label="Foto anterior" className="swiper-button-prev !text-white after:!text-2xl !w-10 !h-10 !bg-tec-blue/50 !rounded-full !shadow-md hover:!bg-tec-blue transition-all opacity-0 group-hover:opacity-100 focus-visible:opacity-100"></button>
-                  <button type="button" aria-label="Próxima foto" className="swiper-button-next !text-white after:!text-2xl !w-10 !h-10 !bg-tec-blue/50 !rounded-full !shadow-md hover:!bg-tec-blue transition-all opacity-0 group-hover:opacity-100 focus-visible:opacity-100"></button>
+                  <button type="button" aria-label="Foto anterior" className="swiper-button-prev !text-white after:!text-2xl !w-10 !h-10 !bg-tec-blue/85 !rounded-full !shadow-md hover:!bg-tec-blue transition-all opacity-0 group-hover:opacity-100 focus-visible:opacity-100"></button>
+                  <button type="button" aria-label="Próxima foto" className="swiper-button-next !text-white after:!text-2xl !w-10 !h-10 !bg-tec-blue/85 !rounded-full !shadow-md hover:!bg-tec-blue transition-all opacity-0 group-hover:opacity-100 focus-visible:opacity-100"></button>
                 </Swiper>
               ) : (
                 <div className="w-full h-full flex items-center justify-center bg-gray-50 text-gray-400">
@@ -217,8 +217,8 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
                       <VideoCard video={video} onVideoClick={setSelectedVideo} />
                     </SwiperSlide>
                   ))}
-                  <button type="button" aria-label="Vídeos anteriores" className="video-swiper-button-prev swiper-button-prev !text-white after:!text-xl !w-8 !h-8 !bg-tec-blue/50 !rounded-full !shadow-md hover:!bg-tec-blue transition-all opacity-0 group-hover/video:opacity-100 focus-visible:opacity-100"></button>
-                  <button type="button" aria-label="Próximos vídeos" className="video-swiper-button-next swiper-button-next !text-white after:!text-xl !w-8 !h-8 !bg-tec-blue/50 !rounded-full !shadow-md hover:!bg-tec-blue transition-all opacity-0 group-hover/video:opacity-100 focus-visible:opacity-100"></button>
+                  <button type="button" aria-label="Vídeos anteriores" className="video-swiper-button-prev swiper-button-prev !text-white after:!text-xl !w-8 !h-8 !bg-tec-blue/85 !rounded-full !shadow-md hover:!bg-tec-blue transition-all opacity-0 group-hover/video:opacity-100 focus-visible:opacity-100"></button>
+                  <button type="button" aria-label="Próximos vídeos" className="video-swiper-button-next swiper-button-next !text-white after:!text-xl !w-8 !h-8 !bg-tec-blue/85 !rounded-full !shadow-md hover:!bg-tec-blue transition-all opacity-0 group-hover/video:opacity-100 focus-visible:opacity-100"></button>
                 </Swiper>
               </div>
             )}
