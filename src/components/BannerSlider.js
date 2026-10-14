@@ -6,6 +6,7 @@ import { Navigation, Pagination, Autoplay, Keyboard, A11y } from 'swiper/modules
 import Image from 'next/image';
 import Link from 'next/link';
 import { getStrapiMediaUrl } from '@/lib/media';
+import { safeUrl } from '@/lib/safeUrl';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -76,7 +77,7 @@ export default function BannerSlider({ banners }) {
                         {texto_comercial}
                       </p>
                     )}
-                    <Link href={link_do_botao || '#'} className="inline-block bg-[#002554] hover:bg-[#003377] text-white font-bold py-3 px-6 rounded-lg shadow-md transition-colors duration-300">
+                    <Link href={safeUrl(link_do_botao) || '#'} className="inline-block bg-[#002554] hover:bg-[#003377] text-white font-bold py-3 px-6 rounded-lg shadow-md transition-colors duration-300">
                       {texto_do_botao}
                     </Link>
                   </div>

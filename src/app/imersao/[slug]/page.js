@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getStrapiMediaUrl } from '@/lib/media';
+import { safeUrl } from '@/lib/safeUrl';
 
 // --- Lógica interna de busca para estabilidade do build ---
 
@@ -187,9 +188,9 @@ export default async function ImersaoPage({ params }) {
                 <div className="w-full space-y-2 mb-2">
                     {botoes_padrao ? (
                         <>
-                            {curso && (
+                            {safeUrl(curso) && (
                                 <Link
-                                    href={curso}
+                                    href={safeUrl(curso)}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center p-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl transition-all duration-300 group"
@@ -207,9 +208,9 @@ export default async function ImersaoPage({ params }) {
                                     </svg>
                                 </Link>
                             )}
-                            {guia && (
+                            {safeUrl(guia) && (
                                 <Link
-                                    href={guia}
+                                    href={safeUrl(guia)}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center p-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl transition-all duration-300 group"
@@ -225,9 +226,9 @@ export default async function ImersaoPage({ params }) {
                                     </svg>
                                 </Link>
                             )}
-                            {manual && (
+                            {safeUrl(manual) && (
                                 <Link
-                                    href={manual}
+                                    href={safeUrl(manual)}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center p-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl transition-all duration-300 group"
@@ -248,7 +249,7 @@ export default async function ImersaoPage({ params }) {
                         personalizado && personalizado.map((botao) => (
                             <Link
                                 key={botao.id}
-                                href={botao.link_do_botao}
+                                href={safeUrl(botao.link_do_botao) || '#'}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center p-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl transition-all duration-300 group"
@@ -270,9 +271,9 @@ export default async function ImersaoPage({ params }) {
                 {/* App Store & Play Store Badges */}
                 {(link_playstore || link_appstore) && (
                     <div className="flex w-full gap-3 mb-4 shrink-0">
-                        {link_appstore && (
+                        {safeUrl(link_appstore) && (
                             <Link
-                                href={link_appstore}
+                                href={safeUrl(link_appstore)}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex-1 flex items-center justify-center p-2 bg-gradient-to-r from-white/10 to-white/5 hover:from-white/20 hover:to-white/10 border border-white/20 rounded-2xl transition-all duration-300 group"
@@ -291,9 +292,9 @@ export default async function ImersaoPage({ params }) {
                                 </div>
                             </Link>
                         )}
-                        {link_playstore && (
+                        {safeUrl(link_playstore) && (
                             <Link
-                                href={link_playstore}
+                                href={safeUrl(link_playstore)}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex-1 flex items-center justify-center p-2 bg-gradient-to-r from-white/10 to-white/5 hover:from-white/20 hover:to-white/10 border border-white/20 rounded-2xl transition-all duration-300 group"

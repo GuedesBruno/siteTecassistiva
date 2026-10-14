@@ -2,6 +2,7 @@ import React from 'react';
 import { getStrapiMediaUrl } from '@/lib/media';
 import Image from 'next/image';
 import RichTextRenderer from './RichTextRenderer';
+import { safeUrl } from '@/lib/safeUrl';
 
 // Função auxiliar para extrair com segurança a primeira URL de um campo Rich Text do Strapi
 const extractLinkFromRichText = (content) => {
@@ -52,9 +53,9 @@ export default function SoftwareCard({ software }) {
         <h4 className="font-semibold text-gray-700 mb-3">Instaladores:</h4>
         <div className="space-y-4">
           {instaladores && instaladores.map((instalador) => {
-            const onlineUrl = extractLinkFromRichText(instalador.link_online);
-            const offline1Url = extractLinkFromRichText(instalador.link_offline_1);
-            const offline2Url = extractLinkFromRichText(instalador.link_offline_2);
+            const onlineUrl = safeUrl(extractLinkFromRichText(instalador.link_online));
+            const offline1Url = safeUrl(extractLinkFromRichText(instalador.link_offline_1));
+            const offline2Url = safeUrl(extractLinkFromRichText(instalador.link_offline_2));
 
             return (
               <div key={instalador.id} className="p-3 bg-gray-50 rounded-md">

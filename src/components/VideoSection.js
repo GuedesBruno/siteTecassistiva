@@ -46,7 +46,7 @@ const VideoCard = ({ video, onVideoClick }) => {
         if (isMounted) setThumbnailUrl(`https://i.ytimg.com/vi/${videoInfo.id}/hqdefault.jpg`);
       } else if (videoInfo.type === 'vimeo') {
         try {
-          const response = await fetch(`https://vimeo.com/api/oembed.json?url=${attrs.link}`);
+          const response = await fetch(`https://vimeo.com/api/oembed.json?url=${encodeURIComponent(attrs.link)}`);
           if (response.ok) {
             const data = await response.json();
             if (isMounted) setThumbnailUrl(data.thumbnail_url);

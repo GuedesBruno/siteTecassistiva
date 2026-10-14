@@ -7,6 +7,7 @@ import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { getStrapiMediaUrl } from '@/lib/media';
+import { safeUrl } from '@/lib/safeUrl';
 import VideoModal from './VideoModal';
 import RichTextRenderer from './RichTextRenderer';
 import SpecsTable from './SpecsTable';
@@ -227,7 +228,7 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
 
             {/* WhatsApp Button */}
             <a
-              href={`https://wa.me/5511995978139?text=Olá, gostaria de saber mais sobre o produto ${p.nome}`}
+              href={`https://wa.me/5511995978139?text=${encodeURIComponent(`Olá, gostaria de saber mais sobre o produto ${p.nome}`)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-8 py-4 bg-green-500 hover:bg-green-600 text-white text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 w-full sm:w-auto"
@@ -294,7 +295,7 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
                     </div>
                   )}
                   {tab.name === 'Downloads' && (p.documentos || []).map(doc => (
-                    <a key={doc.id} href={getStrapiMediaUrl(doc.url)} target="_blank" rel="noopener noreferrer" className="flex items-center text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200 py-1">
+                    <a key={doc.id} href={safeUrl(getStrapiMediaUrl(doc.url)) || '#'} target="_blank" rel="noopener noreferrer" className="flex items-center text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200 py-1">
                       <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                       <span>{doc.name}</span>
                     </a>
