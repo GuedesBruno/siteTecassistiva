@@ -73,7 +73,7 @@ export default function ContactForm({ title, subtitle, formName }) {
   return (
     <div className="bg-gray-50 p-6 rounded-lg shadow-inner">
       <h2 className="text-2xl font-bold text-center text-gray-800 mb-1">{title}</h2>
-      <h3 className="text-lg text-center text-gray-600 mb-6">{subtitle}</h3>
+      <p className="text-lg text-center text-gray-600 mb-6">{subtitle}</p>
       <form onSubmit={handleSubmit} className="space-y-2" aria-label="Formulário de contato">
         <input type="hidden" name="_subject" value={`Novo Contato via ${formName}`} />
 
@@ -202,7 +202,7 @@ export default function ContactForm({ title, subtitle, formName }) {
             rows="3"
             maxLength={2000}
             placeholder="Digite sua dúvida ou solicitação"
-            className="p-2 border border-gray-500 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full text-sm"
+            className="p-2 border border-gray-500 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full text-sm placeholder:text-gray-600"
           />
         </div>
 
@@ -221,7 +221,7 @@ export default function ContactForm({ title, subtitle, formName }) {
             rel="noopener noreferrer"
             className="bg-green-700 text-white font-bold py-2 px-6 rounded-lg hover:bg-green-800 focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-transform transform hover:scale-105 text-sm"
           >
-            Fale agora
+            Fale agora<span className="sr-only"> (abre em nova aba)</span>
           </a>
         </div>
 
@@ -233,10 +233,16 @@ export default function ContactForm({ title, subtitle, formName }) {
         <div
           role="status"
           aria-live="polite"
-          className={status ? `text-center mt-4 p-3 rounded ${status.includes('sucesso') ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}` : ''}
+          className={status && status.includes('sucesso') ? 'text-center mt-4 p-3 rounded bg-green-100 text-green-800' : ''}
         >
-          {status}
+          {status && status.includes('sucesso') ? status : ''}
         </div>
+        {/* Erro de envio: role="alert" para ser anunciado imediatamente */}
+        {status && !status.includes('sucesso') && (
+          <div role="alert" className="text-center mt-4 p-3 rounded bg-red-100 text-red-800">
+            {status}
+          </div>
+        )}
       </form>
     </div>
   );
