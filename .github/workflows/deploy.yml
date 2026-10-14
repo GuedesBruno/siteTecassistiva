@@ -18,6 +18,9 @@ concurrency:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    # No nível do job para que o `if` do passo de aviso consiga ler a variável
+    env:
+      N8N_WEBHOOK_URL: ${{ secrets.N8N_WEBHOOK_URL }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -30,6 +33,15 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Verificar secret do formulário
+        env:
+          NEXT_PUBLIC_FORM_ENDPOINT: ${{ secrets.NEXT_PUBLIC_FORM_ENDPOINT }}
+        run: |
+          if [ -z "$NEXT_PUBLIC_FORM_ENDPOINT" ]; then
+            echo "::error::Secret NEXT_PUBLIC_FORM_ENDPOINT vazio. O formulário de contato ficaria sem destino; deploy abortado."
+            exit 1
+          fi
 
       - name: Build (Next static export)
         env:
@@ -72,8 +84,8 @@ jobs:
         run: echo "Deploy finished"
 
       - name: Avisar n8n em caso de erro
-        if: failure()
-        env:
-          N8N_WEBHOOK_URL: ${{ secrets.N8N_WEBHOOK_URL }}
+        if: failure() && env.N8N_WEBHOOK_URL != ''
         run: |
-          curl --fail --max-time 10 -X POST "$N8N_WEBHOOK_URL"             -H "Content-Type: application/json"             -d '{"projeto": "Site Tecassistiva", "status": "Falha no Deploy", "log_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"}' || true
+          curl --fail --max-time 10 -X POST "$N8N_WEBHOOK_URL" \
+            -H "Content-Type: application/json" \
+            -d '{"projeto": "Site Tecassistiva", "status": "Falha no Deploy", "log_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"}' || true
