@@ -183,7 +183,7 @@ export default async function ProductPage({ params }) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
       />
       <ProductDetail product={product} breadcrumbs={breadcrumbs} />
       {(slug === 'everest' || slug === 'basic') && (
