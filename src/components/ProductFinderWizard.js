@@ -175,6 +175,7 @@ export default function ProductFinderWizard({ categories = [], products = [] }) 
                             onFocus={() => setShowSuggestions(true)}
                             onBlur={() => setTimeout(() => setShowSuggestions(false), 200)} // Delay to allow click on item
                             placeholder="Ex: Cegueira, Linha Braille, Lupa..."
+                            aria-label="O que você busca? Digite uma necessidade ou produto"
                             className="w-full pl-12 pr-14 py-3 text-base rounded-full border-2 border-gray-200 focus:border-tec-blue focus:ring-4 focus:ring-blue-100 outline-none transition-all duration-300 shadow-sm appearance-none"
                             autoComplete="off"
                         />

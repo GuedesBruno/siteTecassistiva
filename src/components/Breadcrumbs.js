@@ -6,19 +6,24 @@ export default function Breadcrumbs({ items }) {
   }
 
   return (
-    <nav className="text-sm text-gray-500 mb-6">
-      {items.map((item, index) => (
-        <span key={index}>
-          {index > 0 && <span className="mx-2">&gt;</span>}
-          {item.path ? (
-            <Link href={item.path} className="hover:underline">
-              {item.name}
-            </Link>
-          ) : (
-            <span className="font-semibold text-gray-700">{item.name}</span>
-          )}
-        </span>
-      ))}
+    <nav className="text-sm text-gray-500 mb-6" aria-label="Trilha de navegação">
+      <ol className="flex flex-wrap items-center">
+        {items.map((item, index) => {
+          const isLast = index === items.length - 1;
+          return (
+            <li key={index}>
+              {index > 0 && <span className="mx-2" aria-hidden="true">&gt;</span>}
+              {item.path ? (
+                <Link href={item.path} className="hover:underline" {...(isLast ? { 'aria-current': 'page' } : {})}>
+                  {item.name}
+                </Link>
+              ) : (
+                <span className="font-semibold text-gray-700" {...(isLast ? { 'aria-current': 'page' } : {})}>{item.name}</span>
+              )}
+            </li>
+          );
+        })}
+      </ol>
     </nav>
   );
 }

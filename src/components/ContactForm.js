@@ -96,36 +96,38 @@ export default function ContactForm({ title, subtitle, formName }) {
           {/* Nome */}
           <div>
             <label htmlFor="nome" className="block text-sm font-medium text-gray-700 mb-1">
-              Nome <span className="text-red-500" aria-label="obrigatório">*</span>
+              Nome <span className="text-red-700" aria-hidden="true">*</span><span className="sr-only"> (obrigatório)</span>
             </label>
             <input
               type="text"
               id="nome"
               name="nome"
+              autoComplete="name"
               maxLength={100}
               value={formData.nome}
               onChange={handleChange}
               required
               aria-required="true"
-              className="p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full text-sm"
+              className="p-2 border border-gray-500 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full text-sm"
             />
           </div>
 
           {/* Instituição */}
           <div>
             <label htmlFor="instituicao" className="block text-sm font-medium text-gray-700 mb-1">
-              Instituição <span className="text-red-500" aria-label="obrigatório">*</span>
+              Instituição <span className="text-red-700" aria-hidden="true">*</span><span className="sr-only"> (obrigatório)</span>
             </label>
             <input
               type="text"
               id="instituicao"
               name="instituicao"
+              autoComplete="organization"
               maxLength={150}
               value={formData.instituicao}
               onChange={handleChange}
               required
               aria-required="true"
-              className="p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full text-sm"
+              className="p-2 border border-gray-500 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full text-sm"
             />
           </div>
 
@@ -141,7 +143,7 @@ export default function ContactForm({ title, subtitle, formName }) {
               maxLength={100}
               value={formData.departamento}
               onChange={handleChange}
-              className="p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full text-sm"
+              className="p-2 border border-gray-500 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full text-sm"
             />
           </div>
         </div>
@@ -151,36 +153,38 @@ export default function ContactForm({ title, subtitle, formName }) {
           {/* Celular */}
           <div>
             <label htmlFor="celular" className="block text-sm font-medium text-gray-700 mb-1">
-              Celular <span className="text-red-500" aria-label="obrigatório">*</span>
+              Celular <span className="text-red-700" aria-hidden="true">*</span><span className="sr-only"> (obrigatório)</span>
             </label>
             <input
               type="tel"
               id="celular"
               name="celular"
+              autoComplete="tel"
               maxLength={20}
               value={formData.celular}
               onChange={handleChange}
               required
               aria-required="true"
-              className="p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full text-sm"
+              className="p-2 border border-gray-500 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full text-sm"
             />
           </div>
 
           {/* E-mail */}
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-              E-mail <span className="text-red-500" aria-label="obrigatório">*</span>
+              E-mail <span className="text-red-700" aria-hidden="true">*</span><span className="sr-only"> (obrigatório)</span>
             </label>
             <input
               type="email"
               id="email"
               name="email"
+              autoComplete="email"
               maxLength={254}
               value={formData.email}
               onChange={handleChange}
               required
               aria-required="true"
-              className="p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full text-sm"
+              className="p-2 border border-gray-500 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full text-sm"
             />
           </div>
         </div>
@@ -198,8 +202,7 @@ export default function ContactForm({ title, subtitle, formName }) {
             rows="3"
             maxLength={2000}
             placeholder="Digite sua dúvida ou solicitação"
-            className="p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full text-sm"
-            aria-describedby="mensagem-hint"
+            className="p-2 border border-gray-500 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full text-sm"
           />
         </div>
 
@@ -207,7 +210,7 @@ export default function ContactForm({ title, subtitle, formName }) {
         <div className="text-center flex items-center justify-center space-x-4 pt-2">
           <button
             type="submit"
-            className="bg-tec-blue text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-transform transform hover:scale-105 text-sm"
+            className="bg-tec-blue text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-transform transform hover:scale-105 text-sm"
           >
             Enviar Contato
           </button>
@@ -216,7 +219,7 @@ export default function ContactForm({ title, subtitle, formName }) {
             href="https://wa.me/5511995978139"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-green-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-transform transform hover:scale-105 text-sm"
+            className="bg-green-700 text-white font-bold py-2 px-6 rounded-lg hover:bg-green-800 focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-transform transform hover:scale-105 text-sm"
           >
             Fale agora
           </a>
@@ -226,16 +229,14 @@ export default function ContactForm({ title, subtitle, formName }) {
           Ao enviar, você concorda que a Tecassistiva use seus dados apenas para responder a esta solicitação (LGPD).
         </p>
 
-        {status && (
-          <div
-            role="status"
-            aria-live="polite"
-            className={`text-center mt-4 p-3 rounded ${status.includes('sucesso') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-              }`}
-          >
-            {status}
-          </div>
-        )}
+        {/* Região de status sempre presente no DOM para que leitores de tela anunciem as mudanças */}
+        <div
+          role="status"
+          aria-live="polite"
+          className={status ? `text-center mt-4 p-3 rounded ${status.includes('sucesso') ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}` : ''}
+        >
+          {status}
+        </div>
       </form>
     </div>
   );
