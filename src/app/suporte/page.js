@@ -2,9 +2,6 @@ import { Suspense } from 'react';
 import SupportPageClient from '@/components/SupportPageClient';
 import Breadcrumbs from '@/components/Breadcrumbs';
 
-// Prevent static generation - use on-demand ISR
-export const revalidate = 3600; // Revalidate every hour
-
 export const metadata = {
   title: 'Suporte Técnico',
   description: 'Acesse softwares, drivers, manuais e documentação técnica para produtos de tecnologia assistiva da Tecassistiva.',

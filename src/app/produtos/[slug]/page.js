@@ -119,8 +119,7 @@ export async function generateMetadata({ params }) {
       }
     };
   } catch (error) {
-    // During build, return minimal metadata
-    // Full metadata will load on-demand with ISR
+    // Se a busca falhar, devolve metadados mínimos (o site é exportação estática: não há ISR)
     return {
       title: 'Produto | Tecassistiva',
       description: 'Confira nosso produto.',

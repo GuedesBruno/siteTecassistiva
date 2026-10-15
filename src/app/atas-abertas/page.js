@@ -4,9 +4,6 @@ import ContactForm from '@/components/ContactForm';
 import AdvantagesSection from '@/components/AdvantagesSection';
 import SocialMediaSection from '@/components/SocialMediaSection';
 
-// Previne geracao estatica - usa sob demanda ISR
-export const revalidate = 3600; // Revalidate every hour
-
 export const metadata = {
   title: 'Atas Abertas',
   description: 'Consulte as atas de registro de preços abertas para adesão (carona). Adquira produtos de tecnologia assistiva com preços registrados.',
