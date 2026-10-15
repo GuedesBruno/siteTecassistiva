@@ -1,116 +1,89 @@
 # Tecassistiva - Catálogo de Produtos
 
-Este é o repositório do novo site da Tecassistiva, uma plataforma moderna para exibir um catálogo detalhado de produtos de tecnologia assistiva. O projeto foi construído utilizando uma arquitetura Jamstack, com Next.js para o frontend e Strapi como um Headless CMS para o backend.
+Site da Tecassistiva: catálogo de produtos de tecnologia assistiva. Next.js 14 (App Router) com **exportação estática** (`output: 'export'`, `trailingSlash: true`), alimentado em tempo de build por um Strapi (Headless CMS) hospedado à parte. O resultado (`out/`) é HTML/CSS/JS puro, publicado em hospedagem sem Node.js (Locaweb).
 
-## 🚀 Arquitetura
+## Arquitetura
 
-A solução é dividida em duas partes principais:
+- **Frontend (este repositório)**: Next.js, React 18, Tailwind. Todas as páginas, inclusive `/produtos/[slug]`, `/produtos/categorias/...`, `/produtos/fabricante/[slug]`, `/ambientes/...` e `/imersao/[slug]`, são geradas no build. Não há ISR nem servidor: para refletir uma mudança do CMS é preciso novo build e deploy.
+- **Backend**: Strapi (produtos, categorias, fabricantes, ambientes, banners, vídeos, atas, softwares, imersões, mídias e PDFs).
+- **Busca**: `scripts/build-search-data.js` gera `public/search-data.json` a partir do Strapi; a página `/busca` filtra esse arquivo no navegador.
+- **Sitemap**: `scripts/generate-sitemap.mjs` gera `public/sitemap.xml`.
+- **Cliente HTTP do Strapi**: `src/lib/strapi-client.mjs` é único e usado pelo site e pelos scripts de build. `src/lib/api.js` tem as consultas; `src/lib/imersao-data.mjs` tem as das páginas de imersão.
 
-1.  **Frontend (Este repositório)**: Uma aplicação Next.js que utiliza o **App Router**. O site é gerado estaticamente (SSG - Static Site Generation) para máxima performance, segurança e otimização para SEO. As páginas dos produtos são dinâmicas, criadas em tempo de build a partir dos dados consumidos da API do Strapi.
-2.  **Backend (Headless CMS)**: Um painel Strapi (hospedado separadamente) que serve como fonte de dados para todo o conteúdo do site, incluindo:
-    *   Informações de produtos (descrições, especificações técnicas, etc.).
-    *   Categorias e subcategorias.
-    *   Fabricantes.
-    *   Mídias como imagens, vídeos e documentos (PDFs de manuais e guias).
+## Requisitos
 
-## ✨ Funcionalidades Principais
+- Node.js 20 ou superior (`engines` no `package.json`) e npm.
 
-*   **Geração Estática (SSG)**: Páginas rápidas e otimizadas para motores de busca.
-*   **Páginas de Produto Dinâmicas**: Rotas como `/produtos/[slug]` são geradas para cada item cadastrado no CMS.
-*   **SEO Otimizado**: Metadados (título, descrição, palavras-chave) e URLs canônicas são gerados dinamicamente para cada página de produto, melhorando a relevância nos resultados de busca.
-*   **Gerenciamento de Conteúdo Centralizado**: Toda a informação é gerenciada via Strapi, permitindo que a equipe de conteúdo atualize o site sem a necessidade de deploy.
-*   **Conteúdo Rico**: Suporte para descrições longas, listas, vídeos embarcados (YouTube/Vimeo) e múltiplos documentos para download.
+## Variáveis de ambiente
 
-## 🛠️ Tecnologias e Bibliotecas
+Copie `.env.example` para `.env.local` e preencha (nunca commite valores reais).
 
-*   **Framework**: Next.js
-*   **React**: React
-*   **Gerenciamento de Ambiente**: dotenv para carregar variáveis de ambiente de um arquivo `.env`.
-*   **Debugging**: debug para logs detalhados e namespaces durante o desenvolvimento.
-*   **Fonte**: O projeto utiliza `next/font` para otimizar e carregar a família de fontes Geist.
+| Variável | Para que serve |
+| --- | --- |
+| `NEXT_PUBLIC_STRAPI_URL` | URL base do Strapi, com `https://` e sem `/api` no final. |
+| `STRAPI_API_TOKEN` | Token de API somente leitura do Strapi. Usado só no build; é segredo. |
+| `NEXT_PUBLIC_FORM_ENDPOINT` | Endpoint do formulário de contato (ex.: Formspree). Vai para o JavaScript público. |
+| `CI` | Definida pelo GitHub Actions. Quando verdadeira (qualquer valor exceto vazio, `false` ou `0`), **qualquer falha de dados do Strapi interrompe o build**, inclusive nas páginas de imersão. Fora de CI, falhas viram dados vazios para o desenvolvimento seguir. |
 
-## 📂 Estrutura do Projeto
+## Scripts
+
+| Comando | O que faz |
+| --- | --- |
+| `npm run dev` | Servidor de desenvolvimento em http://localhost:3000. |
+| `npm run build` | Gera `search-data.json` e `sitemap.xml` e roda `next build` (exportação para `out/`). |
+| `npm run build:search` | Só regenera `public/search-data.json`. |
+| `npm run start` | `next start` (não usar em produção: o site é estático). |
+| `npm run lint` | `eslint src`. Deve terminar com 0 erros. |
+
+O `npm run build` sobrescreve `public/search-data.json` e `public/sitemap.xml`. Não commite esses arquivos gerados com dados de teste.
+
+## Testes (qa/)
+
+Verificações sem dependências, executadas com Node:
+
+```bash
+for f in qa/test-*.mjs; do node "$f"; done
+```
+
+Cobrem retry e falha em CI da API, cliente do Strapi, páginas de imersão em CI, `safeUrl`, validação de iframes, navegação por teclado das abas, sentinelas do `VideoModal`, canonical por rota, imports e o `deploy.yml`.
+
+`qa/mock-strapi.mjs` é um Strapi falso (somente leitura, dados fictícios) para validar o build sem acesso ao CMS:
+
+```bash
+node qa/mock-strapi.mjs 14337 &
+NEXT_PUBLIC_STRAPI_URL=http://localhost:14337 STRAPI_API_TOKEN=fake npm run build
+```
+
+Encerre o mock depois (apenas o processo dele) e restaure `public/search-data.json`, `public/sitemap.xml` e `out/` se o build os alterar.
+
+## Deploy
+
+Automático por GitHub Actions (`.github/workflows/deploy.yml`), disparado por push na `main`, manualmente (`workflow_dispatch`) ou por `repository_dispatch` do tipo `strapi_update` (publicação no Strapi). O fluxo: `npm ci`, verificação do secret do formulário, `npm run build` com os secrets `NEXT_PUBLIC_STRAPI_URL`, `STRAPI_API_TOKEN` e `NEXT_PUBLIC_FORM_ENDPOINT`, verificação de `out/` (mínimo de 20 páginas de produto) e envio por FTP com `lftp mirror -R` **sem `--delete`**: arquivos removidos do site continuam no servidor até serem apagados à mão. Falhas avisam o webhook do n8n (`N8N_WEBHOOK_URL`). Os PDFs de `public/guias` e `public/manuais` ficam só no servidor (ver `docs/ARQUIVOS-ESTATICOS.md`).
+
+`deploy.ps1` é um script auxiliar local.
+
+## Documentação (docs/)
+
+- `docs/ARQUIVOS-ESTATICOS.md`: PDFs hospedados só no servidor.
+- `docs/LINKS-PDFS-STRAPI.md`: links dos PDFs para cadastro no Strapi.
+- `docs/PLANO-ATUALIZACAO.md`: plano de atualização de dependências (vulnerabilidades restantes exigem versões major).
+- `docs/seo_palavras_chave_pendente.md`: campo `palavras_chave` pendente no Strapi.
+
+## Estrutura
 
 ```
 tecassistiva-site/
 ├── src/
-│   ├── app/
-│   │   ├── produtos/
-│   │   │   └── [slug]/
-│   │   │       └── page.js      # Template da página de produto
-│   │   ├── layout.js            # Layout principal
-│   │   └── page.js              # Página inicial
-│   └── lib/
-│       └── api.js               # Funções para buscar dados da API do Strapi
-├── public/
-│   ├── guias/                   # PDFs dos guias (só no servidor; ver docs/ARQUIVOS-ESTATICOS.md)
-│   └── manuais/                 # PDFs dos manuais (só no servidor; ver docs/ARQUIVOS-ESTATICOS.md)
-├── .env.example                 # Arquivo de exemplo para variáveis de ambiente
-└── next.config.js               # Configurações do Next.js
+│   ├── app/          # Rotas (App Router): produtos, categorias, fabricantes, ambientes, imersao, busca, suporte, atas-abertas...
+│   ├── components/   # Componentes React
+│   └── lib/          # api.js, strapi-client.mjs, imersao-data.mjs, media.js, safeUrl, hooks de foco
+├── scripts/          # build-search-data.js, generate-sitemap.mjs
+├── qa/               # testes e mock do Strapi
+├── docs/             # documentação
+├── public/           # estáticos (search-data.json e sitemap.xml são gerados no build)
+└── .github/workflows/deploy.yml
 ```
 
-## ⚙️ Começando
+## Acessibilidade e SEO
 
-Siga os passos abaixo para configurar o ambiente de desenvolvimento local.
-
-### 1. Pré-requisitos
-
-*   Node.js (versão 18 ou superior)
-*   npm, yarn, pnpm ou bun
-
-### 2. Clonar o Repositório
-
-```bash
-git clone <URL_DO_REPOSITORIO>
-cd tecassistiva-site
-```
-
-### 3. Instalar Dependências
-
-Execute o comando correspondente ao seu gerenciador de pacotes:
-
-```bash
-npm install
-# ou
-yarn install
-# ou
-pnpm install
-# ou
-bun install
-```
-
-### 4. Configurar Variáveis de Ambiente
-
-Crie um arquivo `.env` na raiz do projeto, copiando o conteúdo de `.env.example`. Preencha as variáveis com os valores corretos para o seu ambiente (URL da API do Strapi, token, etc.).
-
-```bash
-# .env
-STRAPI_API_URL="https://innovative-friendship-159ff40007.strapiapp.com"
-STRAPI_API_TOKEN="seu_token_de_api"
-```
-
-### 5. Rodar o Servidor de Desenvolvimento
-
-```bash
-npm run dev
-```
-
-Abra http://localhost:3000 no seu navegador para ver o resultado. A página será atualizada automaticamente conforme você edita os arquivos.
-
-## 📦 Build e Deploy
-
-### Build
-
-Para gerar a versão estática do site para produção, execute:
-
-```bash
-npm run build
-```
-
-O Next.js irá gerar os arquivos estáticos na pasta `.next/`. Se configurado para exportação estática, os arquivos HTML/CSS/JS estarão na pasta `out/`.
-
-### Deploy na Vercel
-
-A maneira mais fácil de fazer o deploy de uma aplicação Next.js é através da Vercel Platform, dos criadores do Next.js.
-
-Para mais detalhes, consulte a documentação de deploy do Next.js.
+Cada rota define `canonical`; `/busca` é `noindex, follow`. Modais usam `useModalFocus` (foco inicial, trap do Tab, Esc, retorno do foco). Animações respeitam `prefers-reduced-motion`.
