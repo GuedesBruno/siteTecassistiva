@@ -1,8 +1,8 @@
 // Valida URLs vindas do CMS antes de usá-las em href/src.
-// Aceita apenas os protocolos https, http, mailto e tel; também aceita caminhos
+// Aceita apenas os protocolos https, mailto e tel (http: é rejeitado: o site é só HTTPS); também aceita caminhos
 // internos do próprio site ("/produtos/x", "#ancora"). Qualquer outra coisa
 // (javascript:, data:, vbscript: etc.) devolve null.
-const ALLOWED_PROTOCOLS = ['https:', 'http:', 'mailto:', 'tel:'];
+const ALLOWED_PROTOCOLS = ['https:', 'mailto:', 'tel:'];
 
 const INTERNAL_PATH = /^\/(?![\/\\])[^\\\u0000-\u001f\s]*$/;
 
