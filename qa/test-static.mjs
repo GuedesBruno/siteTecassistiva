@@ -93,6 +93,8 @@ ts.defect('verificação de out/: páginas não-produto (categorias/fabricante/i
   assert.equal(r.status, 1, 'deveria reprovar com 19 produtos reais');
 });
 ts.test('slugs de produto vêm de search-data.json: >= 20 produtos hoje (limiar 20 está abaixo do real)', () => {
+  // search-data.json é gerado pelo build e não fica no git: sem ele (clone limpo) o teste é ignorado
+  if (!fs.existsSync(path.join(root, 'public/search-data.json'))) { console.log('       (public/search-data.json ausente: teste ignorado)'); return; }
   const sd = JSON.parse(read('public/search-data.json'));
   const n = sd.filter((i) => i.type === 'Produto').length;
   console.log(`       (produtos em search-data.json: ${n})`);

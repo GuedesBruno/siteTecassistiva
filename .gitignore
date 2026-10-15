@@ -64,3 +64,9 @@ SOLUCAO_PROPOSTA.md
 /public/guias/
 /public/manuais/
 /public/catalogo/
+
+# Saídas de build e arquivos gerados (o `npm run build` recria search-data.json e sitemap.xml)
+build-output.txt
+.next_old/
+/public/search-data.json
+/public/sitemap.xml
