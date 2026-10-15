@@ -1,4 +1,5 @@
 import Breadcrumbs from '@/components/Breadcrumbs';
+import { isCI } from '@/lib/strapi-client.mjs';
 import AtaCard from '@/components/AtaCard';
 import ContactForm from '@/components/ContactForm';
 import AdvantagesSection from '@/components/AdvantagesSection';
@@ -27,6 +28,7 @@ export default async function AtasAbertasPage() {
     atas = await getOpenAtas();
   } catch (error) {
     console.error('Erro ao carregar atas abertas:', error);
+    if (isCI()) throw error;
     atas = [];
   }
 
@@ -60,7 +62,7 @@ export default async function AtasAbertasPage() {
           {/* Coluna 2: ARP */}
           <div className="prose text-gray-700">
             <h2 className="text-xl font-bold text-center mb-3">O que é uma Ata de Registro de Preços – ARP?</h2>
-            <p className="text-justify text-sm">A Ata de Registro de Preços (ARP) é o documento que formaliza o resultado do SRP. Nela, são registrados os preços, os fornecedores, os produtos e as condições de fornecimento. Essa ata funciona como um "cardápio" de produtos e serviços que os órgãos públicos podem adquirir de forma ágil e sem a necessidade de um novo processo licitatório completo, bastando apenas emitir uma ordem de compra.</p>
+            <p className="text-justify text-sm">A Ata de Registro de Preços (ARP) é o documento que formaliza o resultado do SRP. Nela, são registrados os preços, os fornecedores, os produtos e as condições de fornecimento. Essa ata funciona como um &quot;cardápio&quot; de produtos e serviços que os órgãos públicos podem adquirir de forma ágil e sem a necessidade de um novo processo licitatório completo, bastando apenas emitir uma ordem de compra.</p>
           </div>
         </div>
 

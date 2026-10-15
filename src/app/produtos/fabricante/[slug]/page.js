@@ -2,6 +2,7 @@ import CategoryMenu from '@/components/CategoryMenu';
 import ProductDisplay from '@/components/ProductDisplay';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import fs from 'fs';
+import { isCI } from '@/lib/strapi-client.mjs';
 import path from 'path';
 
 // Lazy load API functions to avoid compilation during SSG
@@ -43,6 +44,7 @@ async function getManufacturerSlugsFromSearchData() {
     return Array.from(manufacturerMap.values());
   } catch (error) {
     console.error('Error reading manufacturer slugs from search-data.json:', error);
+    if (isCI()) throw error;
     return [];
   }
 }
@@ -53,6 +55,7 @@ export async function generateStaticParams() {
     
     if (!manufacturerSlugs || manufacturerSlugs.length === 0) {
       console.warn('No manufacturer slugs found in search-data.json');
+      if (isCI()) throw new Error('Nenhum fabricante em search-data.json.');
       return [];
     }
     

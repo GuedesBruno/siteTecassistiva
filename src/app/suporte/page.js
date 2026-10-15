@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import SupportPageClient from '@/components/SupportPageClient';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import { isCI } from '@/lib/strapi-client.mjs';
 
 export const metadata = {
   title: 'Suporte Técnico',
@@ -43,6 +44,7 @@ export default async function SuportePage() {
     ]);
   } catch (error) {
     console.error('Erro ao carregar dados da página de suporte:', error);
+    if (isCI()) throw error;
   }
 
   const breadcrumbs = [
