@@ -58,8 +58,13 @@ jobs:
             echo "::error::A pasta out/ não existe. Build não gerou o site estático."
             exit 1
           fi
-          PRODUTOS=$(find out/produtos -mindepth 2 -maxdepth 2 -name index.html | wc -l)
-          echo "Páginas de produto/subpasta em out/produtos: $PRODUTOS"
+          if [ ! -d out/produtos ]; then
+            echo "::error::A pasta out/produtos não existe. Nenhuma página de produto foi gerada; deploy abortado."
+            exit 1
+          fi
+          # Só produtos reais: exclui categorias/, fabricante/ e imersao/
+          PRODUTOS=$(find out/produtos -mindepth 2 -maxdepth 2 -name index.html -not -path 'out/produtos/categorias/*' -not -path 'out/produtos/fabricante/*' -not -path 'out/produtos/imersao/*' | wc -l)
+          echo "Páginas de produto em out/produtos: $PRODUTOS"
           if [ "$PRODUTOS" -lt 20 ]; then
             echo "::error::Poucas páginas de produto ($PRODUTOS < 20). Provável falha na API do Strapi; deploy abortado."
             exit 1
