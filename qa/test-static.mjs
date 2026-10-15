@@ -143,8 +143,9 @@ th.test('CSP cobre as origens que o código usa (vimeo, youtube, google maps, fo
   for (const o of ['https://player.vimeo.com', 'https://www.youtube.com', 'https://www.google.com', 'https://formspree.io', 'https://backend.tecassistiva.com.br', 'https://vimeo.com'])
     assert.ok(csp.includes(o), o);
 });
-th.defect('X-Frame-Options DENY conflita com frame-ancestors \'self\' da CSP (políticas incoerentes)', () => {
-  assert.ok(!(/X-Frame-Options "DENY"/.test(ht) && /frame-ancestors 'self'/.test(ht)));
+th.test('X-Frame-Options DENY coerente com frame-ancestors none da CSP', () => {
+  assert.match(ht, /X-Frame-Options "DENY"/);
+  assert.match(ht, /frame-ancestors 'none'/);
 });
 th.test('robots.txt não bloqueia mais /_next/ (CSS/JS renderizáveis pelo Google)', () => {
   assert.ok(!/Disallow:\s*\/_next\//.test(read('public/robots.txt')));
