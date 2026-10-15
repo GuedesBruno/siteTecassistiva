@@ -20,7 +20,7 @@ function parseEnv(file) {
 }
 
 (async function(){
-  const envPath = path.resolve(__dirname, '..', '.env.local');
+  const envPath = path.resolve(__dirname, '..', '..', '.env.local');
   if (!fs.existsSync(envPath)) {
     console.error('.env.local not found');
     process.exit(2);

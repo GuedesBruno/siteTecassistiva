@@ -1,4 +1,4 @@
-import { getImersaoBySlug } from '../src/lib/api.js';
+import { getImersaoBySlug } from '../../src/lib/api.js';
 import dotenv from 'dotenv';
 
 // Carrega as variáveis de ambiente do arquivo .env.local

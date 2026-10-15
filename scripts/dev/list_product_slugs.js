@@ -34,7 +34,7 @@ function parseEnv(file) {
 }
 
 (async function(){
-  const envPath = path.resolve(__dirname, '..', '.env.local');
+  const envPath = path.resolve(__dirname, '..', '..', '.env.local');
   const env = parseEnv(envPath);
 
   const strapiUrl = env.NEXT_PUBLIC_STRAPI_URL;
