@@ -43,8 +43,8 @@ tecassistiva-site/
 │   └── lib/
 │       └── api.js               # Funções para buscar dados da API do Strapi
 ├── public/
-│   ├── guias/                   # PDFs dos guias de produtos
-│   └── manuais/                 # PDFs dos manuais de produtos
+│   ├── guias/                   # PDFs dos guias (só no servidor; ver docs/ARQUIVOS-ESTATICOS.md)
+│   └── manuais/                 # PDFs dos manuais (só no servidor; ver docs/ARQUIVOS-ESTATICOS.md)
 ├── .env.example                 # Arquivo de exemplo para variáveis de ambiente
 └── next.config.js               # Configurações do Next.js
 ```
