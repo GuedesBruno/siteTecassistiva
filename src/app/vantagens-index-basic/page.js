@@ -3,6 +3,7 @@ import React from 'react';
 export const metadata = {
     title: 'Impressora Braille Index Basic: Vantagens Exclusivas | Tecassistiva',
     description: 'Descubra por que a Impressora Braille Index Basic é superior em velocidade, economia e tecnologia comparada a outras impressoras Braille do mercado.',
+    alternates: { canonical: '/vantagens-index-basic/' },
 };
 
 export default function VantagensPage() {

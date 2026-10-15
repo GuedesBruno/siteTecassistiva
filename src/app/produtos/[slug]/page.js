@@ -124,6 +124,7 @@ export async function generateMetadata({ params }) {
     return {
       title: 'Produto | Tecassistiva',
       description: 'Confira nosso produto.',
+      alternates: { canonical: `/produtos/${params.slug}/` },
     };
   }
 }

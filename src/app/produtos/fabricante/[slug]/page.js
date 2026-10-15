@@ -60,6 +60,12 @@ export async function generateStaticParams() {
     return manufacturerSlugs;
 }
 
+export function generateMetadata({ params }) {
+    return {
+        alternates: { canonical: `/produtos/fabricante/${params.slug}/` },
+    };
+}
+
 export default async function ManufacturerProductsPage({ params }) {
     const { slug } = params;
     
