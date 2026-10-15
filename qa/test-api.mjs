@@ -88,8 +88,8 @@ t.test('variáveis ausentes ou URL placeholder lançam mesmo fora de CI', wrap(a
   process.env.NEXT_PUBLIC_STRAPI_URL = 'strapi.sem.protocolo';
   await assert.rejects(() => l.fetchAPI('/api/x'), /inválida/);
 }));
-t.test('CI="false" ou "0" ativam fail-fast (string não vazia) - documenta pegadinha', wrap(async () => {
-  for (const v of ['false', '0']) { const l = await load(v); mock([500]); await assert.rejects(() => l.fetchAPI('/api/x')); }
+t.test('CI="false", "0" e "" são falsos: mantêm o fallback {data:[]}', wrap(async () => {
+  for (const v of ['false', '0', '']) { const l = await load(v); mock([500]); assert.deepEqual(await l.fetchAPI('/api/x'), { data: [] }); }
 }));
 
 // --- Comportamento DESEJADO pelo objetivo "falhar o build em CI": hoje os wrappers engolem o erro. ---
