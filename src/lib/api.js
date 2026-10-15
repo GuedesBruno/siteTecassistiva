@@ -3,7 +3,8 @@ import { sortItemsByOrder } from './utils';
 import { ambientesData as mockAmbientes } from './ambientes-data';
 
 // Em CI (deploy) qualquer falha da API deve interromper o build; fora de CI mantemos o fallback com dados vazios.
-const IS_CI = Boolean(process.env.CI);
+// CI="false", "0" e "" contam como falso.
+const IS_CI = !['', 'false', '0'].includes(String(process.env.CI ?? '').trim().toLowerCase());
 const DEBUG = Boolean(process.env.DEBUG);
 
 const MAX_ATTEMPTS = 3;
@@ -110,6 +111,7 @@ export async function getAllProductsForDisplay() {
     return sortItemsByOrder(data.filter(item => item && (item.attributes || item).ocultar_do_catalogo !== true));
   } catch (error) {
     console.error(`Falha ao buscar todos os produtos:`, error);
+    if (IS_CI) throw error;
     return [];
   }
 }
@@ -249,6 +251,7 @@ export async function getCategoryBySlug(slug) {
 
     return { data: normalized };
   } catch (err) {
+    if (IS_CI) throw err;
     console.warn('getCategoryBySlug: populate request failed, falling back to no-populate:', err.message);
     try {
       const response = await fetchAPI(`/api/categorias?filters[slug][$eq]=${slug}`);
@@ -369,6 +372,7 @@ export async function getProductsWithDocuments() {
     return sortItemsByOrder(normalized);
   } catch (error) {
     console.error(`Falha ao buscar produtos com documentos:`, error);
+    if (IS_CI) throw error;
     return [];
   }
 }
@@ -401,6 +405,7 @@ export async function getSoftwareAndDrivers() {
 
   } catch (error) {
     console.error(`Falha ao buscar softwares e drivers:`, error);
+    if (IS_CI) throw error;
     return [];
   }
 }
@@ -478,6 +483,7 @@ export async function getAllImersaoSlugs() {
     return filtered;
   } catch (error) {
     console.error(`❌ ERRO ao buscar imersões:`, error.message);
+    if (IS_CI) throw error;
     return [];
   }
 }
@@ -544,6 +550,7 @@ export async function getAmbientes() {
 
   } catch (error) {
     console.error("Falha crítica ao buscar ambientes no Strapi, usando mock estático:", error);
+    if (IS_CI) throw error;
     return mockAmbientes; // FALLBACK de segurança
   }
 }
