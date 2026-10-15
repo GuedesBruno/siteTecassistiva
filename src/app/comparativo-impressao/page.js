@@ -113,7 +113,7 @@ export default function ComparativoPage() {
                                 <p className="text-lg md:text-xl text-gray-700 leading-relaxed" style={{ fontFamily: 'monospace', overflowWrap: 'break-word', wordWrap: 'break-word', wordBreak: 'break-all' }}>⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵⠷⠡⠜⠩⠿⠣⠌⠾⠬⠹⠾⠯</p>
                             </div>
                             <div className="mt-4 flex flex-col items-center gap-2">
-                                <img src="/teste2.jpg" alt="Gráfico mostrando média de 3.41 pontos por caractere" className="w-32 h-auto rounded-lg shadow-md" />
+                                <img src="/grafico-pontos-portugues-acentos.jpg" alt="Gráfico mostrando média de 3.41 pontos por caractere" className="w-32 h-auto rounded-lg shadow-md" />
                                 <p className="text-sm font-semibold text-gray-700">Média de 3.41 pontos por caractere</p>
                             </div>
                         </div>
@@ -129,7 +129,7 @@ export default function ComparativoPage() {
                                 <p className="text-lg md:text-xl text-gray-700 leading-relaxed" style={{ fontFamily: 'monospace', overflowWrap: 'break-word', wordWrap: 'break-word', wordBreak: 'break-all' }}>⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵</p>
                             </div>
                             <div className="mt-4 flex flex-col items-center gap-2">
-                                <img src="/teste1.jpg" alt="Gráfico mostrando média de 3.02 pontos por caractere" className="w-32 h-auto rounded-lg shadow-md" />
+                                <img src="/grafico-pontos-ingles-simulacao.jpg" alt="Gráfico mostrando média de 3.02 pontos por caractere" className="w-32 h-auto rounded-lg shadow-md" />
                                 <p className="text-sm font-semibold text-gray-700">Média de 3.02 pontos por caractere</p>
                             </div>
                         </div>
@@ -145,7 +145,7 @@ export default function ComparativoPage() {
                                 <p className="text-lg md:text-xl text-gray-400 leading-relaxed" style={{ fontFamily: 'monospace', overflowWrap: 'break-word', wordWrap: 'break-word', wordBreak: 'break-all' }}>⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁</p>
                             </div>
                             <div className="mt-4 flex flex-col items-center gap-2">
-                                <img src="/teste3.jpg" alt="Gráfico mostrando média de 1 ponto por caractere" className="w-32 h-auto rounded-lg shadow-md" />
+                                <img src="/grafico-pontos-brincadeira.jpg" alt="Gráfico mostrando média de 1 ponto por caractere" className="w-32 h-auto rounded-lg shadow-md" />
                                 <p className="text-sm font-semibold text-red-600">Média de 1 ponto por caractere</p>
                             </div>
                         </div>
