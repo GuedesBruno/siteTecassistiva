@@ -99,11 +99,11 @@ async function generateSitemap() {
 
   const staticPages = [
     '/',
-    '/produtos',
-    '/atas-abertas',
-    '/suporte',
-    '/contato',
-    '/tecassistiva',
+    '/produtos/',
+    '/atas-abertas/',
+    '/suporte/',
+    '/contato/',
+    '/tecassistiva/',
   ];
 
   const sitemapContent = `
@@ -117,7 +117,7 @@ async function generateSitemap() {
 
       ${productSlugs.map(p => `
         <url>
-          <loc>${`${SITE_URL}/produtos/${p.slug}`}</loc>
+          <loc>${`${SITE_URL}/produtos/${p.slug}/`}</loc>
           <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
         </url>
       `).join('')}
@@ -127,14 +127,14 @@ async function generateSitemap() {
       // É uma subcategoria
       return `
         <url>
-          <loc>${`${SITE_URL}/produtos/categorias/${c.slug}/${c.subCategorySlug}`}</loc>
+          <loc>${`${SITE_URL}/produtos/categorias/${c.slug}/${c.subCategorySlug}/`}</loc>
           <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
         </url>`;
     } else {
       // É uma categoria pai
       return `
         <url>
-          <loc>${`${SITE_URL}/produtos/categorias/${c.slug}`}</loc>
+          <loc>${`${SITE_URL}/produtos/categorias/${c.slug}/`}</loc>
           <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
         </url>`;
     }
@@ -142,7 +142,7 @@ async function generateSitemap() {
 
       ${imersaoSlugs.map(i => `
         <url>
-          <loc>${`${SITE_URL}/imersao/${i.slug}`}</loc>
+          <loc>${`${SITE_URL}/imersao/${i.slug}/`}</loc>
           <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
         </url>
       `).join('')}
