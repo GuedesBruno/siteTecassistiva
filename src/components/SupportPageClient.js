@@ -41,10 +41,8 @@ export default function SupportPageClient({ products, software, categories }) {
 
   // Efeito para atualizar a aba ativa se a URL mudar
   useEffect(() => {
-    const currentTab = searchParams.get('tab');
-    if (currentTab && currentTab !== activeTab) {
-      setActiveTab(currentTab);
-    }
+    // Só reage a mudança do ?tab=; sem depender de activeTab, o clique do usuário não é revertido.
+    if (tabFromUrl) setActiveTab(tabFromUrl);
   }, [tabFromUrl]);
 
   const handleTabClick = (tab) => {
