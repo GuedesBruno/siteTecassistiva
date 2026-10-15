@@ -63,7 +63,7 @@ export default function ComparativoPage() {
                             <div>
                                 <h3 className="font-bold text-gray-900 text-lg mb-2">O Alfabeto Inglês</h3>
                                 <p className="text-gray-700 text-sm leading-relaxed">
-                                    Imprimir "ABC...XYZ" repetidamente é o método utilizado nos testes tradicionais, considerando o alfabeto inglês.
+                                    Imprimir &quot;ABC...XYZ&quot; repetidamente é o método utilizado nos testes tradicionais, considerando o alfabeto inglês.
                                 </p>
                             </div>
                         </div>
@@ -136,7 +136,7 @@ export default function ComparativoPage() {
 
                         {/* Method 3: Misleading - Simulation */}
                         <div className="bg-red-50 rounded-2xl p-6 border-2 border-red-200 shadow-sm min-h-[320px] flex flex-col order-9 md:order-9">
-                            <h4 className="text-red-400 uppercase text-xs font-bold tracking-widest mb-4">⚠️ "TESTE" DE BRINCADEIRA </h4>
+                            <h4 className="text-red-400 uppercase text-xs font-bold tracking-widest mb-4">⚠️ &quot;TESTE&quot; DE BRINCADEIRA </h4>
                             <div className="font-mono text-gray-400 text-lg md:text-xl leading-relaxed flex-grow" style={{ whiteSpace: 'nowrap' }}>
                                 <p>aaaaaaaaaaaaaaaaaaaaaaaaaa</p>
                             </div>
@@ -278,7 +278,7 @@ export default function ComparativoPage() {
                                     {/* 3. Enganoso (Somente "a") - Red */}
                                     <tr className="bg-red-500 text-white hover:bg-red-600 transition-colors">
                                         <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
-                                            Enganoso (Somente "a")
+                                            Enganoso (Somente &quot;a&quot;)
                                         </td>
                                         <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
                                             40 CPL × 25 LPP
@@ -470,7 +470,7 @@ export default function ComparativoPage() {
                                     {/* 3. Enganoso (Somente "a") - Red */}
                                     <tr className="bg-red-500 text-white hover:bg-red-600 transition-colors">
                                         <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
-                                            Enganoso (Somente "a")
+                                            Enganoso (Somente &quot;a&quot;)
                                         </td>
                                         <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
                                             46 CPL × 29 LPP

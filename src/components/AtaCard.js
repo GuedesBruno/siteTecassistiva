@@ -76,7 +76,7 @@ export default function AtaCard({ ata }) {
               )}
             </p>
             {item.categoria && <p className="text-sm text-gray-600 mt-2"><strong>Categoria:</strong> {item.categoria}</p>}
-            {item.quantidade_carona && <p className="text-sm text-gray-600"><strong>Quantidade para "Carona":</strong> {item.quantidade_carona}</p>}
+            {item.quantidade_carona && <p className="text-sm text-gray-600"><strong>Quantidade para &quot;Carona&quot;:</strong> {item.quantidade_carona}</p>}
           </div>
         );
       })}

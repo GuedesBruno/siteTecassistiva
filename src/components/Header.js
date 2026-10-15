@@ -52,15 +52,16 @@ export default function Header({ categories = [] }) {
       updateHeaderHeight();
     });
 
-    if (headerRef.current) {
-      resizeObserver.observe(headerRef.current);
+    const headerEl = headerRef.current;
+    if (headerEl) {
+      resizeObserver.observe(headerEl);
     }
 
     // Limpeza dos eventos e observer
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      if (headerRef.current) {
-        resizeObserver.unobserve(headerRef.current);
+      if (headerEl) {
+        resizeObserver.unobserve(headerEl);
       }
     };
   }, []); // Array de dependências vazio para rodar apenas uma vez na montagem
