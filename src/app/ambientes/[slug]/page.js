@@ -28,6 +28,7 @@ export async function generateMetadata({ params }) {
   return {
     title: `${ambiente.nome} | Soluções por Ambientes`,
     description: `Produtos recomendados para o ambiente: ${ambiente.nome}`,
+    alternates: { canonical: `/ambientes/${ambiente.slug}/` },
   };
 }
 

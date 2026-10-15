@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { useModalFocus } from '@/lib/useModalFocus';
+import { sentinelFocusTarget } from '@/lib/videoModalFocus';
 
 /**
  * Um componente de modal para exibir um player de vídeo do Vimeo ou YouTube.
@@ -11,20 +13,17 @@ import { useEffect, useRef } from 'react';
  */
 export default function VideoModal({ videoInfo, onClose }) {
   const wakeLockRef = useRef(null);
+  const closeButtonRef = useRef(null);
+  const iframeRef = useRef(null);
 
-  // Lida com a tecla "Esc" para fechar o modal
-  useEffect(() => {
-    const handleEsc = (event) => {
-      if (event.key === 'Escape') {
-        onClose();
-      }
-    };
-    window.addEventListener('keydown', handleEsc);
+  // Sentinelas antes e depois do iframe: vindo do Fechar entram no player; vindo do player voltam ao Fechar
+  const handleSentinelFocus = (event) => {
+    const target = sentinelFocusTarget(event.relatedTarget, closeButtonRef.current);
+    (target === 'player' ? iframeRef.current : closeButtonRef.current)?.focus();
+  };
 
-    return () => {
-      window.removeEventListener('keydown', handleEsc);
-    };
-  }, [onClose]);
+  // Foco inicial, trap do Tab, Esc para fechar e retorno do foco ao elemento que abriu o modal
+  const dialogRef = useModalFocus(Boolean(videoInfo), onClose);
 
   // Efeito para gerenciar o Wake Lock
   useEffect(() => {
@@ -70,15 +69,20 @@ export default function VideoModal({ videoInfo, onClose }) {
 
   if (videoInfo.type === 'vimeo') {
     const [id, hash] = videoInfo.id.split('/');
-    videoSrc = `https://player.vimeo.com/video/${id}?autoplay=1${hash ? `&h=${hash}` : ''}`;
-    videoTitle = `Player de vídeo do Vimeo para o ID ${videoInfo.id}`;
+    videoSrc = `https://player.vimeo.com/video/${id}${hash ? `?h=${hash}` : ''}`;
+    videoTitle = videoInfo.title ? `Vídeo: ${videoInfo.title}` : `Player de vídeo do Vimeo para o ID ${videoInfo.id}`;
   } else if (videoInfo.type === 'youtube') {
-    videoSrc = `https://www.youtube.com/embed/${videoInfo.id}?autoplay=1`;
-    videoTitle = `Player de vídeo do YouTube para o ID ${videoInfo.id}`;
+    videoSrc = `https://www.youtube.com/embed/${videoInfo.id}`;
+    videoTitle = videoInfo.title ? `Vídeo: ${videoInfo.title}` : `Player de vídeo do YouTube para o ID ${videoInfo.id}`;
   }
 
   return (
     <div
+      ref={dialogRef}
+      tabIndex={-1}
+      role="dialog"
+      aria-modal="true"
+      aria-label={videoTitle}
       className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-[100]"
       onClick={onClose} // Fecha ao clicar no overlay
     >
@@ -87,14 +91,18 @@ export default function VideoModal({ videoInfo, onClose }) {
         onClick={(e) => e.stopPropagation()} // Impede o fechamento ao clicar no conteúdo do modal
       >
         <button
+          ref={closeButtonRef}
           onClick={onClose}
+          data-autofocus
           className="absolute top-4 right-4 text-white bg-gray-800 rounded-full h-10 w-10 flex items-center justify-center text-2xl z-10 hover:bg-gray-600 transition-colors"
           aria-label="Fechar vídeo"
         >
           &times;
         </button>
         <div className="aspect-video w-full h-full">
+          <div tabIndex={0} onFocus={handleSentinelFocus} />
           <iframe
+            ref={iframeRef}
             src={videoSrc}
             className="w-full h-full"
             frameBorder="0"
@@ -102,6 +110,7 @@ export default function VideoModal({ videoInfo, onClose }) {
             allowFullScreen
             title={videoTitle}
           ></iframe>
+          <div tabIndex={0} onFocus={handleSentinelFocus} />
         </div>
       </div>
     </div>

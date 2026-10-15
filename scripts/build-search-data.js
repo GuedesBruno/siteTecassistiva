@@ -3,11 +3,14 @@ import path from 'path';
 import dotenv from 'dotenv';
 import { glob } from 'glob';
 import qs from 'qs';
+import { normalizeDataArray, requestStrapi } from '../src/lib/strapi-client.mjs';
+import { getStrapiMediaUrl } from '../src/lib/media.js';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
-// Função auxiliar para fetch API
-// Função auxiliar para fetch API com timeout e retry mais agressivo para lidar com 503s do Strapi Cloud
+// Busca na API com timeout de 10 minutos e retry agressivo (5 tentativas, backoff de 2s a 30s)
+// para lidar com 503s do Strapi Cloud. Qualquer resposta não-ok é repetida; ao fim, lança o último erro.
+// (Quem decide se a falha derruba o build é safeFetch, olhando CI.)
 async function fetchAPI(endpoint, retries = 5) {
   const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
   const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN;
@@ -16,80 +19,39 @@ async function fetchAPI(endpoint, retries = 5) {
     throw new Error("Variáveis de ambiente não definidas");
   }
 
-  let lastError;
-
-  for (let attempt = 1; attempt <= retries; attempt++) {
-    try {
-      let base = STRAPI_URL.replace(/\/+$/g, '');
-      if (base.endsWith('/api')) {
-        base = base.replace(/\/api$/, '');
-      }
-      const path_ep = endpoint.replace(/^\/+/, '');
-      const url = `${base}/${path_ep}`;
-
-      // Aumenta timeout para 600 segundos (10 minutos)
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 600000);
-
-      if (attempt > 1) {
-        console.log(`  Tentativa ${attempt}/${retries} para ${endpoint}...`);
-      }
-
-      const res = await fetch(url, {
-        headers: { 'Authorization': `Bearer ${STRAPI_TOKEN}` },
-        signal: controller.signal,
-      });
-
-      clearTimeout(timeoutId);
-
-      if (!res.ok) {
-        // Tenta ler o erro
-        let errorMsg = `API Error: ${res.status}`;
-        try {
-          const errorBody = await res.json();
-          if (errorBody && errorBody.error && errorBody.error.message) {
-            errorMsg += ` - ${errorBody.error.message}`;
-          }
-        } catch (e) { /* ignore */ }
-        throw new Error(errorMsg);
-      }
-
-      return await res.json();
-    } catch (error) {
-      lastError = error;
-
-      if (error.name === 'AbortError') {
-        console.error(`Timeout ao fazer fetch (tentativa ${attempt}/${retries}): ${endpoint}`);
-      } else {
-        console.error(`Erro ao fazer fetch (tentativa ${attempt}/${retries}): ${error.message} (${endpoint})`);
-      }
-
-      // Se não for a última tentativa, aguarda antes de tentar novamente (exponential backoff com tempo maior)
-      if (attempt < retries) {
-        // Incrementa o backoff: 2s, 4s, 8s, 16s... máximo 30s
+  let res;
+  try {
+    res = await requestStrapi(endpoint, {
+      baseUrl: STRAPI_URL,
+      token: STRAPI_TOKEN,
+      maxAttempts: retries,
+      shouldRetryStatus: () => true,
+      retryDelay: (attempt) => {
         const waitTime = Math.min(2000 * Math.pow(2, attempt - 1), 30000);
         console.log(`  Aguardando ${waitTime}ms antes de tentar novamente...`);
-        await new Promise(resolve => setTimeout(resolve, waitTime));
-      }
-    }
+        return waitTime;
+      },
+      timeoutMs: 600000,
+      onRetry: (attempt, reason) => console.error(`Erro ao fazer fetch (tentativa ${attempt}/${retries}): ${reason} (${endpoint})`),
+    });
+  } catch (error) {
+    console.error(`Erro ao fazer fetch (tentativa ${retries}/${retries}): ${error.name === 'AbortError' ? 'timeout' : error.message} (${endpoint})`);
+    throw error;
   }
 
-  throw lastError;
-}
+  if (!res.ok) {
+    let errorMsg = `API Error: ${res.status}`;
+    try {
+      const errorBody = await res.json();
+      if (errorBody && errorBody.error && errorBody.error.message) {
+        errorMsg += ` - ${errorBody.error.message}`;
+      }
+    } catch (e) { /* ignore */ }
+    console.error(`Erro ao fazer fetch (tentativa ${retries}/${retries}): ${errorMsg} (${endpoint})`);
+    throw new Error(errorMsg);
+  }
 
-function getStrapiMediaUrl(path) {
-  if (!path) return null;
-  if (/^https?:\/\//i.test(path) || /^\/\//.test(path)) return path;
-  const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
-  const base = STRAPI_URL.replace(/\/+$/g, '').replace(/\/api$/, '');
-  if (path.startsWith('/')) return `${base}${path}`;
-  return `${base}/${path}`;
-}
-
-function normalizeDataArray(response) {
-  if (!response) return [];
-  const data = response.data || [];
-  return data;
+  return await res.json();
 }
 
 // Function to strip HTML/JSX tags and extract text.
@@ -164,6 +126,8 @@ async function generateSearchData() {
       console.log(`Buscando ${label}...`);
       return await fetchAllData(endpoint);
     } catch (err) {
+      // Em CI (deploy) não publica busca incompleta: falha o build
+      if (process.env.CI) throw err;
       console.warn(`AVISO: Falha ao buscar ${label} (${err.message}). Usando array vazio como fallback.`);
       return [];
     }

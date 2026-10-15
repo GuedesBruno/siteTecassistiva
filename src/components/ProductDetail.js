@@ -3,10 +3,12 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
+import { Navigation, A11y } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { getStrapiMediaUrl } from '@/lib/media';
+import { safeUrl } from '@/lib/safeUrl';
+import { handleTablistKeyDown } from '@/lib/tabsKeyboard';
 import VideoModal from './VideoModal';
 import RichTextRenderer from './RichTextRenderer';
 import SpecsTable from './SpecsTable';
@@ -108,6 +110,7 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
   const [activeTab, setActiveTab] = useState(initialTab);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [swiper, setSwiper] = useState(null);
+  const [activeImage, setActiveImage] = useState(0);
 
   // Effect to handle prop changes or empty states
   useEffect(() => {
@@ -129,8 +132,14 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
             <div className="aspect-square relative rounded-2xl overflow-hidden bg-white shadow-lg border border-gray-100">
               {images.length > 0 ? (
                 <Swiper
-                  modules={[Navigation]}
+                  modules={[Navigation, A11y]}
                   onSwiper={setSwiper}
+                  onSlideChange={(sw) => setActiveImage(sw.realIndex)}
+                  a11y={{
+                    prevSlideMessage: 'Foto anterior',
+                    nextSlideMessage: 'Próxima foto',
+                    slideLabelMessage: 'Foto {{index}} de {{slidesLength}}',
+                  }}
                   navigation={{
                     prevEl: '.swiper-button-prev',
                     nextEl: '.swiper-button-next',
@@ -151,8 +160,8 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
                       </div>
                     </SwiperSlide>
                   ))}
-                  <div className="swiper-button-prev !text-white after:!text-2xl !w-10 !h-10 !bg-tec-blue/50 !rounded-full !shadow-md hover:!bg-tec-blue transition-all opacity-0 group-hover:opacity-100"></div>
-                  <div className="swiper-button-next !text-white after:!text-2xl !w-10 !h-10 !bg-tec-blue/50 !rounded-full !shadow-md hover:!bg-tec-blue transition-all opacity-0 group-hover:opacity-100"></div>
+                  <button type="button" aria-label="Foto anterior" className="swiper-button-prev !text-white after:!text-2xl !w-10 !h-10 !bg-tec-blue/85 !rounded-full !shadow-md hover:!bg-tec-blue transition-all opacity-0 group-hover:opacity-100 focus-visible:opacity-100"></button>
+                  <button type="button" aria-label="Próxima foto" className="swiper-button-next !text-white after:!text-2xl !w-10 !h-10 !bg-tec-blue/85 !rounded-full !shadow-md hover:!bg-tec-blue transition-all opacity-0 group-hover:opacity-100 focus-visible:opacity-100"></button>
                 </Swiper>
               ) : (
                 <div className="w-full h-full flex items-center justify-center bg-gray-50 text-gray-400">
@@ -167,18 +176,21 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
             {images.length > 1 && (
               <div className="mt-4 grid grid-cols-5 gap-2">
                 {images.map((img, idx) => (
-                  <div
+                  <button
                     key={img.id || idx}
-                    className="aspect-square relative rounded-lg overflow-hidden border border-gray-200 cursor-pointer hover:border-tec-blue transition-colors"
-                    onClick={() => swiper?.slideTo(idx)}
+                    type="button"
+                    aria-label={`Ver foto ${idx + 1} de ${images.length}`}
+                    aria-current={activeImage === idx ? 'true' : undefined}
+                    className={`aspect-square relative rounded-lg overflow-hidden border-2 transition-colors ${activeImage === idx ? 'border-tec-blue' : 'border-gray-200 hover:border-tec-blue'}`}
+                    onClick={() => swiper?.slideToLoop(idx)}
                   >
                     <Image
                       src={getStrapiMediaUrl(img.url)}
-                      alt={`Thumbnail ${idx + 1}`}
+                      alt=""
                       fill
                       className="object-cover"
                     />
-                  </div>
+                  </button>
                 ))}
               </div>
             )}
@@ -205,8 +217,8 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
                       <VideoCard video={video} onVideoClick={setSelectedVideo} />
                     </SwiperSlide>
                   ))}
-                  <div className="video-swiper-button-prev swiper-button-prev !text-white after:!text-xl !w-8 !h-8 !bg-tec-blue/50 !rounded-full !shadow-md hover:!bg-tec-blue transition-all opacity-0 group-hover/video:opacity-100"></div>
-                  <div className="video-swiper-button-next swiper-button-next !text-white after:!text-xl !w-8 !h-8 !bg-tec-blue/50 !rounded-full !shadow-md hover:!bg-tec-blue transition-all opacity-0 group-hover/video:opacity-100"></div>
+                  <button type="button" aria-label="Vídeos anteriores" className="video-swiper-button-prev swiper-button-prev !text-white after:!text-xl !w-8 !h-8 !bg-tec-blue/85 !rounded-full !shadow-md hover:!bg-tec-blue transition-all opacity-0 group-hover/video:opacity-100 focus-visible:opacity-100"></button>
+                  <button type="button" aria-label="Próximos vídeos" className="video-swiper-button-next swiper-button-next !text-white after:!text-xl !w-8 !h-8 !bg-tec-blue/85 !rounded-full !shadow-md hover:!bg-tec-blue transition-all opacity-0 group-hover/video:opacity-100 focus-visible:opacity-100"></button>
                 </Swiper>
               </div>
             )}
@@ -227,7 +239,7 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
 
             {/* WhatsApp Button */}
             <a
-              href={`https://wa.me/5511995978139?text=Olá, gostaria de saber mais sobre o produto ${p.nome}`}
+              href={`https://wa.me/5511995978139?text=${encodeURIComponent(`Olá, gostaria de saber mais sobre o produto ${p.nome}`)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-8 py-4 bg-green-500 hover:bg-green-600 text-white text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 w-full sm:w-auto"
@@ -242,13 +254,26 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
 
         <div className="w-full">
           <div className="border-b border-gray-200 sticky top-[var(--header-height)] z-40 bg-white transition-all duration-300">
-            <nav className="-mb-px flex space-x-2 md:space-x-4 overflow-x-auto no-scrollbar" aria-label="Tabs">
-              {tabs.map((tab) => (
+            <div role="tablist" aria-label="Informações do produto" className="-mb-px flex space-x-2 md:space-x-4 overflow-x-auto no-scrollbar">
+              {tabs.map((tab, tabIndex) => (
                 tab.content && (
                   <button
                     key={tab.name}
+                    type="button"
+                    role="tab"
+                    id={`product-tab-${tabIndex}`}
+                    aria-selected={activeTab === tab.name}
+                    aria-controls={`product-tabpanel-${tabIndex}`}
+                    tabIndex={activeTab === tab.name ? 0 : -1}
                     onClick={() => setActiveTab(tab.name)}
-                    className={`px-4 py-3 text-sm md:text-base font-semibold transition-colors duration-200 whitespace-nowrap ${activeTab === tab.name
+                    onKeyDown={(e) => handleTablistKeyDown(
+                      e,
+                      tabs.filter(t => t.content).map(t => t.name),
+                      tab.name,
+                      setActiveTab,
+                      (name) => `product-tab-${tabs.findIndex(t => t.name === name)}`
+                    )}
+                    className={`px-4 py-3 text-sm md:text-base font-semibold transition-colors duration-200 whitespace-nowrap focus-visible:outline-offset-[-2px] ${activeTab === tab.name
                       ? 'border-b-2 border-tec-blue text-tec-blue'
                       : 'text-gray-500 hover:text-tec-blue'
                       }`}
@@ -257,12 +282,18 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
                   </button>
                 )
               ))}
-            </nav>
+            </div>
           </div>
           <div className="py-8">
             <div className="prose max-w-none">
-              {tabs.map((tab) => (
-                <div key={tab.name} className={activeTab === tab.name ? 'block' : 'hidden'}>
+              {tabs.map((tab, tabIndex) => (
+                <div
+                  key={tab.name}
+                  role="tabpanel"
+                  id={`product-tabpanel-${tabIndex}`}
+                  aria-labelledby={`product-tab-${tabIndex}`}
+                  className={`scroll-mt-14 ${activeTab === tab.name ? 'block' : 'hidden'}`}
+                >
                   {/* Lógica para Visão Geral e Características Funcionais (Cards Verticais) */}
                   {(tab.name === 'Visão Geral' || tab.name === 'Características Funcionais') && (
                     <div className="flex flex-col gap-6">
@@ -294,7 +325,7 @@ export default function ProductDetail({ product, breadcrumbs = [] }) {
                     </div>
                   )}
                   {tab.name === 'Downloads' && (p.documentos || []).map(doc => (
-                    <a key={doc.id} href={getStrapiMediaUrl(doc.url)} target="_blank" rel="noopener noreferrer" className="flex items-center text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200 py-1">
+                    <a key={doc.id} href={safeUrl(getStrapiMediaUrl(doc.url)) || '#'} target="_blank" rel="noopener noreferrer" className="flex items-center text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200 py-1">
                       <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                       <span>{doc.name}</span>
                     </a>

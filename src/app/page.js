@@ -4,32 +4,12 @@ import VideoSection from "@/components/VideoSection";
 import ManufacturersGrid from "@/components/ManufacturersGrid";
 import TestimonialSection from "@/components/TestimonialSection";
 import Link from 'next/link';
+import { getBanners, getFeaturedProducts, getManufacturers, getAllTestimonials, getHomeVideos } from "@/lib/api";
 
-// Lazy load API functions to avoid compilation during SSG.
-async function getBanners() {
-  const { getBanners: _getBanners } = await import("@/lib/api");
-  return _getBanners();
-}
 
-async function getFeaturedProducts() {
-  const { getFeaturedProducts: _getFeaturedProducts } = await import("@/lib/api");
-  return _getFeaturedProducts();
-}
-
-async function getManufacturers() {
-  const { getManufacturers: _getManufacturers } = await import("@/lib/api");
-  return _getManufacturers();
-}
-
-async function getAllTestimonials() {
-  const { getAllTestimonials: _getAllTestimonials } = await import("@/lib/api");
-  return _getAllTestimonials();
-}
-
-async function getHomeVideos() {
-  const { getHomeVideos: _getHomeVideos } = await import("@/lib/api");
-  return _getHomeVideos();
-}
+export const metadata = {
+  alternates: { canonical: '/' },
+};
 
 export default async function Home() {
   // Busca os dados da API em paralelo para otimizar o tempo de build

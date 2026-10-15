@@ -192,3 +192,21 @@
 
 # Define a página de erro 404 personalizada do Next.js
 ErrorDocument 404 /404.html
+
+# ----------------------------------------------------------------------
+# Segurança adicional e cache (acrescentado na revisão de segurança)
+# ----------------------------------------------------------------------
+<IfModule mod_headers.c>
+  # HSTS: força HTTPS por 1 ano (sem includeSubDomains/preload de propósito)
+  Header always set Strict-Transport-Security "max-age=31536000"
+
+  # CSP em modo somente relatório: apenas registra violações no console do
+  # navegador, não bloqueia nada. Ajustar e só então trocar por Content-Security-Policy.
+  Header set Content-Security-Policy-Report-Only "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://formspree.io https://vimeo.com https://backend.tecassistiva.com.br https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com; frame-src https://player.vimeo.com https://www.youtube.com https://www.youtube-nocookie.com https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io; frame-ancestors 'self'; upgrade-insecure-requests"
+
+  # Somente _next/static (arquivos com hash no nome): cache longo e imutável
+  # (LocationMatch não é permitido em .htaccess; <If> do Apache 2.4 é)
+  <If "%{REQUEST_URI} =~ m#^/_next/static/#">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </If>
+</IfModule>

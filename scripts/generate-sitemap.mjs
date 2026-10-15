@@ -2,12 +2,13 @@
 import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
+import { normalizeDataArray, requestStrapi } from '../src/lib/strapi-client.mjs';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
 const SITE_URL = 'https://www.tecassistiva.com.br';
 
-// Funções de fetch sem dependência de src/lib/api.js
+// Uma tentativa só: qualquer falha da API interrompe o build (sitemap incompleto não deve ser publicado).
 async function fetchAPI(endpoint) {
   const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
   const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN;
@@ -17,16 +18,7 @@ async function fetchAPI(endpoint) {
   }
 
   try {
-    let base = STRAPI_URL.replace(/\/+$/g, '');
-    if (base.endsWith('/api')) {
-      base = base.replace(/\/api$/, '');
-    }
-    const path_ep = endpoint.replace(/^\/+/, '');
-    const url = `${base}/${path_ep}`;
-
-    const res = await fetch(url, {
-      headers: { 'Authorization': `Bearer ${STRAPI_TOKEN}` },
-    });
+    const res = await requestStrapi(endpoint, { baseUrl: STRAPI_URL, token: STRAPI_TOKEN });
 
     if (!res.ok) {
       throw new Error(`API Error: ${res.status}`);
@@ -37,12 +29,6 @@ async function fetchAPI(endpoint) {
     console.error(`Erro ao fazer fetch: ${error.message}`);
     throw error;
   }
-}
-
-function normalizeDataArray(response) {
-  if (!response) return [];
-  const data = response.data || [];
-  return data;
 }
 
 async function getAllProductSlugs() {
@@ -99,11 +85,11 @@ async function generateSitemap() {
 
   const staticPages = [
     '/',
-    '/produtos',
-    '/atas-abertas',
-    '/suporte',
-    '/contato',
-    '/tecassistiva',
+    '/produtos/',
+    '/atas-abertas/',
+    '/suporte/',
+    '/contato/',
+    '/tecassistiva/',
   ];
 
   const sitemapContent = `
@@ -117,7 +103,7 @@ async function generateSitemap() {
 
       ${productSlugs.map(p => `
         <url>
-          <loc>${`${SITE_URL}/produtos/${p.slug}`}</loc>
+          <loc>${`${SITE_URL}/produtos/${p.slug}/`}</loc>
           <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
         </url>
       `).join('')}
@@ -127,14 +113,14 @@ async function generateSitemap() {
       // É uma subcategoria
       return `
         <url>
-          <loc>${`${SITE_URL}/produtos/categorias/${c.slug}/${c.subCategorySlug}`}</loc>
+          <loc>${`${SITE_URL}/produtos/categorias/${c.slug}/${c.subCategorySlug}/`}</loc>
           <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
         </url>`;
     } else {
       // É uma categoria pai
       return `
         <url>
-          <loc>${`${SITE_URL}/produtos/categorias/${c.slug}`}</loc>
+          <loc>${`${SITE_URL}/produtos/categorias/${c.slug}/`}</loc>
           <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
         </url>`;
     }
@@ -142,7 +128,7 @@ async function generateSitemap() {
 
       ${imersaoSlugs.map(i => `
         <url>
-          <loc>${`${SITE_URL}/imersao/${i.slug}`}</loc>
+          <loc>${`${SITE_URL}/imersao/${i.slug}/`}</loc>
           <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
         </url>
       `).join('')}

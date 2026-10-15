@@ -1,7 +1,10 @@
 'use client';
 
+import { useId } from 'react';
+
 // Não usar useState aqui, o estado será gerenciado no componente pai
 export default function Accordion({ title, content, isOpen, onToggle }) {
+  const panelId = useId();
 
   let renderedContent;
   if (typeof content === 'string') {
@@ -18,9 +21,13 @@ export default function Accordion({ title, content, isOpen, onToggle }) {
 
   return (
     <div className="border-t border-gray-200 py-4">
+      <h3 className="m-0">
       <button
+        type="button"
         onClick={onToggle} // Usa o manipulador de toggle recebido por props
-        className="flex justify-between items-center w-full text-lg font-semibold text-left text-gray-800 hover:text-blue-600 focus:outline-none"
+        aria-expanded={isOpen}
+        aria-controls={panelId}
+        className="flex justify-between items-center w-full text-lg font-semibold text-left text-gray-800 hover:text-blue-600"
       >
         <span>{title}</span>
         <svg
@@ -28,16 +35,16 @@ export default function Accordion({ title, content, isOpen, onToggle }) {
           fill="none"
           stroke="currentColor"
           viewBox="0 2 24 24"
+          aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
         </svg>
       </button>
-      {isOpen && (
-        <div className="mt-4 prose prose-sm max-w-none text-gray-700">
-          {renderedContent}
-        </div>
-      )}
+      </h3>
+      <div id={panelId} hidden={!isOpen} className="mt-4 prose prose-sm max-w-none text-gray-700">
+        {renderedContent}
+      </div>
     </div>
   );
 }

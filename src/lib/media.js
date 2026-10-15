@@ -1,10 +1,10 @@
 // Pure utility functions for media URL handling
 // These don't import @/lib/api to avoid loading problematic dependencies during static export.
+// Fonte única de getStrapiURL/getStrapiMediaUrl (api.js reexporta daqui).
+import { trimStrapiBase } from './strapi-client.mjs';
 
 export function getStrapiURL() {
-  let base = (process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337').replace(/\/+$/g, '');
-  if (base.endsWith('/api')) base = base.replace(/\/api$/, '');
-  return base;
+  return trimStrapiBase(process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337');
 }
 
 export function getStrapiMediaUrl(path) {

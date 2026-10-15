@@ -1,6 +1,13 @@
 import qs from 'qs';
 import { sortItemsByOrder } from './utils';
 import { ambientesData as mockAmbientes } from './ambientes-data';
+import { isCI, normalizeDataArray, requestStrapi } from './strapi-client.mjs';
+
+const IS_CI = isCI();
+const DEBUG = Boolean(process.env.DEBUG);
+
+// Repete erros de rede e respostas 5xx (3 tentativas, espera de 1s e 2s). 4xx não é repetido.
+const MAX_ATTEMPTS = 3;
 
 async function fetchAPI(endpoint, options = {}) {
   const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
@@ -18,26 +25,23 @@ async function fetchAPI(endpoint, options = {}) {
   }
 
   try {
-    let base = STRAPI_URL.replace(/\/+$/g, '');
-    if (base.endsWith('/api')) {
-      base = base.replace(/\/api$/, '');
-    }
-    const path = endpoint.replace(/^\/+/, '');
-    const url = `${base}/${path}`;
+    if (DEBUG) console.log(`Fetching API: ${endpoint}`);
 
-    console.log(`🔌 Fetching API: ${url}`); // Log para debug
-
-    const fetchOptions = {
-      headers: { 'Authorization': `Bearer ${STRAPI_TOKEN}` },
-      ...options,
-    };
-
-    const res = await fetch(url, fetchOptions);
+    const res = await requestStrapi(endpoint, {
+      baseUrl: STRAPI_URL,
+      token: STRAPI_TOKEN,
+      maxAttempts: MAX_ATTEMPTS,
+      shouldRetryStatus: (status) => status >= 500,
+      retryDelay: (attempt) => 1000 * attempt,
+      fetchOptions: options,
+      onRetry: (attempt, reason) => console.warn(`Tentativa ${attempt}/${MAX_ATTEMPTS} falhou (${reason}) em ${endpoint}`),
+    });
 
     if (!res.ok) {
       console.error(`Erro na requisição para ${endpoint}: ${res.status} ${res.statusText}`);
-      const errorText = await res.text();
-      console.error("Detalhes do erro:", errorText);
+      if (IS_CI) {
+        throw new Error(`Falha na API do Strapi (${res.status}) em ${endpoint}`);
+      }
 
       // FALLBACK: Se Strapi retornar erro (ex: limite de API excedido), retorna dados vazios
       console.warn(`⚠️ Strapi API indisponível (${res.status}). Retornando dados vazios para permitir build.`);
@@ -48,6 +52,7 @@ async function fetchAPI(endpoint, options = {}) {
 
   } catch (error) {
     console.error(`ERRO ao fazer fetch no endpoint "${endpoint}":`, error.message);
+    if (IS_CI) throw error;
 
     // FALLBACK CRÍTICO: Se Strapi estiver completamente offline, retorna dados vazios
     // Isso permite que o build complete mesmo com Strapi suspenso
@@ -57,25 +62,10 @@ async function fetchAPI(endpoint, options = {}) {
   }
 }
 
-export function getStrapiURL() {
-  let base = (process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337').replace(/\/+$/g, '');
-  if (base.endsWith('/api')) base = base.replace(/\/api$/, '');
-  return base;
-}
-
-export function getStrapiMediaUrl(path) {
-  if (!path) return null;
-  if (/^https?:\/\//i.test(path) || /^\/\//.test(path)) return path;
-  const base = getStrapiURL();
-  if (path.startsWith('/')) return `${base}${path}`;
-  return `${base}/${path}`;
-}
-
-export function normalizeDataArray(response) {
-  if (!response) return [];
-  const data = response.data || [];
-  return data;
-}
+// getStrapiURL/getStrapiMediaUrl vivem em media.js (sem dependências); reexportados aqui por compatibilidade.
+import { getStrapiURL, getStrapiMediaUrl } from './media';
+export { getStrapiURL, getStrapiMediaUrl };
+export { normalizeDataArray };
 
 export async function getAllProductsForDisplay() {
   try {
@@ -86,6 +76,7 @@ export async function getAllProductsForDisplay() {
     return sortItemsByOrder(data.filter(item => item && (item.attributes || item).ocultar_do_catalogo !== true));
   } catch (error) {
     console.error(`Falha ao buscar todos os produtos:`, error);
+    if (IS_CI) throw error;
     return [];
   }
 }
@@ -225,6 +216,7 @@ export async function getCategoryBySlug(slug) {
 
     return { data: normalized };
   } catch (err) {
+    if (IS_CI) throw err;
     console.warn('getCategoryBySlug: populate request failed, falling back to no-populate:', err.message);
     try {
       const response = await fetchAPI(`/api/categorias?filters[slug][$eq]=${slug}`);
@@ -269,8 +261,7 @@ export async function getAllTestimonials() {
 // Adicionando funções que podem estar faltando para o build
 export async function getAllCategoryPaths() {
   const response = await fetchAPI(
-    '/api/categorias?fields[0]=slug&populate[subcategorias][fields][0]=slug&pagination[limit]=200',
-    { cache: 'no-store' } // Força a busca de dados novos, evitando cache
+    '/api/categorias?fields[0]=slug&populate[subcategorias][fields][0]=slug&pagination[limit]=200'
   );
   return normalizeDataArray(response);
 }
@@ -345,6 +336,7 @@ export async function getProductsWithDocuments() {
     return sortItemsByOrder(normalized);
   } catch (error) {
     console.error(`Falha ao buscar produtos com documentos:`, error);
+    if (IS_CI) throw error;
     return [];
   }
 }
@@ -377,26 +369,7 @@ export async function getSoftwareAndDrivers() {
 
   } catch (error) {
     console.error(`Falha ao buscar softwares e drivers:`, error);
-    return [];
-  }
-}
-
-export async function getAllSimplePages() {
-  try {
-    // Tenta buscar como uma coleção
-    const pagesData = await fetchAPI(`/api/paginas?fields[0]=titulo&fields[1]=slug&pagination[limit]=100`);
-    if (pagesData && pagesData.length > 0) {
-      return normalizeDataArray(pagesData);
-    }
-    // Se falhar ou retornar vazio, tenta como um tipo único (single type)
-    const singlePageData = await fetchAPI(`/api/pagina?fields[0]=titulo&fields[1]=slug`);
-    if (singlePageData && singlePageData.id) {
-      // Encapsula em um array para manter a consistência do tipo de retorno
-      return [singlePageData];
-    }
-    return [];
-  } catch (error) {
-    console.error(`Falha ao buscar páginas simples, tentando como coleção e tipo único:`, error);
+    if (IS_CI) throw error;
     return [];
   }
 }
@@ -431,20 +404,14 @@ export async function getImersaoBySlug(slug) {
 export async function getAllImersaoSlugs() {
   // ADICIONADO: populate[produto][fields] para verificar se existe relação
   const populateQuery = 'populate[produto][fields][0]=slug&populate[produto][fields][1]=nome&fields[0]=slug';
-  console.log(`🔍 Buscando imersões com populate: /api/imersaos?${populateQuery}`);
 
   try {
     const res = await fetchAPI(`/api/imersaos?${populateQuery}`);
-    console.log(`✅ Resposta da API:`, JSON.stringify(res, null, 2).substring(0, 500));
-
     const data = normalizeDataArray(res);
-    console.log(`📊 Data após normalize:`, data.length, 'itens');
-
     // Normalize each item if the attributes object is missing
     const normalizedData = data.map(item => {
       if (!item) return null;
       if (item.attributes) {
-        console.log(`  - Item com slug: ${item.attributes?.slug}, produto: ${item.attributes?.produto?.data ? 'SIM' : 'NÃO'}`);
         return item;
       }
       const { id, ...attributes } = item;
@@ -457,10 +424,10 @@ export async function getAllImersaoSlugs() {
       item.attributes?.produto?.data
     );
 
-    console.log(`✅ Imersões com produto vinculado: ${filtered.length}`);
     return filtered;
   } catch (error) {
     console.error(`❌ ERRO ao buscar imersões:`, error.message);
+    if (IS_CI) throw error;
     return [];
   }
 }
@@ -527,6 +494,7 @@ export async function getAmbientes() {
 
   } catch (error) {
     console.error("Falha crítica ao buscar ambientes no Strapi, usando mock estático:", error);
+    if (IS_CI) throw error;
     return mockAmbientes; // FALLBACK de segurança
   }
 }

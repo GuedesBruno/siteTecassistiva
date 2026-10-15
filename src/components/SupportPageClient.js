@@ -6,12 +6,22 @@ import { FaWhatsapp, FaPhoneAlt, FaEnvelope, FaCertificate } from 'react-icons/f
 import DocumentListItem from './DocumentListItem';
 import SoftwareListItem from './SoftwareListItem';
 import CategoryMenu from './CategoryMenu';
+import { handleTablistKeyDown } from '@/lib/tabsKeyboard';
 import SoftwareListMenu from './SoftwareListMenu';
 
 
-const TabButton = ({ label, isActive, onClick }) => (
+const SUPPORT_TABS = ['softwares', 'drivers', 'documentos', 'contato'];
+
+const TabButton = ({ id, label, isActive, onClick, onKeyDown }) => (
   <button
+    type="button"
+    role="tab"
+    id={`support-tab-${id}`}
+    aria-selected={isActive}
+    aria-controls="support-tabpanel"
+    tabIndex={isActive ? 0 : -1}
     onClick={onClick}
+    onKeyDown={onKeyDown}
     className={`px-4 py-3 font-semibold border-b-4 transition-colors duration-300 ${isActive
       ? 'border-blue-500 text-blue-600'
       : 'border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-300'
@@ -293,19 +303,30 @@ export default function SupportPageClient({ products, software, categories }) {
           </aside>
         )}
 
-        <main className={activeTab !== 'contato' ? "lg:col-span-3" : "lg:col-span-4"}>
+        <div className={activeTab !== 'contato' ? "lg:col-span-3" : "lg:col-span-4"}>
           <div className="border-b border-gray-200 mb-8">
-            <nav className="-mb-px flex flex-wrap justify-center space-x-8" aria-label="Tabs">
-              <TabButton label="Softwares" isActive={activeTab === 'softwares'} onClick={() => handleTabClick('softwares')} />
-              <TabButton label="Drivers e Utilitários" isActive={activeTab === 'drivers'} onClick={() => handleTabClick('drivers')} />
-              <TabButton label="Manuais e Documentos" isActive={activeTab === 'documentos'} onClick={() => handleTabClick('documentos')} />
-              <TabButton label="Contato do Suporte" isActive={activeTab === 'contato'} onClick={() => handleTabClick('contato')} />
-            </nav>
+            <div role="tablist" aria-label="Seções do suporte" className="-mb-px flex flex-wrap justify-center space-x-8">
+              {[
+                ['softwares', 'Softwares'],
+                ['drivers', 'Drivers e Utilitários'],
+                ['documentos', 'Manuais e Documentos'],
+                ['contato', 'Contato do Suporte'],
+              ].map(([id, label]) => (
+                <TabButton
+                  key={id}
+                  id={id}
+                  label={label}
+                  isActive={activeTab === id}
+                  onClick={() => handleTabClick(id)}
+                  onKeyDown={(e) => handleTablistKeyDown(e, SUPPORT_TABS, id, handleTabClick, (tabId) => `support-tab-${tabId}`)}
+                />
+              ))}
+            </div>
           </div>
-          <div>
+          <div role="tabpanel" id="support-tabpanel" aria-labelledby={`support-tab-${activeTab}`}>
             {renderMainContent()}
           </div>
-        </main>
+        </div>
       </div>
     </div>
   );

@@ -4,11 +4,12 @@ import Link from 'next/link';
 export const metadata = {
     title: 'Comparativo de Velocidade: Impressora Braille | Tecassistiva',
     description: 'Entenda como analisar a velocidade real de uma impressora Braille e a importância dos testes com caracteres da língua portuguesa.',
+    alternates: { canonical: '/comparativo-impressao/' },
 };
 
 export default function ComparativoPage() {
     return (
-        <main className="min-h-screen bg-white font-sans">
+        <div className="min-h-screen bg-white font-sans">
             {/* Hero Section */}
             <section className="bg-gray-50 py-6 md:py-8 relative overflow-hidden border-b border-gray-200">
                 <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 bg-blue-100 rounded-full blur-3xl opacity-40"></div>
@@ -62,7 +63,7 @@ export default function ComparativoPage() {
                             <div>
                                 <h3 className="font-bold text-gray-900 text-lg mb-2">O Alfabeto Inglês</h3>
                                 <p className="text-gray-700 text-sm leading-relaxed">
-                                    Imprimir "ABC...XYZ" repetidamente é o método utilizado nos testes tradicionais, considerando o alfabeto inglês.
+                                    Imprimir &quot;ABC...XYZ&quot; repetidamente é o método utilizado nos testes tradicionais, considerando o alfabeto inglês.
                                 </p>
                             </div>
                         </div>
@@ -112,7 +113,7 @@ export default function ComparativoPage() {
                                 <p className="text-lg md:text-xl text-gray-700 leading-relaxed" style={{ fontFamily: 'monospace', overflowWrap: 'break-word', wordWrap: 'break-word', wordBreak: 'break-all' }}>⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵⠷⠡⠜⠩⠿⠣⠌⠾⠬⠹⠾⠯</p>
                             </div>
                             <div className="mt-4 flex flex-col items-center gap-2">
-                                <img src="/teste2.jpg" alt="Gráfico mostrando média de 3.41 pontos por caractere" className="w-32 h-auto rounded-lg shadow-md" />
+                                <img src="/grafico-pontos-portugues-acentos.jpg" alt="Gráfico mostrando média de 3.41 pontos por caractere" className="w-32 h-auto rounded-lg shadow-md" />
                                 <p className="text-sm font-semibold text-gray-700">Média de 3.41 pontos por caractere</p>
                             </div>
                         </div>
@@ -128,14 +129,14 @@ export default function ComparativoPage() {
                                 <p className="text-lg md:text-xl text-gray-700 leading-relaxed" style={{ fontFamily: 'monospace', overflowWrap: 'break-word', wordWrap: 'break-word', wordBreak: 'break-all' }}>⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵</p>
                             </div>
                             <div className="mt-4 flex flex-col items-center gap-2">
-                                <img src="/teste1.jpg" alt="Gráfico mostrando média de 3.02 pontos por caractere" className="w-32 h-auto rounded-lg shadow-md" />
+                                <img src="/grafico-pontos-ingles-simulacao.jpg" alt="Gráfico mostrando média de 3.02 pontos por caractere" className="w-32 h-auto rounded-lg shadow-md" />
                                 <p className="text-sm font-semibold text-gray-700">Média de 3.02 pontos por caractere</p>
                             </div>
                         </div>
 
                         {/* Method 3: Misleading - Simulation */}
                         <div className="bg-red-50 rounded-2xl p-6 border-2 border-red-200 shadow-sm min-h-[320px] flex flex-col order-9 md:order-9">
-                            <h4 className="text-red-400 uppercase text-xs font-bold tracking-widest mb-4">⚠️ "TESTE" DE BRINCADEIRA </h4>
+                            <h4 className="text-red-400 uppercase text-xs font-bold tracking-widest mb-4">⚠️ &quot;TESTE&quot; DE BRINCADEIRA </h4>
                             <div className="font-mono text-gray-400 text-lg md:text-xl leading-relaxed flex-grow" style={{ whiteSpace: 'nowrap' }}>
                                 <p>aaaaaaaaaaaaaaaaaaaaaaaaaa</p>
                             </div>
@@ -144,7 +145,7 @@ export default function ComparativoPage() {
                                 <p className="text-lg md:text-xl text-gray-400 leading-relaxed" style={{ fontFamily: 'monospace', overflowWrap: 'break-word', wordWrap: 'break-word', wordBreak: 'break-all' }}>⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁</p>
                             </div>
                             <div className="mt-4 flex flex-col items-center gap-2">
-                                <img src="/teste3.jpg" alt="Gráfico mostrando média de 1 ponto por caractere" className="w-32 h-auto rounded-lg shadow-md" />
+                                <img src="/grafico-pontos-brincadeira.jpg" alt="Gráfico mostrando média de 1 ponto por caractere" className="w-32 h-auto rounded-lg shadow-md" />
                                 <p className="text-sm font-semibold text-red-600">Média de 1 ponto por caractere</p>
                             </div>
                         </div>
@@ -277,7 +278,7 @@ export default function ComparativoPage() {
                                     {/* 3. Enganoso (Somente "a") - Red */}
                                     <tr className="bg-red-500 text-white hover:bg-red-600 transition-colors">
                                         <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
-                                            Enganoso (Somente "a")
+                                            Enganoso (Somente &quot;a&quot;)
                                         </td>
                                         <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
                                             40 CPL × 25 LPP
@@ -469,7 +470,7 @@ export default function ComparativoPage() {
                                     {/* 3. Enganoso (Somente "a") - Red */}
                                     <tr className="bg-red-500 text-white hover:bg-red-600 transition-colors">
                                         <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
-                                            Enganoso (Somente "a")
+                                            Enganoso (Somente &quot;a&quot;)
                                         </td>
                                         <td className="border border-red-600 px-1 py-2 md:px-4 md:py-3 text-center text-[10px] md:text-sm font-bold">
                                             46 CPL × 29 LPP
@@ -512,6 +513,6 @@ export default function ComparativoPage() {
                     </Link>
                 </div>
             </section>
-        </main>
+        </div>
     );
 }

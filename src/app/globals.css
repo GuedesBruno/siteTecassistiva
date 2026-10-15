@@ -101,11 +101,17 @@ body:not(:has(.imersao-page)) .rounded-full {
   /* Firefox */
 }
 
-/* Custom focus styles for better accessibility */
+/* Foco visível global com anel duplo (interno branco, externo azul escuro):
+   mantém contraste tanto em fundos claros quanto escuros. */
 *:focus-visible {
-  outline: 2px solid #002554;
+  outline: 3px solid #002554;
   outline-offset: 2px;
-  border-radius: 2px;
+  box-shadow: 0 0 0 2px #ffffff;
+}
+
+/* Evita que o cabeçalho fixo cubra o elemento ao navegar por âncoras ou foco */
+html {
+  scroll-padding-top: calc(var(--header-height, 6rem) + 1rem);
 }
 
 /* Ensure featured product carousel navigation buttons have rounded corners */

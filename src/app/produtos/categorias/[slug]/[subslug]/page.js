@@ -77,7 +77,7 @@ export async function generateMetadata({ params }) {
       title: `${subcategoryName} | Tecassistiva`,
       description: `Confira nossos produtos em ${subcategoryName}.`,
       alternates: {
-        canonical: `https://www.tecassistiva.com.br/produtos/categorias/${slug}/${subslug}`,
+        canonical: `/produtos/categorias/${slug}/${subslug}/`,
       },
     };
   }
@@ -158,7 +158,7 @@ export default async function SubCategoryPage({ params }) {
     <div className="container mx-auto px-4 py-8 min-h-screen">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
       />
       <div className="flex flex-col md:flex-row gap-8">
         <aside className="w-full md:w-1/3 lg:w-1/4">
@@ -168,7 +168,7 @@ export default async function SubCategoryPage({ params }) {
             activeSubcategorySlug={subslug}
           />
         </aside>
-        <main className="w-full md:w-2/3 lg:w-3/4">
+        <div className="w-full md:w-2/3 lg:w-3/4">
           <Breadcrumbs items={breadcrumbs} />
           <Suspense fallback={<div>Carregando...</div>}>
             <ProductDisplay
@@ -176,7 +176,7 @@ export default async function SubCategoryPage({ params }) {
               products={products}
             />
           </Suspense>
-        </main>
+        </div>
       </div>
     </div>
   );

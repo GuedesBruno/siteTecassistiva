@@ -76,7 +76,7 @@ export default function AtaCard({ ata }) {
               )}
             </p>
             {item.categoria && <p className="text-sm text-gray-600 mt-2"><strong>Categoria:</strong> {item.categoria}</p>}
-            {item.quantidade_carona && <p className="text-sm text-gray-600"><strong>Quantidade para "Carona":</strong> {item.quantidade_carona}</p>}
+            {item.quantidade_carona && <p className="text-sm text-gray-600"><strong>Quantidade para &quot;Carona&quot;:</strong> {item.quantidade_carona}</p>}
           </div>
         );
       })}
@@ -126,7 +126,7 @@ export default function AtaCard({ ata }) {
                         key={item.id}
                         onClick={() => handleButtonClick(item.id)}
                         title={produtoNome}
-                        className="flex flex-col items-center justify-start p-1 rounded-md bg-white border border-gray-200 hover:border-tec-blue hover:shadow-md focus:outline-none focus:ring-1 focus:ring-tec-blue transition-all duration-200 group h-full"
+                        className="flex flex-col items-center justify-start p-1 rounded-md bg-white border border-gray-200 hover:border-tec-blue hover:shadow-md focus:ring-1 focus:ring-tec-blue transition-all duration-200 group h-full"
                       >
                         <div className="w-full aspect-square relative mb-1 bg-gray-50 rounded-sm overflow-hidden">
                           {imagemUrl ? (

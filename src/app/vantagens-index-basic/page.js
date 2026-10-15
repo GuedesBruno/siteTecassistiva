@@ -3,11 +3,12 @@ import React from 'react';
 export const metadata = {
     title: 'Impressora Braille Index Basic: Vantagens Exclusivas | Tecassistiva',
     description: 'Descubra por que a Impressora Braille Index Basic é superior em velocidade, economia e tecnologia comparada a outras impressoras Braille do mercado.',
+    alternates: { canonical: '/vantagens-index-basic/' },
 };
 
 export default function VantagensPage() {
     return (
-        <main className="min-h-screen bg-white font-sans">
+        <div className="min-h-screen bg-white font-sans">
             {/* Comparative Summary Section */}
             <section className="py-12 md:py-16 bg-white">
                 <div className="container mx-auto px-4 max-w-6xl">
@@ -290,6 +291,6 @@ export default function VantagensPage() {
                     </div>
                 </div>
             </section>
-        </main>
+        </div>
     );
 }

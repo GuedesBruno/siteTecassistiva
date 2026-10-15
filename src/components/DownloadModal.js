@@ -1,12 +1,18 @@
 import React from 'react';
+import { useModalFocus } from '@/lib/useModalFocus';
 import { FaTimes, FaDownload } from 'react-icons/fa';
 import RichTextRenderer from './RichTextRenderer';
 
 export default function DownloadModal({ isOpen, onClose, version, softwareName, links }) {
+    // Foco inicial, trap do Tab, Esc para fechar e retorno do foco ao elemento que abriu o modal
+    const dialogRef = useModalFocus(isOpen, onClose);
+
     if (!isOpen) return null;
 
     return (
         <div
+            ref={dialogRef}
+            tabIndex={-1}
             className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
             onClick={onClose}
             role="dialog"
@@ -30,7 +36,7 @@ export default function DownloadModal({ isOpen, onClose, version, softwareName, 
                     </div>
                     <button
                         onClick={onClose}
-                        className="text-gray-400 hover:text-gray-600 transition-colors p-1"
+                        className="text-gray-700 hover:text-gray-900 transition-colors h-10 w-10 flex items-center justify-center"
                         aria-label="Fechar modal de download"
                     >
                         <FaTimes size={20} aria-hidden="true" />

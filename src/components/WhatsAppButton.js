@@ -35,7 +35,7 @@ export default function WhatsAppButton() {
       onClick={handleWhatsAppClick}
       className={`group fixed bottom-5 right-8 z-50 flex items-center
         transition-all duration-700 ease-in-out
-        focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 
+        focus:ring-2 focus:ring-green-500 focus:ring-offset-2 
         hover:scale-110
         ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}
       `}

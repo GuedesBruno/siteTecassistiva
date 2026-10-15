@@ -54,3 +54,19 @@ SOLUCAO_PROPOSTA.md
 
 # Gemini AI artifacts (user-specific)
 .gemini/
+
+# permite versionar o exemplo de variáveis (sem valores reais)
+!.env.example
+
+# PDFs estáticos (guias, manuais, catálogos): hospedados SOMENTE no servidor da Locaweb.
+# O deploy (lftp mirror -R, sem --delete) não apaga arquivos que já estão no servidor,
+# então estes PDFs permanecem lá mesmo sem estarem no repositório. Ver docs/ARQUIVOS-ESTATICOS.md.
+/public/guias/
+/public/manuais/
+/public/catalogo/
+
+# Saídas de build e arquivos gerados (o `npm run build` recria search-data.json e sitemap.xml)
+build-output.txt
+.next_old/
+/public/search-data.json
+/public/sitemap.xml

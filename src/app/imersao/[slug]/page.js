@@ -2,70 +2,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getStrapiMediaUrl } from '@/lib/media';
+import { safeUrl } from '@/lib/safeUrl';
+import { isCI } from '@/lib/strapi-client.mjs';
+import { getImersaoBySlugInternal, getAllImersaoSlugsInternal } from '@/lib/imersao-data.mjs';
 
-// --- Lógica interna de busca para estabilidade do build ---
-
-async function internalFetchAPI(endpoint) {
-    const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
-    const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN;
-
-    if (!STRAPI_URL || !STRAPI_TOKEN) {
-        console.warn("[Imersão] Variáveis de ambiente não definidas. Retornando dados vazios.");
-        return null;
-    }
-
-    try {
-        let base = STRAPI_URL.replace(/\/+$/g, '');
-        if (base.endsWith('/api')) {
-            base = base.replace(/\/api$/, '');
-        }
-        const path_ep = endpoint.replace(/^\/+/, '');
-        const url = `${base}/${path_ep}`;
-
-        const res = await fetch(url, {
-            headers: { 'Authorization': `Bearer ${STRAPI_TOKEN}` },
-            next: { revalidate: 60 } // Cache por 60 segundos
-        });
-
-        if (!res.ok) {
-            console.error(`[Imersão] API Error: ${res.status}`);
-            return null;
-        }
-
-        return await res.json();
-    } catch (error) {
-        console.error(`[Imersão] Erro ao fazer fetch: ${error.message}`);
-        return null;
-    }
-}
-
-function normalizeDataArray(response) {
-    if (!response) return [];
-    const data = response.data || [];
-    return data;
-}
-
-async function getImersaoBySlugInternal(slug) {
-    const populateQuery = 'populate[personalizado]=*&populate[produto][fields][0]=nome&populate[produto][fields][1]=descricao_curta&populate[produto][populate][0]=imagem_principal&populate[produto][populate][1]=categorias&populate[produto][populate][2]=relacao_fabricante&fields[0]=genero_descricao&fields[1]=curso&fields[2]=guia&fields[3]=manual&fields[4]=botoes_padrao&fields[5]=link_playstore&fields[6]=link_appstore';
-    const res = await internalFetchAPI(`/api/imersaos?filters[slug][$eq]=${slug}&${populateQuery}`);
-    const data = normalizeDataArray(res);
-    if (data.length === 0) return null;
-
-    const item = data[0];
-    if (item.attributes) {
-        return item;
-    }
-    const { id, ...attributes } = item;
-    return { id, attributes };
-}
-
-async function getAllImersaoSlugsInternal() {
-    const res = await internalFetchAPI('/api/imersaos?fields[0]=slug&pagination[limit]=1000');
-    const items = normalizeDataArray(res);
-    return items.map(i => ({
-        slug: i.attributes?.slug || i.slug,
-    })).filter(i => i.slug);
-}
+// Fora de CI, falha na API vira notFound; em CI a falha interrompe o build (ver imersao-data.mjs).
 
 // --- Page Functions ---
 
@@ -83,6 +24,7 @@ export async function generateStaticParams() {
         }));
     } catch (error) {
         console.error('[imersao] Error generating static params:', error);
+        if (isCI()) throw error;
         return [];
     }
 }
@@ -103,6 +45,7 @@ export async function generateMetadata({ params }) {
 
     return {
         title: `Imersão: ${productData.nome}`,
+        alternates: { canonical: `/imersao/${slug}/` },
     };
 }
 
@@ -138,20 +81,21 @@ export default async function ImersaoPage({ params }) {
     const fabricanteNome = fabricanteData?.nome || '';
 
     return (
-        <div className="h-screen bg-[#002554] font-sans text-white selection:bg-blue-500 selection:text-white relative overflow-hidden flex flex-col items-center justify-center p-4">
+        <div className="min-h-screen bg-[#002554] font-sans text-white selection:bg-blue-500 selection:text-white relative overflow-hidden flex flex-col items-center justify-center p-4">
 
             {/* Background Logo Watermark */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-5 pointer-events-none z-0">
                 <Image
                     src="/logo-tecassistiva.svg"
-                    alt="Background Logo"
+                    alt=""
+                    aria-hidden="true"
                     fill
                     className="object-contain brightness-0 invert"
                 />
             </div>
 
             {/* Glassmorphism Card */}
-            <main className="w-full max-w-md bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl shadow-2xl p-6 relative z-10 flex flex-col items-center max-h-[95vh] overflow-hidden">
+            <div className="w-full max-w-md bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl shadow-2xl p-6 relative z-10 flex flex-col items-center">
 
                 {/* Product Image (Rounded) */}
                 <div
@@ -174,21 +118,21 @@ export default async function ImersaoPage({ params }) {
                 </div>
 
                 {/* Welcome Text */}
-                <p className="text-center text-lg mb-6 text-blue-100 leading-relaxed font-light shrink-0">
+                <h1 className="text-center text-lg mb-6 text-blue-100 leading-relaxed font-light shrink-0">
                     Sua IMERSÃO com {genero_descricao === 'feminino' ? 'a' : 'o'}{' '}
                     <strong className="font-bold text-white block text-xl mt-1">
                         {fabricanteNome} {productData.nome}
                     </strong>
                     começa aqui!
-                </p>
+                </h1>
 
                 {/* Action Buttons (Linktree Style) */}
                 <div className="w-full space-y-2 mb-2">
                     {botoes_padrao ? (
                         <>
-                            {curso && (
+                            {safeUrl(curso) && (
                                 <Link
-                                    href={curso}
+                                    href={safeUrl(curso)}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center p-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl transition-all duration-300 group"
@@ -206,9 +150,9 @@ export default async function ImersaoPage({ params }) {
                                     </svg>
                                 </Link>
                             )}
-                            {guia && (
+                            {safeUrl(guia) && (
                                 <Link
-                                    href={guia}
+                                    href={safeUrl(guia)}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center p-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl transition-all duration-300 group"
@@ -224,9 +168,9 @@ export default async function ImersaoPage({ params }) {
                                     </svg>
                                 </Link>
                             )}
-                            {manual && (
+                            {safeUrl(manual) && (
                                 <Link
-                                    href={manual}
+                                    href={safeUrl(manual)}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center p-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl transition-all duration-300 group"
@@ -247,7 +191,7 @@ export default async function ImersaoPage({ params }) {
                         personalizado && personalizado.map((botao) => (
                             <Link
                                 key={botao.id}
-                                href={botao.link_do_botao}
+                                href={safeUrl(botao.link_do_botao) || '#'}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center p-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl transition-all duration-300 group"
@@ -269,9 +213,9 @@ export default async function ImersaoPage({ params }) {
                 {/* App Store & Play Store Badges */}
                 {(link_playstore || link_appstore) && (
                     <div className="flex w-full gap-3 mb-4 shrink-0">
-                        {link_appstore && (
+                        {safeUrl(link_appstore) && (
                             <Link
-                                href={link_appstore}
+                                href={safeUrl(link_appstore)}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex-1 flex items-center justify-center p-2 bg-gradient-to-r from-white/10 to-white/5 hover:from-white/20 hover:to-white/10 border border-white/20 rounded-2xl transition-all duration-300 group"
@@ -279,20 +223,20 @@ export default async function ImersaoPage({ params }) {
                                 <div className="relative w-8 h-8 mr-2 transition-transform group-hover:scale-110">
                                     <Image
                                         src="/app-store-badge.svg"
-                                        alt="Apple Logo"
+                                        alt=""
                                         fill
                                         className="object-contain" // Assumes the SVG is white/monochrome or fits the theme
                                     />
                                 </div>
                                 <div className="flex flex-col items-start leading-none">
-                                    <span className="text-[8px] text-white/70 uppercase tracking-wider">APP DISPONÍVEL NA</span>
+                                    <span className="text-xs text-white/80 uppercase tracking-wider">APP DISPONÍVEL NA</span>
                                     <span className="font-bold text-white text-base">App Store</span>
                                 </div>
                             </Link>
                         )}
-                        {link_playstore && (
+                        {safeUrl(link_playstore) && (
                             <Link
-                                href={link_playstore}
+                                href={safeUrl(link_playstore)}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex-1 flex items-center justify-center p-2 bg-gradient-to-r from-white/10 to-white/5 hover:from-white/20 hover:to-white/10 border border-white/20 rounded-2xl transition-all duration-300 group"
@@ -300,13 +244,13 @@ export default async function ImersaoPage({ params }) {
                                 <div className="relative w-8 h-8 mr-2 transition-transform group-hover:scale-110">
                                     <Image
                                         src="/google-play-badge.svg"
-                                        alt="Android Logo"
+                                        alt=""
                                         fill
                                         className="object-contain"
                                     />
                                 </div>
                                 <div className="flex flex-col items-start leading-none">
-                                    <span className="text-[8px] text-white/70 uppercase tracking-wider">APP DISPONÍVEL NA</span>
+                                    <span className="text-xs text-white/80 uppercase tracking-wider">APP DISPONÍVEL NA</span>
                                     <span className="font-bold text-white text-base">Play Store</span>
                                 </div>
                             </Link>
@@ -328,20 +272,20 @@ export default async function ImersaoPage({ params }) {
                 {/* Social Media Icons */}
                 <div className="flex space-x-6 mt-2 shrink-0">
                     <Link href="https://www.instagram.com/tecassistiva/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-all transform hover:scale-110 border border-white/10">
-                        <Image src="/logo_instagram.svg" alt="Instagram" width={20} height={20} className="brightness-0 invert" />
+                        <Image src="/logo_instagram.svg" alt="" width={20} height={20} className="brightness-0 invert" />
                     </Link>
                     <Link href="https://www.youtube.com/c/tecassistiva" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-all transform hover:scale-110 border border-white/10">
-                        <Image src="/logo_youtube.svg" alt="YouTube" width={20} height={20} className="brightness-0 invert" />
+                        <Image src="/logo_youtube.svg" alt="" width={20} height={20} className="brightness-0 invert" />
                     </Link>
                     <Link href="mailto:teca@tecassistiva.com.br" aria-label="Email" className="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-all transform hover:scale-110 border border-white/10">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                     </Link>
                 </div>
 
-                <footer className="mt-4 text-center text-white/30 text-[10px] shrink-0">
+                <footer className="mt-4 text-center text-white/70 text-xs shrink-0">
                     © {new Date().getFullYear()} Tecassistiva
                 </footer>
-            </main>
+            </div>
         </div>
     );
 }

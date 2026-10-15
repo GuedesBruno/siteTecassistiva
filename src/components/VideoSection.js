@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { getStrapiMediaUrl } from '@/lib/media';
 import VideoModal from './VideoModal.js';
+import CarouselAutoplayToggle, { useCarouselAutoplay } from './CarouselAutoplayToggle';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/css';
@@ -46,7 +47,7 @@ const VideoCard = ({ video, onVideoClick }) => {
         if (isMounted) setThumbnailUrl(`https://i.ytimg.com/vi/${videoInfo.id}/hqdefault.jpg`);
       } else if (videoInfo.type === 'vimeo') {
         try {
-          const response = await fetch(`https://vimeo.com/api/oembed.json?url=${attrs.link}`);
+          const response = await fetch(`https://vimeo.com/api/oembed.json?url=${encodeURIComponent(attrs.link)}`);
           if (response.ok) {
             const data = await response.json();
             if (isMounted) setThumbnailUrl(data.thumbnail_url);
@@ -66,7 +67,7 @@ const VideoCard = ({ video, onVideoClick }) => {
   if (!videoInfo) return null;
 
   const handleClick = () => {
-    onVideoClick(videoInfo);
+    onVideoClick({ ...videoInfo, title: attrs.titulo });
   };
 
   return (
@@ -94,6 +95,7 @@ const VideoCard = ({ video, onVideoClick }) => {
 
 export default function VideoSection({ videos }) {
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const { onSwiper, paused, toggle } = useCarouselAutoplay();
   if (!videos || videos.length === 0) return null;
 
   return (
@@ -105,6 +107,8 @@ export default function VideoSection({ videos }) {
         </div>
         <Swiper
           modules={[Navigation, Autoplay]}
+          onSwiper={onSwiper}
+          watchSlidesProgress
           spaceBetween={30}
           navigation={{
             prevEl: '.video-section-prev',
@@ -133,8 +137,9 @@ export default function VideoSection({ videos }) {
         )}
       </div>
       {/* Botões de navegação personalizados */}
-      <div className="swiper-button-prev video-section-prev"></div>
-      <div className="swiper-button-next video-section-next"></div>
+      <button type="button" className="swiper-button-prev video-section-prev" aria-label="Vídeos anteriores"></button>
+      <button type="button" className="swiper-button-next video-section-next" aria-label="Próximos vídeos"></button>
+      <CarouselAutoplayToggle paused={paused} onToggle={toggle} label="carrossel de vídeos" className="bottom-4 left-4" />
     </section>
   );
 }

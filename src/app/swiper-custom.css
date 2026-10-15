@@ -1,6 +1,6 @@
 .swiper-button-next, .swiper-button-prev {
     color: #fff !important; /* Cor dos ícones */
-    background-color: rgba(0, 37, 84, 0.5); /* Fundo semi-transparente */
+    background-color: rgba(0, 37, 84, 0.85); /* Fundo quase opaco (contraste do ícone) */
     border-radius: 50%; /* Formato circular */
     width: 44px !important; /* Largura */
     height: 44px !important; /* Altura */
@@ -11,19 +11,12 @@
 }
 
 .swiper-button-next:hover, .swiper-button-prev:hover {
-    background-color: rgba(0, 37, 84, 0.8); /* Fundo mais opaco no hover */
+    background-color: rgba(0, 37, 84, 1); /* Fundo opaco no hover */
 }
 
 .swiper-button-next::after, .swiper-button-prev::after {
     font-size: 20px !important; /* Tamanho dos ícones de seta */
     font-weight: 900;
-}
-
-/* Esconde as setas em telas menores*/
-@media (max-width: 768px) {
-    .swiper-button-next, .swiper-button-prev {
-        display: none !important;
-    }
 }
 
 /* Estilos personalizados para o Carrossel da Seção de Vídeos */

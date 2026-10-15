@@ -3,6 +3,7 @@ import ProductDetail from '@/components/ProductDetail';
 import FloatingComparativoBanner from '@/components/FloatingComparativoBanner';
 import { notFound } from 'next/navigation';
 import fs from 'fs';
+import { isCI } from '@/lib/strapi-client.mjs';
 import path from 'path';
 
 // Lazy load API functions to avoid compilation during SSG
@@ -31,6 +32,7 @@ async function getProductSlugsFromSearchData() {
     return productSlugs;
   } catch (error) {
     console.error('Error reading product slugs from search-data.json:', error);
+    if (isCI()) throw error;
     return [];
   }
 }
@@ -43,6 +45,7 @@ export async function generateStaticParams() {
 
   if (!productSlugs || productSlugs.length === 0) {
     console.warn('No product slugs found in search-data.json');
+    if (isCI()) throw new Error('Nenhum slug de produto em search-data.json.');
     return [];
   }
 
@@ -103,7 +106,7 @@ export async function generateMetadata({ params }) {
         'tecnologia assistiva',
         'acessibilidade'
       ].filter(Boolean).join(', '),
-      canonical: `https://www.tecassistiva.com.br/produtos/${productAttributes.slug}/`,
+      alternates: { canonical: `/produtos/${productAttributes.slug}/` },
       openGraph: {
         title: productAttributes.nome,
         description: description,
@@ -119,11 +122,12 @@ export async function generateMetadata({ params }) {
       }
     };
   } catch (error) {
-    // During build, return minimal metadata
-    // Full metadata will load on-demand with ISR
+    if (isCI()) throw error;
+    // Se a busca falhar, devolve metadados mínimos (o site é exportação estática: não há ISR)
     return {
       title: 'Produto | Tecassistiva',
       description: 'Confira nosso produto.',
+      alternates: { canonical: `/produtos/${params.slug}/` },
     };
   }
 }
@@ -183,7 +187,7 @@ export default async function ProductPage({ params }) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
       />
       <ProductDetail product={product} breadcrumbs={breadcrumbs} />
       {(slug === 'everest' || slug === 'basic') && (
