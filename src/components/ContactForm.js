@@ -229,16 +229,16 @@ export default function ContactForm({ title, subtitle, formName }) {
           Ao enviar, você concorda que a Tecassistiva use seus dados apenas para responder a esta solicitação (LGPD).
         </p>
 
-        {/* Região de status sempre presente no DOM para que leitores de tela anunciem as mudanças */}
+        {/* Região de status sempre presente no DOM: "Enviando..." e sucesso são anunciados de forma educada */}
         <div
           role="status"
           aria-live="polite"
           className={status && status.includes('sucesso') ? 'text-center mt-4 p-3 rounded bg-green-100 text-green-800' : ''}
         >
-          {status && status.includes('sucesso') ? status : ''}
+          {status && (status === 'Enviando...' || status.includes('sucesso')) ? status : ''}
         </div>
-        {/* Erro de envio: role="alert" para ser anunciado imediatamente */}
-        {status && !status.includes('sucesso') && (
+        {/* Somente erro de envio usa role="alert", para ser anunciado imediatamente */}
+        {status && status !== 'Enviando...' && !status.includes('sucesso') && (
           <div role="alert" className="text-center mt-4 p-3 rounded bg-red-100 text-red-800">
             {status}
           </div>
