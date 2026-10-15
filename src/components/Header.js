@@ -70,7 +70,9 @@ export default function Header({ categories = [] }) {
   const mobileMenuRef = useModalFocus(isMenuOpen, () => setIsMenuOpen(false));
 
   // aria-current="page" no link da página atual
-  const current = (href) => (pathname === href ? 'page' : undefined);
+  // Compara sem barra final, pois o site usa trailingSlash (pathname costuma vir com "/")
+  const normalize = (p) => (p && p.length > 1 ? p.replace(/\/+$/, '') : p);
+  const current = (href) => (normalize(pathname) === normalize(href) ? 'page' : undefined);
 
   // Submenus desktop (disclosure): Esc fecha (aberto por clique/teclado ou por hover) e devolve o foco ao botão
   // se ele estava dentro do submenu; clicar fora ou sair do foco do grupo fecha
