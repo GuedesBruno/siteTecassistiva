@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { useModalFocus } from '@/lib/useModalFocus';
+import { sentinelFocusTarget } from '@/lib/videoModalFocus';
 
 /**
  * Um componente de modal para exibir um player de vídeo do Vimeo ou YouTube.
@@ -13,6 +14,13 @@ import { useModalFocus } from '@/lib/useModalFocus';
 export default function VideoModal({ videoInfo, onClose }) {
   const wakeLockRef = useRef(null);
   const closeButtonRef = useRef(null);
+  const iframeRef = useRef(null);
+
+  // Sentinelas antes e depois do iframe: vindo do Fechar entram no player; vindo do player voltam ao Fechar
+  const handleSentinelFocus = (event) => {
+    const target = sentinelFocusTarget(event.relatedTarget, closeButtonRef.current);
+    (target === 'player' ? iframeRef.current : closeButtonRef.current)?.focus();
+  };
 
   // Foco inicial, trap do Tab, Esc para fechar e retorno do foco ao elemento que abriu o modal
   const dialogRef = useModalFocus(Boolean(videoInfo), onClose);
@@ -92,7 +100,9 @@ export default function VideoModal({ videoInfo, onClose }) {
           &times;
         </button>
         <div className="aspect-video w-full h-full">
+          <div tabIndex={0} onFocus={handleSentinelFocus} />
           <iframe
+            ref={iframeRef}
             src={videoSrc}
             className="w-full h-full"
             frameBorder="0"
@@ -100,8 +110,7 @@ export default function VideoModal({ videoInfo, onClose }) {
             allowFullScreen
             title={videoTitle}
           ></iframe>
-          {/* Sentinela: ao sair do player com Tab, devolve o foco ao botão Fechar (evita vazar para a página) */}
-          <div tabIndex={0} onFocus={() => closeButtonRef.current?.focus()} />
+          <div tabIndex={0} onFocus={handleSentinelFocus} />
         </div>
       </div>
     </div>
