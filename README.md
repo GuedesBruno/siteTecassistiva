@@ -60,7 +60,7 @@ Encerre o mock depois (apenas o processo dele) e restaure `public/search-data.js
 
 Automático por GitHub Actions (`.github/workflows/deploy.yml`), disparado por push na `main`, manualmente (`workflow_dispatch`) ou por `repository_dispatch` do tipo `strapi_update` (publicação no Strapi). O fluxo: `npm ci`, verificação do secret do formulário, `npm run build` com os secrets `NEXT_PUBLIC_STRAPI_URL`, `STRAPI_API_TOKEN` e `NEXT_PUBLIC_FORM_ENDPOINT`, verificação de `out/` (mínimo de 20 páginas de produto) e envio por FTP com `lftp mirror -R` **sem `--delete`**: arquivos removidos do site continuam no servidor até serem apagados à mão. Falhas avisam o webhook do n8n (`N8N_WEBHOOK_URL`). Os PDFs de `public/guias` e `public/manuais` ficam só no servidor (ver `docs/ARQUIVOS-ESTATICOS.md`).
 
-`deploy.ps1` é um script auxiliar local.
+`deploy.ps1` é um auxiliar local: limpa `out/` e `.next/` e faz o build.
 
 ## Documentação (docs/)
 
