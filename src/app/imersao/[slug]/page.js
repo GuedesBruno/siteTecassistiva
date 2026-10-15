@@ -3,8 +3,10 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getStrapiMediaUrl } from '@/lib/media';
 import { safeUrl } from '@/lib/safeUrl';
+import { normalizeDataArray, requestStrapi } from '@/lib/strapi-client.mjs';
 
 // --- Lógica interna de busca para estabilidade do build ---
+// Uma tentativa; qualquer falha devolve null (a página cai em notFound) em vez de derrubar o build.
 
 async function internalFetchAPI(endpoint) {
     const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
@@ -16,17 +18,7 @@ async function internalFetchAPI(endpoint) {
     }
 
     try {
-        let base = STRAPI_URL.replace(/\/+$/g, '');
-        if (base.endsWith('/api')) {
-            base = base.replace(/\/api$/, '');
-        }
-        const path_ep = endpoint.replace(/^\/+/, '');
-        const url = `${base}/${path_ep}`;
-
-        const res = await fetch(url, {
-            headers: { 'Authorization': `Bearer ${STRAPI_TOKEN}` },
-            next: { revalidate: 60 } // Cache por 60 segundos
-        });
+        const res = await requestStrapi(endpoint, { baseUrl: STRAPI_URL, token: STRAPI_TOKEN });
 
         if (!res.ok) {
             console.error(`[Imersão] API Error: ${res.status}`);
@@ -38,12 +30,6 @@ async function internalFetchAPI(endpoint) {
         console.error(`[Imersão] Erro ao fazer fetch: ${error.message}`);
         return null;
     }
-}
-
-function normalizeDataArray(response) {
-    if (!response) return [];
-    const data = response.data || [];
-    return data;
 }
 
 async function getImersaoBySlugInternal(slug) {

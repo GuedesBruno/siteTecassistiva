@@ -7,7 +7,10 @@ const root = new URL('..', import.meta.url);
 const tmp = new URL('./.tmp-api/', import.meta.url);
 fs.mkdirSync(tmp, { recursive: true });
 let code = fs.readFileSync(new URL('src/lib/api.js', root), 'utf8');
-code = code.replace("from './utils'", "from './utils-stub.mjs'").replace("from './ambientes-data'", "from './ambientes-stub.mjs'");
+code = code.replace("from './utils'", "from './utils-stub.mjs'").replace("from './ambientes-data'", "from './ambientes-stub.mjs'").replace("from './media'", "from './media.mjs'");
+// cliente HTTP real (strapi-client.mjs) e media.js reais: o que está sob teste é o comportamento de retry/fail-fast de verdade
+fs.copyFileSync(new URL('src/lib/strapi-client.mjs', root), new URL('strapi-client.mjs', tmp));
+fs.copyFileSync(new URL('src/lib/media.js', root), new URL('media.mjs', tmp));
 fs.writeFileSync(new URL('api-under-test.mjs', tmp), code);
 fs.writeFileSync(new URL('utils-stub.mjs', tmp), 'export const sortItemsByOrder = (a) => a;');
 fs.writeFileSync(new URL('ambientes-stub.mjs', tmp), 'export const ambientesData = [{ slug: "MOCK" }];');

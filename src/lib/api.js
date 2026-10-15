@@ -1,29 +1,13 @@
 import qs from 'qs';
 import { sortItemsByOrder } from './utils';
 import { ambientesData as mockAmbientes } from './ambientes-data';
+import { isCI, normalizeDataArray, requestStrapi } from './strapi-client.mjs';
 
-// Em CI (deploy) qualquer falha da API deve interromper o build; fora de CI mantemos o fallback com dados vazios.
-// CI="false", "0" e "" contam como falso.
-const IS_CI = !['', 'false', '0'].includes(String(process.env.CI ?? '').trim().toLowerCase());
+const IS_CI = isCI();
 const DEBUG = Boolean(process.env.DEBUG);
 
-const MAX_ATTEMPTS = 3;
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
 // Repete erros de rede e respostas 5xx (3 tentativas, espera de 1s e 2s). 4xx não é repetido.
-async function fetchWithRetry(url, options, endpoint) {
-  for (let attempt = 1; ; attempt++) {
-    try {
-      const res = await fetch(url, options);
-      if (res.status < 500 || attempt === MAX_ATTEMPTS) return res;
-      console.warn(`Tentativa ${attempt}/${MAX_ATTEMPTS} falhou (${res.status}) em ${endpoint}`);
-    } catch (error) {
-      if (attempt === MAX_ATTEMPTS) throw error;
-      console.warn(`Tentativa ${attempt}/${MAX_ATTEMPTS} falhou (${error.message}) em ${endpoint}`);
-    }
-    await sleep(1000 * attempt);
-  }
-}
+const MAX_ATTEMPTS = 3;
 
 async function fetchAPI(endpoint, options = {}) {
   const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
@@ -41,21 +25,17 @@ async function fetchAPI(endpoint, options = {}) {
   }
 
   try {
-    let base = STRAPI_URL.replace(/\/+$/g, '');
-    if (base.endsWith('/api')) {
-      base = base.replace(/\/api$/, '');
-    }
-    const path = endpoint.replace(/^\/+/, '');
-    const url = `${base}/${path}`;
-
     if (DEBUG) console.log(`Fetching API: ${endpoint}`);
 
-    const fetchOptions = {
-      headers: { 'Authorization': `Bearer ${STRAPI_TOKEN}` },
-      ...options,
-    };
-
-    const res = await fetchWithRetry(url, fetchOptions, endpoint);
+    const res = await requestStrapi(endpoint, {
+      baseUrl: STRAPI_URL,
+      token: STRAPI_TOKEN,
+      maxAttempts: MAX_ATTEMPTS,
+      shouldRetryStatus: (status) => status >= 500,
+      retryDelay: (attempt) => 1000 * attempt,
+      fetchOptions: options,
+      onRetry: (attempt, reason) => console.warn(`Tentativa ${attempt}/${MAX_ATTEMPTS} falhou (${reason}) em ${endpoint}`),
+    });
 
     if (!res.ok) {
       console.error(`Erro na requisição para ${endpoint}: ${res.status} ${res.statusText}`);
@@ -82,25 +62,9 @@ async function fetchAPI(endpoint, options = {}) {
   }
 }
 
-export function getStrapiURL() {
-  let base = (process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337').replace(/\/+$/g, '');
-  if (base.endsWith('/api')) base = base.replace(/\/api$/, '');
-  return base;
-}
-
-export function getStrapiMediaUrl(path) {
-  if (!path) return null;
-  if (/^https?:\/\//i.test(path) || /^\/\//.test(path)) return path;
-  const base = getStrapiURL();
-  if (path.startsWith('/')) return `${base}${path}`;
-  return `${base}/${path}`;
-}
-
-export function normalizeDataArray(response) {
-  if (!response) return [];
-  const data = response.data || [];
-  return data;
-}
+// getStrapiURL/getStrapiMediaUrl vivem em media.js (sem dependências); reexportados aqui por compatibilidade.
+export { getStrapiURL, getStrapiMediaUrl } from './media';
+export { normalizeDataArray };
 
 export async function getAllProductsForDisplay() {
   try {
@@ -296,8 +260,7 @@ export async function getAllTestimonials() {
 // Adicionando funções que podem estar faltando para o build
 export async function getAllCategoryPaths() {
   const response = await fetchAPI(
-    '/api/categorias?fields[0]=slug&populate[subcategorias][fields][0]=slug&pagination[limit]=200',
-    { cache: 'no-store' } // Força a busca de dados novos, evitando cache
+    '/api/categorias?fields[0]=slug&populate[subcategorias][fields][0]=slug&pagination[limit]=200'
   );
   return normalizeDataArray(response);
 }
