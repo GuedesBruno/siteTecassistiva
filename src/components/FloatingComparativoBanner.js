@@ -46,7 +46,7 @@ export default function FloatingComparativoBanner() {
         {/* Floating Icon */}
         <div className="relative flex items-center justify-center flex-shrink-0">
           {/* Contorno pulsante atrás do círculo para dar destaque */}
-          <div className="absolute inset-0 bg-tec-blue opacity-40 animate-ping motion-reduce:animate-none" style={{ borderRadius: '50%', animationDuration: '2s' }}></div>
+          <div className="absolute inset-0 bg-tec-blue opacity-40 animate-[ping_2s_cubic-bezier(0,0,0.2,1)_3] motion-reduce:animate-none" style={{ borderRadius: '50%' }}></div>
           
           <div className="w-16 h-16 bg-tec-blue text-white flex items-center justify-center shadow-lg group-hover:shadow-2xl transition-all border-4 border-white cursor-pointer relative z-10" style={{ borderRadius: '50%' }}>
             <svg className="w-8 h-8" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
