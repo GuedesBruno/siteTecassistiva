@@ -63,7 +63,8 @@ async function fetchAPI(endpoint, options = {}) {
 }
 
 // getStrapiURL/getStrapiMediaUrl vivem em media.js (sem dependências); reexportados aqui por compatibilidade.
-export { getStrapiURL, getStrapiMediaUrl } from './media';
+import { getStrapiURL, getStrapiMediaUrl } from './media';
+export { getStrapiURL, getStrapiMediaUrl };
 export { normalizeDataArray };
 
 export async function getAllProductsForDisplay() {

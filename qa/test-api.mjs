@@ -119,6 +119,14 @@ t.test('CI: funções sem try/catch propagam (getBanners, getFeaturedProducts, g
   await assert.rejects(() => l.getBanners()); await assert.rejects(() => l.getFeaturedProducts()); await assert.rejects(() => l.getProductBySlug('x'));
 }));
 
+t.test('getAmbientes monta a árvore usando getStrapiMediaUrl (import local do api.js) e reexporta as funções de media', wrap(async () => {
+  const l = await load(undefined); mock([200]);
+  const r = await l.getAmbientes();
+  assert.equal(r[0].slug, 'x'); assert.equal(r[0].imagem_grid, null);
+  assert.equal(l.getStrapiMediaUrl('/uploads/a.png'), 'https://strapi.invalid/uploads/a.png');
+  assert.equal(l.getStrapiURL(), 'https://strapi.invalid');
+}));
+
 const failures = await t.run();
 fs.rmSync(tmp, { recursive: true, force: true });
 process.exit(failures ? 1 : 0);
