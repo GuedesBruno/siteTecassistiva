@@ -57,7 +57,7 @@ export default function CategoryMenu({
 
     const activeClasses = isSub
       ? 'font-bold text-tec-blue bg-gray-100'
-      : 'bg-tec-blue text-white font-semibold shadow-sm';
+      : 'bg-tec-blue text-white font-semibold shadow-xs';
 
     const inactiveClasses = isSub
       ? 'text-gray-700 hover:text-tec-blue hover:bg-gray-100'

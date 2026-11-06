@@ -53,7 +53,8 @@ export async function generateStaticParams() {
   return paths;
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   const { slug, subslug } = params;
   const categoryData = await getCategoryBySlug(slug);
   const category = categoryData?.data?.[0]?.attributes;
@@ -87,7 +88,8 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default async function SubCategoryPage({ params }) {
+export default async function SubCategoryPage(props) {
+  const params = await props.params;
   const { slug, subslug } = params;
 
   const [categoryData, products, allCategories] = await Promise.all([

@@ -43,8 +43,8 @@ export default function ComparativoPage() {
                     {/* Methods: Vertical on mobile (card→badge→sim), Horizontal on desktop (3 cols) */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {/* Method 1: Portuguese Alphabet - Card (Was Method 2) */}
-                        <div className="flex gap-4 p-6 rounded-xl bg-blue-500 border-2 border-blue-600 shadow-sm hover:shadow-md transition-shadow order-1 md:order-1">
-                            <div className="flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-xl">
+                        <div className="flex gap-4 p-6 rounded-xl bg-blue-500 border-2 border-blue-600 shadow-xs hover:shadow-md transition-shadow order-1 md:order-1">
+                            <div className="shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-xl">
                                 1
                             </div>
                             <div>
@@ -56,8 +56,8 @@ export default function ComparativoPage() {
                         </div>
 
                         {/* Method 2: English Alphabet - Card (Was Method 1) */}
-                        <div className="flex gap-4 p-6 rounded-xl bg-blue-50 border-2 border-blue-100 shadow-sm hover:shadow-md transition-shadow order-4 md:order-2">
-                            <div className="flex-shrink-0 w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold text-xl">
+                        <div className="flex gap-4 p-6 rounded-xl bg-blue-50 border-2 border-blue-100 shadow-xs hover:shadow-md transition-shadow order-4 md:order-2">
+                            <div className="shrink-0 w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold text-xl">
                                 2
                             </div>
                             <div>
@@ -69,8 +69,8 @@ export default function ComparativoPage() {
                         </div>
 
                         {/* Method 3: Misleading - Card */}
-                        <div className="flex gap-4 p-6 rounded-xl bg-red-50 border-2 border-red-300 shadow-sm hover:shadow-md transition-shadow order-7 md:order-3">
-                            <div className="flex-shrink-0 w-12 h-12 bg-red-600 text-white rounded-full flex items-center justify-center text-2xl">
+                        <div className="flex gap-4 p-6 rounded-xl bg-red-50 border-2 border-red-300 shadow-xs hover:shadow-md transition-shadow order-7 md:order-3">
+                            <div className="shrink-0 w-12 h-12 bg-red-600 text-white rounded-full flex items-center justify-center text-2xl">
                                 ⚠️
                             </div>
                             <div>
@@ -83,14 +83,14 @@ export default function ComparativoPage() {
 
                         {/* Method 1: Portuguese - Badge */}
                         <div className="flex justify-center order-2 md:order-4">
-                            <span className="inline-block bg-gray-100 px-6 py-3 rounded-lg text-gray-700 font-bold border-2 border-gray-300 shadow-sm">
+                            <span className="inline-block bg-gray-100 px-6 py-3 rounded-lg text-gray-700 font-bold border-2 border-gray-300 shadow-xs">
                                 Recomendado
                             </span>
                         </div>
 
                         {/* Method 2: English - Badge */}
                         <div className="flex justify-center order-5 md:order-5">
-                            <span className="inline-block bg-gray-100 px-6 py-3 rounded-lg text-gray-700 font-bold border-2 border-gray-300 shadow-sm">
+                            <span className="inline-block bg-gray-100 px-6 py-3 rounded-lg text-gray-700 font-bold border-2 border-gray-300 shadow-xs">
                                 Padrão Internacional
                             </span>
                         </div>
@@ -103,9 +103,9 @@ export default function ComparativoPage() {
                         </div>
 
                         {/* Method 1: Portuguese - Simulation */}
-                        <div className="bg-gray-50 rounded-2xl p-6 border-2 border-gray-200 shadow-sm min-h-[320px] flex flex-col order-3 md:order-7">
+                        <div className="bg-gray-50 rounded-2xl p-6 border-2 border-gray-200 shadow-xs min-h-[320px] flex flex-col order-3 md:order-7">
                             <h4 className="text-gray-400 uppercase text-xs font-bold tracking-widest mb-4">SIMULAÇÃO DE TESTE</h4>
-                            <div className="font-mono text-gray-600 text-lg md:text-xl leading-relaxed flex-grow">
+                            <div className="font-mono text-gray-600 text-lg md:text-xl leading-relaxed grow">
                                 <p style={{ whiteSpace: 'nowrap' }}>abcdefghijklmnopqrstuvwxyz</p>
                                 <p style={{ whiteSpace: 'nowrap' }}><span className="font-bold">áàâãéêíóôõúç</span></p>
                             </div>
@@ -119,9 +119,9 @@ export default function ComparativoPage() {
                         </div>
 
                         {/* Method 2: English - Simulation */}
-                        <div className="bg-white rounded-2xl p-6 border-2 border-gray-200 shadow-sm min-h-[320px] flex flex-col order-6 md:order-8">
+                        <div className="bg-white rounded-2xl p-6 border-2 border-gray-200 shadow-xs min-h-[320px] flex flex-col order-6 md:order-8">
                             <h4 className="text-gray-400 uppercase text-xs font-bold tracking-widest mb-4">SIMULAÇÃO DE TESTE</h4>
-                            <div className="font-serif text-gray-600 text-lg md:text-xl leading-relaxed flex-grow" style={{ whiteSpace: 'nowrap' }}>
+                            <div className="font-serif text-gray-600 text-lg md:text-xl leading-relaxed grow" style={{ whiteSpace: 'nowrap' }}>
                                 <p>abcdefghijklmnopqrstuvwxyz</p>
                             </div>
                             <div className="mt-4 pt-4 border-t border-gray-200">
@@ -135,9 +135,9 @@ export default function ComparativoPage() {
                         </div>
 
                         {/* Method 3: Misleading - Simulation */}
-                        <div className="bg-red-50 rounded-2xl p-6 border-2 border-red-200 shadow-sm min-h-[320px] flex flex-col order-9 md:order-9">
+                        <div className="bg-red-50 rounded-2xl p-6 border-2 border-red-200 shadow-xs min-h-[320px] flex flex-col order-9 md:order-9">
                             <h4 className="text-red-400 uppercase text-xs font-bold tracking-widest mb-4">⚠️ &quot;TESTE&quot; DE BRINCADEIRA </h4>
-                            <div className="font-mono text-gray-400 text-lg md:text-xl leading-relaxed flex-grow" style={{ whiteSpace: 'nowrap' }}>
+                            <div className="font-mono text-gray-400 text-lg md:text-xl leading-relaxed grow" style={{ whiteSpace: 'nowrap' }}>
                                 <p>aaaaaaaaaaaaaaaaaaaaaaaaaa</p>
                             </div>
                             <div className="mt-4 pt-4 border-t border-red-200">
@@ -325,17 +325,17 @@ export default function ComparativoPage() {
                     </p>
 
                     <div className="bg-white p-4 md:p-6 rounded-3xl shadow-xl border border-blue-100 relative overflow-hidden group">
-                        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-tec-blue via-blue-400 to-tec-blue"></div>
+                        <div className="absolute top-0 left-0 w-full h-2 bg-linear-to-r/srgb from-tec-blue via-blue-400 to-tec-blue"></div>
                         <p className="text-sm text-gray-400 mb-4 uppercase tracking-widest font-semibold">Tabela de Teste Real</p>
                         <div className="flex justify-center gap-0.5 md:gap-1 overflow-x-auto">
                             {['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'].map((char, i) => (
-                                <div key={i} className="flex flex-col items-center flex-shrink-0">
+                                <div key={i} className="flex flex-col items-center shrink-0">
                                     <span className="font-mono text-lg md:text-2xl text-gray-800">{char}</span>
                                     <span className="font-mono text-base md:text-xl text-gray-600">{'⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵'[i]}</span>
                                 </div>
                             ))}
                             {[{ char: 'á', braille: '⠷' }, { char: 'à', braille: '⠡' }, { char: 'â', braille: '⠜' }, { char: 'ã', braille: '⠩' }, { char: 'é', braille: '⠿' }, { char: 'ê', braille: '⠣' }, { char: 'í', braille: '⠌' }, { char: 'ó', braille: '⠾' }, { char: 'ô', braille: '⠬' }, { char: 'õ', braille: '⠹' }, { char: 'ú', braille: '⠾' }, { char: 'ç', braille: '⠯' }].map((item, i) => (
-                                <div key={`accent-${i}`} className="flex flex-col items-center flex-shrink-0">
+                                <div key={`accent-${i}`} className="flex flex-col items-center shrink-0">
                                     <span className="font-mono text-lg md:text-2xl text-tec-blue font-black">{item.char}</span>
                                     <span className="font-mono text-base md:text-xl text-tec-blue font-black">{item.braille}</span>
                                 </div>
@@ -351,7 +351,7 @@ export default function ComparativoPage() {
             </section>
 
             {/* Expert Report Section */}
-            <section className="py-12 md:py-20 bg-gradient-to-br from-blue-50 to-white">
+            <section className="py-12 md:py-20 bg-linear-to-br/srgb from-blue-50 to-white">
                 <div className="container mx-auto px-4 max-w-4xl">
                     <div className="text-center mb-12">
                         <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
@@ -364,12 +364,12 @@ export default function ComparativoPage() {
 
                     <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 border border-blue-100">
                         <div className="flex flex-col md:flex-row items-center gap-8">
-                            <div className="flex-shrink-0">
-                                <div className="w-24 h-24 bg-gradient-to-br from-tec-blue to-blue-600 rounded-2xl flex items-center justify-center text-5xl shadow-lg">
+                            <div className="shrink-0">
+                                <div className="w-24 h-24 bg-linear-to-br/srgb from-tec-blue to-blue-600 rounded-2xl flex items-center justify-center text-5xl shadow-lg">
                                     📄
                                 </div>
                             </div>
-                            <div className="flex-grow text-center md:text-left">
+                            <div className="grow text-center md:text-left">
                                 <h3 className="text-2xl font-bold text-gray-900 mb-3">Laudo Técnico Oficial</h3>
                                 <p className="text-gray-600 mb-6">
                                     Documento técnico detalhado com os testes de velocidade de impressão Braille no Brasil.

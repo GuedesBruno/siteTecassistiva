@@ -57,7 +57,7 @@ export default function RichTextRenderer({ content }) {
           const iframeSrc = getAllowedIframeSrc(node.text);
           if (!iframeSrc) return null;
           return (
-            <div key={index} className="my-6 aspect-video w-full rounded-xl overflow-hidden shadow-sm">
+            <div key={index} className="my-6 aspect-video w-full rounded-xl overflow-hidden shadow-xs">
               <iframe
                 src={iframeSrc}
                 title={getIframeTitle(node.text)}

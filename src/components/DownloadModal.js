@@ -13,7 +13,7 @@ export default function DownloadModal({ isOpen, onClose, version, softwareName, 
         <div
             ref={dialogRef}
             tabIndex={-1}
-            className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
             onClick={onClose}
             role="dialog"
             aria-modal="true"
@@ -65,7 +65,7 @@ export default function DownloadModal({ isOpen, onClose, version, softwareName, 
                 <div className="border-t border-gray-200 mt-6 pt-4">
                     <button
                         onClick={onClose}
-                        className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded transition-colors"
+                        className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-sm transition-colors"
                         aria-label="Fechar modal"
                     >
                         Fechar

@@ -29,7 +29,8 @@ export async function generateStaticParams() {
     }
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+    const params = await props.params;
     const { slug } = params;
     const imersao = await getImersaoBySlugInternal(slug);
 
@@ -50,7 +51,8 @@ export async function generateMetadata({ params }) {
 }
 
 
-export default async function ImersaoPage({ params }) {
+export default async function ImersaoPage(props) {
+    const params = await props.params;
     const { slug } = params;
     console.log(`📄 Renderizando página de imersão: ${slug}`);
 
@@ -218,7 +220,7 @@ export default async function ImersaoPage({ params }) {
                                 href={safeUrl(link_appstore)}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex-1 flex items-center justify-center p-2 bg-gradient-to-r from-white/10 to-white/5 hover:from-white/20 hover:to-white/10 border border-white/20 rounded-2xl transition-all duration-300 group"
+                                className="flex-1 flex items-center justify-center p-2 bg-linear-to-r/srgb from-white/10 to-white/5 hover:from-white/20 hover:to-white/10 border border-white/20 rounded-2xl transition-all duration-300 group"
                             >
                                 <div className="relative w-8 h-8 mr-2 transition-transform group-hover:scale-110">
                                     <Image
@@ -239,7 +241,7 @@ export default async function ImersaoPage({ params }) {
                                 href={safeUrl(link_playstore)}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex-1 flex items-center justify-center p-2 bg-gradient-to-r from-white/10 to-white/5 hover:from-white/20 hover:to-white/10 border border-white/20 rounded-2xl transition-all duration-300 group"
+                                className="flex-1 flex items-center justify-center p-2 bg-linear-to-r/srgb from-white/10 to-white/5 hover:from-white/20 hover:to-white/10 border border-white/20 rounded-2xl transition-all duration-300 group"
                             >
                                 <div className="relative w-8 h-8 mr-2 transition-transform group-hover:scale-110">
                                     <Image

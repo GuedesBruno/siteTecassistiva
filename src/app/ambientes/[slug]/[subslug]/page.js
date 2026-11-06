@@ -25,7 +25,8 @@ export async function generateStaticParams() {
   return paths;
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   const ambientesData = await getAmbientes();
   const ambiente = ambientesData.find(a => a.slug === params.slug);
   const subAmbiente = ambiente?.subAmbientes?.find(s => s.slug === params.subslug);
@@ -40,7 +41,8 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default async function SubAmbientePage({ params }) {
+export default async function SubAmbientePage(props) {
+  const params = await props.params;
   const ambientesData = await getAmbientes();
   const ambiente = ambientesData.find(a => a.slug === params.slug);
   const subAmbiente = ambiente?.subAmbientes?.find(s => s.slug === params.subslug);

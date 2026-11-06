@@ -138,7 +138,7 @@ export default function SoftwareListItem({ software }) {
               {visibleInsts.map((inst) => (
                 <div
                   key={inst.id}
-                  className="border rounded hover:border-blue-300 hover:shadow-sm transition-all duration-200 flex flex-col"
+                  className="border rounded-sm hover:border-blue-300 hover:shadow-xs transition-all duration-200 flex flex-col"
                   style={cardStyle}
                   role="article"
                   aria-label={`Versão ${inst.versao || 'não disponível'} de ${nome}`}
@@ -146,7 +146,7 @@ export default function SoftwareListItem({ software }) {
                   <div style={{ marginBottom: '8px', textAlign: 'center', display: 'flex', justifyContent: 'center' }}>
                     {inst.versao ? (
                       <div
-                        className="inline-flex items-center font-semibold rounded"
+                        className="inline-flex items-center font-semibold rounded-sm"
                         style={versionStyle}
                       >
                         <FaCodeBranch className="mr-1.5" size={10} aria-hidden="true" />
@@ -161,7 +161,7 @@ export default function SoftwareListItem({ software }) {
 
                   <button
                     onClick={() => openModal(inst)}
-                    className="mt-auto bg-[#002554] hover:bg-[#003d7a] text-white font-medium rounded transition-all duration-200 flex items-center justify-center gap-1.5"
+                    className="mt-auto bg-[#002554] hover:bg-[#003d7a] text-white font-medium rounded-sm transition-all duration-200 flex items-center justify-center gap-1.5"
                     style={{
                       fontSize: '11px',
                       padding: '6px 8px'

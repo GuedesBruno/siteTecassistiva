@@ -128,7 +128,7 @@ export default function AtaCard({ ata }) {
                         title={produtoNome}
                         className="flex flex-col items-center justify-start p-1 rounded-md bg-white border border-gray-200 hover:border-tec-blue hover:shadow-md focus:ring-1 focus:ring-tec-blue transition-all duration-200 group h-full"
                       >
-                        <div className="w-full aspect-square relative mb-1 bg-gray-50 rounded-sm overflow-hidden">
+                        <div className="w-full aspect-square relative mb-1 bg-gray-50 rounded-xs overflow-hidden">
                           {imagemUrl ? (
                             <Image
                               src={imagemUrl}
@@ -183,7 +183,7 @@ export default function AtaCard({ ata }) {
                       className="text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200 flex items-center"
                     >
                       {/* Ícone de "abrir em nova aba" */}
-                      <svg className="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                      <svg className="w-5 h-5 mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                       <span>{docAttributes.name}</span>
                     </a>
                   </li>

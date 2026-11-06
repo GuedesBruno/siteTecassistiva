@@ -54,7 +54,8 @@ export async function generateStaticParams() {
 }
 
 // Gera os metadados para a página (título, descrição)
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   try {
     const product = await getProductBySlug(params.slug);
     const productAttributes = product?.attributes || product;
@@ -133,7 +134,8 @@ export async function generateMetadata({ params }) {
 }
 
 // A página que renderiza um único produto
-export default async function ProductPage({ params }) {
+export default async function ProductPage(props) {
+  const params = await props.params;
   const { slug } = params;
   console.log(`📦 Renderizando página de produto: ${slug}`);
 

@@ -233,13 +233,13 @@ export default function ContactForm({ title, subtitle, formName }) {
         <div
           role="status"
           aria-live="polite"
-          className={status && status.includes('sucesso') ? 'text-center mt-4 p-3 rounded bg-green-100 text-green-800' : ''}
+          className={status && status.includes('sucesso') ? 'text-center mt-4 p-3 rounded-sm bg-green-100 text-green-800' : ''}
         >
           {status && (status === 'Enviando...' || status.includes('sucesso')) ? status : ''}
         </div>
         {/* Somente erro de envio usa role="alert", para ser anunciado imediatamente */}
         {status && status !== 'Enviando...' && !status.includes('sucesso') && (
-          <div role="alert" className="text-center mt-4 p-3 rounded bg-red-100 text-red-800">
+          <div role="alert" className="text-center mt-4 p-3 rounded-sm bg-red-100 text-red-800">
             {status}
           </div>
         )}

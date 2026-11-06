@@ -1,16 +1,16 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
+import nextCoreWebVitals from "eslint-config-next/core-web-vitals";
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals"),
+  ...nextCoreWebVitals,
+  {
+    // Regras novas do eslint-plugin-react-hooks 7 (React Compiler) vindas com o eslint-config-next 16.
+    // Ficam como aviso para nao mexer no comportamento do codigo existente nesta atualizacao; tratar depois.
+    rules: {
+      "react-hooks/set-state-in-effect": "warn",
+      "react-hooks/refs": "warn",
+      "react-hooks/static-components": "warn",
+    },
+  },
   {
     ignores: [
       "node_modules/**",

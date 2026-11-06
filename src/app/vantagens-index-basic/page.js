@@ -27,7 +27,7 @@ export default function VantagensPage() {
                     {/* Comparison Cards */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
                         {/* Speed Comparison Card */}
-                        <div className="bg-gradient-to-br from-blue-50 to-white p-8 rounded-2xl border-2 border-blue-200 shadow-lg">
+                        <div className="bg-linear-to-br/srgb from-blue-50 to-white p-8 rounded-2xl border-2 border-blue-200 shadow-lg">
                             <div className="flex items-center gap-3 mb-6">
                                 <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-2xl">
                                     ⚡
@@ -61,7 +61,7 @@ export default function VantagensPage() {
                         </div>
 
                         {/* Time Economy Card */}
-                        <div className="bg-gradient-to-br from-purple-50 to-white p-8 rounded-2xl border-2 border-purple-200 shadow-lg">
+                        <div className="bg-linear-to-br/srgb from-purple-50 to-white p-8 rounded-2xl border-2 border-purple-200 shadow-lg">
                             <div className="flex items-center gap-3 mb-6">
                                 <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center text-2xl">
                                     ⏱️
@@ -96,7 +96,7 @@ export default function VantagensPage() {
                         </div>
 
                         {/* Modern Technology Card */}
-                        <div className="bg-gradient-to-br from-green-50 to-white p-8 rounded-2xl border-2 border-green-200 shadow-lg">
+                        <div className="bg-linear-to-br/srgb from-green-50 to-white p-8 rounded-2xl border-2 border-green-200 shadow-lg">
                             <div className="flex items-center gap-3 mb-6">
                                 <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-2xl">
                                     📱
@@ -123,7 +123,7 @@ export default function VantagensPage() {
                     </div>
 
                     {/* Modern Technologies Card - Full Width */}
-                    <div className="mb-12 bg-gradient-to-br from-orange-50 to-white p-8 rounded-2xl border-2 border-orange-200 shadow-lg">
+                    <div className="mb-12 bg-linear-to-br/srgb from-orange-50 to-white p-8 rounded-2xl border-2 border-orange-200 shadow-lg">
                         <div className="flex items-center justify-center gap-3 mb-8">
                             <div className="flex items-center justify-center">
                                 <img src="/indexlogo.png" alt="Index Braille" className="h-12 w-auto" />
@@ -155,7 +155,7 @@ export default function VantagensPage() {
                                 { icon: '🔊', title: 'Feedback de Voz', desc: 'Alto-falante integrado com feedback falado em português de todas as ações.' },
                                 { icon: '⌨️', title: 'Painel Acessível', desc: 'Painel de controle com teclas em Braille e feedback sonoro e luminoso.' }
                             ].map((item, i) => (
-                                <div key={i} className="flex flex-col items-center text-center gap-1 p-4 bg-white rounded-xl border border-orange-100 shadow-sm hover:shadow-md transition-shadow">
+                                <div key={i} className="flex flex-col items-center text-center gap-1 p-4 bg-white rounded-xl border border-orange-100 shadow-xs hover:shadow-md transition-shadow">
                                     <div className="text-3xl shrink-0 flex items-center justify-center w-12 h-12 text-orange-500">{item.icon}</div>
                                     <div>
                                         <h4 className={`font-bold text-gray-900 mb-2 ${item.titleClassName || 'text-lg'}`}>{item.title}</h4>

@@ -230,7 +230,7 @@ export default function SupportPageClient({ products, software, categories }) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-6">
                 <div className="flex items-start">
-                  <FaPhoneAlt className="text-blue-600 mt-1 mr-4 flex-shrink-0" size={20} />
+                  <FaPhoneAlt className="text-blue-600 mt-1 mr-4 shrink-0" size={20} />
                   <div>
                     <h3 className="font-semibold text-lg">Telefone</h3>
                     <a
@@ -243,7 +243,7 @@ export default function SupportPageClient({ products, software, categories }) {
                   </div>
                 </div>
                 <div className="flex items-start">
-                  <FaWhatsapp className="text-green-500 mt-1 mr-4 flex-shrink-0" size={22} />
+                  <FaWhatsapp className="text-green-500 mt-1 mr-4 shrink-0" size={22} />
                   <div>
                     <h3 className="font-semibold text-lg">WhatsApp</h3>
                     <a
@@ -258,7 +258,7 @@ export default function SupportPageClient({ products, software, categories }) {
                   </div>
                 </div>
                 <div className="flex items-start">
-                  <FaEnvelope className="text-red-500 mt-1 mr-4 flex-shrink-0" size={20} />
+                  <FaEnvelope className="text-red-500 mt-1 mr-4 shrink-0" size={20} />
                   <div>
                     <h3 className="font-semibold text-lg">E-mail</h3>
                     <a
@@ -271,7 +271,7 @@ export default function SupportPageClient({ products, software, categories }) {
                 </div>
               </div>
               <div className="bg-blue-50 p-6 rounded-lg border border-blue-200 flex items-start">
-                <FaCertificate className="text-blue-600 mt-1 mr-4 flex-shrink-0" size={24} />
+                <FaCertificate className="text-blue-600 mt-1 mr-4 shrink-0" size={24} />
                 <div>
                   <h3 className="font-semibold text-lg text-blue-800">Equipe Certificada</h3>
                   <p className="text-gray-700 mt-2">Nossos técnicos são treinados e certificados diretamente pelas fabricantes dos produtos. Como representantes oficiais da maioria das marcas que trabalhamos, garantimos um suporte especializado e de alta qualidade para você.</p>

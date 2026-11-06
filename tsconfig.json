@@ -18,15 +18,16 @@
     "incremental": true,
     "module": "esnext",
     "esModuleInterop": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "plugins": [
       {
         "name": "next"
       }
-    ]
+    ],
+    "target": "ES2017"
   },
   "include": [
     "next-env.d.ts",
@@ -35,7 +36,8 @@
     "**/*.tsx",
     "**/*.js",
     "**/*.jsx",
-    "postcss.config.cjs"
+    "postcss.config.cjs",
+    ".next/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

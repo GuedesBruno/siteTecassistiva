@@ -1,5 +1,48 @@
 # Plano de atualização de dependências
 
+## Estado em 06/11/2026 (branch `chore/atualizacao-majors`, nada publicado)
+
+Com autorização do responsável, as majors abaixo foram aplicadas **na ordem Swiper, Next 15 + React 19, ESLint 9, Next 16, Tailwind 4**, um commit por etapa. Cada etapa passou por `npm run lint` (0 erros), `node qa/test-*.mjs` e `npm run build` com o mock (`qa/mock-strapi.mjs`, CI=true), comparando a lista de arquivos de `out/` com a anterior.
+
+| Pacote | Antes | Depois |
+|---|---|---|
+| swiper | 11.2.10 | 12.2.0 |
+| next | 14.2.35 | 16.4.5 (passando por 15.5.29) |
+| react / react-dom | 18.3.1 | 19.3.1 |
+| eslint | 8.57.1 | 9.39.5 |
+| eslint-config-next | 14.2.35 | 16.4.5 |
+| tailwindcss | 3.4.19 | 4.3.4 (+ `@tailwindcss/postcss`; `autoprefixer` removido) |
+| @types/react | 18 | 19 |
+
+`npm audit`: **13 vulnerabilidades (2 críticas, 4 altas, 7 moderadas) -> 9 moderadas, nenhuma alta ou crítica.** Restam: `glob` 10.x (aviso de AbortSignal na API; é dependência direta, usada só em `scripts/build-search-data.js`; a correção exige glob >= 14) e `minimatch` dentro de `typescript-eslint` (ferramenta de lint, não vai para o site).
+
+### O que foi feito em cada etapa
+
+1. **Swiper 12.2.0**: sem mudança de código. Caminhos `swiper/css`, `swiper/css/navigation`, `swiper/css/pagination` e módulos (`Navigation`, `Pagination`, `Autoplay`, `Keyboard`, `A11y`) continuam existindo. Rotas de `out/` idênticas.
+2. **Next 15.5.29 + React 19**: `params` assíncronos (`await props.params`) em `generateMetadata` e nas páginas dinâmicas de ambientes, imersao, produtos, categorias (incl. subcategoria) e fabricante. O Next acrescentou `target: ES2017` ao `tsconfig.json`. `react-icons`, `swiper/react` e `@strapi/blocks-react-renderer` funcionaram com React 19.
+3. **ESLint 9**: feito **depois** do Next 15 (mudança de ordem): `eslint-config-next` 14 só aceita ESLint 7/8 e quebra com 9 (plugin `react-hooks` não é encontrado). Com `eslint-config-next` 15 funcionou com o flat config existente.
+4. **Next 16.4.5**: `eslint.config.mjs` passou a importar `eslint-config-next/core-web-vitals` (flat nativo, sem `FlatCompat`). O `eslint-plugin-react-hooks` 7 trouxe regras novas (`set-state-in-effect`, `refs`, `static-components`) que acusam 7 pontos do código atual (BannerSlider, CarouselAutoplayToggle, ComparisonButton, ProductDetail, SupportPageClient, AtaCard, useModalFocus). Elas ficaram como **aviso** para não mexer no comportamento nesta atualização; tratar depois, uma a uma. O build agora usa Turbopack. O `tsconfig.json` foi ajustado pelo Next (`jsx: react-jsx`, `moduleResolution: bundler`).
+5. **Tailwind 4.3.4**: configuração em CSS (`src/app/globals.css`): `@import "tailwindcss" source(none)` + `@source` de `src/components` e `src/app` (mesmos globs do antigo `content`), `@theme` com `--color-tec-*` e `--breakpoint-shell: 80rem`, `@utility max-w-shell` (usa `--shell-max`). `tailwind.config.js` e `autoprefixer` removidos; `postcss.config.cjs` usa `@tailwindcss/postcss`. Compatibilidade com o Tailwind 3 em `@layer base`: cor de borda padrão gray-200, `cursor: pointer` em botões, cor do placeholder. O foco global (`*:focus-visible`) foi para `@layer base`, senão as regras sem camada passariam a vencer `focus:ring-*`. Classes renomeadas à mão (`shadow-sm` -> `shadow-xs`, `rounded-sm` -> `rounded-xs`, `rounded` -> `rounded-sm`, `flex-grow` -> `grow`, `flex-shrink-0` -> `shrink-0`, `bg-opacity-N` -> `/N`, `bg-gradient-to-*` -> `bg-linear-to-*/srgb` para manter a interpolação em sRGB) e as regras de `border-radius` do `globals.css` ajustadas aos nomes novos. O CSS gerado antes/depois foi comparado por utilitário: mesmas classes e propriedades (só mudam para propriedades lógicas e `translate`/`scale`/`rotate` separados). `qa/test-static.mjs` agora compila pelo PostCSS (a CLI do Tailwind 3 não existe mais).
+
+### Pendências desta atualização
+
+- **Codemod `@tailwindcss/upgrade` não rodou** nesta máquina (o módulo nativo `tree-sitter` não compila e dá segfault). A migração das classes foi feita a mão e conferida comparando o CSS gerado, mas convém rodar o codemod em outra máquina e ver que ele não encontra mais nada.
+- **Navegadores**: Next 16 (Turbopack) e Tailwind 4 pressupõem navegadores recentes (Chrome/Edge 111+, Safari 16.4+, Firefox 128+ para o Tailwind). O site já usava `:has()` em `globals.css`. **Não houve confirmação do público**: se escolas ou instituições ainda usam Windows 7/8 (Chrome 109) ou Safari antigo, o visual quebra. Confirmar antes do merge.
+- **Teste visual manual** (sem navegador nesta execução): ver a lista no relatório da entrega. Em especial hover (agora só em dispositivos com hover), gradientes, sombras, `space-*`, foco por teclado e carrosséis.
+- Next 16 passa a gerar `_not-found/` e arquivos `__next.*.txt` (payload de prefetch, com `$` no nome em rotas dinâmicas) em `out/`. As páginas HTML são as mesmas. Conferir que o `lftp mirror` do deploy envia esses nomes e que a Locaweb os serve.
+- Regras novas do `react-hooks` 7 como aviso (item 4 acima) e `tailwind.config.js` removido: quem tiver extensão de editor apontando para ele precisa atualizar.
+- Observado, não alterado: `font-sans` no `<html>` usa a pilha padrão do Tailwind; a variável `--font-montserrat` é criada em `layout.js` mas nenhum token a usa. Também não existe a animação `animate-fade-in-up`/`animate-fade-in` (já era assim no Tailwind 3).
+
+## Não feito / fica para depois
+
+- TypeScript 5.9 -> 7, `@types/node` e `dotenv` 16 -> 18 (etapa 4 do plano original, risco baixo; `dotenv` 17+ imprime logs, usar `{ quiet: true }`).
+- Swiper 12 -> 14 (a 12 já corrige o crítico).
+- `glob` 10 -> 14 (aviso moderado restante).
+
+## Plano original (referência)
+
+O texto abaixo é o plano anterior à execução, mantido por histórico; os pontos de atenção já foram tratados como descrito acima.
+
 Situação em 15/10/2026, depois de aplicar apenas atualizações dentro do semver atual (`npm update`, `npm audit fix` sem `--force`, `next` e `eslint-config-next` 14.2.32 -> 14.2.35).
 
 `npm audit`: 29 vulnerabilidades (2 críticas, 22 altas, 5 moderadas) -> 13 (2 críticas, 9 altas, 2 moderadas). As restantes só se resolvem com versões major, listadas abaixo.
