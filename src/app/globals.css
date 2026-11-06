@@ -1,9 +1,49 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Tailwind 4. source(none) + @source reproduzem os globs do antigo tailwind.config.js (content). */
+@import "tailwindcss" source(none);
+@source "../components";
+@source "../app";
+
+/* Tokens do tema (antes em tailwind.config.js). */
+@theme {
+  --color-tec-blue: #002554;        /* cor principal do Header */
+  --color-tec-blue-light: #0056b3;  /* azul vibrante para botões e links */
+  --color-tec-navy: #001F3F;        /* barra superior */
+  --color-tec-footer: #003366;      /* cor antiga do Header, agora do Footer */
+  /* Breakpoint "shell": largura do quadro da página. Manter igual a --shell-max abaixo. */
+  --breakpoint-shell: 80rem;
+}
+
+/* max-w-shell: largura máxima do quadro da página (valor único em --shell-max). */
+@utility max-w-shell {
+  max-width: var(--shell-max);
+}
+
+/* Compatibilidade com os padrões do Tailwind 3 (mudaram no 4), para não alterar a aparência. */
+@layer base {
+  /* Cor de borda padrão era gray-200; no 4 passou a ser currentColor. */
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+
+  /* Botões tinham cursor pointer no preflight do 3. */
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  /* Placeholder era gray-400; no 4 passou a ser currentColor com 50% de opacidade. */
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-gray-400);
+  }
+}
 
 
-/* Largura máxima do quadro da página (layout.js). Muda aqui e em screens.shell no tailwind.config.js. */
+/* Largura máxima do quadro da página (layout.js). Muda aqui e em --breakpoint-shell no @theme acima. */
 :root {
   --shell-max: 80rem;
 }
@@ -14,11 +54,13 @@
   right: max(2rem, calc(50% - var(--shell-max) / 2 + 2rem));
 }
 
+/* Tailwind 4 renomeou: rounded-sm -> rounded-xs e rounded -> rounded-sm; os seletores cobrem os nomes novos. */
 /* Força a remoção de cantos arredondados em todo o site, conforme solicitado. */
 /* Exceção: páginas de imersão podem usar cantos arredondados */
 /* Exceção: ícones de redes sociais na página de imersão */
 /* Detecta automaticamente via classe ou wrapper */
 body:not(:has(.imersao-page)) .rounded,
+body:not(:has(.imersao-page)) .rounded-xs,
 body:not(:has(.imersao-page)) .rounded-sm,
 body:not(:has(.imersao-page)) .rounded-md,
 body:not(:has(.imersao-page)) .rounded-lg,
@@ -33,8 +75,12 @@ body:not(:has(.imersao-page)) .rounded-full {
   border-radius: 0.25rem !important;
 }
 
-.imersao-page .rounded-sm {
+.imersao-page .rounded-xs {
   border-radius: 0.125rem !important;
+}
+
+.imersao-page .rounded-sm {
+  border-radius: 0.25rem !important;
 }
 
 .imersao-page .rounded-md {
@@ -114,10 +160,12 @@ body:not(:has(.imersao-page)) .rounded-full {
 
 /* Foco visível global com anel duplo (interno branco, externo azul escuro):
    mantém contraste tanto em fundos claros quanto escuros. */
-*:focus-visible {
-  outline: 3px solid #002554;
-  outline-offset: 2px;
-  box-shadow: 0 0 0 2px #ffffff;
+@layer base {
+  *:focus-visible {
+    outline: 3px solid #002554;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px #ffffff;
+  }
 }
 
 /* Evita que o cabeçalho fixo cubra o elemento ao navegar por âncoras ou foco */

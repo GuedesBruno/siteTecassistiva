@@ -264,20 +264,20 @@ ti.test('Header: hooks no topo do componente, antes de qualquer return; sem aces
   const lastHook = Math.max(h.lastIndexOf('useEffect('), h.lastIndexOf('useModalFocus('), h.lastIndexOf('useState('), h.lastIndexOf('useRef('));
   assert.ok(lastHook < firstReturn, 'hook depois do return principal');
 });
-ti.test('Tailwind: classes novas/arbitrárias geram CSS (CLI local do projeto, sem instalar nada)', () => {
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'qa-tw-'));
-  try {
-    fs.writeFileSync(path.join(dir, 'in.css'), '@tailwind utilities;\n');
-    const bin = path.join(root, 'node_modules', 'tailwindcss', 'lib', 'cli.js');
-    const r = spawnSync(process.execPath, [bin, '-c', path.join(root, 'tailwind.config.js'), '-i', path.join(dir, 'in.css'), '-o', path.join(dir, 'out.css')], { cwd: root, encoding: 'utf8' });
-    assert.equal(r.status, 0, r.stderr);
-    const css = fs.readFileSync(path.join(dir, 'out.css'), 'utf8');
-    for (const sel of ['animate-\\[bounce_1s_ease-in-out_3\\]', 'motion-reduce\\:animate-none', 'motion-reduce\\:transition-none',
-      'transition-\\[transform\\2c visibility\\]', 'placeholder\\:text-gray-600', 'bg-tec-blue\\/85', 'focus-visible\\:opacity-100',
-      'group-hover\\/video\\:opacity-100', 'focus-visible\\:outline-offset-\\[-2px\\]', 'scroll-mt-14', 'bg-green-700', 'text-red-700'])
-      assert.ok(css.includes(sel), `classe sem CSS: ${sel}`);
-    assert.ok(/@keyframes bounce/.test(css));
-  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+ti.test('Tailwind 4: classes novas/arbitrárias geram CSS (via PostCSS do projeto, sem instalar nada)', async () => {
+  const { default: postcss } = await import('postcss');
+  const { default: tailwind } = await import('@tailwindcss/postcss');
+  const from = path.join(root, 'src', 'app', 'globals.css');
+  const r = await postcss([tailwind()]).process(fs.readFileSync(from, 'utf8'), { from });
+  const css = r.css;
+  for (const sel of ['animate-\\[bounce_1s_ease-in-out_3\\]', 'motion-reduce\\:animate-none', 'motion-reduce\\:transition-none',
+    'placeholder\\:text-gray-600', 'bg-tec-blue\\/85', 'focus-visible\\:opacity-100',
+    'group-hover\\/video\\:opacity-100', 'focus-visible\\:outline-offset-\\[-2px\\]', 'scroll-mt-14', 'bg-green-700', 'text-red-700',
+    'max-w-shell', 'shell\\:border-x'])
+    assert.ok(css.includes(sel), `classe sem CSS: ${sel}`);
+  assert.ok(/transition-\\\[transform/.test(css), 'classe sem CSS: transition-[transform,visibility]');
+  assert.ok(/@keyframes bounce/.test(css) && /@keyframes ping/.test(css));
+  assert.ok(css.includes('--color-tec-blue:#002554') || css.includes('--color-tec-blue: #002554'), 'token tec-blue ausente');
 });
 
 const fails = (await ts.run()) + (await th.run()) + (await tc.run()) + (await ti.run());
