@@ -1,0 +1,62 @@
+name: CI (verificações de Pull Request)
+
+on:
+  pull_request:
+    branches: [ main, 'feat/**', 'chore/**' ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Testes de QA (qa/)
+        run: |
+          set -e
+          for t in qa/test-*.mjs; do
+            echo "::group::$t"
+            node "$t"
+            echo "::endgroup::"
+          done
+
+      # Build completo contra um Strapi FALSO (qa/mock-strapi.mjs): não usa secrets nem o CMS real,
+      # então também roda em PRs de forks. Valida que o site compila e gera as páginas.
+      - name: Build com Strapi de teste
+        env:
+          CI: 'true'
+          NEXT_PUBLIC_STRAPI_URL: http://localhost:14337
+          STRAPI_API_TOKEN: fake
+          NEXT_PUBLIC_FORM_ENDPOINT: https://formulario.invalid/teste
+        run: |
+          node qa/mock-strapi.mjs 14337 &
+          sleep 2
+          npm run build
+
+      - name: Verificar saída do build (out/)
+        run: |
+          test -d out/produtos || { echo "::error::out/produtos não existe"; exit 1; }
+          N=$(find out/produtos -mindepth 2 -maxdepth 2 -name index.html -not -path 'out/produtos/categorias/*' -not -path 'out/produtos/fabricante/*' -not -path 'out/produtos/imersao/*' | wc -l)
+          echo "Páginas de produto: $N"
+          [ "$N" -ge 20 ] || { echo "::error::Poucas páginas de produto ($N < 20)"; exit 1; }
