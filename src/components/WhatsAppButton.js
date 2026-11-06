@@ -33,7 +33,7 @@ export default function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       onClick={handleWhatsAppClick}
-      className={`group fixed bottom-5 fixed-right-in-shell z-50 flex items-center
+      className={`group fixed bottom-5 right-8 z-50 flex items-center
         transition-all duration-700 ease-in-out
         focus:ring-2 focus:ring-green-500 focus:ring-offset-2 
         hover:scale-110

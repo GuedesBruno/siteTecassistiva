@@ -30,3 +30,10 @@
 .video-section-next:hover {
     background-color: #d1d5db;
 }
+/* Banner principal no celular: as setas ficam na altura da imagem (que vem primeiro), não sobre o texto */
+@media (max-width: 767px) {
+    .banner-slider-prev,
+    .banner-slider-next {
+        top: 150px !important;
+    }
+}

@@ -3,15 +3,9 @@
 @tailwind utilities;
 
 
-/* Largura máxima do quadro da página (layout.js). Muda aqui e em screens.shell no tailwind.config.js. */
+/* Largura máxima do conteúdo (mesmo valor do `container` e de maxWidth.shell no tailwind.config.js). */
 :root {
   --shell-max: 80rem;
-}
-
-/* Elementos fixed no canto direito: alinham ao quadro em telas largas
-   (50% = metade da viewport sem a barra de rolagem) e ficam a 2rem da borda em telas menores. */
-.fixed-right-in-shell {
-  right: max(2rem, calc(50% - var(--shell-max) / 2 + 2rem));
 }
 
 /* Força a remoção de cantos arredondados em todo o site, conforme solicitado. */

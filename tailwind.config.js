@@ -5,10 +5,14 @@ module.exports = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    // `container` para de crescer em 1280px (sem o passo 2xl de 1536px): o conteúdo fica com
+    // margens laterais em telas largas, enquanto fundos, header e footer ocupam a tela toda.
+    container: {
+      screens: { sm: '640px', md: '768px', lg: '1024px', xl: '1280px' },
+    },
     extend: {
-      // Largura máxima do quadro da página. Valor único: manter igual a --shell-max em globals.css.
+      // Largura máxima do conteúdo. Valor único: manter igual a --shell-max em globals.css.
       maxWidth: { shell: 'var(--shell-max)' },
-      screens: { shell: '80rem' },
       // ATUALIZADO: Paleta de cores ajustada
       colors: {
         'tec-blue': '#002554',        // Nova cor principal do Header
