@@ -6,6 +6,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      // Largura máxima do quadro da página. Valor único: manter igual a --shell-max em globals.css.
+      maxWidth: { shell: 'var(--shell-max)' },
+      screens: { shell: '80rem' },
       // ATUALIZADO: Paleta de cores ajustada
       colors: {
         'tec-blue': '#002554',        // Nova cor principal do Header
