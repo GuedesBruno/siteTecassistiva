@@ -72,17 +72,14 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="pt-BR" className={`${montserrat.variable} font-sans`}>
-      <body className="bg-gray-200 text-gray-800">
-        {/* Quadro da página: largura máxima (--shell-max) centralizada; abaixo dela, ocupa a tela toda sem borda */}
-        <div className="page-shell relative flex flex-col min-h-screen w-full max-w-shell mx-auto bg-gray-50 shell:border-x border-gray-300">
-          <SkipToContent />
-          <Header categories={categories} />
-          <main id="main-content" className="flex-grow z-0" style={{ paddingTop: 'var(--header-height, 6rem)' }}>
-            {children}
-          </main>
-          <Footer />
-          <WhatsAppButton />
-        </div>
+      <body className="flex flex-col min-h-screen bg-gray-50 text-gray-800">
+        <SkipToContent />
+        <Header categories={categories} />
+        <main id="main-content" className="flex-grow z-0" style={{ paddingTop: 'var(--header-height, 6rem)' }}>
+          {children}
+        </main>
+        <Footer />
+        <WhatsAppButton />
 
         {/* Scripts do Google Tag Manager */}
         <Script async src="https://www.googletagmanager.com/gtag/js?id=G-WH33R519KY" />

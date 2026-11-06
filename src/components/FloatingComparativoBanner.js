@@ -8,7 +8,7 @@ export default function FloatingComparativoBanner() {
 
   return (
     <div 
-      className="fixed bottom-[90px] fixed-right-in-shell z-50"
+      className="fixed bottom-[90px] right-8 z-50"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onFocus={() => setIsHovered(true)}
