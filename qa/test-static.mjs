@@ -273,9 +273,11 @@ ti.test('Tailwind 4: classes novas/arbitrárias geram CSS (via PostCSS do projet
   for (const sel of ['animate-\\[bounce_1s_ease-in-out_3\\]', 'motion-reduce\\:animate-none', 'motion-reduce\\:transition-none',
     'placeholder\\:text-gray-600', 'bg-tec-blue\\/85', 'focus-visible\\:opacity-100',
     'group-hover\\/video\\:opacity-100', 'focus-visible\\:outline-offset-\\[-2px\\]', 'scroll-mt-14', 'bg-green-700', 'text-red-700',
-    'max-w-shell', 'shell\\:border-x'])
+    'max-w-\\[calc\\(var\\(--shell-max\\)\\+8rem\\)\\]', 'text-balance'])
     assert.ok(css.includes(sel), `classe sem CSS: ${sel}`);
   assert.ok(/transition-\\\[transform/.test(css), 'classe sem CSS: transition-[transform,visibility]');
+  // `container` limitado a --shell-max também no passo 2xl (regra própria depois da do Tailwind)
+  assert.ok(/\.container\s*\{\s*max-width:\s*var\(--shell-max\)/.test(css), 'container sem limite --shell-max');
   assert.ok(/@keyframes bounce/.test(css) && /@keyframes ping/.test(css));
   assert.ok(css.includes('--color-tec-blue:#002554') || css.includes('--color-tec-blue: #002554'), 'token tec-blue ausente');
 });

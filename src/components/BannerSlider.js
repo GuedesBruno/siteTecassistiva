@@ -65,19 +65,20 @@ export default function BannerSlider({ banners }) {
 
           return (
             <SwiperSlide key={banner.id}>
-              <div className={`w-full min-h-[58vh] flex flex-col md:flex-row ${isReversed ? 'md:flex-row-reverse' : ''}`}>
+              {/* Conteúdo limitado a --shell-max; o md:px-16 reserva a faixa das setas para que não cubram o texto */}
+              <div className={`w-full max-w-[calc(var(--shell-max)+8rem)] mx-auto md:px-16 min-h-[58vh] flex flex-col md:flex-row ${isReversed ? 'md:flex-row-reverse' : ''}`}>
 
                 {/* Text Section - Order 2 on Mobile (Bottom) */}
-                <div className="w-full md:w-1/2 lg:w-2/5 order-2 md:order-none bg-white flex items-center justify-center p-6 pb-20 md:p-8 lg:p-12">
-                  <div className="w-full max-w-lg text-center md:text-left">
-                    <h2 className="text-[clamp(1.75rem,4vw,3.5rem)] font-extrabold leading-tight mb-4 text-[#002554] break-words">
+                <div className="w-full md:w-1/2 order-2 md:order-none bg-white flex items-center justify-center p-6 pb-20 md:p-8 lg:p-12">
+                  <div className="w-full max-w-xl text-center md:text-left">
+                    <h2 className="text-[clamp(1.75rem,3vw,2.75rem)] font-extrabold leading-[1.15] mb-4 text-[#002554] text-balance hyphens-auto">
                       {titulo}
                     </h2>
-                    <p className="text-[clamp(1rem,1.5vw,1.125rem)] mb-6 text-[#002554] md:text-justify">
+                    <p className="text-[clamp(1rem,1.5vw,1.125rem)] mb-6 text-[#002554]">
                       {subtitulo}
                     </p>
                     {texto_comercial && (
-                      <p className="text-sm sm:text-base mb-6 text-[#002554] md:text-justify">
+                      <p className="text-sm sm:text-base mb-6 text-[#002554]">
                         {texto_comercial}
                       </p>
                     )}
@@ -88,14 +89,14 @@ export default function BannerSlider({ banners }) {
                 </div>
 
                 {/* Image Section - Order 1 on Mobile (Top) */}
-                <div className="w-full md:w-1/2 lg:w-3/5 order-1 md:order-none min-h-[300px] sm:min-h-[400px] md:min-h-full relative bg-white">
+                <div className="w-full md:w-1/2 order-1 md:order-none min-h-[300px] sm:min-h-[400px] md:min-h-full relative bg-white">
                   {fullImageUrl ? (
                     <>
                       <Image
                         src={fullImageUrl}
                         alt={imageAlt}
                         fill
-                        className="object-contain object-center md:object-top p-4"
+                        className="object-contain object-center p-4"
                         priority={index === 0}
                       />
                     </>

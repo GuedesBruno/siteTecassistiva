@@ -9,13 +9,14 @@
   --color-tec-blue-light: #0056b3;  /* azul vibrante para botões e links */
   --color-tec-navy: #001F3F;        /* barra superior */
   --color-tec-footer: #003366;      /* cor antiga do Header, agora do Footer */
-  /* Breakpoint "shell": largura do quadro da página. Manter igual a --shell-max abaixo. */
-  --breakpoint-shell: 80rem;
 }
 
-/* max-w-shell: largura máxima do quadro da página (valor único em --shell-max). */
-@utility max-w-shell {
-  max-width: var(--shell-max);
+/* `container` para de crescer em --shell-max (sem o passo 2xl de 96rem): o conteúdo fica com
+   margens laterais em telas largas, enquanto fundos, header e footer ocupam a tela toda. */
+@utility container {
+  @media (width >= 96rem) {
+    max-width: var(--shell-max);
+  }
 }
 
 /* Compatibilidade com os padrões do Tailwind 3 (mudaram no 4), para não alterar a aparência. */
@@ -43,15 +44,9 @@
 }
 
 
-/* Largura máxima do quadro da página (layout.js). Muda aqui e em --breakpoint-shell no @theme acima. */
+/* Largura máxima do conteúdo (`container` e banner principal). */
 :root {
   --shell-max: 80rem;
-}
-
-/* Elementos fixed no canto direito: alinham ao quadro em telas largas
-   (50% = metade da viewport sem a barra de rolagem) e ficam a 2rem da borda em telas menores. */
-.fixed-right-in-shell {
-  right: max(2rem, calc(50% - var(--shell-max) / 2 + 2rem));
 }
 
 /* Tailwind 4 renomeou: rounded-sm -> rounded-xs e rounded -> rounded-sm; os seletores cobrem os nomes novos. */
