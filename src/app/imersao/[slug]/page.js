@@ -29,7 +29,8 @@ export async function generateStaticParams() {
     }
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+    const params = await props.params;
     const { slug } = params;
     const imersao = await getImersaoBySlugInternal(slug);
 
@@ -50,7 +51,8 @@ export async function generateMetadata({ params }) {
 }
 
 
-export default async function ImersaoPage({ params }) {
+export default async function ImersaoPage(props) {
+    const params = await props.params;
     const { slug } = params;
     console.log(`📄 Renderizando página de imersão: ${slug}`);
 

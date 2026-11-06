@@ -63,13 +63,15 @@ export async function generateStaticParams() {
     return manufacturerSlugs;
 }
 
-export function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+    const params = await props.params;
     return {
         alternates: { canonical: `/produtos/fabricante/${params.slug}/` },
     };
 }
 
-export default async function ManufacturerProductsPage({ params }) {
+export default async function ManufacturerProductsPage(props) {
+    const params = await props.params;
     const { slug } = params;
     
     const allCategories = await getAllCategories();

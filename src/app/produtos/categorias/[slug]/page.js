@@ -30,7 +30,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   const { slug } = params;
   const categoryData = await getCategoryBySlug(slug);
   const category = categoryData?.data?.[0]?.attributes;
@@ -51,7 +52,8 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default async function CategoryPage({ params }) {
+export default async function CategoryPage(props) {
+  const params = await props.params;
   const { slug } = params;
 
   // Busca os dados em paralelo
