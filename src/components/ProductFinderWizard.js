@@ -233,7 +233,7 @@ export default function ProductFinderWizard({ categories = [], products = [] }) 
                             aria-activedescendant={isListOpen && activeIndex >= 0 ? optionId(activeIndex) : undefined}
                             placeholder="Ex: Cegueira, Linha Braille, Lupa..."
                             aria-label="O que você busca? Digite uma necessidade ou produto"
-                            className="w-full pl-12 pr-14 py-3 text-base rounded-full border-2 border-gray-200 focus:border-tec-blue focus:ring-4 focus:ring-blue-100 transition-all duration-300 shadow-sm appearance-none"
+                            className="w-full pl-12 pr-14 py-3 text-base rounded-full border-2 border-gray-200 focus:border-tec-blue focus:ring-4 focus:ring-blue-100 transition-all duration-300 shadow-xs appearance-none"
                             autoComplete="off"
                         />
 
@@ -248,7 +248,7 @@ export default function ProductFinderWizard({ categories = [], products = [] }) 
                             aria-label="Mostrar opções"
                             aria-expanded={isListOpen}
                             aria-controls={listboxId}
-                            className="absolute right-2 top-1/2 transform -translate-y-1/2 w-9 h-9 flex items-center justify-center bg-gray-50 border border-gray-200 rounded-lg text-gray-400 hover:bg-white hover:border-tec-blue hover:text-tec-blue cursor-pointer transition-all duration-200 shadow-sm z-30"
+                            className="absolute right-2 top-1/2 transform -translate-y-1/2 w-9 h-9 flex items-center justify-center bg-gray-50 border border-gray-200 rounded-lg text-gray-400 hover:bg-white hover:border-tec-blue hover:text-tec-blue cursor-pointer transition-all duration-200 shadow-xs z-30"
                         >
                             <FaChevronDown aria-hidden="true" className={`text-sm transition-transform duration-200 ${showSuggestions ? 'rotate-180' : ''}`} />
                         </button>

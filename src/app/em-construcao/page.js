@@ -7,11 +7,11 @@ export const metadata = {
 
 export default function EmConstrucaoPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center px-4 py-12">
+    <div className="min-h-screen bg-linear-to-br/srgb from-blue-50 via-white to-purple-50 flex items-center justify-center px-4 py-12">
       <div className="max-w-2xl w-full text-center">
         {/* Ícone de Construção Animado */}
         <div className="mb-8 animate-bounce">
-          <div className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full shadow-lg">
+          <div className="inline-flex items-center justify-center w-24 h-24 bg-linear-to-br/srgb from-blue-500 to-purple-600 rounded-full shadow-lg">
             <svg 
               className="w-12 h-12 text-white" 
               fill="none" 
@@ -52,7 +52,7 @@ export default function EmConstrucaoPage() {
         <div className="mb-8">
           <div className="bg-gray-200 rounded-full h-3 overflow-hidden shadow-inner">
             <div 
-              className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 h-full rounded-full animate-pulse"
+              className="bg-linear-to-r/srgb from-blue-500 via-purple-500 to-pink-500 h-full rounded-full animate-pulse"
               style={{ width: '65%' }}
             />
           </div>
@@ -63,7 +63,7 @@ export default function EmConstrucaoPage() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Link 
             href="/"
-            className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+            className="inline-flex items-center px-8 py-4 bg-linear-to-r/srgb from-blue-600 to-purple-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
           >
             <svg 
               className="w-5 h-5 mr-2" 

@@ -61,7 +61,7 @@ export default function DocumentListItem({ product }) {
               href={getStrapiMediaUrl(docUrl)}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-[#002554] hover:bg-[#003d7a] text-white text-sm font-medium rounded-lg transition-all duration-200 hover:scale-105 shadow-sm"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-[#002554] hover:bg-[#003d7a] text-white text-sm font-medium rounded-lg transition-all duration-200 hover:scale-105 shadow-xs"
             >
               <FaDownload size={12} />
               <span>{docName}</span>

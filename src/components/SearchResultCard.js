@@ -6,7 +6,7 @@ export default function SearchResultCard({ result }) {
   if (result.type === 'Documento') {
     return (
       <div className="border rounded-lg overflow-hidden flex flex-col justify-between hover:shadow-lg transition-shadow duration-200 h-full bg-blue-50">
-        <div className="p-4 flex flex-col justify-between flex-grow">
+        <div className="p-4 flex flex-col justify-between grow">
           <div>
             <div className="flex items-start gap-2 mb-2">
               <span className="text-2xl">📄</span>
@@ -67,7 +67,7 @@ export default function SearchResultCard({ result }) {
       )}
 
       {/* Conteúdo */}
-      <div className="p-4 flex flex-col justify-between flex-grow">
+      <div className="p-4 flex flex-col justify-between grow">
         <div>
           <Link href={result.slug} className="block mb-2">
             <h3 className="text-lg font-bold text-gray-800 hover:text-tec-blue line-clamp-2">{result.title}</h3>

@@ -77,7 +77,7 @@ export default async function RootLayout({ children }) {
         <div className="page-shell relative flex flex-col min-h-screen w-full max-w-shell mx-auto bg-gray-50 shell:border-x border-gray-300">
           <SkipToContent />
           <Header categories={categories} />
-          <main id="main-content" className="flex-grow z-0" style={{ paddingTop: 'var(--header-height, 6rem)' }}>
+          <main id="main-content" className="grow z-0" style={{ paddingTop: 'var(--header-height, 6rem)' }}>
             {children}
           </main>
           <Footer />

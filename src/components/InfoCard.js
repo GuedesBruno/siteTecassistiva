@@ -6,7 +6,7 @@ const InfoCard = ({ title, children, actionLabel, onClick, isSticky = false, var
 
     // Simple container classes
     // REMOVED: overflow-hidden from here if allowOverflow is true
-    let containerClasses = `group relative w-full rounded-2xl transition-all duration-300 ease-out ${bgClass} border cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-blue-300 ${allowOverflow ? '' : 'overflow-hidden'}`;
+    let containerClasses = `group relative w-full rounded-2xl transition-all duration-300 ease-out ${bgClass} border cursor-pointer shadow-xs hover:shadow-lg hover:-translate-y-1 hover:border-blue-300 ${allowOverflow ? '' : 'overflow-hidden'}`;
 
     return (
         <div
@@ -16,7 +16,7 @@ const InfoCard = ({ title, children, actionLabel, onClick, isSticky = false, var
             {/* Background Decoration Clipper */}
             <div className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none">
                 {/* Decorative Top Accent (Cleaner) */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-tec-blue/5 to-transparent rounded-bl-full -mr-10 -mt-10 transition-transform duration-700 group-hover:scale-110" />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-linear-to-br/srgb from-tec-blue/5 to-transparent rounded-bl-full -mr-10 -mt-10 transition-transform duration-700 group-hover:scale-110" />
             </div>
 
             {/* Content Container */}
@@ -30,7 +30,7 @@ const InfoCard = ({ title, children, actionLabel, onClick, isSticky = false, var
                 )}
 
                 {/* Content Body */}
-                <div className="text-black flex-grow prose max-w-none mb-6">
+                <div className="text-black grow prose max-w-none mb-6">
                     {children}
                 </div>
 

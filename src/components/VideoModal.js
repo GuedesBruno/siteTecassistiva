@@ -83,7 +83,7 @@ export default function VideoModal({ videoInfo, onClose }) {
       role="dialog"
       aria-modal="true"
       aria-label={videoTitle}
-      className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-[100]"
+      className="fixed inset-0 bg-black/90 flex items-center justify-center z-[100]"
       onClick={onClose} // Fecha ao clicar no overlay
     >
       <div

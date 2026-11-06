@@ -44,7 +44,7 @@ export default function FloatingComparativoBanner() {
         </div>
 
         {/* Floating Icon */}
-        <div className="relative flex items-center justify-center flex-shrink-0">
+        <div className="relative flex items-center justify-center shrink-0">
           {/* Contorno pulsante atrás do círculo para dar destaque */}
           <div className="absolute inset-0 bg-tec-blue opacity-40 animate-[ping_2s_cubic-bezier(0,0,0.2,1)_3] motion-reduce:animate-none" style={{ borderRadius: '50%' }}></div>
           

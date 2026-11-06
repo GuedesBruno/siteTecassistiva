@@ -16,7 +16,7 @@ export default function SoftwareListMenu({ items = [], selectedItem, onItemSelec
                   type="button"
                   onClick={() => onItemSelect(item)}
                   className={`block w-full text-left px-4 py-2 rounded-md transition-colors duration-200 ${isActive
-                      ? 'bg-tec-blue text-white font-semibold shadow-sm'
+                      ? 'bg-tec-blue text-white font-semibold shadow-xs'
                       : 'text-gray-800 hover:bg-gray-100 hover:text-tec-blue'
                     }`}
                 >
